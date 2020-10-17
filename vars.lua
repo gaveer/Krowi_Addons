@@ -214,8 +214,12 @@ else
 	tinsert(RAFdb.AchID[117], 13291)
 	tinsert(RAFdb.AchID[117], 13295)
 end
-RAFdb.MapID[117] = 1
+-- RAFdb.MapID[117] = 1
 RAFdb.MapName[117] = "Battle of Dazar'alor"
 RAFdb.AchID[118] = {13414,13416,13417}--Crucible of Storms
-RAFdb.MapID[118] = 1
+-- RAFdb.MapID[118] = 1
 RAFdb.MapName[118] = "Crucible of Storms"
+RAFdb.AchID[119] = {13698,13545,13723,13893,13706}--Operation: Mechagon
+RAFdb.MapName[119] = "Operation: Mechagon"
+RAFdb.AchID[120] = {13724,13719,13767,13633,13628,13716,13629,13768,13725,13718,13684,13726,13728,13729,13730,13733,13727,13731,13732}--Eternal Palace
+RAFdb.MapName[120] = "Eternal Palace"

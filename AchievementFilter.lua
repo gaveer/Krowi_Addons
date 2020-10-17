@@ -99,26 +99,26 @@ function RaidAchFilter:AchEarned(eventName, achID)
 end
 RaidAchFilter:RegisterEvent("ACHIEVEMENT_EARNED", "AchEarned")
 
---Auto swap to instance you're in
-function RaidAchFilter:ZoneChange()
-	local f = _G["RaidAch_Frame"]
-	if f then
-		local mapID =  C_Map.GetBestMapForUnit("player")
-		for i = 1, #RAFdb.MapID do
-			if RAFdb.MapID[i] == mapID then 
-				local id = i
-				if id < 5 or id == 7 or id == 8 or (id > 9 and id < 14) then --Only LK Raids
-					local dif = GetLegacyRaidDifficultyID()
-					if dif == 2 or dif == 4 or dif == 6 then id = id+1; RaidAchFilter:ShowAch(id); break --25 Player
-					else RaidAchFilter:ShowAch(id); break end --10 Player
-				else
-					RaidAchFilter:ShowAch(id); break
-				end
-			end
-		end
-	end
-end
-RaidAchFilter:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChange")
+-- --Auto swap to instance you're in
+-- function RaidAchFilter:ZoneChange()
+-- 	local f = _G["RaidAch_Frame"]
+-- 	if f then
+-- 		local mapID =  C_Map.GetBestMapForUnit("player")
+-- 		for i = 1, #RAFdb.MapID do
+-- 			if RAFdb.MapID[i] == mapID then 
+-- 				local id = i
+-- 				if id < 5 or id == 7 or id == 8 or (id > 9 and id < 14) then --Only LK Raids
+-- 					local dif = GetLegacyRaidDifficultyID()
+-- 					if dif == 2 or dif == 4 or dif == 6 then id = id+1; RaidAchFilter:ShowAch(id); break --25 Player
+-- 					else RaidAchFilter:ShowAch(id); break end --10 Player
+-- 				else
+-- 					RaidAchFilter:ShowAch(id); break
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- end
+-- RaidAchFilter:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChange")
 
 -- Main Window
 function RaidAchFilter:Initialize()
@@ -373,6 +373,16 @@ function RaidAchFilter:Initialize()
 					end
 					UIDropDownMenu_AddButton(info, level)
 				  end
+				  -- BfA 8.2.0
+				  for i = 120, 120 do
+					  info.value = i
+					  info.checked = false
+					  info.text = RAFdb.MapName[i]
+					  info.func = function() 
+						RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
+					  end
+					  UIDropDownMenu_AddButton(info, level)
+					end
 			-- Dungeons!
 			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub1" then
 				for i = 32, 47 do
@@ -434,6 +444,16 @@ function RaidAchFilter:Initialize()
 					  end
 					  UIDropDownMenu_AddButton(info, level)
 				end
+				-- BfA 8.2.0
+				for i = 119, 119 do
+					info.value = i
+					info.checked = false
+					info.text = RAFdb.MapName[i]
+					info.func = function() 
+					  RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
+					end
+					UIDropDownMenu_AddButton(info, level)
+			  end
 			end
 	     end
 	 end

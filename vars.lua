@@ -37,6 +37,7 @@ RAFdb.AchID[29] = {11724,11696,11699,11676,11773,11674,11675,11683,11770,11767,1
 RAFdb.AchID[30] = {11337,11386,11377,11394,11426,11396,11397,11398,11387}--ToValor
 RAFdb.AchID[31] = {12937,12938,12823,12828,12772,12830,12836,12551,12521,12522,12523,12524,12526,12530,12527,12529,12531,12532,12533}--Uldir
 
+
 if uFaction == "A" then tinsert(RAFdb.AchID[23], 8679) else tinsert(RAFdb.AchID[23], 8680) end 
 --Lich King Dungeons
 RAFdb.AchID[32] = {2038,2056,1862,481,492} --Ahn'kahet
@@ -105,16 +106,17 @@ RAFdb.AchID[89] = {12004,12005,12009,12007,12008}--Seat
 RAFdb.AchID[90] = {10773,10775,10776,10803}--The Arcway
 RAFdb.AchID[91] = {10707,10679,10680,10801,10802,10803}--Vault of the Wardens
 -- BfA Dungeons
-RAFdb.AchID[92] = {12824,12825,12826}--Atal'dazar
-RAFdb.AchID[93] = {12548,12998,12831,12832,12833}--Freehold
-RAFdb.AchID[94] = {12848}--King's Rest
+RAFdb.AchID[92] = {12270,12272,12273,12824,12825,12826}--Atal'dazar
+RAFdb.AchID[93] = {12550,12548,12998,12831,12832,12833}--Freehold
+RAFdb.AchID[94] = {12723,12722,12721,12848}--King's Rest
 RAFdb.AchID[95] = {12600,12601,12602,12835,12837,12838}--Shrine of the Storm
-RAFdb.AchID[96] = {12727,12726,12847}--Siege of Boralus
-RAFdb.AchID[97] = {12504,12505,12506}--Temple of Sethraliss
-RAFdb.AchID[98] = {12844,12845,12846}--The Motherlode!!
+RAFdb.AchID[96] = {12489,12727,12726,12847}--Siege of Boralus
+RAFdb.AchID[97] = {12507,12503,12508,12504,12505,12506,}--Temple of Sethraliss
+RAFdb.AchID[98] = {12855,12854,12844,12845,12846}--The Motherlode!!
 RAFdb.AchID[99] = {12498,12549,12499,12500,12501,12502}--The Underrot
 RAFdb.AchID[100] = {12457,12462,12840,12841,12842}--Tol Dagor
 RAFdb.AchID[101] = {12489,12495,12490,12483,12484,12488}--Waycrest Manor
+
 RAFdb.MapID = {
 --Raids
 186,186,162,162,248,141,155,155,200,172,172,147,--LK
@@ -198,3 +200,22 @@ RAFdb.MapName[8] = RAFdb.MapName[8].." [25]"--Sarth
 RAFdb.MapName[9] = RAFdb.MapName[9].." [10/25]"--Halion
 RAFdb.MapName[10] = RAFdb.MapName[10].." [10]"
 RAFdb.MapName[11] = RAFdb.MapName[11].." [25]"--ToC
+
+-- BfA 8.1.0
+RAFdb.AchID[117] = {13410,13430,13401,13425,13325,13345,13431,13383,13316,13314,13313,13312,13311,13299,13300,13293,13292}--Battle of Dazar'alor
+if uFaction == "A" then
+	tinsert(RAFdb.AchID[117], 13286)
+	tinsert(RAFdb.AchID[117], 13287)
+	tinsert(RAFdb.AchID[117], 13288)
+	tinsert(RAFdb.AchID[117], 13298)
+else
+	tinsert(RAFdb.AchID[117], 13289)
+	tinsert(RAFdb.AchID[117], 13290)
+	tinsert(RAFdb.AchID[117], 13291)
+	tinsert(RAFdb.AchID[117], 13295)
+end
+RAFdb.MapID[117] = 1
+RAFdb.MapName[117] = "Battle of Dazar'alor"
+RAFdb.AchID[118] = {13414,13416,13417}--Crucible of Storms
+RAFdb.MapID[118] = 1
+RAFdb.MapName[118] = "Crucible of Storms"

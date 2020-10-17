@@ -363,6 +363,16 @@ function RaidAchFilter:Initialize()
 				  end
 				  UIDropDownMenu_AddButton(info, level)
 				end
+				-- BfA 8.1.0
+				for i = 117, 118 do
+					info.value = i
+					info.checked = false
+					info.text = RAFdb.MapName[i]
+					info.func = function() 
+					  RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
+					end
+					UIDropDownMenu_AddButton(info, level)
+				  end
 			-- Dungeons!
 			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub1" then
 				for i = 32, 47 do

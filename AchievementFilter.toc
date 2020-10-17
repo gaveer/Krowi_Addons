@@ -1,0 +1,10 @@
+## Interface: 90001
+## Title: Achievement Filter
+## Version: 0.1
+## Author: Krowi
+## SavedVariables: AchievementFilterDB
+## Notes: Filters your raid/dungeon/scenario achievements by instance.
+
+embeds.xml
+vars.lua
+AchievementFilter.lua

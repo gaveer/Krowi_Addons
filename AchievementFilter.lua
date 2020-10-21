@@ -1,3 +1,5 @@
+print(C_Map.GetBestMapForUnit("player"))
+
 local RaidAchFilter = LibStub("AceAddon-3.0"):NewAddon("RaidAchFilter", "AceConsole-3.0", "AceEvent-3.0")
 local icon = LibStub("LibDBIcon-1.0")
 
@@ -180,7 +182,7 @@ function RaidAchFilter:Initialize()
 	-- fra:SetBackdropBorderColor(1, 0.675, 0.125, 1)
 	local ttl = fra:CreateFontString("$parent_HeaderText","OVERLAY","GameFontNormal") -- Header Text
 	ttl:SetPoint("TOPLEFT",fra,"TOPLEFT",9,-6)
-	ttl:SetText("Raid Achievement Filter")
+	ttl:SetText("Achievement Filter")
 	ttl:Show()
 	local btn = CreateFrame("BUTTON", "$parent_Close", fra, "UIPanelCloseButton") -- Close Button
 	btn:SetPoint("TOPRIGHT", fra, "TOPRIGHT", -13, 3)
@@ -189,14 +191,14 @@ function RaidAchFilter:Initialize()
 	btn2:SetPoint("TOPRIGHT", -230, -10)
 	_G[btn2:GetName().."Text"]:SetText("Hide Account Completed")
 	btn2:RegisterForClicks("AnyUp");	btn2:SetScript("OnClick", function (self, button, down) 
-	  _G['RaidAch_Frame_HideCharacter']:SetChecked(false); if RAF_RID then RaidAchFilter:ShowAch(RAF_RID) end
+	  _G['RaidAch_Frame_HideCharacter']:SetChecked(false); if RAF_RID then RaidAchFilter:ShowAchievements(RAF_RID) end
 	end)
 	local btn3 = CreateFrame("CheckButton", "$parent_HideCharacter", fra, "ChatConfigCheckButtonTemplate") -- Hide Character Completed
 	btn3:SetPoint("TOPRIGHT", -230, -27)
 	_G[btn3:GetName().."Text"]:SetText("Hide Character Completed")
 	btn3:RegisterForClicks("AnyUp");
 	btn3:SetScript("OnClick", function (self, button, down) 
-	  _G['RaidAch_Frame_HideAccount']:SetChecked(false); if RAF_RID then RaidAchFilter:ShowAch(RAF_RID) end
+	  _G['RaidAch_Frame_HideAccount']:SetChecked(false); if RAF_RID then RaidAchFilter:ShowAchievements(RAF_RID) end
 	end)
 	-- Raids list dropdown
 	local dropDown = CreateFrame("Button", "RaidAch_Dropdown", fra, "UIDropDownMenuTemplate")
@@ -253,251 +255,6 @@ function RaidAchFilter:Initialize()
 			UIDropDownMenu_AddButton(info, level)
 		end
 	end
---[[ 
-	
-
-	dropDown.initialize = function(self, level)
-	    if not level then return end
-		wipe(info)
-		if level == 1 then
-			info.isTitle = 1
-			info.notCheckable = 1
-			info.keepShownOnClick = false
-			info.text = "Filter by Instance"
-			UIDropDownMenu_AddButton(info, level)
-			info.disabled = nil
-			info.isTitle = nil
-			info.notCheckable = true
-			info.hasArrow = true
-			info.text = "Raids"
-			info.value = "topmenu1"
-			UIDropDownMenu_AddButton(info, level)
-			info.text = "Dungeons"
-			info.value = "topmenu2"
-			UIDropDownMenu_AddButton(info, level)
-			info.text = "Scenarios"
-			info.value = "topmenu3"
-			UIDropDownMenu_AddButton(info, level)
-			-- Close menu item
-			info.hasArrow     = nil
-			info.value        = nil
-			info.notCheckable = 1
-			info.text         = CLOSE
-			info.func         = self.HideMenu
-			UIDropDownMenu_AddButton(info, level)
-		elseif level == 2 then
-			info.disabled = nil
-			info.isTitle = nil
-			info.notCheckable = true
-			info.hasArrow = true
-
-			if UIDROPDOWNMENU_MENU_VALUE == "topmenu1" then
-				info.text = "Lich King"
-				info.value = "submenua1"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Cataclysm"
-				info.value = "submenua2"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Mists of Pandaria"
-				info.value = "submenua3"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Warlords of Draenor"
-				info.value = "submenua4"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Legion"
-				info.value = "submenua5"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Battle for Azeroth"
-				info.value = "submenua6"
-				UIDropDownMenu_AddButton(info, level)
-			elseif UIDROPDOWNMENU_MENU_VALUE == "topmenu2" then
-				info.text = "Lich King"
-				info.value = "submenub1"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Cataclysm"
-				info.value = "submenub2"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Mists of Pandaria"
-				info.value = "submenub3"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Warlords of Draenor"
-				info.value = "submenub4"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Legion"
-				info.value = "submenub5"
-				UIDropDownMenu_AddButton(info, level)
-				info.text = "Battle for Azeroth"
-				info.value = "submenub6"
-				UIDropDownMenu_AddButton(info, level)
-			elseif UIDROPDOWNMENU_MENU_VALUE == "topmenu3" then
-				for i = 102, 115 do --Scenarios!
-				  info.value = i
-				  info.checked = false
-				  info.hasArrow = false
-				  info.notCheckable = nil
-				  info.text = RAFdb.MapName[i]
-				  info.func = function() 
-					RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-				  end
-				  UIDropDownMenu_AddButton(info, level)
-				end
-			end
-		 elseif level == 3 then
-			-- Raids!
-			if UIDROPDOWNMENU_MENU_VALUE == "submenua1" then
-				for i = 1, 12 do
-				  info.value = i
-				  info.checked = false
-				  info.text = RAFdb.MapName[i]
-				  info.func = function() 
-					RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-				  end
-				  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenua2" then
-				for i = 13, 17 do
-				  info.value = i
-				  info.checked = false
-				  info.text = RAFdb.MapName[i]
-				  info.func = function() 
-					RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-				  end
-				  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenua3" then
-				for i = 18, 22 do
-				  info.value = i
-				  info.checked = false
-				  info.text = RAFdb.MapName[i]
-				  info.func = function() 
-					RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-				  end
-				  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenua4" then
-				for i = 23, 25 do
-				  info.value = i
-				  info.checked = false
-				  info.text = RAFdb.MapName[i]
-				  info.func = function() 
-					RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-				  end
-				  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenua5" then
-				for i = 26, 30 do
-				  info.value = i
-				  info.checked = false
-				  info.text = RAFdb.MapName[i]
-				  info.func = function() 
-					RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-				  end
-				  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenua6" then
-				for i = 31, 31 do
-				  info.value = i
-				  info.checked = false
-				  info.text = RAFdb.MapName[i]
-				  info.func = function() 
-					RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-				  end
-				  UIDropDownMenu_AddButton(info, level)
-				end
-				-- BfA 8.1.0
-				for i = 117, 118 do
-					info.value = i
-					info.checked = false
-					info.text = RAFdb.MapName[i]
-					info.func = function() 
-					  RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					end
-					UIDropDownMenu_AddButton(info, level)
-				  end
-				  -- BfA 8.2.0
-				  for i = 120, 120 do
-					  info.value = i
-					  info.checked = false
-					  info.text = RAFdb.MapName[i]
-					  info.func = function() 
-						RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					  end
-					  UIDropDownMenu_AddButton(info, level)
-					end
-			-- Dungeons!
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub1" then
-				for i = 32, 47 do
-					  info.value = i
-					  info.checked = false
-					  info.text = RAFdb.MapName[i]
-					  info.func = function() 
-					    RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					  end
-					  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub2" then
-				for i = 48, 61 do
-					  info.value = i
-					  info.checked = false
-					  info.text = RAFdb.MapName[i]
-					  info.func = function() 
-					    RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					  end
-					  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub3" then
-				for i = 62, 70 do
-					  info.value = i
-					  info.checked = false
-					  info.text = RAFdb.MapName[i]
-					  info.func = function() 
-					    RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					  end
-					  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub4" then
-				for i = 71, 78 do
-					  info.value = i
-					  info.checked = false
-					  info.text = RAFdb.MapName[i]
-					  info.func = function() 
-					    RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					  end
-					  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub5" then
-				for i = 79, 91 do
-					  info.value = i
-					  info.checked = false
-					  info.text = RAFdb.MapName[i]
-					  info.func = function() 
-					    RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					  end
-					  UIDropDownMenu_AddButton(info, level)
-				end
-			elseif UIDROPDOWNMENU_MENU_VALUE == "submenub6" then
-				for i = 92, 101 do
-					  info.value = i
-					  info.checked = false
-					  info.text = RAFdb.MapName[i]
-					  info.func = function() 
-					    RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					  end
-					  UIDropDownMenu_AddButton(info, level)
-				end
-				-- BfA 8.2.0
-				for i = 119, 119 do
-					info.value = i
-					info.checked = false
-					info.text = RAFdb.MapName[i]
-					info.func = function() 
-					  RaidAchFilter:ShowAch(i); ToggleDropDownMenu(1, nil, dropDown);
-					end
-					UIDropDownMenu_AddButton(info, level)
-			  end
-			end
-	     end
-	 end ]]
 	--Set default when first opened
 	UIDropDownMenu_Initialize(dropDown)
 	UIDropDownMenu_SetSelectedValue(dropDown, 1)
@@ -758,66 +515,10 @@ function RaidAchFilter:ShowAchievements(--[[ Raid ]] object)
 		_G["RaidAch_Frame"]:SetWidth(520)
 	end
 
-	RAF_RID = object.Achievements
+	RAF_RID = object
 
 	local dropDown = _G["RaidAch_Dropdown"]
 	UIDropDownMenu_Initialize(dropDown)
 	UIDropDownMenu_SetSelectedValue(dropDown, object.ID)
 	UIDropDownMenu_SetText(dropDown, object.Name)
 end
-
-
---[[ function RaidAchFilter:ShowAch(Raid)
-	local chkBox1 = _G["RaidAch_Frame_HideAccount"]
-	local chkBox2 = _G["RaidAch_Frame_HideCharacter"]
-	local scrBar = _G["RaidAch_Slider"]
-	RAFdb.AchList = RAFdb.AchID[Raid]
-
-	for i = 1, 68 do
-		local fra = _G["achFra" .. i]
-		if fra then fra:Hide() end
-	end
-	local maxID = 1
-	local indent = 0
-	fraNum = 1
-	for i = 1, #RAFdb.AchList do
-		local IDNumber, Name, Points, Completed, Month, Day, Year, Description, Flags, Image, RewardText, isGuildAch, earnedByMe, earnedBy = GetAchievementInfo(RAFdb.AchID[Raid][i])
-		if Completed and not chkBox1:GetChecked() then
-			if chkBox2:GetChecked() and earnedByMe then --ignore it
-			else
-				RaidAchFilter:AchAdd(maxID, RAFdb.AchID[Raid][i], indent)
-				maxID=maxID+1
-				indent=indent-75
-			end
-		elseif not Completed then
-			RaidAchFilter:AchAdd(maxID, RAFdb.AchID[Raid][i], indent)
-			maxID=maxID+1
-			indent=indent-75
-		end
-	end
-
-	scrBar:SetMinMaxValues(1, maxID) 
-	local fraHeight = 0
-	for i = 1, #RAFdb.AchID[Raid] do
-		if _G["achFra"..i] and _G["achFra"..i]:IsShown() then fraHeight=fraHeight+75 end
-	end
-	
-	if fraHeight > 600 then 
-		fraHeight=fraHeight-520
-		scrBar:SetMinMaxValues(1, fraHeight)
-		scrBar:Show(); scrBar:Enable(); scrBar:SetValue(0); scrBar:SetValueStep(15.0)
-		_G["RaidAch_Frame_Close"]:SetPoint("TOPRIGHT", _G["RaidAch_Frame"], "TOPRIGHT", -13, 3)
-		_G["RaidAch_Frame"]:SetWidth(536)
-	else 
-		scrBar:Hide(); scrBar:Disable(); fraHeight = 100
-		_G["RaidAch_Frame_Close"]:SetPoint("TOPRIGHT", _G["RaidAch_Frame"], "TOPRIGHT", 4, 3)
-		_G["RaidAch_Frame"]:SetWidth(520)
-	end
-
-	RAF_RID = Raid
-
-	local dropDown = _G["RaidAch_Dropdown"]
-	UIDropDownMenu_Initialize(dropDown)
-	UIDropDownMenu_SetSelectedValue(dropDown, Raid)
-	UIDropDownMenu_SetText(dropDown, RAFdb.MapName[Raid])
-end ]]

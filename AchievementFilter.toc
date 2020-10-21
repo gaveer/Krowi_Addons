@@ -9,5 +9,7 @@ embeds.xml
 vars.lua
 TreeObject.lua
 TreeObjectWithAchievements.lua
-Achievements.lua
+Expansions.lua
+Cataclysm.lua
+Mists of Pandaria.lua
 AchievementFilter.lua

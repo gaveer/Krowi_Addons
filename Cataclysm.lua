@@ -1,18 +1,4 @@
--- Root
-Root = TreeObject:New("Root");
-
--- Expansions
-Xpack_Classic = Root:AddChild(TreeObject:New("Classic"));
-Xpack_TBC = Root:AddChild(TreeObject:New("The Burning Crusade"));
-Xpack_WotLK = Root:AddChild(TreeObject:New("Wrath of the Lich King"));
-Xpack_Cata = Root:AddChild(TreeObject:New("Cataclysm"));
-Xpack_MoP = Root:AddChild(TreeObject:New("Mists of Pandaria"));
-Xpack_WoD = Root:AddChild(TreeObject:New("Warlords of Draenor"));
-Xpack_Legion = Root:AddChild(TreeObject:New("Legion"));
-Xpack_BfA = Root:AddChild(TreeObject:New("Battle for Azeroth"));
-Xpack_SL = Root:AddChild(TreeObject:New("Shadowlands"));
-
--- Cataclysm Raids
+-- Raids
 Xpack_Cata_Raids = Xpack_Cata:AddChild(TreeObject:New("Raids"));
 -- 4.0
 Xpack_Cata_Raid_BH = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("Baradin Hold"));
@@ -29,13 +15,3 @@ Xpack_Cata_Raid_FL:AddAchievements({5821, 5813, 5810, 5829, 5830, 5799, 5855, 58
 -- 4.3
 Xpack_Cata_Raid_DS = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("Dragon Soul"));
 Xpack_Cata_Raid_DS:AddAchievements({6174, 6128, 6129, 6175, 6084, 6105, 6133, 6180, 6106, 6107, 6177, 6109, 6110, 6111, 6112, 6113, 6114, 6115, 6116});
-
-
-
-
-
-
-
--- test
-Raid1 = Xpack_Classic:AddChild(TreeObject:New("Raid 1"))
-Raid12 = Raid1:AddChild(TreeObject:New("Raid 12"))

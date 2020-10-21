@@ -73,7 +73,7 @@ function RaidAchFilter:Toggle()
 	local f = _G["RaidAch_Frame"]
 	local fra = _G["AchievementFrame"]
 	if not f then
-		RaidAchFilter:Initialize(); RaidAchFilter:ShowAch(1); --RaidAchFilter:ZoneChange()
+		RaidAchFilter:Initialize(); -- RaidAchFilter:ShowAch(1); -- RaidAchFilter:ZoneChange()
 		if fra then 
 			if ( AchievementFrame:IsShown() ) and f then f:ClearAllPoints(); f:SetPoint("TOPLEFT",fra,"TOPRIGHT",4,0)end 
 		end
@@ -99,26 +99,26 @@ function RaidAchFilter:AchEarned(eventName, achID)
 end
 RaidAchFilter:RegisterEvent("ACHIEVEMENT_EARNED", "AchEarned")
 
--- --Auto swap to instance you're in
--- function RaidAchFilter:ZoneChange()
--- 	local f = _G["RaidAch_Frame"]
--- 	if f then
--- 		local mapID =  C_Map.GetBestMapForUnit("player")
--- 		for i = 1, #RAFdb.MapID do
--- 			if RAFdb.MapID[i] == mapID then 
--- 				local id = i
--- 				if id < 5 or id == 7 or id == 8 or (id > 9 and id < 14) then --Only LK Raids
--- 					local dif = GetLegacyRaidDifficultyID()
--- 					if dif == 2 or dif == 4 or dif == 6 then id = id+1; RaidAchFilter:ShowAch(id); break --25 Player
--- 					else RaidAchFilter:ShowAch(id); break end --10 Player
--- 				else
--- 					RaidAchFilter:ShowAch(id); break
--- 				end
--- 			end
--- 		end
--- 	end
--- end
--- RaidAchFilter:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChange")
+--[[ --Auto swap to instance you're in
+function RaidAchFilter:ZoneChange()
+	local f = _G["RaidAch_Frame"]
+	if f then
+		local mapID =  C_Map.GetBestMapForUnit("player")
+		for i = 1, #RAFdb.MapID do
+			if RAFdb.MapID[i] == mapID then 
+				local id = i
+				if id < 5 or id == 7 or id == 8 or (id > 9 and id < 14) then --Only LK Raids
+					local dif = GetLegacyRaidDifficultyID()
+					if dif == 2 or dif == 4 or dif == 6 then id = id+1; RaidAchFilter:ShowAch(id); break --25 Player
+					else RaidAchFilter:ShowAch(id); break end --10 Player
+				else
+					RaidAchFilter:ShowAch(id); break
+				end
+			end
+		end
+	end
+end
+RaidAchFilter:RegisterEvent("ZONE_CHANGED_NEW_AREA", "ZoneChange") ]]
 
 -- Main Window
 function RaidAchFilter:Initialize()
@@ -161,10 +161,10 @@ function RaidAchFilter:Initialize()
 	scrFra:SetScript("OnMouseWheel",
 		function(self, delta) 
 			local x = scrBar:GetValue(); local y = scrBar:GetValueStep()*3
-			if #RAFdb.AchList > 7 then -- Only work if scrollbar is up
+			-- if #RAFdb.AchList > 7 then -- Only work if scrollbar is up
 				if delta == 1 then scrBar:SetValue(x-y)
 				else scrBar:SetValue(x+y) end 
-			end
+			-- end
 		end)
 	local content = CreateFrame("Frame", "RaidAch_Content", scrFra) 
 	content:SetSize(128, 128) 
@@ -215,6 +215,47 @@ function RaidAchFilter:Initialize()
 	end
 
 	local info = {}
+	dropDown.initialize = function(self, level)		
+		print(level);
+	    if not level then return end
+		wipe(info)
+		local treeObject = Root;
+		print(UIDROPDOWNMENU_MENU_VALUE);
+		if UIDROPDOWNMENU_MENU_VALUE ~= nil then
+			for w in UIDROPDOWNMENU_MENU_VALUE:gmatch("([^_]+)") do
+				treeObject = treeObject.Children[tonumber(w)];
+			end
+		end
+		print(treeObject.Name);
+		info.notCheckable = true
+		for k, child in pairs(treeObject.Children) do
+			info.text = child.Name;
+			info.value = child.ID;
+			if next(child.Children) == nil then
+				info.hasArrow = false;
+				info.func = function() 
+					print(child.ID); -- click event
+					print(child.Achievements)
+					RaidAchFilter:ShowAchievements(child); -- test for fl achies
+					ToggleDropDownMenu(1, nil, dropDown);
+				end
+			else
+				info.hasArrow = true;
+			end
+			UIDropDownMenu_AddButton(info, level)
+		end
+		if level == 1 then
+			info.hasArrow     = nil
+			info.value        = nil
+			info.notCheckable = 1
+			info.text         = CLOSE
+			info.func         = self.HideMenu
+			UIDropDownMenu_AddButton(info, level)
+		end
+	end
+--[[ 
+	
+
 	dropDown.initialize = function(self, level)
 	    if not level then return end
 		wipe(info)
@@ -456,7 +497,7 @@ function RaidAchFilter:Initialize()
 			  end
 			end
 	     end
-	 end
+	 end ]]
 	--Set default when first opened
 	UIDropDownMenu_Initialize(dropDown)
 	UIDropDownMenu_SetSelectedValue(dropDown, 1)
@@ -668,8 +709,65 @@ function RaidAchFilter:AchAdd(fraID, ach_ID, indent_num)
 	end
 end
 
-function RaidAchFilter:ShowAch(Raid)
+function RaidAchFilter:ShowAchievements(--[[ Raid ]] object)
+	print(object.Achievements);
+	print(#object.Achievements);
+	local chkBox1 = _G["RaidAch_Frame_HideAccount"]
+	local chkBox2 = _G["RaidAch_Frame_HideCharacter"]
+	local scrBar = _G["RaidAch_Slider"]
+	-- RAFdb.AchList = RAFdb.AchID[Raid]
 
+	for i = 1, 68 do
+		local fra = _G["achFra" .. i]
+		if fra then fra:Hide() end
+	end
+	local maxID = 1
+	local indent = 0
+	fraNum = 1
+	for i = 1, #object.Achievements do
+		local id, name, points, completed, month, day, year, description, flags, image, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(object.Achievements[i])
+		if completed and not chkBox1:GetChecked() then
+			if chkBox2:GetChecked() and wasEarnedByMe then --ignore it
+			else
+				RaidAchFilter:AchAdd(maxID, object.Achievements[i], indent)
+				maxID=maxID+1
+				indent=indent-75
+			end
+		elseif not completed then
+			RaidAchFilter:AchAdd(maxID, object.Achievements[i], indent)
+			maxID=maxID+1
+			indent=indent-75
+		end
+	end
+
+	scrBar:SetMinMaxValues(1, maxID) 
+	local fraHeight = 0
+	for i = 1, #object.Achievements do
+		if _G["achFra"..i] and _G["achFra"..i]:IsShown() then fraHeight=fraHeight+75 end
+	end
+	
+	if fraHeight > 600 then 
+		fraHeight=fraHeight-520
+		scrBar:SetMinMaxValues(1, fraHeight)
+		scrBar:Show(); scrBar:Enable(); scrBar:SetValue(0); scrBar:SetValueStep(15.0)
+		_G["RaidAch_Frame_Close"]:SetPoint("TOPRIGHT", _G["RaidAch_Frame"], "TOPRIGHT", -13, 3)
+		_G["RaidAch_Frame"]:SetWidth(536)
+	else 
+		scrBar:Hide(); scrBar:Disable(); fraHeight = 100
+		_G["RaidAch_Frame_Close"]:SetPoint("TOPRIGHT", _G["RaidAch_Frame"], "TOPRIGHT", 4, 3)
+		_G["RaidAch_Frame"]:SetWidth(520)
+	end
+
+	RAF_RID = object.Achievements
+
+	local dropDown = _G["RaidAch_Dropdown"]
+	UIDropDownMenu_Initialize(dropDown)
+	UIDropDownMenu_SetSelectedValue(dropDown, object.ID)
+	UIDropDownMenu_SetText(dropDown, object.Name)
+end
+
+
+--[[ function RaidAchFilter:ShowAch(Raid)
 	local chkBox1 = _G["RaidAch_Frame_HideAccount"]
 	local chkBox2 = _G["RaidAch_Frame_HideCharacter"]
 	local scrBar = _G["RaidAch_Slider"]
@@ -722,5 +820,4 @@ function RaidAchFilter:ShowAch(Raid)
 	UIDropDownMenu_Initialize(dropDown)
 	UIDropDownMenu_SetSelectedValue(dropDown, Raid)
 	UIDropDownMenu_SetText(dropDown, RAFdb.MapName[Raid])
-
-end
+end ]]

@@ -7,4 +7,7 @@
 
 embeds.xml
 vars.lua
+TreeObject.lua
+TreeObjectWithAchievements.lua
+Achievements.lua
 AchievementFilter.lua

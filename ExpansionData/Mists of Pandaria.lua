@@ -3,6 +3,7 @@ Xpack_MoP = Root:AddChild(TreeObject:New("Mists of Pandaria"));
 
 -- Raids
 Xpack_MoP_Raids = Xpack_MoP:AddChild(TreeObject:New("Raids"));
+
 -- 5.0
 Xpack_Cata_Raid_MSV = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("Mogu'shan Vaults"));
 Xpack_Cata_Raid_MSV:AddAchievementIDs({6823, 6674, 7056, 7933, 6687, 6686, 6455}); -- Glory of the Pandaria Raider
@@ -22,6 +23,7 @@ Xpack_Cata_Raid_ToES:AddAchievementIDs({6731, 6732, 6733, 6734}); -- Defeat X on
 Xpack_Cata_Raid_ToES:AddAchievementIDs({6689}); -- Defeat the bosses in X
 Xpack_Cata_Raid_ToES:AddAchievement(8248, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 Xpack_Cata_Raid_ToES:AddAchievement(7487, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+
 -- 5.2
 Xpack_Cata_Raid_ToT = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("Throne of Thunder"));
 Xpack_Cata_Raid_ToT:AddAchievementIDs({8094, 8038, 8073, 8077, 8082, 8097, 8098, 8037, 8081, 8087, 8086, 8090}); -- Glory of the Thundering Raider
@@ -31,6 +33,7 @@ Xpack_Cata_Raid_ToT:AddAchievement(8089, AddAchievementType.FoS, false);  -- Fea
 Xpack_Cata_Raid_ToT:AddAchievement(8249, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 Xpack_Cata_Raid_ToT:AddAchievement(8238, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 Xpack_Cata_Raid_ToT:AddAchievement(8260, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+
 -- 5.4
 Xpack_Cata_Raid_SoO = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("Siege of Orgrimmar"));
 Xpack_Cata_Raid_SoO:AddAchievementIDs({8536, 8528, 8532, 8521, 8530, 8520, 8453, 8448, 8538, 8529, 8527, 8543, 8531, 8537}); -- Glory of the Orgrimmar Raider

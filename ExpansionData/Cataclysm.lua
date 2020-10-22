@@ -3,6 +3,7 @@ Xpack_Cata = Root:AddChild(TreeObject:New("Cataclysm"));
 
 -- Raids
 Xpack_Cata_Raids = Xpack_Cata:AddChild(TreeObject:New("Raids"));
+
 -- 4.0
 Xpack_Cata_Raid_BH = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("Baradin Hold"));
 Xpack_Cata_Raid_BH:AddAchievementIDs({5416}); -- Defeat X
@@ -19,13 +20,14 @@ Xpack_Cata_Raid_TotFW = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New
 Xpack_Cata_Raid_TotFW:AddAchievementIDs({5304, 5305}); -- Glory of the Cataclysm Raider
 Xpack_Cata_Raid_TotFW:AddAchievementIDs({5122, 5123}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_TotFW:AddAchievementIDs({4851}); -- Defeat the bosses in X
+
 -- 4.2
+Xpack_Cata_Raid_BH:AddAchievementIDs({6045}); -- Defeat X
 Xpack_Cata_Raid_FL = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("Firelands"));
 Xpack_Cata_Raid_FL:AddAchievementIDs({5821, 5813, 5810, 5829, 5830, 5799, 5855}); -- Glory of the Firelands Raider
 Xpack_Cata_Raid_FL:AddAchievementIDs({5807, 5809, 5808, 5806, 5805, 5804, 5803}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_FL:AddAchievementIDs({5802}); -- Defeat the bosses in X
--- 4.2.2
-Xpack_Cata_Raid_BH:AddAchievementIDs({6045}); -- Defeat X
+
 -- 4.3
 Xpack_Cata_Raid_BH:AddAchievementIDs({6108}); -- Defeat X
 Xpack_Cata_Raid_DS = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("Dragon Soul"));

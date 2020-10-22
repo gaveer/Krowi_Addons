@@ -15,4 +15,5 @@ ExpansionData/Expansions.lua
 ExpansionData/Cataclysm.lua
 ExpansionData/Mists of Pandaria.lua
 ExpansionData/Warlords of Draenor.lua
+ExpansionData/Legion.lua
 AchievementFilter.lua

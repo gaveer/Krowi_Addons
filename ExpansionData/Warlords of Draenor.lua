@@ -3,6 +3,7 @@ Xpack_WoD = Root:AddChild(TreeObject:New("Warlords of Draenor"));
 
 -- Raids
 Xpack_WoD_Raids = Xpack_WoD:AddChild(TreeObject:New("Raids"));
+
 -- 6.0
 Xpack_WoD_Raid_HM = Xpack_WoD_Raids:AddChild(TreeObjectWithAchievements:New("Highmaul"));
 Xpack_WoD_Raid_HM:AddAchievementIDs({8948, 8947, 8974, 8975, 8958, 8976, 8977}); -- Glory of the Draenor Raider
@@ -16,6 +17,7 @@ Xpack_WoD_Raid_BRF:AddAchievementIDs({8967, 8966, 8970, 8968, 8932, 8971, 8956, 
 Xpack_WoD_Raid_BRF:AddAchievementIDs({8989, 8990, 8991, 8992}); -- Defeat the bosses in X
 Xpack_WoD_Raid_BRF:AddAchievement(9444, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 Xpack_WoD_Raid_BRF:AddAchievement(9443, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+
 -- 6.2
 Xpack_WoD_Raid_HFC = Xpack_WoD_Raids:AddChild(TreeObjectWithAchievements:New("Hellfire Citadel"));
 Xpack_WoD_Raid_HFC:AddAchievementIDs({10026, 10057, 10013, 10054, 9972, 9979, 9988, 10086, 9989, 10012, 10087, 10030, 10073}); -- Glory of the Hellfire Raider

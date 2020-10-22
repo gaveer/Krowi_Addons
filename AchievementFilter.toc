@@ -3,16 +3,16 @@
 ## Version: 0.1
 ## Author: Krowi
 ## SavedVariables: AchievementFilterDB
-## Notes: Filters your raid/dungeon/scenario achievements by instance.
+## Notes: Filters your raid/dungeon/scenario/... achievements by instance. More to come!
 
 embeds.xml
 vars.lua
-AchievementType.lua
-Achievement.lua
-TreeObject.lua
-TreeObjectWithAchievements.lua
-Expansions.lua
-Cataclysm.lua
-Mists of Pandaria.lua
-Warlords of Draenor.lua
+Core/AchievementType.lua
+Core/Achievement.lua
+Core/TreeObject.lua
+Core/TreeObjectWithAchievements.lua
+ExpansionData/Expansions.lua
+ExpansionData/Cataclysm.lua
+ExpansionData/Mists of Pandaria.lua
+ExpansionData/Warlords of Draenor.lua
 AchievementFilter.lua

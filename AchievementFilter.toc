@@ -7,9 +7,12 @@
 
 embeds.xml
 vars.lua
+AchievementType.lua
+Achievement.lua
 TreeObject.lua
 TreeObjectWithAchievements.lua
 Expansions.lua
 Cataclysm.lua
 Mists of Pandaria.lua
+Warlords of Draenor.lua
 AchievementFilter.lua

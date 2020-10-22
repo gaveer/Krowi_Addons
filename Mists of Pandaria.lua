@@ -1,3 +1,6 @@
+-- Expansion
+Xpack_MoP = Root:AddChild(TreeObject:New("Mists of Pandaria"));
+
 -- Raids
 Xpack_MoP_Raids = Xpack_MoP:AddChild(TreeObject:New("Raids"));
 -- 5.0

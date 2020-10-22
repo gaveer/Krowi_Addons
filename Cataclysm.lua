@@ -1,3 +1,4 @@
+-- Expansion
 Xpack_Cata = Root:AddChild(TreeObject:New("Cataclysm"));
 
 -- Raids
@@ -30,5 +31,4 @@ Xpack_Cata_Raid_BH:AddAchievementIDs({6108}); -- Defeat X
 Xpack_Cata_Raid_DS = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("Dragon Soul"));
 Xpack_Cata_Raid_DS:AddAchievementIDs({6174, 6128, 6129, 6175, 6084, 6105, 6133, 6180}); -- Glory of the Dragon Soul Raider
 Xpack_Cata_Raid_DS:AddAchievementIDs({6109, 6110, 6111, 6112, 6113, 6114, 6115, 6116}); -- Defeat X on Heroic Difficulty
-Xpack_Cata_Raid_DS:AddAchievementIDs({6106, 6107}); -- Defeat the bosses in X
-Xpack_Cata_Raid_DS:AddAchievementIDs({6177}); -- Defeat X
+Xpack_Cata_Raid_DS:AddAchievementIDs({6106, 6107, 6177}); -- Defeat the bosses in X

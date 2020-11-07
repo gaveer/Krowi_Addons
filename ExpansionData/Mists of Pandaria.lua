@@ -9,30 +9,30 @@ Xpack_Cata_Raid_MSV = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("M
 Xpack_Cata_Raid_MSV:AddAchievementIDs({6823, 6674, 7056, 7933, 6687, 6686, 6455}); -- Glory of the Pandaria Raider
 Xpack_Cata_Raid_MSV:AddAchievementIDs({6719, 6720, 6721, 6722, 6723, 6724}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_MSV:AddAchievementIDs({6458, 6844}); -- Defeat the bosses in X
-Xpack_Cata_Raid_MSV:AddAchievement(6954, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_MSV:AddAchievement(7485, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_MSV:AddAchievement(6954, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_MSV:AddAchievement(7485, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 Xpack_Cata_Raid_HoF = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("Heart of Fear"));
 Xpack_Cata_Raid_HoF:AddAchievementIDs({6937, 6936, 6553, 6683, 6518, 6922}); -- Glory of the Pandaria Raider
 Xpack_Cata_Raid_HoF:AddAchievementIDs({6725, 6726, 6727, 6728, 6729, 6730}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_HoF:AddAchievementIDs({6718, 6845}); -- Defeat the bosses in X
-Xpack_Cata_Raid_HoF:AddAchievement(8246, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_HoF:AddAchievement(7486, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_HoF:AddAchievement(8246, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_HoF:AddAchievement(7486, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 Xpack_Cata_Raid_ToES = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("Terrace of Endless Spring"));
 Xpack_Cata_Raid_ToES:AddAchievementIDs({6717, 6933, 6824, 6825}); -- Glory of the Pandaria Raider
 Xpack_Cata_Raid_ToES:AddAchievementIDs({6731, 6732, 6733, 6734}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_ToES:AddAchievementIDs({6689}); -- Defeat the bosses in X
-Xpack_Cata_Raid_ToES:AddAchievement(8248, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_ToES:AddAchievement(7487, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_ToES:AddAchievement(8248, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_ToES:AddAchievement(7487, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
 -- 5.2
 Xpack_Cata_Raid_ToT = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("Throne of Thunder"));
 Xpack_Cata_Raid_ToT:AddAchievementIDs({8094, 8038, 8073, 8077, 8082, 8097, 8098, 8037, 8081, 8087, 8086, 8090}); -- Glory of the Thundering Raider
 Xpack_Cata_Raid_ToT:AddAchievementIDs({8056, 8057, 8058, 8059, 8060, 8061, 8062, 8063, 8064, 8065, 8066, 8067, 8068}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_ToT:AddAchievementIDs({8069, 8070, 8071, 8072}); -- Defeat the bosses in X
-Xpack_Cata_Raid_ToT:AddAchievement(8089, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_ToT:AddAchievement(8249, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_ToT:AddAchievement(8238, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_ToT:AddAchievement(8260, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_ToT:AddAchievement(8089, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_ToT:AddAchievement(8249, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_ToT:AddAchievement(8238, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_ToT:AddAchievement(8260, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
 -- 5.4
 Xpack_Cata_Raid_SoO = Xpack_MoP_Raids:AddChild(TreeObjectWithAchievements:New("Siege of Orgrimmar"));
@@ -44,7 +44,7 @@ if IsAlliance then
 elseif IsHorde then
     Xpack_Cata_Raid_SoO:AddAchievementIDs({8680}); -- Defeat X
 end
-Xpack_Cata_Raid_SoO:AddAchievement(8398, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_SoO:AddAchievement(8399, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_SoO:AddAchievement(8400, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
-Xpack_Cata_Raid_SoO:AddAchievement(8401, AddAchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_SoO:AddAchievement(8398, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_SoO:AddAchievement(8399, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_SoO:AddAchievement(8400, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_SoO:AddAchievement(8401, AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)

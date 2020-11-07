@@ -1,7 +1,3 @@
-IsAlliance = UnitFactionGroup("player") == "Alliance";
-IsHorde = UnitFactionGroup("player") == "Horde";
-IsNeutral = UnitFactionGroup("player") == "Neutral";
-
 -- Root
 Root = TreeObject:New("Root");
 

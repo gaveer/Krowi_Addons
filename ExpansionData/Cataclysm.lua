@@ -15,7 +15,7 @@ Xpack_Cata_Raid_BoT = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("
 Xpack_Cata_Raid_BoT:AddAchievementIDs({5300, 4852, 5311, 5312}); -- Glory of the Cataclysm Raider
 Xpack_Cata_Raid_BoT:AddAchievementIDs({5118, 5117, 5119, 5120, 5121}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_BoT:AddAchievementIDs({4850}); -- Defeat the bosses in X
-Xpack_Cata_Raid_BoT:AddAchievement(5313, AddAchievementType.FoS, false); -- Feats of Strength (Unobtainable)
+Xpack_Cata_Raid_BoT:AddAchievement(5313, AchievementType.FoS, false); -- Feats of Strength (Unobtainable)
 Xpack_Cata_Raid_TotFW = Xpack_Cata_Raids:AddChild(TreeObjectWithAchievements:New("Throne of the Four Winds"));
 Xpack_Cata_Raid_TotFW:AddAchievementIDs({5304, 5305}); -- Glory of the Cataclysm Raider
 Xpack_Cata_Raid_TotFW:AddAchievementIDs({5122, 5123}); -- Defeat X on Heroic Difficulty

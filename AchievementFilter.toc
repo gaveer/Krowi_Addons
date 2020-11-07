@@ -7,6 +7,7 @@
 
 embeds.xml
 vars.lua
+Core/Core.lua
 Core/AchievementType.lua
 Core/Achievement.lua
 Core/TreeObject.lua
@@ -17,3 +18,4 @@ ExpansionData/Mists of Pandaria.lua
 ExpansionData/Warlords of Draenor.lua
 ExpansionData/Legion.lua
 AchievementFilter.lua
+test.lua

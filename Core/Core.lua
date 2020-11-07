@@ -1,4 +1,3 @@
--- lol
 -- Global vars
 AchievementFilter = LibStub("AceAddon-3.0"):NewAddon("AchievementFilter");
 IsAlliance = UnitFactionGroup("player") == "Alliance";

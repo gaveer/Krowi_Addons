@@ -1,7 +1,7 @@
 -- Don't change!
 AF_NAME = "Achievement Filter";
 AF_VERSION = "90001";
-AF_BUILD = "1";
+AF_BUILD = "0.1";
 
 -- Localization
 AF_OPTIONS_GENERAL = "General";
@@ -12,3 +12,4 @@ AF_OPTIONS_DEBUG_INFO_TOGGLE = "Enable debug info";
 AF_OPTIONS_DEBUG_INFO_TOGGLE_TOOLTIP = "Enable / disable debug info";
 AF_OPTIONS_LOADED = "Options loaded";
 AF_ICON_LOADED = "Icon loaded";
+AF_ICON_TOOLTIP_LINE2 = "Right click for Options.";

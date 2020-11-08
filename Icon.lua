@@ -1,25 +1,25 @@
 AFSetting.Minimap = {
     hide = not AFSetting.ShowMinimapIcon,
-}
+};
 
-Icon = LibStub("LibDBIcon-1.0");
+Icon = LibStub("LibDBIcon-1.0"); -- Using this instead of creating the icon from scratch is the automatic integration with addons like Titan Panel
 
 AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("AchievementFilterLDB", {
     type = "launcher",
-    label = "Achievement Filter",
+    label = AF_NAME,
     icon = "Interface\\Icons\\achievement_dungeon_heroic_gloryoftheraider",
     OnClick = function(self, button)
-        if button == "LeftButton" then
-            Debug("LeftButton clicked");
+        if button == "RightButton" then
+            Debug("RightButton clicked");
             InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
-		    InterfaceOptionsFrame_OpenToCategory("Achievement Filter");
+		    InterfaceOptionsFrame_OpenToCategory(AF_NAME);
 	    end
     end,
     OnTooltipShow = function(tt)
-        tt:AddLine("Achievement Filter")
-        tt:AddLine("|cffffffff" .. "Click for Options.")
+        tt:AddLine("|cffffffff" .. AF_NAME);
+        tt:AddLine(AF_ICON_TOOLTIP_LINE2);
     end,
-})
+});
 
 local iconFrame = CreateFrame("Frame", nil, nil);
 iconFrame:RegisterEvent("ADDON_LOADED");
@@ -30,7 +30,7 @@ function iconFrame:OnEvent(event, arg1)
             AFSetting.Minimap.hide = not AFSetting.ShowMinimapIcon;
             Icon:Register("AchievementFilterLDB", AchievementFilterLDB, AFSetting.Minimap);
             Debug(AF_ICON_LOADED);
-            Debug("     - Icon shown: " .. tostring(not AFSetting.Minimap.hide));
+            Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not AFSetting.Minimap.hide));
             self:UnregisterEvent("ADDON_LOADED");
         end
     end

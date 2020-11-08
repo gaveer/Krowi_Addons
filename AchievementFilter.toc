@@ -2,14 +2,14 @@
 ## Title: Achievement Filter
 ## Version: 0.1
 ## Author: Krowi
-## SavedVariables: AchievementFilterDB, AFSetting
-## Notes: Filters your raid/dungeon/scenario/... achievements by instance. More to come!
+## SavedVariables: AFSetting
+## Notes: Filters your achievements.
 
 embeds.xml
 
 Localization.lua
-Core/Debug.lua
-Core/Config.lua
-Core/Icon.lua
+Debug.lua
+Config.lua
+Icon.lua
 
 AchievementFilter.lua

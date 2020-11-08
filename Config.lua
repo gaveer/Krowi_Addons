@@ -4,7 +4,7 @@ AFSetting = {
 };
 
 local panel = CreateFrame("Frame", "afOptionsPanel", InterfaceOptionsFramePanelContainer);
-panel.name = "Achievement Filter";
+panel.name = AF_NAME;
 panel:RegisterEvent("ADDON_LOADED");
 
 local titlebar = CreateFrame("Frame", nil, panel);

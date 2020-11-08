@@ -1,0 +1,4 @@
+-- -- Global vars
+-- IsAlliance = UnitFactionGroup("player") == "Alliance";
+-- IsHorde = UnitFactionGroup("player") == "Horde";
+-- IsNeutral = UnitFactionGroup("player") == "Neutral";

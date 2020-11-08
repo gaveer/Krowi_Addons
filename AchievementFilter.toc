@@ -2,20 +2,14 @@
 ## Title: Achievement Filter
 ## Version: 0.1
 ## Author: Krowi
-## SavedVariables: AchievementFilterDB
+## SavedVariables: AchievementFilterDB, AFSetting
 ## Notes: Filters your raid/dungeon/scenario/... achievements by instance. More to come!
 
 embeds.xml
-vars.lua
-Core/Core.lua
-Core/AchievementType.lua
-Core/Achievement.lua
-Core/TreeObject.lua
-Core/TreeObjectWithAchievements.lua
-ExpansionData/Expansions.lua
-ExpansionData/Cataclysm.lua
-ExpansionData/Mists of Pandaria.lua
-ExpansionData/Warlords of Draenor.lua
-ExpansionData/Legion.lua
+
+Localization.lua
+Core/Debug.lua
+Core/Config.lua
+Core/Icon.lua
+
 AchievementFilter.lua
-test.lua

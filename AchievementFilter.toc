@@ -9,6 +9,11 @@ embeds.xml
 
 AchievementFilter.lua
 
+Localization.lua
+Debug.lua
+Config.lua
+Icon.lua
+
 AchievementCategory.lua
 AchievementType.lua
 Achievement.lua
@@ -16,8 +21,4 @@ Achievement.lua
 ExpansionData/Cataclysm.lua
 ExpansionData/Expansions.lua
 
-Localization.lua
-Debug.lua
-Config.lua
-Icon.lua
 Tab.lua

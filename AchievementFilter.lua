@@ -1,4 +1,4 @@
 AchievementFilter = {
     Data = {};
-    Categories={};
+    Categories = {};
 };

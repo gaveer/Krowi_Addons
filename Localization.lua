@@ -13,4 +13,24 @@ AF_OPTIONS_DEBUG_INFO_TOGGLE_TOOLTIP = "Enable / disable debug info";
 AF_ICON_TOOLTIP_LINE2 = "Right click for Options.";
 AF_TAB_BUTTON_TEXT = "Ach Filter";
 
-AF_CATEGORY_SHADOWLANDS = "Shadowlands";
+-- Expansions
+AF_CATEGORY_CLASSIC = "Classic";
+AF_CATEGORY_TBC = "The Burning Crusade";
+AF_CATEGORY_WOTLK = "Wrath of the Lich King";
+AF_CATEGORY_CATA = "Cataclysm";
+AF_CATEGORY_MOP = "Shadowlands";
+AF_CATEGORY_WOD = "Shadowlands";
+AF_CATEGORY_LEGION = "Shadowlands";
+AF_CATEGORY_BFA = "Battle for Azeroth";
+AF_CATEGORY_SL = "Shadowlands";
+
+AF_CATEGORY_RAIDS = "Raids";
+AF_CATEGORY_DUNGEONS = "Dungeons";
+
+-- Cataclysm
+AF_CATEGORY_RAID_BH = "Baradin Hold";
+AF_CATEGORY_RAID_BWD = "Blackwing Descent";
+AF_CATEGORY_RAID_BOT = "Bastion of Twilight";
+AF_CATEGORY_RAID_TOTFW = "Throne of the Four Winds";
+AF_CATEGORY_RAID_FL = "Firelands";
+AF_CATEGORY_RAID_DS = "Dragon Soul";

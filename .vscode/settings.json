@@ -27,6 +27,10 @@
         "AchievementFrameCategories_GetCategoryList",
         "ACHIEVEMENTUI_CATEGORIES",
         "GetCategoryInfo",
-        "enum"
+        "enum",
+        "ACHIEVEMENTUI_CATEGORIESWIDTH",
+        "ACHIEVEMENT_FUNCTIONS",
+        "HybridScrollFrame_GetButtonIndex",
+        "AchievementFrameCategoriesContainer"
     ]
 }

@@ -11,5 +11,6 @@ Localization.lua
 Debug.lua
 Config.lua
 Icon.lua
+Tab.lua
 
 AchievementFilter.lua

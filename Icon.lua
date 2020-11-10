@@ -21,10 +21,10 @@ AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("AchievementFi
     end,
 });
 
-local iconFrame = CreateFrame("Frame", nil, nil);
-iconFrame:RegisterEvent("ADDON_LOADED");
+local iconLoadHelper = CreateFrame("Frame", nil, nil);
+iconLoadHelper:RegisterEvent("ADDON_LOADED");
 
-function iconFrame:OnEvent(event, arg1)
+function iconLoadHelper:OnEvent(event, arg1)
     if arg1 == "AchievementFilter" then
         if event == "ADDON_LOADED" then
             AFSetting.Minimap.hide = not AFSetting.ShowMinimapIcon;
@@ -35,4 +35,4 @@ function iconFrame:OnEvent(event, arg1)
         end
     end
 end
-iconFrame:SetScript("OnEvent", iconFrame.OnEvent);
+iconLoadHelper:SetScript("OnEvent", iconLoadHelper.OnEvent);

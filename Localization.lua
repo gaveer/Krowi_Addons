@@ -10,10 +10,7 @@ AF_OPTIONS_MINIMAP_ICON_TOGGLE_TOOLTIP = "Show / hide the minimap icon";
 AF_OPTIONS_DEBUG = "Debug";
 AF_OPTIONS_DEBUG_INFO_TOGGLE = "Enable debug info";
 AF_OPTIONS_DEBUG_INFO_TOGGLE_TOOLTIP = "Enable / disable debug info";
-AF_OPTIONS_LOADED = "Options loaded";
 AF_ICON_TOOLTIP_LINE2 = "Right click for Options.";
-AF_ICON_LOADED = "Icon loaded";
 AF_TAB_BUTTON_TEXT = "Ach Filter";
-AF_TAB_TAB_BUTTON_LOADED = "Tab Button loaded";
-AF_TAB_RIGHT_FRAME_LOADED = "Right Frame loaded";
-AF_TAB_LEFT_FRAME_LOADED = "Left Frame loaded";
+
+AF_CATEGORY_SHADOWLANDS = "Shadowlands";

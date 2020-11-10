@@ -9,8 +9,9 @@ AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("AchievementFi
     label = AF_NAME,
     icon = "Interface\\Icons\\achievement_dungeon_heroic_gloryoftheraider",
     OnClick = function(self, button)
+        AchievementFilter.Debug("Icon clicked ...");
         if button == "RightButton" then
-            Debug("RightButton clicked");
+            AchievementFilter.Debug("... with RightButton");
             InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
 		    InterfaceOptionsFrame_OpenToCategory(AF_NAME);
 	    end
@@ -29,8 +30,8 @@ function iconLoadHelper:OnEvent(event, arg1)
         if event == "ADDON_LOADED" then
             AFSetting.Minimap.hide = not AFSetting.ShowMinimapIcon;
             Icon:Register("AchievementFilterLDB", AchievementFilterLDB, AFSetting.Minimap);
-            Debug(AF_ICON_LOADED);
-            Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not AFSetting.Minimap.hide));
+            AchievementFilter.Debug("Icon loaded");
+            AchievementFilter.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not AFSetting.Minimap.hide));
             self:UnregisterEvent("ADDON_LOADED");
         end
     end

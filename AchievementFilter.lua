@@ -1,1 +1,4 @@
-Debug("AchievementFilter.lua");
+AchievementFilter = {
+    Data = {};
+    Categories={};
+};

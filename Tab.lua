@@ -1,10 +1,19 @@
+AchievementFilter.DebugTable(GetCategoryList());
+
 local function AchievementCategoryButton_OnClick_Local(button)
     AchievementCategoryButton_OnClick_Original(button);
     print(button);
-    DebugTable(button);
-    DebugTable(AchievementFrameCategoriesContainer.buttons);
+    AchievementFilter.DebugTable(button);
+    AchievementFilter.DebugTable(AchievementFrameCategoriesContainer.buttons);
 end
 
+function AchievementFilter.GetCategoryName(id)
+    if id == 500 then
+        return AF_CATEGORY_SHADOWLANDS;
+    end
+end
+
+-- Extending the original function allows us with little work to add another level to the categories view
 function AchievementFrameCategories_DisplayButton_Extended (button, element)
     AchievementFrameCategories_DisplayButton_Original(button, element);
     if not element then
@@ -24,16 +33,45 @@ function AchievementFrameCategories_DisplayButton_Extended (button, element)
             button:SetWidth(ACHIEVEMENTUI_CATEGORIESWIDTH - 25);
         end
 	end
+    -- AchievementFilter.Debug(AchievementFilter.GetCategoryName(element.id));
+    if element.more then
+        -- AchievementFilter.Debug(element.text);
+        button.label:SetText(element.more.Name);
+    end
 end
 
--- more or less working code
+local categoriesTable = {};
+function ConvertToTable(category)
+    local id = category.ID;
+    local parent = not category.Parent;
+    if category.Parent and type(category.Parent.ID) == "number" then
+        parent = category.Parent.ID;
+    end
+    tinsert(categoriesTable, {id = id, parent = parent, more = category});
+    for k, v in pairs(category.Children) do
+        ConvertToTable(v);
+    end
+end
+
+function LoadAchievementCategories(table)
+    for i in next, table do
+		ConvertToTable(table[i]);
+    end
+end
+
+function AchievementFilter.GetAFCategoryList() -- unused for now
+    return categoriesTable;
+end
+
+-- more or less working final code
 local achievementFunctions;
 
-local function AchievementFrame_UpdateTabs(clickedTab) -- Overwrite the debaulft Blizzard_AchievementUI AchievementFrame_UpdateTabs
-	AchievementFrame.searchResults:Hide();
-	PanelTemplates_Tab_OnClick(_G["AchievementFrameTab"..clickedTab], AchievementFrame);
+function AchievementFilter.AchievementFrame_UpdateTabs(clickedTab) -- Overwrites the debaulft Blizzard_AchievementUI AchievementFrame_UpdateTabs
+    AchievementFilter.Debug("AchievementFrame_UpdateTabs");
+    AchievementFrame_UpdateTabs_Blizzard(clickedTab); -- Call Blizzard function to handle base needs and tabs 1 to 3 (default achievement tabs)
 	local tab;
-	for i = 1, 4 do -- Extended from 3 to 4
+    for i = 4, AchievementFrame.numTabs do -- Skip default achievement tabs (1 to 3)
+        AchievementFilter.Debug("Updating tab " .. tostring(i));
 		tab = _G["AchievementFrameTab"..i];
 		if ( i == clickedTab ) then
 			tab.text:SetPoint("CENTER", 0, -5);
@@ -43,47 +81,60 @@ local function AchievementFrame_UpdateTabs(clickedTab) -- Overwrite the debaulft
 	end
 end
 
+function AchievementFilter.AchievementFrameCategories_GetCategoryList(categories)
+    -- Clear the list so we can add our own categories, not sure how yet though
+    local cats = achievementFunctions.categoryAccessor();
 
-local function AchievementFrameBaseTab_OnClick(tab) -- Overwrite the debaulft Blizzard_AchievementUI AchievementFrameBaseTab_OnClick
-    Debug(tab:GetID());
-	AchievementFrame_UpdateTabs(tab:GetID());
+    for i in next, categories do
+		categories[i] = nil;
+    end
+    -- might need to add option so only parents are shown and rest hidden initially but show/hide is not working yet
+    for i in next, cats do
+        tinsert(categories, cats[i]);
+    end
+end
+
+function AchievementFilter.AchievementFrameCategories_Update() -- might not be needed
+    AchievementFrameCategories_Update();
+end
+
+function AchievementFilter.AchievementFrameTab_OnClick(id) -- Mimick Blizzard_AchievementUI AchievementFrameBaseTab_OnClick for our own buttons
+    AchievementFilter.Debug("AchievementFrameTab_OnClick");
+    AchievementFilter.Debug("Tab " .. tostring(id) .. " of " .. tostring(AchievementFrame.numTabs) .. " clicked.");
+	AchievementFilter.AchievementFrame_UpdateTabs(id);
 
     if IN_GUILD_VIEW then
         AchievementFrame_ToggleView();
     end
-    achievementFunctions = ACHIEVEMENT_FUNCTIONS;
-    -- AchievementFrameCategories_GetCategoryList(ACHIEVEMENTUI_CATEGORIES); -- This needs to happen before AchievementFrame_ShowSubFrame (fix for bug 157885)
-    ACHIEVEMENTUI_CATEGORIES = {}; -- Clear the list so we can add our own categories, not sure how yet though
-    tinsert(ACHIEVEMENTUI_CATEGORIES, {id = 96, parent = true,});
-    tinsert(ACHIEVEMENTUI_CATEGORIES, {id = 95, parent = 96,});
-    tinsert(ACHIEVEMENTUI_CATEGORIES, {id = 97, parent = 95,});
+    achievementFunctions = AF_ACHIEVEMENT_FUNCTIONS;
+    AchievementFilter.AchievementFrameCategories_GetCategoryList(ACHIEVEMENTUI_CATEGORIES); -- This needs to happen before AchievementFrame_ShowSubFrame (fix for bug 157885)
     AchievementFrame_ShowSubFrame(AchievementFrameAchievements);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
     AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1);
     AchievementFrameGuildEmblemLeft:Hide();
     AchievementFrameGuildEmblemRight:Hide();
 
-	AchievementFrameCategories_Update();
+	AchievementFilter.AchievementFrameCategories_Update();
 	achievementFunctions.updateFunc();
 
 	-- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 
-local function LoadTabButton()
+-- [[ UI loading ]] --
+local function LoadTabButton() -- Do this in code instead of an xml template since we're not sure if other addons will also add tabs to the AchievementFrame
     local tabID = 0;
     repeat
         tabID = tabID + 1;
     until not _G["AchievementFrameTab" .. tabID];
+    PanelTemplates_SetNumTabs(AchievementFrame, tabID);
     local tabButton = CreateFrame("Button", "AchievementFrameTab" .. tabID, AchievementFrame, "AchievementFrameTabButtonTemplate");
+    tabButton:SetID(tabID);
     tabButton:SetText(AF_TAB_BUTTON_TEXT);
     tabButton:SetPoint("LEFT", "AchievementFrameTab" .. tabID - 1, "RIGHT", -5, 0);
-    tabButton:SetID(tabID);
-    tabButton:SetScript("OnClick", AchievementFrameBaseTab_OnClick);
-    tabButton.RightFrame = nil;
-    tabButton.LeftFrame = nil;
-    PanelTemplates_SetNumTabs(AchievementFrame, tabID);
-
-    return tabButton;
+    tabButton:SetScript("OnClick", function(self)
+        AchievementFilter.AchievementFrameTab_OnClick(self:GetID());
+        PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
+    end);
 end
 
 local function LoadRightFrame(tabButton)
@@ -162,12 +213,25 @@ tabButtonLoadHelper:RegisterEvent("ADDON_LOADED");
 function tabButtonLoadHelper:OnEvent(event, arg1)
     if arg1 == "Blizzard_AchievementUI" then
         if event == "ADDON_LOADED" then
-            local tabButton = LoadTabButton();
-            Debug(AF_TAB_TAB_BUTTON_LOADED);
-            LoadRightFrame(tabButton);
-            Debug(AF_TAB_RIGHT_FRAME_LOADED);
-            LoadLeftFrame(tabButton);
-            Debug(AF_TAB_LEFT_FRAME_LOADED);
+            AchievementFilter.Debug("Achievement Frame");
+            LoadTabButton();
+            AchievementFrame_UpdateTabs_Blizzard = AchievementFrame_UpdateTabs;
+            AchievementFrame_UpdateTabs = AchievementFilter.AchievementFrame_UpdateTabs;
+            AchievementFilter.Debug("     - Tab Button loaded");
+            LoadAchievementCategories(AchievementFilter.Data);
+            AchievementFilter.Debug("     - Achievement categories loaded");
+            AF_ACHIEVEMENT_FUNCTIONS = {
+                categoryAccessor = AchievementFilter.GetAFCategoryList,
+                clearFunc = AchievementFrameAchievements_ClearSelection,
+                updateFunc = AchievementFrameAchievements_Update,
+                selectedCategory = "summary";
+            }
+            -- LoadRightFrame(tabButton);
+            -- Debug(AF_TAB_RIGHT_FRAME_LOADED);
+            -- LoadLeftFrame(tabButton);
+            -- Debug(AF_TAB_LEFT_FRAME_LOADED);
+            AchievementFilter.DebugTable(GetCategoryList());
+            AchievementFilter.DebugTable(categoriesTable, 1);
             self:UnregisterEvent("ADDON_LOADED");
 
             -- AchievementCategoryButton_OnClick_Original = AchievementCategoryButton_OnClick;

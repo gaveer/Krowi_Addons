@@ -1,5 +1,32 @@
 {
     "Lua.diagnostics.globals": [
-        "tab"
+        "tab",
+        "LibStub",
+        "InterfaceAddOnsList_Update",
+        "InterfaceOptionsFrame_OpenToCategory",
+        "CreateFrame",
+        "InterfaceOptions_AddCategory",
+        "InterfaceOptionsFramePanelContainer",
+        "AchievementFrame",
+        "PlaySound",
+        "PanelTemplates_SetNumTabs",
+        "tinsert",
+        "SOUNDKIT",
+        "IN_GUILD_VIEW",
+        "AchievementFrame_ToggleView",
+        "GetCategoryList",
+        "AchievementFrameAchievements_ClearSelection",
+        "AchievementFrameAchievements_Update",
+        "AchievementFrame_ShowSubFrame",
+        "AchievementFrameWaterMark",
+        "AchievementFrameCategoriesBG",
+        "AchievementFrameGuildEmblemLeft",
+        "AchievementFrameGuildEmblemRight",
+        "AchievementFrameCategories_Update",
+        "AchievementFrameAchievements",
+        "AchievementFrameCategories_GetCategoryList",
+        "ACHIEVEMENTUI_CATEGORIES",
+        "GetCategoryInfo",
+        "enum"
     ]
 }

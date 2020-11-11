@@ -26,4 +26,6 @@ function AchievementFilter.LoadAchievementCategories()
     for i in next, AchievementFilter.Data do
 		AchievementFilter.ConvertToBlizzardAchievementCategory(AchievementFilter.Data[i]);
     end
+    
+    -- AchievementFilter.DebugTable(AchievementFilter.Categories);
 end

@@ -31,6 +31,7 @@
         "ACHIEVEMENTUI_CATEGORIESWIDTH",
         "ACHIEVEMENT_FUNCTIONS",
         "HybridScrollFrame_GetButtonIndex",
-        "AchievementFrameCategoriesContainer"
+        "AchievementFrameCategoriesContainer",
+        "AchievementFrameCategories_SelectButton"
     ]
 }

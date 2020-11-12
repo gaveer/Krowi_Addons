@@ -17,23 +17,14 @@ AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("AchievementFi
 	    end
     end,
     OnTooltipShow = function(tt)
-        tt:AddLine("|cffffffff" .. AF_NAME);
+        tt:AddLine("|cffffffff" .. AF_NAME_COLORED);
         tt:AddLine(AF_ICON_TOOLTIP_LINE2);
     end,
 });
 
-local iconLoadHelper = CreateFrame("Frame", nil, nil);
-iconLoadHelper:RegisterEvent("ADDON_LOADED");
-
-function iconLoadHelper:OnEvent(event, arg1)
-    if arg1 == "AchievementFilter" then
-        if event == "ADDON_LOADED" then
-            AFSetting.Minimap.hide = not AFSetting.ShowMinimapIcon;
-            Icon:Register("AchievementFilterLDB", AchievementFilterLDB, AFSetting.Minimap);
-            KrowiAF.Debug("Icon loaded");
-            KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not AFSetting.Minimap.hide));
-            self:UnregisterEvent("ADDON_LOADED");
-        end
-    end
+function KrowiAF.LoadIcon()
+    AFSetting.Minimap.hide = not AFSetting.ShowMinimapIcon;
+    Icon:Register("AchievementFilterLDB", AchievementFilterLDB, AFSetting.Minimap);
+    KrowiAF.Debug("- Icon loaded");
+    KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not AFSetting.Minimap.hide));
 end
-iconLoadHelper:SetScript("OnEvent", iconLoadHelper.OnEvent);

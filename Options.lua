@@ -5,7 +5,6 @@ AFSetting = {
 
 local panel = CreateFrame("Frame", "afOptionsPanel", InterfaceOptionsFramePanelContainer);
 panel.name = AF_NAME;
-panel:RegisterEvent("ADDON_LOADED");
 
 local titlebar = CreateFrame("Frame", nil, panel);
 titlebar:SetPoint("TOPLEFT", panel, "TOPLEFT");
@@ -13,7 +12,7 @@ titlebar:SetPoint("TOPRIGHT", panel, "TOPRIGHT");
 titlebar:SetHeight(75);
 titlebar.title = titlebar:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge");
 titlebar.title:SetPoint("TOP", titlebar, "TOP", 0, -25);
-titlebar.title:SetText(AF_NAME);
+titlebar.title:SetText(AF_NAME_COLORED);
 titlebar.version = titlebar:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
 titlebar.version:SetPoint("TOP", titlebar, "TOP", 0, -50);
 titlebar.version:SetText("v" .. AF_VERSION .. "." .. AF_BUILD);
@@ -85,18 +84,12 @@ enableDebugInfoToggle:SetScript("OnClick", function(self, button, down)
     print(AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo));
 end);
 
-function panel:OnEvent(event, arg1)
-    if arg1 == "AchievementFilter" then
-        if event == "ADDON_LOADED" then
-            showMinimapIconToggle:SetChecked(AFSetting.ShowMinimapIcon);
-            enableDebugInfoToggle:SetChecked(AFSetting.EnableDebugInfo);
-            KrowiAF.Debug("Options loaded");
-            KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon) .. " - " .. tostring(showMinimapIconToggle:GetChecked()));
-            KrowiAF.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo) .. " - " .. tostring(enableDebugInfoToggle:GetChecked()));
-            self:UnregisterEvent("ADDON_LOADED");
-        end
-    end
+function KrowiAF.LoadOptions()
+    showMinimapIconToggle:SetChecked(AFSetting.ShowMinimapIcon);
+    enableDebugInfoToggle:SetChecked(AFSetting.EnableDebugInfo);
+    KrowiAF.Debug("- Options loaded");
+    KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon) .. " - " .. tostring(showMinimapIconToggle:GetChecked()));
+    KrowiAF.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo) .. " - " .. tostring(enableDebugInfoToggle:GetChecked()));
 end
-panel:SetScript("OnEvent", panel.OnEvent);
 
 InterfaceOptions_AddCategory(panel);

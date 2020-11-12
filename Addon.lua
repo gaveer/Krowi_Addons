@@ -1,0 +1,5 @@
+KrowiAF = {
+    Data = {};
+    Categories = {};
+    AchievementFunctions = {};
+};

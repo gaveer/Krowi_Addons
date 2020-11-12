@@ -53,6 +53,7 @@
         "GUILD_FEAT_OF_STRENGTH_DESCRIPTION",
         "ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT",
         "HybridScrollFrame_Update",
-        "HybridScrollFrame_CollapseButton"
+        "HybridScrollFrame_CollapseButton",
+        "hooksecurefunc"
     ]
 }

@@ -46,9 +46,9 @@ showMinimapIconToggle:SetPoint("TOPLEFT", headerGeneral, "BOTTOMLEFT", 10, -10);
 showMinimapIconToggle:SetScript("OnClick", function(self, button, down) 
     AFSetting.ShowMinimapIcon = showMinimapIconToggle:GetChecked() and true or false;
     if AFSetting.ShowMinimapIcon then
-        Icon:Show("AchievementFilterLDB");
+        KrowiAF.Icon:Show("AchievementFilterLDB");
     else
-        Icon:Hide("AchievementFilterLDB");
+        KrowiAF.Icon:Hide("AchievementFilterLDB");
     end
     KrowiAF.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon));
 end);

@@ -7,7 +7,6 @@ function loadHelper:OnEvent(event, arg1)
             KrowiAF.LoadOptions(); -- 1
             KrowiAF.LoadIcon(); -- 2
         elseif arg1 == "Blizzard_AchievementUI" then
-            KrowiAF.LoadTab(); -- 3
             KrowiAF.AddNewTab(AF_TAB_BUTTON_TEXT, {
                 categoryAccessor = function()
                     return KrowiAF.Categories;

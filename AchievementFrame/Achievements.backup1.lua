@@ -1,19 +1,20 @@
--- function KrowiAF.GetAchievementInfo(...)
---     local args = {...}
---     local category, achievementID;
---     if #args == 1 then
---         achievementID = args[1];
---         KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "'");
---     elseif #args == 2 then
---         achievementID = KrowiAF.Categories[args[1]].more.Achievements[args[2]].ID;
---         KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "' (" .. tostring(args[1]) .. ", " .. tostring(args[2]) .. ")");
---     else
---         KrowiAF.Debug("GetAchievementInfo was called with a not defined number of parameters!");
---         return;
---     end
+local blizzGetAchievementInfo;
+function KrowiAF.GetAchievementInfo(...)
+    local args = {...}
+    local category, achievementID;
+    if #args == 1 then
+        achievementID = args[1];
+        KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "'");
+    elseif #args == 2 then
+        achievementID = KrowiAF.Categories[args[1]].more.Achievements[args[2]].ID;
+        KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "' (" .. tostring(args[1]) .. ", " .. tostring(args[2]) .. ")");
+    else
+        KrowiAF.Debug("GetAchievementInfo was called with a not defined number of parameters!");
+        return;
+    end
 
---     return GetAchievementInfo(achievementID);
--- end
+    return blizzGetAchievementInfo(achievementID);
+end
 
 function KrowiAF.GetCategoryNumAchievements(categoryID)
     KrowiAF.Debug("GetCategoryNumAchievements");
@@ -27,9 +28,9 @@ function KrowiAF.GetCategoryNumAchievements(categoryID)
             numCompleted = numCompleted + 1;
         end
     end
-    -- KrowiAF.Debug(numAchievements);
-    -- KrowiAF.Debug(numCompleted);
-    -- KrowiAF.Debug(0);
+    KrowiAF.Debug(numAchievements);
+    KrowiAF.Debug(numCompleted);
+    KrowiAF.Debug(0);
     -- if ACHIEVEMENTUI_SELECTEDFILTER == AchievementFrame_GetCategoryNumAchievements_All then
         return numAchievements, numCompleted, 0;
     -- elseif ACHIEVEMENTUI_SELECTEDFILTER == AchievementFrame_GetCategoryNumAchievements_Complete then
@@ -40,20 +41,24 @@ function KrowiAF.GetCategoryNumAchievements(categoryID)
 end
 
 function KrowiAF.AchievementFrameAchievements_Update ()
+    KrowiAF.Debug("AchievementFrameAchievements_Update");
+
     local category = KrowiAF.AchievementFunctions.selectedCategory;
-    KrowiAF.Debug("AchievementFrameAchievements_Update for category '" .. tostring(category) .. "' with name '" .. KrowiAF.Categories[category].more.Name .. "'");
+    KrowiAF.Debug("Selected category is '" .. tostring(category) .. "' with name '" .. KrowiAF.Categories[category].more.Name .. "'");
 
 	local scrollFrame = AchievementFrameAchievementsContainer;
+
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
     local buttons = scrollFrame.buttons;
+    local numAchievements, numCompleted, completedOffset = KrowiAF.GetCategoryNumAchievements(category);
+	local numButtons = #buttons;
 
-    local numAchievements, _, completedOffset = KrowiAF.GetCategoryNumAchievements(category);
-
-    -- Leaving it in for now, doesn't break anything and future proofs
 	-- If the current category is feats of strength and there are no entries then show the explanation text
-	if AchievementFrame_IsFeatOfStrength() and #KrowiAF.Categories[category].more.Achievements == 0 then
-		if AchievementFrame.selectedTab == 1 then
+	if ( AchievementFrame_IsFeatOfStrength() and #KrowiAF.Categories[category].more.Achievements == 0 ) then
+		if ( AchievementFrame.selectedTab == 1 ) then
 			AchievementFrameAchievementsFeatOfStrengthText:SetText(FEAT_OF_STRENGTH_DESCRIPTION);
+		else
+			AchievementFrameAchievementsFeatOfStrengthText:SetText(GUILD_FEAT_OF_STRENGTH_DESCRIPTION);
 		end
 		AchievementFrameAchievementsFeatOfStrengthText:Show();
 	else
@@ -69,13 +74,17 @@ function KrowiAF.AchievementFrameAchievements_Update ()
 
 	local achievementIndex;
 	local displayedHeight = 0;
-	for i = 1, #buttons do
+	for i = 1, numButtons do
 		achievementIndex = i + offset + completedOffset;
 		if ( achievementIndex > numAchievements + completedOffset ) then
 			buttons[i]:Hide();
         else
-            -- passing the achievement ID to the category and nil to the achievementID tricks the function to get the achievement by ID instead of category and ID
-            AchievementButton_DisplayAchievement(buttons[i], KrowiAF.Categories[category].more.Achievements[achievementIndex].ID, nil, selection);
+            -- AchievementButton_DisplayAchievement(buttons[i], category, achievementIndex, selection);
+            -- some workaround to not have to overwrite the entire AchievementButton_DisplayAchievement function
+            blizzGetAchievementInfo = GetAchievementInfo;
+            GetAchievementInfo = KrowiAF.GetAchievementInfo;
+			AchievementButton_DisplayAchievement(buttons[i], category, achievementIndex, selection); -- this probably does not work properly so scrolling is bugged
+            GetAchievementInfo = blizzGetAchievementInfo;
 			displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		end
 	end
@@ -85,7 +94,7 @@ function KrowiAF.AchievementFrameAchievements_Update ()
 
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 
-	if selection then
+	if ( selection ) then
 		AchievementFrameAchievements.selection = selection;
 	else
 		HybridScrollFrame_CollapseButton(scrollFrame);

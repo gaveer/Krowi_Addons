@@ -36,6 +36,19 @@ Xpack_Cata_Raid_DS:AddAchievementIDs({6174, 6128, 6129, 6175, 6084, 6105, 6133, 
 Xpack_Cata_Raid_DS:AddAchievementIDs({6109, 6110, 6111, 6112, 6113, 6114, 6115, 6116}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_DS:AddAchievementIDs({6106, 6107, 6177}); -- Defeat the bosses in X
 
+-- test
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New("Placeholder"));
+
 -- Dungeons
 Xpack_Cata_Dungeons = Xpack_Cata:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_DUNGEONS));
 Xpack_Cata_Placeholder1 = Xpack_Cata_Dungeons:AddChild(KrowiAF.AchievementCategory:New("Placeholder1"));

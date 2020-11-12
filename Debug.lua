@@ -62,7 +62,7 @@ function KrowiAF.TableToString(t, ...)
 		table.insert(acc_list, x)
 	end
 	local function valid_id(x)
-		-- FIXME: we should also reject keywords; but the list of
+		-- we should also reject keywords; but the list of
 		-- current keywords is not fixed in metalua...
 		return type(x) == "string"
 		and string['match'](x, "^[a-zA-Z_][a-zA-Z0-9_]*$")

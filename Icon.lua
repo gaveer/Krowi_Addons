@@ -2,7 +2,7 @@ AFSetting.Minimap = {
     hide = not AFSetting.ShowMinimapIcon,
 };
 
-Icon = LibStub("LibDBIcon-1.0"); -- Using this instead of creating the icon from scratch is the automatic integration with addons like Titan Panel
+KrowiAF.Icon = LibStub("LibDBIcon-1.0"); -- Using this instead of creating the icon from scratch is the automatic integration with addons like Titan Panel
 
 AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("AchievementFilterLDB", {
     type = "launcher",
@@ -24,7 +24,7 @@ AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("AchievementFi
 
 function KrowiAF.LoadIcon()
     AFSetting.Minimap.hide = not AFSetting.ShowMinimapIcon;
-    Icon:Register("AchievementFilterLDB", AchievementFilterLDB, AFSetting.Minimap);
+    KrowiAF.Icon:Register("AchievementFilterLDB", AchievementFilterLDB, AFSetting.Minimap);
     KrowiAF.Debug("- Icon loaded");
     KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not AFSetting.Minimap.hide));
 end

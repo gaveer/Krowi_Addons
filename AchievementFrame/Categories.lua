@@ -71,6 +71,7 @@ function KrowiAF.AchievementFrameCategories_SelectButton (button)
 end
 
 function KrowiAF.AchievementFrameCategories_Update()
+    KrowiAF.Debug("AchievementFrameCategories_Update");
     local displayCategories = AchievementFrameCategories_Update();
 
     -- For some reason, only calling AchievementFrameCategories_Update does not highlight the selected category
@@ -100,7 +101,6 @@ end
 -- Extending the original function allows us with little work to add another level to the categories view
 function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
     -- AchievementFilter.Debug("AchievementFrameCategories_DisplayButton"); -- Creates a lot of messages!
-    Blizzard_AchievementFrameCategories_DisplayButton(button, element);
     if not element then
 		return;
     end
@@ -150,7 +150,6 @@ function KrowiAF.LoadCategories()
     KrowiAF.Debug("- Achievement Frame - Categories");
     KrowiAF.LoadAchievementCategories();
     KrowiAF.Debug("     - Achievement categories loaded");
-    Blizzard_AchievementFrameCategories_DisplayButton = AchievementFrameCategories_DisplayButton;
-    AchievementFrameCategories_DisplayButton = KrowiAF.AchievementFrameCategories_DisplayButton;
+    hooksecurefunc("AchievementFrameCategories_DisplayButton", KrowiAF.AchievementFrameCategories_DisplayButton);
     KrowiAF.Debug("     - DisplayButton extended");
 end

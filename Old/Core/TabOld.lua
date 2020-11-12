@@ -1,13 +1,13 @@
-AchievementFilter.DebugTable(GetCategoryList());
+Krowi_AF.DebugTable(GetCategoryList());
 
 local function AchievementCategoryButton_OnClick_Local(button)
     AchievementCategoryButton_OnClick_Original(button);
     print(button);
-    AchievementFilter.DebugTable(button);
-    AchievementFilter.DebugTable(AchievementFrameCategoriesContainer.buttons);
+    Krowi_AF.DebugTable(button);
+    Krowi_AF.DebugTable(AchievementFrameCategoriesContainer.buttons);
 end
 
-function AchievementFilter.GetCategoryName(id)
+function Krowi_AF.GetCategoryName(id)
     if id == 500 then
         return AF_CATEGORY_SHADOWLANDS;
     end
@@ -15,7 +15,7 @@ end
 
 -- Extending the original function allows us with little work to add another level to the categories view
 function AchievementFrameCategories_DisplayButton_Extended (button, element)
-    AchievementFrameCategories_DisplayButton_Original(button, element);
+    Blizzard_AchievementFrameCategories_DisplayButton(button, element);
     if not element then
 		return;
     end
@@ -41,12 +41,12 @@ function AchievementFrameCategories_DisplayButton_Extended (button, element)
 end
 
 -- [[ Tab functionality ]] --
-function AchievementFilter.AchievementFrame_UpdateTabs(clickedTab) -- Overwrites the debaulft Blizzard_AchievementUI AchievementFrame_UpdateTabs
-    AchievementFilter.Debug("AchievementFrame_UpdateTabs");
-    AchievementFrame_UpdateTabs_Blizzard(clickedTab); -- Call Blizzard function to handle base needs and tabs 1 to 3 (default achievement tabs)
+function Krowi_AF.AchievementFrame_UpdateTabs(clickedTab) -- Overwrites the debaulft Blizzard_AchievementUI AchievementFrame_UpdateTabs
+    Krowi_AF.Debug("AchievementFrame_UpdateTabs");
+    Blizzard_AchievementFrame_UpdateTabs(clickedTab); -- Call Blizzard function to handle base needs and tabs 1 to 3 (default achievement tabs)
 	local tab;
     for i = 4, AchievementFrame.numTabs do -- Skip default achievement tabs (1 to 3)
-        AchievementFilter.Debug("Updating tab " .. tostring(i));
+        Krowi_AF.Debug("Updating tab " .. tostring(i));
 		tab = _G["AchievementFrameTab"..i];
 		if ( i == clickedTab ) then
 			tab.text:SetPoint("CENTER", 0, -5);
@@ -57,16 +57,16 @@ function AchievementFilter.AchievementFrame_UpdateTabs(clickedTab) -- Overwrites
 end
 
 local achievementFunctions;
-function AchievementFilter.AchievementFrameTab_OnClick(id) -- Mimick Blizzard_AchievementUI AchievementFrameBaseTab_OnClick for our own buttons
-    AchievementFilter.Debug("AchievementFrameTab_OnClick");
-    AchievementFilter.Debug("Tab " .. tostring(id) .. " of " .. tostring(AchievementFrame.numTabs) .. " clicked.");
-	AchievementFilter.AchievementFrame_UpdateTabs(id);
+function Krowi_AF.AchievementFrameTab_OnClick(id) -- Mimick Blizzard_AchievementUI AchievementFrameBaseTab_OnClick for our own buttons
+    Krowi_AF.Debug("AchievementFrameTab_OnClick");
+    Krowi_AF.Debug("Tab " .. tostring(id) .. " of " .. tostring(AchievementFrame.numTabs) .. " clicked.");
+	Krowi_AF.AchievementFrame_UpdateTabs(id);
 
     if IN_GUILD_VIEW then
         AchievementFrame_ToggleView();
     end
     achievementFunctions = AF_ACHIEVEMENT_FUNCTIONS;
-    AchievementFilter.AchievementFrameCategories_GetCategoryList(ACHIEVEMENTUI_CATEGORIES); -- This needs to happen before AchievementFrame_ShowSubFrame (fix for bug 157885)
+    Krowi_AF.AchievementFrameCategories_GetCategoryList(ACHIEVEMENTUI_CATEGORIES); -- This needs to happen before AchievementFrame_ShowSubFrame (fix for bug 157885)
     AchievementFrame_ShowSubFrame(AchievementFrameAchievements);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
     AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1);
@@ -80,7 +80,7 @@ function AchievementFilter.AchievementFrameTab_OnClick(id) -- Mimick Blizzard_Ac
 end
 
 -- [[ Category functionality ]] --
-function AchievementFilter.AchievementFrameCategories_GetCategoryList(categories)
+function Krowi_AF.AchievementFrameCategories_GetCategoryList(categories)
     -- Clear the list so we can add our own categories, not sure how yet though
     local cats = achievementFunctions.categoryAccessor();
 
@@ -105,7 +105,7 @@ local function LoadTabButton() -- Do this in code instead of an xml template sin
     tabButton:SetText(AF_TAB_BUTTON_TEXT);
     tabButton:SetPoint("LEFT", "AchievementFrameTab" .. tabID - 1, "RIGHT", -5, 0);
     tabButton:SetScript("OnClick", function(self)
-        AchievementFilter.AchievementFrameTab_OnClick(self:GetID());
+        Krowi_AF.AchievementFrameTab_OnClick(self:GetID());
         PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
     end);
 end
@@ -186,29 +186,29 @@ tabButtonLoadHelper:RegisterEvent("ADDON_LOADED");
 function tabButtonLoadHelper:OnEvent(event, arg1)
     if arg1 == "Blizzard_AchievementUI" then
         if event == "ADDON_LOADED" then
-            AchievementFilter.Debug("Achievement Frame");
+            Krowi_AF.Debug("Achievement Frame");
             LoadTabButton();
-            AchievementFrame_UpdateTabs_Blizzard = AchievementFrame_UpdateTabs;
-            AchievementFrame_UpdateTabs = AchievementFilter.AchievementFrame_UpdateTabs;
-            AchievementFilter.Debug("     - Tab Button loaded");
-            AchievementFilter.LoadAchievementCategories();
-            AchievementFilter.Debug("     - Achievement categories loaded");
+            Blizzard_AchievementFrame_UpdateTabs = AchievementFrame_UpdateTabs;
+            AchievementFrame_UpdateTabs = Krowi_AF.AchievementFrame_UpdateTabs;
+            Krowi_AF.Debug("     - Tab Button loaded");
+            Krowi_AF.LoadAchievementCategories();
+            Krowi_AF.Debug("     - Achievement categories loaded");
             AF_ACHIEVEMENT_FUNCTIONS = ACHIEVEMENT_FUNCTIONS;
             AF_ACHIEVEMENT_FUNCTIONS.categoryAccessor = function()
-                return AchievementFilter.Categories;
+                return Krowi_AF.Categories;
             end;
-            AchievementFilter.Debug("     - Function links loaded");
+            Krowi_AF.Debug("     - Function links loaded");
             -- LoadRightFrame(tabButton);
             -- Debug(AF_TAB_RIGHT_FRAME_LOADED);
             -- LoadLeftFrame(tabButton);
             -- Debug(AF_TAB_LEFT_FRAME_LOADED);
-            AchievementFilter.DebugTable(GetCategoryList());
-            AchievementFilter.DebugTable(categoriesTable, 1);
+            Krowi_AF.DebugTable(GetCategoryList());
+            Krowi_AF.DebugTable(categoriesTable, 1);
             self:UnregisterEvent("ADDON_LOADED");
 
             -- AchievementCategoryButton_OnClick_Original = AchievementCategoryButton_OnClick;
             -- AchievementCategoryButton_OnClick = AchievementCategoryButton_OnClick_Local;
-            AchievementFrameCategories_DisplayButton_Original = AchievementFrameCategories_DisplayButton;
+            Blizzard_AchievementFrameCategories_DisplayButton = AchievementFrameCategories_DisplayButton;
             AchievementFrameCategories_DisplayButton = AchievementFrameCategories_DisplayButton_Extended;
         end
     end

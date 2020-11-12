@@ -1,4 +1,4 @@
-AchievementFilter = {
+KrowiAF = {
     Data = {};
     Categories = {};
 };

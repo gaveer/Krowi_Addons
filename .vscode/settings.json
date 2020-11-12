@@ -32,6 +32,27 @@
         "ACHIEVEMENT_FUNCTIONS",
         "HybridScrollFrame_GetButtonIndex",
         "AchievementFrameCategoriesContainer",
-        "AchievementFrameCategories_SelectButton"
+        "AchievementFrameCategories_SelectButton",
+        "FEAT_OF_STRENGTH_ID",
+        "AchievementFrameFilterDropDown",
+        "AchievementFrameHeaderLeftDDLInset",
+        "AchievementFrameAchievementsContainerScrollBar",
+        "AchievementCategoryButton_OnClick",
+        "AchievementFrameAchievementsContainer",
+        "HybridScrollFrame_GetOffset",
+        "GetAchievementInfo",
+        "ACHIEVEMENTUI_SELECTEDFILTER",
+        "AchievementFrame_GetCategoryNumAchievements_All",
+        "AchievementFrame_GetCategoryNumAchievements_Complete",
+        "AchievementFrame_GetCategoryNumAchievements_Incomplete",
+        "AchievementButton_DisplayAchievement",
+        "AchievementButton_ResetObjectives",
+        "AchievementFrame_IsFeatOfStrength",
+        "AchievementFrameAchievementsFeatOfStrengthText",
+        "FEAT_OF_STRENGTH_DESCRIPTION",
+        "GUILD_FEAT_OF_STRENGTH_DESCRIPTION",
+        "ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT",
+        "HybridScrollFrame_Update",
+        "HybridScrollFrame_CollapseButton"
     ]
 }

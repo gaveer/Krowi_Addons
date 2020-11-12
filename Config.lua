@@ -51,7 +51,7 @@ showMinimapIconToggle:SetScript("OnClick", function(self, button, down)
     else
         Icon:Hide("AchievementFilterLDB");
     end
-    AchievementFilter.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon));
+    KrowiAF.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon));
 end);
 
 local headerDebug = CreateFrame("Frame", nil, headerGeneral);
@@ -90,9 +90,9 @@ function panel:OnEvent(event, arg1)
         if event == "ADDON_LOADED" then
             showMinimapIconToggle:SetChecked(AFSetting.ShowMinimapIcon);
             enableDebugInfoToggle:SetChecked(AFSetting.EnableDebugInfo);
-            AchievementFilter.Debug("Options loaded");
-            AchievementFilter.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon) .. " - " .. tostring(showMinimapIconToggle:GetChecked()));
-            AchievementFilter.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo) .. " - " .. tostring(enableDebugInfoToggle:GetChecked()));
+            KrowiAF.Debug("Options loaded");
+            KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon) .. " - " .. tostring(showMinimapIconToggle:GetChecked()));
+            KrowiAF.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo) .. " - " .. tostring(enableDebugInfoToggle:GetChecked()));
             self:UnregisterEvent("ADDON_LOADED");
         end
     end

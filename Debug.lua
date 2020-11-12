@@ -1,10 +1,10 @@
-function AchievementFilter.Debug(value)
+function KrowiAF.Debug(value)
     if AFSetting and AFSetting.EnableDebugInfo then
         print(value);
     end
 end
 
-function AchievementFilter.DebugTable(tbl, charactersPerLine)
+function KrowiAF.DebugTable(tbl, charactersPerLine)
     if AFSetting and AFSetting.EnableDebugInfo then
         if type(charactersPerLine) ~= "number" then
             charactersPerLine = 100;

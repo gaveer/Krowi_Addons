@@ -14,11 +14,12 @@ Debug.lua
 Config.lua
 Icon.lua
 
-AchievementCategory.lua
-AchievementType.lua
-Achievement.lua
+Objects/AchievementCategory.lua
+Objects/AchievementType.lua
+Objects/Achievement.lua
 
 ExpansionData/Cataclysm.lua
 ExpansionData/Expansions.lua
 
-Tab.lua
+TabButton.lua
+Categories.lua

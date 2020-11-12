@@ -5,7 +5,7 @@ function enum(table)
     return table
 end
 
-AchievementFilter.AchievementType = enum {
+KrowiAF.AchievementType = enum {
     "Default",
     "FoS"
  };

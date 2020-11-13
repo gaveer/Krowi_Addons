@@ -1,19 +1,44 @@
--- function KrowiAF.GetAchievementInfo(...)
---     local args = {...}
---     local category, achievementID;
---     if #args == 1 then
---         achievementID = args[1];
---         KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "'");
---     elseif #args == 2 then
---         achievementID = KrowiAF.Categories[args[1]].more.Achievements[args[2]].ID;
---         KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "' (" .. tostring(args[1]) .. ", " .. tostring(args[2]) .. ")");
---     else
---         KrowiAF.Debug("GetAchievementInfo was called with a not defined number of parameters!");
---         return;
---     end
-
---     return GetAchievementInfo(achievementID);
--- end
+function KrowiAF.AchievementButton_OnClick (self, button, down, ignoreModifiers)
+	KrowiAF.Debug("AchievementButton_OnClick");
+	KrowiAF.Debug(self.index);
+	if(IsModifiedClick() and not ignoreModifiers) then
+		local handled = nil;
+		if ( IsModifiedClick("CHATLINK") ) then
+			local achievementLink = GetAchievementLink(self.id);
+			if ( achievementLink ) then
+				handled = ChatEdit_InsertLink(achievementLink);
+				if ( not handled and SocialPostFrame and Social_IsShown() ) then
+					Social_InsertLink(achievementLink);
+					handled = true;
+				end
+			end
+		end
+		if ( not handled and IsModifiedClick("QUESTWATCHTOGGLE") ) then
+			AchievementButton_ToggleTracking(self.id);
+		end
+		return;
+	end
+	if ( self.selected ) then
+		if ( not self:IsMouseOver() ) then
+			self.highlight:Hide();
+		end
+		AchievementFrameAchievements_ClearSelection()
+		HybridScrollFrame_CollapseButton(AchievementFrameAchievementsContainer);
+		AchievementFrameAchievements_Update();
+		return;
+	end
+	
+	AchievementFrameAchievements_ClearSelection()
+	AchievementFrameAchievements_SelectButton(self);
+	local keepIndex = self.index;
+	AchievementButton_DisplayAchievement(self, self.id, nil, self.id);
+	self.index = keepIndex;
+	HybridScrollFrame_ExpandButton(AchievementFrameAchievementsContainer, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
+	AchievementFrameAchievements_Update();
+	if ( not ignoreModifiers ) then
+		AchievementFrameAchievements_AdjustSelection();
+	end
+end
 
 function KrowiAF.GetCategoryNumAchievements(categoryID)
     KrowiAF.Debug("GetCategoryNumAchievements");
@@ -27,9 +52,6 @@ function KrowiAF.GetCategoryNumAchievements(categoryID)
             numCompleted = numCompleted + 1;
         end
     end
-    -- KrowiAF.Debug(numAchievements);
-    -- KrowiAF.Debug(numCompleted);
-    -- KrowiAF.Debug(0);
     -- if ACHIEVEMENTUI_SELECTEDFILTER == AchievementFrame_GetCategoryNumAchievements_All then
         return numAchievements, numCompleted, 0;
     -- elseif ACHIEVEMENTUI_SELECTEDFILTER == AchievementFrame_GetCategoryNumAchievements_Complete then
@@ -77,6 +99,8 @@ function KrowiAF.AchievementFrameAchievements_Update ()
             -- passing the achievement ID to the category and nil to the achievementID tricks the function to get the achievement by ID instead of category and ID
             AchievementButton_DisplayAchievement(buttons[i], KrowiAF.Categories[category].more.Achievements[achievementIndex].ID, nil, selection);
 			displayedHeight = displayedHeight + buttons[i]:GetHeight();
+			buttons[i].index = achievementIndex;
+			buttons[i]:SetScript("OnClick", KrowiAF.AchievementButton_OnClick);
 		end
 	end
 

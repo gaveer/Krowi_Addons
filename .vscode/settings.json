@@ -54,6 +54,16 @@
         "ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT",
         "HybridScrollFrame_Update",
         "HybridScrollFrame_CollapseButton",
-        "hooksecurefunc"
+        "hooksecurefunc",
+        "IsModifiedClick",
+        "GetAchievementLink",
+        "ChatEdit_InsertLink",
+        "SocialPostFrame",
+        "Social_InsertLink",
+        "Social_IsShown",
+        "AchievementButton_ToggleTracking",
+        "AchievementFrameAchievements_SelectButton",
+        "HybridScrollFrame_ExpandButton",
+        "AchievementFrameAchievements_AdjustSelection"
     ]
 }

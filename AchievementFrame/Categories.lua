@@ -1,3 +1,44 @@
+function KrowiAF.AchievementFrameCategories_GetCategoryList(categories)
+    KrowiAF.Debug("AchievementFrameCategories_GetCategoryList");
+    -- Clear the list so we can add our own categories, not sure how yet though
+    local cats = KrowiAF.AchievementFunctions.categoryAccessor();
+    -- AchievementFilter.DebugTable(cats);
+
+    for i in next, categories do
+		categories[i] = nil;
+    end
+    
+    for _, cat in next, cats do
+        if cat.more.Level ~= 0 then
+            cat.hidden = true;
+        end
+        cat.collapsed = true;
+        tinsert(categories, cat);
+    end
+end
+
+function KrowiAF.AchievementFrameCategories_Update()
+    KrowiAF.Debug("AchievementFrameCategories_Update");
+    local displayCategories = AchievementFrameCategories_Update();
+
+    -- For some reason, only calling AchievementFrameCategories_Update does not highlight the selected category
+    local scrollFrame = AchievementFrameCategoriesContainer
+	local offset = HybridScrollFrame_GetOffset(scrollFrame);
+	local buttons = scrollFrame.buttons;
+
+    local selection = KrowiAF.AchievementFunctions.selectedCategory;
+
+	local element
+	for i = 1, #buttons do
+		element = displayCategories[i + offset];
+		if element then
+            if selection and element.id == selection then
+				buttons[i]:LockHighlight();
+			end
+		end
+	end
+end
+
 function KrowiAF.AchievementFrameCategories_SelectButton (button)
     KrowiAF.Debug("AchievementFrameCategories_SelectButton");
     if ( button.isSelected and button.element.collapsed == false ) then -- Collapse selected categories
@@ -70,28 +111,6 @@ function KrowiAF.AchievementFrameCategories_SelectButton (button)
     KrowiAF.AchievementFunctions.updateFunc();
 end
 
-function KrowiAF.AchievementFrameCategories_Update()
-    KrowiAF.Debug("AchievementFrameCategories_Update");
-    local displayCategories = AchievementFrameCategories_Update();
-
-    -- For some reason, only calling AchievementFrameCategories_Update does not highlight the selected category
-    local scrollFrame = AchievementFrameCategoriesContainer
-	local offset = HybridScrollFrame_GetOffset(scrollFrame);
-	local buttons = scrollFrame.buttons;
-
-    local selection = KrowiAF.AchievementFunctions.selectedCategory;
-
-	local element
-	for i = 1, #buttons do
-		element = displayCategories[i + offset];
-		if element then
-            if selection and element.id == selection then
-				buttons[i]:LockHighlight();
-			end
-		end
-	end
-end
-
 function KrowiAF.AchievementCategoryButton_OnClick (button)
     KrowiAF.Debug("AchievementCategoryButton_OnClick for " .. button.element.more.Name);
 	KrowiAF.AchievementFrameCategories_SelectButton(button);
@@ -124,25 +143,6 @@ function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
         end
     else
         button:SetScript("OnClick", AchievementCategoryButton_OnClick);
-    end
-end
-
-function KrowiAF.AchievementFrameCategories_GetCategoryList(categories)
-    KrowiAF.Debug("AchievementFrameCategories_GetCategoryList");
-    -- Clear the list so we can add our own categories, not sure how yet though
-    local cats = KrowiAF.AchievementFunctions.categoryAccessor();
-    -- AchievementFilter.DebugTable(cats);
-
-    for i in next, categories do
-		categories[i] = nil;
-    end
-    
-    for _, cat in next, cats do
-        if cat.more.Level ~= 0 then
-            cat.hidden = true;
-        end
-        cat.collapsed = true;
-        tinsert(categories, cat);
     end
 end
 

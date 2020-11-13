@@ -64,6 +64,8 @@
         "AchievementButton_ToggleTracking",
         "AchievementFrameAchievements_SelectButton",
         "HybridScrollFrame_ExpandButton",
-        "AchievementFrameAchievements_AdjustSelection"
+        "AchievementFrameAchievements_AdjustSelection",
+        "AchievementFrameComparisonTab_OnClick",
+        "AchievementFrameBaseTab_OnClick"
     ]
 }

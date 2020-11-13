@@ -27,5 +27,5 @@ function KrowiAF.LoadAchievementCategories()
 		KrowiAF.ConvertToBlizzardAchievementCategory(KrowiAF.Data[i]);
     end
     
-    -- AchievementFilter.DebugTable(AchievementFilter.Categories);
+    -- KrowiAF.DebugTable(AchievementFilter.Categories);
 end

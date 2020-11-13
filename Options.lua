@@ -1,6 +1,7 @@
 AFSetting = {
     ShowMinimapIcon = true,
     EnableDebugInfo = false,
+    EnableTraceInfo = false,
 };
 
 local panel = CreateFrame("Frame", "afOptionsPanel", InterfaceOptionsFramePanelContainer);
@@ -84,12 +85,23 @@ enableDebugInfoToggle:SetScript("OnClick", function(self, button, down)
     print(AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo));
 end);
 
+local enableTraceInfoToggle = CreateFrame("CheckButton", "afDebugInfoTraceToggle", headerDebug, "InterfaceOptionsCheckButtonTemplate");
+_G[enableTraceInfoToggle:GetName().."Text"]:SetText(AF_OPTIONS_TRACE_INFO_TOGGLE);
+enableTraceInfoToggle.tooltipText = AF_OPTIONS_TRACE_INFO_TOGGLE_TOOLTIP;
+enableTraceInfoToggle:SetPoint("TOPLEFT", enableDebugInfoToggle, "BOTTOMLEFT", 0, -10);
+enableTraceInfoToggle:SetScript("OnClick", function(self, button, down)
+    AFSetting.EnableTraceInfo = enableTraceInfoToggle:GetChecked() and true or false;
+    print(AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableTraceInfo));
+end);
+
 function KrowiAF.LoadOptions()
     showMinimapIconToggle:SetChecked(AFSetting.ShowMinimapIcon);
     enableDebugInfoToggle:SetChecked(AFSetting.EnableDebugInfo);
+    enableTraceInfoToggle:SetChecked(AFSetting.EnableTraceInfo);
     KrowiAF.Debug("- Options loaded");
     KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon) .. " - " .. tostring(showMinimapIconToggle:GetChecked()));
     KrowiAF.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo) .. " - " .. tostring(enableDebugInfoToggle:GetChecked()));
+    KrowiAF.Debug("     - " .. AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableTraceInfo) .. " - " .. tostring(enableTraceInfoToggle:GetChecked()));
 end
 
 InterfaceOptions_AddCategory(panel);

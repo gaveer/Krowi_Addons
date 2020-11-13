@@ -1,5 +1,5 @@
 function KrowiAF.AchievementFrameCategories_GetCategoryList(categories)
-    KrowiAF.Debug("AchievementFrameCategories_GetCategoryList");
+    KrowiAF.Trace("AchievementFrameCategories_GetCategoryList");
     -- Clear the list so we can add our own categories, not sure how yet though
     local cats = KrowiAF.AchievementFunctions.categoryAccessor();
     -- AchievementFilter.DebugTable(cats);
@@ -17,30 +17,106 @@ function KrowiAF.AchievementFrameCategories_GetCategoryList(categories)
     end
 end
 
+local displayCategories = {};
+-- This one needs to replace all Blizzard_AchievementUI AchievementFrameCategories_Update functions
 function KrowiAF.AchievementFrameCategories_Update()
-    KrowiAF.Debug("AchievementFrameCategories_Update");
-    local displayCategories = AchievementFrameCategories_Update();
-
-    -- For some reason, only calling AchievementFrameCategories_Update does not highlight the selected category
-    local scrollFrame = AchievementFrameCategoriesContainer
+    KrowiAF.Trace("AchievementFrameCategories_Update");
+    local scrollFrame = AchievementFrameCategoriesContainer;
+    local categories = ACHIEVEMENTUI_CATEGORIES;
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
 
+    local displayCategories = displayCategories;
+
+	for i in next, displayCategories do
+		displayCategories[i] = nil;
+    end
+
     local selection = KrowiAF.AchievementFunctions.selectedCategory;
+
+    local parent;
+	if selection then
+		for _, category in next, categories do
+			if ( category.id == selection ) then
+				parent = category.parent;
+			end
+		end
+    end
+
+    for _, category in next, categories do
+		if not category.hidden then
+			tinsert(displayCategories, category);
+		elseif parent and category.id == parent then
+			category.collapsed = false;
+			tinsert(displayCategories, category);
+		elseif parent and category.parent and category.parent == parent then
+			category.hidden = false;
+			tinsert(displayCategories, category);
+		end
+    end
+
+	local totalHeight = #displayCategories * buttons[1]:GetHeight();
+    local displayedHeight = 0;
 
 	local element
 	for i = 1, #buttons do
 		element = displayCategories[i + offset];
+		displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		if element then
-            if selection and element.id == selection then
+			AchievementFrameCategories_DisplayButton(buttons[i], element);
+			if ( selection and element.id == selection ) then
 				buttons[i]:LockHighlight();
+			else
+				buttons[i]:UnlockHighlight();
 			end
+			buttons[i]:Show();
+		else
+			buttons[i].element = nil;
+			buttons[i]:Hide();
 		end
 	end
+
+    HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
+    
+	return displayCategories;
 end
 
+-- Extending the original function allows us with little work to add another level to the categories view
+-- Called after Blizzard_AchievementUI AchievementFrameCategories_DisplayButton through a hook
+function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
+    -- KrowiAF.Trace("AchievementFrameCategories_DisplayButton"); -- Creates a lot of messages!
+    if not element then
+		return;
+    end
+
+    local buttonIndex = HybridScrollFrame_GetButtonIndex(AchievementFrameCategoriesContainer, button)
+    if buttonIndex ~= 1 then -- First button should be linked to the container and not to a previous (not existing) button
+        button:SetPoint("TOPRIGHT", "AchievementFrameCategoriesContainerButton" .. buttonIndex - 1, "BOTTOMRIGHT");
+    else
+        button:SetPoint("TOPRIGHT", AchievementFrameCategoriesContainer:GetScrollChild(), "TOPRIGHT", -4, 0);
+    end
+
+    -- This applies to all buttons not on the highest level (overwrites the default -25)
+    if type(element.parent) == "number" then
+        button:SetWidth(ACHIEVEMENTUI_CATEGORIESWIDTH - 15);
+    end
+
+    if element.more then -- This applies to all the custom buttons for this addon
+        button.label:SetText(element.more.Name); -- Set these again since Blizzard_AchievementUI AchievementFrameCategories_DisplayButton will do this wrong
+        button.name = element.more.Name; -- Set these again since Blizzard_AchievementUI AchievementFrameCategories_DisplayButton will do this wrong
+        -- @TODO Blizzard_AchievementUI AchievementFrameCategories_DisplayButton set showTooltipFunc to nil, leave this right now and add later
+        button:SetScript("OnClick", KrowiAF.AchievementCategoryButton_OnClick);
+        if element.more.Level >= 2 then
+            button:SetWidth(ACHIEVEMENTUI_CATEGORIESWIDTH - 15 - (element.more.Level - 1) * 5);
+        end
+    else
+        button:SetScript("OnClick", AchievementCategoryButton_OnClick);
+    end
+end
+
+-- This one needs to replace all Blizzard_AchievementUI AchievementFrameCategories_SelectButton functions
 function KrowiAF.AchievementFrameCategories_SelectButton (button)
-    KrowiAF.Debug("AchievementFrameCategories_SelectButton");
+    KrowiAF.Trace("AchievementFrameCategories_SelectButton");
     if ( button.isSelected and button.element.collapsed == false ) then -- Collapse selected categories
         button.element.collapsed = true;
         for _, category in next, ACHIEVEMENTUI_CATEGORIES do
@@ -112,38 +188,9 @@ function KrowiAF.AchievementFrameCategories_SelectButton (button)
 end
 
 function KrowiAF.AchievementCategoryButton_OnClick (button)
-    KrowiAF.Debug("AchievementCategoryButton_OnClick for " .. button.element.more.Name);
+    KrowiAF.Trace("AchievementCategoryButton_OnClick - Category " .. button.element.more.Name .. " clicked");
 	KrowiAF.AchievementFrameCategories_SelectButton(button);
     KrowiAF.AchievementFrameCategories_Update();
-end
-
--- Extending the original function allows us with little work to add another level to the categories view
-function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
-    -- AchievementFilter.Debug("AchievementFrameCategories_DisplayButton"); -- Creates a lot of messages!
-    if not element then
-		return;
-    end
-
-    local buttonID = HybridScrollFrame_GetButtonIndex(AchievementFrameCategoriesContainer, button)
-    if buttonID ~= 1 then -- Skip the first button to not mess up the rest, always highest level so not a problem
-        button:SetPoint("TOPRIGHT", "AchievementFrameCategoriesContainerButton" .. buttonID - 1, "BOTTOMRIGHT");
-    else
-        button:SetPoint("TOPRIGHT", AchievementFrameCategoriesContainer:GetScrollChild(), "TOPRIGHT", -4, 0);
-    end
-
-    if type(element.parent) == "number" then -- This applies to all buttons not on the highest level (default is -25)
-        button:SetWidth(ACHIEVEMENTUI_CATEGORIESWIDTH - 15);
-    end
-
-    if element.more then -- This applies to all the custom buttons for this addon
-        button.label:SetText(element.more.Name);
-        button:SetScript("OnClick", KrowiAF.AchievementCategoryButton_OnClick);
-        if element.more.Level >= 2 then
-            button:SetWidth(ACHIEVEMENTUI_CATEGORIESWIDTH - 15 - (element.more.Level - 1) * 5);
-        end
-    else
-        button:SetScript("OnClick", AchievementCategoryButton_OnClick);
-    end
 end
 
 function KrowiAF.LoadCategories()
@@ -151,5 +198,5 @@ function KrowiAF.LoadCategories()
     KrowiAF.LoadAchievementCategories();
     KrowiAF.Debug("     - Achievement categories loaded");
     hooksecurefunc("AchievementFrameCategories_DisplayButton", KrowiAF.AchievementFrameCategories_DisplayButton);
-    KrowiAF.Debug("     - DisplayButton extended");
+    KrowiAF.Debug("     - AchievementFrameCategories_DisplayButton hooked");
 end

@@ -66,6 +66,8 @@
         "HybridScrollFrame_ExpandButton",
         "AchievementFrameAchievements_AdjustSelection",
         "AchievementFrameComparisonTab_OnClick",
-        "AchievementFrameBaseTab_OnClick"
+        "AchievementFrameBaseTab_OnClick",
+        "AchievementFrameHeaderTitle",
+        "GUILD_ACHIEVEMENTS_TITLE"
     ]
 }

@@ -4,6 +4,12 @@ function KrowiAF.Debug(value)
     end
 end
 
+function KrowiAF.Trace(value)
+    if AFSetting and AFSetting.EnableTraceInfo then
+        print(value);
+    end
+end
+
 function KrowiAF.DebugTable(tbl, charactersPerLine)
     if AFSetting and AFSetting.EnableDebugInfo then
         if type(charactersPerLine) ~= "number" then

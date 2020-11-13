@@ -13,23 +13,26 @@ function KrowiAF.AchievementCategory:New(name)
     self.Achievements = {};
     return self;
 end
+
 function KrowiAF.AchievementCategory:AddChild(child)
-    table.insert(self.Children, child);
+    tinsert(self.Children, child);
     child.Parent = self;
     child.Level = self.Level + 1;
-    print(child.ID);
     return child;
 end
+
 function KrowiAF.AchievementCategory:AddAchievementIDs(achievementIDs)
     for k, id in pairs(achievementIDs) do
-        table.insert(self.Achievements, KrowiAF.Achievement:New(id));
+        tinsert(self.Achievements, KrowiAF.Achievement:New(id));
     end
 end
+
 function KrowiAF.AchievementCategory:AddAchievements(achievements)
     for k, achievement in pairs(achievements) do
-        table.insert(self.Achievements, achievement);
+        tinsert(self.Achievements, achievement);
     end
 end
+
 function KrowiAF.AchievementCategory:AddAchievement(id, type, obtainable)
-    table.insert(self.Achievements, KrowiAF.Achievement:New(id, type, obtainable));
+    tinsert(self.Achievements, KrowiAF.Achievement:New(id, type, obtainable));
 end

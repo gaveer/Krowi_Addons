@@ -67,6 +67,11 @@ function KrowiAF.AchievementTab:AchievementFrameTab_OnClick(id) -- Mimick Blizza
 	KrowiAF.AchievementFrameCategories_Update();
 	KrowiAF.AchievementFunctions.updateFunc();
 
+    -- When we click our own tab, set the achievement buttons to our own code
+	for _, button in next, AchievementFrameAchievementsContainer.buttons do
+		button:SetScript("OnClick", KrowiAF.AchievementButton_OnClick);
+	end
+
 	-- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 
@@ -86,6 +91,19 @@ function KrowiAF.AchievementTab:AchievementFrameComparisonTab_OnClick(id)
 	KrowiAF.AchievementFrameCategories_Update();
 	AchievementFrame_UpdateTabs(id);
 
-	KrowiAF.AchievementFunctions.updateFunc();
+    KrowiAF.AchievementFunctions.updateFunc();
+    
+    -- When we click our own tab, set the achievement buttons to our own code
+	for _, button in next, AchievementFrameAchievementsContainer.buttons do
+		button:SetScript("OnClick", KrowiAF.AchievementButton_OnClick);
+    end
+    
 	-- SwitchAchievementSearchTab(id); -- Does not work yet
+end
+
+-- When we leave our own tab, set the achievement buttons back to the Blizzard one
+function KrowiAF.AchievementTab:LeaveTab()
+	for _, button in next, AchievementFrameAchievementsContainer.buttons do
+		button:SetScript("OnClick", AchievementButton_OnClick);
+	end
 end

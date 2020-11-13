@@ -68,6 +68,22 @@
         "AchievementFrameComparisonTab_OnClick",
         "AchievementFrameBaseTab_OnClick",
         "AchievementFrameHeaderTitle",
-        "GUILD_ACHIEVEMENTS_TITLE"
+        "GUILD_ACHIEVEMENTS_TITLE",
+        "DEFAULT_CHAT_FRAME",
+        "bit",
+        "ACHIEVEMENT_FLAGS_ACCOUNT",
+        "ACHIEVEMENTBUTTON_LABELWIDTH",
+        "GetPreviousAchievement",
+        "AchievementShield_SetPoints",
+        "AchievementButton_GetProgressivePoints",
+        "AchievementPointsFont",
+        "AchievementPointsFontSmall",
+        "ceil",
+        "FormatShortDate",
+        "IsTrackedAchievement",
+        "AchievementButton_UpdatePlusMinusTexture",
+        "AchievementButton_DisplayObjectives",
+        "renderOffScreen",
+        "AchievementButton_OnClick"
     ]
 }

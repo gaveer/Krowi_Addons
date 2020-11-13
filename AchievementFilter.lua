@@ -11,7 +11,7 @@ function loadHelper:OnEvent(event, arg1)
             KrowiAF.LoadOptions(); -- 1
             KrowiAF.LoadIcon(); -- 2
         elseif arg1 == "Blizzard_AchievementUI" then
-            KrowiAF.AchievementTab:AddNewTab(AF_TAB_BUTTON_TEXT, {
+            local tab = KrowiAF.AchievementTab:AddNewTab(AF_TAB_BUTTON_TEXT, {
                 categoryAccessor = function()
                     return KrowiAF.Categories;
                 end,
@@ -22,6 +22,9 @@ function loadHelper:OnEvent(event, arg1)
                 noSummary = true;
             }); -- 4
             KrowiAF.Debug("     - Functions linked");
+            hooksecurefunc("AchievementFrameBaseTab_OnClick", tab.LeaveTab);
+            hooksecurefunc("AchievementFrameComparisonTab_OnClick", tab.LeaveTab);
+            KrowiAF.Debug("     - LeaveTab hooked");
             KrowiAF.LoadCategories(); -- 5
             KrowiAF.LoadAchievements(); -- 6
             self:UnregisterEvent("ADDON_LOADED");

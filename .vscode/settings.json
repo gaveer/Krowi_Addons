@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "**/[^A]*": true,
+        "**/A[^c]*": true,
+        "**/Ac[^h]*": true,
+        "**/*.7z": true,
+        "**/*.zip": true,
+    },
+    "git.ignoreLimitWarning": true
+}

@@ -50,7 +50,7 @@ function KrowiAF.AchievementTab:AddNewTab(text, functions)
 end
 
 function KrowiAF.AchievementTab:AchievementFrameTab_OnClick(id) -- Mimick Blizzard_AchievementUI AchievementFrameBaseTab_OnClick for our own buttons
-    KrowiAF.Trace("AchievementFrameTab_OnClick - Tab " .. tostring(id) .. " of " .. tostring(AchievementFrame.numTabs) .. " clicked.");
+    KrowiAF.Trace("KrowiAF.AchievementFrameTab_OnClick - Tab " .. tostring(id) .. " of " .. tostring(AchievementFrame.numTabs) .. " clicked.");
 	AchievementFrame_UpdateTabs(id);
 
     if KrowiAF.InGuildView() then
@@ -67,16 +67,13 @@ function KrowiAF.AchievementTab:AchievementFrameTab_OnClick(id) -- Mimick Blizza
 	KrowiAF.AchievementFrameCategories_Update();
 	KrowiAF.AchievementFunctions.updateFunc();
 
-    -- When we click our own tab, set the achievement buttons to our own code
-	for _, button in next, AchievementFrameAchievementsContainer.buttons do
-		button:SetScript("OnClick", KrowiAF.AchievementButton_OnClick);
-	end
+    self:EnterTab();
 
 	-- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 
 function KrowiAF.AchievementTab:AchievementFrameComparisonTab_OnClick(id)
-    KrowiAF.Trace("AchievementFrameComparisonTab_OnClick - Tab " .. tostring(id) .. " of " .. tostring(AchievementFrame.numTabs) .. " clicked.");
+    KrowiAF.Trace("KrowiAF.AchievementFrameComparisonTab_OnClick - Tab " .. tostring(id) .. " of " .. tostring(AchievementFrame.numTabs) .. " clicked.");
 	if KrowiAF.InGuildView() then
 		AchievementFrame_ToggleView();
 		AchievementFrameGuildEmblemLeft:Hide();
@@ -93,17 +90,23 @@ function KrowiAF.AchievementTab:AchievementFrameComparisonTab_OnClick(id)
 
     KrowiAF.AchievementFunctions.updateFunc();
     
-    -- When we click our own tab, set the achievement buttons to our own code
-	for _, button in next, AchievementFrameAchievementsContainer.buttons do
-		button:SetScript("OnClick", KrowiAF.AchievementButton_OnClick);
-    end
+    self:EnterTab();
     
 	-- SwitchAchievementSearchTab(id); -- Does not work yet
 end
 
--- When we leave our own tab, set the achievement buttons back to the Blizzard one
+-- When we enter our own tab, set some things to our code
+function KrowiAF.AchievementTab:EnterTab()
+	for _, button in next, AchievementFrameAchievementsContainer.buttons do
+        button:SetScript("OnClick", KrowiAF.AchievementButton_OnClick);
+        AchievementFrameAchievementsContainer.update = KrowiAF.AchievementFrameAchievements_Update;
+	end
+end
+
+-- When we leave our own tab, set some things back to the Blizzard ones
 function KrowiAF.AchievementTab:LeaveTab()
 	for _, button in next, AchievementFrameAchievementsContainer.buttons do
-		button:SetScript("OnClick", AchievementButton_OnClick);
+        button:SetScript("OnClick", AchievementButton_OnClick);
+        AchievementFrameAchievementsContainer.update = AchievementFrameAchievements_Update;
 	end
 end

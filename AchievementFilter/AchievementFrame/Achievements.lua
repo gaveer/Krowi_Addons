@@ -1,7 +1,7 @@
 local achievementUIFontHeight;
 
 function KrowiAF.GetFilteredAchievements(categoryID)
-    KrowiAF.Trace("GetFilteredAchievements");
+    KrowiAF.Trace("KrowiAF.GetFilteredAchievements");
 
 	local achievements = {};
 	for _, achievement in next, KrowiAF.Categories[categoryID].more.Achievements do
@@ -25,13 +25,12 @@ end
 
 function KrowiAF.AchievementFrameAchievements_Update()
     local category = KrowiAF.AchievementFunctions.selectedCategory;
-    KrowiAF.Debug("AchievementFrameAchievements_Update for category '" .. tostring(category) .. "' with name '" .. KrowiAF.Categories[category].more.Name .. "'");
+    KrowiAF.Debug("KrowiAF.AchievementFrameAchievements_Update for category '" .. tostring(category) .. "' with name '" .. KrowiAF.Categories[category].more.Name .. "'");
 
 	local scrollFrame = AchievementFrameAchievementsContainer;
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
     local buttons = scrollFrame.buttons;
 	local achievements = KrowiAF.GetFilteredAchievements(category);
-	KrowiAF.Debug(#achievements);
 	
     -- Leaving it in for now, doesn't break anything and future proofs
 	-- If the current category is feats of strength and there are no entries then show the explanation text
@@ -75,8 +74,27 @@ function KrowiAF.AchievementFrameAchievements_Update()
     end
 end
 
+function KrowiAF.AchievementFrameAchievements_ForceUpdate ()
+	if ( AchievementFrameAchievements.selection ) then
+		local nextID = GetNextAchievement(AchievementFrameAchievements.selection);
+		local id, _, _, completed = GetAchievementInfo(AchievementFrameAchievements.selection);
+		if ( nextID and completed ) then
+			AchievementFrameAchievements.selection = nil;
+		end
+	end
+	AchievementFrameAchievementsObjectives:Hide();
+	AchievementFrameAchievementsObjectives.id = nil;
+
+	local buttons = AchievementFrameAchievementsContainer.buttons;
+	for i, button in next, buttons do
+		button.id = nil;
+	end
+
+	KrowiAF.AchievementFrameAchievements_Update();
+end
+
 function KrowiAF.AchievementButton_OnClick(self, button, down, ignoreModifiers)
-	KrowiAF.Trace("AchievementButton_OnClick for achievement " .. tostring(self.id));
+	KrowiAF.Trace("KrowiAF.AchievementButton_OnClick for achievement " .. tostring(self.id));
 
 	if IsModifiedClick() and not ignoreModifiers then
 		local handled = nil;
@@ -117,7 +135,7 @@ end
 
 function KrowiAF.AchievementButton_DisplayAchievement(button, achievement, selectionID, renderOffScreen)
 	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievement);
-    KrowiAF.Trace("AchievementButton_DisplayAchievement for achievement " .. tostring(id));
+    KrowiAF.Trace("KrowiAF.AchievementButton_DisplayAchievement for achievement " .. tostring(id));
 
 	if not id then
 		button:Hide();
@@ -251,7 +269,7 @@ function KrowiAF.LoadAchievements()
 	end
 	KrowiAF.Debug("     - Achievement UI font height set");
 
-
+-- Hooked all blizz achi functions to trace execution te debug scroll frame
     hooksecurefunc("AchievementFrameAchievements_OnLoad", function() KrowiAF.Trace("|cFF333333AchievementFrameAchievements_OnLoad|r"); end);
     hooksecurefunc("AchievementFrameAchievements_OnEvent", function() KrowiAF.Trace("|cFF333333AchievementFrameAchievements_OnEvent|r"); end);
     hooksecurefunc("AchievementFrameAchievementsBackdrop_OnLoad", function() KrowiAF.Trace("|cFF333333AchievementFrameAchievementsBackdrop_OnLoad|r"); end);
@@ -271,12 +289,12 @@ function KrowiAF.LoadAchievements()
 	hooksecurefunc("AchievementButton_Expand", function() KrowiAF.Trace("|cFF333333AchievementButton_Expand|r"); end);
 	hooksecurefunc("AchievementButton_Saturate", function() KrowiAF.Trace("|cFF333333AchievementButton_Saturate|r"); end);
 	hooksecurefunc("AchievementButton_Desaturate", function() KrowiAF.Trace("|cFF333333AchievementButton_Desaturate|r"); end);
-	-- hooksecurefunc("AchievementButton_OnLoad", function() KrowiAF.Trace("|cFF333333AchievementButton_OnLoad|r"); end);
+	hooksecurefunc("AchievementButton_OnLoad", function() KrowiAF.Trace("|cFF333333AchievementButton_OnLoad|r"); end);
 	hooksecurefunc("AchievementButton_OnClick", function() KrowiAF.Trace("|cFF666666AchievementButton_OnClick|r"); end);
 	hooksecurefunc("AchievementButton_ToggleTracking", function() KrowiAF.Trace("|cFF333333AchievementButton_ToggleTracking|r"); end);
 	hooksecurefunc("AchievementButton_DisplayAchievement", function() KrowiAF.Trace("|cFF333333AchievementButton_DisplayAchievement|r"); end);
 	hooksecurefunc("AchievementFrameAchievements_SelectButton", function() KrowiAF.Trace("|cFF333333AchievementFrameAchievements_SelectButton|r"); end);
-	-- hooksecurefunc("AchievementButton_ResetObjectives", function() KrowiAF.Trace("|cFF333333AchievementButton_ResetObjectives|r"); end);
+	hooksecurefunc("AchievementButton_ResetObjectives", function() KrowiAF.Trace("|cFF333333AchievementButton_ResetObjectives|r"); end);
 	hooksecurefunc("AchievementButton_DisplayObjectives", function() KrowiAF.Trace("|cFF333333AchievementButton_DisplayObjectives|r"); end);
 	hooksecurefunc("AchievementShield_SetPoints", function() KrowiAF.Trace("|cFF333333AchievementShield_SetPoints|r"); end);
 	hooksecurefunc("AchievementButton_ResetTable", function() KrowiAF.Trace("|cFF333333AchievementButton_ResetTable|r"); end);
@@ -319,7 +337,7 @@ function KrowiAF.LoadAchievements()
 	hooksecurefunc("AchievementFrameSummaryAchievement_OnEnter", function() KrowiAF.Trace("|cFF333333AchievementFrameSummaryAchievement_OnEnter|r"); end);
 	hooksecurefunc("AchievementFrameSummaryCategoryButton_OnClick", function() KrowiAF.Trace("|cFF333333AchievementFrameSummaryCategoryButton_OnClick|r"); end);
 	hooksecurefunc("AchievementFrameSummaryCategory_OnLoad", function() KrowiAF.Trace("|cFF333333AchievementFrameSummaryCategory_OnLoad|r"); end);
-	-- hooksecurefunc("AchievementFrame_GetCategoryTotalNumAchievements", function() KrowiAF.Trace("|cFF333333AchievementFrame_GetCategoryTotalNumAchievements|r"); end);
+	hooksecurefunc("AchievementFrame_GetCategoryTotalNumAchievements", function() KrowiAF.Trace("|cFF333333AchievementFrame_GetCategoryTotalNumAchievements|r"); end);
 	hooksecurefunc("AchievementFrameSummaryCategory_OnEvent", function() KrowiAF.Trace("|cFF333333AchievementFrameSummaryCategory_OnEvent|r"); end);
 	hooksecurefunc("AchievementFrameSummaryCategory_OnShow", function() KrowiAF.Trace("|cFF333333AchievementFrameSummaryCategory_OnShow|r"); end);
 	hooksecurefunc("AchievementFrameSummaryCategory_OnHide", function() KrowiAF.Trace("|cFF333333AchievementFrameSummaryCategory_OnHide|r"); end);
@@ -393,13 +411,13 @@ function KrowiAF.LoadAchievements()
 	hooksecurefunc("AchievementFrame_SetTabs", function() KrowiAF.Trace("|cFF555555AchievementFrame_SetTabs|r"); end);
 	hooksecurefunc("AchievementFrame_UpdateTabs", function() KrowiAF.Trace("|cFF555555AchievementFrame_UpdateTabs|r"); end);
 	hooksecurefunc("AchievementFrame_ToggleView", function() KrowiAF.Trace("|cFF555555AchievementFrame_ToggleView|r"); end);
-	-- hooksecurefunc("AchievementFrame_ShowSubFrame", function() KrowiAF.Trace("|cFF555555AchievementFrame_ShowSubFrame|r"); end);
+	hooksecurefunc("AchievementFrame_ShowSubFrame", function() KrowiAF.Trace("|cFF555555AchievementFrame_ShowSubFrame|r"); end);
 	hooksecurefunc("AchievementFrameCategories_OnLoad", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_OnLoad|r"); end);
 	hooksecurefunc("AchievementFrameCategories_OnEvent", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_OnEvent|r"); end);
 	hooksecurefunc("AchievementFrameCategories_OnShow", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_OnShow|r"); end);
 	hooksecurefunc("AchievementFrameCategories_GetCategoryList", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_GetCategoryList|r"); end);
 	hooksecurefunc("AchievementFrameCategories_Update", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_Update|r"); end);
-	-- hooksecurefunc("AchievementFrameCategories_DisplayButton", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_DisplayButton|r"); end);
+	hooksecurefunc("AchievementFrameCategories_DisplayButton", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_DisplayButton|r"); end);
 	hooksecurefunc("AchievementFrameCategory_StatusBarTooltip", function() KrowiAF.Trace("|cFF555555AchievementFrameCategory_StatusBarTooltip|r"); end);
 	hooksecurefunc("AchievementFrameCategory_FeatOfStrengthTooltip", function() KrowiAF.Trace("|cFF555555AchievementFrameCategory_FeatOfStrengthTooltip|r"); end);
 	hooksecurefunc("AchievementFrameCategories_UpdateTooltip", function() KrowiAF.Trace("|cFF555555AchievementFrameCategories_UpdateTooltip|r"); end);
@@ -423,5 +441,25 @@ function KrowiAF.LoadAchievements()
 	hooksecurefunc("AchievementShield_Desaturate", function() KrowiAF.Trace("|cFF555555AchievementShield_Desaturate|r"); end);
 	hooksecurefunc("AchievementShield_Saturate", function() KrowiAF.Trace("|cFF555555AchievementShield_Saturate|r"); end);
 	hooksecurefunc("AchievementShield_OnLoad", function() KrowiAF.Trace("|cFF555555AchievementShield_OnLoad|r"); end);
+	
+	hooksecurefunc("HybridScrollFrame_OnLoad", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_OnLoad|r"); end);
+	hooksecurefunc("HybridScrollFrameScrollUp_OnLoad", function() KrowiAF.Trace("|cFF225588HybridScrollFrameScrollUp_OnLoad|r"); end);
+	hooksecurefunc("HybridScrollFrameScrollDown_OnLoad", function() KrowiAF.Trace("|cFF225588HybridScrollFrameScrollDown_OnLoad|r"); end);
+	hooksecurefunc("HybridScrollFrame_OnValueChanged", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_OnValueChanged|r"); end);
+	hooksecurefunc("HybridScrollFrame_UpdateButtonStates", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_UpdateButtonStates|r"); end);
+	hooksecurefunc("HybridScrollFrame_OnMouseWheel", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_OnMouseWheel|r"); end);
+	hooksecurefunc("HybridScrollFrameScrollButton_OnUpdate", function() KrowiAF.Trace("|cFF225588HybridScrollFrameScrollButton_OnUpdate|r"); end);
+	hooksecurefunc("HybridScrollFrameScrollButton_OnClick", function() KrowiAF.Trace("|cFF225588HybridScrollFrameScrollButton_OnClick|r"); end);
+	hooksecurefunc("HybridScrollFrame_Update", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_Update|r"); end);
+	hooksecurefunc("HybridScrollFrame_GetOffset", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_GetOffset|r"); end);
+	hooksecurefunc("HybridScrollFrameScrollChild_OnLoad", function() KrowiAF.Trace("|cFF225588HybridScrollFrameScrollChild_OnLoad|r"); end);
+	hooksecurefunc("HybridScrollFrame_ExpandButton", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_ExpandButton|r"); end);
+	hooksecurefunc("HybridScrollFrame_CollapseButton", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_CollapseButton|r"); end);
+	hooksecurefunc("HybridScrollFrame_SetOffset", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_SetOffset|r"); end);
+	hooksecurefunc("HybridScrollFrame_CreateButtons", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_CreateButtons|r"); end);
+	hooksecurefunc("HybridScrollFrame_GetButtonIndex", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_GetButtonIndex|r"); end);
+	hooksecurefunc("HybridScrollFrame_GetButtons", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_GetButtons|r"); end);
+	hooksecurefunc("HybridScrollFrame_SetDoNotHideScrollBar", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_SetDoNotHideScrollBar|r"); end);
+	hooksecurefunc("HybridScrollFrame_ScrollToIndex", function() KrowiAF.Trace("|cFF225588HybridScrollFrame_ScrollToIndex|r"); end);
     KrowiAF.Debug("     - OnLoad extended");
 end

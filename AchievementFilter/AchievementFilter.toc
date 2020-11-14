@@ -26,3 +26,4 @@ AchievementFrame/Categories.lua
 AchievementFrame/Achievements.lua
 
 AchievementFilter.lua
+AchievementFilter.xml

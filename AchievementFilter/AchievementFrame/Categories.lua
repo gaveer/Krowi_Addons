@@ -1,5 +1,5 @@
 function KrowiAF.AchievementFrameCategories_GetCategoryList(categories)
-    KrowiAF.Trace("AchievementFrameCategories_GetCategoryList");
+    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_GetCategoryList");
     -- Clear the list so we can add our own categories, not sure how yet though
     local cats = KrowiAF.AchievementFunctions.categoryAccessor();
     -- AchievementFilter.DebugTable(cats);
@@ -20,7 +20,7 @@ end
 local displayCategories = {};
 -- This one needs to replace all Blizzard_AchievementUI AchievementFrameCategories_Update functions
 function KrowiAF.AchievementFrameCategories_Update()
-    KrowiAF.Trace("AchievementFrameCategories_Update");
+    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_Update");
     local scrollFrame = AchievementFrameCategoriesContainer;
     local categories = ACHIEVEMENTUI_CATEGORIES;
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
@@ -84,7 +84,7 @@ end
 -- Extending the original function allows us with little work to add another level to the categories view
 -- Called after Blizzard_AchievementUI AchievementFrameCategories_DisplayButton through a hook
 function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
-    -- KrowiAF.Trace("AchievementFrameCategories_DisplayButton"); -- Creates a lot of messages!
+    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_DisplayButton"); -- Creates a lot of messages!
     if not element then
 		return;
     end
@@ -116,7 +116,7 @@ end
 
 -- This one needs to replace all Blizzard_AchievementUI AchievementFrameCategories_SelectButton functions
 function KrowiAF.AchievementFrameCategories_SelectButton (button)
-    KrowiAF.Trace("AchievementFrameCategories_SelectButton");
+    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_SelectButton");
     if ( button.isSelected and button.element.collapsed == false ) then -- Collapse selected categories
         button.element.collapsed = true;
         for _, category in next, ACHIEVEMENTUI_CATEGORIES do
@@ -188,7 +188,7 @@ function KrowiAF.AchievementFrameCategories_SelectButton (button)
 end
 
 function KrowiAF.AchievementCategoryButton_OnClick (button)
-    KrowiAF.Trace("AchievementCategoryButton_OnClick - Category " .. button.element.more.Name .. " clicked");
+    KrowiAF.Trace("KrowiAF.AchievementCategoryButton_OnClick - Category " .. button.element.more.Name .. " clicked");
 	KrowiAF.AchievementFrameCategories_SelectButton(button);
     KrowiAF.AchievementFrameCategories_Update();
 end

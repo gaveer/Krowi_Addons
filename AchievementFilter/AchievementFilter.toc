@@ -19,6 +19,9 @@ Objects/AchievementType.lua
 Objects/Achievement.lua
 
 ExpansionData/Cataclysm.lua
+ExpansionData/Mists of Pandaria.lua
+ExpansionData/Warlords of Draenor.lua
+ExpansionData/Legion.lua
 ExpansionData/Expansions.lua
 
 AchievementFilter.lua

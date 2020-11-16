@@ -26,10 +26,6 @@ AF_TAB_BUTTON_TEXT = "Ach Filter";
 AF_CATEGORY_CLASSIC = "Classic";
 AF_CATEGORY_TBC = "The Burning Crusade";
 AF_CATEGORY_WOTLK = "Wrath of the Lich King";
-AF_CATEGORY_CATA = "Cataclysm";
-AF_CATEGORY_MOP = "Shadowlands";
-AF_CATEGORY_WOD = "Shadowlands";
-AF_CATEGORY_LEGION = "Shadowlands";
 AF_CATEGORY_BFA = "Battle for Azeroth";
 AF_CATEGORY_SL = "Shadowlands";
 
@@ -37,9 +33,28 @@ AF_CATEGORY_RAIDS = "Raids";
 AF_CATEGORY_DUNGEONS = "Dungeons";
 
 -- Cataclysm
-AF_CATEGORY_RAID_BH = "Baradin Hold";
-AF_CATEGORY_RAID_BWD = "Blackwing Descent";
-AF_CATEGORY_RAID_BOT = "Bastion of Twilight";
-AF_CATEGORY_RAID_TOTFW = "Throne of the Four Winds";
-AF_CATEGORY_RAID_FL = "Firelands";
-AF_CATEGORY_RAID_DS = "Dragon Soul";
+AF_CATEGORY_CATA = "Cataclysm";
+AF_CATEGORY_XPACK_CATA_RAID_BH = "Baradin Hold";
+AF_CATEGORY_XPACK_CATA_RAID_BWD = "Blackwing Descent";
+AF_CATEGORY_XPACK_CATA_RAID_BOT = "Bastion of Twilight";
+AF_CATEGORY_XPACK_CATA_RAID_TOTFW = "Throne of the Four Winds";
+AF_CATEGORY_XPACK_CATA_RAID_FL = "Firelands";
+AF_CATEGORY_XPACK_CATA_RAID_DS = "Dragon Soul";
+
+-- Mists of Pandaria
+AF_CATEGORY_MOP = "Mists of Pandaria";
+AF_CATEGORY_XPACK_MOP_RAID_MSV = "Mogu'shan Vaults";
+AF_CATEGORY_XPACK_MOP_RAID_HoF = "Heart of Fear";
+AF_CATEGORY_XPACK_MOP_RAID_ToES = "Terrace of Endless Spring";
+AF_CATEGORY_XPACK_MOP_RAID_ToT = "Throne of Thunder";
+AF_CATEGORY_XPACK_MOP_RAID_SoO = "Siege of Orgrimmar";
+
+-- Warlords of Draenor
+AF_CATEGORY_WOD = "Warlords of Draenor";
+AF_CATEGORY_XPACK_WOD_RAID_HM = "Highmaul";
+AF_CATEGORY_XPACK_WOD_RAID_BRF = "Blackrock Foundry";
+AF_CATEGORY_XPACK_WOD_RAID_HFC = "Hellfire Citadel";
+
+-- Legion
+AF_CATEGORY_LEGION = "Legion";
+AF_CATEGORY_XPACK_LEGION_RAID_EN = "Emerald Nightmare";

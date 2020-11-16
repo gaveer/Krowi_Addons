@@ -1,6 +1,6 @@
 ## Interface: 90001
 ## Title: Achievement Filter
-## Version: 0.1
+## Version: Beta 0.1
 ## Author: Krowi
 ## SavedVariables: AFSetting
 ## Notes: Filters your achievements.
@@ -20,9 +20,5 @@ Objects/Achievement.lua
 
 ExpansionData/Cataclysm.lua
 ExpansionData/Expansions.lua
-
-AchievementFrame/Tab.lua
-AchievementFrame/Categories.lua
-AchievementFrame/Achievements.lua
 
 AchievementFilter.lua

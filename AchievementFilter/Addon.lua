@@ -1,7 +1,7 @@
 KrowiAF = {
     Data = {};
-    Categories_Old = {};
-    AchievementFunctions = {};
+    -- Categories_Old = {};
+    -- AchievementFunctions = {};
     Compatibility = {
         Overachiever_Tabs = false;
     };

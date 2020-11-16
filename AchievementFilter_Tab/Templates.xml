@@ -5,11 +5,22 @@
 	<Button name="KrowiAF_AchievementCategoryTemplate" inherits="AchievementCategoryTemplate" virtual="true">
 		<Scripts>
 			<OnLoad>
-                	self:EnableMouse(true);
-	                self:EnableMouseWheel(true);
+                self:EnableMouse(true);
+                self:EnableMouseWheel(true);
 			</OnLoad>
 			<OnClick>
 				KrowiAF_AchievementCategoryButton_OnClick(self, button, down);
+			</OnClick>
+		</Scripts>
+	</Button>
+
+    <!-- Originally from Blizzard_AchievementUI.xml line 772 at time of writing -->
+	<Button name="KrowiAF_AchievementTemplate" inherits="AchievementTemplate" virtual="true">
+		<Scripts>
+			<OnLoad inherit="prepend" function="KrowiAF_AchievementButton_OnLoad"/>
+			<OnClick>
+				-- this is also called from the shield's OnClick
+				KrowiAF_AchievementButton_OnClick(self);
 			</OnClick>
 		</Scripts>
 	</Button>

@@ -73,10 +73,9 @@ function KrowiAF.AchievementFrameTabButton:Base_OnClick(id)
     -- KrowiAF.CategoriesFrame.GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
     AchievementFrame_ShowSubFrame(KrowiAF.CategoriesFrame, KrowiAF.AchievementsFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
-    AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1);
 
 	KrowiAF.CategoriesFrame.Update();
-	KrowiAF.AchievementFrameAchievements_Update();
+	KrowiAF.AchievementsFrame.Update();
 
 	-- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end

@@ -292,7 +292,7 @@ function KrowiAF.LoadAchievements()
 	-- hooksecurefunc("AchievementButton_Saturate", function() KrowiAF.Trace("|cFF333333AchievementButton_Saturate|r"); end);
 	-- hooksecurefunc("AchievementButton_Desaturate", function() KrowiAF.Trace("|cFF333333AchievementButton_Desaturate|r"); end);
 	-- hooksecurefunc("AchievementButton_OnLoad", function() KrowiAF.Trace("|cFF333333AchievementButton_OnLoad|r"); end);
-	-- hooksecurefunc("AchievementButton_OnClick", function() KrowiAF.Trace("|cFF666666AchievementButton_OnClick|r"); end);
+	-- hooksecurefunc("AchievementButton_OnClick", function(self) KrowiAF.Trace("|cFF666666AchievementButton_OnClick|r"); KrowiAF.DebugTable(self); end);
 	-- hooksecurefunc("AchievementButton_ToggleTracking", function() KrowiAF.Trace("|cFF333333AchievementButton_ToggleTracking|r"); end);
 	-- hooksecurefunc("AchievementButton_DisplayAchievement", function() KrowiAF.Trace("|cFF333333AchievementButton_DisplayAchievement|r"); end);
 	-- hooksecurefunc("AchievementFrameAchievements_SelectButton", function() KrowiAF.Trace("|cFF333333AchievementFrameAchievements_SelectButton|r"); end);

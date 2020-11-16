@@ -2,7 +2,7 @@
 AF_NAME = "Achievement Filter";
 AF_NAME_COLORED = "|cFF1D92C2" .. AF_NAME .. "|r";
 AF_VERSION = "90001";
-AF_BUILD = "0.1";
+AF_BUILD = "Beta 0.1";
 
 -- [[ Localization ]] --
 

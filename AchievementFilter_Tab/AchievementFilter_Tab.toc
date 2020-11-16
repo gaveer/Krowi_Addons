@@ -1,6 +1,6 @@
 ## Interface: 90001
 ## Title: Achievement Filter - Tab
-## Version: 0.1
+## Version: Beta 0.1
 ## Author: Krowi
 ## LoadOnDemand: 1
 ## LoadWith: Blizzard_AchievementUI
@@ -12,11 +12,9 @@ Frames.xml
 
 AchievementFilter_Tab.lua
 
-Categories.lua
+CategoriesFrame.lua
 CategoryButton.lua
-Achievements.lua
-AchievementIcon.lua
-AchievementShield.lua
+AchievementsFrame.lua
 AchievementButton.lua
 Tabbutton.lua
 

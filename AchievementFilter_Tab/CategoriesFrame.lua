@@ -19,19 +19,18 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 			-- [[ OnLoad ]] --
 				tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.CategoriesFrame:GetName());
 				self:Hide();
-				self.buttons = {};
 
 			-- [[ OnEvent ]] --
 				KrowiAF.CategoriesFrame.GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
 				KrowiAF.SelectedCategory = KrowiAF.Categories[1];
 				-- KrowiAF.DebugTable(KrowiAF.Categories);
 
-				KrowiAF.CategoriesFrame.Container.ScrollBar.Show = function (self)
+				KrowiAF.CategoriesFrame.Container.ScrollBar.Show = function(self)
 					KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 175, 22, 30);
-				end
-				KrowiAF.CategoriesFrame.Container.ScrollBar.Hide = function (self)
+				end;
+				KrowiAF.CategoriesFrame.Container.ScrollBar.Hide = function(self)
 					KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 197, 0, 30);
-				end
+				end;
 
 				KrowiAF.CategoriesFrame.Container.ScrollBar.trackBG:Show();
 				KrowiAF.CategoriesFrame.Container.update = KrowiAF.CategoriesFrame.Update;
@@ -53,6 +52,8 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		AchievementFrameHeaderLeftDDLInset:Hide();
 		AchievementFrame.searchBox:Hide();
 		AchievementFrameHeaderRightDDLInset:Hide();
+
+		AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this texture global texture for player achievements
 
 		KrowiAF.CategoriesFrame.Update();
 	end
@@ -76,15 +77,16 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 	KrowiAF.CategoriesFrame:SetScript("OnHide", KrowiAF.CategoriesFrame.OnHide);
 
 	function KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset) -- OK
-		UI_CategoriesWidth = categoriesWidth;
+		KrowiAF.Trace("KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide");
 
+		UI_CategoriesWidth = categoriesWidth;
 		KrowiAF.CategoriesFrame:SetWidth(categoriesWidth);
 		KrowiAF.CategoriesFrame.Container:GetScrollChild():SetWidth(categoriesWidth);
 		KrowiAF.AchievementsFrame:SetPoint("TOPLEFT", KrowiAF.CategoriesFrame, "TOPRIGHT", achievementsOffsetX, 0);
 		AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
 		AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
 		for _, button in next, KrowiAF.CategoriesFrame.Container.buttons do
-			KrowiAF.CategoriesFrame.DisplayButton(button, button.Category)
+			KrowiAF.CategoriesFrame.DisplayButton(button, button.Category);
 		end
 		func(self);
 	end
@@ -229,7 +231,7 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	function KrowiAF.CategoriesFrame.SelectButton(button) -- NOK, LAST 3 LINES RENAME -- AchievementFrameCategories_SelectButton
+	function KrowiAF.CategoriesFrame.SelectButton(button) -- OK -- AchievementFrameCategories_SelectButton
 		KrowiAF.Trace("KrowiAF.CategoriesFrame.SelectButton");
 
 		if button.IsSelected and not button.Category.Collapsed then -- Collapse selected categories
@@ -281,7 +283,7 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		AchievementFrame_ShowSubFrame(KrowiAF.CategoriesFrame, KrowiAF.AchievementsFrame);
 		KrowiAF.SelectedCategory = button.Category;
 
-		KrowiAF.AchievementFrameAchievements_ClearSelection();
-		KrowiAF_AchievementFrameAchievementsContainerScrollBar:SetValue(0);
-		KrowiAF.AchievementFrameAchievements_Update();
+		KrowiAF.AchievementsFrame.ClearSelection();
+		KrowiAF.AchievementsFrame.Container.ScrollBar:SetValue(0);
+		KrowiAF.AchievementsFrame.Update();
 	end

@@ -7,7 +7,7 @@ end
 function KrowiAF.AchievementShield_Saturate (self) -- Blizzard_AchievementUI.lua line 1018
     KrowiAF.Trace("KrowiAF.AchievementShield_Saturate");
 
-	self.Icon:SetTexCoord(0, .5, KrowiAF.UI_TexturesOffset, KrowiAF.UI_TexturesOffset + 0.5);
+	self.Icon:SetTexCoord(0, .5, 0, 0.5);
 end
 
 function KrowiAF.AchievementShield_Load(shield) -- Blizzard_AchievementUI.lua line 1022

@@ -58,3 +58,7 @@ AF_CATEGORY_XPACK_WOD_RAID_HFC = "Hellfire Citadel";
 -- Legion
 AF_CATEGORY_LEGION = "Legion";
 AF_CATEGORY_XPACK_LEGION_RAID_EN = "Emerald Nightmare";
+AF_CATEGORY_XPACK_LEGION_RAID_NH = "The Nighthold";
+AF_CATEGORY_XPACK_LEGION_RAID_TOV = "Trial of Valor";
+AF_CATEGORY_XPACK_LEGION_RAID_TOS = "Tomb of Sargeras";
+AF_CATEGORY_XPACK_LEGION_RAID_ANTORUS = "Antorus, the Burning Throne";

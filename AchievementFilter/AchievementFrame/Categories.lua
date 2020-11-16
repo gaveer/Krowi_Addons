@@ -1,5 +1,5 @@
-function KrowiAF.AchievementFrameCategories_GetCategoryList(categories)
-    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_GetCategoryList");
+function KrowiAF.AchievementFrameCategories_GetCategoryList_Old(categories)
+    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_GetCategoryList_Old");
     -- Clear the list so we can add our own categories, not sure how yet though
     local cats = KrowiAF.AchievementFunctions.categoryAccessor();
     -- AchievementFilter.DebugTable(cats);
@@ -19,8 +19,8 @@ end
 
 local displayCategories = {};
 -- This one needs to replace all Blizzard_AchievementUI AchievementFrameCategories_Update functions
-function KrowiAF.AchievementFrameCategories_Update()
-    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_Update");
+function KrowiAF.AchievementFrameCategories_Update_Old()
+    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_Update_Old");
     local scrollFrame = AchievementFrameCategoriesContainer;
     local categories = ACHIEVEMENTUI_CATEGORIES;
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
@@ -83,8 +83,8 @@ end
 
 -- Extending the original function allows us with little work to add another level to the categories view
 -- Called after Blizzard_AchievementUI AchievementFrameCategories_DisplayButton through a hook
-function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
-    KrowiAF.Trace("KrowiAF.AchievementFrameCategories_DisplayButton"); -- Creates a lot of messages!
+function KrowiAF.AchievementFrameCategories_DisplayButton_Old (button, element)
+    -- KrowiAF.Trace("KrowiAF.AchievementFrameCategories_DisplayButton"); -- Creates a lot of messages!
     if not element then
 		return;
     end
@@ -105,7 +105,7 @@ function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
         button.label:SetText(element.more.Name); -- Set these again since Blizzard_AchievementUI AchievementFrameCategories_DisplayButton will do this wrong
         button.name = element.more.Name; -- Set these again since Blizzard_AchievementUI AchievementFrameCategories_DisplayButton will do this wrong
         -- @TODO Blizzard_AchievementUI AchievementFrameCategories_DisplayButton set showTooltipFunc to nil, leave this right now and add later
-        button:SetScript("OnClick", KrowiAF.AchievementCategoryButton_OnClick);
+        button:SetScript("OnClick", KrowiAF.AchievementCategoryButton_OnClick_Old);
         if element.more.Level >= 2 then
             button:SetWidth(ACHIEVEMENTUI_CATEGORIESWIDTH - 15 - (element.more.Level - 1) * 5);
         end
@@ -115,7 +115,7 @@ function KrowiAF.AchievementFrameCategories_DisplayButton (button, element)
 end
 
 -- This one needs to replace all Blizzard_AchievementUI AchievementFrameCategories_SelectButton functions
-function KrowiAF.AchievementFrameCategories_SelectButton (button)
+function KrowiAF.AchievementFrameCategories_SelectButton_Old (button)
     KrowiAF.Trace("KrowiAF.AchievementFrameCategories_SelectButton");
     if ( button.isSelected and button.element.collapsed == false ) then -- Collapse selected categories
         button.element.collapsed = true;
@@ -187,16 +187,16 @@ function KrowiAF.AchievementFrameCategories_SelectButton (button)
     KrowiAF.AchievementFunctions.updateFunc();
 end
 
-function KrowiAF.AchievementCategoryButton_OnClick (button)
-    KrowiAF.Trace("KrowiAF.AchievementCategoryButton_OnClick - Category " .. button.element.more.Name .. " clicked");
-	KrowiAF.AchievementFrameCategories_SelectButton(button);
-    KrowiAF.AchievementFrameCategories_Update();
+function KrowiAF.AchievementCategoryButton_OnClick_Old (button)
+    KrowiAF.Trace("KrowiAF.AchievementCategoryButton_OnClick_Old - Category " .. button.element.more.Name .. " clicked");
+	KrowiAF.AchievementFrameCategories_SelectButton_Old(button);
+    KrowiAF.AchievementFrameCategories_Update_Old();
 end
 
 function KrowiAF.LoadCategories()
     KrowiAF.Debug("- Achievement Frame - Categories");
     KrowiAF.LoadAchievementCategories();
     KrowiAF.Debug("     - Achievement categories loaded");
-    hooksecurefunc("AchievementFrameCategories_DisplayButton", KrowiAF.AchievementFrameCategories_DisplayButton);
+    hooksecurefunc("AchievementFrameCategories_DisplayButton", KrowiAF.AchievementFrameCategories_DisplayButton_Old);
     KrowiAF.Debug("     - AchievementFrameCategories_DisplayButton hooked");
 end

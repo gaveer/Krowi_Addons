@@ -1,7 +1,10 @@
 KrowiAF = {
     Data = {};
-    Categories = {};
+    Categories_Old = {};
     AchievementFunctions = {};
+    Compatibility = {
+        Overachiever_Tabs = false;
+    };
 };
 
 function KrowiAF.Enum(table)

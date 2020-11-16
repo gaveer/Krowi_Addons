@@ -6,7 +6,7 @@ function KrowiAF.GetAchievementInfo(...)
         achievementID = args[1];
         KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "'");
     elseif #args == 2 then
-        achievementID = KrowiAF.Categories[args[1]].more.Achievements[args[2]].ID;
+        achievementID = KrowiAF.Categories_Old[args[1]].more.Achievements[args[2]].ID;
         KrowiAF.Debug("GetAchievementInfo for '" .. tostring(achievementID) .. "' (" .. tostring(args[1]) .. ", " .. tostring(args[2]) .. ")");
     else
         KrowiAF.Debug("GetAchievementInfo was called with a not defined number of parameters!");
@@ -21,7 +21,7 @@ function KrowiAF.GetCategoryNumAchievements(categoryID)
     local numAchievements = 0;
     local numCompleted = 0;
     local completedOffset = 0;
-    for _, child in next, KrowiAF.Categories[categoryID].more.Achievements do
+    for _, child in next, KrowiAF.Categories_Old[categoryID].more.Achievements do
         local _, _, _, completed = GetAchievementInfo(child.ID);
         numAchievements = numAchievements + 1;
         if completed then
@@ -40,11 +40,11 @@ function KrowiAF.GetCategoryNumAchievements(categoryID)
     -- end
 end
 
-function KrowiAF.AchievementFrameAchievements_Update ()
+function KrowiAF.AchievementFrameAchievements_Update_Old ()
     KrowiAF.Debug("AchievementFrameAchievements_Update");
 
     local category = KrowiAF.AchievementFunctions.selectedCategory;
-    KrowiAF.Debug("Selected category is '" .. tostring(category) .. "' with name '" .. KrowiAF.Categories[category].more.Name .. "'");
+    KrowiAF.Debug("Selected category is '" .. tostring(category) .. "' with name '" .. KrowiAF.Categories_Old[category].more.Name .. "'");
 
 	local scrollFrame = AchievementFrameAchievementsContainer;
 
@@ -54,7 +54,7 @@ function KrowiAF.AchievementFrameAchievements_Update ()
 	local numButtons = #buttons;
 
 	-- If the current category is feats of strength and there are no entries then show the explanation text
-	if ( AchievementFrame_IsFeatOfStrength() and #KrowiAF.Categories[category].more.Achievements == 0 ) then
+	if ( AchievementFrame_IsFeatOfStrength() and #KrowiAF.Categories_Old[category].more.Achievements == 0 ) then
 		if ( AchievementFrame.selectedTab == 1 ) then
 			AchievementFrameAchievementsFeatOfStrengthText:SetText(FEAT_OF_STRENGTH_DESCRIPTION);
 		else

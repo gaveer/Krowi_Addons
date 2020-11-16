@@ -1,0 +1,23 @@
+## Interface: 90001
+## Title: Achievement Filter - Tab
+## Version: 0.1
+## Author: Krowi
+## LoadOnDemand: 1
+## LoadWith: Blizzard_AchievementUI
+## Dependencies: AchievementFilter
+## X-Child-Of: AchievementFilter
+## Notes: Filters your achievements.
+
+Frames.xml
+
+AchievementFilter_Tab.lua
+
+Categories.lua
+CategoryButton.lua
+Achievements.lua
+AchievementIcon.lua
+AchievementShield.lua
+AchievementButton.lua
+Tabbutton.lua
+
+Templates.xml

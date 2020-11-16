@@ -1,14 +1,14 @@
-function KrowiAF.InGuildView()
+function KrowiAF.InGuildView_Old()
     return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
 end
 
-local TabFunctions = {
+KrowiAF.TabFunctions = {
     categoryAccessor = function()
-        return KrowiAF.Categories;
+        return KrowiAF.Categories_Old;
     end,
-    getCategoryList = KrowiAF.AchievementFrameCategories_GetCategoryList,
+    getCategoryList = KrowiAF.AchievementFrameCategories_GetCategoryList_Old,
     clearFunc = AchievementFrameAchievements_ClearSelection,
-    updateFunc = KrowiAF.AchievementFrameAchievements_Update,
+    updateFunc = KrowiAF.AchievementFrameAchievements_Update_Old,
     selectedCategory = 1;
     noSummary = true;
 };
@@ -22,19 +22,16 @@ function loadHelper:OnEvent(event, arg1)
             KrowiAF.LoadOptions(); -- 1
             KrowiAF.LoadIcon(); -- 2
         elseif arg1 == "Blizzard_AchievementUI" then
--- test
-local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "KrowiAF_AchievementFrameCategories");
-frame:Show();
--- test
-
-
-            local tab = KrowiAF.AchievementTab:AddNewTab(AF_TAB_BUTTON_TEXT, TabFunctions); -- 4
+            local tab = KrowiAF.AchievementTab_Old:AddNewTab(AF_TAB_BUTTON_TEXT .. "OLD", KrowiAF.TabFunctions); -- 4
             KrowiAF.Debug("     - Functions linked");
             hooksecurefunc("AchievementFrameBaseTab_OnClick", tab.LeaveTab);
             hooksecurefunc("AchievementFrameComparisonTab_OnClick", tab.LeaveTab);
             KrowiAF.Debug("     - LeaveTab hooked");
             KrowiAF.LoadCategories(); -- 5
             KrowiAF.LoadAchievements(); -- 6
+            -- local loaded, reason = LoadAddOn("AchievementFilter_Tab");
+            -- KrowiAF.Debug(loaded);
+            -- KrowiAF.Debug(reason);
             self:UnregisterEvent("ADDON_LOADED");
         end
     end

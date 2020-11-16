@@ -39,4 +39,16 @@ Xpack_Cata_Raid_DS:AddAchievementIDs({6106, 6107, 6177}); -- Defeat the bosses i
 -- Test
 Xpack_Cata_Dungeons = Xpack_Cata:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_DUNGEONS));
 Xpack_Cata_Placeholder1 = Xpack_Cata_Dungeons:AddChild(KrowiAF.AchievementCategory:New("Placeholder1"));
-Xpack_Cata_Placeholder2 = Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));
+Xpack_Cata_Placeholder1:AddChild(KrowiAF.AchievementCategory:New("Placeholder2"));

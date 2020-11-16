@@ -16,7 +16,7 @@ function KrowiAF.ConvertToBlizzardAchievementCategory(category)
     if category.Parent and type(category.Parent.ID) == "number" then
         parent = category.Parent.ID;
     end
-    tinsert(KrowiAF.Categories, {id = id, parent = parent, more = category});
+    tinsert(KrowiAF.Categories_Old, {id = id, parent = parent, more = category});
     for _, v in pairs(category.Children) do
         KrowiAF.ConvertToBlizzardAchievementCategory(v);
     end

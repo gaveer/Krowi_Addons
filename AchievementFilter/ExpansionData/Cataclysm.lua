@@ -4,6 +4,7 @@ tinsert(KrowiAF.Data, Xpack_Cata);
 
 -- Raids
 Xpack_Cata_Raids = Xpack_Cata:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_RAIDS));
+Xpack_Cata_Raids:AddAchievementIDs({4853, 5828, 6169}); -- Glory of the ...
 
 -- 4.0
 Xpack_Cata_Raid_BH = Xpack_Cata_Raids:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_XPACK_CATA_RAID_BH));
@@ -36,5 +37,5 @@ Xpack_Cata_Raid_DS:AddAchievementIDs({6174, 6128, 6129, 6175, 6084, 6105, 6133, 
 Xpack_Cata_Raid_DS:AddAchievementIDs({6109, 6110, 6111, 6112, 6113, 6114, 6115, 6116}); -- Defeat X on Heroic Difficulty
 Xpack_Cata_Raid_DS:AddAchievementIDs({6106, 6107, 6177}); -- Defeat the bosses in X
 
--- Test
-Xpack_Cata_Dungeons = Xpack_Cata:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_DUNGEONS));
+-- Dungeons
+-- Xpack_Cata_Dungeons = Xpack_Cata:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_DUNGEONS));

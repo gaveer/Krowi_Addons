@@ -5,6 +5,9 @@ KrowiAF = {
     -- Compatibility = {
     --     Overachiever_Tabs = false;
     -- };
+    IsAlliance = UnitFactionGroup("player") == "Alliance";
+    IsHorde = UnitFactionGroup("player") == "Horde";
+    IsNeutral = UnitFactionGroup("player") == "Neutral";
 };
 
 function KrowiAF.Enum(table)

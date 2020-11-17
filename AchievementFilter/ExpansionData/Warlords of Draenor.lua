@@ -4,6 +4,7 @@ tinsert(KrowiAF.Data, Xpack_WoD);
 
 -- Raids
 Xpack_WoD_Raids = Xpack_WoD:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_RAIDS));
+Xpack_WoD_Raids:AddAchievementIDs({8985, 10149}); -- Glory of the ...
 
 -- 6.0
 Xpack_WoD_Raid_HM = Xpack_WoD_Raids:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_XPACK_WOD_RAID_HM));

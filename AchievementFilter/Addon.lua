@@ -2,9 +2,9 @@ KrowiAF = {
     Data = {};
     -- Categories_Old = {};
     -- AchievementFunctions = {};
-    Compatibility = {
-        Overachiever_Tabs = false;
-    };
+    -- Compatibility = {
+    --     Overachiever_Tabs = false;
+    -- };
 };
 
 function KrowiAF.Enum(table)

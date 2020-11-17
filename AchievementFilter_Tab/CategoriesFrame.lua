@@ -10,34 +10,38 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 	function KrowiAF.CategoriesFrame.OnEvent(self, event, ...) -- OK -- AchievementFrameCategories_OnLoad + AchievementFrameCategories_OnEvent
 		if event == "ADDON_LOADED" then
 			local addonName = ...;
-			if addonName and addonName ~= "AchievementFilter_Tab" then
-				return;
-			end
-
 			KrowiAF.Trace("KrowiAF.CategoriesFrame.OnEvent - " .. event .. " - " .. addonName);
 
-			-- [[ OnLoad ]] --
-				tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.CategoriesFrame:GetName());
-				self:Hide();
+			if addonName and addonName == "AchievementFilter_Tab" then
+				-- [[ OnLoad ]] --
+					tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.CategoriesFrame:GetName());
+					self:Hide();
 
-			-- [[ OnEvent ]] --
-				KrowiAF.CategoriesFrame.GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
-				KrowiAF.SelectedCategory = KrowiAF.Categories[1];
-				-- KrowiAF.DebugTable(KrowiAF.Categories);
+				-- [[ OnEvent ]] --
+					KrowiAF.CategoriesFrame.GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
+					KrowiAF.SelectedCategory = KrowiAF.Categories[1];
+					-- KrowiAF.DebugTable(KrowiAF.Categories);
 
-				KrowiAF.CategoriesFrame.Container.ScrollBar.Show = function(self)
-					KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 175, 22, 30);
-				end;
-				KrowiAF.CategoriesFrame.Container.ScrollBar.Hide = function(self)
-					KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 197, 0, 30);
-				end;
+					KrowiAF.CategoriesFrame.Container.ScrollBar.Show = function(self)
+						KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 175, 22, 30);
+					end;
+					KrowiAF.CategoriesFrame.Container.ScrollBar.Hide = function(self)
+						KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 197, 0, 30);
+					end;
 
-				KrowiAF.CategoriesFrame.Container.ScrollBar.trackBG:Show();
-				KrowiAF.CategoriesFrame.Container.update = KrowiAF.CategoriesFrame.Update;
-				HybridScrollFrame_CreateButtons(KrowiAF.CategoriesFrame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
+					KrowiAF.CategoriesFrame.Container.ScrollBar.trackBG:Show();
+					KrowiAF.CategoriesFrame.Container.update = KrowiAF.CategoriesFrame.Update;
+					HybridScrollFrame_CreateButtons(KrowiAF.CategoriesFrame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
 
-				KrowiAF.CategoriesFrame.Update();
-				self:UnregisterEvent(event);
+					KrowiAF.CategoriesFrame.Update();
+			elseif addonName and addonName == "Overachiever_Tabs" then
+				for i, subFrameName in next, ACHIEVEMENTFRAME_SUBFRAMES do -- Issue #2: Fix
+					if subFrameName == KrowiAF.CategoriesFrame:GetName() then
+						table.remove(ACHIEVEMENTFRAME_SUBFRAMES, i);
+						tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.CategoriesFrame:GetName());
+					end
+				end
+			end
 		end
 	end
 	KrowiAF.CategoriesFrame:SetScript("OnEvent", KrowiAF.CategoriesFrame.OnEvent);
@@ -46,8 +50,8 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		KrowiAF.Trace("KrowiAF.CategoriesFrame.OnShow");
 
 		-- First handle the visibility of certain frames
-		AchievementFrameCategoriesContainer:Hide();
-		AchievementFrameCategoriesContainerScrollBar:Hide();
+		AchievementFrameCategoriesContainer:Hide(); -- Issue #2: Broken
+		AchievementFrameCategoriesContainerScrollBar:Hide(); -- Issue #2: Broken
 		AchievementFrameFilterDropDown:Hide();
 		AchievementFrameHeaderLeftDDLInset:Hide();
 		AchievementFrame.searchBox:Hide();

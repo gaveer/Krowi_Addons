@@ -19,7 +19,7 @@ function KrowiAF.AchievementFrameTabButton:New(text)
         self:OnClick(selfFunc:GetID());
         PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
     end);
-    tab:SetScript("OnEvent", function(self, event, ...)
+    tab:SetScript("OnEvent", function(selfFunc, event, ...) -- Issue #1: Fix
         KrowiAF.AchievementFrameTab_OnEvent(tab, tabID, self, event, ...);
     end);
     tab:RegisterEvent("ADDON_LOADED");
@@ -34,7 +34,7 @@ function KrowiAF.AchievementFrameTabButton:New(text)
         tab:SetPoint("LEFT", "AchievementFrameTab" .. tabID - 1, "RIGHT", -5, 0); -- Can break if other addon adds tab with "bad" name
     end);
 
-    hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- See FIX001
+    hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Broken
         self:AchievementFrame_UpdateTabs(tab, tabID, clickedTab);
     end);
 
@@ -43,20 +43,15 @@ end
 
 function KrowiAF.AchievementFrameTab_OnEvent(thisTab, thisTabID, self, event, ...)
     if event == "ADDON_LOADED" then
-        if not KrowiAF.Compatibility.Overachiever_Tabs then -- Set to false if already false, nil or not true
-            KrowiAF.Compatibility.Overachiever_Tabs = false;
-        end
-
 		local addonName = ...;
-		if addonName and addonName == "Overachiever_Tabs" then
-            KrowiAF.Compatibility.Overachiever_Tabs = true;
-            -- FIX001 - Fix broken hook due to Overachiever_Tabs overwriting this hook AFTER our load
-            hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab)
-                KrowiAF.AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab);
-            end);
-		end
-
         KrowiAF.Trace("KrowiAF.AchievementFrameTab_OnEvent - " .. event .. " - " .. addonName);
+
+		if addonName and addonName == "Overachiever_Tabs" then
+            hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Fix
+                self:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab);
+            end);
+            KrowiAF.Debug("Overachiever_Tabs compatibility enabled");
+		end
 	end
 end
 
@@ -99,4 +94,4 @@ function KrowiAF.AchievementFrameTabButton:AchievementFrame_UpdateTabs(thisTab, 
     end
 end
 
-KrowiAF.AchievementFrameTabButton:New(AF_TAB_BUTTON_TEXT);
+local tabTab = KrowiAF.AchievementFrameTabButton:New(AF_TAB_BUTTON_TEXT);

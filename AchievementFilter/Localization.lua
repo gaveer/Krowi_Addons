@@ -26,7 +26,6 @@ AF_TAB_BUTTON_TEXT = "Ach Filter";
 AF_CATEGORY_CLASSIC = "Classic";
 AF_CATEGORY_TBC = "The Burning Crusade";
 AF_CATEGORY_WOTLK = "Wrath of the Lich King";
-AF_CATEGORY_BFA = "Battle for Azeroth";
 AF_CATEGORY_SL = "Shadowlands";
 
 AF_CATEGORY_RAIDS = "Raids";
@@ -62,3 +61,11 @@ AF_CATEGORY_XPACK_LEGION_RAID_NH = "The Nighthold";
 AF_CATEGORY_XPACK_LEGION_RAID_TOV = "Trial of Valor";
 AF_CATEGORY_XPACK_LEGION_RAID_TOS = "Tomb of Sargeras";
 AF_CATEGORY_XPACK_LEGION_RAID_ANTORUS = "Antorus, the Burning Throne";
+
+-- Battle for Azeroth
+AF_CATEGORY_BFA = "Battle for Azeroth";
+AF_CATEGORY_XPACK_BFA_RAID_ULDIR = "Uldir";
+AF_CATEGORY_XPACK_BFA_RAID_BDA = "Battle of Dazar'alor";
+AF_CATEGORY_XPACK_BFA_RAID_COS = "Crucible of Storms";
+AF_CATEGORY_XPACK_BFA_RAID_EP = "Eternal Palace";
+AF_CATEGORY_XPACK_BFA_RAID_NYA = "Ny'alotha, the Waking City";

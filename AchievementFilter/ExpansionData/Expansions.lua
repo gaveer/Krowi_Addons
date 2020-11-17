@@ -1,14 +1,12 @@
 -- Expansions
-Xpack_Classic = KrowiAF.AchievementCategory:New(AF_CATEGORY_CLASSIC);
-tinsert(KrowiAF.Data, Xpack_Classic);
-Xpack_TBC = KrowiAF.AchievementCategory:New(AF_CATEGORY_TBC);
-tinsert(KrowiAF.Data, Xpack_TBC);
-Xpack_WotLK = KrowiAF.AchievementCategory:New(AF_CATEGORY_WOTLK);
-tinsert(KrowiAF.Data, Xpack_WotLK);
-Xpack_BfA = KrowiAF.AchievementCategory:New(AF_CATEGORY_BFA);
-tinsert(KrowiAF.Data, Xpack_BfA);
-Xpack_SL = KrowiAF.AchievementCategory:New(AF_CATEGORY_SL);
-tinsert(KrowiAF.Data, Xpack_SL);
+-- Xpack_Classic = KrowiAF.AchievementCategory:New(AF_CATEGORY_CLASSIC);
+-- tinsert(KrowiAF.Data, Xpack_Classic);
+-- Xpack_TBC = KrowiAF.AchievementCategory:New(AF_CATEGORY_TBC);
+-- tinsert(KrowiAF.Data, Xpack_TBC);
+-- Xpack_WotLK = KrowiAF.AchievementCategory:New(AF_CATEGORY_WOTLK);
+-- tinsert(KrowiAF.Data, Xpack_WotLK);
+-- Xpack_SL = KrowiAF.AchievementCategory:New(AF_CATEGORY_SL);
+-- tinsert(KrowiAF.Data, Xpack_SL);
 
 function KrowiAF.ConvertToBlizzardAchievementCategory(category)
     local id = category.ID;

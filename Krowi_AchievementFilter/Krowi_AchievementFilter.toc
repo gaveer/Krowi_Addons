@@ -1,0 +1,28 @@
+## Interface: 90001
+## Title: Krowi's Achievement Filter
+## Version: Beta 0.1
+## Author: Krowi
+## SavedVariables: AFSetting
+## Notes: Filters your achievements.
+
+embeds.xml
+
+Addon.lua
+
+Localization.lua
+Debug.lua
+Options.lua
+Icon.lua
+
+Objects/AchievementCategory.lua
+Objects/AchievementType.lua
+Objects/Achievement.lua
+
+ExpansionData/Cataclysm.lua
+ExpansionData/Mists of Pandaria.lua
+ExpansionData/Warlords of Draenor.lua
+ExpansionData/Legion.lua
+ExpansionData/Battle for Azeroth.lua
+ExpansionData/Expansions.lua
+
+Krowi_AchievementFilter.lua

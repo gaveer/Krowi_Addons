@@ -20,7 +20,7 @@ AF_OPTIONS_TRACE_INFO_TOGGLE_TOOLTIP = "Enable / disable trace info";
 AF_ICON_TOOLTIP_LINE2 = "Right click for Options.";
 
 -- Tab
-AF_TAB_BUTTON_TEXT = "Ach Filter";
+AF_TAB_BUTTON_TEXT = "Achievement Filter";
 
 -- Expansions
 AF_CATEGORY_CLASSIC = "Classic";

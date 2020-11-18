@@ -1,7 +1,7 @@
 -- Don't change!
 AF_NAME = "Krowi's Achievement Filter";
 AF_NAME_COLORED = "|cFF1D92C2" .. AF_NAME .. "|r";
-AF_VERSION = "90001";
+AF_VERSION = "90002";
 AF_BUILD = "Beta 0.1";
 
 -- [[ Localization ]] --
@@ -26,7 +26,6 @@ AF_TAB_BUTTON_TEXT = "Achievement Filter";
 AF_CATEGORY_CLASSIC = "Classic";
 AF_CATEGORY_TBC = "The Burning Crusade";
 AF_CATEGORY_WOTLK = "Wrath of the Lich King";
-AF_CATEGORY_SL = "Shadowlands";
 
 AF_CATEGORY_RAIDS = "Raids";
 AF_CATEGORY_DUNGEONS = "Dungeons";
@@ -69,3 +68,7 @@ AF_CATEGORY_XPACK_BFA_RAID_BDA = "Battle of Dazar'alor";
 AF_CATEGORY_XPACK_BFA_RAID_COS = "Crucible of Storms";
 AF_CATEGORY_XPACK_BFA_RAID_EP = "Eternal Palace";
 AF_CATEGORY_XPACK_BFA_RAID_NYA = "Ny'alotha, the Waking City";
+
+-- Shadowlands
+AF_CATEGORY_SL = "Shadowlands";
+AF_CATEGORY_XPACK_SL_RAID_CN = "Castle Nathria";

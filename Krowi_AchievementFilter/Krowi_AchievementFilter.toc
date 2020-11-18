@@ -1,4 +1,4 @@
-## Interface: 90001
+## Interface: 90002
 ## Title: Krowi's Achievement Filter
 ## Version: Beta 0.1
 ## Author: Krowi
@@ -23,6 +23,7 @@ ExpansionData/Mists of Pandaria.lua
 ExpansionData/Warlords of Draenor.lua
 ExpansionData/Legion.lua
 ExpansionData/Battle for Azeroth.lua
+ExpansionData/Shadowlands.lua
 ExpansionData/Expansions.lua
 
 Krowi_AchievementFilter.lua

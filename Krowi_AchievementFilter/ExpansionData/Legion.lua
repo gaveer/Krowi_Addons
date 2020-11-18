@@ -23,7 +23,7 @@ tinsert(KrowiAF.Data, Xpack_Legion);
 
         -- 7.1
             Xpack_Legion_Raid_ToV = Xpack_Legion_Raids:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_XPACK_LEGION_RAID_TOV));
-            Xpack_Legion_Raid_ToV:AddAchievementIDs({11337, 11386, 11377}); -- No Glory available for ToV
+            Xpack_Legion_Raid_ToV:AddAchievementIDs({11337, 11386, 11377}); -- No Glory available
             Xpack_Legion_Raid_ToV:AddAchievementIDs({11396, 11397, 11398}); -- Defeat X on Mythic Difficulty
             Xpack_Legion_Raid_ToV:AddAchievementIDs({11394, 11426}); -- Defeat the bosses in X
             Xpack_Legion_Raid_ToV:AddAchievement(11387, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)

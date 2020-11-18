@@ -65,7 +65,7 @@ AF_CATEGORY_XPACK_LEGION_RAID_ANTORUS = "Antorus, the Burning Throne";
 AF_CATEGORY_BFA = "Battle for Azeroth";
 AF_CATEGORY_XPACK_BFA_RAID_ULDIR = "Uldir";
 AF_CATEGORY_XPACK_BFA_RAID_BDA = "Battle of Dazar'alor";
-AF_CATEGORY_XPACK_BFA_RAID_COS = "Crucible of Storms";
+-- AF_CATEGORY_XPACK_BFA_RAID_COS = "Crucible of Storms";
 AF_CATEGORY_XPACK_BFA_RAID_EP = "Eternal Palace";
 AF_CATEGORY_XPACK_BFA_RAID_NYA = "Ny'alotha, the Waking City";
 

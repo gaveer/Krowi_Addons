@@ -71,4 +71,4 @@ AF_CATEGORY_XPACK_BFA_RAID_NYA = "Ny'alotha, the Waking City";
 
 -- Shadowlands
 AF_CATEGORY_SL = "Shadowlands";
-AF_CATEGORY_XPACK_SL_RAID_CN = "Castle Nathria";
+-- AF_CATEGORY_XPACK_SL_RAID_CN = "Castle Nathria";

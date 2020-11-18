@@ -205,7 +205,12 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 			button.background:SetVertexColor(1, 1, 1);
 		end
 
-		button.label:SetText(category.Name);
+		if type(category.Name) == "number" then -- Little addition to be able to enter Achievement ID's as names for tabs - no localization needed for these as the game does it (I assume)
+			local _, name = GetAchievementInfo(category.Name);
+			button.label:SetText(name);
+		else
+			button.label:SetText(category.Name);
+		end
 		button.Category = category;
 
 		-- For the tooltip

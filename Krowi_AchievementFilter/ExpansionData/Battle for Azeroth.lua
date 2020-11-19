@@ -112,5 +112,5 @@ tinsert(KrowiAF.Data, expansion);
         -- 8.2
             dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1178)); -- Operation: Mechagon
             dungeon:AddAchievementIDs({13706, 13698, 13723, 13545, 13624}); -- No Glory available
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
-            raid:AddAchievement(13789, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
+            -- dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon:AddAchievement(13789, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)

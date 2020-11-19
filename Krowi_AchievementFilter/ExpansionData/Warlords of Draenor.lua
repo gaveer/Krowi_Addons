@@ -34,9 +34,37 @@ local expansion, raids, raid, dungeons, dungeon;
 
     -- Dungeons
         dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
-        dungeons:AddAchievementIDs({}); -- Overarching achievements
+        dungeons:AddAchievementIDs({9396}); -- Overarching achievements
 
         -- 6.0
             dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
-            dungeon:AddAchievementIDs({}); -- Glory of the 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
+            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
+            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
+            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
+            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
+            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
+            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
+            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
+            dungeon:AddAchievementIDs({}); -- Glory of the Draenor Hero
             dungeon:AddAchievementIDs({}); -- Defeat the bosses in X

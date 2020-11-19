@@ -23,9 +23,9 @@ AF_ICON_TOOLTIP_LINE2 = "Right click for Options.";
 AF_TAB_BUTTON_TEXT = "Achievement Filter";
 
 -- Expansions
-AF_CATEGORY_CLASSIC = "Classic";
-AF_CATEGORY_TBC = "The Burning Crusade";
-AF_CATEGORY_WOTLK = "Wrath of the Lich King";
+-- AF_CATEGORY_CLASSIC = "Classic";
+-- AF_CATEGORY_TBC = "The Burning Crusade";
+-- AF_CATEGORY_WOTLK = "Wrath of the Lich King";
 
 -- AF_CATEGORY_RAIDS = "Raids";
 -- AF_CATEGORY_DUNGEONS = "Dungeons";

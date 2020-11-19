@@ -34,7 +34,7 @@ local expansion, raids, raid, dungeons, dungeon;
             dungeon:AddAchievementIDs({14371, 14412, 14413}); -- Defeat the bosses in X
             
             dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1185)); -- Halls of Atonement
-            dungeon:AddAchievementIDs({14284, 14352}); -- Glory of the Shadowlands Hero
+            dungeon:AddAchievementIDs({14567, 14284, 14352}); -- Glory of the Shadowlands Hero
             dungeon:AddAchievementIDs({14370, 14410, 14411}); -- Defeat the bosses in X
             
             dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1186)); -- Spires of Ascension

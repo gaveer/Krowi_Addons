@@ -2,7 +2,7 @@
 ## Title: Krowi's Achievement Filter
 ## Version: Beta 0.1
 ## Author: Krowi
-## SavedVariables: AFSetting
+## SavedVariables: AFSetting, TEST
 ## Notes: Filters your achievements.
 
 embeds.xml

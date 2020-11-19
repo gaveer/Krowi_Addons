@@ -2,7 +2,7 @@
 AF_NAME = "Krowi's Achievement Filter";
 AF_NAME_COLORED = "|cFF1D92C2" .. AF_NAME .. "|r";
 AF_VERSION = "90002";
-AF_BUILD = "Beta 0.1";
+AF_BUILD = "Beta 0.2";
 
 -- [[ Localization ]] --
 
@@ -27,48 +27,48 @@ AF_CATEGORY_CLASSIC = "Classic";
 AF_CATEGORY_TBC = "The Burning Crusade";
 AF_CATEGORY_WOTLK = "Wrath of the Lich King";
 
-AF_CATEGORY_RAIDS = "Raids";
-AF_CATEGORY_DUNGEONS = "Dungeons";
+-- AF_CATEGORY_RAIDS = "Raids";
+-- AF_CATEGORY_DUNGEONS = "Dungeons";
 
 -- Cataclysm
-AF_CATEGORY_CATA = "Cataclysm";
-AF_CATEGORY_XPACK_CATA_RAID_BH = "Baradin Hold";
-AF_CATEGORY_XPACK_CATA_RAID_BWD = "Blackwing Descent";
-AF_CATEGORY_XPACK_CATA_RAID_BOT = "Bastion of Twilight";
-AF_CATEGORY_XPACK_CATA_RAID_TOTFW = "Throne of the Four Winds";
-AF_CATEGORY_XPACK_CATA_RAID_FL = "Firelands";
-AF_CATEGORY_XPACK_CATA_RAID_DS = "Dragon Soul";
+-- AF_CATEGORY_CATA = "Cataclysm";
+-- AF_CATEGORY_XPACK_CATA_RAID_BH = "Baradin Hold";
+-- AF_CATEGORY_XPACK_CATA_RAID_BWD = "Blackwing Descent";
+-- AF_CATEGORY_XPACK_CATA_RAID_BOT = "Bastion of Twilight";
+-- AF_CATEGORY_XPACK_CATA_RAID_TOTFW = "Throne of the Four Winds";
+-- AF_CATEGORY_XPACK_CATA_RAID_FL = "Firelands";
+-- AF_CATEGORY_XPACK_CATA_RAID_DS = "Dragon Soul";
 
 -- Mists of Pandaria
-AF_CATEGORY_MOP = "Mists of Pandaria";
-AF_CATEGORY_XPACK_MOP_RAID_MSV = "Mogu'shan Vaults";
-AF_CATEGORY_XPACK_MOP_RAID_HoF = "Heart of Fear";
-AF_CATEGORY_XPACK_MOP_RAID_ToES = "Terrace of Endless Spring";
-AF_CATEGORY_XPACK_MOP_RAID_ToT = "Throne of Thunder";
-AF_CATEGORY_XPACK_MOP_RAID_SoO = "Siege of Orgrimmar";
+-- AF_CATEGORY_MOP = "Mists of Pandaria";
+-- AF_CATEGORY_XPACK_MOP_RAID_MSV = "Mogu'shan Vaults";
+-- AF_CATEGORY_XPACK_MOP_RAID_HoF = "Heart of Fear";
+-- AF_CATEGORY_XPACK_MOP_RAID_ToES = "Terrace of Endless Spring";
+-- AF_CATEGORY_XPACK_MOP_RAID_ToT = "Throne of Thunder";
+-- AF_CATEGORY_XPACK_MOP_RAID_SoO = "Siege of Orgrimmar";
 
 -- Warlords of Draenor
-AF_CATEGORY_WOD = "Warlords of Draenor";
-AF_CATEGORY_XPACK_WOD_RAID_HM = "Highmaul";
-AF_CATEGORY_XPACK_WOD_RAID_BRF = "Blackrock Foundry";
-AF_CATEGORY_XPACK_WOD_RAID_HFC = "Hellfire Citadel";
+-- AF_CATEGORY_WOD = "Warlords of Draenor";
+-- AF_CATEGORY_XPACK_WOD_RAID_HM = "Highmaul";
+-- AF_CATEGORY_XPACK_WOD_RAID_BRF = "Blackrock Foundry";
+-- AF_CATEGORY_XPACK_WOD_RAID_HFC = "Hellfire Citadel";
 
 -- Legion
-AF_CATEGORY_LEGION = "Legion";
-AF_CATEGORY_XPACK_LEGION_RAID_EN = "Emerald Nightmare";
-AF_CATEGORY_XPACK_LEGION_RAID_NH = "The Nighthold";
-AF_CATEGORY_XPACK_LEGION_RAID_TOV = "Trial of Valor";
-AF_CATEGORY_XPACK_LEGION_RAID_TOS = "Tomb of Sargeras";
-AF_CATEGORY_XPACK_LEGION_RAID_ANTORUS = "Antorus, the Burning Throne";
+-- AF_CATEGORY_LEGION = "Legion";
+-- AF_CATEGORY_XPACK_LEGION_RAID_EN = "Emerald Nightmare";
+-- AF_CATEGORY_XPACK_LEGION_RAID_NH = "The Nighthold";
+-- AF_CATEGORY_XPACK_LEGION_RAID_TOV = "Trial of Valor";
+-- AF_CATEGORY_XPACK_LEGION_RAID_TOS = "Tomb of Sargeras";
+-- AF_CATEGORY_XPACK_LEGION_RAID_ANTORUS = "Antorus, the Burning Throne";
 
 -- Battle for Azeroth
-AF_CATEGORY_BFA = "Battle for Azeroth";
-AF_CATEGORY_XPACK_BFA_RAID_ULDIR = "Uldir";
-AF_CATEGORY_XPACK_BFA_RAID_BDA = "Battle of Dazar'alor";
+-- AF_CATEGORY_BFA = "Battle for Azeroth";
+-- AF_CATEGORY_XPACK_BFA_RAID_ULDIR = "Uldir";
+-- AF_CATEGORY_XPACK_BFA_RAID_BDA = "Battle of Dazar'alor";
 -- AF_CATEGORY_XPACK_BFA_RAID_COS = "Crucible of Storms";
-AF_CATEGORY_XPACK_BFA_RAID_EP = "Eternal Palace";
-AF_CATEGORY_XPACK_BFA_RAID_NYA = "Ny'alotha, the Waking City";
+-- AF_CATEGORY_XPACK_BFA_RAID_EP = "Eternal Palace";
+-- AF_CATEGORY_XPACK_BFA_RAID_NYA = "Ny'alotha, the Waking City";
 
 -- Shadowlands
-AF_CATEGORY_SL = "Shadowlands";
+-- AF_CATEGORY_SL = "Shadowlands";
 -- AF_CATEGORY_XPACK_SL_RAID_CN = "Castle Nathria";

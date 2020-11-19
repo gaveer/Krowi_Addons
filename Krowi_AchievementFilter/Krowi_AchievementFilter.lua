@@ -13,8 +13,38 @@
 --     noSummary = true;
 -- };
 
+-- TEST={};
+-- KrowiAF.counter = 0;
+-- KrowiAF.interval = 100;
+-- KrowiAF.step = 0;
+-- KrowiAF.max = 20000;
+-- -- Globals Section
+-- MyAddon_UpdateInterval = 1.0; -- How often the OnUpdate code will run (in seconds)
+
+-- -- Functions Section
+-- function MyAddon_OnUpdate(self, elapsed)
+--   self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed; 	
+
+--   if (self.TimeSinceLastUpdate > MyAddon_UpdateInterval) then
+  
+--   if KrowiAF.step < KrowiAF.max then
+--     KrowiAF.counter = KrowiAF.step;
+--     KrowiAF.step = KrowiAF.step + KrowiAF.interval;
+--    for i = KrowiAF.counter, KrowiAF.step do
+--        local id, name = GetAchievementInfo(i);
+--        print("Achievement " .. tostring(id) .. " - " .. tostring(name));
+--        tinsert(TEST, {id, name});
+--    end
+-- end
+
+--     self.TimeSinceLastUpdate = 0;
+--   end
+-- end
+
 local loadHelper = CreateFrame("Frame", nil, nil);
+-- loadHelper.TimeSinceLastUpdate = 0;
 loadHelper:RegisterEvent("ADDON_LOADED");
+-- loadHelper:SetScript("OnUpdate", MyAddon_OnUpdate);
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then

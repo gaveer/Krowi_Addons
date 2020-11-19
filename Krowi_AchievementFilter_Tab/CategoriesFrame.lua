@@ -102,6 +102,12 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 
 		datum.Hidden = datum.Level ~= 0;
 		datum.Collapsed = true;
+		-- if type(datum.Name) == "number" then -- If name is a number = category ID
+		-- 	datum.Name = GetCategoryInfo(datum.Name);
+		-- elseif type(datum.Name) == "table" and getmetatable(datum.Name) == KrowiAF.Achievement then
+		-- 	local _, name = GetAchievementInfo(datum.Name.ID);
+		-- 	datum.Name = name;
+		-- end
 		tinsert(categories, datum);
 		for _, child in next, datum.Children do
 			ConvertToAchievementFrameCategory(child, categories);
@@ -205,12 +211,12 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 			button.background:SetVertexColor(1, 1, 1);
 		end
 
-		if type(category.Name) == "number" then -- Little addition to be able to enter Achievement ID's as names for tabs - no localization needed for these as the game does it (I assume)
-			local _, name = GetAchievementInfo(category.Name);
-			button.label:SetText(name);
-		else
-			button.label:SetText(category.Name);
-		end
+		-- if type(category.Name) == "number" then -- Little addition to be able to enter Achievement ID's as names for tabs - no localization needed for these as the game does it (I assume)
+		-- 	local _, name = GetAchievementInfo(category.Name);
+		-- 	button.label:SetText(name);
+		-- else
+		button.label:SetText(category.Name);
+		-- end
 		button.Category = category;
 
 		-- For the tooltip

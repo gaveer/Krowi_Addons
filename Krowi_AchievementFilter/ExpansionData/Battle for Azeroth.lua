@@ -1,15 +1,15 @@
 local expansion, raids, raid, dungeons, dungeon;
 
 -- Expansion
-expansion = KrowiAF.AchievementCategory:New(AF_CATEGORY_BFA);
+expansion = KrowiAF.AchievementCategory:New(GetCategoryInfo(15305)); -- Battle for Azeroth
 tinsert(KrowiAF.Data, expansion);
 
     -- Raids
-        raids = expansion:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_RAIDS));
+        raids = expansion:AddChild(KrowiAF.AchievementCategory:NewRaids());
         raids:AddAchievementIDs({12806, 13315, 13687, 14146}); -- Overarching achievements
 
         -- 8.0
-            raid = raids:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_XPACK_BFA_RAID_ULDIR)); -- Uldir
+            raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(1031)); -- Uldir
             raid:AddAchievementIDs({12937, 12938, 12828, 12823, 12772, 12830, 12836, 12551}); -- Glory of the Uldir Raider
             raid:AddAchievementIDs({12524, 12526, 12527, 12530, 12529, 12531, 12532, 12533}); -- Defeat X on Mythic Difficulty
             raid:AddAchievementIDs({12521, 12522, 12523}); -- Defeat the bosses in X
@@ -17,7 +17,7 @@ tinsert(KrowiAF.Data, expansion);
             raid:AddAchievement(12535, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
         -- 8.1
-            raid = raids:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_XPACK_BFA_RAID_BDA)); -- Battle of Dazar'alor
+            raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(1176)); -- Battle of Dazar'alor
             raid:AddAchievementIDs({13316}); -- Glory of the Dazar'alor Raider
             if KrowiAF.IsAlliance then
                 raid:AddAchievementIDs({13431, 13383}); -- Glory of the Dazar'alor Raider
@@ -40,7 +40,7 @@ tinsert(KrowiAF.Data, expansion);
             raid:AddAchievement(13322, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
             raid:AddAchievement(13323, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
-            raid = raids:AddChild(KrowiAF.AchievementCategory:New(13414)); -- Crucible of Storms
+            raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(1177)); -- Crucible of Storms
             raid:AddAchievementIDs({13501, 13506}); -- No Glory available
             raid:AddAchievementIDs({13416, 13417}); -- Defeat X on Mythic Difficulty
             raid:AddAchievementIDs({13414, 13415}); -- Defeat the bosses in X
@@ -48,7 +48,7 @@ tinsert(KrowiAF.Data, expansion);
             raid:AddAchievement(13419, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
         -- 8.2
-            raid = raids:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_XPACK_BFA_RAID_EP)); -- Eternal Palace
+            raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(1179)); -- Eternal Palace
             raid:AddAchievementIDs({13684, 13628, 13767, 13629, 13724, 13633, 13716, 13768}); -- Glory of the Eternal Raider
             raid:AddAchievementIDs({13726, 13728, 13727, 13729, 13730, 13731, 13732, 13733}); -- Defeat X on Mythic Difficulty
             raid:AddAchievementIDs({13718, 13719, 13725}); -- Defeat the bosses in X
@@ -56,60 +56,61 @@ tinsert(KrowiAF.Data, expansion);
             raid:AddAchievement(13785, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
         -- 8.3
-            raid = raids:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_XPACK_BFA_RAID_NYA)); -- Ny'alotha, the Waking City
+            raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(1180)); -- Ny'alotha, the Waking City
             raid:AddAchievementIDs({14019, 14008, 14037, 14024, 14139, 14023, 13999, 13990, 14026, 14038, 14147, 14148}); -- Glory of the Ny'alotha Raider
             raid:AddAchievementIDs({14041, 14043, 14044, 14045, 14050, 14046, 14051, 14048, 14049, 14052, 14054, 14055}); -- Defeat X on Mythic Difficulty
             raid:AddAchievementIDs({}); -- Defeat the bosses in X
             raid:AddAchievement(14068, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
             raid:AddAchievement(14069, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
-            
     -- Dungeons
-        dungeons = expansion:AddChild(KrowiAF.AchievementCategory:New(AF_CATEGORY_DUNGEONS));
-        dungeons:AddAchievementIDs({12812, 12807, 13075}); -- Overarching achievements
+        dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
+        dungeons:AddAchievementIDs({12812, 12807, 13075, 12489}); -- Overarching achievements
+        -- Not sure to put 12489 here on in both dungeons, put it here for now
 
         -- 8.0
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Freehold
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1001)); -- Freehold
+            dungeon:AddAchievementIDs({12550, 12548, 12998}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12831, 12832, 12833}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Waycrest Manor
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1021)); -- Waycrest Manor
+            dungeon:AddAchievementIDs({12495, 12490}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12483, 12484, 12488}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Shrine of the Storm
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1036)); -- Shrine of the Storm
+            dungeon:AddAchievementIDs({12600, 12601, 12602}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12835, 12837, 12838}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Atal'Dazar
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(968)); -- Atal'Dazar
+            dungeon:AddAchievementIDs({12270, 12272, 12273}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12824, 12825, 12826}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Underrot
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1022)); -- Underrot
+            dungeon:AddAchievementIDs({12498, 12549, 12499}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12500, 12501, 12502}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Temple of Sethraliss
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1030)); -- Temple of Sethraliss
+            dungeon:AddAchievementIDs({12507, 12503, 12508}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12504, 12505, 12506}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Tol Dagor
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1002)); -- Tol Dagor
+            dungeon:AddAchievementIDs({12457, 12462}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12840, 12841, 12842}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- The MOTHERLODE!!
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1012)); -- The MOTHERLODE!!
+            dungeon:AddAchievementIDs({12855, 12854}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12844, 12845, 12846}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Siege of Boralus
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1023)); -- Siege of Boralus
+            dungeon:AddAchievementIDs({12727, 12726}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12847}); -- Defeat the bosses in X
 
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- King's Rest
-            dungeon:AddAchievementIDs({}); -- Glory of the Wartorn Hero
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1041)); -- Kings' Rest
+            dungeon:AddAchievementIDs({12722, 12721, 12723}); -- Glory of the Wartorn Hero
+            dungeon:AddAchievementIDs({12848}); -- Defeat the bosses in X
 
         -- 8.2
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:New()); -- Operation: Mechagon
-            dungeon:AddAchievementIDs({}); -- No Glory available
+            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1178)); -- Operation: Mechagon
+            dungeon:AddAchievementIDs({13706, 13698, 13723, 13545, 13624}); -- No Glory available
             dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+            raid:AddAchievement(13789, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)

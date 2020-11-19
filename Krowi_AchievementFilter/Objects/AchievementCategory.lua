@@ -14,6 +14,18 @@ function KrowiAF.AchievementCategory:New(name)
     return self;
 end
 
+function KrowiAF.AchievementCategory:NewRaids()
+    return KrowiAF.AchievementCategory:New(GetCategoryInfo(15271)); -- Raids
+end
+
+function KrowiAF.AchievementCategory:NewDungeons()
+    return KrowiAF.AchievementCategory:New(GetCategoryInfo(15272)); -- Dungeons
+end
+
+function KrowiAF.AchievementCategory:NewEJ(id)
+    return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id));
+end
+
 function KrowiAF.AchievementCategory:AddChild(child)
     tinsert(self.Children, child);
     child.Parent = self;

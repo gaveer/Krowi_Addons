@@ -18,82 +18,87 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		
 		if event == "ADDON_LOADED" then
 			local addonName = ...;
-			if addonName and addonName ~= "Krowi_AchievementFilter_Tab" then
-				return;
-			end
-
 			KrowiAF.Trace("KrowiAF.AchievementsFrame.OnEvent - " .. event .. " - " .. addonName);
+			
+			if addonName and addonName == "Krowi_AchievementFilter_Tab" then
 
-			-- [[ OnLoad ]] --
-				tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.AchievementsFrame:GetName());
-				self:Hide();
+				-- [[ OnLoad ]] --
+					tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.AchievementsFrame:GetName());
+					self:Hide();
 
-				KrowiAF.AchievementsFrame.Container.ScrollBar.Show = function(self)
-					KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 504, 8);
-				end;
+					KrowiAF.AchievementsFrame.Container.ScrollBar.Show = function(self)
+						KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 504, 8);
+					end;
 
-				KrowiAF.AchievementsFrame.Container.ScrollBar.Hide = function(self)
-					KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 530, 8);
-				end;
-				
-				KrowiAF.AchievementsFrame.Container.ScrollBar.trackBG:Show();
-				KrowiAF.AchievementsFrame.Container.update = KrowiAF.AchievementsFrame.Update;
-				HybridScrollFrame_CreateButtons(KrowiAF.AchievementsFrame.Container, "KrowiAF_AchievementTemplate", 0, -2);
-		
-			-- [[ OnEvent ]] --
-				self:RegisterEvent("ACHIEVEMENT_EARNED");
-				self:RegisterEvent("CRITERIA_UPDATE");
-				self:RegisterEvent("TRACKED_ACHIEVEMENT_LIST_CHANGED");
-				self:RegisterEvent("RECEIVED_ACHIEVEMENT_MEMBER_LIST");
-				self:RegisterEvent("ACHIEVEMENT_SEARCH_UPDATED");
+					KrowiAF.AchievementsFrame.Container.ScrollBar.Hide = function(self)
+						KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 530, 8);
+					end;
+					
+					KrowiAF.AchievementsFrame.Container.ScrollBar.trackBG:Show();
+					KrowiAF.AchievementsFrame.Container.update = KrowiAF.AchievementsFrame.Update;
+					HybridScrollFrame_CreateButtons(KrowiAF.AchievementsFrame.Container, "KrowiAF_AchievementTemplate", 0, -2);
+					
+					if Overachiever then
+						Overachiever.UI_HookAchButtons(KrowiAF.AchievementsFrame.Container.buttons, KrowiAF.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
+					end
+			
+				-- [[ OnEvent ]] --
+					self:RegisterEvent("ACHIEVEMENT_EARNED");
+					self:RegisterEvent("CRITERIA_UPDATE");
+					self:RegisterEvent("TRACKED_ACHIEVEMENT_LIST_CHANGED");
+					self:RegisterEvent("RECEIVED_ACHIEVEMENT_MEMBER_LIST");
+					self:RegisterEvent("ACHIEVEMENT_SEARCH_UPDATED");
 
-				-- updateTrackedAchievements(GetTrackedAchievements()); -- NOK - add back later
-				
-			self:UnregisterEvent(event);
-				-- elseif event == "ACHIEVEMENT_EARNED" then -- Not sure if this is going to work ...
-				-- 	local achievementID = ...;
-				-- 	KrowiAF.AchievementFrameCategories_GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
-				-- 	KrowiAF.CategoriesFrame.Update();
-				-- 	KrowiAF.CategoriesFrame.UpdateTooltip();
-				-- 	-- This has to happen before AchievementFrameAchievements_ForceUpdate() in order to achieve the behavior we want, since it clears the selection for progressive achievements.
-				-- 	local selection = KrowiAF.SelectedAchievement;
-				-- 	KrowiAF.AchievementFrameAchievements_ForceUpdate();
-				-- 	if KrowiAF_AchievementFrameAchievementsContainer:IsVisible() and selection.ID == achievementID then
-				-- 		KrowiAF.AchievementFrame_SelectAchievement(selection, true);
-				-- 	end
-				-- 	AchievementFrameHeaderPoints:SetText(BreakUpLargeNumbers(GetTotalAchievementPoints(KrowiAF.InGuildView())));
-				-- elseif event == "CRITERIA_UPDATE" then -- Not sure if this is going to work ...
-				-- 	if KrowiAF.SelectedAchievement then
-				-- 		local id = KrowiAF_AchievementFrameAchievementsObjectives.ID;
-				-- 		local button = KrowiAF_AchievementFrameAchievementsObjectives:GetParent();
-				-- 		KrowiAF_AchievementFrameAchievementsObjectives.ID = nil;
-				-- 		if self:IsVisible() then
-				-- 			KrowiAF.AchievementButton_DisplayObjectives(button, id, button.Achievement.Completed);
-				-- 			KrowiAF.AchievementFrameAchievements_Update();
-				-- 		end
-				-- 	else
-				-- 		KrowiAF_AchievementFrameAchievementsObjectives.ID = nil; -- Force redraw
-				--     end
-				-- elseif event == "TRACKED_ACHIEVEMENT_LIST_CHANGED" then -- Not sure if this is going to work ...
-				-- 	for k, _ in next, KrowiAF.TrackedAchievements do
-				-- 		KrowiAF.TrackedAchievements[k] = nil;
-				-- 	end
+					-- updateTrackedAchievements(GetTrackedAchievements()); -- NOK - add back later
+					
+				-- self:UnregisterEvent(event);
+					-- elseif event == "ACHIEVEMENT_EARNED" then -- Not sure if this is going to work ...
+					-- 	local achievementID = ...;
+					-- 	KrowiAF.AchievementFrameCategories_GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
+					-- 	KrowiAF.CategoriesFrame.Update();
+					-- 	KrowiAF.CategoriesFrame.UpdateTooltip();
+					-- 	-- This has to happen before AchievementFrameAchievements_ForceUpdate() in order to achieve the behavior we want, since it clears the selection for progressive achievements.
+					-- 	local selection = KrowiAF.SelectedAchievement;
+					-- 	KrowiAF.AchievementFrameAchievements_ForceUpdate();
+					-- 	if KrowiAF_AchievementFrameAchievementsContainer:IsVisible() and selection.ID == achievementID then
+					-- 		KrowiAF.AchievementFrame_SelectAchievement(selection, true);
+					-- 	end
+					-- 	AchievementFrameHeaderPoints:SetText(BreakUpLargeNumbers(GetTotalAchievementPoints(KrowiAF.InGuildView())));
+					-- elseif event == "CRITERIA_UPDATE" then -- Not sure if this is going to work ...
+					-- 	if KrowiAF.SelectedAchievement then
+					-- 		local id = KrowiAF_AchievementFrameAchievementsObjectives.ID;
+					-- 		local button = KrowiAF_AchievementFrameAchievementsObjectives:GetParent();
+					-- 		KrowiAF_AchievementFrameAchievementsObjectives.ID = nil;
+					-- 		if self:IsVisible() then
+					-- 			KrowiAF.AchievementButton_DisplayObjectives(button, id, button.Achievement.Completed);
+					-- 			KrowiAF.AchievementFrameAchievements_Update();
+					-- 		end
+					-- 	else
+					-- 		KrowiAF_AchievementFrameAchievementsObjectives.ID = nil; -- Force redraw
+					--     end
+					-- elseif event == "TRACKED_ACHIEVEMENT_LIST_CHANGED" then -- Not sure if this is going to work ...
+					-- 	for k, _ in next, KrowiAF.TrackedAchievements do
+					-- 		KrowiAF.TrackedAchievements[k] = nil;
+					-- 	end
 
-				--     updateTrackedAchievements(GetTrackedAchievements());
-				-- elseif event == "RECEIVED_ACHIEVEMENT_MEMBER_LIST" then -- Not sure if this is going to work ...
-				-- 	local achievementID = ...;
-				-- 	-- check if we initiated the request from a meta criteria and we're still over it
-				-- 	if KrowiAF.GuildMemberRequestFrame and KrowiAF.GuildMemberRequestFrame.ID == achievementID then
-				-- 		-- update the tooltip
-				-- 		local func = KrowiAF.GuildMemberRequestFrame:GetScript("OnEnter");
-				-- 		if func then
-				-- 			func(KrowiAF.GuildMemberRequestFrame);
-				-- 		end
-				--     end
-				-- elseif event == "ACHIEVEMENT_SEARCH_UPDATED" then -- Not sure if this is going to work ...
-				--     -- @TODO - implement later
-				-- 	-- AchievementFrame.searchBox.fullSearchFinished = true;
-				-- 	-- AchievementFrame_UpdateSearch(self);
+					--     updateTrackedAchievements(GetTrackedAchievements());
+					-- elseif event == "RECEIVED_ACHIEVEMENT_MEMBER_LIST" then -- Not sure if this is going to work ...
+					-- 	local achievementID = ...;
+					-- 	-- check if we initiated the request from a meta criteria and we're still over it
+					-- 	if KrowiAF.GuildMemberRequestFrame and KrowiAF.GuildMemberRequestFrame.ID == achievementID then
+					-- 		-- update the tooltip
+					-- 		local func = KrowiAF.GuildMemberRequestFrame:GetScript("OnEnter");
+					-- 		if func then
+					-- 			func(KrowiAF.GuildMemberRequestFrame);
+					-- 		end
+					--     end
+					-- elseif event == "ACHIEVEMENT_SEARCH_UPDATED" then -- Not sure if this is going to work ...
+					--     -- @TODO - implement later
+					-- 	-- AchievementFrame.searchBox.fullSearchFinished = true;
+					-- 	-- AchievementFrame_UpdateSearch(self);
+			elseif addonName and addonName == "Overachiever" then
+				Overachiever.UI_HookAchButtons(KrowiAF.AchievementsFrame.Container.buttons, KrowiAF.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
+			end
 		end
 	end
 	KrowiAF.AchievementsFrame:SetScript("OnEvent", KrowiAF.AchievementsFrame.OnEvent);

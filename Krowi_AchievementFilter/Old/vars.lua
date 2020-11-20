@@ -51,25 +51,6 @@ RAFdb.AchID[58] = {5289,5288,4847,5064} --Vortex Pinnacle
 RAFdb.AchID[59] = {6127,6070,6118} --Well of Eternity
 RAFdb.AchID[60] = {5761,5750,5858,5760,5769} --Zul'Aman
 RAFdb.AchID[61] = {5743,5762,5765,5744,5759,5768} --Zul'gurub
--- MoP Dungeons
-RAFdb.AchID[62] = {6479,6476,6945,10010,6759} --Gate of the Setting Sun
-RAFdb.AchID[63] = {6713,6478,6736,6755,6756} --Mogu'shan Palace
-RAFdb.AchID[64] = {6684,6427,6760} --Scarlet Halls
-RAFdb.AchID[65] = {6929,6928,6946,6761} --Scarlet Monastery
-RAFdb.AchID[66] = {6394,6396,6531,6715,6821,6762} --Scholomance
-RAFdb.AchID[67] = {6471,6477,6472,6469,6470} --Shado-Pan
-RAFdb.AchID[68] = {6485,6822,6688,10011,6763} --Siege of Niuzao Temple
-RAFdb.AchID[69] = {6420,6400,6089,6402,6457,6456} --Stormstout Brewery
-RAFdb.AchID[70] = {6475,6460,6671,6757,6758} --Temple of the Jade Serpent
--- WoD Dungeons
-RAFdb.AchID[71] = {9023,9551,9552,9039,9049,10080}--Auchindoun
-RAFdb.AchID[72] = {8993,9005,9008,9037,9046,10076}--Bloodmaul Slag Mines
-RAFdb.AchID[73] = {9024,9007,9043,9052,10082}--Grimrail Depot
-RAFdb.AchID[74] = {9083,9081,9082,9038,9047,10079}--Iron Docks
-RAFdb.AchID[75] = {9018,9025,9026,9041,9054,10084}--Shadowmoon Burial Grounds
-RAFdb.AchID[76] = {9033,9034,9035,9036,8843,8844,10081}--Skyreach
-RAFdb.AchID[77] = {9017,9493,9223,9044,9053,10083}--The Everbloom
-RAFdb.AchID[78] = {9045,9058,9056,9057,9042,9055,10085}--UBRS
 
 RAFdb.MapID = {
 --Raids

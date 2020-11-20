@@ -38,7 +38,7 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 					KrowiAF.AchievementsFrame.Container.update = KrowiAF.AchievementsFrame.Update;
 					HybridScrollFrame_CreateButtons(KrowiAF.AchievementsFrame.Container, "KrowiAF_AchievementTemplate", 0, -2);
 					
-					hooksecurefunc("AchievementFrameAchievements_ForceUpdate", KrowiAF.AchievementsFrame.ForceUpdate); -- Issue #5: Fix
+					hooksecurefunc("AchievementFrameAchievements_ForceUpdate", KrowiAF.AchievementsFrame.ForceUpdate); -- Issue #3: Fix
 
 					if Overachiever then
 						Overachiever.UI_HookAchButtons(KrowiAF.AchievementsFrame.Container.buttons, KrowiAF.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
@@ -194,7 +194,7 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	function KrowiAF.AchievementsFrame.ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate  -- Issue #5: Fix
+	function KrowiAF.AchievementsFrame.ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate  -- Issue #3: Fix
 		KrowiAF.Trace("KrowiAF.AchievementsFrame.ForceUpdate");
 		
 		if KrowiAF.SelectedAchievement then

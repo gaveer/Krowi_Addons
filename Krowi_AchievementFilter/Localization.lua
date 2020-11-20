@@ -2,7 +2,7 @@
 AF_NAME = "Krowi's Achievement Filter";
 AF_NAME_COLORED = "|cFF1D92C2" .. AF_NAME .. "|r";
 AF_VERSION = "90002";
-AF_BUILD = "Beta 0.2";
+AF_BUILD = "0.2 Beta";
 
 -- [[ Localization ]] --
 

@@ -38,6 +38,8 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 					KrowiAF.AchievementsFrame.Container.update = KrowiAF.AchievementsFrame.Update;
 					HybridScrollFrame_CreateButtons(KrowiAF.AchievementsFrame.Container, "KrowiAF_AchievementTemplate", 0, -2);
 					
+					hooksecurefunc("AchievementFrameAchievements_ForceUpdate", KrowiAF.AchievementsFrame.ForceUpdate); -- Issue #5: Fix
+
 					if Overachiever then
 						Overachiever.UI_HookAchButtons(KrowiAF.AchievementsFrame.Container.buttons, KrowiAF.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
 					end
@@ -192,10 +194,26 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	-- function KrowiAF.AchievementFrameAchievements_ForceUpdate() -- Blizzard_AchievementUI.lua line 896
-	--     KrowiAF.Trace("KrowiAF.AchievementFrameAchievements_ForceUpdate");
-
-	-- end
+	function KrowiAF.AchievementsFrame.ForceUpdate() -- NOK -- AchievementFrameAchievements_ForceUpdate  -- Issue #5: Fix
+		KrowiAF.Trace("KrowiAF.AchievementsFrame.ForceUpdate");
+		
+		if KrowiAF.SelectedAchievement then
+			local nextID = GetNextAchievement(KrowiAF.SelectedAchievement.ID);
+			local id, _, _, completed = GetAchievementInfo(KrowiAF.SelectedAchievement.ID);
+			if nextID and completed then
+				KrowiAF.SelectedAchievement = nil;
+			end
+		end
+		AchievementFrameAchievementsObjectives:Hide();
+		AchievementFrameAchievementsObjectives.id = nil;
+	
+		local buttons = KrowiAF.AchievementsFrame.Container.buttons;
+		for i, button in next, buttons do
+			button.id = nil;
+		end
+	
+		KrowiAF.AchievementsFrame.Update();
+	end
 
 	function KrowiAF.AchievementsFrame.ClearSelection()  -- OK -- AchievementFrameAchievements_ClearSelection
 		KrowiAF.Trace("KrowiAF.AchievementsFrame.ClearSelection");

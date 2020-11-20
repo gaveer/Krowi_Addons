@@ -42,6 +42,7 @@ local UI_FontHeight;
 				end
 			end
 			if not handled and IsModifiedClick("QUESTWATCHTOGGLE") then
+				KrowiAF.Debug("AchievementButton_ToggleTracking from KrowiAF_AchievementButton_OnClick");
 				AchievementButton_ToggleTracking(self.id);
 			end
 			return;

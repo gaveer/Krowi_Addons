@@ -60,7 +60,7 @@ tinsert(KrowiAF.Data, expansion);
 
     -- Dungeons
         dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
-        dungeons:AddAchievementIDs({12812, 12807, 13075, 12489}); -- Overarching achievements
+        dungeons:AddAchievementIDs({12807, 12812, 13075, 12489}); -- Overarching achievements
         -- Not sure to put 12489 here on in both dungeons, put it here for now
 
         -- 8.0

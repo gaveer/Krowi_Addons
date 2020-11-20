@@ -18,7 +18,7 @@ local expansion, raids, raid, dungeons, dungeon;
 
     -- Dungeons
         dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
-        dungeons:AddAchievementIDs({14322}); -- Overarching achievements
+        dungeons:AddAchievementIDs({14418, 14322}); -- Overarching achievements
 
         -- 9.0
             dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1182)); -- The Necrotic Wake

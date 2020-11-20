@@ -36,21 +36,6 @@ else RAFdb.AchID[44] = {3802,3803,3804,3778,4297} end --Trial of the Champion
 RAFdb.AchID[45] = {1919,477,489} --Utgarde Keep
 RAFdb.AchID[46] = {2043,1873,2156,2157,488,499} --Utgarde Pinnacle
 RAFdb.AchID[47] = {2153,2041,1865,1816,483,494} --Violet Hold
--- Cataclysm Dungeons
-RAFdb.AchID[48] = {5281,5282,5283,5284,4833,5060} --Blackrock Caverns
-RAFdb.AchID[49] = {5366,5367,5368,5369,5370,5371,5083} -- Deadmines
-RAFdb.AchID[50] = {5995,6130,6117} --End Time
-RAFdb.AchID[51] = {5297,5298,4840,5062} --Grim Batol
-RAFdb.AchID[52] = {5293,5294,5296,5295,4841,5065} --Halls of Origination
-RAFdb.AchID[53] = {6132,6119} --Hour of Twilight
-RAFdb.AchID[54] = {5291,5290,5292,4848,5066} --Lost City of Tol'vir
-RAFdb.AchID[55] = {5503,5504,5505,5093}--Shadowfang Keep
-RAFdb.AchID[56] = {5287,4846,5063} --Stonecore
-RAFdb.AchID[57] = {5285,5286,4839,5061} --Throne of Tides
-RAFdb.AchID[58] = {5289,5288,4847,5064} --Vortex Pinnacle
-RAFdb.AchID[59] = {6127,6070,6118} --Well of Eternity
-RAFdb.AchID[60] = {5761,5750,5858,5760,5769} --Zul'Aman
-RAFdb.AchID[61] = {5743,5762,5765,5744,5759,5768} --Zul'gurub
 
 RAFdb.MapID = {
 --Raids

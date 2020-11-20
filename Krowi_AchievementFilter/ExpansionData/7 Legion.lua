@@ -44,7 +44,7 @@ tinsert(KrowiAF.Data, expansion);
 
     -- Dungeons
         dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
-        dungeons:AddAchievementIDs({11163}); -- Overarching achievements
+        dungeons:AddAchievementIDs({11164, 11163}); -- Overarching achievements
 
         -- 7.0
             dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(716)); -- Eye of Azshara

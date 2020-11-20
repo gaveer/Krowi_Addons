@@ -194,7 +194,7 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	function KrowiAF.AchievementsFrame.ForceUpdate() -- NOK -- AchievementFrameAchievements_ForceUpdate  -- Issue #5: Fix
+	function KrowiAF.AchievementsFrame.ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate  -- Issue #5: Fix
 		KrowiAF.Trace("KrowiAF.AchievementsFrame.ForceUpdate");
 		
 		if KrowiAF.SelectedAchievement then

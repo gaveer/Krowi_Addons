@@ -30,7 +30,7 @@ local expansion, raids, raid, dungeons, dungeon;
 
     -- Dungeons
         dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
-        dungeons:AddAchievementIDs({9396}); -- Overarching achievements
+        dungeons:AddAchievementIDs({9391, 9396}); -- Overarching achievements
 
         -- 6.0
             dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(385)); -- Bloodmaul Slag Mines

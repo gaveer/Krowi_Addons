@@ -55,11 +55,43 @@ tinsert(KrowiAF.Data, expansion);
             raid:AddAchievement(8400, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
             raid:AddAchievement(8401, KrowiAF.AchievementType.FoS, false);  -- Feats of Strength (Unobtainable)
 
-    -- Dungeons
-        dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
-        dungeons:AddAchievementIDs({}); -- Overarching achievements
+    -- -- Dungeons
+    --     dungeons = expansion:AddChild(KrowiAF.AchievementCategory:NewDungeons());
+    --     dungeons:AddAchievementIDs({6927}); -- Overarching achievements
 
-        -- 5.0
-            dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ()); -- 
-            dungeon:AddAchievementIDs({}); -- Glory of the 
-            dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+    --     -- 5.0
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(313)); -- Temple of the Jade Serpent
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(302)); -- Stormstout Brewery
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(321)); -- Mogu'shan Palace
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(312)); -- Shado-Pan Monastery
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(303)); -- Gate of the Setting Sun
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(324)); -- Siege of Niuzao Temple
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(311)); -- Scarlet Halls
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(316)); -- Scarlet Monastery
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
+
+    --         dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(246)); -- Scholomance
+    --         dungeon:AddAchievementIDs({}); -- Glory of the Pandaria Hero
+    --         dungeon:AddAchievementIDs({}); -- Defeat the bosses in X

@@ -18,12 +18,6 @@ Objects/AchievementCategory.lua
 Objects/AchievementType.lua
 Objects/Achievement.lua
 
-ExpansionData/Cataclysm.lua
-ExpansionData/Mists of Pandaria.lua
-ExpansionData/Warlords of Draenor.lua
-ExpansionData/Legion.lua
-ExpansionData/Battle for Azeroth.lua
-ExpansionData/Shadowlands.lua
-ExpansionData/Expansions.lua
+ExpansionData.xml
 
 Krowi_AchievementFilter.lua

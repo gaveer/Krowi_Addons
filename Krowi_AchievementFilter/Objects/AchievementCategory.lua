@@ -39,6 +39,12 @@ function KrowiAF.AchievementCategory:AddAchievementIDs(achievementIDs)
     end
 end
 
+function KrowiAF.AchievementCategory:AddAchievementFOSIDs(achievementIDs)
+    for k, id in pairs(achievementIDs) do
+        tinsert(self.Achievements, KrowiAF.Achievement:New(id, KrowiAF.AchievementType.FoS, false));
+    end
+end
+
 function KrowiAF.AchievementCategory:AddAchievements(achievements)
     for k, achievement in pairs(achievements) do
         tinsert(self.Achievements, achievement);

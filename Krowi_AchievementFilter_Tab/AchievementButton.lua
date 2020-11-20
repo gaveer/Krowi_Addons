@@ -27,8 +27,6 @@ local UI_FontHeight;
 	function KrowiAF_AchievementButton_OnClick (self, button, down, ignoreModifiers) -- OK -- AchievementButton_OnClick
 		KrowiAF.Trace("KrowiAF_AchievementButton_OnClick");
 		
-		KrowiAF.Debug("Achievement clicked");
-
 		if IsModifiedClick() and not ignoreModifiers then
 			local handled = nil;
 			if IsModifiedClick("CHATLINK") then

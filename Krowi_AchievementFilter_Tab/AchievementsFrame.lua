@@ -1,4 +1,4 @@
-KrowiAF.SelectedAchievement = {};
+KrowiAF.SelectedAchievement = nil; -- Issue #6: Fix
 -- KrowiAF.TrackedAchievements = {};
 -- KrowiAF.UI_AchievementsWidth = 0;
 -- KrowiAF.UI_AchievementsButtonWidthOffset = 8;

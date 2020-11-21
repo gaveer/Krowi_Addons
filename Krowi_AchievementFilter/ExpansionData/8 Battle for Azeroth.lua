@@ -2,6 +2,7 @@ local expansion, raids, raid, dungeons, dungeon;
 
 -- Expansion
 expansion = KrowiAF.AchievementCategory:New(GetCategoryInfo(15305)); -- Battle for Azeroth
+-- expansion:AddAchievementIDs({}); -- Overarching achievements
 tinsert(KrowiAF.Data, expansion);
 
     -- Raids

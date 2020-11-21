@@ -3,8 +3,6 @@
 -- tinsert(KrowiAF.Data, Xpack_Classic);
 -- Xpack_TBC = KrowiAF.AchievementCategory:New(AF_CATEGORY_TBC);
 -- tinsert(KrowiAF.Data, Xpack_TBC);
--- Xpack_WotLK = KrowiAF.AchievementCategory:New(AF_CATEGORY_WOTLK);
--- tinsert(KrowiAF.Data, Xpack_WotLK);
 
 function KrowiAF.ConvertToBlizzardAchievementCategory(category)
     local id = category.ID;

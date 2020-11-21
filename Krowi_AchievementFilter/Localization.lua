@@ -22,6 +22,10 @@ AF_ICON_TOOLTIP_LINE2 = "Right click for Options.";
 -- Tab
 AF_TAB_BUTTON_TEXT = "Achievement Filter";
 
+-- Categories
+AF_CATEGORY_10_PLAYER = "10 player";
+AF_CATEGORY_25_PLAYER = "25 player";
+
 -- Expansions
 -- AF_CATEGORY_CLASSIC = "Classic";
 -- AF_CATEGORY_TBC = "The Burning Crusade";

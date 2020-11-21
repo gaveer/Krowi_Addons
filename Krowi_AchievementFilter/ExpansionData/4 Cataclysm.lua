@@ -11,12 +11,7 @@ tinsert(KrowiAF.Data, expansion);
 
         -- 4.0
             raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(75)); -- Baradin Hold
-            raid:AddAchievementIDs({5416, 6045 --[[4.2]], 6108 --[[4.3]]}); -- Defeat X
-
-            raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(73)); -- Blackwing Descent
-            raid:AddAchievementIDs({5306, 5307, 5309, 5308, 5310, 4849}); -- Glory of the Cataclysm Raider
-            raid:AddAchievementIDs({5094, 5107, 5115, 5109, 5108, 5116}); -- Defeat X on Heroic Difficulty
-            raid:AddAchievementIDs({4842}); -- Defeat the bosses in X
+            raid:AddAchievementIDs({5416, 6045 --[[4.2]], 6108 --[[4.3]]}); -- Defeat the bosses in X
 
             raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(72)); -- The Bastion of Twilight
             raid:AddAchievementIDs({5300, 4852, 5311, 5312}); -- Glory of the Cataclysm Raider

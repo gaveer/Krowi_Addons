@@ -1,3 +1,8 @@
+print(GetDifficultyInfo(3));
+print(GetDifficultyInfo(4));
+print(GetDifficultyInfo(5));
+print(GetDifficultyInfo(6));
+
 -- function KrowiAF.InGuildView_Old()
 --     return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
 -- end

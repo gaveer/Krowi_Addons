@@ -8,7 +8,7 @@ tinsert(KrowiAF.Data, expansion);
     -- Raids
         raids = expansion:AddChild(KrowiAF.AchievementCategory:NewRaids());
         raids:AddAchievementIDs({2137, 2138, 12401, 4602, 4603}); -- Overarching achievements
-        raids:AddAchievementFOSIDs({2957, 2958}); -- Overarching achievements
+        raids:AddAchievementFOSIDs({2957, 2958}); -- Feats of Strength (Unobtainable)
 
         -- 3.0
             raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(753)); -- Vault of Archavon

@@ -1,12 +1,12 @@
 function KrowiAF.Debug(value)
     if AFSetting and AFSetting.EnableDebugInfo then
-        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME_COLORED .. " " .. tostring(value));
+        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME .. " " .. tostring(value));
     end
 end
 
 function KrowiAF.Trace(value)
     if AFSetting and AFSetting.EnableTraceInfo then
-        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME_COLORED .. " " .. tostring(value));
+        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME .. " " .. tostring(value));
     end
 end
 

@@ -17,8 +17,10 @@ KrowiAF.AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("Krowi
 	    end
     end,
     OnTooltipShow = function(tt)
-        tt:AddLine("|cffffffff" .. AF_NAME_COLORED);
-        tt:AddLine(AF_ICON_TOOLTIP_LINE2);
+        tt:ClearLines();
+        tt:AddDoubleLine(AF_NAME, AF_VERSION_BUILD);
+        tt:AddLine(" ");
+        tt:AddLine(AF_ICON_TOOLTIP_RIGHT_CLICK);
     end,
 });
 

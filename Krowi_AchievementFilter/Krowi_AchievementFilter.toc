@@ -5,7 +5,7 @@
 ## SavedVariables: AFSetting, TEST
 ## Notes: Filters your achievements.
 
-embeds.xml
+Libs/Files.xml
 
 Addon.lua
 
@@ -14,10 +14,8 @@ Debug.lua
 Options.lua
 Icon.lua
 
-Objects/AchievementCategory.lua
-Objects/AchievementType.lua
-Objects/Achievement.lua
+Objects/Files.xml
 
-ExpansionData.xml
+ExpansionData/Files.xml
 
 Krowi_AchievementFilter.lua

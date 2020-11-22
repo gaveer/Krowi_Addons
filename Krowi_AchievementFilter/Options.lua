@@ -13,10 +13,10 @@ titlebar:SetPoint("TOPRIGHT", panel, "TOPRIGHT");
 titlebar:SetHeight(75);
 titlebar.title = titlebar:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge");
 titlebar.title:SetPoint("TOP", titlebar, "TOP", 0, -25);
-titlebar.title:SetText(AF_NAME_COLORED);
+titlebar.title:SetText(AF_NAME);
 titlebar.version = titlebar:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
 titlebar.version:SetPoint("TOP", titlebar, "TOP", 0, -50);
-titlebar.version:SetText("v" .. AF_VERSION .. "." .. AF_BUILD);
+titlebar.version:SetText(AF_VERSION_BUILD);
 
 local headerGeneral = CreateFrame("Frame", nil, titlebar);
 headerGeneral:SetHeight(18);
@@ -47,9 +47,9 @@ showMinimapIconToggle:SetPoint("TOPLEFT", headerGeneral, "BOTTOMLEFT", 10, -10);
 showMinimapIconToggle:SetScript("OnClick", function(self, button, down) 
     AFSetting.ShowMinimapIcon = showMinimapIconToggle:GetChecked() and true or false;
     if AFSetting.ShowMinimapIcon then
-        KrowiAF.Icon:Show("AchievementFilterLDB");
+        KrowiAF.Icon:Show("KrowiAFAchievementFilterLDB");
     else
-        KrowiAF.Icon:Hide("AchievementFilterLDB");
+        KrowiAF.Icon:Hide("KrowiAFAchievementFilterLDB");
     end
     KrowiAF.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon));
 end);

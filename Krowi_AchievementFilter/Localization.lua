@@ -1,8 +1,9 @@
 -- Don't change!
-AF_NAME = "Krowi's Achievement Filter";
-AF_NAME_COLORED = "|cFF1D92C2" .. AF_NAME .. "|r";
+AF_COLOR = "|cFF1D92C2";
+AF_NAME = "Krowi's " .. AF_COLOR .. "Achievement Filter|r";
 AF_VERSION = "90002";
-AF_BUILD = "1.0";
+AF_BUILD = "2.0";
+AF_VERSION_BUILD = "v" .. AF_VERSION .. "." .. AF_BUILD;
 
 -- [[ Localization ]] --
 
@@ -17,7 +18,7 @@ AF_OPTIONS_TRACE_INFO_TOGGLE = "Enable trace info";
 AF_OPTIONS_TRACE_INFO_TOGGLE_TOOLTIP = "Enable / disable trace info";
 
 -- Icon
-AF_ICON_TOOLTIP_LINE2 = "Right click for Options.";
+AF_ICON_TOOLTIP_RIGHT_CLICK = "Right-click " .. AF_COLOR .. "for Options.|r";
 
 -- Tab
 AF_TAB_BUTTON_TEXT = "Achievement Filter";

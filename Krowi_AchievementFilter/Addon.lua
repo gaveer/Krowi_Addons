@@ -1,10 +1,5 @@
 KrowiAF = {
     Data = {};
-    -- Categories_Old = {};
-    -- AchievementFunctions = {};
-    -- Compatibility = {
-    --     Overachiever_Tabs = false;
-    -- };
     IsAlliance = UnitFactionGroup("player") == "Alliance";
     IsHorde = UnitFactionGroup("player") == "Horde";
     IsNeutral = UnitFactionGroup("player") == "Neutral";

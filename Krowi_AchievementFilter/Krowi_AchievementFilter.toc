@@ -1,6 +1,6 @@
 ## Interface: 90002
 ## Title: Krowi's Achievement Filter
-## Version: 0.2 Beta
+## Version: 1.0
 ## Author: Krowi
 ## SavedVariables: AFSetting, TEST
 ## Notes: Filters your achievements.

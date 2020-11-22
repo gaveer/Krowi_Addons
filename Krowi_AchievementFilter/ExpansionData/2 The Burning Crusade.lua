@@ -35,8 +35,9 @@ tinsert(KrowiAF.Data, expansion);
             raid:AddAchievementIDs({697}); -- Defeat the bosses in X
 
         -- 2.3
-            raid = raids:AddChild(KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(77) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Zul'Aman
-            raid:AddAchievementIDs({691}); -- Defeat the bosses in X
+            raid = raids:AddChild(KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(77) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Zul'Aman -  - revamped in Cataclysm 4.1
+            raid:AddAchievementFOSIDs({691}); -- Defeat the bosses in X
+            raid:AddAchievementFOSIDs({430}); -- Mounts (Unobtainable)
 
         -- 2.4
             raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(752)); -- Sunwell Plateau

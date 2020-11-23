@@ -194,9 +194,14 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	function KrowiAF.AchievementsFrame.ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate  -- Issue #3: Fix
+	function KrowiAF.AchievementsFrame.ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate -- Issue #3: Fix
 		KrowiAF.Trace("KrowiAF.AchievementsFrame.ForceUpdate");
 		
+		if not KrowiAF.AchievementsFrame:IsShown() then -- Issue #8: Fix
+			return;
+		end
+
+		-- Issue #8: Broken
 		if KrowiAF.SelectedAchievement then
 			local nextID = GetNextAchievement(KrowiAF.SelectedAchievement.ID);
 			local id, _, _, completed = GetAchievementInfo(KrowiAF.SelectedAchievement.ID);

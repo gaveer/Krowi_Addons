@@ -17,6 +17,7 @@
     <Script file="ExpansionData\4 Cataclysm\Raids.lua" />
 
     <Script file="ExpansionData\5 Mists of Pandaria\Expansion.lua" />
+    <Script file="ExpansionData\5 Mists of Pandaria\Scenarios.lua" />
     <Script file="ExpansionData\5 Mists of Pandaria\Dungeons.lua" />
     <Script file="ExpansionData\5 Mists of Pandaria\Raids.lua" />
 

@@ -26,6 +26,10 @@ function KrowiAF.AchievementCategory:NewEJ(id)
     return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id));
 end
 
+function KrowiAF.AchievementCategory:NewLFG(id)
+    return KrowiAF.AchievementCategory:New(GetLFGDungeonInfo(id));
+end
+
 function KrowiAF.AchievementCategory:AddChild(child)
     tinsert(self.Children, child);
     child.Parent = self;

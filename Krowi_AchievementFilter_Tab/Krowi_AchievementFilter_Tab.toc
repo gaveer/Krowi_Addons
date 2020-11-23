@@ -1,6 +1,6 @@
 ## Interface: 90002
 ## Title: Krowi's Achievement Filter - Tab
-## Version: 1.0
+## Version: 2.0
 ## Author: Krowi
 ## LoadOnDemand: 1
 ## LoadWith: Blizzard_AchievementUI

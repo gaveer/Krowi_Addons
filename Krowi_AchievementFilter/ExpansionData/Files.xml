@@ -34,6 +34,7 @@
     <Script file="ExpansionData\8 Battle for Azeroth\Raids.lua" />
 
     <Script file="ExpansionData\9 Shadowlands\Expansion.lua" />
+    <Script file="ExpansionData\9 Shadowlands\Zones.lua" />
     <Script file="ExpansionData\9 Shadowlands\Dungeons.lua" />
     <Script file="ExpansionData\9 Shadowlands\Raids.lua" />
     

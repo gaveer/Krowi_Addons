@@ -2,7 +2,7 @@
 AF_COLOR = "|cFF1D92C2";
 AF_NAME = "Krowi's " .. AF_COLOR .. "Achievement Filter|r";
 AF_VERSION = "90002";
-AF_BUILD = "2.0";
+AF_BUILD = "3.0";
 AF_VERSION_BUILD = "v" .. AF_VERSION .. "." .. AF_BUILD;
 
 -- [[ Localization ]] --
@@ -22,3 +22,5 @@ AF_ICON_TOOLTIP_RIGHT_CLICK = "Right-click " .. AF_COLOR .. "for Options.|r";
 
 -- Tab
 AF_TAB_BUTTON_TEXT = "Achievement Filter";
+
+AF_CATEGORY_ZONES = "Zones";

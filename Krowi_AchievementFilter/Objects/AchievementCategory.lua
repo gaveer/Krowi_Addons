@@ -30,6 +30,10 @@ function KrowiAF.AchievementCategory:NewLFG(id)
     return KrowiAF.AchievementCategory:New(GetLFGDungeonInfo(id));
 end
 
+function KrowiAF.AchievementCategory:NewMap(id)
+    return KrowiAF.AchievementCategory:New(C_Map.GetMapInfo(id).name);
+end
+
 function KrowiAF.AchievementCategory:AddChild(child)
     tinsert(self.Children, child);
     child.Parent = self;

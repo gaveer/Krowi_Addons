@@ -1,6 +1,6 @@
 local dungeons, dungeon;
 
-dungeons = Xpack_BfA:AddChild(KrowiAF.AchievementCategory:NewDungeons());
+dungeons = Xpack_BfA:AddSubsection(KrowiAF.AchievementSubsection.Dungeons);
 dungeons:AddAchievementIDs({12807, 12812, 13075, 12489}); -- Overarching achievements
 -- Not sure to put 12489 here on in both dungeons, put it here for now
 

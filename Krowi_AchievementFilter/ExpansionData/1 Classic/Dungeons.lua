@@ -1,6 +1,6 @@
 local dungeons, dungeon;
 
-dungeons = Xpack_Classic:AddChild(KrowiAF.AchievementCategory:NewDungeons());
+dungeons = Xpack_Classic:AddSubsection(KrowiAF.AchievementSubsection.Dungeons);
 dungeons:AddAchievementIDs({1283}); -- Overarching achievements
 
 -- 1.0

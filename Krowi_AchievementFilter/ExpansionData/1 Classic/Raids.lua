@@ -1,6 +1,6 @@
 local raids, raid;
 
-raids = Xpack_Classic:AddChild(KrowiAF.AchievementCategory:NewRaids());
+raids = Xpack_Classic:AddSubsection(KrowiAF.AchievementSubsection.Raids);
 raids:AddAchievementIDs({1285}); -- Overarching achievements
 
 -- 1.1

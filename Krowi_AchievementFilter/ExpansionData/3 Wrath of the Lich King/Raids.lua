@@ -1,6 +1,6 @@
 local raids, raid, version;
 
-raids = Xpack_WotLK:AddChild(KrowiAF.AchievementCategory:NewRaids());
+raids = Xpack_WotLK:AddSubsection(KrowiAF.AchievementSubsection.Raids);
 raids:AddAchievementIDs({2137, 2138, 12401, 4602, 4603}); -- Overarching achievements
 raids:AddAchievementFOSIDs({2957, 2958}); -- Feats of Strength (Unobtainable)
 

@@ -14,14 +14,6 @@ function KrowiAF.AchievementCategory:New(name)
     return self;
 end
 
-function KrowiAF.AchievementCategory:NewRaids()
-    return KrowiAF.AchievementCategory:New(GetCategoryInfo(15271)); -- Raids
-end
-
-function KrowiAF.AchievementCategory:NewDungeons()
-    return KrowiAF.AchievementCategory:New(GetCategoryInfo(15272)); -- Dungeons
-end
-
 function KrowiAF.AchievementCategory:NewEJ(id)
     return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id));
 end
@@ -38,6 +30,22 @@ function KrowiAF.AchievementCategory:AddChild(child)
     tinsert(self.Children, child);
     child.Parent = self;
     child.Level = self.Level + 1;
+    return child;
+end
+
+KrowiAF.AchievementSubsection = {
+    Zones = function() return KrowiAF.AchievementCategory:New(AF_CATEGORY_ZONES) end, -- Zones
+    Quests = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15447)) end, -- Quests
+    Exploration = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(97)) end, -- Exploration
+    PvP = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15270)) end, -- Player vs. Player
+    Reputation = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15273)) end, -- Reputation
+    Raids = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15271)) end, -- Raids
+    Dungeons = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15272)) end, -- Dungeons
+ };
+
+function KrowiAF.AchievementCategory:AddSubsection(subsection, ...)
+    local child = subsection();
+    self:AddChild(child);
     return child;
 end
 

@@ -216,6 +216,14 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		-- 	button.label:SetText(name);
 		-- else
 		button.label:SetText(category.Name);
+		-- KrowiAF.Debug(category.Name .. " - " .. tostring(category.Collapsed));
+		if #category.Children ~= 0 then
+			if category.Collapsed then
+				button.label:SetText("+ " .. category.Name);
+			else
+				button.label:SetText("- " .. category.Name);
+			end
+		end
 		-- end
 		button.Category = category;
 
@@ -268,16 +276,19 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 			end
 		else -- Open selected category, close other highest level categories
 			for i, category in next, KrowiAF.Categories do
-				if category.Level == button.Category.Level and category.Parent == button.Category then -- Category on same level and same parent
+				if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
 					category.Collapsed = true;
 				end
 				if category.Level > button.Category.Level then -- Category on lower level
-					if category.Parent == button.Category then -- Child of
-						category.Hidden = false;
-					else -- Not a child of
-						category.Hidden = true;
-						category.Collapsed = true;
-					end
+					category.Hidden = category.Parent ~= button.Category;
+					category.Collapsed = true;
+					-- if category.Parent == button.Category then -- Child of
+					-- 	category.Hidden = false;
+					-- 	category.Collapsed = true;
+					-- else -- Not a child of
+					-- 	category.Hidden = true;
+					-- 	category.Collapsed = true;
+					-- end
 				end
 			end
 			button.Category.Collapsed = false;

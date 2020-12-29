@@ -6,7 +6,7 @@ zones:AddAchievementIDs({14280, 14790, 14758}); -- Quests
 zones:AddAchievementIDs({14825, 14731}); -- Exploration
 zones:AddAchievementIDs({14515, 14516}); -- PvP
 zones:AddAchievementIDs({14315}); -- Reputation
-zones:AddAchievementIDs({14867, 14879, 14881}); -- Pet Battles
+-- zones:AddAchievementIDs({14867, 14879, 14881}); -- Pet Battles
 
 -- 9.0
     zone = zones:AddChild(KrowiAF.AchievementCategory:NewMap(1533)); -- Bastion

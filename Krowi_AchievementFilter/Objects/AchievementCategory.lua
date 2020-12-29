@@ -41,6 +41,7 @@ KrowiAF.AchievementSubsection = {
     Reputation = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15273)) end, -- Reputation
     Raids = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15271)) end, -- Raids
     Dungeons = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15272)) end, -- Dungeons
+    PetBattles = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15117)) end, -- Pet Battles
  };
 
 function KrowiAF.AchievementCategory:AddSubsection(subsection, ...)

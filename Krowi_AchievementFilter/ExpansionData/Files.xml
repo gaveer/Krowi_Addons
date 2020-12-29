@@ -37,5 +37,6 @@
     <Script file="ExpansionData\9 Shadowlands\Zones.lua" />
     <Script file="ExpansionData\9 Shadowlands\Dungeons.lua" />
     <Script file="ExpansionData\9 Shadowlands\Raids.lua" />
+    <Script file="ExpansionData\9 Shadowlands\PetBattles.lua" />
     
 </Ui>

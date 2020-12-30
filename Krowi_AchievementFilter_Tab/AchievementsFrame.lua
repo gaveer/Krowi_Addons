@@ -37,6 +37,11 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 					KrowiAF.AchievementsFrame.Container.ScrollBar.trackBG:Show();
 					KrowiAF.AchievementsFrame.Container.update = KrowiAF.AchievementsFrame.Update;
 					HybridScrollFrame_CreateButtons(KrowiAF.AchievementsFrame.Container, "KrowiAF_AchievementTemplate", 0, -2);
+
+					-- Register also right clicks to the achievements buttons
+					for _, button in next, KrowiAF.AchievementsFrame.Container.buttons do
+						button:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+					end
 					
 					hooksecurefunc("AchievementFrameAchievements_ForceUpdate", KrowiAF.AchievementsFrame.ForceUpdate); -- Issue #3: Fix
 

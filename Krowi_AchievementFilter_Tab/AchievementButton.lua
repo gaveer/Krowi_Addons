@@ -5,7 +5,7 @@ local UI_FontHeight;
 -- [[ Blizzard_AchievementUI.lua derived ]] --
 
     -- Used in Templates - KrowiAF_AchievementCategoryTemplate
-	function KrowiAF_AchievementButton_OnLoad (self) -- OK -- AchievementButton_OnLoad
+	function KrowiAF_AchievementButton_OnLoad(self) -- OK -- AchievementButton_OnLoad
 		KrowiAF.Trace("KrowiAF_AchievementButton_OnLoad");
 
 		if not UI_FontHeight then
@@ -24,9 +24,22 @@ local UI_FontHeight;
 	end
 
     -- Used in Templates - KrowiAF_AchievementCategoryTemplate
-	function KrowiAF_AchievementButton_OnClick (self, button, down, ignoreModifiers) -- OK -- AchievementButton_OnClick
+	function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers) -- OK -- AchievementButton_OnClick
 		KrowiAF.Trace("KrowiAF_AchievementButton_OnClick");
 		
+		if button == "LeftButton" then
+			KrowiAF.Debug("LeftButton");
+			KrowiAF_AchievementButton_OnClick_LeftButton(self, ignoreModifiers);
+		elseif button == "RightButton" then
+			KrowiAF.Debug("RightButton");
+			KrowiAF_AchievementButton_OnClick_RightButton(self);
+		end
+		
+	end
+
+	function KrowiAF_AchievementButton_OnClick_LeftButton(self, ignoreModifiers)
+		KrowiAF.Trace("KrowiAF_AchievementButton_OnClick_LeftButton");
+
 		if IsModifiedClick() and not ignoreModifiers then
 			local handled = nil;
 			if IsModifiedClick("CHATLINK") then
@@ -64,6 +77,12 @@ local UI_FontHeight;
 		if not ignoreModifiers then
 			KrowiAF.AchievementsFrame.AdjustSelection();
 		end
+	end
+
+	function KrowiAF_AchievementButton_OnClick_RightButton(self)
+		KrowiAF.Trace("KrowiAF_AchievementButton_OnClick_RightButton");
+
+		KrowiAF.Debug("https://www.wowhead.com/achievement=" .. self.id .. "#comments"); -- make go to comments optional in settings
 	end
 
 	function KrowiAF.AchievementsButton.DisplayAchievement(button, achievement, index, selection, renderOffScreen) -- OK -- AchievementButton_DisplayAchievement

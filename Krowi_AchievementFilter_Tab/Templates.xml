@@ -20,7 +20,7 @@
 			<OnLoad inherit="prepend" function="KrowiAF_AchievementButton_OnLoad"/>
 			<OnClick>
 				-- this is also called from the shield's OnClick
-				KrowiAF_AchievementButton_OnClick(self);
+				KrowiAF_AchievementButton_OnClick(self, button, down);
 			</OnClick>
 		</Scripts>
 	</Button>

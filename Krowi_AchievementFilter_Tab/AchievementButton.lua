@@ -29,16 +29,17 @@ local UI_FontHeight;
 		
 		if button == "LeftButton" then
 			KrowiAF.Debug("LeftButton");
-			KrowiAF_AchievementButton_OnClick_LeftButton(self, ignoreModifiers);
+			KrowiAF.AchievementsButton.OnClickLeftButton(self, ignoreModifiers);
 		elseif button == "RightButton" then
 			KrowiAF.Debug("RightButton");
-			KrowiAF_AchievementButton_OnClick_RightButton(self);
+			KrowiAF.AchievementsButton.OnClickRightButton(self);
 		end
 		
 	end
 
-	function KrowiAF_AchievementButton_OnClick_LeftButton(self, ignoreModifiers)
-		KrowiAF.Trace("KrowiAF_AchievementButton_OnClick_LeftButton");
+	-- OnClick Left Button Start
+	function KrowiAF.AchievementsButton.OnClickLeftButton(self, ignoreModifiers)
+		KrowiAF.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
 
 		if IsModifiedClick() and not ignoreModifiers then
 			local handled = nil;
@@ -78,12 +79,61 @@ local UI_FontHeight;
 			KrowiAF.AchievementsFrame.AdjustSelection();
 		end
 	end
+	-- OnClick Left Button End
 
-	function KrowiAF_AchievementButton_OnClick_RightButton(self)
-		KrowiAF.Trace("KrowiAF_AchievementButton_OnClick_RightButton");
+	-- OnClick Right Button Start
+	local wowheadLink = "";
+	StaticPopupDialogs["WOWHEAD_LINK"] = {
+		text = "Press CTRL+X to copy the website and close this window.",
+		button1 = "Close",
+		hasEditBox=true,
+		editBoxWidth=500,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = true,
+		preferredIndex = 3,
+        OnShow = function(self)
+            self.editBox:SetText(wowheadLink);
+            self.editBox:HighlightText();
+        end,
+        EditBoxOnEscapePressed = function(self) self:GetParent().button1:Click() end,
+        EditBoxOnTextChanged = function(self)
+			if self:GetText():len() < 1 then
+				self:GetParent().button1:Click()
+            else
+                self:SetText(wowheadLink)
+                self:HighlightText()
+            end
+        end,
+    }
 
-		KrowiAF.Debug("https://www.wowhead.com/achievement=" .. self.id .. "#comments"); -- make go to comments optional in settings
+	function KrowiAF.AchievementsButton.OpenWowheadLink()
+		KrowiAF.Trace("KrowiAF.AchievementsButton.OpenWowheadLink");
+
+		StaticPopup_Show("WOWHEAD_LINK");
 	end
+
+	local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
+	local menu = {
+		{text = "Select an Option", isTitle = true},
+		{text = "Wowhead", func = KrowiAF.AchievementsButton.OpenWowheadLink},
+		-- {text = "Option 2", func = function() print("You've chosen option 2"); end},
+		-- {text = "More Options", hasArrow = true,
+		-- 	menuList = {
+		-- 		{text = "Option 3", func = function() print("You've chosen option 3"); end}
+		-- 	}
+		-- }
+	};
+
+	function KrowiAF.AchievementsButton.OnClickRightButton(self)
+		KrowiAF.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
+
+		wowheadLink = "https://www.wowhead.com/achievement=" .. self.id; -- .. "#comments"; -- make go to comments optional in settings
+		KrowiAF.Debug(wowheadLink);
+
+		EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
+	end
+	-- OnClick Right Button End
 
 	function KrowiAF.AchievementsButton.DisplayAchievement(button, achievement, index, selection, renderOffScreen) -- OK -- AchievementButton_DisplayAchievement
 		local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievement.ID);

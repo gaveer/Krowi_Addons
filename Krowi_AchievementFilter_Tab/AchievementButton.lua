@@ -83,7 +83,7 @@ local UI_FontHeight;
 
 	-- OnClick Right Button Start
 	local wowheadLink = "";
-	StaticPopupDialogs["WOWHEAD_LINK"] = {
+	StaticPopupDialogs["EXTERNAL_LINK"] = {
 		text = "Press CTRL+X to copy the website and close this window.",
 		button1 = "Close",
 		hasEditBox=true,
@@ -110,13 +110,13 @@ local UI_FontHeight;
 	function KrowiAF.AchievementsButton.OpenWowheadLink()
 		KrowiAF.Trace("KrowiAF.AchievementsButton.OpenWowheadLink");
 
-		StaticPopup_Show("WOWHEAD_LINK");
+		StaticPopup_Show("EXTERNAL_LINK");
 	end
 
 	local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
 	local menu = {
-		{text = "Select an Option", isTitle = true},
-		{text = "Wowhead", func = KrowiAF.AchievementsButton.OpenWowheadLink},
+		-- {text = "Select an Option", isTitle = true},
+		-- {text = "Wowhead", func = KrowiAF.AchievementsButton.OpenWowheadLink},
 		-- {text = "Option 2", func = function() print("You've chosen option 2"); end},
 		-- {text = "More Options", hasArrow = true,
 		-- 	menuList = {
@@ -128,8 +128,21 @@ local UI_FontHeight;
 	function KrowiAF.AchievementsButton.OnClickRightButton(self)
 		KrowiAF.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
 
+		-- Reset menu
+		menu = {};
+
+		-- Always add header
+		tinsert(menu, {text = "Select an Option", isTitle = true});
+
+		-- Always add Wowhead link
 		wowheadLink = "https://www.wowhead.com/achievement=" .. self.id; -- .. "#comments"; -- make go to comments optional in settings
 		KrowiAF.Debug(wowheadLink);
+		tinsert(menu, {text = "Wowhead", func = KrowiAF.AchievementsButton.OpenWowheadLink});
+
+		-- Add Xu-Fu's Pet Battle Strategies for pet related achievements (links are added at the location the achievements are added)
+		-- if pet battle achievement then
+		--	tinsert(menu, {text = "Xu-Fu's Pet Battle Strategies", func = KrowiAF.AchievementsButton.OpenWowheadLink});
+		-- end
 
 		EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
 	end

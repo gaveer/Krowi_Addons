@@ -15,15 +15,11 @@ function KrowiAF.AchievementCategory:New(name)
 end
 
 function KrowiAF.AchievementCategory:NewEJ(id)
-    return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id));
+    return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id)); -- JournalInstance table
 end
 
 function KrowiAF.AchievementCategory:NewLFG(id)
-    return KrowiAF.AchievementCategory:New(GetLFGDungeonInfo(id));
-end
-
-function KrowiAF.AchievementCategory:NewMap(id)
-    return KrowiAF.AchievementCategory:New(C_Map.GetMapInfo(id).name);
+    return KrowiAF.AchievementCategory:New(GetLFGDungeonInfo(id)); -- LFGDungeons table
 end
 
 function KrowiAF.AchievementCategory:AddChild(child)
@@ -35,17 +31,20 @@ end
 
 KrowiAF.AchievementSubsection = {
     Zones = function() return KrowiAF.AchievementCategory:New(AF_CATEGORY_ZONES) end, -- Zones
-    Quests = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15447)) end, -- Quests
-    Exploration = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(97)) end, -- Exploration
-    PvP = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15270)) end, -- Player vs. Player
-    Reputation = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15273)) end, -- Reputation
-    Raids = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15271)) end, -- Raids
-    Dungeons = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15272)) end, -- Dungeons
-    PetBattles = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15117)) end, -- Pet Battles
+    Quests = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15447)) end, -- Achievement_Category table - Quests
+    Exploration = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(97)) end, -- Achievement_Category table - Exploration
+    PvP = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15270)) end, -- Achievement_Category table - Player vs. Player
+    Reputation = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15273)) end, -- Achievement_Category table - Reputation
+    Raids = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15271)) end, -- Achievement_Category table - Raids
+    Dungeons = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15272)) end, -- Achievement_Category table - Dungeons
+    PetBattles = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15117)) end, -- Achievement_Category table - Pet Battles
+    ZoneName = function(id) return KrowiAF.AchievementCategory:New(C_Map.GetMapInfo(id).name) end, -- UiMap table - Used for zone names
+    InstanceName = function(id) return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id)) end, -- JournalInstance table - Used for raid and dungeon names
+    LFGName = function(id) return KrowiAF.AchievementCategory:New(GetLFGDungeonInfo(id)) end, -- LFGDungeons table - Used for all that has no JournalInstance table record
  };
 
 function KrowiAF.AchievementCategory:AddSubsection(subsection, ...)
-    local child = subsection();
+    local child = subsection(...);
     self:AddChild(child);
     return child;
 end

@@ -1,4 +1,5 @@
 KrowiAF.AchievementType = KrowiAF.Enum {
     "Default",
-    "FoS"
+    "FoS",
+    "Pet Battle"
  };

@@ -1,10 +1,3 @@
--- Don't change!
-AF_COLOR = "|cFF1D92C2";
-AF_NAME = "Krowi's " .. AF_COLOR .. "Achievement Filter|r";
-AF_VERSION = "90002";
-AF_BUILD = "6.0";
-AF_VERSION_BUILD = "v" .. AF_VERSION .. "." .. AF_BUILD;
-
 -- [[ Localization ]] --
 
 -- Options
@@ -24,3 +17,4 @@ AF_ICON_TOOLTIP_RIGHT_CLICK = "Right-click " .. AF_COLOR .. "for Options.|r";
 AF_TAB_BUTTON_TEXT = "Achievement Filter";
 
 AF_CATEGORY_ZONES = "Zones";
+AF_XUFU = "Xu-Fu's Pet Battle Strategies";

@@ -1,3 +1,5 @@
+local _, addon = ...;
+
 KrowiAF.AchievementsButton = {};
 
 local UI_FontHeight;
@@ -6,7 +8,7 @@ local UI_FontHeight;
 
     -- Used in Templates - KrowiAF_AchievementCategoryTemplate
 	function KrowiAF_AchievementButton_OnLoad(self) -- OK -- AchievementButton_OnLoad
-		KrowiAF.Trace("KrowiAF_AchievementButton_OnLoad");
+		addon.Diagnostics.Trace("KrowiAF_AchievementButton_OnLoad");
 
 		if not UI_FontHeight then
 			local _, fontHeight = self.description:GetFont();
@@ -25,13 +27,13 @@ local UI_FontHeight;
 
     -- Used in Templates - KrowiAF_AchievementCategoryTemplate
 	function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers) -- OK -- AchievementButton_OnClick
-		KrowiAF.Trace("KrowiAF_AchievementButton_OnClick");
+		addon.Diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
 		
 		if button == "LeftButton" then
-			KrowiAF.Debug("LeftButton");
+			addon.Diagnostics.Debug("LeftButton");
 			KrowiAF.AchievementsButton.OnClickLeftButton(self, ignoreModifiers);
 		elseif button == "RightButton" then
-			KrowiAF.Debug("RightButton");
+			addon.Diagnostics.Debug("RightButton");
 			KrowiAF.AchievementsButton.OnClickRightButton(self);
 		end
 		
@@ -39,7 +41,7 @@ local UI_FontHeight;
 
 	-- OnClick Left Button Start
 	function KrowiAF.AchievementsButton.OnClickLeftButton(self, ignoreModifiers)
-		KrowiAF.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
+		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
 
 		if IsModifiedClick() and not ignoreModifiers then
 			local handled = nil;
@@ -54,7 +56,7 @@ local UI_FontHeight;
 				end
 			end
 			if not handled and IsModifiedClick("QUESTWATCHTOGGLE") then
-				KrowiAF.Debug("AchievementButton_ToggleTracking from KrowiAF_AchievementButton_OnClick");
+				addon.Diagnostics.Debug("AchievementButton_ToggleTracking from KrowiAF_AchievementButton_OnClick");
 				AchievementButton_ToggleTracking(self.id);
 			end
 			return;
@@ -82,7 +84,7 @@ local UI_FontHeight;
 	-- OnClick Left Button End
 
 	-- OnClick Right Button Start
-	local wowheadLink = "";
+	local externalLink = "";
 	StaticPopupDialogs["EXTERNAL_LINK"] = {
 		text = "Press CTRL+X to copy the website and close this window.",
 		button1 = "Close",
@@ -93,7 +95,7 @@ local UI_FontHeight;
 		hideOnEscape = true,
 		preferredIndex = 3,
         OnShow = function(self)
-            self.editBox:SetText(wowheadLink);
+            self.editBox:SetText(externalLink);
             self.editBox:HighlightText();
         end,
         EditBoxOnEscapePressed = function(self) self:GetParent().button1:Click() end,
@@ -101,48 +103,65 @@ local UI_FontHeight;
 			if self:GetText():len() < 1 then
 				self:GetParent().button1:Click()
             else
-                self:SetText(wowheadLink)
+                self:SetText(externalLink)
                 self:HighlightText()
             end
         end,
     }
 
-	function KrowiAF.AchievementsButton.OpenWowheadLink()
-		KrowiAF.Trace("KrowiAF.AchievementsButton.OpenWowheadLink");
+	local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
+	local menu = {};
 
-		StaticPopup_Show("EXTERNAL_LINK");
+	function KrowiAF.AchievementsButton.RecursiveMenu()
 	end
 
-	local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
-	local menu = {
-		-- {text = "Select an Option", isTitle = true},
-		-- {text = "Wowhead", func = KrowiAF.AchievementsButton.OpenWowheadLink},
-		-- {text = "Option 2", func = function() print("You've chosen option 2"); end},
-		-- {text = "More Options", hasArrow = true,
-		-- 	menuList = {
-		-- 		{text = "Option 3", func = function() print("You've chosen option 3"); end}
-		-- 	}
-		-- }
-	};
-
 	function KrowiAF.AchievementsButton.OnClickRightButton(self)
-		KrowiAF.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
+		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
 
 		-- Reset menu
 		menu = {};
 
 		-- Always add header
-		tinsert(menu, {text = "Select an Option", isTitle = true});
+		local _, name = GetAchievementInfo(self.Achievement.ID);
+		tinsert(menu, {text = name, isTitle = true});
 
-		-- Always add Wowhead link
-		wowheadLink = "https://www.wowhead.com/achievement=" .. self.id; -- .. "#comments"; -- make go to comments optional in settings
-		KrowiAF.Debug(wowheadLink);
-		tinsert(menu, {text = "Wowhead", func = KrowiAF.AchievementsButton.OpenWowheadLink});
+		-- Debug table
+		if Krowi_AchievementFilterOptions and Krowi_AchievementFilterOptions.EnableDebugInfo then
+			tinsert(menu, {text = "Debug Table", func = function() addon.Diagnostics.DebugTable(self); end});
+		end
+
+		-- Wowhead link
+		if self.Achievement.HasWowheadLink then
+			externalLink = "https://www.wowhead.com/achievement=" .. self.Achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
+			addon.Diagnostics.Debug(externalLink);
+			tinsert(menu, {text = "Wowhead", func = function() StaticPopup_Show("EXTERNAL_LINK"); end});
+		end
 
 		-- Add Xu-Fu's Pet Battle Strategies for pet related achievements (links are added at the location the achievements are added)
-		-- if pet battle achievement then
-		--	tinsert(menu, {text = "Xu-Fu's Pet Battle Strategies", func = KrowiAF.AchievementsButton.OpenWowheadLink});
-		-- end
+		if self.Achievement.XuFuLink ~= nil then
+			externalLink = self.Achievement.XuFuLink.Url;
+			addon.Diagnostics.Debug(externalLink);
+			if self.Achievement.XuFuLink.Criteria == nil then
+				tinsert(menu, {text = self.Achievement.XuFuLink.Name, func = function() StaticPopup_Show("EXTERNAL_LINK"); end});
+			else
+				local menuList = {};
+				for _, criteria in next, self.Achievement.XuFuLink.Criteria do
+					tinsert(menuList, {text = criteria.Name, func = function()
+						externalLink = criteria.Url;
+						StaticPopup_Show("EXTERNAL_LINK");
+					 end});
+				end
+				tinsert(menu, {text = self.Achievement.XuFuLink.Name, hasArrow = true, menuList = menuList, func = function()
+					externalLink = self.Achievement.XuFuLink.Url;
+					StaticPopup_Show("EXTERNAL_LINK");
+				end});
+			end
+		end
+
+		-- IAT Link
+		if self.Achievement.HasIATLink and IsAddOnLoaded("InstanceAchievementTracker") then
+			tinsert(menu, {text = "IAT Tactics", func = function() IAT_DisplayAchievement(self.Achievement.ID); end});
+		end
 
 		EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
 	end
@@ -150,7 +169,7 @@ local UI_FontHeight;
 
 	function KrowiAF.AchievementsButton.DisplayAchievement(button, achievement, index, selection, renderOffScreen) -- OK -- AchievementButton_DisplayAchievement
 		local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievement.ID);
-		KrowiAF.Trace("KrowiAF.AchievementsButton.DisplayAchievement for achievement " .. tostring(id));
+		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.DisplayAchievement for achievement " .. tostring(id));
 
 		if not id then
 			button:Hide();
@@ -176,7 +195,7 @@ local UI_FontHeight;
 			button.label:SetText(name);
 
 			if GetPreviousAchievement(id) then
-				-- If this is a progressive achievement, show the total score.
+				-- If this is a progressive achievement, show the total saddon.
 				AchievementShield_SetPoints(AchievementButton_GetProgressivePoints(id), button.shield.points, AchievementPointsFont, AchievementPointsFontSmall);
 			else
 				AchievementShield_SetPoints(points, button.shield.points, AchievementPointsFont, AchievementPointsFontSmall);

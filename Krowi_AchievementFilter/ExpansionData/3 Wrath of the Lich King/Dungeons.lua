@@ -1,6 +1,8 @@
+local _, addon = ...;
+
 local dungeons, dungeon;
 
-dungeons = Xpack_WotLK:AddSubsection(KrowiAF.AchievementSubsection.Dungeons);
+dungeons = Xpack_WotLK:AddCategory(KrowiAF.AchievementSubsection.Dungeons);
 dungeons:AddAchievementIDs({1288, 2136}); -- Overarching achievements
 
 -- 3.0
@@ -55,9 +57,9 @@ dungeons:AddAchievementIDs({1288, 2136}); -- Overarching achievements
 -- 3.2
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(284)); -- Trial of the Champion
     dungeon:AddAchievementIDs({3803, 3802, 3804}); -- No Glory available
-    if KrowiAF.IsAlliance then
+    if addon.Faction.IsAlliance then
         dungeon:AddAchievementIDs({4296, 4298}); -- Defeat the bosses in X
-    elseif KrowiAF.IsHorde then
+    elseif addon.Faction.IsHorde then
         dungeon:AddAchievementIDs({3778, 4297}); -- Defeat the bosses in X
     end
 

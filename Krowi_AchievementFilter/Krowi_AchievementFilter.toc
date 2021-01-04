@@ -1,16 +1,19 @@
 ## Interface: 90002
 ## Title: Krowi's Achievement Filter
-## Version: 6.0
+## Version: 7.0
 ## Author: Krowi
-## SavedVariables: AFSetting
+## SavedVariables: Krowi_AchievementFilterOptions
+## Dependencies: Blizzard_AchievementUI
 ## Notes: Filters your achievements.
 
 Libs/Files.xml
 
-Addon.lua
+Core/Files.xml
+
+Krowi_AchievementFilter.lua
 
 Localization.lua
-Debug.lua
+Diagnostics.lua
 Options.lua
 Icon.lua
 
@@ -18,4 +21,14 @@ Objects/Files.xml
 
 ExpansionData/Files.xml
 
-Krowi_AchievementFilter.lua
+GUI/Frames.xml
+
+GUI/Krowi_AchievementFilter_Tab.lua
+
+GUI/CategoriesFrame.lua
+GUI/CategoryButton.lua
+GUI/AchievementsFrame.lua
+GUI/AchievementButton.lua
+GUI/Tabbutton.lua
+
+GUI/Templates.xml

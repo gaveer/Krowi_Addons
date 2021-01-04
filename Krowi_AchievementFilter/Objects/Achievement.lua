@@ -1,14 +1,29 @@
-KrowiAF.Achievement = {};
-KrowiAF.Achievement.__index = KrowiAF.Achievement;
-function KrowiAF.Achievement:New(id, type, obtainable)
+local _, addon = ...; -- Global addon namespace
+local objects = addon.Objects; -- Local objects namespace
+objects.Achievement = {}; -- Global achievement object
+local achievement = objects.Achievement; -- Local achievement object
+
+achievement.__index = achievement; -- Used to support OOP like code
+
+-- Create a new achievement
+function achievement:New(id, obtainable, hasWowheadLink, hasIATLink)
     local self = {};
-    setmetatable(self, KrowiAF.Achievement);
+    setmetatable(self, achievement);
     self.ID = id or 0;
-    self.Type = type or KrowiAF.AchievementType.Default;
-    if obtainable == nil then
+    if obtainable == nil then -- self.Obtainable = obtainable or true; would make it always true
         self.Obtainable = true;
     else
         self.Obtainable = obtainable;
     end
+    if hasWowheadLink == nil then -- self.HasWowheadLink = hasWowheadLink or true; would make it always true
+        self.HasWowheadLink = true;
+    else
+        self.HasWowheadLink = hasWowheadLink;
+    end
+    self.HasIATLink = hasIATLink;
     return self;
+end
+
+function achievement:AddXuFuLink(xuFuLink)
+    self.XuFuLink = xuFuLink;
 end

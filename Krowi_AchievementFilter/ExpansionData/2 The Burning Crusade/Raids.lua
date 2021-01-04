@@ -1,12 +1,12 @@
 local raids, raid;
 
-raids = Xpack_TBC:AddSubsection(KrowiAF.AchievementSubsection.Raids);
+raids = Xpack_TBC:AddCategory(KrowiAF.AchievementSubsection.Raids);
 raids:AddAchievementIDs({1286}); -- Overarching achievements
 
 -- 2.0
     raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(745)); -- Karazhan
     raid:AddAchievementIDs({690}); -- Defeat the bosses in X
-    raid:AddAchievement(882, KrowiAF.AchievementType.FoS, true); -- Mounts (Obtainable)
+    raid:AddAchievement(882, true); -- Mounts (Obtainable)
 
     raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(746)); -- Gruul's Lair
     raid:AddAchievementIDs({692}); -- Defeat the bosses in X
@@ -19,7 +19,7 @@ raids:AddAchievementIDs({1286}); -- Overarching achievements
 
     raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(749)); -- The Eye
     raid:AddAchievementIDs({696}); -- Defeat the bosses in X
-    raid:AddAchievement(885, KrowiAF.AchievementType.FoS, true); -- Mounts (Obtainable)
+    raid:AddAchievement(885, true); -- Mounts (Obtainable)
 
     raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(750)); -- The Battle for Mount Hyjal
     raid:AddAchievementIDs({695}); -- Defeat the bosses in X
@@ -30,7 +30,7 @@ raids:AddAchievementIDs({1286}); -- Overarching achievements
 
 -- 2.3
     raid = raids:AddChild(KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(77) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Zul'Aman -  - revamped in Cataclysm 4.1
-    raid:AddAchievementFOSIDs({691}); -- Defeat the bosses in X
+    raid:AddAchievementFOSIDs({691}); -- Defeat the bosses in X (Unobtainable)
     raid:AddAchievementFOSIDs({430}); -- Mounts (Unobtainable)
 
 -- 2.4

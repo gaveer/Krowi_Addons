@@ -1,10 +1,16 @@
-AFSetting = {
+local _, addon = ...; -- Global addon namespace
+addon.Options = {}; -- Global options namespace
+local options = addon.Options; -- Local options namespace
+local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+
+-- Default options from SavedVariables in case there are none yet
+Krowi_AchievementFilterOptions = {
     ShowMinimapIcon = true,
     EnableDebugInfo = false,
     EnableTraceInfo = false,
 };
 
-local panel = CreateFrame("Frame", "afOptionsPanel", InterfaceOptionsFramePanelContainer);
+local panel = CreateFrame("Frame", nil, InterfaceOptionsFramePanelContainer);
 panel.name = AF_NAME;
 
 local titlebar = CreateFrame("Frame", nil, panel);
@@ -45,13 +51,13 @@ _G[showMinimapIconToggle:GetName().."Text"]:SetText(AF_OPTIONS_MINIMAP_ICON_TOGG
 showMinimapIconToggle.tooltipText = AF_OPTIONS_MINIMAP_ICON_TOGGLE_TOOLTIP;
 showMinimapIconToggle:SetPoint("TOPLEFT", headerGeneral, "BOTTOMLEFT", 10, -10);
 showMinimapIconToggle:SetScript("OnClick", function(self, button, down) 
-    AFSetting.ShowMinimapIcon = showMinimapIconToggle:GetChecked() and true or false;
-    if AFSetting.ShowMinimapIcon then
-        KrowiAF.Icon:Show("KrowiAFAchievementFilterLDB");
+    Krowi_AchievementFilterOptions.ShowMinimapIcon = showMinimapIconToggle:GetChecked();
+    if Krowi_AchievementFilterOptions.ShowMinimapIcon then
+        addon.Icon:Show("Krowi_AchievementFilterLDB");
     else
-        KrowiAF.Icon:Hide("KrowiAFAchievementFilterLDB");
+        addon.Icon:Hide("Krowi_AchievementFilterLDB");
     end
-    KrowiAF.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon));
+    addon.Diagnostics.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.ShowMinimapIcon));
 end);
 
 local headerDebug = CreateFrame("Frame", nil, headerGeneral);
@@ -81,8 +87,8 @@ _G[enableDebugInfoToggle:GetName().."Text"]:SetText(AF_OPTIONS_DEBUG_INFO_TOGGLE
 enableDebugInfoToggle.tooltipText = AF_OPTIONS_DEBUG_INFO_TOGGLE_TOOLTIP;
 enableDebugInfoToggle:SetPoint("TOPLEFT", headerDebug, "BOTTOMLEFT", 10, -10);
 enableDebugInfoToggle:SetScript("OnClick", function(self, button, down)
-    AFSetting.EnableDebugInfo = enableDebugInfoToggle:GetChecked() and true or false;
-    print(AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo));
+    Krowi_AchievementFilterOptions.EnableDebugInfo = enableDebugInfoToggle:GetChecked();
+    print(AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableDebugInfo));
 end);
 
 local enableTraceInfoToggle = CreateFrame("CheckButton", "afDebugInfoTraceToggle", headerDebug, "InterfaceOptionsCheckButtonTemplate");
@@ -90,18 +96,19 @@ _G[enableTraceInfoToggle:GetName().."Text"]:SetText(AF_OPTIONS_TRACE_INFO_TOGGLE
 enableTraceInfoToggle.tooltipText = AF_OPTIONS_TRACE_INFO_TOGGLE_TOOLTIP;
 enableTraceInfoToggle:SetPoint("TOPLEFT", enableDebugInfoToggle, "BOTTOMLEFT", 0, -10);
 enableTraceInfoToggle:SetScript("OnClick", function(self, button, down)
-    AFSetting.EnableTraceInfo = enableTraceInfoToggle:GetChecked() and true or false;
-    print(AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableTraceInfo));
+    Krowi_AchievementFilterOptions.EnableTraceInfo = enableTraceInfoToggle:GetChecked();
+    print(AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableTraceInfo));
 end);
 
-function KrowiAF.LoadOptions()
-    showMinimapIconToggle:SetChecked(AFSetting.ShowMinimapIcon);
-    enableDebugInfoToggle:SetChecked(AFSetting.EnableDebugInfo);
-    enableTraceInfoToggle:SetChecked(AFSetting.EnableTraceInfo);
-    KrowiAF.Debug("- Options loaded");
-    KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(AFSetting.ShowMinimapIcon) .. " - " .. tostring(showMinimapIconToggle:GetChecked()));
-    KrowiAF.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableDebugInfo) .. " - " .. tostring(enableDebugInfoToggle:GetChecked()));
-    KrowiAF.Debug("     - " .. AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(AFSetting.EnableTraceInfo) .. " - " .. tostring(enableTraceInfoToggle:GetChecked()));
-end
-
 InterfaceOptions_AddCategory(panel);
+
+-- Load the options
+function options.Load()
+    showMinimapIconToggle:SetChecked(Krowi_AchievementFilterOptions.ShowMinimapIcon);
+    enableDebugInfoToggle:SetChecked(Krowi_AchievementFilterOptions.EnableDebugInfo);
+    enableTraceInfoToggle:SetChecked(Krowi_AchievementFilterOptions.EnableTraceInfo);
+    diagnostics.Debug("- Options loaded");
+    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.ShowMinimapIcon) .. " - " .. tostring(showMinimapIconToggle:GetChecked()));
+    diagnostics.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableDebugInfo) .. " - " .. tostring(enableDebugInfoToggle:GetChecked()));
+    diagnostics.Debug("     - " .. AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableTraceInfo) .. " - " .. tostring(enableTraceInfoToggle:GetChecked()));
+end

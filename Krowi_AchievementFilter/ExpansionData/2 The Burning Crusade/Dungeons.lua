@@ -1,6 +1,6 @@
 local dungeons, dungeon;
 
-dungeons = Xpack_TBC:AddSubsection(KrowiAF.AchievementSubsection.Dungeons);
+dungeons = Xpack_TBC:AddCategory(KrowiAF.AchievementSubsection.Dungeons);
 dungeons:AddAchievementIDs({1284, 1287}); -- Overarching achievements
 
 -- 2.0
@@ -30,7 +30,7 @@ dungeons:AddAchievementIDs({1284, 1287}); -- Overarching achievements
 
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(252)); -- Sethekk Halls
     dungeon:AddAchievementIDs({653, 674}); -- Defeat the bosses in X
-    dungeon:AddAchievement(883, KrowiAF.AchievementType.FoS, true); -- Mounts (Obtainable)
+    dungeon:AddAchievement(883, true); -- Mounts (Obtainable)
 
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(253)); -- Shadow Labyrinth
     dungeon:AddAchievementIDs({654, 675}); -- Defeat the bosses in X
@@ -53,4 +53,4 @@ dungeons:AddAchievementIDs({1284, 1287}); -- Overarching achievements
 -- 2.4
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(249)); -- Magisters' Terrace
     dungeon:AddAchievementIDs({661, 682}); -- Defeat the bosses in X
-    dungeon:AddAchievement(884, KrowiAF.AchievementType.FoS, true); -- Mounts (Obtainable)
+    dungeon:AddAchievement(884, true); -- Mounts (Obtainable)

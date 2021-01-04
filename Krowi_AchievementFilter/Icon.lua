@@ -1,17 +1,22 @@
-AFSetting.Minimap = {
-    hide = not AFSetting.ShowMinimapIcon,
+local _, addon = ...; -- Global addon namespace
+
+-- Extra options needed for default LibDBIcon behaviour
+Krowi_AchievementFilterOptions.Minimap = {
+    hide = not Krowi_AchievementFilterOptions.ShowMinimapIcon,
 };
 
-KrowiAF.Icon = LibStub("LibDBIcon-1.0"); -- Using this instead of creating the icon from scratch is the automatic integration with addons like Titan Panel
+ -- Using LibDBIcon instead of creating the icon from scratch is the automatic integration with other addons that also use LibDataBroker
+addon.Icon = LibStub("LibDBIcon-1.0"); -- Global icon object
+local icon = addon.Icon; -- Local icon object
 
-KrowiAF.AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("KrowiAFAchievementFilterLDB", {
+icon.AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("Krowi_AchievementFilterLDB", {
     type = "launcher",
     label = AF_NAME,
     icon = "Interface\\Icons\\achievement_dungeon_heroic_gloryoftheraider",
     OnClick = function(self, button)
-        KrowiAF.Debug("Icon clicked ...");
+        addon.Diagnostics.Debug("Icon clicked with " .. button);
         if button == "RightButton" then
-            KrowiAF.Debug("... with RightButton");
+            addon.Diagnostics.Trace("icon.AchievementFilterLDB.OnClick with RightButton");
             InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
 		    InterfaceOptionsFrame_OpenToCategory(AF_NAME);
 	    end
@@ -19,14 +24,15 @@ KrowiAF.AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("Krowi
     OnTooltipShow = function(tt)
         tt:ClearLines();
         tt:AddDoubleLine(AF_NAME, AF_VERSION_BUILD);
-        tt:AddLine(" ");
+        tt:AddLine(" "); -- Empty line
         tt:AddLine(AF_ICON_TOOLTIP_RIGHT_CLICK);
     end,
 });
 
-function KrowiAF.LoadIcon()
-    AFSetting.Minimap.hide = not AFSetting.ShowMinimapIcon;
-    KrowiAF.Icon:Register("KrowiAFAchievementFilterLDB", KrowiAF.AchievementFilterLDB, AFSetting.Minimap);
-    KrowiAF.Debug("- Icon loaded");
-    KrowiAF.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not AFSetting.Minimap.hide));
+-- Load the icon
+function icon.Load()
+    Krowi_AchievementFilterOptions.Minimap.hide = not Krowi_AchievementFilterOptions.ShowMinimapIcon;
+    icon:Register("Krowi_AchievementFilterLDB", icon.AchievementFilterLDB, Krowi_AchievementFilterOptions.Minimap);
+    addon.Diagnostics.Debug("- Icon loaded");
+    addon.Diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not Krowi_AchievementFilterOptions.Minimap.hide));
 end

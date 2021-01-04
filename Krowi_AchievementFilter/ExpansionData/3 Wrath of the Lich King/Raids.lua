@@ -1,6 +1,8 @@
+local _, addon = ...;
+
 local raids, raid, version;
 
-raids = Xpack_WotLK:AddSubsection(KrowiAF.AchievementSubsection.Raids);
+raids = Xpack_WotLK:AddCategory(KrowiAF.AchievementSubsection.Raids);
 raids:AddAchievementIDs({2137, 2138, 12401, 4602, 4603}); -- Overarching achievements
 raids:AddAchievementFOSIDs({2957, 2958}); -- Feats of Strength (Unobtainable)
 
@@ -101,9 +103,9 @@ raids:AddAchievementFOSIDs({2957, 2958}); -- Feats of Strength (Unobtainable)
     version:AddAchievementIDs({3813, 3937, 3997, 3815, 3816}); -- No Glory available
     version:AddAchievementIDs({3916, 3812}); -- Defeat the bosses in X
     version:AddAchievementFOSIDs({3817, 3818, 3819}); -- Feats of Strength (Unobtainable)
-    if KrowiAF.IsAlliance then
+    if addon.Faction.IsAlliance then
         version:AddAchievementFOSIDs({4156}); -- Feats of Strength (Unobtainable)
-    elseif KrowiAF.IsHorde then
+    elseif addon.Faction.IsHorde then
         version:AddAchievementFOSIDs({4079}); -- Feats of Strength (Unobtainable)
     end
 

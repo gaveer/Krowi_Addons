@@ -1,5 +1,7 @@
 -- Scenarios have to be looked up through the GetLFGDungeonInfo since these have to Encounter Journal info.
 
+local _, addon = ...;
+
 local scenarios, scenario;
 
 scenarios = Xpack_MoP:AddChild(KrowiAF.AchievementCategory:New(GetCategoryInfo(15302))); -- Would like to find a name with just "Scenarios"
@@ -26,12 +28,12 @@ scenarios:AddAchievementIDs({7385}); -- Overarching achievements
     scenario:AddAchievementIDs({7267, 7266}); -- No Glory available
     scenario:AddAchievementIDs({7265}); -- Defeat the bosses in X
 
-    if KrowiAF.IsAlliance then -- Theramore's Fall
+    if addon.Faction.IsAlliance then -- Theramore's Fall
         scenario = scenarios:AddChild(KrowiAF.AchievementCategory:NewLFG(566));
         scenario:AddAchievementIDs({7526, 7527}); -- No Glory available
         scenario:AddAchievementIDs({7523}); -- Defeat the bosses in X
         scenario:AddAchievementFOSIDs({7467}); -- Feats of Strength (Unobtainable)
-    elseif KrowiAF.IsHorde then
+    elseif addon.Faction.IsHorde then
         scenario = scenarios:AddChild(KrowiAF.AchievementCategory:NewLFG(567));
         scenario:AddAchievementIDs({7529, 7530}); -- No Glory available
         scenario:AddAchievementIDs({7524}); -- Defeat the bosses in X
@@ -51,11 +53,11 @@ scenarios:AddAchievementIDs({7385}); -- Overarching achievements
     scenario:AddAchievementIDs({7984, 7987, 7986}); -- No Glory available
     scenario:AddAchievementIDs({8009}); -- Defeat the bosses in X
 
-    if KrowiAF.IsAlliance then
+    if addon.Faction.IsAlliance then
         scenario = scenarios:AddChild(KrowiAF.AchievementCategory:NewLFG(590)); -- Lion's Landing
         scenario:AddAchievementIDs({8011, 8012}); -- No Glory available
         scenario:AddAchievementIDs({8010}); -- Defeat the bosses in X
-    elseif KrowiAF.IsHorde then
+    elseif addon.Faction.IsHorde then
         scenario = scenarios:AddChild(KrowiAF.AchievementCategory:NewLFG(595)); -- Domination Point
         scenario:AddAchievementIDs({8014, 8015}); -- No Glory available
         scenario:AddAchievementIDs({8013}); -- Defeat the bosses in X
@@ -67,11 +69,11 @@ scenarios:AddAchievementIDs({7385}); -- Overarching achievements
     scenario:AddAchievementIDs({7988}); -- Defeat the bosses in X
 
 -- 5.3
-    if KrowiAF.IsAlliance then -- Battle on the High Seas
+    if addon.Faction.IsAlliance then -- Battle on the High Seas
         scenario = scenarios:AddChild(KrowiAF.AchievementCategory:NewLFG(655));
         scenario:AddAchievementIDs({8347}); -- No Glory available
         scenario:AddAchievementIDs({8314, 8364}); -- Defeat the bosses in X
-    elseif KrowiAF.IsHorde then
+    elseif addon.Faction.IsHorde then
         scenario = scenarios:AddChild(KrowiAF.AchievementCategory:NewLFG(654));
         scenario:AddAchievementIDs({8347}); -- No Glory available
         scenario:AddAchievementIDs({8315, 8366}); -- Defeat the bosses in X

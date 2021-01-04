@@ -1,6 +1,6 @@
 local dungeons, dungeon;
 
-dungeons = Xpack_Classic:AddSubsection(KrowiAF.AchievementSubsection.Dungeons);
+dungeons = Xpack_Classic:AddCategory(KrowiAF.AchievementSubsection.Dungeons);
 dungeons:AddAchievementIDs({1283}); -- Overarching achievements
 
 -- 1.0
@@ -36,12 +36,12 @@ dungeons:AddAchievementIDs({1283}); -- Overarching achievements
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(311)); -- Scarlet Halls - revamped in Mists of Pandaria 5.0
     dungeon:AddAchievementIDs({6684, 6427}); -- Glory of the Pandaria Hero
     dungeon:AddAchievementIDs({7413, 6760}); -- Defeat the bosses in X
-    dungeon:AddAchievementFOSIDs({6895, 6908, 6909, 6910, 8436}); -- Challenge mode
+    dungeon:AddAchievementFOSIDs({6895, 6908, 6909, 6910, 8436}); -- Challenge mode (Unobtainable)
 
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(316)); -- Scarlet Monastery - revamped in Mists of Pandaria 5.0
     dungeon:AddAchievementIDs({6946, 6928, 6929}); -- Glory of the Pandaria Hero
     dungeon:AddAchievementIDs({637, 6761}); -- Defeat the bosses in X
-    dungeon:AddAchievementFOSIDs({6896, 6911, 6912, 6913, 8437}); -- Challenge mode
+    dungeon:AddAchievementFOSIDs({6896, 6911, 6912, 6913, 8437}); -- Challenge mode (Unobtainable)
 
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(239)); -- Uldaman
     dungeon:AddAchievementIDs({638}); -- Defeat the bosses in X
@@ -67,7 +67,7 @@ dungeons:AddAchievementIDs({1283}); -- Overarching achievements
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(246)); -- Scholomance - revamped in Mists of Pandaria 5.0
     dungeon:AddAchievementIDs({6531, 6394, 6396, 6715, 6821}); -- Glory of the Pandaria Hero
     dungeon:AddAchievementIDs({645, 6762}); -- Defeat the bosses in X
-    dungeon:AddAchievementFOSIDs({6897, 6914, 6915, 6916, 8438}); -- Challenge mode
+    dungeon:AddAchievementFOSIDs({6897, 6914, 6915, 6916, 8438}); -- Challenge mode (Unobtainable)
 
     dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(236)); -- Stratholme
     dungeon:AddAchievementIDs({646}); -- Defeat the bosses in X

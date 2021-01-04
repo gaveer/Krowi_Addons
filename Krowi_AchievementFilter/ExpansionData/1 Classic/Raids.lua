@@ -1,6 +1,6 @@
 local raids, raid;
 
-raids = Xpack_Classic:AddSubsection(KrowiAF.AchievementSubsection.Raids);
+raids = Xpack_Classic:AddCategory(KrowiAF.AchievementSubsection.Raids);
 raids:AddAchievementIDs({1285}); -- Overarching achievements
 
 -- 1.1
@@ -16,7 +16,7 @@ raids:AddAchievementIDs({1285}); -- Overarching achievements
 
 -- 1.7
     raid = raids:AddChild(KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(76) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Zul'Gurub - revamped in Cataclysm 4.1
-    raid:AddAchievementFOSIDs({560, 688}); -- Defeat the bosses in X
+    raid:AddAchievementFOSIDs({560, 688}); -- Defeat the bosses in X (Unobtainable)
     raid:AddAchievementFOSIDs({880, 881}); -- Mounts (Unobtainable)
 
 -- 1.9
@@ -25,4 +25,4 @@ raids:AddAchievementIDs({1285}); -- Overarching achievements
 
     raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(744)); -- Temple of Ahn'Qiraj
     raid:AddAchievementIDs({687}); -- Defeat the bosses in X
-    raid:AddAchievement(424, KrowiAF.AchievementType.FoS, true); -- Mounts (Obtainable)
+    raid:AddAchievement(424, true); -- Mounts (Obtainable)

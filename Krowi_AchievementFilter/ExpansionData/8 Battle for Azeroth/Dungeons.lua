@@ -1,52 +1,98 @@
-local dungeons, dungeon;
+local _, addon = ...; -- Global addon namespace
+addon.BattleForAzeroth.Dungeons = {}; -- Global expansion Dungeons namespace
+local dungeons = addon.BattleForAzeroth.Dungeons; -- Local expansion Dungeons namespace
 
-dungeons = Xpack_BfA:AddSubsection(KrowiAF.AchievementSubsection.Dungeons);
-dungeons:AddAchievementIDs({12807, 12812, 13075, 12489}); -- Overarching achievements
--- Not sure to put 12489 here on in both dungeons, put it here for now
+dungeons.Freelhold = {}; -- 8.0
+function dungeons.Freelhold.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1001);
+    dungeon:AddAchievementIDsWithIATLink(12550, 12548, 12998); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12831, 12832, 12833); -- Defeat the bosses in X
+end
 
--- 8.0
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1001)); -- Freehold
-    dungeon:AddAchievementIDs({12550, 12548, 12998}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12831, 12832, 12833}); -- Defeat the bosses in X
+dungeons.WaycrestManor = {}; -- 8.0
+function dungeons.WaycrestManor.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1021);
+    dungeon:AddAchievementIDsWithIATLink(12495, 12490, 12489); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12483, 12484, 12488); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1021)); -- Waycrest Manor
-    dungeon:AddAchievementIDs({12495, 12490}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12483, 12484, 12488}); -- Defeat the bosses in X
+dungeons.ShrineOfTheStorm = {}; -- 8.0
+function dungeons.ShrineOfTheStorm.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1036);
+    dungeon:AddAchievementIDsWithIATLink(12600, 12601, 12602); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12835, 12837, 12838); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1036)); -- Shrine of the Storm
-    dungeon:AddAchievementIDs({12600, 12601, 12602}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12835, 12837, 12838}); -- Defeat the bosses in X
+dungeons.AtalDazar = {}; -- 8.0
+function dungeons.AtalDazar.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(968);
+    dungeon:AddAchievementIDsWithIATLink(12270, 12272, 12273); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12824, 12825, 12826); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(968)); -- Atal'Dazar
-    dungeon:AddAchievementIDs({12270, 12272, 12273}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12824, 12825, 12826}); -- Defeat the bosses in X
+dungeons.Underrot = {}; -- 8.0
+function dungeons.Underrot.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1022);
+    dungeon:AddAchievementIDsWithIATLink(12498, 12549, 12499); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12500, 12501, 12502); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1022)); -- Underrot
-    dungeon:AddAchievementIDs({12498, 12549, 12499}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12500, 12501, 12502}); -- Defeat the bosses in X
+dungeons.TempleOfSethraliss = {}; -- 8.0
+function dungeons.TempleOfSethraliss.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1030);
+    dungeon:AddAchievementIDsWithIATLink(12507, 12503, 12508); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12504, 12505, 12506); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1030)); -- Temple of Sethraliss
-    dungeon:AddAchievementIDs({12507, 12503, 12508}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12504, 12505, 12506}); -- Defeat the bosses in X
+dungeons.TolDagor = {}; -- 8.0
+function dungeons.TolDagor.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1002);
+    dungeon:AddAchievementIDsWithIATLink(12457, 12462); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12840, 12841, 12842); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1002)); -- Tol Dagor
-    dungeon:AddAchievementIDs({12457, 12462}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12840, 12841, 12842}); -- Defeat the bosses in X
+dungeons.TheMotherlode = {}; -- 8.0
+function dungeons.TheMotherlode.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1012);
+    dungeon:AddAchievementIDsWithIATLink(12855, 12854); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12844, 12845, 12846); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1012)); -- The MOTHERLODE!!
-    dungeon:AddAchievementIDs({12855, 12854}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12844, 12845, 12846}); -- Defeat the bosses in X
+dungeons.SiegeOfBoralus = {}; -- 8.0
+function dungeons.SiegeOfBoralus.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1023);
+    dungeon:AddAchievementIDsWithIATLink(12727, 12726, 12489); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12847); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1023)); -- Siege of Boralus
-    dungeon:AddAchievementIDs({12727, 12726}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12847}); -- Defeat the bosses in X
+dungeons.KingsRest = {}; -- 8.0
+function dungeons.KingsRest.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1041);
+    dungeon:AddAchievementIDsWithIATLink(12722, 12721, 12723); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDs(12848); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1041)); -- Kings' Rest
-    dungeon:AddAchievementIDs({12722, 12721, 12723}); -- Glory of the Wartorn Hero
-    dungeon:AddAchievementIDs({12848}); -- Defeat the bosses in X
+dungeons.OperationMechagon = {}; -- 8.2
+function dungeons.OperationMechagon.Load(catDungeons)
+    local dungeon = catDungeons:AddCatInstanceInfo(1178);
+    dungeon:AddAchievementIDsWithIATLink(13706, 13698, 13723, 13545, 13624); -- No Glory available
+    -- dungeon:AddAchievementIDs(); -- Defeat the bosses in X
+    dungeon:AddAchievementIDsUnobtainable(13789);  -- Feats of Strength (Unobtainable)
+end
 
--- 8.2
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(1178)); -- Operation: Mechagon
-    dungeon:AddAchievementIDs({13706, 13698, 13723, 13545, 13624}); -- No Glory available
-    -- dungeon:AddAchievementIDs({}); -- Defeat the bosses in X
-    dungeon:AddAchievementFOSIDs({13789});  -- Feats of Strength (Unobtainable)
+function dungeons.Load(expansion)
+    local catDungeons = expansion:AddCatDungeons();
+    catDungeons:AddAchievementIDs(12807, 12812, 13075); -- Overarching achievements
+
+    dungeons.Freelhold.Load(catDungeons);
+    dungeons.WaycrestManor.Load(catDungeons);
+    dungeons.ShrineOfTheStorm.Load(catDungeons);
+    dungeons.AtalDazar.Load(catDungeons);
+    dungeons.Underrot.Load(catDungeons);
+    dungeons.TempleOfSethraliss.Load(catDungeons);
+    dungeons.TolDagor.Load(catDungeons);
+    dungeons.TheMotherlode.Load(catDungeons);
+    dungeons.SiegeOfBoralus.Load(catDungeons);
+    dungeons.KingsRest.Load(catDungeons);
+    dungeons.OperationMechagon.Load(catDungeons);
+end

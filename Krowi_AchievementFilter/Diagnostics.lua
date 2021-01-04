@@ -1,29 +1,45 @@
-function KrowiAF.Debug(value)
-    if AFSetting and AFSetting.EnableDebugInfo then
-        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME .. " " .. tostring(value));
+local _, addon = ...; -- Global addon namespace
+addon.Diagnostics = {}; -- Global diagnostics namespace
+local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+
+local debugEnabled; -- Used to determine if printing debug messages is allowed
+local traceEnabled; -- Used to determine if printing trace messages is allowed
+
+-- Print the value to the DEFAULT_CHAT_FRAME
+function diagnostics.Debug(value, forced)
+    if debugEnabled or forced then
+        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME .. " - " .. tostring(value));
     end
 end
 
-function KrowiAF.Trace(value)
-    if AFSetting and AFSetting.EnableTraceInfo then
-        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME .. " " .. tostring(value));
-    end
-end
-
-function KrowiAF.DebugTable(tbl, charactersPerLine)
-    if AFSetting and AFSetting.EnableDebugInfo then
+-- Print the table to the DEFAULT_CHAT_FRAME
+function diagnostics.DebugTable(table, charactersPerLine, forced)
+    if debugEnabled or forced then
         if type(charactersPerLine) ~= "number" then
             charactersPerLine = 100;
         end
-        local printTable = KrowiAF.SplitString(KrowiAF.TableToString(tbl, charactersPerLine),"\n");
+        local printTable = diagnostics.SplitString(diagnostics.TableToString(table, charactersPerLine),"\n");
         for i in next, printTable do
             print(printTable[i]);
         end
     end
 end
 
--- [[ String Functions ]] --
-function KrowiAF.SplitString(str, pat)
+-- Print the value to the DEFAULT_CHAT_FRAME
+function diagnostics.Trace(value)
+    if traceEnabled then
+        DEFAULT_CHAT_FRAME:AddMessage(AF_NAME .. " - " .. tostring(value));
+    end
+end
+
+-- Load the diagnostics
+function diagnostics.Load()
+	debugEnabled = Krowi_AchievementFilterOptions.EnableDebugInfo;
+	traceEnabled = Krowi_AchievementFilterOptions.EnableTraceInfo;
+end
+
+-- Split a str at every pat (not my code)
+function diagnostics.SplitString(str, pat)
     local t = {} 
     local fpat = "(.-)" .. pat
     local last_end = 1
@@ -42,8 +58,8 @@ function KrowiAF.SplitString(str, pat)
     return t
 end
 
--- [[ Table Functions ]] --
-function KrowiAF.TableToString(t, ...)
+-- Convert a t to a string (not my code)
+function diagnostics.TableToString(t, ...)
 	local PRINT_HASH, HANDLE_TAG, FIX_INDENT, LINE_MAX, INITIAL_INDENT = true, true
 	for _, x in ipairs {...} do
 		if type(x) == "number" then
@@ -238,8 +254,4 @@ function KrowiAF.TableToString(t, ...)
 	current_offset = INITIAL_INDENT or 0
 	rec(t, { }, 0)
 	return table.concat (acc_list)
-end
-
-function KrowiAF.PrintTable(...)
-    return print(KrowiAF.TableToString(...))
 end

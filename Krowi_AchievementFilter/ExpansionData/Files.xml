@@ -1,29 +1,29 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
 
-    <!-- <Script file="ExpansionData\1 Classic\Expansion.lua" /> -->
-    <!-- <Script file="ExpansionData\1 Classic\Dungeons.lua" /> -->
-    <!-- <Script file="ExpansionData\1 Classic\Raids.lua" /> -->
+    <Script file="ExpansionData\1 Classic\Expansion.lua" />
+    <Script file="ExpansionData\1 Classic\Dungeons.lua" />
+    <Script file="ExpansionData\1 Classic\Raids.lua" />
 
-    <!-- <Script file="ExpansionData\2 The Burning Crusade\Expansion.lua" /> -->
-    <!-- <Script file="ExpansionData\2 The Burning Crusade\Dungeons.lua" /> -->
-    <!-- <Script file="ExpansionData\2 The Burning Crusade\Raids.lua" /> -->
+    <Script file="ExpansionData\2 The Burning Crusade\Expansion.lua" />
+    <Script file="ExpansionData\2 The Burning Crusade\Dungeons.lua" />
+    <Script file="ExpansionData\2 The Burning Crusade\Raids.lua" />
 
-    <!-- <Script file="ExpansionData\3 Wrath of the Lich King\Expansion.lua" /> -->
-    <!-- <Script file="ExpansionData\3 Wrath of the Lich King\Dungeons.lua" /> -->
-    <!-- <Script file="ExpansionData\3 Wrath of the Lich King\Raids.lua" /> -->
+    <Script file="ExpansionData\3 Wrath of the Lich King\Expansion.lua" />
+    <Script file="ExpansionData\3 Wrath of the Lich King\Dungeons.lua" />
+    <Script file="ExpansionData\3 Wrath of the Lich King\Raids.lua" />
 
-    <!-- <Script file="ExpansionData\4 Cataclysm\Expansion.lua" /> -->
-    <!-- <Script file="ExpansionData\4 Cataclysm\Dungeons.lua" /> -->
-    <!-- <Script file="ExpansionData\4 Cataclysm\Raids.lua" /> -->
+    <Script file="ExpansionData\4 Cataclysm\Expansion.lua" />
+    <Script file="ExpansionData\4 Cataclysm\Dungeons.lua" />
+    <Script file="ExpansionData\4 Cataclysm\Raids.lua" />
 
-    <!-- <Script file="ExpansionData\5 Mists of Pandaria\Expansion.lua" /> -->
-    <!-- <Script file="ExpansionData\5 Mists of Pandaria\Scenarios.lua" /> -->
-    <!-- <Script file="ExpansionData\5 Mists of Pandaria\Dungeons.lua" /> -->
-    <!-- <Script file="ExpansionData\5 Mists of Pandaria\Raids.lua" /> -->
+    <Script file="ExpansionData\5 Mists of Pandaria\Expansion.lua" />
+    <Script file="ExpansionData\5 Mists of Pandaria\Scenarios.lua" />
+    <Script file="ExpansionData\5 Mists of Pandaria\Dungeons.lua" />
+    <Script file="ExpansionData\5 Mists of Pandaria\Raids.lua" />
 
-    <!-- <Script file="ExpansionData\6 Warlords of Draenor\Expansion.lua" /> -->
-    <!-- <Script file="ExpansionData\6 Warlords of Draenor\Dungeons.lua" /> -->
-    <!-- <Script file="ExpansionData\6 Warlords of Draenor\Raids.lua" /> -->
+    <Script file="ExpansionData\6 Warlords of Draenor\Expansion.lua" />
+    <Script file="ExpansionData\6 Warlords of Draenor\Dungeons.lua" />
+    <Script file="ExpansionData\6 Warlords of Draenor\Raids.lua" />
 
     <Script file="ExpansionData\7 Legion\Expansion.lua" />
     <Script file="ExpansionData\7 Legion\Dungeons.lua" />

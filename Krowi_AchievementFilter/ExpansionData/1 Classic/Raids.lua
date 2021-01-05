@@ -1,28 +1,55 @@
-local raids, raid;
+local _, addon = ...; -- Global addon namespace
+addon.Classic.Raids = {}; -- Global expansion Raids namespace
+local raids = addon.Classic.Raids; -- Local expansion Raids namespace
 
-raids = Xpack_Classic:AddCategory(KrowiAF.AchievementSubsection.Raids);
-raids:AddAchievementIDs({1285}); -- Overarching achievements
+raids.MoltenCore = {}; -- 1.1
+function raids.MoltenCore.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(741);
+    raid:AddAchievementIDs(686); -- Defeat the bosses in X
+end
 
--- 1.1
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(741)); -- Molten Core
-    raid:AddAchievementIDs({686}); -- Defeat the bosses in X
+raids.OnyxiasLair = {}; -- 1.1
+function raids.OnyxiasLair.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(760);
+    raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
+    raid:AddAchievementIDsUnobtainable(684); -- Defeat the bosses in X
+end
 
-    raid = raids:AddChild(KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(760) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Onyxia's Lair - revamped in Wrath of the Lish King 3.2
-    raid:AddAchievementFOSIDs({684}); -- Defeat the bosses in X
+raids.BlackwingLair = {}; -- 1.6
+function raids.BlackwingLair.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(742);
+    raid:AddAchievementIDs(685); -- Defeat the bosses in X
+end
 
--- 1.6
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(742)); -- Blackwing Lair
-    raid:AddAchievementIDs({685}); -- Defeat the bosses in X
+raids.ZulGurub = {}; -- 1.7
+function raids.ZulGurub.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(76);
+    raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
+    raid:AddAchievementIDsUnobtainable(560, 688); -- Defeat the bosses in X (Unobtainable)
+    raid:AddAchievementIDsUnobtainable(880, 881); -- Mounts (Unobtainable)
+end
 
--- 1.7
-    raid = raids:AddChild(KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(76) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Zul'Gurub - revamped in Cataclysm 4.1
-    raid:AddAchievementFOSIDs({560, 688}); -- Defeat the bosses in X (Unobtainable)
-    raid:AddAchievementFOSIDs({880, 881}); -- Mounts (Unobtainable)
+raids.RuinsOfAhnQiraj = {}; -- 1.9
+function raids.RuinsOfAhnQiraj.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(743);
+    raid:AddAchievementIDs(689); -- Defeat the bosses in X
+end
 
--- 1.9
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(743)); -- Ruins of Ahn'Qiraj
-    raid:AddAchievementIDs({689}); -- Defeat the bosses in X
+raids.TempleOfAhnQiraj = {}; -- 1.9
+function raids.TempleOfAhnQiraj.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(744);
+    raid:AddAchievementIDs(687); -- Defeat the bosses in X
+    raid:AddAchievementFull(424, true); -- Mounts (Obtainable)
+end
 
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(744)); -- Temple of Ahn'Qiraj
-    raid:AddAchievementIDs({687}); -- Defeat the bosses in X
-    raid:AddAchievement(424, true); -- Mounts (Obtainable)
+function raids.Load(expansion)
+    local catRaids = expansion:AddCatRaids();
+    catRaids:AddAchievementIDs(1285); -- Overarching achievements
+
+    raids.MoltenCore.Load(catRaids);
+    raids.OnyxiasLair.Load(catRaids);
+    raids.BlackwingLair.Load(catRaids);
+    raids.ZulGurub.Load(catRaids);
+    raids.RuinsOfAhnQiraj.Load(catRaids);
+    raids.TempleOfAhnQiraj.Load(catRaids);
+end

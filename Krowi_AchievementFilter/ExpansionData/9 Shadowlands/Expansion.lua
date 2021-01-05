@@ -11,4 +11,6 @@ function shadowlands.Load()
     shadowlands.Dungeons.Load(expansion);
     shadowlands.Raids.Load(expansion);
     shadowlands.PetBattles.Load(expansion);
+
+    addon.Diagnostics.DebugTable(shadowlands.Zones, nil, true);
 end

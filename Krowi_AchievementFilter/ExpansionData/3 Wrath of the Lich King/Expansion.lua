@@ -1,5 +1,12 @@
-local _, addon = ...;
+local _, addon = ...; -- Global addon namespace
+addon.WrathOfTheLichKing = {}; -- Global expansion namespace
+local wrathOfTheLichKing = addon.WrathOfTheLichKing; -- Local expansion namespace
+local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
 
-Xpack_WotLK = KrowiAF.AchievementCategory:New(GetCategoryInfo(14866)); -- Wrath of the Lich King
--- Xpack_WotLK:AddAchievementIDs({}); -- Overarching achievements
-tinsert(addon.Data, Xpack_WotLK);
+function wrathOfTheLichKing.Load()
+    local expansion = achCat:NewCatInfo(14866);
+    tinsert(addon.Data, expansion);
+
+    wrathOfTheLichKing.Dungeons.Load(expansion);
+    wrathOfTheLichKing.Raids.Load(expansion);
+end

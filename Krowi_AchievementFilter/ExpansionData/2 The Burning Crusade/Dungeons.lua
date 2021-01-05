@@ -1,56 +1,123 @@
-local dungeons, dungeon;
+local _, addon = ...; -- Global addon namespace
+addon.TheBurningCrusade.Dungeons = {}; -- Global expansion Dungeons namespace
+local dungeons = addon.TheBurningCrusade.Dungeons; -- Local expansion Dungeons namespace
 
-dungeons = Xpack_TBC:AddCategory(KrowiAF.AchievementSubsection.Dungeons);
-dungeons:AddAchievementIDs({1284, 1287}); -- Overarching achievements
+dungeons.HellfireRamparts = {} -- 2.0
+function dungeons.HellfireRamparts.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(248);
+    dungeon:AddAchievementIDs(647, 667); -- Defeat the bosses in X
+end
 
--- 2.0
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(248)); -- Hellfire Ramparts
-    dungeon:AddAchievementIDs({647, 667}); -- Defeat the bosses in X
+dungeons.TheBloodFurnace = {} -- 2.0
+function dungeons.TheBloodFurnace.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(256);
+    dungeon:AddAchievementIDs(648, 668); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(256)); -- The Blood Furnace
-    dungeon:AddAchievementIDs({648, 668}); -- Defeat the bosses in X
+dungeons.TheShatteredHalls = {} -- 2.0
+function dungeons.TheShatteredHalls.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(259);
+    dungeon:AddAchievementIDs(657, 678); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(259)); -- The Shattered Halls
-    dungeon:AddAchievementIDs({657, 678}); -- Defeat the bosses in X
+dungeons.TheSlavePens = {} -- 2.0
+function dungeons.TheSlavePens.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(260);
+    dungeon:AddAchievementIDs(649, 669); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(260)); -- The Slave Pens
-    dungeon:AddAchievementIDs({649, 669}); -- Defeat the bosses in X
+dungeons.TheUnderbog = {} -- 2.0
+function dungeons.TheUnderbog.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(262);
+    dungeon:AddAchievementIDs(650, 670); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(262)); -- The Underbog
-    dungeon:AddAchievementIDs({650, 670}); -- Defeat the bosses in X
+dungeons.TheSteamvault = {} -- 2.0
+function dungeons.TheSteamvault.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(261);
+    dungeon:AddAchievementIDs(656, 677); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(261)); -- The Steamvault
-    dungeon:AddAchievementIDs({656, 677}); -- Defeat the bosses in X
+dungeons.ManaTombs = {} -- 2.0
+function dungeons.ManaTombs.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(250);
+    dungeon:AddAchievementIDs(651, 671); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(250)); -- Mana-Tombs
-    dungeon:AddAchievementIDs({651, 671}); -- Defeat the bosses in X
+dungeons.AuchenaiCrypts = {} -- 2.0
+function dungeons.AuchenaiCrypts.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(247);
+    dungeon:AddAchievementIDs(666, 672); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(247)); -- Auchenai Crypts
-    dungeon:AddAchievementIDs({666, 672}); -- Defeat the bosses in X
+dungeons.SethekkHalls = {} -- 2.0
+function dungeons.SethekkHalls.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(252);
+    dungeon:AddAchievementIDs(653, 674); -- Defeat the bosses in X
+    dungeon:AddAchievementFull(883, true); -- Mounts (Obtainable)
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(252)); -- Sethekk Halls
-    dungeon:AddAchievementIDs({653, 674}); -- Defeat the bosses in X
-    dungeon:AddAchievement(883, true); -- Mounts (Obtainable)
+dungeons.ShadowLabyrinth = {} -- 2.0
+function dungeons.ShadowLabyrinth.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(253);
+    dungeon:AddAchievementIDs(654, 675); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(253)); -- Shadow Labyrinth
-    dungeon:AddAchievementIDs({654, 675}); -- Defeat the bosses in X
+dungeons.OldHillsbradFoothills = {} -- 2.0
+function dungeons.OldHillsbradFoothills.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(251);
+    dungeon:AddAchievementIDs(652, 673); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(251)); -- Old Hillsbrad Foothills
-    dungeon:AddAchievementIDs({652, 673}); -- Defeat the bosses in X
+dungeons.TheBlackMorass = {} -- 2.0
+function dungeons.TheBlackMorass.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(255);
+    dungeon:AddAchievementIDs(655, 676); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(255)); -- The Black Morass
-    dungeon:AddAchievementIDs({655, 676}); -- Defeat the bosses in X
+dungeons.TheMechanar = {} -- 2.0
+function dungeons.TheMechanar.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(258);
+    dungeon:AddAchievementIDs(658, 679); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(258)); -- The Mechanar
-    dungeon:AddAchievementIDs({658, 679}); -- Defeat the bosses in X
+dungeons.TheBotanica = {} -- 2.0
+function dungeons.TheBotanica.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(257);
+    dungeon:AddAchievementIDs(659, 680); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(257)); -- The Botanica
-    dungeon:AddAchievementIDs({659, 680}); -- Defeat the bosses in X
+dungeons.TheArcatraz = {} -- 2.0
+function dungeons.TheArcatraz.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(254);
+    dungeon:AddAchievementIDs(660, 681); -- Defeat the bosses in X
+end
 
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(254)); -- The Arcatraz
-    dungeon:AddAchievementIDs({660, 681}); -- Defeat the bosses in X
+dungeons.MagistersTerrace = {} -- 2.4
+function dungeons.MagistersTerrace.Load(catDungeons)
+	local dungeon = catDungeons:AddCatInstanceInfo(249);
+    dungeon:AddAchievementIDs(661, 682); -- Defeat the bosses in X
+    dungeon:AddAchievementFull(884, true); -- Mounts (Obtainable)
+end
 
--- 2.4
-    dungeon = dungeons:AddChild(KrowiAF.AchievementCategory:NewEJ(249)); -- Magisters' Terrace
-    dungeon:AddAchievementIDs({661, 682}); -- Defeat the bosses in X
-    dungeon:AddAchievement(884, true); -- Mounts (Obtainable)
+function dungeons.Load(expansion)
+    local catDungeons = expansion:AddCatDungeons();
+    catDungeons:AddAchievementIDs(1284, 1287); -- Overarching achievements
+
+    dungeons.HellfireRamparts.Load(catDungeons);
+    dungeons.TheBloodFurnace.Load(catDungeons);
+    dungeons.TheShatteredHalls.Load(catDungeons);
+    dungeons.TheSlavePens.Load(catDungeons);
+    dungeons.TheUnderbog.Load(catDungeons);
+    dungeons.TheSteamvault.Load(catDungeons);
+    dungeons.ManaTombs.Load(catDungeons);
+    dungeons.AuchenaiCrypts.Load(catDungeons);
+    dungeons.SethekkHalls.Load(catDungeons);
+    dungeons.ShadowLabyrinth.Load(catDungeons);
+    dungeons.OldHillsbradFoothills.Load(catDungeons);
+    dungeons.TheBlackMorass.Load(catDungeons);
+    dungeons.TheMechanar.Load(catDungeons);
+    dungeons.TheBotanica.Load(catDungeons);
+    dungeons.TheArcatraz.Load(catDungeons);
+    dungeons.MagistersTerrace.Load(catDungeons);
+end

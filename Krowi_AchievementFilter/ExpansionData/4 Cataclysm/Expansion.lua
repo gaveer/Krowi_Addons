@@ -1,5 +1,12 @@
-local _, addon = ...;
+local _, addon = ...; -- Global addon namespace
+addon.Cataclysm = {}; -- Global expansion namespace
+local cataclysm = addon.Cataclysm; -- Local expansion namespace
+local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
 
-Xpack_Cata = KrowiAF.AchievementCategory:New(GetCategoryInfo(15072)); -- Cataclysm
-Xpack_Cata:AddAchievementTest(5506,nil,nil,false); -- Overarching achievements
-tinsert(addon.Data, Xpack_Cata);
+function cataclysm.Load()
+    local expansion = achCat:NewCatInfo(15072);
+    tinsert(addon.Data, expansion);
+
+    cataclysm.Dungeons.Load(expansion);
+    cataclysm.Raids.Load(expansion);
+end

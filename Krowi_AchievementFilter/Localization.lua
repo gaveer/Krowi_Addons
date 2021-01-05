@@ -17,4 +17,5 @@ AF_ICON_TOOLTIP_RIGHT_CLICK = "Right-click " .. AF_COLOR .. "for Options.|r";
 AF_TAB_BUTTON_TEXT = "Achievement Filter";
 
 AF_CATEGORY_ZONES = "Zones";
+AF_CATEGORY_SCENARIOS = "Scenarios";
 AF_XUFU = "Xu-Fu's Pet Battle Strategies";

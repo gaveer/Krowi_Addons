@@ -5,8 +5,7 @@ local achievement = objects.Achievement; -- Local achievement object
 
 achievement.__index = achievement; -- Used to support OOP like code
 
--- Create a new achievement
-function achievement:New(id, obtainable, hasWowheadLink, hasIATLink)
+function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Create a new achievement
     local self = {};
     setmetatable(self, achievement);
     self.ID = id or 0;

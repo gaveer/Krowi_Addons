@@ -1,5 +1,13 @@
-local _, addon = ...;
+local _, addon = ...; -- Global addon namespace
+addon.MistsOfPandaria = {}; -- Global expansion namespace
+local mistsOfPandaria = addon.MistsOfPandaria; -- Local expansion namespace
+local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
 
-Xpack_MoP = KrowiAF.AchievementCategory:New(GetCategoryInfo(15164)); -- Mists of Pandaria
--- Xpack_MoP:AddAchievementIDs({}); -- Overarching achievements
-tinsert(addon.Data, Xpack_MoP);
+function mistsOfPandaria.Load()
+    local expansion = achCat:NewCatInfo(15164);
+    tinsert(addon.Data, expansion);
+
+    mistsOfPandaria.Scenarios.Load(expansion);
+    mistsOfPandaria.Dungeons.Load(expansion);
+    mistsOfPandaria.Raids.Load(expansion);
+end

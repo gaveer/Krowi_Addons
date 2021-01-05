@@ -1,5 +1,12 @@
-local _, addon = ...;
+local _, addon = ...; -- Global addon namespace
+addon.WarlordsOfDreanor = {}; -- Global expansion namespace
+local warlordsOfDreanor = addon.WarlordsOfDreanor; -- Local expansion namespace
+local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
 
-Xpack_WoD = KrowiAF.AchievementCategory:New(GetCategoryInfo(15233)); -- Warlords of Draenor
--- Xpack_WoD:AddAchievementIDs({}); -- Overarching achievements
-tinsert(addon.Data, Xpack_WoD);
+function warlordsOfDreanor.Load()
+    local expansion = achCat:NewCatInfo(15233);
+    tinsert(addon.Data, expansion);
+
+    warlordsOfDreanor.Dungeons.Load(expansion);
+    warlordsOfDreanor.Raids.Load(expansion);
+end

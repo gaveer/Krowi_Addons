@@ -9,46 +9,46 @@ KrowiAF.SelectedAchievement = nil; -- Issue #6: Fix
 
 local UI_AchievementsWidth = 504;
 
-KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
+addon.GUI.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 
 -- [[ Blizzard_AchievementUI.lua derived OnEvent, OnShow and OnHide functions + Show and Hide the ScrollBar ]] --
 
-	function KrowiAF.AchievementsFrame.OnEvent(self, event, ...) -- WIP - more Events to add -- AchievementFrameAchievements_OnLoad + AchievementFrameAchievements_OnEvent
+	function addon.GUI.AchievementsFrame.OnEvent(self, event, ...) -- WIP - more Events to add -- AchievementFrameAchievements_OnLoad + AchievementFrameAchievements_OnEvent
 		if Kiosk.IsEnabled() then -- Not sure what this does but keeping it
 			return;
 		end
 		
 		if event == "ADDON_LOADED" then
 			local addonName = ...;
-			addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.OnEvent - " .. event .. " - " .. addonName);
+			addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.OnEvent - " .. event .. " - " .. addonName);
 			
 			if addonName and addonName == "Krowi_AchievementFilter" then
 
 				-- [[ OnLoad ]] --
-					tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.AchievementsFrame:GetName());
+					tinsert(ACHIEVEMENTFRAME_SUBFRAMES, addon.GUI.AchievementsFrame:GetName());
 					self:Hide();
 
-					KrowiAF.AchievementsFrame.Container.ScrollBar.Show = function(self)
-						KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 504, 8);
+					addon.GUI.AchievementsFrame.Container.ScrollBar.Show = function(self)
+						addon.GUI.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 504, 8);
 					end;
 
-					KrowiAF.AchievementsFrame.Container.ScrollBar.Hide = function(self)
-						KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 530, 8);
+					addon.GUI.AchievementsFrame.Container.ScrollBar.Hide = function(self)
+						addon.GUI.AchievementsFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 530, 8);
 					end;
 					
-					KrowiAF.AchievementsFrame.Container.ScrollBar.trackBG:Show();
-					KrowiAF.AchievementsFrame.Container.update = KrowiAF.AchievementsFrame.Update;
-					HybridScrollFrame_CreateButtons(KrowiAF.AchievementsFrame.Container, "KrowiAF_AchievementTemplate", 0, -2);
+					addon.GUI.AchievementsFrame.Container.ScrollBar.trackBG:Show();
+					addon.GUI.AchievementsFrame.Container.update = addon.GUI.AchievementsFrame.Update;
+					HybridScrollFrame_CreateButtons(addon.GUI.AchievementsFrame.Container, "KrowiAF_AchievementTemplate", 0, -2);
 
 					-- Register also right clicks to the achievements buttons
-					for _, button in next, KrowiAF.AchievementsFrame.Container.buttons do
+					for _, button in next, addon.GUI.AchievementsFrame.Container.buttons do
 						button:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 					end
 					
-					hooksecurefunc("AchievementFrameAchievements_ForceUpdate", KrowiAF.AchievementsFrame.ForceUpdate); -- Issue #3: Fix
+					hooksecurefunc("AchievementFrameAchievements_ForceUpdate", addon.GUI.AchievementsFrame.ForceUpdate); -- Issue #3: Fix
 
 					if Overachiever then
-						Overachiever.UI_HookAchButtons(KrowiAF.AchievementsFrame.Container.buttons, KrowiAF.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
+						Overachiever.UI_HookAchButtons(addon.GUI.AchievementsFrame.Container.buttons, addon.GUI.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
 					end
 			
 				-- [[ OnEvent ]] --
@@ -64,8 +64,8 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 					-- elseif event == "ACHIEVEMENT_EARNED" then -- Not sure if this is going to work ...
 					-- 	local achievementID = ...;
 					-- 	KrowiAF.AchievementFrameCategories_GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
-					-- 	KrowiAF.CategoriesFrame.Update();
-					-- 	KrowiAF.CategoriesFrame.UpdateTooltip();
+					-- 	addon.GUI.CategoriesFrame.Update();
+					-- 	addon.GUI.CategoriesFrame.UpdateTooltip();
 					-- 	-- This has to happen before AchievementFrameAchievements_ForceUpdate() in order to achieve the behavior we want, since it clears the selection for progressive achievements.
 					-- 	local selection = KrowiAF.SelectedAchievement;
 					-- 	KrowiAF.AchievementFrameAchievements_ForceUpdate();
@@ -106,11 +106,11 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 					-- 	-- AchievementFrame.searchBox.fullSearchFinished = true;
 					-- 	-- AchievementFrame_UpdateSearch(self);
 			elseif addonName and addonName == "Overachiever" then
-				Overachiever.UI_HookAchButtons(KrowiAF.AchievementsFrame.Container.buttons, KrowiAF.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
+				Overachiever.UI_HookAchButtons(addon.GUI.AchievementsFrame.Container.buttons, addon.GUI.AchievementsFrame.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
 			end
 		end
 	end
-	KrowiAF.AchievementsFrame:SetScript("OnEvent", KrowiAF.AchievementsFrame.OnEvent);
+	addon.GUI.AchievementsFrame:SetScript("OnEvent", addon.GUI.AchievementsFrame.OnEvent);
 
 
 	-- local function updateTrackedAchievements (...)
@@ -121,12 +121,12 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 	-- 	end
 	-- end
 
-	function KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide(self, func, achievementsWidth, achievementsButtonOffset) -- OK
-		addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.Container.ScrollBar.Show_Hide");
+	function addon.GUI.AchievementsFrame.Container.ScrollBar.Show_Hide(self, func, achievementsWidth, achievementsButtonOffset) -- OK
+		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.Container.ScrollBar.Show_Hide");
 
 		UI_AchievementsWidth = achievementsWidth;
-		KrowiAF.AchievementsFrame:SetWidth(achievementsWidth);
-		for _, button in next, KrowiAF.AchievementsFrame.Container.buttons do
+		addon.GUI.AchievementsFrame:SetWidth(achievementsWidth);
+		for _, button in next, addon.GUI.AchievementsFrame.Container.buttons do
 			button:SetWidth(achievementsWidth - achievementsButtonOffset);
 		end
 		func(self);
@@ -161,11 +161,11 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 
 -- [[ Blizzard_AchievementUI.lua derived ]] --
 
-	function KrowiAF.AchievementsFrame.Update() -- OK -- AchievementFrameAchievements_Update
-		addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.Update");
+	function addon.GUI.AchievementsFrame.Update() -- OK -- AchievementFrameAchievements_Update
+		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.Update");
 
 		local category = KrowiAF.SelectedCategory;
-		local scrollFrame = KrowiAF.AchievementsFrame.Container;
+		local scrollFrame = addon.GUI.AchievementsFrame.Container;
 
 		local offset = HybridScrollFrame_GetOffset(scrollFrame);
 		local buttons = scrollFrame.buttons;
@@ -203,10 +203,10 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	function KrowiAF.AchievementsFrame.ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate -- Issue #3: Fix
-		addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.ForceUpdate");
+	function addon.GUI.AchievementsFrame.ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate -- Issue #3: Fix
+		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.ForceUpdate");
 		
-		if not KrowiAF.AchievementsFrame:IsShown() then -- Issue #8: Fix
+		if not addon.GUI.AchievementsFrame:IsShown() then -- Issue #8: Fix
 			return;
 		end
 
@@ -221,19 +221,19 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		AchievementFrameAchievementsObjectives:Hide();
 		AchievementFrameAchievementsObjectives.id = nil;
 	
-		local buttons = KrowiAF.AchievementsFrame.Container.buttons;
+		local buttons = addon.GUI.AchievementsFrame.Container.buttons;
 		for i, button in next, buttons do
 			button.id = nil;
 		end
 	
-		KrowiAF.AchievementsFrame.Update();
+		addon.GUI.AchievementsFrame.Update();
 	end
 
-	function KrowiAF.AchievementsFrame.ClearSelection()  -- OK -- AchievementFrameAchievements_ClearSelection
-		addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.ClearSelection");
+	function addon.GUI.AchievementsFrame.ClearSelection()  -- OK -- AchievementFrameAchievements_ClearSelection
+		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.ClearSelection");
 
 		AchievementFrameAchievementsObjectives:Hide();
-		for _, button in next, KrowiAF.AchievementsFrame.Container.buttons do
+		for _, button in next, addon.GUI.AchievementsFrame.Container.buttons do
 			button:Collapse();
 			if not button:IsMouseOver() then
 				button.highlight:Hide();
@@ -249,8 +249,8 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		KrowiAF.SelectedAchievement = nil;
 	end
 
-	function KrowiAF.AchievementsFrame.SelectButton (button) -- OK -- AchievementFrameAchievements_SelectButton
-		addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.SelectButton");
+	function addon.GUI.AchievementsFrame.SelectButton (button) -- OK -- AchievementFrameAchievements_SelectButton
+		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.SelectButton");
 		
 		KrowiAF.SelectedAchievement = button.Achievement;
 		button.selected = true;
@@ -258,38 +258,38 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 		SetFocusedAchievement(button.Achievement.ID);
 	end
 
-	function KrowiAF.AchievementsFrame.FindSelection()  -- OK -- AchievementFrameAchievements_FindSelection
-		addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.FindSelection");
+	function addon.GUI.AchievementsFrame.FindSelection()  -- OK -- AchievementFrameAchievements_FindSelection
+		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.FindSelection");
 
-		local _, maxVal = KrowiAF.AchievementsFrame.Container.ScrollBar:GetMinMaxValues();
-		local scrollHeight = KrowiAF.AchievementsFrame.Container:GetHeight();
+		local _, maxVal = addon.GUI.AchievementsFrame.Container.ScrollBar:GetMinMaxValues();
+		local scrollHeight = addon.GUI.AchievementsFrame.Container:GetHeight();
 		local newHeight = 0;
-		KrowiAF.AchievementsFrame.Container.ScrollBar:SetValue(0);
+		addon.GUI.AchievementsFrame.Container.ScrollBar:SetValue(0);
 		while true do
-			for _, button in next, KrowiAF.AchievementsFrame.Container.buttons do
+			for _, button in next, addon.GUI.AchievementsFrame.Container.buttons do
 				if button.selected then
-					newHeight = KrowiAF.AchievementsFrame.Container.ScrollBar:GetValue() + KrowiAF.AchievementsFrame.Container:GetTop() - button:GetTop();
+					newHeight = addon.GUI.AchievementsFrame.Container.ScrollBar:GetValue() + addon.GUI.AchievementsFrame.Container:GetTop() - button:GetTop();
 					newHeight = min(newHeight, maxVal);
-					KrowiAF.AchievementsFrame.Container.ScrollBar:SetValue(newHeight);
+					addon.GUI.AchievementsFrame.Container.ScrollBar:SetValue(newHeight);
 					return;
 				end
 			end
-			if not KrowiAF.AchievementsFrame.Container.ScrollBar:IsVisible() or KrowiAF.AchievementsFrame.Container.ScrollBar:GetValue() == maxVal then
+			if not addon.GUI.AchievementsFrame.Container.ScrollBar:IsVisible() or addon.GUI.AchievementsFrame.Container.ScrollBar:GetValue() == maxVal then
 				return;
 			else
 				newHeight = newHeight + scrollHeight;
 				newHeight = min(newHeight, maxVal);
-				KrowiAF.AchievementsFrame.Container.ScrollBar:SetValue(newHeight);
+				addon.GUI.AchievementsFrame.Container.ScrollBar:SetValue(newHeight);
 			end
 		end
 	end
 
-	function KrowiAF.AchievementsFrame.AdjustSelection()  -- OK -- AchievementFrameAchievements_AdjustSelection
-		addon.Diagnostics.Trace("KrowiAF.AchievementsFrame.AdjustSelection");
+	function addon.GUI.AchievementsFrame.AdjustSelection()  -- OK -- AchievementFrameAchievements_AdjustSelection
+		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.AdjustSelection");
 
 		local selectedButton;
 		-- check if selection is visible
-		for _, button in next, KrowiAF.AchievementsFrame.Container.buttons do
+		for _, button in next, addon.GUI.AchievementsFrame.Container.buttons do
 			if button.selected then
 				selectedButton = button;
 				break;
@@ -300,19 +300,19 @@ KrowiAF.AchievementsFrame:RegisterEvent("ADDON_LOADED");
 			AchievementFrameAchievements_FindSelection();
 		else
 			local newHeight;
-			if ( selectedButton:GetTop() > KrowiAF.AchievementsFrame.Container:GetTop() ) then
-				newHeight = KrowiAF.AchievementsFrame.Container.ScrollBar:GetValue() + KrowiAF.AchievementsFrame.Container:GetTop() - selectedButton:GetTop();
-			elseif ( selectedButton:GetBottom() < KrowiAF.AchievementsFrame.Container:GetBottom() ) then
-				if ( selectedButton:GetHeight() > KrowiAF.AchievementsFrame.Container:GetHeight() ) then
-					newHeight = KrowiAF.AchievementsFrame.Container.ScrollBar:GetValue() + KrowiAF.AchievementsFrame.Container:GetTop() - selectedButton:GetTop();
+			if ( selectedButton:GetTop() > addon.GUI.AchievementsFrame.Container:GetTop() ) then
+				newHeight = addon.GUI.AchievementsFrame.Container.ScrollBar:GetValue() + addon.GUI.AchievementsFrame.Container:GetTop() - selectedButton:GetTop();
+			elseif ( selectedButton:GetBottom() < addon.GUI.AchievementsFrame.Container:GetBottom() ) then
+				if ( selectedButton:GetHeight() > addon.GUI.AchievementsFrame.Container:GetHeight() ) then
+					newHeight = addon.GUI.AchievementsFrame.Container.ScrollBar:GetValue() + addon.GUI.AchievementsFrame.Container:GetTop() - selectedButton:GetTop();
 				else
-					newHeight = KrowiAF.AchievementsFrame.Container.ScrollBar:GetValue() + KrowiAF.AchievementsFrame.Container:GetBottom() - selectedButton:GetBottom();
+					newHeight = addon.GUI.AchievementsFrame.Container.ScrollBar:GetValue() + addon.GUI.AchievementsFrame.Container:GetBottom() - selectedButton:GetBottom();
 				end
 			end
 			if ( newHeight ) then
-				local _, maxVal = KrowiAF.AchievementsFrame.Container.ScrollBar:GetMinMaxValues();
+				local _, maxVal = addon.GUI.AchievementsFrame.Container.ScrollBar:GetMinMaxValues();
 				newHeight = min(newHeight, maxVal);
-				KrowiAF.AchievementsFrame.Container.ScrollBar:SetValue(newHeight);
+				addon.GUI.AchievementsFrame.Container.ScrollBar:SetValue(newHeight);
 			end
 		end
 	end

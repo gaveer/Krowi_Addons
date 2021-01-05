@@ -1,38 +1,76 @@
-local raids, raid;
+local _, addon = ...; -- Global addon namespace
+addon.TheBurningCrusade.Raids = {}; -- Global expansion Raids namespace
+local raids = addon.TheBurningCrusade.Raids; -- Local expansion Raids namespace
 
-raids = Xpack_TBC:AddCategory(KrowiAF.AchievementSubsection.Raids);
-raids:AddAchievementIDs({1286}); -- Overarching achievements
+raids.Karazhan = {}; -- 2.0
+function raids.Karazhan.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(745);
+    raid:AddAchievementIDs(690); -- Defeat the bosses in X
+    raid:AddAchievementFull(882, true); -- Mounts (Obtainable)
+end
 
--- 2.0
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(745)); -- Karazhan
-    raid:AddAchievementIDs({690}); -- Defeat the bosses in X
-    raid:AddAchievement(882, true); -- Mounts (Obtainable)
+raids.GruulsLair = {}; -- 2.0
+function raids.GruulsLair.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(746);
+    raid:AddAchievementIDs(692); -- Defeat the bosses in X
+end
 
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(746)); -- Gruul's Lair
-    raid:AddAchievementIDs({692}); -- Defeat the bosses in X
+raids.MagtheridonsLair = {}; -- 2.0
+function raids.MagtheridonsLair.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(747);
+    raid:AddAchievementIDs(693); -- Defeat the bosses in X
+end
 
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(747)); -- Magtheridon's Lair
-    raid:AddAchievementIDs({693}); -- Defeat the bosses in X
+raids.SerpentshrineCavern = {}; -- 2.0
+function raids.SerpentshrineCavern.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(748);
+    raid:AddAchievementIDs(694); -- Defeat the bosses in X
+end
 
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(748)); -- Serpentshrine Cavern
-    raid:AddAchievementIDs({694}); -- Defeat the bosses in X
+raids.TheEye = {}; -- 2.0
+function raids.TheEye.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(749);
+    raid:AddAchievementIDs(696); -- Defeat the bosses in X
+    raid:AddAchievementFull(885, true); -- Mounts (Obtainable)
+end
 
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(749)); -- The Eye
-    raid:AddAchievementIDs({696}); -- Defeat the bosses in X
-    raid:AddAchievement(885, true); -- Mounts (Obtainable)
+raids.TheBattleForMountHyjal = {}; -- 2.0
+function raids.TheBattleForMountHyjal.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(750);
+    raid:AddAchievementIDs(695); -- Defeat the bosses in X
+end
 
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(750)); -- The Battle for Mount Hyjal
-    raid:AddAchievementIDs({695}); -- Defeat the bosses in X
+raids.BlackTemple = {}; -- 2.1
+function raids.BlackTemple.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(751);
+    raid:AddAchievementIDs(697); -- Defeat the bosses in X
+end
 
--- 2.1
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(751)); -- Black Temple
-    raid:AddAchievementIDs({697}); -- Defeat the bosses in X
+raids.ZulAman = {}; -- 2.3
+function raids.ZulAman.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(77);
+    raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
+    raid:AddAchievementIDsUnobtainable(691); -- Defeat the bosses in X (Unobtainable)
+    raid:AddAchievementIDsUnobtainable(430); -- Mounts (Unobtainable)
+end
 
--- 2.3
-    raid = raids:AddChild(KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(77) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Zul'Aman -  - revamped in Cataclysm 4.1
-    raid:AddAchievementFOSIDs({691}); -- Defeat the bosses in X (Unobtainable)
-    raid:AddAchievementFOSIDs({430}); -- Mounts (Unobtainable)
+raids.SunwellPlateau = {}; -- 2.4
+function raids.SunwellPlateau.Load(catRaids)
+    local raid = catRaids:AddCatInstanceInfo(752);
+    raid:AddAchievementIDs(698); -- Defeat the bosses in X
+end
 
--- 2.4
-    raid = raids:AddChild(KrowiAF.AchievementCategory:NewEJ(752)); -- Sunwell Plateau
-    raid:AddAchievementIDs({698}); -- Defeat the bosses in X
+function raids.Load(expansion)
+    local catRaids = expansion:AddCatRaids();
+    catRaids:AddAchievementIDs(1286); -- Overarching achievements
+
+    raids.Karazhan.Load(catRaids);
+    raids.GruulsLair.Load(catRaids);
+    raids.MagtheridonsLair.Load(catRaids);
+    raids.SerpentshrineCavern.Load(catRaids);
+    raids.TheEye.Load(catRaids);
+    raids.TheBattleForMountHyjal.Load(catRaids);
+    raids.BlackTemple.Load(catRaids);
+    raids.ZulAman.Load(catRaids);
+    raids.SunwellPlateau.Load(catRaids);
+end

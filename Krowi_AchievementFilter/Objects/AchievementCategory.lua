@@ -5,8 +5,7 @@ local achievementCategory = objects.AchievementCategory; -- Local achievement ca
 
 achievementCategory.__index = achievementCategory; -- Used to support OOP like code
 
--- Create a new achievement category
-function achievementCategory:New(name)
+function achievementCategory:New(name) -- Create a new achievement category
     local self = {};
     setmetatable(self, achievementCategory);
     self.Name = name or "Unknown";
@@ -14,13 +13,11 @@ function achievementCategory:New(name)
     return self;
 end
 
--- Create a new achievement category using GetCategoryInfo(id)
-function achievementCategory:NewCatInfo(id)
+function achievementCategory:NewCatInfo(id) -- Create a new achievement category using GetCategoryInfo(id)
     return achievementCategory:New(GetCategoryInfo(id));
 end
 
--- Add a child achievement category to an achievement category
-function achievementCategory:AddCategory(category)
+function achievementCategory:AddCategory(category) -- Add a child achievement category to an achievement category
     if self.Children == nil then
         self.Children = {};
     end
@@ -30,8 +27,7 @@ function achievementCategory:AddCategory(category)
     return category;
 end
 
--- Add an achievement to an achievement category
-function achievementCategory:AddAchievement(achievement)
+function achievementCategory:AddAchievement(achievement) -- Add an achievement to an achievement category
     if self.Achievements == nil then
         self.Achievements = {};
     end
@@ -39,129 +35,76 @@ function achievementCategory:AddAchievement(achievement)
     return achievement;
 end
 
--- Add a child Zones achievement category to an achievement category
-function achievementCategory:AddCatZones()
+function achievementCategory:AddCatZones() -- Add a child Zones achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(AF_CATEGORY_ZONES));
 end
 
--- Add a child Quests achievement category to an achievement category
-function achievementCategory:AddCatQuests()
+function achievementCategory:AddCatQuests() -- Add a child Quests achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(GetCategoryInfo(15447))); -- Achievement_Category table
 end
 
--- Add a child Exploration achievement category to an achievement category
-function achievementCategory:AddCatExploration()
+function achievementCategory:AddCatExploration() -- Add a child Exploration achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(GetCategoryInfo(97))); -- Achievement_Category table
 end
 
--- Add a child PvP achievement category to an achievement category
-function achievementCategory:AddCatPvP()
+function achievementCategory:AddCatPvP() -- Add a child PvP achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(GetCategoryInfo(15270))); -- Achievement_Category table
 end
 
--- Add a child Reputation achievement category to an achievement category
-function achievementCategory:AddCatReputation()
+function achievementCategory:AddCatReputation() -- Add a child Reputation achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(GetCategoryInfo(15273))); -- Achievement_Category table
 end
 
--- Add a child Dungeons achievement category to an achievement category
-function achievementCategory:AddCatDungeons()
+function achievementCategory:AddCatDungeons() -- Add a child Dungeons achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(GetCategoryInfo(15272))); -- Achievement_Category table
 end
 
--- Add a child Raids achievement category to an achievement category
-function achievementCategory:AddCatRaids()
+function achievementCategory:AddCatRaids() -- Add a child Raids achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(GetCategoryInfo(15271))); -- Achievement_Category table
 end
 
--- Add a child Pet Battles achievement category to an achievement category
-function achievementCategory:AddCatPetBattles()
+function achievementCategory:AddCatPetBattles() -- Add a child Pet Battles achievement category to an achievement category
     return self:AddCategory(achievementCategory:New(GetCategoryInfo(15117))); -- Achievement_Category table
 end
 
--- Add a child zone achievement category using C_Map.GetMapInfo(id).name to an achievement category
-function achievementCategory:AddCatMapInfo(id)
+function achievementCategory:AddCatMapInfo(id) -- Add a child zone achievement category using C_Map.GetMapInfo(id).name to an achievement category
     return self:AddCategory(achievementCategory:New(C_Map.GetMapInfo(id).name)); -- UiMap table
 end
 
--- Add a child instance achievement category using EJ_GetInstanceInfo(id) to an achievement category
-function achievementCategory:AddCatInstanceInfo(id)
+function achievementCategory:AddCatInstanceInfo(id) -- Add a child instance achievement category using EJ_GetInstanceInfo(id) to an achievement category
     return self:AddCategory(achievementCategory:New(EJ_GetInstanceInfo(id))); -- JournalInstance table
 end
 
--- Add an achievement to an achievement category
-function achievementCategory:AddAchievementFull(id, obtainable, hasWowheadLink, hasIATLink, xuFuLink)
+function achievementCategory:AddCatDifficulty10() -- Add a child difficulty achievement category using GetDifficultyInfo(3) to an achievement category
+    return self:AddCategory(achievementCategory:New(GetDifficultyInfo(3))); -- Difficulty table
+end
+
+function achievementCategory:AddCatDifficulty25() -- Add a child difficulty achievement category using GetDifficultyInfo(4) to an achievement category
+    return self:AddCategory(achievementCategory:New(GetDifficultyInfo(4))); -- Difficulty table
+end
+
+function achievementCategory:AddCatLFGDungeonInfo(id) -- Add a child instance achievement category using GetLFGDungeonInfo(id) to an achievement category
+    return self:AddCategory(achievementCategory:New(GetLFGDungeonInfo(id))); -- LFGDungeons table
+end
+
+function achievementCategory:AddAchievementFull(id, obtainable, hasWowheadLink, hasIATLink, xuFuLink) -- Add an achievement to an achievement category
     return self:AddAchievement(addon.Objects.Achievement:New(id, obtainable, hasWowheadLink, hasIATLink, xuFuLink));
 end
 
--- Add a variable number of achievements from achievement IDs to an achievement category
-function achievementCategory:AddAchievementIDs(...)
+function achievementCategory:AddAchievementIDs(...) -- Add a variable number of achievements from achievement IDs to an achievement category
     for _, id in next, {...} do
         self:AddAchievement(addon.Objects.Achievement:New(id));
     end
 end
 
--- Add a variable number of unobtainable achievements from achievement IDs to an achievement category
-function achievementCategory:AddAchievementIDsUnobtainable(...)
+function achievementCategory:AddAchievementIDsUnobtainable(...) -- Add a variable number of unobtainable achievements from achievement IDs to an achievement category
     for _, id in next, {...} do
         self:AddAchievement(addon.Objects.Achievement:New(id, false));
     end
 end
 
--- Add a variable number of achievements from achievement IDs to an achievement category with IAT links active
-function achievementCategory:AddAchievementIDsWithIATLink(...)
+function achievementCategory:AddAchievementIDsWithIATLink(...) -- Add a variable number of achievements from achievement IDs to an achievement category with IAT links active
     for _, id in next, {...} do
         self:AddAchievement(addon.Objects.Achievement:New(id, nil, nil, true));
     end
 end
-
-
--- Legacy code to be removed!!!!!
--- function KrowiAF.AchievementCategory:NewEJ(id)
---     return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id)); -- JournalInstance table
--- end
-
--- function KrowiAF.AchievementCategory:NewLFG(id)
---     return KrowiAF.AchievementCategory:New(GetLFGDungeonInfo(id)); -- LFGDungeons table
--- end
-
--- function KrowiAF.AchievementCategory:AddChild(child) -- to be removed
---     tinsert(self.Children, child);
---     child.Parent = self;
---     child.Level = self.Level + 1;
---     return child;
--- end
-
--- -- These need to be functions to always get a new one when asked for
--- KrowiAF.AchievementSubsection = { -- Needs a name, it's a collection of preset achievement categories
---     Zones = function() return KrowiAF.AchievementCategory:New(AF_CATEGORY_ZONES) end, -- Zones
---     Quests = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15447)) end, -- Achievement_Category table - Quests
---     Exploration = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(97)) end, -- Achievement_Category table - Exploration
---     PvP = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15270)) end, -- Achievement_Category table - Player vs. Player
---     Reputation = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15273)) end, -- Achievement_Category table - Reputation
---     Raids = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15271)) end, -- Achievement_Category table - Raids
---     Dungeons = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15272)) end, -- Achievement_Category table - Dungeons
---     PetBattles = function() return KrowiAF.AchievementCategory:New(GetCategoryInfo(15117)) end, -- Achievement_Category table - Pet Battles
---     UiMapNameFromID = function(id) return KrowiAF.AchievementCategory:New(C_Map.GetMapInfo(id).name) end, -- UiMap table - Used for zone names
---     JournalInstanceNameFromID = function(id) return KrowiAF.AchievementCategory:New(EJ_GetInstanceInfo(id)) end, -- JournalInstance table - Used for raid and dungeon names
---     LFGDungeonsNameFromID = function(id) return KrowiAF.AchievementCategory:New(GetLFGDungeonInfo(id)) end, -- LFGDungeons table - Used for all that has no JournalInstance table record
---  };
-
-
--- function KrowiAF.AchievementCategory:AddAchievementIDs(achievementIDs)
---     for k, id in pairs(achievementIDs) do
---         tinsert(self.Achievements, addon.Objects.Achievement:New(id));
---     end
--- end
-
--- function KrowiAF.AchievementCategory:AddAchievementFOSIDs(achievementIDs)
---     for k, id in pairs(achievementIDs) do
---         tinsert(self.Achievements, addon.Objects.Achievement:New(id, false));
---     end
--- end
-
--- function KrowiAF.AchievementCategory:AddAchievements(achievements)
---     for k, achievement in pairs(achievements) do
---         tinsert(self.Achievements, achievement);
---     end
--- end

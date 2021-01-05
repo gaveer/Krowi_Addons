@@ -6,6 +6,6 @@ local _, addon = ...;
     function KrowiAF_AchievementCategoryButton_OnClick(button) -- OK -- line 746
         addon.Diagnostics.Trace("KrowiAF_AchievementCategoryButton_OnClick");
         
-        KrowiAF.CategoriesFrame.SelectButton(button);
-        KrowiAF.CategoriesFrame.Update();
+        addon.GUI.CategoriesFrame.SelectButton(button);
+        addon.GUI.CategoriesFrame.Update();
     end

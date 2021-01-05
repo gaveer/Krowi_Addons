@@ -13,6 +13,10 @@ addon.Faction.IsNeutral = UnitFactionGroup("player") == "Neutral";
 
 KrowiAF = {}; -- Still needed for legacy purposes, can be removed after full rewrite
 
+function addon.InGuildView()
+    return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
+end
+
 local loadHelper = CreateFrame("Frame");
 loadHelper:RegisterEvent("ADDON_LOADED");
 
@@ -21,9 +25,17 @@ function loadHelper:OnEvent(event, arg1)
         addon.Diagnostics.Load();
         addon.Options.Load();
         addon.Icon.Load();
+
+        addon.Classic.Load();
+        addon.TheBurningCrusade.Load();
+        addon.WrathOfTheLichKing.Load();
+        addon.Cataclysm.Load();
+        addon.MistsOfPandaria.Load();
+        addon.WarlordsOfDreanor.Load();
         addon.Legion.Load();
         addon.BattleForAzeroth.Load();
         addon.Shadowlands.Load();
+
         self:UnregisterEvent("ADDON_LOADED");
     end
 end

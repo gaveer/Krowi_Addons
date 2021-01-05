@@ -45,7 +45,6 @@ function raids.CrucibleOfStorms.Load(catRaids)
     raid:AddAchievementIDsUnobtainable(13418, 13419); -- Feats of Strength (Unobtainable)
 end
 
-
 raids.EternalPalace = {}; -- 8.2
 function raids.EternalPalace.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(1179);
@@ -54,7 +53,6 @@ function raids.EternalPalace.Load(catRaids)
     raid:AddAchievementIDs(13726, 13728, 13727, 13729, 13730, 13731, 13732, 13733); -- Defeat X on Mythic Difficulty
     raid:AddAchievementIDsUnobtainable(13784, 13785); -- Feats of Strength (Unobtainable)
 end
-
 
 raids.Nyalotha = {}; -- 8.3
 function raids.Nyalotha.Load(catRaids)

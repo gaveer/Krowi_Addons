@@ -5,51 +5,51 @@ KrowiAF.SelectedCategory = {};
 
 local UI_CategoriesWidth = 175;
 
-KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
+addon.GUI.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 
 -- [[ Blizzard_AchievementUI.lua derived OnEvent, OnShow and OnHide functions + Show and Hide the ScrollBar ]] --
 
-	function KrowiAF.CategoriesFrame.OnEvent(self, event, ...) -- OK -- AchievementFrameCategories_OnLoad + AchievementFrameCategories_OnEvent
+	function addon.GUI.CategoriesFrame.OnEvent(self, event, ...) -- OK -- AchievementFrameCategories_OnLoad + AchievementFrameCategories_OnEvent
 		if event == "ADDON_LOADED" then
 			local addonName = ...;
-			addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.OnEvent - " .. event .. " - " .. addonName);
+			addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.OnEvent - " .. event .. " - " .. addonName);
 
 			if addonName and addonName == "Krowi_AchievementFilter" then
 				-- [[ OnLoad ]] --
-					tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.CategoriesFrame:GetName());
+					tinsert(ACHIEVEMENTFRAME_SUBFRAMES, addon.GUI.CategoriesFrame:GetName());
 					self:Hide();
 
 				-- [[ OnEvent ]] --
-					KrowiAF.CategoriesFrame.GetCategoryList(addon.Data, KrowiAF.Categories);
+					addon.GUI.CategoriesFrame.GetCategoryList(addon.Data, KrowiAF.Categories);
 					KrowiAF.SelectedCategory = KrowiAF.Categories[1];
 					-- KrowiAF.DebugTable(KrowiAF.Categories);
 
-					KrowiAF.CategoriesFrame.Container.ScrollBar.Show = function(self)
-						KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 175, 22, 30);
+					addon.GUI.CategoriesFrame.Container.ScrollBar.Show = function(self)
+						addon.GUI.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Show, 175, 22, 30);
 					end;
-					KrowiAF.CategoriesFrame.Container.ScrollBar.Hide = function(self)
-						KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 197, 0, 30);
+					addon.GUI.CategoriesFrame.Container.ScrollBar.Hide = function(self)
+						addon.GUI.CategoriesFrame.Container.ScrollBar.Show_Hide(self, getmetatable(self).__index.Hide, 197, 0, 30);
 					end;
 
-					KrowiAF.CategoriesFrame.Container.ScrollBar.trackBG:Show();
-					KrowiAF.CategoriesFrame.Container.update = KrowiAF.CategoriesFrame.Update;
-					HybridScrollFrame_CreateButtons(KrowiAF.CategoriesFrame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
+					addon.GUI.CategoriesFrame.Container.ScrollBar.trackBG:Show();
+					addon.GUI.CategoriesFrame.Container.update = addon.GUI.CategoriesFrame.Update;
+					HybridScrollFrame_CreateButtons(addon.GUI.CategoriesFrame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
 
-					KrowiAF.CategoriesFrame.Update();
+					addon.GUI.CategoriesFrame.Update();
 			elseif addonName and addonName == "Overachiever_Tabs" then
 				for i, subFrameName in next, ACHIEVEMENTFRAME_SUBFRAMES do -- Issue #2: Fix
-					if subFrameName == KrowiAF.CategoriesFrame:GetName() then
+					if subFrameName == addon.GUI.CategoriesFrame:GetName() then
 						table.remove(ACHIEVEMENTFRAME_SUBFRAMES, i);
-						tinsert(ACHIEVEMENTFRAME_SUBFRAMES, KrowiAF.CategoriesFrame:GetName());
+						tinsert(ACHIEVEMENTFRAME_SUBFRAMES, addon.GUI.CategoriesFrame:GetName());
 					end
 				end
 			end
 		end
 	end
-	KrowiAF.CategoriesFrame:SetScript("OnEvent", KrowiAF.CategoriesFrame.OnEvent);
+	addon.GUI.CategoriesFrame:SetScript("OnEvent", addon.GUI.CategoriesFrame.OnEvent);
 
-	function KrowiAF.CategoriesFrame.OnShow(self) -- OK -- AchievementFrameCategories_OnShow
-		addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.OnShow");
+	function addon.GUI.CategoriesFrame.OnShow(self) -- OK -- AchievementFrameCategories_OnShow
+		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.OnShow");
 
 		-- First handle the visibility of certain frames
 		AchievementFrameCategoriesContainer:Hide(); -- Issue #2: Broken
@@ -61,12 +61,12 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 
 		AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this texture global texture for player achievements
 
-		KrowiAF.CategoriesFrame.Update();
+		addon.GUI.CategoriesFrame.Update();
 	end
-	KrowiAF.CategoriesFrame:SetScript("OnShow", KrowiAF.CategoriesFrame.OnShow);
+	addon.GUI.CategoriesFrame:SetScript("OnShow", addon.GUI.CategoriesFrame.OnShow);
 
-	function KrowiAF.CategoriesFrame.OnHide(self) -- OK
-		addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.OnHide");
+	function addon.GUI.CategoriesFrame.OnHide(self) -- OK
+		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.OnHide");
 
 		-- First handle the visibility of certain frames
 		AchievementFrameCategoriesContainer:Show();
@@ -80,19 +80,19 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		AchievementFrame.searchBox:Show();
 		AchievementFrameHeaderRightDDLInset:Show();
 	end
-	KrowiAF.CategoriesFrame:SetScript("OnHide", KrowiAF.CategoriesFrame.OnHide);
+	addon.GUI.CategoriesFrame:SetScript("OnHide", addon.GUI.CategoriesFrame.OnHide);
 
-	function KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide(self, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset) -- OK
-		addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.Container.ScrollBar.Show_Hide");
+	function addon.GUI.CategoriesFrame.Container.ScrollBar.Show_Hide(self, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset) -- OK
+		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.Container.ScrollBar.Show_Hide");
 
 		UI_CategoriesWidth = categoriesWidth;
-		KrowiAF.CategoriesFrame:SetWidth(categoriesWidth);
-		KrowiAF.CategoriesFrame.Container:GetScrollChild():SetWidth(categoriesWidth);
-		KrowiAF.AchievementsFrame:SetPoint("TOPLEFT", KrowiAF.CategoriesFrame, "TOPRIGHT", achievementsOffsetX, 0);
+		addon.GUI.CategoriesFrame:SetWidth(categoriesWidth);
+		addon.GUI.CategoriesFrame.Container:GetScrollChild():SetWidth(categoriesWidth);
+		addon.GUI.AchievementsFrame:SetPoint("TOPLEFT", addon.GUI.CategoriesFrame, "TOPRIGHT", achievementsOffsetX, 0);
 		AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
 		AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
-		for _, button in next, KrowiAF.CategoriesFrame.Container.buttons do
-			KrowiAF.CategoriesFrame.DisplayButton(button, button.Category);
+		for _, button in next, addon.GUI.CategoriesFrame.Container.buttons do
+			addon.GUI.CategoriesFrame.DisplayButton(button, button.Category);
 		end
 		func(self);
 	end
@@ -118,8 +118,8 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	function KrowiAF.CategoriesFrame.GetCategoryList(data, categories) -- OK -- AchievementFrameCategories_GetCategoryList
-		addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.GetCategoryList");
+	function addon.GUI.CategoriesFrame.GetCategoryList(data, categories) -- OK -- AchievementFrameCategories_GetCategoryList
+		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.GetCategoryList");
 
 		for i in next, categories do -- Make sure the list is empty
 			categories[i] = nil;
@@ -161,10 +161,10 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 
 -- [[ Blizzard_AchievementUI.lua derived ]] --
 
-	function KrowiAF.CategoriesFrame.Update() -- OK -- AchievementFrameCategories_Update
-		addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.Update");
+	function addon.GUI.CategoriesFrame.Update() -- OK -- AchievementFrameCategories_Update
+		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.Update");
 		
-		local scrollFrame = KrowiAF.CategoriesFrame.Container;
+		local scrollFrame = addon.GUI.CategoriesFrame.Container;
 		local offset = HybridScrollFrame_GetOffset(scrollFrame);
 		local buttons = scrollFrame.buttons;
 
@@ -183,7 +183,7 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 			category = displayCategories[i + offset];
 			displayedHeight = displayedHeight + buttons[i]:GetHeight();
 			if category then
-				KrowiAF.CategoriesFrame.DisplayButton(buttons[i], category);
+				addon.GUI.CategoriesFrame.DisplayButton(buttons[i], category);
 				if category == KrowiAF.SelectedCategory then
 					buttons[i]:LockHighlight();
 				else
@@ -199,8 +199,8 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 	end
 
-	function KrowiAF.CategoriesFrame.DisplayButton(button, category) -- OK -- AchievementFrameCategories_DisplayButton
-		-- addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.DisplayButton"); -- Generates a lot of messages
+	function addon.GUI.CategoriesFrame.DisplayButton(button, category) -- OK -- AchievementFrameCategories_DisplayButton
+		-- addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.DisplayButton"); -- Generates a lot of messages
 		
 		if not category then
 			button.Category = nil;
@@ -246,15 +246,15 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 	end
 
 	-- This one is called when you earn an achievement so when you're hovering over a category, the tooltip is updated
-	function KrowiAF.CategoriesFrame.UpdateTooltip() -- OK -- AchievementFrameCategories_UpdateTooltip
-		addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.UpdateTooltip");
+	function addon.GUI.CategoriesFrame.UpdateTooltip() -- OK -- AchievementFrameCategories_UpdateTooltip
+		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.UpdateTooltip");
 
-		local container = KrowiAF.CategoriesFrame.Container;
+		local container = addon.GUI.CategoriesFrame.Container;
 		if not container:IsVisible() or not container.buttons then
 			return;
 		end
 
-		for _, button in next, KrowiAF.CategoriesFrame.Container.buttons do
+		for _, button in next, addon.GUI.CategoriesFrame.Container.buttons do
 			if button:IsMouseOver() and button.showTooltipFunc then
 				button:showTooltipFunc();
 				break;
@@ -262,8 +262,8 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 		end
 	end
 
-	function KrowiAF.CategoriesFrame.SelectButton(button) -- OK -- AchievementFrameCategories_SelectButton
-		addon.Diagnostics.Trace("KrowiAF.CategoriesFrame.SelectButton");
+	function addon.GUI.CategoriesFrame.SelectButton(button) -- OK -- AchievementFrameCategories_SelectButton
+		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.SelectButton");
 
 		if button.IsSelected and not button.Category.Collapsed then -- Collapse selected categories
 			button.Category.Collapsed = true;
@@ -302,7 +302,7 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 			button.Category.Collapsed = false;
 		end
 
-		local buttons = KrowiAF.CategoriesFrame.Container.buttons;
+		local buttons = addon.GUI.CategoriesFrame.Container.buttons;
 		for _, button in next, buttons do
 			button.IsSelected = nil;
 		end
@@ -314,10 +314,10 @@ KrowiAF.CategoriesFrame:RegisterEvent("ADDON_LOADED");
 			return
 		end
 
-		AchievementFrame_ShowSubFrame(KrowiAF.CategoriesFrame, KrowiAF.AchievementsFrame);
+		AchievementFrame_ShowSubFrame(addon.GUI.CategoriesFrame, addon.GUI.AchievementsFrame);
 		KrowiAF.SelectedCategory = button.Category;
 
-		KrowiAF.AchievementsFrame.ClearSelection();
-		KrowiAF.AchievementsFrame.Container.ScrollBar:SetValue(0);
-		KrowiAF.AchievementsFrame.Update();
+		addon.GUI.AchievementsFrame.ClearSelection();
+		addon.GUI.AchievementsFrame.Container.ScrollBar:SetValue(0);
+		addon.GUI.AchievementsFrame.Update();
 	end

@@ -66,19 +66,19 @@ local UI_FontHeight;
 			if not self:IsMouseOver() then
 				self.highlight:Hide();
 			end
-			KrowiAF.AchievementsFrame.ClearSelection();
-			HybridScrollFrame_CollapseButton(KrowiAF.AchievementsFrame.Container);
-			KrowiAF.AchievementsFrame.Update();
+			addon.GUI.AchievementsFrame.ClearSelection();
+			HybridScrollFrame_CollapseButton(addon.GUI.AchievementsFrame.Container);
+			addon.GUI.AchievementsFrame.Update();
 			return;
 		end
 
-		KrowiAF.AchievementsFrame.ClearSelection();
-		KrowiAF.AchievementsFrame.SelectButton(self);
+		addon.GUI.AchievementsFrame.ClearSelection();
+		addon.GUI.AchievementsFrame.SelectButton(self);
 		KrowiAF.AchievementsButton.DisplayAchievement(self, KrowiAF.SelectedAchievement, self.index, self.Achievement);
-		HybridScrollFrame_ExpandButton(KrowiAF.AchievementsFrame.Container, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
-		KrowiAF.AchievementsFrame.Update();
+		HybridScrollFrame_ExpandButton(addon.GUI.AchievementsFrame.Container, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
+		addon.GUI.AchievementsFrame.Update();
 		if not ignoreModifiers then
-			KrowiAF.AchievementsFrame.AdjustSelection();
+			addon.GUI.AchievementsFrame.AdjustSelection();
 		end
 	end
 	-- OnClick Left Button End
@@ -146,6 +146,7 @@ local UI_FontHeight;
 			else
 				local menuList = {};
 				for _, criteria in next, self.Achievement.XuFuLink.Criteria do
+					addon.Diagnostics.Debug(criteria.Name);
 					tinsert(menuList, {text = criteria.Name, func = function()
 						externalLink = criteria.Url;
 						StaticPopup_Show("EXTERNAL_LINK");

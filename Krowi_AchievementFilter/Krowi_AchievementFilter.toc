@@ -22,13 +22,12 @@ Objects/Files.xml
 ExpansionData/Files.xml
 
 GUI/Frames.xml
-
-GUI/Krowi_AchievementFilter_Tab.lua
+GUI/Files.xml
 
 GUI/CategoriesFrame.lua
 GUI/CategoryButton.lua
 GUI/AchievementsFrame.lua
 GUI/AchievementButton.lua
-GUI/Tabbutton.lua
+GUI/AchievementFrameTabButton.lua
 
 GUI/Templates.xml

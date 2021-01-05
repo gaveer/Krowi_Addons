@@ -1,15 +1,31 @@
-local _, addon = ...;
+local _, addon = ...; -- Global addon namespace
+local gui = addon.GUI; -- Local GUI namespace
+gui.AchievementFrameTabButton = {}; -- Global Achievement Frame Tab Button object
+local achievementFrameTabButton = gui.AchievementFrameTabButton; -- Local Achievement Frame Tab Button object
 
-KrowiAF.AchievementFrameTabButton = {};
-KrowiAF.AchievementFrameTabButton.__index = KrowiAF.AchievementFrameTabButton;
+achievementFrameTabButton.__index = achievementFrameTabButton; -- Used to support OOP like code
+
+local function AchievementFrameTab_OnEvent(thisTab, thisTabID, self, event, ...)
+    if event == "ADDON_LOADED" then
+		local addonName = ...;
+        addon.Diagnostics.Trace("addon.AchievementFrameTab_OnEvent - " .. event .. " - " .. addonName);
+
+		if addonName and addonName == "Overachiever_Tabs" then
+            hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Fix
+                self:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab);
+            end);
+            addon.Diagnostics.Debug("Overachiever_Tabs compatibility enabled");
+		end
+	end
+end
 
 -- Do this in code instead of an xml template since we're not sure if other addons will also add tabs to the AchievementFrame
 -- or if we want to add more ourselves
-function KrowiAF.AchievementFrameTabButton:New(text)
-    addon.Diagnostics.Trace("KrowiAF.AchievementFrameTabButton:New");
-    
+function achievementFrameTabButton:New(text)
+    addon.Diagnostics.Trace("addon.AchievementFrameTabButton:New");
+
     local self = {};
-    setmetatable(self, KrowiAF.AchievementFrameTabButton);
+    setmetatable(self, achievementFrameTabButton);
 
     local tabID = AchievementFrame.numTabs + 1;
     PanelTemplates_SetNumTabs(AchievementFrame, tabID);
@@ -22,7 +38,7 @@ function KrowiAF.AchievementFrameTabButton:New(text)
         PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
     end);
     tab:SetScript("OnEvent", function(selfFunc, event, ...) -- Issue #1: Fix
-        KrowiAF.AchievementFrameTab_OnEvent(tab, tabID, self, event, ...);
+        AchievementFrameTab_OnEvent(tab, tabID, self, event, ...);
     end);
     tab:RegisterEvent("ADDON_LOADED");
 
@@ -43,42 +59,29 @@ function KrowiAF.AchievementFrameTabButton:New(text)
     return self;
 end
 
-function KrowiAF.AchievementFrameTab_OnEvent(thisTab, thisTabID, self, event, ...)
-    if event == "ADDON_LOADED" then
-		local addonName = ...;
-        addon.Diagnostics.Trace("KrowiAF.AchievementFrameTab_OnEvent - " .. event .. " - " .. addonName);
 
-		if addonName and addonName == "Overachiever_Tabs" then
-            hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Fix
-                self:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab);
-            end);
-            addon.Diagnostics.Debug("Overachiever_Tabs compatibility enabled");
-		end
-	end
-end
-
-function KrowiAF.AchievementFrameTabButton:Base_OnClick(id)
-    addon.Diagnostics.Trace("KrowiAF.AchievementFrameTabButton:Base_OnClick");
+function achievementFrameTabButton:Base_OnClick(id)
+    addon.Diagnostics.Trace("addon.AchievementFrameTabButton:Base_OnClick");
 
 	AchievementFrame_UpdateTabs(id);
 
-    if KrowiAF.InGuildView() then
+    if addon.InGuildView() then
         AchievementFrame_ToggleView();
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();
     end
-    -- KrowiAF.CategoriesFrame.GetCategoryList(KrowiAF.Data, KrowiAF.Categories);
-    AchievementFrame_ShowSubFrame(KrowiAF.CategoriesFrame, KrowiAF.AchievementsFrame);
+    -- addon.GUI.CategoriesFrame.GetCategoryList(addon.Data, addon.Categories);
+    AchievementFrame_ShowSubFrame(gui.CategoriesFrame, gui.AchievementsFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 
-	KrowiAF.CategoriesFrame.Update();
-	KrowiAF.AchievementsFrame.Update();
+	gui.CategoriesFrame.Update();
+	gui.AchievementsFrame.Update();
 
 	-- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 
-function KrowiAF.AchievementFrameTabButton:Comparison_OnClick(id)
-    addon.Diagnostics.Trace("KrowiAF.AchievementFrameTabButton:Comparison_OnClick");
+function achievementFrameTabButton:Comparison_OnClick(id)
+    addon.Diagnostics.Trace("addon.AchievementFrameTabButton:Comparison_OnClick");
 
     -- No comparison support. Just open up the non-comparison achievement tab.
 	AchievementFrameTab_OnClick = AchievementFrameBaseTab_OnClick; -- Also set the other tabs back to their default OnClick like Blizzard does
@@ -86,8 +89,8 @@ function KrowiAF.AchievementFrameTabButton:Comparison_OnClick(id)
     self:OnClick(id);
 end
 
-function KrowiAF.AchievementFrameTabButton:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab)
-    addon.Diagnostics.Trace("KrowiAF.AchievementFrame_UpdateTabs - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
+function achievementFrameTabButton:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab)
+    addon.Diagnostics.Trace("addon.AchievementFrame_UpdateTabs - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
 
     if clickedTab == thisTabID then -- Our tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -5);
@@ -96,4 +99,4 @@ function KrowiAF.AchievementFrameTabButton:AchievementFrame_UpdateTabs(thisTab, 
     end
 end
 
-local tabTab = KrowiAF.AchievementFrameTabButton:New(AF_TAB_BUTTON_TEXT);
+local tabTab = achievementFrameTabButton:New(AF_TAB_BUTTON_TEXT);

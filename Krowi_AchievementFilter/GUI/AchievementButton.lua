@@ -1,46 +1,40 @@
-local _, addon = ...;
+local _, addon = ...; -- Global addon namespace
+local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
-KrowiAF.AchievementsButton = {};
+-- local UI_FontHeight;
 
-local UI_FontHeight;
+function KrowiAF_AchievementButton_OnLoad(self) -- Used in Templates - KrowiAF_AchievementTemplate
+	diagnostics.Trace("KrowiAF_AchievementButton_OnLoad");
 
--- [[ Blizzard_AchievementUI.lua derived ]] --
+	-- if not UI_FontHeight then
+	-- 	local _, fontHeight = self.description:GetFont();
+	-- 	UI_FontHeight = fontHeight;
+	-- end
 
-    -- Used in Templates - KrowiAF_AchievementCategoryTemplate
-	function KrowiAF_AchievementButton_OnLoad(self) -- OK -- AchievementButton_OnLoad
-		addon.Diagnostics.Trace("KrowiAF_AchievementButton_OnLoad");
+	-- We need to overwrite the shield.OnClick so it calls the correct button OnClick
+	-- Doing this in code to not have to redo the entire template
+	self.shield:SetScript("OnClick", function(self)
+		local parent = self:GetParent();
+		KrowiAF_AchievementButton_OnClick(parent);
+	end);
 
-		if not UI_FontHeight then
-			local _, fontHeight = self.description:GetFont();
-			UI_FontHeight = fontHeight;
-		end
-		
-		-- We need to overwrite the shield.OnClick so it calls the correct button OnClick
-		-- Doing this in code to not have to redo the entire template
-		self.shield:SetScript("OnClick", function(self)
-			local parent = self:GetParent();
-			KrowiAF_AchievementButton_OnClick(parent);
-		end);
+	AchievementButton_OnLoad(self);
+end
 
-		AchievementButton_OnLoad(self);
+function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers) -- Used in Templates - KrowiAF_AchievementTemplate
+	diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
+
+	if button == "LeftButton" then
+		addon.Diagnostics.Debug("LeftButton");
+		OnClickLeftButton(self, ignoreModifiers);
+	elseif button == "RightButton" then
+		addon.Diagnostics.Debug("RightButton");
+		OnClickRightButton(self);
 	end
-
-    -- Used in Templates - KrowiAF_AchievementCategoryTemplate
-	function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers) -- OK -- AchievementButton_OnClick
-		addon.Diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
-		
-		if button == "LeftButton" then
-			addon.Diagnostics.Debug("LeftButton");
-			KrowiAF.AchievementsButton.OnClickLeftButton(self, ignoreModifiers);
-		elseif button == "RightButton" then
-			addon.Diagnostics.Debug("RightButton");
-			KrowiAF.AchievementsButton.OnClickRightButton(self);
-		end
-		
-	end
+end
 
 	-- OnClick Left Button Start
-	function KrowiAF.AchievementsButton.OnClickLeftButton(self, ignoreModifiers)
+	function OnClickLeftButton(self, ignoreModifiers)
 		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
 
 		if IsModifiedClick() and not ignoreModifiers then
@@ -74,7 +68,7 @@ local UI_FontHeight;
 
 		self.ParentContainer.ParentFrame.Parent:ClearSelection();
 		self.ParentContainer.ParentFrame.Parent:SelectButton(self);
-		KrowiAF.AchievementsButton.DisplayAchievement(self, self.ParentContainer.ParentFrame.Parent.SelectedAchievement, self.index, self.Achievement);
+		self.ParentContainer.ParentFrame.Parent:DisplayAchievement(self, self.ParentContainer.ParentFrame.Parent.SelectedAchievement, self.index, self.Achievement);
 		HybridScrollFrame_ExpandButton(self.ParentContainer, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
 		self.ParentContainer.ParentFrame.Parent:Update();
 		if not ignoreModifiers then
@@ -112,10 +106,10 @@ local UI_FontHeight;
 	local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
 	local menu = {};
 
-	function KrowiAF.AchievementsButton.RecursiveMenu()
+	function RecursiveMenu()
 	end
 
-	function KrowiAF.AchievementsButton.OnClickRightButton(self)
+	function OnClickRightButton(self)
 		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
 
 		-- Reset menu
@@ -167,124 +161,3 @@ local UI_FontHeight;
 		EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
 	end
 	-- OnClick Right Button End
-
-	function KrowiAF.AchievementsButton.DisplayAchievement(button, achievement, index, selection, renderOffScreen) -- OK -- AchievementButton_DisplayAchievement
-		local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievement.ID);
-		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.DisplayAchievement for achievement " .. tostring(id));
-
-		if not id then
-			button:Hide();
-			return;
-		else
-			button:Show();
-		end
-
-		button.index = index;
-		button.Achievement = achievement;
-
-		if button.id ~= id then
-			local saturatedStyle;
-			if bit.band(flags, ACHIEVEMENT_FLAGS_ACCOUNT) == ACHIEVEMENT_FLAGS_ACCOUNT then
-				button.accountWide = true;
-				saturatedStyle = "account";
-			else
-				button.accountWide = nil;
-				saturatedStyle = "normal";
-			end
-			button.id = id;
-			button.label:SetWidth(ACHIEVEMENTBUTTON_LABELWIDTH);
-			button.label:SetText(name);
-
-			if GetPreviousAchievement(id) then
-				-- If this is a progressive achievement, show the total score.
-				AchievementShield_SetPoints(AchievementButton_GetProgressivePoints(id), button.shield.points, AchievementPointsFont, AchievementPointsFontSmall);
-			else
-				AchievementShield_SetPoints(points, button.shield.points, AchievementPointsFont, AchievementPointsFontSmall);
-			end
-
-			if points > 0 then
-				button.shield.icon:SetTexture([[Interface\AchievementFrame\UI-Achievement-Shields]]);
-			else
-				button.shield.icon:SetTexture([[Interface\AchievementFrame\UI-Achievement-Shields-NoPoints]]);
-			end
-
-			if isGuild then
-				button.shield.points:Show();
-				button.shield.wasEarnedByMe = nil;
-				button.shield.earnedBy = nil;
-			else
-				button.shield.wasEarnedByMe = not (completed and not wasEarnedByMe);
-				button.shield.earnedBy = earnedBy;
-			end
-
-			button.shield.id = id;
-			button.description:SetText(description);
-			button.hiddenDescription:SetText(description);
-			button.numLines = ceil(button.hiddenDescription:GetHeight() / UI_FontHeight);
-			button.icon.texture:SetTexture(icon);
-			if completed or wasEarnedByMe then
-				button.completed = true;
-				button.dateCompleted:SetText(FormatShortDate(day, month, year));
-				button.dateCompleted:Show();
-				if button.saturatedStyle ~= saturatedStyle then
-					button:Saturate();
-				end
-			else
-				button.completed = nil;
-				button.dateCompleted:Hide();
-				button:Desaturate();
-			end
-
-			if rewardText == "" then
-				button.reward:Hide();
-				button.rewardBackground:Hide();
-			else
-				button.reward:SetText(rewardText);
-				button.reward:Show();
-				button.rewardBackground:Show();
-				if button.completed then
-					button.rewardBackground:SetVertexColor(1, 1, 1);
-				else
-					button.rewardBackground:SetVertexColor(0.35, 0.35, 0.35);
-				end
-			end
-		end
-
-		if IsTrackedAchievement(id) then -- Issue #10 : Fix
-			button.check:Show();
-			button.label:SetWidth(button.label:GetStringWidth() + 4); -- This +4 here is to fudge around any string width issues that arize from resizing a string set to its string width. See bug 144418 for an example.
-			button.tracked:SetChecked(true);
-			button.tracked:Show();
-		else
-			button.check:Hide();
-			button.tracked:SetChecked(false);
-			button.tracked:Hide();
-		end
-
-		AchievementButton_UpdatePlusMinusTexture(button);
-
-		if selection and id == selection.ID then
-			KrowiAF.SelectedAchievement = achievement;
-			button.selected = true;
-			button.highlight:Show();
-			local height = AchievementButton_DisplayObjectives(button, button.id, button.completed, renderOffScreen);
-			if height == ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT then
-				button:Collapse();
-			else
-				button:Expand(height);
-			end
-			if not completed or (not wasEarnedByMe and not isGuild) then
-				button.tracked:Show();
-			end
-		elseif button.selected then
-			button.selected = nil;
-			if not button:IsMouseOver() then
-				button.highlight:Hide();
-			end
-			button:Collapse();
-			button.description:Show();
-			button.hiddenDescription:Hide();
-		end
-
-		return id;
-	end

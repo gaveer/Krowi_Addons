@@ -13,6 +13,11 @@ function categoriesFrame:New(categories, achievementsFrame)
 	local self = {};
     setmetatable(self, categoriesFrame);
 
+	self.Categories = categories;
+	self.SelectedCategory = self.Categories[1];
+	self.AchievementsFrame = achievementsFrame;
+	self.AchievementsFrame.Parent.SelectedCategory = self.SelectedCategory;
+
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "AchivementGoldBorderBackdrop");
 	frame:SetPoint("TOPLEFT", AchievementFrameCategories);
 	frame:SetPoint("BOTTOM", AchievementFrameCategories);
@@ -34,15 +39,8 @@ function categoriesFrame:New(categories, achievementsFrame)
 	frame:SetScript("OnShow", self.OnShow);
 	frame:SetScript("OnHide", self.OnHide);
 
-	-- [[ AchievementFrameCategories_OnLoad ]] --
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
 	frame:Hide();
-
-	-- [[ AchievementFrameCategories_OnEvent ]] --
-	self.Categories = categories;
-	self.SelectedCategory = self.Categories[1];
-	self.AchievementsFrame = achievementsFrame;
-	self.AchievementsFrame.Parent.SelectedCategory = self.SelectedCategory;
 
 	scrollBar.Show = function()
 		self.Show_Hide(frame, scrollBar, getmetatable(scrollBar).__index.Show, 175, 22, 30);
@@ -57,6 +55,7 @@ function categoriesFrame:New(categories, achievementsFrame)
 	end
 
 	HybridScrollFrame_CreateButtons(container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
+	-- Doing post Load things
 	for _, button in next, container.buttons do
 		button.ParentContainer = container;
 	end
@@ -98,7 +97,7 @@ function categoriesFrame:OnHide()
 end
 
 function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
-	diagnostics.Trace("addon.GUI.CategoriesFrame.Container.ScrollBar.Show_Hide");
+	diagnostics.Trace("categoriesFrame.Show_Hide");
 
 	frame:SetWidth(categoriesWidth);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
@@ -111,212 +110,163 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	func(scrollBar);
 end
 
+local function GetAchievementNumbers(category)
+	-- diagnostics.Trace("GetAchievementNumbers"); -- Generates a lot of messages
 
+	local numOfAch, numOfCompAch, numOfIncompAch = 0, 0, 0;
 
-
--- [[ Helper functions ]] --
-
-
-	
-	local function GetAchievementNumbers(category) -- OK -- AchievementFrame_GetCategoryTotalNumAchievements
-		-- addon.Diagnostics.Trace("GetAchievementNumbers"); -- Generates a lot of messages
-
-		local numOfAch, numOfCompAch, numOfIncompAch = 0, 0, 0;
-
-		if category.Achievements ~= nil then
-			for _, achievement in next, category.Achievements do
-				numOfAch = numOfAch + 1;
-				local _, _, _, completed = GetAchievementInfo(achievement.ID);
-				if completed then
-					numOfCompAch = numOfCompAch + 1;
-				else
-					numOfIncompAch = numOfIncompAch + 1;
-				end
-			end
-		end
-
-		if category.Children ~= nil then
-			for _, child in next, category.Children do
-				local childNumOfAch, childNumOfCompAch, childNumOfIncompAch = GetAchievementNumbers(child);
-				numOfAch = numOfAch + childNumOfAch;
-				numOfCompAch = numOfCompAch + childNumOfCompAch;
-				numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
-			end
-		end
-
-		return numOfAch, numOfCompAch, numOfIncompAch;
-	end
-
--- [[ Blizzard_AchievementUI.lua derived ]] --
-
-	function categoriesFrame:Update() -- OK -- AchievementFrameCategories_Update
-		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.Update");
-
-		-- diagnostics.Debug(self);
-
-		local scrollFrame = self.Frame.Container;
-		local offset = HybridScrollFrame_GetOffset(scrollFrame);
-		local buttons = scrollFrame.buttons;
-
-		local displayCategories = {};
-		for i, category in next, self.Categories do
-			if not category.Hidden then -- If already visible, keep visible
-				tinsert(displayCategories, category);
-			end
-		end
-
-		local totalHeight = #displayCategories * buttons[1]:GetHeight();
-		local displayedHeight = 0;
-
-		local category;
-		-- addon.Diagnostics.Debug(#buttons);
-		for i = 1, #buttons do
-			category = displayCategories[i + offset];
-			displayedHeight = displayedHeight + buttons[i]:GetHeight();
-			if category then
-				self.DisplayButton(buttons[i], category);
-				if category == self.SelectedCategory then
-					buttons[i]:LockHighlight();
-				else
-					buttons[i]:UnlockHighlight();
-				end
-				buttons[i]:Show();
+	if category.Achievements ~= nil then
+		for _, achievement in next, category.Achievements do
+			numOfAch = numOfAch + 1;
+			local _, _, _, completed = GetAchievementInfo(achievement.ID);
+			if completed then
+				numOfCompAch = numOfCompAch + 1;
 			else
-				buttons[i].Category = nil;
-				buttons[i]:Hide();
+				numOfIncompAch = numOfIncompAch + 1;
 			end
 		end
-
-		-- addon.Diagnostics.Trace("HybridScrollFrame_Update");
-		-- addon.Diagnostics.Debug(totalHeight);
-		-- addon.Diagnostics.Debug(displayedHeight);
-		HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 	end
 
-	function categoriesFrame.DisplayButton(button, category) -- OK -- AchievementFrameCategories_DisplayButton
-		-- local catname = "";
-		-- if category and category.Name then
-		-- 	catname = category.Name;
-		-- end
-		-- addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.DisplayButton " .. catname); -- Generates a lot of messages
-
-		if not category then
-			button.Category = nil;
-			button:Hide();
-			return;
+	if category.Children ~= nil then
+		for _, child in next, category.Children do
+			local childNumOfAch, childNumOfCompAch, childNumOfIncompAch = GetAchievementNumbers(child);
+			numOfAch = numOfAch + childNumOfAch;
+			numOfCompAch = numOfCompAch + childNumOfCompAch;
+			numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
 		end
+	end
 
-		button:Show();
-		if category.Parent then -- Not top level category has parent
-			button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 15 - (category.Level - 1) * 5);
-			button.label:SetFontObject("GameFontHighlight");
-			button.background:SetVertexColor(0.6, 0.6, 0.6);
-		else -- Top level category has no parent
-			button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 10);
-			button.label:SetFontObject("GameFontNormal");
-			button.background:SetVertexColor(1, 1, 1);
+	return numOfAch, numOfCompAch, numOfIncompAch;
+end
+
+function categoriesFrame:Update()
+	diagnostics.Trace("categoriesFrame:Update");
+
+	local scrollFrame = self.Frame.Container;
+	local offset = HybridScrollFrame_GetOffset(scrollFrame);
+	local buttons = scrollFrame.buttons;
+
+	local displayCategories = {};
+	for _, category in next, self.Categories do
+		if not category.Hidden then -- If already visible, keep visible
+			tinsert(displayCategories, category);
 		end
+	end
 
-		-- if type(category.Name) == "number" then -- Little addition to be able to enter Achievement ID's as names for tabs - no localization needed for these as the game does it (I assume)
-		-- 	local _, name = GetAchievementInfo(category.Name);
-		-- 	button.label:SetText(name);
-		-- else
-		button.label:SetText(category.Name);
-		-- KrowiAF.Debug(category.Name .. " - " .. tostring(category.Collapsed));
-		if category.Children ~= nil and #category.Children ~= 0 then
-			if category.Collapsed then
-				button.label:SetText("+ " .. category.Name);
+	local totalHeight = #displayCategories * buttons[1]:GetHeight();
+	local displayedHeight = 0;
+
+	local category;
+	for i = 1, #buttons do
+		category = displayCategories[i + offset];
+		displayedHeight = displayedHeight + buttons[i]:GetHeight();
+		if category then
+			self.DisplayButton(buttons[i], category);
+			if category == self.SelectedCategory then
+				buttons[i]:LockHighlight();
 			else
-				button.label:SetText("- " .. category.Name);
+				buttons[i]:UnlockHighlight();
 			end
-		end
-		-- end
-		button.Category = category;
-
-		-- For the tooltip
-		local numOfAch, numOfCompAch = GetAchievementNumbers(category);
-		button.name = category.Name;
-		button.text = nil;
-		button.numAchievements = numOfAch;
-		button.numCompleted = numOfCompAch;
-		button.numCompletedText = numOfCompAch.."/"..numOfAch;
-		button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
-	end
-
-	-- This one is called when you earn an achievement so when you're hovering over a category, the tooltip is updated
-	function categoriesFrame.UpdateTooltip() -- OK -- AchievementFrameCategories_UpdateTooltip
-		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.UpdateTooltip");
-
-		local container = addon.GUI.CategoriesFrame.Container;
-		if not container:IsVisible() or not container.buttons then
-			return;
-		end
-
-		for _, button in next, addon.GUI.CategoriesFrame.Container.buttons do
-			if button:IsMouseOver() and button.showTooltipFunc then
-				button:showTooltipFunc();
-				break;
-			end
+			buttons[i]:Show();
+		else
+			buttons[i].Category = nil;
+			buttons[i]:Hide();
 		end
 	end
 
-	function categoriesFrame:SelectButton(button) -- OK -- AchievementFrameCategories_SelectButton
-		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.SelectButton");
+	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
+end
 
-		if button.IsSelected and not button.Category.Collapsed then -- Collapse selected categories
-			button.Category.Collapsed = true;
-			for _, category in next, self.Categories do
-				if category.Level ~= 0 then -- If 0 = highest level = ignore
-					local levels = category.Level - button.Category.Level;
-					if levels ~= 0 then -- If 0 = same level = ignore
-						local parent = category.Parent;
-						while levels > 1 do
-							parent = parent.Parent;
-							levels = levels - 1;
-						end
-						if parent == button.Category then
-							category.Hidden = true;
-						end
+function categoriesFrame.DisplayButton(button, category)
+	-- diagnostics.Trace("categoriesFrame.DisplayButton"); -- Generates a lot of messages
+
+	if not category then
+		button.Category = nil;
+		button:Hide();
+		return;
+	end
+
+	button:Show();
+	if category.Parent then -- Not top level category has parent
+		button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 15 - (category.Level - 1) * 5);
+		button.label:SetFontObject("GameFontHighlight");
+		button.background:SetVertexColor(0.6, 0.6, 0.6);
+	else -- Top level category has no parent
+		button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 10);
+		button.label:SetFontObject("GameFontNormal");
+		button.background:SetVertexColor(1, 1, 1);
+	end
+
+	button.label:SetText(category.Name);
+	if category.Children ~= nil and #category.Children ~= 0 then
+		if category.Collapsed then
+			button.label:SetText("+ " .. category.Name);
+		else
+			button.label:SetText("- " .. category.Name);
+		end
+	end
+	button.Category = category;
+
+	-- For the tooltip
+	local numOfAch, numOfCompAch = GetAchievementNumbers(category);
+	button.name = category.Name;
+	button.text = nil;
+	button.numAchievements = numOfAch;
+	button.numCompleted = numOfCompAch;
+	button.numCompletedText = numOfCompAch.."/"..numOfAch;
+	button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
+end
+
+function categoriesFrame:SelectButton(button)
+	diagnostics.Trace("categoriesFrame:SelectButton");
+
+	if button.IsSelected and not button.Category.Collapsed then -- Collapse selected categories
+		button.Category.Collapsed = true;
+		for _, category in next, self.Categories do
+			if category.Level ~= 0 then -- If 0 = highest level = ignore
+				local levels = category.Level - button.Category.Level;
+				if levels ~= 0 then -- If 0 = same level = ignore
+					local parent = category.Parent;
+					while levels > 1 do
+						parent = parent.Parent;
+						levels = levels - 1;
+					end
+					if parent == button.Category then
+						category.Hidden = true;
 					end
 				end
 			end
-		else -- Open selected category, close other highest level categories
-			for i, category in next, self.Categories do
-				if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
-					category.Collapsed = true;
-				end
-				if category.Level > button.Category.Level then -- Category on lower level
-					category.Hidden = category.Parent ~= button.Category;
-					category.Collapsed = true;
-					-- if category.Parent == button.Category then -- Child of
-					-- 	category.Hidden = false;
-					-- 	category.Collapsed = true;
-					-- else -- Not a child of
-					-- 	category.Hidden = true;
-					-- 	category.Collapsed = true;
-					-- end
-				end
+		end
+	else -- Open selected category, close other highest level categories
+		for i, category in next, self.Categories do
+			if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
+				category.Collapsed = true;
 			end
-			button.Category.Collapsed = false;
+			if category.Level > button.Category.Level then -- Category on lower level
+				category.Hidden = category.Parent ~= button.Category;
+				category.Collapsed = true;
+			end
 		end
-
-		local buttons = self.Frame.Container.buttons;
-		for _, button in next, buttons do
-			button.IsSelected = nil;
-		end
-
-		button.IsSelected = true;
-
-		if button.Category == self.SelectedCategory then
-			-- If this category was selected already, bail after changing collapsed states
-			return
-		end
-
-		AchievementFrame_ShowSubFrame(self.Frame, self.AchievementsFrame);
-		self.SelectedCategory = button.Category;
-		self.AchievementsFrame.Parent.SelectedCategory = self.SelectedCategory; -- should be solved in a better way
-
-		self.AchievementsFrame.Parent:ClearSelection();
-		self.AchievementsFrame.Container.ScrollBar:SetValue(0);
-		self.AchievementsFrame.Parent:Update();
+		button.Category.Collapsed = false;
 	end
+
+	local buttons = self.Frame.Container.buttons;
+	for _, button in next, buttons do
+		button.IsSelected = nil;
+	end
+
+	button.IsSelected = true;
+
+	if button.Category == self.SelectedCategory then
+		-- If this category was selected already, bail after changing collapsed states
+		return
+	end
+
+	AchievementFrame_ShowSubFrame(self.Frame, self.AchievementsFrame);
+	self.SelectedCategory = button.Category;
+	self.AchievementsFrame.Parent.SelectedCategory = self.SelectedCategory; -- Should be solved in a better way but works for now
+
+	self.AchievementsFrame.Parent:ClearSelection();
+	self.AchievementsFrame.Container.ScrollBar:SetValue(0);
+	self.AchievementsFrame.Parent:Update();
+end

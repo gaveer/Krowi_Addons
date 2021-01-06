@@ -10,8 +10,6 @@ addon.Faction.IsAlliance = UnitFactionGroup("player") == "Alliance";
 addon.Faction.IsHorde = UnitFactionGroup("player") == "Horde";
 addon.Faction.IsNeutral = UnitFactionGroup("player") == "Neutral";
 
-KrowiAF = {}; -- Still needed for legacy purposes, can be removed after full rewrite
-
 function addon.InGuildView()
     return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
 end

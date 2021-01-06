@@ -14,40 +14,25 @@ function categoriesFrame:New(categories, achievementsFrame)
     setmetatable(self, categoriesFrame);
 
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "AchivementGoldBorderBackdrop");
-	frame:SetPoint("TOPLEFT", AchievementFrameCategories, "TOPLEFT", 0, 0);
-	frame:SetPoint("BOTTOMLEFT", AchievementFrameCategories, "BOTTOMLEFT", 0, 0);
+	frame:SetPoint("TOPLEFT", AchievementFrameCategories);
+	frame:SetPoint("BOTTOM", AchievementFrameCategories);
 	self.Frame = frame;
 	frame.Parent = self;
 
 	local container = CreateFrame("ScrollFrame", "$parentContainer", frame, "HybridScrollFrameTemplate");
-	container:SetHeight(AchievementFrameCategoriesContainer:GetHeight());
-	container:SetWidth(AchievementFrameCategoriesContainer:GetWidth());
 	container:SetPoint("TOPLEFT", 0, -5);
 	container:SetPoint("BOTTOMRIGHT", 0, 5);
 	frame.Container = container;
 	container.ParentFrame = frame;
 
 	local scrollBar = CreateFrame("Slider", "$parentScrollBar", container, "HybridScrollBarTemplate");
-	-- scrollBar:SetHeight(AchievementFrameCategoriesContainerScrollBar:GetHeight());
-	-- scrollBar:SetWidth(AchievementFrameCategoriesContainerScrollBar:GetWidth());
 	scrollBar:SetPoint("TOPLEFT", container, "TOPRIGHT", 1, -14);
 	scrollBar:SetPoint("BOTTOMLEFT", container, "BOTTOMRIGHT", 1, 12);
 	container.ScrollBar = scrollBar;
 	scrollBar.ParentContainer = container;
 
-	-- frame:RegisterEvent("ADDON_LOADED");
-	-- frame:SetScript("OnEvent", addon.GUI.CategoriesFrame.OnEvent);
 	frame:SetScript("OnShow", self.OnShow);
 	frame:SetScript("OnHide", self.OnHide);
-
-
-	-- diagnostics.Debug(self);
-	-- diagnostics.Debug(frame);
-	-- diagnostics.Debug(container);
-	-- diagnostics.Debug(AchievementFrameCategories:GetHeight());
-	-- diagnostics.Debug(frame:GetHeight());
-	-- diagnostics.Debug(container:GetHeight());
-	-- diagnostics.Debug(scrollBar:GetHeight());
 
 	-- [[ AchievementFrameCategories_OnLoad ]] --
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
@@ -76,115 +61,58 @@ function categoriesFrame:New(categories, achievementsFrame)
 		button.ParentContainer = container;
 	end
 
-	-- diagnostics.DebugTable(container.buttons);
-
 	self:Update();
 
 	return self;
 end
 
--- KrowiAF.Categories = {};
--- KrowiAF.SelectedCategory = {};
+function categoriesFrame:OnShow()
+	diagnostics.Trace("categoriesFrame.OnShow");
 
-local UI_CategoriesWidth = 175;
+	-- First handle the visibility of certain frames
+	AchievementFrameCategories:Hide(); -- Issue #11: Fix
+	AchievementFrameFilterDropDown:Hide();
+	AchievementFrameHeaderLeftDDLInset:Hide();
+	AchievementFrame.searchBox:Hide();
+	AchievementFrameHeaderRightDDLInset:Hide();
 
--- addon.GUI.CategoriesFrame:RegisterEvent("ADDON_LOADED");
+	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
 
--- [[ Blizzard_AchievementUI.lua derived OnEvent, OnShow and OnHide functions + Show and Hide the ScrollBar ]] --
+	self.Parent:Update();
+end
 
-	function addon.GUI.CategoriesFrame.OnEvent(self, event, ...) -- OK -- AchievementFrameCategories_OnLoad + AchievementFrameCategories_OnEvent
-		if event == "ADDON_LOADED" then
-			local addonName = ...;
-			addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.OnEvent - " .. event .. " - " .. addonName);
+function categoriesFrame:OnHide()
+	diagnostics.Trace("categoriesFrame:OnHide");
 
-			if addonName and addonName == "Blizzard_AchievementUI" then
-				-- [[ OnLoad ]] --
-					-- tinsert(ACHIEVEMENTFRAME_SUBFRAMES, self.Frame:GetName());
-					-- self:Hide();
-
-				-- [[ OnEvent ]] --
-					-- addon.GUI.CategoriesFrame.GetCategoryList(addon.Data, KrowiAF.Categories);
-					-- KrowiAF.SelectedCategory = KrowiAF.Categories[1];
-					-- KrowiAF.DebugTable(KrowiAF.Categories);
-
-					-- print(self.Frame);
-
-					-- self.Frame.Container.ScrollBar.Show = function(self)
-					-- 	self.Show_Hide(self, getmetatable(self).__index.Show, 175, 22, 30);
-					-- end;
-					-- self.Frame.Container.ScrollBar.Hide = function(self)
-					-- 	self.Show_Hide(self, getmetatable(self).__index.Hide, 197, 0, 30);
-					-- end;
-
-					-- self.Frame.Container.ScrollBar.trackBG:Show();
-					-- self.Frame.Container.update = categoriesFrame.Update;
-					-- HybridScrollFrame_CreateButtons(self.Frame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
-
-					-- self:Update();
-			elseif addonName and addonName == "Overachiever_Tabs" then
-				for i, subFrameName in next, ACHIEVEMENTFRAME_SUBFRAMES do -- Issue #2: Fix
-					if subFrameName == self.Frame:GetName() then
-						table.remove(ACHIEVEMENTFRAME_SUBFRAMES, i);
-						tinsert(ACHIEVEMENTFRAME_SUBFRAMES, self.Frame:GetName());
-					end
-				end
-			end
-		end
-	end
-	-- addon.GUI.CategoriesFrame:SetScript("OnEvent", addon.GUI.CategoriesFrame.OnEvent);
-
-	function categoriesFrame.OnShow(self) -- OK -- AchievementFrameCategories_OnShow
-		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.OnShow");
-
-		-- First handle the visibility of certain frames
-		AchievementFrameCategories:Hide();
-		AchievementFrameCategoriesContainer:Hide(); -- Issue #2: Broken
-		AchievementFrameCategoriesContainerScrollBar:Hide(); -- Issue #2: Broken
+	-- First handle the visibility of certain frames
+	AchievementFrameCategories:Show(); -- Issue #11: Fix
+	if AchievementFrameAchievements:IsShown() then
+		AchievementFrameFilterDropDown:Show();
+		AchievementFrameHeaderLeftDDLInset:Show();
+	else
 		AchievementFrameFilterDropDown:Hide();
 		AchievementFrameHeaderLeftDDLInset:Hide();
-		AchievementFrame.searchBox:Hide();
-		AchievementFrameHeaderRightDDLInset:Hide();
-
-		AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this texture global texture for player achievements
-
-		-- self.Parent:Update();
 	end
-	-- addon.GUI.CategoriesFrame:SetScript("OnShow", addon.GUI.CategoriesFrame.OnShow);
+	AchievementFrame.searchBox:Show();
+	AchievementFrameHeaderRightDDLInset:Show();
+end
 
-	function categoriesFrame.OnHide(self) -- OK
-		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.OnHide");
+function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
+	diagnostics.Trace("addon.GUI.CategoriesFrame.Container.ScrollBar.Show_Hide");
 
-		-- First handle the visibility of certain frames
-		AchievementFrameCategories:Show();
-		AchievementFrameCategoriesContainer:Show();
-		if AchievementFrameAchievements:IsShown() then
-			AchievementFrameFilterDropDown:Show();
-			AchievementFrameHeaderLeftDDLInset:Show();
-		else
-			AchievementFrameFilterDropDown:Hide();
-			AchievementFrameHeaderLeftDDLInset:Hide();
-		end
-		AchievementFrame.searchBox:Show();
-		AchievementFrameHeaderRightDDLInset:Show();
+	frame:SetWidth(categoriesWidth);
+	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
+	frame.Parent.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
+	AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
+	AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
+	for _, button in next, frame.Container.buttons do
+		frame.Parent.DisplayButton(button, button.Category);
 	end
-	-- addon.GUI.CategoriesFrame:SetScript("OnHide", addon.GUI.CategoriesFrame.OnHide);
+	func(scrollBar);
+end
 
-	function categoriesFrame.Show_Hide(frame, self, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset) -- OK
-		addon.Diagnostics.Trace("addon.GUI.CategoriesFrame.Container.ScrollBar.Show_Hide");
 
-		UI_CategoriesWidth = categoriesWidth;
-		-- addon.Diagnostics.Debug(frame:GetName());
-		-- addon.Diagnostics.Debug(categoriesWidth);
-		frame:SetWidth(categoriesWidth);
-		frame.Container:GetScrollChild():SetWidth(categoriesWidth);
-		frame.Parent.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
-		AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
-		AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
-		for _, button in next, frame.Container.buttons do
-			frame.Parent.DisplayButton(button, button.Category);
-		end
-		func(self);
-	end
+
 
 -- [[ Helper functions ]] --
 
@@ -280,11 +208,11 @@ local UI_CategoriesWidth = 175;
 
 		button:Show();
 		if category.Parent then -- Not top level category has parent
-			button:SetWidth(UI_CategoriesWidth - 15 - (category.Level - 1) * 5);
+			button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 15 - (category.Level - 1) * 5);
 			button.label:SetFontObject("GameFontHighlight");
 			button.background:SetVertexColor(0.6, 0.6, 0.6);
 		else -- Top level category has no parent
-			button:SetWidth(UI_CategoriesWidth - 10);
+			button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 10);
 			button.label:SetFontObject("GameFontNormal");
 			button.background:SetVertexColor(1, 1, 1);
 		end

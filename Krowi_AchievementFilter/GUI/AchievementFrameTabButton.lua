@@ -73,12 +73,8 @@ function achFrameTabBtn:Base_OnClick(id)
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();
     end
-    -- addon.GUI.CategoriesFrame.GetCategoryList(addon.Data, addon.Categories);
     AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
-
-	self.CategoriesFrame.Parent:Update();
-	self.AchievementsFrame.Parent:Update();
 
     -- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end

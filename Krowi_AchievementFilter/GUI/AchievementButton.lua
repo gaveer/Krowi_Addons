@@ -196,7 +196,7 @@ local UI_FontHeight;
 			button.label:SetText(name);
 
 			if GetPreviousAchievement(id) then
-				-- If this is a progressive achievement, show the total saddon.
+				-- If this is a progressive achievement, show the total score.
 				AchievementShield_SetPoints(AchievementButton_GetProgressivePoints(id), button.shield.points, AchievementPointsFont, AchievementPointsFontSmall);
 			else
 				AchievementShield_SetPoints(points, button.shield.points, AchievementPointsFont, AchievementPointsFontSmall);
@@ -248,20 +248,20 @@ local UI_FontHeight;
 					button.rewardBackground:SetVertexColor(0.35, 0.35, 0.35);
 				end
 			end
-
-			if IsTrackedAchievement(id) then
-				button.check:Show();
-				button.label:SetWidth(button.label:GetStringWidth() + 4); -- This +4 here is to fudge around any string width issues that arize from resizing a string set to its string width. See bug 144418 for an example.
-				button.tracked:SetChecked(true);
-				button.tracked:Show();
-			else
-				button.check:Hide();
-				button.tracked:SetChecked(false);
-				button.tracked:Hide();
-			end
-
-			AchievementButton_UpdatePlusMinusTexture(button);
 		end
+
+		if IsTrackedAchievement(id) then -- Issue #10 : Fix
+			button.check:Show();
+			button.label:SetWidth(button.label:GetStringWidth() + 4); -- This +4 here is to fudge around any string width issues that arize from resizing a string set to its string width. See bug 144418 for an example.
+			button.tracked:SetChecked(true);
+			button.tracked:Show();
+		else
+			button.check:Hide();
+			button.tracked:SetChecked(false);
+			button.tracked:Hide();
+		end
+
+		AchievementButton_UpdatePlusMinusTexture(button);
 
 		if selection and id == selection.ID then
 			KrowiAF.SelectedAchievement = achievement;

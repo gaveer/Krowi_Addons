@@ -300,7 +300,7 @@ local UI_AchievementsWidth = 504;
 	function achievementsFrame:ForceUpdate() -- OK -- AchievementFrameAchievements_ForceUpdate -- Issue #3: Fix
 		addon.Diagnostics.Trace("addon.GUI.AchievementsFrame.ForceUpdate");
 
-		if not self.Frame:IsShown() then -- Issue #8: Fix
+		if not self.Frame:IsShown() then -- Issue #8: Fix, Issue #10 : Broken
 			return;
 		end
 

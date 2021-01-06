@@ -5,14 +5,14 @@ local raids = addon.Classic.Raids; -- Local expansion Raids namespace
 raids.MoltenCore = {}; -- 1.1
 function raids.MoltenCore.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(741);
-    raid:AddAchievementIDs(686); -- Defeat the bosses in X
+    raid:AddAchievementIDs(686, 686); -- Defeat the bosses in X
 end
 
 raids.OnyxiasLair = {}; -- 1.1
 function raids.OnyxiasLair.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(760);
     raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
-    raid:AddAchievementIDsUnobtainable(684); -- Defeat the bosses in X
+    raid:AddAchievementIDsUnobtainable(684, 684); -- Defeat the bosses in X
 end
 
 raids.BlackwingLair = {}; -- 1.6
@@ -44,7 +44,7 @@ end
 
 function raids.Load(expansion)
     local catRaids = expansion:AddCatRaids();
-    catRaids:AddAchievementIDs(1285); -- Overarching achievements
+    catRaids:AddAchievementIDs(1285, 1285); -- Overarching achievements
 
     raids.MoltenCore.Load(catRaids);
     raids.OnyxiasLair.Load(catRaids);

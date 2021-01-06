@@ -1,7 +1,7 @@
 local _, addon = ...; -- Global addon namespace
 local objects = addon.Objects; -- Local objects namespace
-objects.XuFuLink = {}; -- Global XuFu Link object
-local xuFuLink = objects.XuFuLink; -- Local XuFu Link object
+objects.XuFuLink = {}; -- Global XuFu Link class
+local xuFuLink = objects.XuFuLink; -- Local XuFu Link class
 
 xuFuLink.__index = xuFuLink; -- Used to support OOP like code
 

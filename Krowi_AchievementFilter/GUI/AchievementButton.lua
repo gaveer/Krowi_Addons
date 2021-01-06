@@ -66,19 +66,19 @@ local UI_FontHeight;
 			if not self:IsMouseOver() then
 				self.highlight:Hide();
 			end
-			addon.GUI.AchievementsFrame.ClearSelection();
-			HybridScrollFrame_CollapseButton(addon.GUI.AchievementsFrame.Container);
-			addon.GUI.AchievementsFrame.Update();
+			self.ParentContainer.ParentFrame.Parent:ClearSelection();
+			HybridScrollFrame_CollapseButton(self.ParentContainer);
+			self.ParentContainer.ParentFrame.Parent:Update();
 			return;
 		end
 
-		addon.GUI.AchievementsFrame.ClearSelection();
-		addon.GUI.AchievementsFrame.SelectButton(self);
-		KrowiAF.AchievementsButton.DisplayAchievement(self, KrowiAF.SelectedAchievement, self.index, self.Achievement);
-		HybridScrollFrame_ExpandButton(addon.GUI.AchievementsFrame.Container, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
-		addon.GUI.AchievementsFrame.Update();
+		self.ParentContainer.ParentFrame.Parent:ClearSelection();
+		self.ParentContainer.ParentFrame.Parent:SelectButton(self);
+		KrowiAF.AchievementsButton.DisplayAchievement(self, self.ParentContainer.ParentFrame.Parent.SelectedAchievement, self.index, self.Achievement);
+		HybridScrollFrame_ExpandButton(self.ParentContainer, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
+		self.ParentContainer.ParentFrame.Parent:Update();
 		if not ignoreModifiers then
-			addon.GUI.AchievementsFrame.AdjustSelection();
+			self.ParentContainer.ParentFrame.Parent:AdjustSelection();
 		end
 	end
 	-- OnClick Left Button End

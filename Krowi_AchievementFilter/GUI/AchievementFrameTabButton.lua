@@ -1,67 +1,70 @@
 local _, addon = ...; -- Global addon namespace
 local gui = addon.GUI; -- Local GUI namespace
-gui.AchievementFrameTabButton = {}; -- Global Achievement Frame Tab Button object
-local achievementFrameTabButton = gui.AchievementFrameTabButton; -- Local Achievement Frame Tab Button object
+local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+gui.AchievementFrameTabButton = {}; -- Global Achievement Frame Tab Button class
+local achFrameTabBtn = gui.AchievementFrameTabButton; -- Local Achievement Frame Tab Button class
 
-achievementFrameTabButton.__index = achievementFrameTabButton; -- Used to support OOP like code
-
-local function AchievementFrameTab_OnEvent(thisTab, thisTabID, self, event, ...)
-    if event == "ADDON_LOADED" then
-		local addonName = ...;
-        addon.Diagnostics.Trace("addon.AchievementFrameTab_OnEvent - " .. event .. " - " .. addonName);
-
-		if addonName and addonName == "Overachiever_Tabs" then
-            hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Fix
-                self:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab);
-            end);
-            addon.Diagnostics.Debug("Overachiever_Tabs compatibility enabled");
-		end
-	end
-end
+achFrameTabBtn.__index = achFrameTabBtn; -- Used to support OOP like code
 
 -- Do this in code instead of an xml template since we're not sure if other addons will also add tabs to the AchievementFrame
 -- or if we want to add more ourselves
-function achievementFrameTabButton:New(text)
-    addon.Diagnostics.Trace("addon.AchievementFrameTabButton:New");
+function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame)
+    diagnostics.Trace("achievementFrameTabButton:New");
 
     local self = {};
-    setmetatable(self, achievementFrameTabButton);
+    setmetatable(self, achFrameTabBtn);
 
     local tabID = AchievementFrame.numTabs + 1;
     PanelTemplates_SetNumTabs(AchievementFrame, tabID);
 
-    local tab = CreateFrame("Button", "AchievementFrameTab" .. tabID, AchievementFrame, "AchievementFrameTabButtonTemplate");
-    tab:SetID(tabID);
-    tab:SetText(text);
-    tab:SetScript("OnClick", function(selfFunc)
+    local frame = CreateFrame("Button", "AchievementFrameTab" .. tabID, AchievementFrame, "AchievementFrameTabButtonTemplate");
+    frame:SetID(tabID);
+    frame:SetText(text);
+    frame:SetScript("OnClick", function(selfFunc)
         self:OnClick(selfFunc:GetID());
         PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
     end);
-    tab:SetScript("OnEvent", function(selfFunc, event, ...) -- Issue #1: Fix
-        AchievementFrameTab_OnEvent(tab, tabID, self, event, ...);
+    frame:SetScript("OnEvent", function(selfFunc, event, ...) -- Issue #1: Fix
+        self:AchievementFrameTab_OnEvent(frame, tabID, self, event, ...);
     end);
-    tab:RegisterEvent("ADDON_LOADED");
+    frame:RegisterEvent("ADDON_LOADED");
 
+    self.Frame = frame;
     self.OnClick = self.Base_OnClick;
+    self.CategoriesFrame = categoriesFrame;
+    self.AchievementsFrame = achievementsFrame;
 
     hooksecurefunc("AchievementFrame_DisplayComparison", function ()
         self.OnClick = self.Comparison_OnClick;
     end);
 
     hooksecurefunc("AchievementFrame_SetTabs", function ()
-        tab:SetPoint("LEFT", "AchievementFrameTab" .. tabID - 1, "RIGHT", -5, 0); -- Can break if other addon adds tab with "bad" name
+        frame:SetPoint("LEFT", "AchievementFrameTab" .. tabID - 1, "RIGHT", -5, 0); -- Can break if other addon adds tab with "bad" name
     end);
 
     hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Broken
-        self:AchievementFrame_UpdateTabs(tab, tabID, clickedTab);
+        self:AchievementFrame_UpdateTabs(frame, tabID, clickedTab);
     end);
 
     return self;
 end
 
+function achFrameTabBtn:AchievementFrameTab_OnEvent(thisTab, thisTabID, self, event, ...)
+    if event == "ADDON_LOADED" then
+		local addonName = ...;
+        diagnostics.Trace("AchievementFrameTab_OnEvent - " .. event .. " - " .. addonName);
 
-function achievementFrameTabButton:Base_OnClick(id)
-    addon.Diagnostics.Trace("addon.AchievementFrameTabButton:Base_OnClick");
+		if addonName and addonName == "Overachiever_Tabs" then
+            hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Fix
+                self:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab);
+            end);
+            diagnostics.Debug("Overachiever_Tabs compatibility enabled");
+		end
+	end
+end
+
+function achFrameTabBtn:Base_OnClick(id)
+    diagnostics.Trace("achievementFrameTabButton:Base_OnClick");
 
 	AchievementFrame_UpdateTabs(id);
 
@@ -71,17 +74,17 @@ function achievementFrameTabButton:Base_OnClick(id)
         AchievementFrameGuildEmblemRight:Hide();
     end
     -- addon.GUI.CategoriesFrame.GetCategoryList(addon.Data, addon.Categories);
-    AchievementFrame_ShowSubFrame(gui.CategoriesFrame, gui.AchievementsFrame);
+    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 
-	gui.CategoriesFrame.Update();
-	gui.AchievementsFrame.Update();
+	self.CategoriesFrame.Parent:Update();
+	self.AchievementsFrame.Parent:Update();
 
-	-- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
+    -- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 
-function achievementFrameTabButton:Comparison_OnClick(id)
-    addon.Diagnostics.Trace("addon.AchievementFrameTabButton:Comparison_OnClick");
+function achFrameTabBtn:Comparison_OnClick(id)
+    diagnostics.Trace("achievementFrameTabButton:Comparison_OnClick");
 
     -- No comparison support. Just open up the non-comparison achievement tab.
 	AchievementFrameTab_OnClick = AchievementFrameBaseTab_OnClick; -- Also set the other tabs back to their default OnClick like Blizzard does
@@ -89,8 +92,8 @@ function achievementFrameTabButton:Comparison_OnClick(id)
     self:OnClick(id);
 end
 
-function achievementFrameTabButton:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab)
-    addon.Diagnostics.Trace("addon.AchievementFrame_UpdateTabs - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
+function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab)
+    diagnostics.Trace("achievementFrameTabButton - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
 
     if clickedTab == thisTabID then -- Our tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -5);
@@ -98,5 +101,3 @@ function achievementFrameTabButton:AchievementFrame_UpdateTabs(thisTab, thisTabI
         thisTab.text:SetPoint("CENTER", 0, -3);
     end
 end
-
-local tabTab = achievementFrameTabButton:New(AF_TAB_BUTTON_TEXT);

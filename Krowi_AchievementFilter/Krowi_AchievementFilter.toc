@@ -3,7 +3,6 @@
 ## Version: 7.0
 ## Author: Krowi
 ## SavedVariables: Krowi_AchievementFilterOptions
-## Dependencies: Blizzard_AchievementUI
 ## Notes: Filters your achievements.
 
 Libs/Files.xml
@@ -21,7 +20,6 @@ Objects/Files.xml
 
 ExpansionData/Files.xml
 
-GUI/Frames.xml
 GUI/Files.xml
 
 GUI/CategoriesFrame.lua

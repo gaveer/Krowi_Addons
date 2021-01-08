@@ -2,7 +2,7 @@
 ## Title: Krowi's Achievement Filter
 ## Version: 7.0
 ## Author: Krowi
-## SavedVariables: Krowi_AchievementFilterOptions
+## SavedVariables: Krowi_AchievementFilterOptions, Krowi_Tests
 ## Notes: Filters your achievements.
 
 Libs/Files.xml

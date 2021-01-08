@@ -57,7 +57,7 @@ showMinimapIconToggle:SetScript("OnClick", function(self, button, down)
     else
         addon.Icon:Hide("Krowi_AchievementFilterLDB");
     end
-    addon.Diagnostics.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.ShowMinimapIcon));
+    diagnostics.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.ShowMinimapIcon));
 end);
 
 local headerDebug = CreateFrame("Frame", nil, headerGeneral);

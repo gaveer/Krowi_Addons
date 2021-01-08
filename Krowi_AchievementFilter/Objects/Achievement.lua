@@ -9,15 +9,11 @@ function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Create a
     local self = {};
     setmetatable(self, achievement);
     self.ID = id or 0;
-    if obtainable == nil then -- self.Obtainable = obtainable or true; would make it always true
-        self.Obtainable = true;
-    else
-        self.Obtainable = obtainable;
+    if obtainable == false then -- We only want this variable present if the achievement is not obtainable anymore to reduce memory usage
+        self.NotObtainable = true;
     end
-    if hasWowheadLink == nil then -- self.HasWowheadLink = hasWowheadLink or true; would make it always true
-        self.HasWowheadLink = true;
-    else
-        self.HasWowheadLink = hasWowheadLink;
+    if hasWowheadLink == false then -- We only want this variable present if there is no Wowhead link to reduce memory usage
+        self.HasNoWowheadLink = true;
     end
     self.HasIATLink = hasIATLink;
     return self;

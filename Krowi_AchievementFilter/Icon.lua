@@ -1,4 +1,5 @@
 local _, addon = ...; -- Global addon namespace
+local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
 -- Extra options needed for default LibDBIcon behaviour
 Krowi_AchievementFilterOptions.Minimap = {
@@ -14,9 +15,9 @@ icon.AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("Krowi_Ac
     label = AF_NAME,
     icon = "Interface\\Icons\\achievement_dungeon_heroic_gloryoftheraider",
     OnClick = function(self, button)
-        addon.Diagnostics.Debug("Icon clicked with " .. button);
+        diagnostics.Debug("Icon clicked with " .. button);
         if button == "RightButton" then
-            addon.Diagnostics.Trace("icon.AchievementFilterLDB.OnClick with RightButton");
+            diagnostics.Trace("icon.AchievementFilterLDB.OnClick with RightButton");
             InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
 		    InterfaceOptionsFrame_OpenToCategory(AF_NAME);
 	    end
@@ -33,6 +34,6 @@ icon.AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("Krowi_Ac
 function icon.Load()
     Krowi_AchievementFilterOptions.Minimap.hide = not Krowi_AchievementFilterOptions.ShowMinimapIcon;
     icon:Register("Krowi_AchievementFilterLDB", icon.AchievementFilterLDB, Krowi_AchievementFilterOptions.Minimap);
-    addon.Diagnostics.Debug("- Icon loaded");
-    addon.Diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not Krowi_AchievementFilterOptions.Minimap.hide));
+    diagnostics.Debug("- Icon loaded");
+    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not Krowi_AchievementFilterOptions.Minimap.hide));
 end

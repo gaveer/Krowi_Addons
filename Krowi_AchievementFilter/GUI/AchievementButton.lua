@@ -1,15 +1,8 @@
 local _, addon = ...; -- Global addon namespace
 local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
--- local UI_FontHeight;
-
 function KrowiAF_AchievementButton_OnLoad(self) -- Used in Templates - KrowiAF_AchievementTemplate
 	diagnostics.Trace("KrowiAF_AchievementButton_OnLoad");
-
-	-- if not UI_FontHeight then
-	-- 	local _, fontHeight = self.description:GetFont();
-	-- 	UI_FontHeight = fontHeight;
-	-- end
 
 	-- We need to overwrite the shield.OnClick so it calls the correct button OnClick
 	-- Doing this in code to not have to redo the entire template
@@ -25,17 +18,17 @@ function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers) 
 	diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
 
 	if button == "LeftButton" then
-		addon.Diagnostics.Debug("LeftButton");
+		diagnostics.Debug("LeftButton");
 		OnClickLeftButton(self, ignoreModifiers);
 	elseif button == "RightButton" then
-		addon.Diagnostics.Debug("RightButton");
+		diagnostics.Debug("RightButton");
 		OnClickRightButton(self);
 	end
 end
 
 	-- OnClick Left Button Start
 	function OnClickLeftButton(self, ignoreModifiers)
-		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
+		diagnostics.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
 
 		if IsModifiedClick() and not ignoreModifiers then
 			local handled = nil;
@@ -50,7 +43,7 @@ end
 				end
 			end
 			if not handled and IsModifiedClick("QUESTWATCHTOGGLE") then
-				addon.Diagnostics.Debug("AchievementButton_ToggleTracking from KrowiAF_AchievementButton_OnClick");
+				diagnostics.Debug("AchievementButton_ToggleTracking from KrowiAF_AchievementButton_OnClick");
 				AchievementButton_ToggleTracking(self.id);
 			end
 			return;
@@ -110,7 +103,7 @@ end
 	end
 
 	function OnClickRightButton(self)
-		addon.Diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
+		diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
 
 		-- Reset menu
 		menu = {};
@@ -121,26 +114,26 @@ end
 
 		-- Debug table
 		if Krowi_AchievementFilterOptions and Krowi_AchievementFilterOptions.EnableDebugInfo then
-			tinsert(menu, {text = "Debug Table", func = function() addon.Diagnostics.DebugTable(self); end});
+			tinsert(menu, {text = "Debug Table", func = function() diagnostics.DebugTable(self); end});
 		end
 
 		-- Wowhead link
-		if self.Achievement.HasWowheadLink then
+		if not self.Achievement.HasNoWowheadLink then
 			externalLink = "https://www.wowhead.com/achievement=" .. self.Achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
-			addon.Diagnostics.Debug(externalLink);
+			diagnostics.Debug(externalLink);
 			tinsert(menu, {text = "Wowhead", func = function() StaticPopup_Show("EXTERNAL_LINK"); end});
 		end
 
 		-- Add Xu-Fu's Pet Battle Strategies for pet related achievements (links are added at the location the achievements are added)
 		if self.Achievement.XuFuLink ~= nil then
 			externalLink = self.Achievement.XuFuLink.Url;
-			addon.Diagnostics.Debug(externalLink);
+			diagnostics.Debug(externalLink);
 			if self.Achievement.XuFuLink.Criteria == nil then
 				tinsert(menu, {text = self.Achievement.XuFuLink.Name, func = function() StaticPopup_Show("EXTERNAL_LINK"); end});
 			else
 				local menuList = {};
 				for _, criteria in next, self.Achievement.XuFuLink.Criteria do
-					addon.Diagnostics.Debug(criteria.Name);
+					diagnostics.Debug(criteria.Name);
 					tinsert(menuList, {text = criteria.Name, func = function()
 						externalLink = criteria.Url;
 						StaticPopup_Show("EXTERNAL_LINK");

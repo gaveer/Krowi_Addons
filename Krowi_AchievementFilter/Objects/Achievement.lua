@@ -19,6 +19,6 @@ function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Create a
     return self;
 end
 
-function achievement:AddXuFuLink(xuFuLink)
-    self.XuFuLink = xuFuLink;
+function achievement:AddRCMenExtra(rcMenExtra)
+    self.RCMenExtra = rcMenExtra;
 end

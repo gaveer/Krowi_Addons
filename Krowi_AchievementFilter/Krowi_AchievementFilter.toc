@@ -21,11 +21,3 @@ Objects/Files.xml
 ExpansionData/Files.xml
 
 GUI/Files.xml
-
-GUI/CategoriesFrame.lua
-GUI/CategoryButton.lua
-GUI/AchievementsFrame.lua
-GUI/AchievementButton.lua
-GUI/AchievementFrameTabButton.lua
-
-GUI/Templates.xml

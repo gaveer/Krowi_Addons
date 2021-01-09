@@ -1,4 +1,5 @@
 local _, addon = ...; -- Global addon namespace
+local gui = addon.GUI; -- Local GUI namespace
 local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
 function KrowiAF_AchievementButton_OnLoad(self) -- Used in Templates - KrowiAF_AchievementTemplate
@@ -71,38 +72,8 @@ function OnClickLeftButton(self, ignoreModifiers)
 	end
 end
 
--- [[ OnClick Right Button Start ]] --
-local externalLink = "";
-local externalLinkDialog = "KROWIAF_EXTERNAL_LINK";
-StaticPopupDialogs[externalLinkDialog] = {
-	text = "Press CTRL+X to copy the website and close this window.",
-	button1 = "Close",
-	hasEditBox=true,
-	editBoxWidth=500,
-	timeout = 0,
-	whileDead = true,
-	hideOnEscape = true,
-	preferredIndex = 3,
-	OnShow = function(self)
-		self.editBox:SetText(externalLink);
-		self.editBox:HighlightText();
-	end,
-	EditBoxOnEscapePressed = function(self) self:GetParent().button1:Click() end,
-	EditBoxOnTextChanged = function(self)
-		if self:GetText():len() < 1 then
-			self:GetParent().button1:Click()
-		else
-			self:SetText(externalLink)
-			self:HighlightText()
-		end
-	end,
-}
-
 local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
 local menu = {};
-
-function RecursiveMenu()
-end
 
 function OnClickRightButton(self)
 	diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
@@ -115,37 +86,15 @@ function OnClickRightButton(self)
 	tinsert(menu, {text = name, isTitle = true});
 
 	-- Debug table
-	if Krowi_AchievementFilterOptions and Krowi_AchievementFilterOptions.EnableDebugInfo then
+	if diagnostics.DebugEnabled then
 		tinsert(menu, {text = "Debug Table", func = function() diagnostics.DebugTable(self); end});
 	end
 
 	-- Wowhead link
 	if not self.Achievement.HasNoWowheadLink then
-		externalLink = "https://www.wowhead.com/achievement=" .. self.Achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
+		local externalLink = "https://www.wowhead.com/achievement=" .. self.Achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
 		diagnostics.Debug(externalLink);
-		tinsert(menu, {text = "Wowhead", func = function() StaticPopup_Show(externalLinkDialog); end});
-	end
-
-	-- Add Xu-Fu's Pet Battle Strategies for pet related achievements (links are added at the location the achievements are added)
-	if self.Achievement.XuFuLink ~= nil then
-		externalLink = self.Achievement.XuFuLink.Url;
-		diagnostics.Debug(externalLink);
-		if self.Achievement.XuFuLink.Criteria == nil then
-			tinsert(menu, {text = self.Achievement.XuFuLink.Name, func = function() StaticPopup_Show(externalLinkDialog); end});
-		else
-			local menuList = {};
-			for _, criteria in next, self.Achievement.XuFuLink.Criteria do
-				diagnostics.Debug(criteria.Name);
-				tinsert(menuList, {text = criteria.Name, func = function()
-					externalLink = criteria.Url;
-					StaticPopup_Show(externalLinkDialog);
-					end});
-			end
-			tinsert(menu, {text = self.Achievement.XuFuLink.Name, hasArrow = true, menuList = menuList, func = function()
-				externalLink = self.Achievement.XuFuLink.Url;
-				StaticPopup_Show(externalLinkDialog);
-			end});
-		end
+		tinsert(menu, {text = "Wowhead", func = function() gui.ShowExternalLinkPopupDialog(externalLink); end});
 	end
 
 	-- IAT Link
@@ -153,5 +102,30 @@ function OnClickRightButton(self)
 		tinsert(menu, {text = "IAT Tactics", func = function() IAT_DisplayAchievement(self.Achievement.ID); end});
 	end
 
+	-- Extra menu defined at the achievement self
+	if self.Achievement.RCMenExtra ~= nil then
+		tinsert(menu, GenerateRightClickMenuPart(self.Achievement.RCMenExtra));
+	end
+
 	EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
+end
+
+function GenerateRightClickMenuPart(achievementRightClickMenuItem)
+	-- diagnostics.Trace("GenerateRightClickMenuPart"); -- Generates a lot of messages
+
+	local achRCMenItem = achievementRightClickMenuItem;
+	local item = {};
+
+	item.text = achRCMenItem.Name;
+	item.func = achRCMenItem.Func;
+	item.isTitle = achRCMenItem.IsTitle;
+	if achRCMenItem.Children ~= nil then
+		item.hasArrow = true;
+		item.menuList = {};
+		for _, child in next, achRCMenItem.Children do
+			tinsert(item.menuList, GenerateRightClickMenuPart(child));
+		end
+	end
+
+	return item;
 end

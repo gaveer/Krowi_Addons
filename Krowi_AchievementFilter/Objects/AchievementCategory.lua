@@ -87,8 +87,8 @@ function achievementCategory:AddCatLFGDungeonInfo(id) -- Add a child instance ac
     return self:AddCategory(achievementCategory:New(GetLFGDungeonInfo(id))); -- LFGDungeons table
 end
 
-function achievementCategory:AddAchievementFull(id, obtainable, hasWowheadLink, hasIATLink, xuFuLink) -- Add an achievement to an achievement category
-    return self:AddAchievement(addon.Objects.Achievement:New(id, obtainable, hasWowheadLink, hasIATLink, xuFuLink));
+function achievementCategory:AddAchievementFull(id, obtainable, hasWowheadLink, hasIATLink) -- Add an achievement to an achievement category
+    return self:AddAchievement(addon.Objects.Achievement:New(id, obtainable, hasWowheadLink, hasIATLink));
 end
 
 function achievementCategory:AddAchievementIDs(...) -- Add a variable number of achievements from achievement IDs to an achievement category

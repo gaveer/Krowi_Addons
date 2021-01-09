@@ -2,5 +2,13 @@
 
     <!-- <Script file="GUI/Frames.xml" /> -->
     <Script file="GUI/GUI.lua" />
+    <Script file="GUI/AchievementFrameTabButton.lua" />
+    <Script file="GUI/CategoriesFrame.lua" />
+    <Script file="GUI/CategoryButton.lua" />
+    <Script file="GUI/AchievementsFrame.lua" />
+    <Script file="GUI/AchievementButton.lua" />
+    <Script file="GUI/ExternalLinkPopupDialog.lua" />
+
+    <Include file="GUI/Templates.xml" />
     
 </Ui>

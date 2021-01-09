@@ -12,7 +12,7 @@ function achievementsFrame:New()
 	local self = {};
 	setmetatable(self, achievementsFrame);
 
-	self.SelectedCategory = nil; -- Set in CategoryFrame
+	self.SelectedCategory = nil;
 	self.SelectedAchievement = nil; -- Issue #6: Fix
 	self.UIFontHeight = nil;
 
@@ -118,6 +118,10 @@ function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achie
 	func(self);
 end
 
+function achievementsFrame:SetSelectedCategory(category)
+	self.SelectedCategory = category;
+end
+
 local function GetFilteredAchievements(category) -- @TODO Gets all achievements right now regardles of the filter - need to look at this on a later time
 	diagnostics.Trace("GetFilteredAchievements");
 
@@ -184,8 +188,6 @@ function achievementsFrame:Update()
 		HybridScrollFrame_CollapseButton(scrollFrame);
 	end
 end
-
-
 
 function achievementsFrame:ForceUpdate() -- Issue #3: Fix
 	diagnostics.Trace("achievementsFrame:ForceUpdate");

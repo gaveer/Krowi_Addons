@@ -7,8 +7,14 @@ local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 local function ConvertToAchievementFrameCategory(datum, categories)
     -- diagnostics.Trace("ConvertToAchievementFrameCategory"); -- Generates a lot of messages
 
-    datum.Hidden = datum.Level ~= 0;
-    datum.Collapsed = true;
+    if datum.Level == 0 then
+        datum.NotHidden = true;
+    end
+
+    if diagnostics.DebugEnabled then
+        datum.Name = datum.Level .. " " .. datum.Name;
+    end
+
     tinsert(categories, datum);
     if datum.Children ~= nil then
         for i, child in next, datum.Children do

@@ -4,6 +4,7 @@ local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
 gui.CategoriesFrame = {}; -- Global categories frame class
 local categoriesFrame = gui.CategoriesFrame; -- Local categories frame class
+categoriesFrame.ID = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
 categoriesFrame.__index = categoriesFrame; -- Used to support OOP like code
 
@@ -16,7 +17,7 @@ function categoriesFrame:New(categories, achievementsFrame)
 	self.Categories = categories;
 	self.SelectedCategory = self.Categories[1];
 	self.AchievementsFrame = achievementsFrame;
-	self.AchievementsFrame.Parent.SelectedCategory = self.SelectedCategory;
+	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
 
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "AchivementGoldBorderBackdrop");
 	frame:SetPoint("TOPLEFT", AchievementFrameCategories);
@@ -51,7 +52,8 @@ function categoriesFrame:New(categories, achievementsFrame)
 
 	scrollBar.trackBG:Show();
 	container.update = function(container)
-		container.ParentFrame.Parent:Update();
+		diagnostics.Trace("container.update");
+		container.ParentFrame.Parent:Update(); -- Issue #12: Broken
 	end
 
 	HybridScrollFrame_CreateButtons(container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
@@ -148,8 +150,10 @@ function categoriesFrame:Update()
 
 	local displayCategories = {};
 	for _, category in next, self.Categories do
-		if not category.Hidden then -- If already visible, keep visible
+		-- if not category.Hidden then -- If already visible, keep visible
+		if category.NotHidden then -- If already visible, keep visible
 			tinsert(displayCategories, category);
+			-- diagnostics.Debug("Showing " .. category.Name);
 		end
 	end
 
@@ -178,7 +182,11 @@ function categoriesFrame:Update()
 end
 
 function categoriesFrame.DisplayButton(button, category)
-	-- diagnostics.Trace("categoriesFrame.DisplayButton"); -- Generates a lot of messages
+	-- local name = "";
+	-- if category then
+	-- 	name = category.Name;
+	-- end
+	-- diagnostics.Trace("categoriesFrame.DisplayButton for " .. name); -- Generates a lot of messages
 
 	if not category then
 		button.Category = nil;
@@ -199,10 +207,10 @@ function categoriesFrame.DisplayButton(button, category)
 
 	button.label:SetText(category.Name);
 	if category.Children ~= nil and #category.Children ~= 0 then
-		if category.Collapsed then
-			button.label:SetText("+ " .. category.Name);
-		else
+		if category.NotCollapsed then
 			button.label:SetText("- " .. category.Name);
+		else
+			button.label:SetText("+ " .. category.Name);
 		end
 	end
 	button.Category = category;
@@ -220,42 +228,38 @@ end
 function categoriesFrame:SelectButton(button)
 	diagnostics.Trace("categoriesFrame:SelectButton");
 
-	if button.IsSelected and not button.Category.Collapsed then -- Collapse selected categories
-		button.Category.Collapsed = true;
+	if button.Category.IsSelected and button.Category.NotCollapsed then -- Collapse selected categories -- Issue #12: Fix
+		button.Category.NotCollapsed = nil;
 		for _, category in next, self.Categories do
-			if category.Level ~= 0 then -- If 0 = highest level = ignore
-				local levels = category.Level - button.Category.Level;
-				if levels ~= 0 then -- If 0 = same level = ignore
-					local parent = category.Parent;
-					while levels > 1 do
-						parent = parent.Parent;
-						levels = levels - 1;
-					end
-					if parent == button.Category then
-						category.Hidden = true;
-					end
-				end
+			if category.Level > button.Category.Level then
+				category.NotHidden = nil;
 			end
 		end
 	else -- Open selected category, close other highest level categories
 		for i, category in next, self.Categories do
 			if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
-				category.Collapsed = true;
+				category.NotCollapsed = nil;
 			end
-			if category.Level > button.Category.Level then -- Category on lower level
-				category.Hidden = category.Parent ~= button.Category;
-				category.Collapsed = true;
+			if category.Level > button.Category.Level then -- Category on higher level
+				if category.Parent == button.Category then -- Show child of clicked button
+					category.NotHidden = true;
+				else
+					category.NotHidden = nil; -- Hide the rest
+				end
+				category.NotCollapsed = nil;
 			end
 		end
-		button.Category.Collapsed = false;
+		button.Category.NotCollapsed = true;
 	end
 
 	local buttons = self.Frame.Container.buttons;
 	for _, button in next, buttons do
-		button.IsSelected = nil;
+		if button.Category then
+			button.Category.IsSelected = nil; -- Issue #12: Fix
+		end
 	end
 
-	button.IsSelected = true;
+	button.Category.IsSelected = true; -- Issue #12: Fix
 
 	if button.Category == self.SelectedCategory then
 		-- If this category was selected already, bail after changing collapsed states
@@ -264,8 +268,7 @@ function categoriesFrame:SelectButton(button)
 
 	AchievementFrame_ShowSubFrame(self.Frame, self.AchievementsFrame);
 	self.SelectedCategory = button.Category;
-	self.AchievementsFrame.Parent.SelectedCategory = self.SelectedCategory; -- Should be solved in a better way but works for now
-
+	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
 	self.AchievementsFrame.Parent:ClearSelection();
 	self.AchievementsFrame.Container.ScrollBar:SetValue(0);
 	self.AchievementsFrame.Parent:Update();

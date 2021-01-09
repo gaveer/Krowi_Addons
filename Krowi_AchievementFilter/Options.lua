@@ -5,7 +5,7 @@ local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
 -- Default options from SavedVariables in case there are none yet
 Krowi_AchievementFilterOptions = {
-    ShowMinimapIcon = true,
+    ShowMinimapIcon = false,
     EnableDebugInfo = false,
     EnableTraceInfo = false,
 };

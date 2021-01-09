@@ -41,11 +41,6 @@ function loadHelper:OnEvent(event, arg1)
         addon.BattleForAzeroth.Load();
         addon.Shadowlands.Load();
         addon.Categories = addon.Data:GetCategoryList(); -- This freezes the game if we load it outside of the loading screen
-
-        Krowi_Tests = {
-            -- data = addon.Data;
-            categories = addon.Categories;
-        }
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

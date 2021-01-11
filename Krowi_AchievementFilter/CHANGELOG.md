@@ -16,6 +16,12 @@ All notable changes to this project will be documented in this file.
 - Memory optimization under the hood
 - Minimap icon hidden by default for fresh installs since it's not doing much right now
 
+### Fixed
+- Issue #9: Cataclysm - Blackwing Decent is missing
+- Issue #10: Toggling achievement tracking in Blizzard tab does not remove check mark from our tab
+- Issue #11: Revisit issue #2
+- Issue #12: Button loses state of IsSelected when categories are updated by selecting a category and by the scrollbar
+
 ## [90002.6.0] - 2021-01-02
 ### Added
 - Right click menu for every achievement in the new tab with a link to Wowhead.

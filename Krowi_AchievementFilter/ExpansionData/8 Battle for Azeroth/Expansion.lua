@@ -7,6 +7,7 @@ function battleForAzeroth.Load()
     local expansion = achCat:NewCatInfo(15305);
     tinsert(addon.Data, expansion);
 
+    battleForAzeroth.Zones.Load(expansion);
     battleForAzeroth.Dungeons.Load(expansion);
     battleForAzeroth.Raids.Load(expansion);
 end

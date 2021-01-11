@@ -32,6 +32,7 @@
     <Script file="ExpansionData\7 Legion\Raids.lua" />
 
     <Script file="ExpansionData\8 Battle for Azeroth\Expansion.lua" />
+    <Script file="ExpansionData\8 Battle for Azeroth\Zones.lua" />
     <Script file="ExpansionData\8 Battle for Azeroth\Dungeons.lua" />
     <Script file="ExpansionData\8 Battle for Azeroth\Raids.lua" />
 

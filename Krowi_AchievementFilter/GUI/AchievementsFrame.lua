@@ -17,7 +17,7 @@ function achievementsFrame:New()
 	self.UIFontHeight = nil;
 
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements", AchievementFrame);
-	frame:SetWidth(504);
+	frame:SetWidth(504 - Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset);
 	frame:SetPoint("TOPLEFT", AchievementFrameCategories, "TOPRIGHT", 22, 0);
 	frame:SetPoint("BOTTOM", AchievementFrameCategories);
 	self.Frame = frame;
@@ -110,6 +110,8 @@ end
 
 function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achievementsButtonOffset)
 	diagnostics.Trace("achievementsFrame.Show_Hide");
+
+	achievementsWidth = achievementsWidth - Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset
 
 	frame:SetWidth(achievementsWidth);
 	for _, button in next, frame.Container.buttons do

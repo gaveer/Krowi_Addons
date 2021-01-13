@@ -2,7 +2,7 @@ AF_COLOR = "|cFF1D92C2";
 AF_NAME = "Krowi's " .. AF_COLOR .. "Achievement Filter|r";
 AF_VERSION = GetBuildInfo();
 AF_BUILD = GetAddOnMetadata("Krowi_AchievementFilter", "Version");
-AF_VERSION_BUILD = "v" .. AF_VERSION .. "." .. AF_BUILD;
+AF_VERSION_BUILD = AF_VERSION .. "." .. AF_BUILD;
 
 local _, addon = ...; -- Global addon namespace
 addon.Faction = {}; -- Global faction data

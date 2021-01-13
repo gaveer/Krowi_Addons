@@ -11,7 +11,7 @@ local function ConvertToAchievementFrameCategory(datum, categories)
         datum.NotHidden = true;
     end
 
-    if diagnostics.DebugEnabled then
+    if diagnostics.DebugEnabled() then
         datum.Name = datum.Level .. " " .. datum.Name;
     end
 

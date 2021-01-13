@@ -40,7 +40,8 @@ raids.CrucibleOfStorms = {}; -- 8.1
 function raids.CrucibleOfStorms.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(1177);
     raid:AddAchievementIDsWithIATLink(13501, 13506); -- No Glory available
-    raid:AddAchievementIDs(13414, 13415); -- Defeat the bosses in X
+    raid:AddAchievementIDs(13414); -- Defeat the bosses in X
+    -- 13415 do not render -- Issue #5: Broken
     raid:AddAchievementIDs(13416, 13417); -- Defeat X on Mythic Difficulty
     raid:AddAchievementIDsUnobtainable(13418, 13419); -- Feats of Strength (Unobtainable)
 end

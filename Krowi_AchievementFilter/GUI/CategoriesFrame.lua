@@ -87,6 +87,7 @@ function categoriesFrame:OnHide()
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Show(); -- Issue #11: Fix
+	AchievementFrameCategoriesBG:SetWidth(195); -- Set back to default value
 	if AchievementFrameAchievements:IsShown() then
 		AchievementFrameFilterDropDown:Show();
 		AchievementFrameHeaderLeftDDLInset:Show();
@@ -101,11 +102,15 @@ end
 function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
 	diagnostics.Trace("categoriesFrame.Show_Hide");
 
+	categoriesWidth = categoriesWidth + Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset;
+	watermarkWidthOffset = watermarkWidthOffset + Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset;
+
 	frame:SetWidth(categoriesWidth);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
 	frame.Parent.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
 	AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
 	AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
+	AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
 	for _, button in next, frame.Container.buttons do
 		frame.Parent.DisplayButton(button, button.Category);
 	end

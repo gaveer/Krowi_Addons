@@ -2,14 +2,14 @@ local _, addon = ...; -- Global addon namespace
 addon.Shadowlands.Zones = {}; -- Global expansion Zones namespace
 local zones = addon.Shadowlands.Zones; -- Local expansion Zones namespace
 
-zones.Oribos = {}; -- 9.0
-function zones.Oribos.Load(catZones)
-    local zone = catZones:AddCatMapInfo(1671);
-    zone:AddCatQuests():AddAchievementIDs();
-    zone:AddCatExploration():AddAchievementIDs();
-    zone:AddCatPvP():AddAchievementIDs();
-    zone:AddCatReputation():AddAchievementIDs();
-end
+-- zones.Oribos = {}; -- 9.0
+-- function zones.Oribos.Load(catZones)
+--     local zone = catZones:AddCatMapInfo(1671);
+--     zone:AddCatQuests():AddAchievementIDs();
+--     zone:AddCatExploration():AddAchievementIDs();
+--     zone:AddCatPvP():AddAchievementIDs();
+--     zone:AddCatReputation():AddAchievementIDs();
+-- end
 
 zones.Bastion = {}; -- 9.0
 function zones.Bastion.Load(catZones)
@@ -62,7 +62,8 @@ function zones.Load(expansion)
     local catZones = expansion:AddCatZones();
     catZones:AddAchievementIDs(14280, 14790, 14758); -- Quests
     catZones:AddAchievementIDs(14825, 14731); -- Exploration
-    catZones:AddAchievementIDs(14515, 14516, 14517, 14518, 14519, 14520); -- PvP
+    catZones:AddAchievementIDs(14515, 14516, 14519); -- PvP
+    -- 14517, 14518, 14520 do not render -- Issue #5: Broken
     catZones:AddAchievementIDs(14315); -- Reputation
 
     -- zones.Oribos.Load(zones);

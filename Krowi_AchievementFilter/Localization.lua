@@ -9,6 +9,8 @@ AF_OPTIONS_DEBUG_INFO_TOGGLE = "Enable debug info";
 AF_OPTIONS_DEBUG_INFO_TOGGLE_TOOLTIP = "Enable / disable debug info";
 AF_OPTIONS_TRACE_INFO_TOGGLE = "Enable trace info";
 AF_OPTIONS_TRACE_INFO_TOGGLE_TOOLTIP = "Enable / disable trace info";
+AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET = "Categories width offset";
+AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET_TOOLTIP = "Categories width offset tooltip";
 
 -- Icon
 AF_ICON_TOOLTIP_RIGHT_CLICK = "Right-click " .. AF_COLOR .. "for Options.|r";
@@ -19,3 +21,5 @@ AF_TAB_BUTTON_TEXT = "Achievement Filter";
 AF_CATEGORY_ZONES = "Zones";
 AF_CATEGORY_SCENARIOS = "Scenarios";
 AF_XUFU = "Xu-Fu's Pet Battle Strategies";
+AF_VERSION = "Version";
+AF_INFO = "Info";

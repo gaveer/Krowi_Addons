@@ -86,7 +86,7 @@ function OnClickRightButton(self)
 	tinsert(menu, {text = name, isTitle = true});
 
 	-- Debug table
-	if diagnostics.DebugEnabled then
+	if diagnostics.DebugEnabled() then
 		tinsert(menu, {text = "Debug Table", func = function() diagnostics.DebugTable(self); end});
 	end
 

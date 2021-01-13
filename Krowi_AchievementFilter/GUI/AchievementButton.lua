@@ -98,7 +98,7 @@ function OnClickRightButton(self)
 	end
 
 	-- IAT Link
-	if self.Achievement.HasIATLink and IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") > "3.14.1" then
+	if self.Achievement.HasIATLink and addon.IsIATLoaded() then
 		tinsert(menu, {text = "IAT Tactics", func = function() IAT_DisplayAchievement(self.Achievement.ID); end});
 	end
 

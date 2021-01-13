@@ -62,7 +62,7 @@ function categoriesFrame:New(categories, achievementsFrame)
 		button.ParentContainer = container;
 	end
 
-	self:Update();
+	-- self:Update();
 
 	return self;
 end
@@ -102,8 +102,9 @@ end
 function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
 	diagnostics.Trace("categoriesFrame.Show_Hide");
 
-	categoriesWidth = categoriesWidth + Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset;
-	watermarkWidthOffset = watermarkWidthOffset + Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset;
+	local db = addon.Options.db;
+	categoriesWidth = categoriesWidth + db.CategoriesFrameWidthOffset;
+	watermarkWidthOffset = watermarkWidthOffset + db.CategoriesFrameWidthOffset;
 
 	frame:SetWidth(categoriesWidth);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);

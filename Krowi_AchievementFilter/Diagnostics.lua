@@ -33,6 +33,6 @@ end
 
 -- Load the diagnostics
 function diagnostics.Load()
-	diagnostics.DebugEnabled = function() return Krowi_AchievementFilterOptions.EnableDebugInfo; end;
-	diagnostics.TraceEnabled = function() return Krowi_AchievementFilterOptions.EnableTraceInfo; end;
+	diagnostics.DebugEnabled = function() return addon.Options.profile.EnableDebugInfo; end;
+	diagnostics.TraceEnabled = function() return addon.Options.profile.EnableTraceInfo; end;
 end

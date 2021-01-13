@@ -6,12 +6,6 @@ addon.Icon = LibStub("LibDBIcon-1.0"); -- Global icon object
 local icon = addon.Icon; -- Local icon object
 
 local function CreateIcon()
-    -- Extra options needed for default LibDBIcon behaviour
-    Krowi_AchievementFilterOptions.Minimap = {
-        hide = not Krowi_AchievementFilterOptions.ShowMinimapIcon,
-    };
-
-
     icon.AchievementFilterLDB = LibStub("LibDataBroker-1.1"):NewDataObject("Krowi_AchievementFilterLDB", {
         type = "launcher",
         label = AF_NAME,
@@ -37,8 +31,9 @@ end
 function icon.Load()
     CreateIcon();
 
-    Krowi_AchievementFilterOptions.Minimap.hide = not Krowi_AchievementFilterOptions.ShowMinimapIcon;
-    icon:Register("Krowi_AchievementFilterLDB", icon.AchievementFilterLDB, Krowi_AchievementFilterOptions.Minimap);
+    local db = addon.Options.db;
+    db.Minimap.hide = not db.ShowMinimapIcon;
+    icon:Register("Krowi_AchievementFilterLDB", icon.AchievementFilterLDB, db.Minimap);
     diagnostics.Debug("- Icon loaded");
-    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not Krowi_AchievementFilterOptions.Minimap.hide));
+    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not db.Minimap.hide));
 end

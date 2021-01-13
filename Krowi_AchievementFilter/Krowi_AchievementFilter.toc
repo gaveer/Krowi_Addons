@@ -2,19 +2,23 @@
 ## Title: Krowi's Achievement Filter
 ## Version: 8.0
 ## Author: Krowi
-## SavedVariables: Krowi_AchievementFilterOptions
+## SavedVariables: Krowi_AchievementFilterOptions, Krowi_AchievementFilterTutorials
 ## Notes: Filters your achievements.
+
+Globals.lua
 
 Libs/Files.xml
 
 Core/Files.xml
 
+Localization/Files.xml
+
 Krowi_AchievementFilter.lua
 
-Localization.lua
 Diagnostics.lua
 Options.lua
 Icon.lua
+Tutorials.lua
 
 Objects/Files.xml
 

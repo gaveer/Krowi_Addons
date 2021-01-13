@@ -17,7 +17,7 @@ local familyID = {
 
 local function GetFELinks(achievementID, firstCriteriaXuFuID, headerName)
     if headerName == nil then
-        headerName = AF_XUFU;
+        headerName = addon.L["XUFU"];
     end
     local linkBase = "https://www.wow-petguide.com/?m=FamilyExorcist&s=";
     local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(headerName, linkBase .. firstCriteriaXuFuID);
@@ -40,7 +40,7 @@ end
 
 local function GetFEMetaLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/?m=FamilyExorcist&s=";
-    local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(AF_XUFU, linkBase);
+    local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     local criteriaString, _, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(achievementID, 1);
     item:AddChild(GetFELinks(assetID, familyID.Aquatic, criteriaString));
@@ -68,7 +68,7 @@ end
 
 local function GetAAotALinks(achievementID, firstCriteriaXuFuID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=AbhorrentAdversaries&s=";
-    local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(AF_XUFU, linkBase);
+    local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     item:AddChildAchCritInfoExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Crystalsnap
     item:AddChildAchCritInfoExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 7); -- Briarpaw

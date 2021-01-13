@@ -1,15 +1,19 @@
 local _, addon = ...; -- Global addon namespace
-addon.Options = {}; -- Global options namespace
-local options = addon.Options; -- Local options namespace
+addon.Options = {}; -- Global options namespace (will be overwritten by the object)
+local options = addon.Options; -- Local options namespace (will be overwritten by the object)
 local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
-local function LoadDefaults()
-    local options = Krowi_AchievementFilterOptions;
-    options.ShowMinimapIcon = options.ShowMinimapIcon or false;
-    options.EnableDebugInfo = options.EnableDebugInfo or false;
-    options.EnableTraceInfo = options.EnableTraceInfo or false;
-    options.CategoriesFrameWidthOffset = options.CategoriesFrameWidthOffset or 0;
-end
+local defaults = {
+    profile = {
+        ShowMinimapIcon = false,
+        EnableDebugInfo = false,
+        EnableTraceInfo = false,
+        CategoriesFrameWidthOffset = 0,
+        Minimap = {
+            hide = true
+        }
+    }
+}
 
 local function CreatePanel()
     local options = {
@@ -26,8 +30,19 @@ local function CreatePanel()
                     version = {
                         name = AF_VERSION .. ": " .. AF_VERSION_BUILD,
                         type = "description",
+                        width = "normal",
                         order = 1,
                     },
+                    openTutorial = {
+                        name = "Help",
+                        type = "execute",
+                        order = 2,
+                        func = function()
+                            InterfaceOptionsFrame:Hide();
+                            addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
+                            addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                        end
+                    }
                 },
             },
             General = {
@@ -42,15 +57,15 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 1,
-                        get = function () return Krowi_AchievementFilterOptions.ShowMinimapIcon; end,
+                        get = function () return addon.Options.db.ShowMinimapIcon; end,
                         set = function()
-                            Krowi_AchievementFilterOptions.ShowMinimapIcon = not Krowi_AchievementFilterOptions.ShowMinimapIcon;
-                            if Krowi_AchievementFilterOptions.ShowMinimapIcon then
+                            addon.Options.db.ShowMinimapIcon = not addon.Options.db.ShowMinimapIcon;
+                            if addon.Options.db.ShowMinimapIcon then
                                 addon.Icon:Show("Krowi_AchievementFilterLDB");
                             else
                                 addon.Icon:Hide("Krowi_AchievementFilterLDB");
                             end
-                            diagnostics.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.ShowMinimapIcon));
+                            diagnostics.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
                         end,
                     },
                     categoriesFrameWidthOffset = {
@@ -61,10 +76,10 @@ local function CreatePanel()
                         max = 100,
                         step = 1,
                         width = "normal",
-                        get = function () return Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset; end,
+                        get = function () return addon.Options.db.CategoriesFrameWidthOffset; end,
                         set = function(_, value)
-                            Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset = value or 0;
-                            print(AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET .. ": " .. tostring(Krowi_AchievementFilterOptions.CategoriesFrameWidthOffset));
+                            addon.Options.db.CategoriesFrameWidthOffset = value;
+                            print(AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
                         end,
                     }
                 }
@@ -81,10 +96,10 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 1,
-                        get = function () return Krowi_AchievementFilterOptions.EnableDebugInfo; end,
+                        get = function () return addon.Options.db.EnableDebugInfo; end,
                         set = function()
-                            Krowi_AchievementFilterOptions.EnableDebugInfo = not Krowi_AchievementFilterOptions.EnableDebugInfo;
-                            print(AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableDebugInfo));
+                            addon.Options.db.EnableDebugInfo = not addon.Options.db.EnableDebugInfo;
+                            print(AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
                         end,
                     },
                     enableTraceInfo = {
@@ -93,32 +108,33 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 2,
-                        get = function () return Krowi_AchievementFilterOptions.EnableTraceInfo; end,
+                        get = function () return addon.Options.db.EnableTraceInfo; end,
                         set = function()
-                            Krowi_AchievementFilterOptions.EnableTraceInfo = not Krowi_AchievementFilterOptions.EnableTraceInfo;
-                            print(AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableTraceInfo));
+                            addon.Options.db.EnableTraceInfo = not addon.Options.db.EnableTraceInfo;
+                            print(AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
                         end,
                     }
                 }
             }
         },
     }
-    local AceConfig = LibStub("AceConfig-3.0")
-    local AceConfigDialog = LibStub("AceConfigDialog-3.0")
-    AceConfig:RegisterOptionsTable(AF_NAME, options)
-    AceConfigDialog:AddToBlizOptions(AF_NAME, nil, nil)
+
+    local aceConfig = LibStub("AceConfig-3.0")
+    local aceConfigDialog = LibStub("AceConfigDialog-3.0")
+    aceConfig:RegisterOptionsTable(AF_NAME, options)
+    aceConfigDialog:AddToBlizOptions(AF_NAME, nil, nil)
 end
 
 -- Load the options
 function options.Load()
-    LoadDefaults();
     CreatePanel();
 
-    -- showMinimapIconToggle:SetChecked(Krowi_AchievementFilterOptions.ShowMinimapIcon);
-    -- enableDebugInfoToggle:SetChecked(Krowi_AchievementFilterOptions.EnableDebugInfo);
-    -- enableTraceInfoToggle:SetChecked(Krowi_AchievementFilterOptions.EnableTraceInfo);
+    addon.Options = LibStub("AceDB-3.0"):New("Krowi_AchievementFilterOptions", defaults, true);
+    addon.Options.db = addon.Options.profile;
+
     diagnostics.Debug("- Options loaded");
-    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableDebugInfo));
-    diagnostics.Debug("     - " .. AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(Krowi_AchievementFilterOptions.EnableTraceInfo));
+    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
+    diagnostics.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
+    diagnostics.Debug("     - " .. AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
+    diagnostics.Debug("     - " .. AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
 end

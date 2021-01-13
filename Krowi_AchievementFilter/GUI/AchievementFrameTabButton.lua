@@ -76,6 +76,8 @@ function achFrameTabBtn:Base_OnClick(id)
     AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 
+    addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages); -- Will only open when there are new pages
+
     -- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 

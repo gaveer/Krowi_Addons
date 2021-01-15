@@ -1,3 +1,6 @@
+--- Krowi-Tutorials-1.0
+--- Tutorials from Krowi based on MSA-Tutorials-1.0 from Marouan Sabbagh
+
 --- MSA-Tutorials-1.0
 --- Tutorials from Marouan Sabbagh based on CustomTutorials from João Cardoso.
 
@@ -63,9 +66,9 @@ local format = string.format
 local strfind = string.find
 local round = function(n) return floor(n + 0.5) end
 
-local Lib = LibStub:NewLibrary('MSA-Tutorials-1.0', 4)
+local Lib = LibStub:NewLibrary('Krowi-Tutorials-1.0', 4)
 if Lib then
-	Lib.NewFrame, Lib.NewButton, Lib.UpdateFrame = nil
+	Lib.NewFrame, Lib.NewButton, Lib.UpdateFrame = nil, nil, nil
 	Lib.numFrames = Lib.numFrames or 1
 	Lib.frames = Lib.frames or {}
 else
@@ -355,4 +358,8 @@ end
 
 function Lib:GetTutorial()
 	return self and Lib.frames[self] and Lib.frames[self].data
+end
+
+function Lib:IsTutorialOpen()
+	return Lib.frames[self]:IsShown();
 end

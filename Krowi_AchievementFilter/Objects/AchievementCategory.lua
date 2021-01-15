@@ -36,7 +36,7 @@ function achievementCategory:AddAchievement(achievement) -- Add an achievement t
 end
 
 function achievementCategory:AddCatZones() -- Add a child Zones achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(AF_CATEGORY_ZONES));
+    return self:AddCategory(achievementCategory:New(addon.L["C_ZONES"]));
 end
 
 function achievementCategory:AddCatQuests() -- Add a child Quests achievement category to an achievement category

@@ -154,5 +154,4 @@ function dungeons.Load(expansion)
     dungeons.DireMaul.Load(catDungeons);
     dungeons.Scholomance.Load(catDungeons);
     dungeons.Stratholme.Load(catDungeons);
-    
 end

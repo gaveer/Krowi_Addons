@@ -22,7 +22,7 @@ local function CreateIcon()
             tt:ClearLines();
             tt:AddDoubleLine(AF_NAME, AF_VERSION_BUILD);
             tt:AddLine(" "); -- Empty line
-            tt:AddLine(AF_ICON_TOOLTIP_RIGHT_CLICK);
+            tt:AddLine(addon.L["I_RIGHT_CLICK"]);
         end,
     });
 end
@@ -35,5 +35,5 @@ function icon.Load()
     db.Minimap.hide = not db.ShowMinimapIcon;
     icon:Register("Krowi_AchievementFilterLDB", icon.AchievementFilterLDB, db.Minimap);
     diagnostics.Debug("- Icon loaded");
-    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(not db.Minimap.hide));
+    diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(not db.Minimap.hide));
 end

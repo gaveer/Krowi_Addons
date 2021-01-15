@@ -2,31 +2,6 @@ local addonName, addon = ...;
 
 local L = LibStub(addon.Libs.AceLocale):NewLocale(addonName, "enUS", true, true);
 
--- [[ Localization ]] --
-
--- Options
-AF_OPTIONS_GENERAL = "General";
-AF_OPTIONS_MINIMAP_ICON_TOGGLE = "Show minimap icon";
-AF_OPTIONS_MINIMAP_ICON_TOGGLE_TOOLTIP = "Show / hide the minimap icon";
-AF_OPTIONS_DEBUG = "Debug";
-AF_OPTIONS_DEBUG_INFO_TOGGLE = "Enable debug info";
-AF_OPTIONS_DEBUG_INFO_TOGGLE_TOOLTIP = "Enable / disable debug info";
-AF_OPTIONS_TRACE_INFO_TOGGLE = "Enable trace info";
-AF_OPTIONS_TRACE_INFO_TOGGLE_TOOLTIP = "Enable / disable trace info";
-AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET = "Categories width offset";
-AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET_TOOLTIP = "Categories width offset tooltip";
-
--- Icon
-AF_ICON_TOOLTIP_RIGHT_CLICK = "Right-click " .. AF_COLOR_ADDON .. "for Options.|r";
-
--- Tab
-AF_TAB_BUTTON_TEXT = "Achievement Filter";
-
-AF_CATEGORY_ZONES = "Zones";
-AF_CATEGORY_SCENARIOS = "Scenarios";
-AF_VERSION = "Version";
-AF_INFO = "Info";
-
 -- Misc.
 L["WOWHEAD"] = "Wowhead";
 L["XUFU"] = "Xu-Fu's Pet Guides";
@@ -34,10 +9,39 @@ L["IAT"] = "Instance Achievement Tracker";
 L["INSTALLED"] = "Installed";
 L["NOT INSTALLED"] = "Not installed";
 
+-- Tab
+L["T_TAB_TEXT"] = "Achievement Filter";
+
+-- Categories
+L["C_ZONES"] = "Zones";
+L["C_SCENARIOS"] = "Scenarios";
+
+-- Options
+L["O_INFO"] = "Info";
+L["O_VERSION"] = "Version";
+L["O_ICON"] = "Icon";
+L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
+L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
+L["O_LAYOUT"] = "Layout";
+L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
+L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width";
+L["O_DEBUG"] = "Debug";
+L["O_ENABLE_DEBUG_INFO"] = "Enable debug info";
+L["O_ENABLE_DEBUG_INFO_DESC"] = "Enable / disable debug info";
+L["O_ENABLE_TRACE_INFO"] = "Enable trace info";
+L["O_ENABLE_TRACE_INFO_DESC"] = "Enable / disable trace info";
+
+-- Icon
+L["I_RIGHT_CLICK"] = "Right-click " .. AF_COLOR_ADDON .. "for Options." .. AF_COLOR_END;
+
 -- Tutorials
 -- Features tutorial
 L["FT_TABBUTTON_TITLE"] = "New achievements tab";
 L["FT_TABBUTTON_DESC"] = "A new achievements tab is added to the achievement window to offer a new way of displaying achievements but in a familiar fashion.";
+L["FT_GROUPING_TITLE"] = "New but familiar";
+L["FT_GROUPING_DESC"] = "Instead of grouping achievements by type and then by expansion like the default tabs do, " ..
+                        "here achievements are first grouped by expansion, then by region like different zones, dungeons, raids, ... " ..
+                        "and then by type.";
 L["FT_RIGHTCLICKMENU_TITLE"] = "Right-click menu";
 L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click menu.\n\n" ..
                                 "Features:\n" ..

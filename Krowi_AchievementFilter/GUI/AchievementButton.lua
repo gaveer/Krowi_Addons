@@ -15,7 +15,7 @@ function KrowiAF_AchievementButton_OnLoad(self) -- Used in Templates - KrowiAF_A
 	AchievementButton_OnLoad(self);
 end
 
-function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers) -- Used in Templates - KrowiAF_AchievementTemplate
+function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers, anchor, offsetX, offsetY) -- Used in Templates - KrowiAF_AchievementTemplate
 	diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
 
 	if button == "LeftButton" then
@@ -23,7 +23,7 @@ function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers) 
 		OnClickLeftButton(self, ignoreModifiers);
 	elseif button == "RightButton" then
 		diagnostics.Debug("RightButton");
-		OnClickRightButton(self);
+		OnClickRightButton(self, anchor, offsetX, offsetY);
 	end
 end
 
@@ -75,8 +75,13 @@ end
 local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
 local menu = {};
 
-function OnClickRightButton(self)
+function OnClickRightButton(self, anchor, offsetX, offsetY)
 	diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
+
+	-- Make sure optional values are set to default if not used
+	anchor = anchor or "cursor";
+	offsetX = offsetX or 0;
+	offsetY = offsetY or 0;
 
 	-- Reset menu
 	menu = {};
@@ -107,7 +112,7 @@ function OnClickRightButton(self)
 		tinsert(menu, GenerateRightClickMenuPart(self.Achievement.RCMenExtra));
 	end
 
-	EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
+	EasyMenu(menu, menuFrame, anchor, offsetX, offsetY, "MENU");
 end
 
 function GenerateRightClickMenuPart(achievementRightClickMenuItem)

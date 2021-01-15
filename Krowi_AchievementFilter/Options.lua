@@ -22,15 +22,14 @@ local function CreatePanel()
         type = 'group',
         args = {
             Info = {
-                name = AF_INFO,
+                name = addon.L["O_INFO"],
                 type = "group",
                 inline = true,
                 order = 1,
                 args = {
                     version = {
-                        name = AF_VERSION .. ": " .. AF_VERSION_BUILD,
+                        name = addon.L["O_VERSION"] .. ": " .. AF_VERSION_BUILD,
                         type = "description",
-                        width = "normal",
                         order = 1,
                     },
                     openTutorial = {
@@ -45,15 +44,15 @@ local function CreatePanel()
                     }
                 },
             },
-            General = {
-                name = AF_OPTIONS_GENERAL,
+            Icon = {
+                name = addon.L["O_ICON"],
                 type = "group",
                 inline = true,
                 order = 2,
                 args = {
                     showMinimapIcon = {
-                        name = AF_OPTIONS_MINIMAP_ICON_TOGGLE,
-                        desc = AF_OPTIONS_MINIMAP_ICON_TOGGLE_TOOLTIP,
+                        name = addon.L["O_SHOW_MINIMAP_ICON"],
+                        desc = addon.L["O_SHOW_MINIMAP_ICON_DESC"],
                         type = "toggle",
                         width = "full",
                         order = 1,
@@ -65,53 +64,62 @@ local function CreatePanel()
                             else
                                 addon.Icon:Hide("Krowi_AchievementFilterLDB");
                             end
-                            diagnostics.Debug(AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
+                            diagnostics.Debug(addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
                         end,
-                    },
+                    }
+                }
+            },
+            Layout = {
+                name = addon.L["O_LAYOUT"],
+                type = "group",
+                inline = true,
+                order = 3,
+                args = {
                     categoriesFrameWidthOffset = {
-                        name = AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET,
-                        desc = AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET_TOOLTIP,
+                        name = addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"],
+                        desc = addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET_DESC"],
                         type = "range",
                         min = -100,
                         max = 100,
                         step = 1,
                         width = "normal",
+                        order = 1,
                         get = function () return addon.Options.db.CategoriesFrameWidthOffset; end,
                         set = function(_, value)
                             addon.Options.db.CategoriesFrameWidthOffset = value;
-                            print(AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+                            print(addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
                         end,
                     }
                 }
             },
             Debug = {
-                name = AF_OPTIONS_DEBUG,
+                name = addon.L["O_DEBUG"],
                 type = "group",
                 inline = true,
-                order = 3,
+                order = 4,
                 args = {
                     enableDebugInfo = {
-                        name = AF_OPTIONS_DEBUG_INFO_TOGGLE,
-                        desc = AF_OPTIONS_DEBUG_INFO_TOGGLE_TOOLTIP,
+                        name = addon.L["O_ENABLE_DEBUG_INFO"],
+                        desc = addon.L["O_ENABLE_DEBUG_INFO_DESC"],
                         type = "toggle",
                         width = "full",
                         order = 1,
                         get = function () return addon.Options.db.EnableDebugInfo; end,
                         set = function()
                             addon.Options.db.EnableDebugInfo = not addon.Options.db.EnableDebugInfo;
-                            print(AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
+                            print(addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
                         end,
                     },
                     enableTraceInfo = {
-                        name = AF_OPTIONS_TRACE_INFO_TOGGLE,
-                        desc = AF_OPTIONS_TRACE_INFO_TOGGLE_TOOLTIP,
+                        name = addon.L["O_ENABLE_TRACE_INFO"],
+                        desc = addon.L["O_ENABLE_TRACE_INFO_DESC"],
                         type = "toggle",
                         width = "full",
                         order = 2,
                         get = function () return addon.Options.db.EnableTraceInfo; end,
                         set = function()
                             addon.Options.db.EnableTraceInfo = not addon.Options.db.EnableTraceInfo;
-                            print(AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
+                            print(addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
                         end,
                     }
                 }
@@ -133,8 +141,8 @@ function options.Load()
     addon.Options.db = addon.Options.profile;
 
     diagnostics.Debug("- Options loaded");
-    diagnostics.Debug("     - " .. AF_OPTIONS_MINIMAP_ICON_TOGGLE .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. AF_OPTIONS_DEBUG_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
-    diagnostics.Debug("     - " .. AF_OPTIONS_TRACE_INFO_TOGGLE .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
-    diagnostics.Debug("     - " .. AF_OPTIONS_CATEGORIESFRAMEWIDTHOFFSET .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+    diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
+    diagnostics.Debug("     - " .. addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+    diagnostics.Debug("     - " .. addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
+    diagnostics.Debug("     - " .. addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
 end

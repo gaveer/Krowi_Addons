@@ -2,7 +2,7 @@
 ## Title: Krowi's Achievement Filter
 ## Version: 8.0
 ## Author: Krowi
-## SavedVariables: Krowi_AchievementFilterOptions, Krowi_AchievementFilterTutorials
+## SavedVariables: Krowi_AchievementFilterOptions, TEST
 ## Notes: Filters your achievements.
 
 Globals.lua

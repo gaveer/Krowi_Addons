@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Battle for Azeroth zones (220+ achievements for Horde and Alliance combined)
 - The width of the categories list can be adjusted in options; negative values will narrow it, positive values will widen it
-- Tutorial explaining the features of the addon; showed when opening the new achievement window tab for the first time
+- Tutorial explaining the features of the addon; showed when opening the new achievement window tab for the first time or when clicking the Help button in Interface -> Addons -> Options
 
 ### Changed
 - Interface -> Addons -> Options is now handled by Ace3

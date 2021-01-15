@@ -30,6 +30,7 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame)
     frame:RegisterEvent("ADDON_LOADED");
 
     self.Frame = frame;
+    self.ID = tabID;
     self.OnClick = self.Base_OnClick;
     self.CategoriesFrame = categoriesFrame;
     self.AchievementsFrame = achievementsFrame;
@@ -76,8 +77,6 @@ function achFrameTabBtn:Base_OnClick(id)
     AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 
-    addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages); -- Will only open when there are new pages
-
     -- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 
@@ -98,4 +97,8 @@ function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedT
     else -- Another tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -3);
     end
+end
+
+function achFrameTabBtn:Select()
+    self:OnClick(self.ID);
 end

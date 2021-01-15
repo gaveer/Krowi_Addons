@@ -23,9 +23,10 @@ function loadHelper:OnEvent(event, arg1)
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
-            local achievementsFrame = addon.GUI.AchievementsFrame:New();
-            local categoriesFrame = addon.GUI.CategoriesFrame:New(addon.Categories, achievementsFrame.Frame);
-            addon.GUI.AchievementFrameTabButton:New(AF_TAB_BUTTON_TEXT, categoriesFrame.Frame, achievementsFrame.Frame);
+            addon.GUI.AchievementsFrame1 = addon.GUI.AchievementsFrame:New();
+            addon.GUI.CategoriesFrame1 = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame1.Frame);
+            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame1.Frame, addon.GUI.AchievementsFrame1.Frame);
+            addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
         end
     elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
         addon.Classic.Load();

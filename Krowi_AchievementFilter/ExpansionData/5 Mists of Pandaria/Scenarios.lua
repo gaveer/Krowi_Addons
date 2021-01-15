@@ -136,7 +136,7 @@ function scenarios.TheSecretsOfRagefire.Load(catDungeons)
 end
 
 function scenarios.Load(expansion)
-    local catScenarios = expansion:AddCategory(achCat:New(AF_CATEGORY_SCENARIOS));
+    local catScenarios = expansion:AddCategory(achCat:New(addon.L["C_SCENARIOS"]));
     catScenarios:AddAchievementIDs(7385); -- Overarching achievements
 
     scenarios.ABrewingStorm.Load(catScenarios);

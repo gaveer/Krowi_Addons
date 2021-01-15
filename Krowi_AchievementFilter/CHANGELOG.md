@@ -1,6 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
 ## [9.0.2.8.0]
 ### Added
 - Battle for Azeroth zones (220+ achievements for Horde and Alliance combined)
@@ -85,7 +87,7 @@ All notable changes to this project will be documented in this file.
 - The need for almost all localization
 
 [Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
-[9.0.2.8.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.2.8.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3169416
 [v9.0.2.7.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3163711
 [90002.6.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3156244
 [90002.5.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3152510

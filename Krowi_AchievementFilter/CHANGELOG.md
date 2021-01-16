@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Searching achievements in the new tab
+- Watch achievements
 
 ## [9.0.2.8.0]
 ### Added

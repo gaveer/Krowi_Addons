@@ -107,7 +107,7 @@ function achievementsFrame.OnEvent(self, event, ...)
 	end
 end
 
-function achievementsFrame.OnShow(self)
+function achievementsFrame:OnShow()
 	diagnostics.Trace("achievementsFrame.OnShow");
 
 	self.Parent:Update();

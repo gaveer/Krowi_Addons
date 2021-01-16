@@ -73,7 +73,7 @@ end
 -- local test;
 
 function categoriesFrame:OnShow()
-	diagnostics.Trace("categoriesFrame.OnShow");
+	diagnostics.Trace("categoriesFrame:OnShow");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Hide(); -- Issue #11: Fix

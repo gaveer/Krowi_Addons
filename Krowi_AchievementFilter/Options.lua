@@ -11,6 +11,10 @@ local defaults = {
         CategoriesFrameWidthOffset = 0,
         Minimap = {
             hide = true
+        },
+        SearchBox = {
+            NumberOfSearchPreviews = 5,
+            MinimumCharactersToSearch = 3
         }
     }
 }

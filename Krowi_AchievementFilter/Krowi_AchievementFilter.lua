@@ -23,9 +23,10 @@ function loadHelper:OnEvent(event, arg1)
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
+            addon.GUI.SearchBox1 = addon.GUI.SearchBox:New();
             addon.GUI.AchievementsFrame1 = addon.GUI.AchievementsFrame:New();
             addon.GUI.CategoriesFrame1 = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame1.Frame);
-            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame1.Frame, addon.GUI.AchievementsFrame1.Frame);
+            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame1.Frame, addon.GUI.AchievementsFrame1.Frame, addon.GUI.SearchBox1.Frame);
             addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
         end
     elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
@@ -38,7 +39,7 @@ function loadHelper:OnEvent(event, arg1)
         addon.Legion.Load();
         addon.BattleForAzeroth.Load();
         addon.Shadowlands.Load();
-        addon.Categories = addon.Data:GetCategoryList(); -- This freezes the game if we load it outside of the loading screen
+        addon.Categories, addon.Achievements = addon.Data:GetList(); -- This freezes the game if we load it outside of the loading screen
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

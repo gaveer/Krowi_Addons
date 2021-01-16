@@ -1,8 +1,10 @@
 local _, addon = ...; -- Global addon namespace
 local gui = addon.GUI; -- Local GUI namespace
 local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+
 gui.AchievementsFrame = {}; -- Global achievements frame class
 local achievementsFrame = gui.AchievementsFrame; -- Local achievements frame class
+achievementsFrame.ID = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
 achievementsFrame.__index = achievementsFrame; -- Used to support OOP like code
 
@@ -12,11 +14,14 @@ function achievementsFrame:New()
 	local self = {};
 	setmetatable(self, achievementsFrame);
 
+	achievementsFrame.ID = achievementsFrame.ID + 1;
+	self.ID = achievementsFrame.ID;
+
 	self.SelectedCategory = nil;
 	self.SelectedAchievement = nil; -- Issue #6: Fix
 	self.UIFontHeight = nil;
 
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements", AchievementFrame);
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements" .. self.ID, AchievementFrame);
 	frame:SetWidth(504 - addon.Options.db.CategoriesFrameWidthOffset);
 	frame:SetPoint("TOPLEFT", AchievementFrameCategories, "TOPRIGHT", 22, 0);
 	frame:SetPoint("BOTTOM", AchievementFrameCategories);
@@ -96,7 +101,7 @@ function achievementsFrame.OnEvent(self, event, ...)
 
 	if ( event == "ADDON_LOADED" ) then
 		local addonName = ...;
-		if ( addonName and addonName ~= "Overachiever" ) then
+		if ( addonName and addonName == "Overachiever" ) then
 			Overachiever.UI_HookAchButtons(self.Container.buttons, self.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
 		end
 	end

@@ -12,14 +12,17 @@ function categoriesFrame:New(categories, achievementsFrame)
     diagnostics.Trace("categoriesFrame:New");
 
 	local self = {};
-    setmetatable(self, categoriesFrame);
+	setmetatable(self, categoriesFrame);
+
+	categoriesFrame.ID = categoriesFrame.ID + 1;
+	self.ID = categoriesFrame.ID;
 
 	self.Categories = categories;
 	self.SelectedCategory = self.Categories[1];
 	self.AchievementsFrame = achievementsFrame;
 	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
 
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "AchivementGoldBorderBackdrop");
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. self.ID, AchievementFrame, "AchivementGoldBorderBackdrop");
 	frame:SetPoint("TOPLEFT", AchievementFrameCategories);
 	frame:SetPoint("BOTTOM", AchievementFrameCategories);
 	self.Frame = frame;
@@ -67,6 +70,8 @@ function categoriesFrame:New(categories, achievementsFrame)
 	return self;
 end
 
+-- local test;
+
 function categoriesFrame:OnShow()
 	diagnostics.Trace("categoriesFrame.OnShow");
 
@@ -75,7 +80,10 @@ function categoriesFrame:OnShow()
 	AchievementFrameFilterDropDown:Hide();
 	AchievementFrameHeaderLeftDDLInset:Hide();
 	AchievementFrame.searchBox:Hide();
-	AchievementFrameHeaderRightDDLInset:Hide();
+	-- AchievementFrameHeaderRightDDLInset:Hide();
+
+	-- test = AchievementFrame_ShowSearchPreviewResults;
+	-- AchievementFrame_ShowSearchPreviewResults = AchievementFrame_ShowSearchPreviewResults_Test;
 
 	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
 
@@ -96,7 +104,9 @@ function categoriesFrame:OnHide()
 		AchievementFrameHeaderLeftDDLInset:Hide();
 	end
 	AchievementFrame.searchBox:Show();
-	AchievementFrameHeaderRightDDLInset:Show();
+	-- AchievementFrameHeaderRightDDLInset:Show();
+	
+	-- AchievementFrame_ShowSearchPreviewResults = test;
 end
 
 function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)

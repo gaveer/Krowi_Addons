@@ -8,7 +8,7 @@ achFrameTabBtn.__index = achFrameTabBtn; -- Used to support OOP like code
 
 -- Do this in code instead of an xml template since we're not sure if other addons will also add tabs to the AchievementFrame
 -- or if we want to add more ourselves
-function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame)
+function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxFrame)
     diagnostics.Trace("achievementFrameTabButton:New");
 
     local self = {};
@@ -34,6 +34,7 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame)
     self.OnClick = self.Base_OnClick;
     self.CategoriesFrame = categoriesFrame;
     self.AchievementsFrame = achievementsFrame;
+    self.SearchBoxFrame = searchBoxFrame;
 
     hooksecurefunc("AchievementFrame_DisplayComparison", function ()
         self.OnClick = self.Comparison_OnClick;
@@ -74,7 +75,7 @@ function achFrameTabBtn:Base_OnClick(id)
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();
     end
-    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame);
+    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame, self.SearchBoxFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 
     -- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet

@@ -1,6 +1,6 @@
 ## Interface: 90002
 ## Title: Krowi's Achievement Filter
-## Version: 8.0
+## Version: 8.1
 ## Author: Krowi
 ## SavedVariables: Krowi_AchievementFilterOptions, TEST
 ## Notes: Filters your achievements.

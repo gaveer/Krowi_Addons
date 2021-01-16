@@ -96,7 +96,7 @@ function achievementsFrame.OnEvent(self, event, ...)
 
 	if ( event == "ADDON_LOADED" ) then
 		local addonName = ...;
-		if ( addonName and addonName ~= "Overachiever" ) then
+		if ( addonName and addonName == "Overachiever" ) then -- Issue #19: Fix
 			Overachiever.UI_HookAchButtons(self.Container.buttons, self.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
 		end
 	end

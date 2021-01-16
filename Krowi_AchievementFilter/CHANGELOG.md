@@ -1,12 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-### Added
-- Searching achievements in the new tab
-- Watch achievements
+## [9.0.2.8.1] - 2021-01-16
+### Fixed
+- Issue #19: 'Overachiever' (a nil value)
 
-## [9.0.2.8.0]
+## [9.0.2.8.0] - 2021-01-15
 ### Added
 - Battle for Azeroth zones (220+ achievements for Horde and Alliance combined)
 - The width of the categories list can be adjusted in options; negative values will narrow it, positive values will widen it
@@ -90,6 +89,7 @@ All notable changes to this project will be documented in this file.
 - The need for almost all localization
 
 [Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.2.8.1]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
 [9.0.2.8.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3169416
 [v9.0.2.7.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3163711
 [90002.6.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3156244

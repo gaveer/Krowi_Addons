@@ -21,59 +21,41 @@ function categoriesFrame:New(categories, achievementsFrame)
 	self.SelectedCategory = self.Categories[1];
 	self.AchievementsFrame = achievementsFrame;
 	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
+	self.AchievementsFrame.Parent.CategoriesFrame = self;
 
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. self.ID, AchievementFrame, "AchivementGoldBorderBackdrop");
-	frame:SetPoint("TOPLEFT", AchievementFrameCategories);
-	frame:SetPoint("BOTTOM", AchievementFrameCategories);
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. self.ID, AchievementFrame, "KrowiAF_AchievementFrameCategoriesTemplate");
 	self.Frame = frame;
 	frame.Parent = self;
-
-	local container = CreateFrame("ScrollFrame", "$parentContainer", frame, "HybridScrollFrameTemplate");
-	container:SetPoint("TOPLEFT", 0, -5);
-	container:SetPoint("BOTTOMRIGHT", 0, 5);
-	frame.Container = container;
-	container.ParentFrame = frame;
-
-	local scrollBar = CreateFrame("Slider", "$parentScrollBar", container, "HybridScrollBarTemplate");
-	scrollBar:SetPoint("TOPLEFT", container, "TOPRIGHT", 1, -14);
-	scrollBar:SetPoint("BOTTOMLEFT", container, "BOTTOMRIGHT", 1, 12);
-	container.ScrollBar = scrollBar;
-	scrollBar.ParentContainer = container;
-
-	frame:SetScript("OnShow", self.OnShow);
-	frame:SetScript("OnHide", self.OnHide);
+	frame.Container.ParentFrame = frame;
+	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
 	frame:Hide();
 
-	scrollBar.Show = function()
-		self.Show_Hide(frame, scrollBar, getmetatable(scrollBar).__index.Show, 175, 22, 30);
+	frame.Container.ScrollBar.Show = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Show, 175, 22, 30);
 	end;
-	scrollBar.Hide = function()
-		self.Show_Hide(frame, scrollBar, getmetatable(scrollBar).__index.Hide, 197, 0, 30);
+	frame.Container.ScrollBar.Hide = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Hide, 197, 0, 30);
 	end;
 
-	scrollBar.trackBG:Show();
-	container.update = function(container)
+	frame.Container.ScrollBar.trackBG:Show();
+	frame.Container.update = function(container)
 		diagnostics.Trace("container.update");
 		container.ParentFrame.Parent:Update(); -- Issue #12: Broken
 	end
 
-	HybridScrollFrame_CreateButtons(container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
+	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
 	-- Doing post Load things
-	for _, button in next, container.buttons do
-		button.ParentContainer = container;
+	for _, button in next, frame.Container.buttons do
+		button.ParentContainer = frame.Container;
 	end
-
-	-- self:Update();
 
 	return self;
 end
 
--- local test;
-
-function categoriesFrame:OnShow()
-	diagnostics.Trace("categoriesFrame:OnShow");
+function KrowiAF_AchievementFrameCategories_OnShow(self) -- Used in Templates - KrowiAF_AchievementFrameCategoriesTemplate
+	diagnostics.Trace("KrowiAF_AchievementFrameCategories_OnShow");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Hide(); -- Issue #11: Fix
@@ -82,16 +64,13 @@ function categoriesFrame:OnShow()
 	AchievementFrame.searchBox:Hide();
 	-- AchievementFrameHeaderRightDDLInset:Hide();
 
-	-- test = AchievementFrame_ShowSearchPreviewResults;
-	-- AchievementFrame_ShowSearchPreviewResults = AchievementFrame_ShowSearchPreviewResults_Test;
-
 	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
 
 	self.Parent:Update();
 end
 
-function categoriesFrame:OnHide()
-	diagnostics.Trace("categoriesFrame:OnHide");
+function KrowiAF_AchievementFrameCategories_OnHide() -- Used in Templates - KrowiAF_AchievementFrameCategoriesTemplate
+	diagnostics.Trace("KrowiAF_AchievementFrameCategories_OnHide");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Show(); -- Issue #11: Fix
@@ -105,8 +84,6 @@ function categoriesFrame:OnHide()
 	end
 	AchievementFrame.searchBox:Show();
 	-- AchievementFrameHeaderRightDDLInset:Show();
-	
-	-- AchievementFrame_ShowSearchPreviewResults = test;
 end
 
 function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
@@ -241,7 +218,7 @@ function categoriesFrame.DisplayButton(button, category)
 	button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
 end
 
-function categoriesFrame:SelectButton(button)
+function categoriesFrame:SelectButton(button, quick)
 	diagnostics.Trace("categoriesFrame:SelectButton");
 
 	if button.Category.IsSelected and button.Category.NotCollapsed then -- Collapse selected categories -- Issue #12: Fix
@@ -282,10 +259,42 @@ function categoriesFrame:SelectButton(button)
 		return
 	end
 
-	AchievementFrame_ShowSubFrame(self.Frame, self.AchievementsFrame);
-	self.SelectedCategory = button.Category;
-	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
-	self.AchievementsFrame.Parent:ClearSelection();
-	self.AchievementsFrame.Container.ScrollBar:SetValue(0);
-	self.AchievementsFrame.Parent:Update();
+	if not quick then -- Skip refreshing achievements if we're still busy selecting the correct category
+		self.SelectedCategory = button.Category;
+		self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
+		self.AchievementsFrame.Parent:ClearSelection();
+		self.AchievementsFrame.Container.ScrollBar:SetValue(0);
+		self.AchievementsFrame.Parent:Update();
+	end
+end
+
+function categoriesFrame:SelectCategory(...)
+	diagnostics.Trace("categoriesFrame:Select");
+
+	local args
+	if type(...) == "table" then
+		args = ...;
+	else
+		args = {...};
+	end
+
+	local buttons = self.Frame.Container.buttons;
+	addon.ResetView(buttons);
+
+	for i, name in next, args do
+		diagnostics.Debug(tostring(i) .. " " .. name);
+		self:SelectButton(buttons[self:FindButtonIndex(name)], i ~= #args);
+		self:Update();
+	end
+end
+
+function categoriesFrame:FindButtonIndex(name)
+	diagnostics.Trace("categoriesFrame:FindButtonIndex");
+
+	local buttons = self.Frame.Container.buttons;
+	for i, button in next, buttons do
+		if string.match(button.name:lower(), name:lower()) then
+			return i;
+        end
+	end
 end

@@ -1,0 +1,37 @@
+local _, addon = ...; -- Global addon namespace
+local gui = addon.GUI; -- Local GUI namespace
+local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+
+gui.SearchPreviewContainer = {}; -- Global searchPreviewContainer frame class
+local searchPreviewContainer = gui.SearchPreviewContainer; -- Local searchPreviewContainer frame class
+searchPreviewContainer.ID = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
+
+searchPreviewContainer.__index = searchPreviewContainer; -- Used to support OOP like code
+
+function searchPreviewContainer:New()
+    diagnostics.Trace("searchPreviewContainer:New");
+
+	local self = {};
+    setmetatable(self, searchPreviewContainer);
+
+	searchPreviewContainer.ID = searchPreviewContainer.ID + 1;
+    self.ID = searchPreviewContainer.ID;
+
+    local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameSearchPreviewContainer" .. self.ID, AchievementFrame);
+	frame:SetPoint("TOPLEFT", AchievementFrame.searchBox, "BOTTOMLEFT", -4, 3);
+
+	self.Frame = frame;
+	frame.Parent = self;
+
+    -- frame:SetScript("OnShow", self.OnShow);
+    -- frame:SetScript("OnEnterPressed", self.OnEnterPressed);
+    -- frame:SetScript("OnTextChanged", self.OnTextChanged);
+    -- frame:SetScript("OnEditFocusLost", self.OnEditFocusLost);
+    -- frame:SetScript("OnEditFocusGained", self.OnEditFocusGained);
+    -- frame:SetScript("OnKeyDown", self.OnKeyDown);
+
+	-- tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
+    frame:Hide();
+
+	return self;
+end

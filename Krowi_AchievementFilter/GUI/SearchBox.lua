@@ -3,7 +3,7 @@ local gui = addon.GUI; -- Local GUI namespace
 local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
 gui.SearchBox = {}; -- Global searchBox frame class
-local searchBox = gui.SearchBox; -- Local categories frame class
+local searchBox = gui.SearchBox; -- Local searchBox frame class
 searchBox.ID = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
 searchBox.__index = searchBox; -- Used to support OOP like code
@@ -72,9 +72,11 @@ function searchBox:OnEnterPressed()
 	end
 end
 
+Results = {};
+
 function searchBox:OnTextChanged()
     diagnostics.Trace("searchBox:OnTextChanged");
-    
+
     SearchBoxTemplate_OnTextChanged(self);
 	if strlen(self:GetText()) >= addon.Options.db.SearchBox.MinimumCharactersToSearch then
 		self.fullSearchFinished = SetAchievementSearchStringTest(self:GetText()); -- Must be some asynchronous function when called in Blizzard_AchievementUI
@@ -82,11 +84,11 @@ function searchBox:OnTextChanged()
             -- AchievementFrame_UpdateSearchPreview();
             addon.Diagnostics.Debug("1");
 		else
-			-- AchievementFrame_ShowSearchPreviewResults();
+			AchievementFrame_ShowSearchPreviewResults_Test();
             addon.Diagnostics.Debug("2");
 		end
 	else
-		-- AchievementFrame_HideSearchPreview();
+		AchievementFrame_HideSearchPreview();
         addon.Diagnostics.Debug("3");
 	end
 end
@@ -103,14 +105,11 @@ function searchBox:OnKeyDown()
 	diagnostics.Trace("searchBox:OnKeyDown");
 end
 
--- Let's overwrite the default one for now, just for testing
 function AchievementFrame_ShowSearchPreviewResults_Test()
     diagnostics.Trace("AchievementFrame_ShowSearchPreviewResults");
 
-    SetAchievementSearchStringTest("classic");
-
 	AchievementFrame.searchProgressBar:Hide();
-	local numResults = GetNumFilteredAchievements();
+	local numResults = GetNumFilteredAchievementsTest();
 	if ( numResults > 0 ) then
 		AchievementFrame_SetSearchPreviewSelection(1);
 	end
@@ -120,7 +119,7 @@ function AchievementFrame_ShowSearchPreviewResults_Test()
 	for index = 1, 5 do
 		local searchPreview = searchPreviews[index];
 		if ( index <= numResults ) then
-			local achievementID = GetFilteredAchievementID(index);
+			local achievementID = GetFilteredAchievementIDTest(index);
 			local _, name, _, _, _, _, _, description, _, icon, _, _, _, _ = GetAchievementInfo(achievementID);
 			searchPreview.name:SetText(name);
 			searchPreview.icon:SetTexture(icon);
@@ -151,16 +150,26 @@ end
 function SetAchievementSearchStringTest(text)
     diagnostics.Trace("SetAchievementSearchStringTest");
 
+	local results = {};
+
     for _, achievement in next, addon.Achievements do
         local achievementID = achievement.ID;
         local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = GetAchievementInfo(achievementID);
-        if string.match(name:lower(), text:lower()) then
-            addon.Diagnostics.Debug(name);
-        end
-        if string.match(description:lower(), text:lower()) then
-            addon.Diagnostics.Debug(description);
+        if string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower()) then
+			tinsert(results, achievement);
+			addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
         end
     end
 
+	Results = results;
+
     return true;
+end
+
+function GetNumFilteredAchievementsTest()
+	return #Results;
+end
+
+function GetFilteredAchievementIDTest(index)
+	return Results[index].ID;
 end

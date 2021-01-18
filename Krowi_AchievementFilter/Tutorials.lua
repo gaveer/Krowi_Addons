@@ -22,14 +22,6 @@ local function OpenAchievementFrameAtTabButton1()
     addon.GUI.TabButton1:Select();
 end
 
-local function ResetView()
-    local categoriesButtons = addon.GUI.CategoriesFrame1.Frame.Container.buttons;
-    KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[1]); -- Select the 1st category
-    if categoriesButtons[1].Category.NotCollapsed then -- Make sure it's collapsed
-        KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[1]);
-    end
-end
-
 function tutorials.Load()
     tutorials.RegisterTutorial(tutorials.FeaturesTutorial, {
         savedvariable = addon.Options.db,
@@ -76,26 +68,17 @@ function tutorials.Load()
         onShow = function(self, i)
             if i == 1 then
                 OpenAchievementFrameAtTabButton1();
-                ResetView();
+                local categoriesButtons = addon.GUI.CategoriesFrame1.Frame.Container.buttons;
+                addon.ResetView(categoriesButtons);
                 self[i].shine = addon.GUI.TabButton1.Frame;
             elseif i == 2 then
                 OpenAchievementFrameAtTabButton1();
-                local categoriesButtons = addon.GUI.CategoriesFrame1.Frame.Container.buttons;
-                ResetView();
-                KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[9]);
-                KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[10]);
-                KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[11]);
-                KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[12]);
+                addon.GUI.CategoriesFrame1:SelectCategory(addon.GetCategoryInfoTitle(15439), addon.L["C_ZONES"], C_Map.GetMapInfo(1533).name, addon.GetCategoryInfoTitle(15447));
                 self[i].shine = addon.GUI.CategoriesFrame1.Frame;
             elseif i == 3 then
                 OpenAchievementFrameAtTabButton1();
-                local categoriesButtons = addon.GUI.CategoriesFrame1.Frame.Container.buttons;
                 local achievementsButtons = addon.GUI.AchievementsFrame1.Frame.Container.buttons;
-                ResetView();
-                KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[1]);
-                KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[2]); -- Select the 1st child of the 1st category
-                KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[2]); -- And make sure it's collapsed
-                KrowiAF_AchievementButton_OnClick(achievementsButtons[1], "RightButton", nil, nil, achievementsButtons[1], 88, 34); -- Offsets are chosen to match tutorial image
+                addon.GUI.AchievementsFrame1:SelectAchievement(1283, "RightButton", nil, nil, achievementsButtons[1], 88, 34);
                 self[i].shine = DropDownList1;
             end
         end

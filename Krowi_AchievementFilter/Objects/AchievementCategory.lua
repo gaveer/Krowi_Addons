@@ -14,7 +14,7 @@ function achievementCategory:New(name) -- Create a new achievement category
 end
 
 function achievementCategory:NewCatInfo(id) -- Create a new achievement category using GetCategoryInfo(id)
-    return achievementCategory:New(GetCategoryInfo(id));
+    return achievementCategory:New(addon.GetCategoryInfoTitle(id));
 end
 
 function achievementCategory:AddCategory(category) -- Add a child achievement category to an achievement category
@@ -40,31 +40,31 @@ function achievementCategory:AddCatZones() -- Add a child Zones achievement cate
 end
 
 function achievementCategory:AddCatQuests() -- Add a child Quests achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(GetCategoryInfo(15447))); -- Achievement_Category table
+    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15447))); -- Achievement_Category table
 end
 
 function achievementCategory:AddCatExploration() -- Add a child Exploration achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(GetCategoryInfo(97))); -- Achievement_Category table
+    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(97))); -- Achievement_Category table
 end
 
 function achievementCategory:AddCatPvP() -- Add a child PvP achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(GetCategoryInfo(15270))); -- Achievement_Category table
+    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15270))); -- Achievement_Category table
 end
 
 function achievementCategory:AddCatReputation() -- Add a child Reputation achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(GetCategoryInfo(15273))); -- Achievement_Category table
+    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15273))); -- Achievement_Category table
 end
 
 function achievementCategory:AddCatDungeons() -- Add a child Dungeons achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(GetCategoryInfo(15272))); -- Achievement_Category table
+    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15272))); -- Achievement_Category table
 end
 
 function achievementCategory:AddCatRaids() -- Add a child Raids achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(GetCategoryInfo(15271))); -- Achievement_Category table
+    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15271))); -- Achievement_Category table
 end
 
 function achievementCategory:AddCatPetBattles() -- Add a child Pet Battles achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(GetCategoryInfo(15117))); -- Achievement_Category table
+    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15117))); -- Achievement_Category table
 end
 
 function achievementCategory:AddCatMapInfo(id) -- Add a child zone achievement category using C_Map.GetMapInfo(id).name to an achievement category
@@ -107,4 +107,19 @@ function achievementCategory:AddAchievementIDsWithIATLink(...) -- Add a variable
     for _, id in next, {...} do
         self:AddAchievement(addon.Objects.Achievement:New(id, nil, nil, true));
     end
+end
+
+function achievementCategory:GetTree()
+    addon.Diagnostics.Trace("achievementCategory:GetTree");
+
+	local categories = {};
+    tinsert(categories, 1, self.Name);
+
+	local parent = self.Parent;
+	while parent ~= nil do
+		tinsert(categories, 1, parent.Name);
+		parent = parent.Parent;
+    end
+    
+    return categories;
 end

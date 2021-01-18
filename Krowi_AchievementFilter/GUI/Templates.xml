@@ -25,4 +25,81 @@
 		</Scripts>
 	</Button>
 
+    <!-- Originally from Blizzard_AchievementUI.xml line 1779 at time of writing -->
+	<Frame name="KrowiAF_AchievementFrameCategoriesTemplate" inherits="AchivementGoldBorderBackdrop" virtual="true">
+		<Anchors>
+        	<Anchor point="TOPLEFT" relativeTo="AchievementFrameCategories"/>
+        	<Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/>
+        </Anchors>
+		<Scripts>
+			<OnShow function="KrowiAF_AchievementFrameCategories_OnShow"/>
+			<OnHide function="KrowiAF_AchievementFrameCategories_OnHide"/>
+		</Scripts>
+		<Frames>
+			<ScrollFrame name="$parentContainer" parentKey="Container" inherits="HybridScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="0" y="-5"/>
+					<Anchor point="BOTTOMRIGHT" x="0" y="5"/>
+				</Anchors>
+				<Frames>
+					<Slider name="$parentScrollBar" parentKey="ScrollBar" inherits="HybridScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="1" y="-14"/>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="1" y="12"/>
+						</Anchors>
+					</Slider>
+				</Frames>
+			</ScrollFrame>
+		</Frames>
+	</Frame>
+
+    <!-- Originally from Blizzard_AchievementUI.xml line 1806 at time of writing -->
+	<Frame name="KrowiAF_AchievementFrameAchievementsTemplate" virtual="true">
+		<Anchors>
+        	<Anchor point="TOPLEFT" relativeTo="AchievementFrameCategories" relativePoint="TOPRIGHT" x="22" y="0"/>
+        	<Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/>
+        </Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" file="Interface\AchievementFrame\UI-Achievement-AchievementBackground">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="3" y="-3"/>
+						<Anchor point="BOTTOMRIGHT" x="-3" y="3"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="0.5"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+					<Color r="0" g="0" b="0" a="0.75"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+        	<OnEvent function="KrowiAF_AchievementFrameAchievements_OnEvent"/>
+			<OnShow function="KrowiAF_AchievementFrameAchievements_OnShow"/>
+		</Scripts>
+		<Frames>
+			<ScrollFrame name="$parentContainer" parentKey="Container" inherits="HybridScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="4" y="-3"/>
+					<Anchor point="BOTTOMRIGHT" x="0" y="5"/>
+				</Anchors>
+				<Frames>
+					<Slider name="$parentScrollBar" parentKey="ScrollBar" inherits="HybridScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="1" y="-16"/>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="1" y="12"/>
+						</Anchors>
+					</Slider>
+				</Frames>
+			</ScrollFrame>
+			<Frame setAllPoints="true" inherits="AchivementGoldBorderBackdrop"/>
+		</Frames>
+	</Frame>
+
 </Ui>

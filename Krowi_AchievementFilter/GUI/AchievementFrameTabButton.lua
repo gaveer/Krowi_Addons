@@ -8,7 +8,7 @@ achFrameTabBtn.__index = achFrameTabBtn; -- Used to support OOP like code
 
 -- Do this in code instead of an xml template since we're not sure if other addons will also add tabs to the AchievementFrame
 -- or if we want to add more ourselves
-function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxFrame)
+function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame) -- searchBoxFrame
     diagnostics.Trace("achievementFrameTabButton:New");
 
     local self = {};
@@ -25,16 +25,17 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxF
         PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
     end);
     frame:SetScript("OnEvent", function(selfFunc, event, ...) -- Issue #1: Fix
-        self:AchievementFrameTab_OnEvent(frame, tabID, self, event, ...);
+        self:AchievementFrameTab_OnEvent(frame, self, event, ...);
     end);
     frame:RegisterEvent("ADDON_LOADED");
 
     self.Frame = frame;
+	frame.Parent = self;
     self.ID = tabID;
     self.OnClick = self.Base_OnClick;
     self.CategoriesFrame = categoriesFrame;
     self.AchievementsFrame = achievementsFrame;
-    self.SearchBoxFrame = searchBoxFrame;
+    -- self.SearchBoxFrame = searchBoxFrame;
 
     hooksecurefunc("AchievementFrame_DisplayComparison", function ()
         self.OnClick = self.Comparison_OnClick;
@@ -51,14 +52,14 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxF
     return self;
 end
 
-function achFrameTabBtn:AchievementFrameTab_OnEvent(thisTab, thisTabID, self, event, ...)
+function achFrameTabBtn:AchievementFrameTab_OnEvent(thisTab, self, event, ...)
     if event == "ADDON_LOADED" then
 		local addonName = ...;
         diagnostics.Trace("AchievementFrameTab_OnEvent - " .. event .. " - " .. addonName);
 
 		if addonName and addonName == "Overachiever_Tabs" then
             hooksecurefunc("AchievementFrame_UpdateTabs", function(clickedTab) -- Issue #1: Fix
-                self:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab);
+                self:AchievementFrame_UpdateTabs(thisTab, thisTab.Parent.ID, clickedTab);
             end);
             diagnostics.Debug("Overachiever_Tabs compatibility enabled");
 		end
@@ -66,7 +67,7 @@ function achFrameTabBtn:AchievementFrameTab_OnEvent(thisTab, thisTabID, self, ev
 end
 
 function achFrameTabBtn:Base_OnClick(id)
-    diagnostics.Trace("achievementFrameTabButton:Base_OnClick");
+    diagnostics.Trace("achFrameTabBtn:Base_OnClick");
 
 	AchievementFrame_UpdateTabs(id);
 
@@ -75,14 +76,14 @@ function achFrameTabBtn:Base_OnClick(id)
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();
     end
-    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame, self.SearchBoxFrame);
+    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame); -- self.SearchBoxFrame
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 
     -- SwitchAchievementSearchTab(tab:GetID()); -- Does not work yet
 end
 
 function achFrameTabBtn:Comparison_OnClick(id)
-    diagnostics.Trace("achievementFrameTabButton:Comparison_OnClick");
+    diagnostics.Trace("achFrameTabBtn:Comparison_OnClick");
 
     -- No comparison support. Just open up the non-comparison achievement tab.
 	AchievementFrameTab_OnClick = AchievementFrameBaseTab_OnClick; -- Also set the other tabs back to their default OnClick like Blizzard does
@@ -91,15 +92,23 @@ function achFrameTabBtn:Comparison_OnClick(id)
 end
 
 function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab)
-    diagnostics.Trace("achievementFrameTabButton - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
+    diagnostics.Trace("achFrameTabBtn:AchievementFrame_UpdateTabs - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
 
     if clickedTab == thisTabID then -- Our tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -5);
+        thisTab.Selected = true;
     else -- Another tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -3);
+        thisTab.Selected = nil;
     end
 end
 
 function achFrameTabBtn:Select()
-    self:OnClick(self.ID);
+    diagnostics.Trace("achFrameTabBtn:Select");
+
+    diagnostics.Debug(self.Frame.Selected);
+
+    if not self.Frame.Selected then
+        self:OnClick(self.ID);
+    end
 end

@@ -17,11 +17,23 @@ function searchPreviewContainer:New()
 	searchPreviewContainer.ID = searchPreviewContainer.ID + 1;
     self.ID = searchPreviewContainer.ID;
 
-    local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameSearchPreviewContainer" .. self.ID, AchievementFrame);
+    local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameSearchPreviewContainer" .. self.ID, AchievementFrame, "KrowiAF_AchievementFrameSearchPreviewContainerTemplate");
 	frame:SetPoint("TOPLEFT", AchievementFrame.searchBox, "BOTTOMLEFT", -4, 3);
-
 	self.Frame = frame;
-	frame.Parent = self;
+    frame.Parent = self;
+
+    frame.Buttons = {};
+    local searchPreview = CreateFrame("Button", "SearchPreview1", frame, "KrowiAF_AchievementSearchPreviewButtonTemplate");
+    searchPreview:SetPoint("TOPLEFT");
+    tinsert(frame.Buttons, searchPreview);
+    for i = 2, addon.Options.db.SearchBox.NumberOfSearchPreviews do
+        searchPreview = CreateFrame("Button", "SearchPreview" .. i, frame, "KrowiAF_AchievementSearchPreviewButtonTemplate");
+        searchPreview:SetPoint("TOPLEFT", frame.Buttons[i - 1], "BOTTOMLEFT");
+        tinsert(frame.Buttons, searchPreview);
+    end
+    frame.ShowAllSearchResults:SetPoint("LEFT", frame.Buttons[1]);
+    frame.ShowAllSearchResults:SetPoint("RIGHT", frame.Buttons[1]);
+    frame.ShowAllSearchResults:SetPoint("TOP", frame.Buttons[#frame.Buttons], "BOTTOM");
 
     -- frame:SetScript("OnShow", self.OnShow);
     -- frame:SetScript("OnEnterPressed", self.OnEnterPressed);

@@ -23,10 +23,11 @@ function loadHelper:OnEvent(event, arg1)
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
-            -- addon.GUI.SearchBox1 = addon.GUI.SearchBox:New();
-            addon.GUI.AchievementsFrame1 = addon.GUI.AchievementsFrame:New();
-            addon.GUI.CategoriesFrame1 = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame1.Frame);
-            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame1.Frame, addon.GUI.AchievementsFrame1.Frame); -- addon.GUI.SearchBox1.Frame
+            addon.GUI.SearchPreviewContainer = addon.GUI.SearchPreviewContainer:New();
+            addon.GUI.SearchBox = addon.GUI.SearchBox:New(addon.GUI.SearchPreviewContainer.Frame);
+            addon.GUI.AchievementsFrame = addon.GUI.AchievementsFrame:New();
+            addon.GUI.CategoriesFrame = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame.Frame);
+            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame.Frame, addon.GUI.AchievementsFrame.Frame, addon.GUI.SearchBox.Frame);
             addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
         end
     elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
@@ -41,16 +42,16 @@ function loadHelper:OnEvent(event, arg1)
         addon.Shadowlands.Load();
         addon.Categories, addon.Achievements = addon.Data:GetList(); -- This freezes the game if we load it outside of the loading screen
 
-        TEST = {};
-        if addon.Diagnostics.DebugEnabled() then
-            for _, category in next, addon.Categories do
-                local parentName = "";
-                if category.Parent ~= nil then
-                    parentName = category.Parent.Name;
-                end
-                tinsert(TEST, {parentName, category.Name});
-            end
-        end
+        -- TEST = {};
+        -- if addon.Diagnostics.DebugEnabled() then
+        --     for _, category in next, addon.Categories do
+        --         local parentName = "";
+        --         if category.Parent ~= nil then
+        --             parentName = category.Parent.Name;
+        --         end
+        --         tinsert(TEST, {parentName, category.Name});
+        --     end
+        -- end
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
@@ -65,7 +66,7 @@ function addon.ResetView(categoriesButtons)
 end
 
 function addon.GetCategoryInfoTitle(categoryID)
-    addon.Diagnostics.Trace("addon.GetCategoryInfoTitle");
+    -- addon.Diagnostics.Trace("addon.GetCategoryInfoTitle"); -- Generates a lot of messages
 
     local title = GetCategoryInfo(categoryID);
     return title;

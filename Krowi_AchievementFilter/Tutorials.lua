@@ -68,17 +68,17 @@ function tutorials.Load()
         onShow = function(self, i)
             if i == 1 then
                 OpenAchievementFrameAtTabButton1();
-                local categoriesButtons = addon.GUI.CategoriesFrame1.Frame.Container.buttons;
+                local categoriesButtons = addon.GUI.CategoriesFrame.Frame.Container.buttons;
                 addon.ResetView(categoriesButtons);
                 self[i].shine = addon.GUI.TabButton1.Frame;
             elseif i == 2 then
                 OpenAchievementFrameAtTabButton1();
-                addon.GUI.CategoriesFrame1:SelectCategory(addon.GetCategoryInfoTitle(15439), addon.L["C_ZONES"], C_Map.GetMapInfo(1533).name, addon.GetCategoryInfoTitle(15447));
-                self[i].shine = addon.GUI.CategoriesFrame1.Frame;
+                addon.GUI.CategoriesFrame:SelectCategory(addon.GetCategoryInfoTitle(15439), addon.L["C_ZONES"], C_Map.GetMapInfo(1533).name, addon.GetCategoryInfoTitle(15447));
+                self[i].shine = addon.GUI.CategoriesFrame.Frame;
             elseif i == 3 then
                 OpenAchievementFrameAtTabButton1();
-                local achievementsButtons = addon.GUI.AchievementsFrame1.Frame.Container.buttons;
-                addon.GUI.AchievementsFrame1:SelectAchievement(1283, "RightButton", nil, nil, achievementsButtons[1], 88, 34);
+                local achievementsButtons = addon.GUI.AchievementsFrame.Frame.Container.buttons;
+                addon.GUI.AchievementsFrame:SelectAchievement(1283, "RightButton", nil, nil, achievementsButtons[1], 88, 34);
                 self[i].shine = DropDownList1;
             end
         end

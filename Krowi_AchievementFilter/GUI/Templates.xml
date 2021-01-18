@@ -102,4 +102,164 @@
 		</Frames>
 	</Frame>
 
+    <!-- Originally from Blizzard_AchievementUI.xml line 14 at time of writing -->
+	<Button name="KrowiAF_AchievementSearchPreviewButtonTemplate" virtual="true">
+		<Size x="206" y="27"/>
+		<Layers>
+			<Layer level="OVERLAY" textureSubLevel="3">
+				<Texture parentKey="SelectedTexture" atlas="search-highlight">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture parentKey="iconFrame" atlas="search-iconframe-large">
+					<Size x="21" y="21"/>
+					<Anchors>
+						<Anchor point="LEFT" x="5" y="1"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\Icons\Ability_ThunderClap" parentKey="Icon">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.iconFrame" x="1" y="-2"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.iconFrame" x="-1" y="1"/>
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormalSmall" justifyH="LEFT" parentKey="Name" text="ACHIEVEMENT_NAME">
+					<Size x="400" y="0"/>
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="5" y="0"/>
+						<Anchor point="RIGHT" x="-5" y="0"/>
+					</Anchors>
+					<Color r="0.96875" g="0.8984375" b="0.578125" a="1"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalTexture atlas="_search-rowbg">
+		</NormalTexture>
+		<PushedTexture atlas="_search-rowbg">
+		</PushedTexture>
+		<!-- This is highlighted by hand so that we can use arrow keys to move the highlight.
+		<HighlightTexture atlas="search-highlight">
+		</HighlightTexture>
+		-->
+		<Scripts>
+			<OnLoad function="KrowiAF_AchievementSearchPreviewButton_OnLoad"/>
+			<OnShow function="AchievementSearchPreviewButton_OnShow"/>
+			<OnEnter function="KrowiAF_AchievementSearchPreviewButton_OnEnter"/>
+			<OnClick function="KrowiAF_AchievementSearchPreviewButton_OnClick"/>
+		</Scripts>
+	</Button>
+
+    <!-- Originally from Blizzard_AchievementUI.xml line 2487 at time of writing -->
+	<Frame name="KrowiAF_AchievementFrameSearchPreviewContainerTemplate" virtual="true">
+		<Size x="206" y="27"/>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeKey="$parent.searchBox" relativePoint="BOTTOMLEFT" x="-4" y="3"/> <!-- Achors to AchievementFrame.searchBox -->
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Background" atlas="_search-rowbg">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture inherits="UI-Frame-BotCornerLeft" parentKey="BorderAnchor">
+					<Anchors>
+						<Anchor point="LEFT" x="-7" y="0"/>
+						<Anchor point="BOTTOM" x="0" y="-5"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="botRightCorner" inherits="UI-Frame-BotCornerRight">
+					<Anchors>
+						<Anchor point="BOTTOM" relativeKey="$parent.BorderAnchor" x="0" y="0"/>
+						<Anchor point="RIGHT" x="4" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="bottomBorder" inherits="_UI-Frame-Bot">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.BorderAnchor" relativePoint="BOTTOMRIGHT" y="0"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.botRightCorner" relativePoint="BOTTOMLEFT" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="leftBorder" inherits="!UI-Frame-LeftTile">
+					<Anchors>
+						<Anchor point="TOP" x="0" y="1" />
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.BorderAnchor" relativePoint="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="rightBorder" inherits="!UI-Frame-RightTile">
+					<Anchors>
+						<Anchor point="TOP" x="0" y="1" />
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.botRightCorner" relativePoint="TOPRIGHT" x="1" y="0"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="topBorder" inherits="_UI-Frame-Bot">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="-2" y="3"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" x="2" y="-3"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button parentKey="ShowAllSearchResults">
+				<Size x="275" y="24"/>
+				<Anchors>
+					<!-- <Anchor point="LEFT" relativeKey="$parent.SearchPreview1" x="0" y="0"/>
+					<Anchor point="RIGHT" relativeKey="$parent.SearchPreview1" x="0" y="0"/> -->
+					<!-- <Anchor point="TOP" relativeKey="$parent.searchPreview5" relativePoint="BOTTOM" x="0" y="0"/> -->
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY" textureSubLevel="2">
+						<Texture parentKey="SelectedTexture" atlas="search-highlight">
+							<Anchors>
+								<Anchor point="TOPLEFT"/>
+								<Anchor point="BOTTOMRIGHT"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<FontString parentKey="Text" inherits="GameFontNormal" justifyH="LEFT" text="SHOW_ALL_RESULTS">
+							<Size x="0" y="0"/>
+							<Anchors>
+								<Anchor point="CENTER" x="0" y="0"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<NormalTexture atlas="_search-rowbg">
+				</NormalTexture>
+				<PushedTexture atlas="_search-rowbg">
+				</PushedTexture>
+				<!-- This is highlighted by hand so that we can use arrow keys to move the highlight.
+				<HighlightTexture atlas="search-highlight">
+				</HighlightTexture>
+				-->
+				<Scripts>
+					<OnShow>
+						self:SetFrameLevel(self:GetParent():GetFrameLevel() + 10);
+					</OnShow>
+					<OnClick>
+						KrowiAF_AchievementFrame_ShowFullSearch();
+						PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+					</OnClick>
+					<OnEnter function="KrowiAF_AchievementFrame_SetSearchPreviewSelection"/>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				self:SetFrameLevel(self:GetParent():GetFrameLevel() + 11);
+			</OnShow>
+		</Scripts>
+	</Frame>
+
 </Ui>

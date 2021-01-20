@@ -8,7 +8,7 @@ searchBox.ID = 0; -- Local ID for naming, starts at 0 and will increment if a ne
 
 searchBox.__index = searchBox; -- Used to support OOP like code
 
-function searchBox:New(searchPreviewContainerFrame)
+function searchBox:New(searchPreviewContainerFrame, achievementsFrame)
     diagnostics.Trace("searchBox:New");
 
 	local self = {};
@@ -18,6 +18,8 @@ function searchBox:New(searchPreviewContainerFrame)
 	self.ID = searchBox.ID;
 	
 	self.SearchPreviewContainerFrame = searchPreviewContainerFrame;
+	self.SearchPreviewContainerFrame.SearchBox = self;
+	self.AchievementsFrame = achievementsFrame;
 
     local frame = CreateFrame("EditBox", "KrowiAF_AchievementFrameSearchBox" .. self.ID, AchievementFrame, "SearchBoxTemplate");
 	frame:SetPoint("TOPLEFT", AchievementFrame.searchBox);
@@ -27,18 +29,18 @@ function searchBox:New(searchPreviewContainerFrame)
 	frame.Parent = self;
 
     frame:SetScript("OnShow", self.OnShow);
-    -- frame:SetScript("OnEnterPressed", self.OnEnterPressed);
+    frame:SetScript("OnEnterPressed", self.OnEnterPressed);
     frame:SetScript("OnTextChanged", self.OnTextChanged);
     frame:SetScript("OnEditFocusLost", self.OnEditFocusLost);
     frame:SetScript("OnEditFocusGained", self.OnEditFocusGained);
-    -- frame:SetScript("OnKeyDown", self.OnKeyDown);
+    frame:SetScript("OnKeyDown", self.OnKeyDown);
 
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
     frame:Hide();
 
-	SearchBoxTemplate_OnLoad(self.Frame);
-	self.Frame.HasStickyFocus = function()
-		local ancestry = self.Frame:GetParent().SearchPreviewContainerFrame;
+	SearchBoxTemplate_OnLoad(frame);
+	frame.HasStickyFocus = function()
+		local ancestry = self.SearchPreviewContainerFrame;
 		return DoesAncestryInclude(ancestry, GetMouseFocus());
     end
 
@@ -50,29 +52,30 @@ function searchBox:OnShow()
 
 	self:SetFrameLevel(self:GetParent():GetFrameLevel() + 7);
 	KrowiAF_AchievementFrame_SetSearchPreviewSelection(self.Parent.SearchPreviewContainerFrame.Buttons[1]);
-	-- self.fullSearchFinished = false;
-	-- self.searchPreviewUpdateDelay = 0;
+	self.fullSearchFinished = false;
+	self.searchPreviewUpdateDelay = 0;
 end
 
--- function searchBox:OnEnterPressed()
---     diagnostics.Trace("searchBox:OnEnterPressed");
+function searchBox:OnEnterPressed()
+    diagnostics.Trace("searchBox:OnEnterPressed");
 
---     -- If the search is not finished yet we have to wait to show the full search results.
--- 	if not self.fullSearchFinished or strlen(self:GetText()) < addon.Options.db.SearchBox.MinimumCharactersToSearch then
--- 		return;
--- 	end
--- 	local searchPreviewContainer = AchievementFrame.searchPreviewContainer;
--- 	if self.selectedIndex == addon.Options.db.SearchBox.NumberOfSearchPreviews + 1 then
--- 		if searchPreviewContainer.showAllSearchResults:IsShown() then
--- 			searchPreviewContainer.showAllSearchResults:Click();
--- 		end
--- 	else
--- 		local preview = searchPreviewContainer.searchPreviews[self.selectedIndex];
--- 		if preview:IsShown() then
--- 			preview:Click();
--- 		end
--- 	end
--- end
+	-- If the search is not finished yet we have to wait to show the full search results.
+	if ( not self.fullSearchFinished or strlen(self:GetText()) < MIN_CHARACTER_SEARCH ) then
+		return;
+	end
+
+	local searchPreviewContainer = self.Parent.SearchPreviewContainerFrame;
+	if searchPreviewContainer.ShowAllSearchResults.IsSelected and searchPreviewContainer.ShowAllSearchResults:IsShown() then
+		searchPreviewContainer.ShowAllSearchResults:Click();
+	else
+		local buttons = searchPreviewContainer.Buttons;
+		for _, button in next, buttons do
+			if button.IsSelected and button:IsShown() then
+				button:Click();
+			end
+		end
+	end
+end
 
 Results = {};
 
@@ -80,7 +83,7 @@ function searchBox:OnTextChanged()
     diagnostics.Trace("searchBox:OnTextChanged");
 
 	SearchBoxTemplate_OnTextChanged(self);
-	
+
 	if strlen(self:GetText()) >= addon.Options.db.SearchBox.MinimumCharactersToSearch then
 		self.fullSearchFinished = SetAchievementSearchStringTest(self:GetText()); -- Must be some asynchronous function when called in Blizzard_AchievementUI
 		if not self.fullSearchFinished then
@@ -108,8 +111,14 @@ function searchBox:OnEditFocusGained()
 	self.Parent:UpdateSearchPreview();
 end
 
-function searchBox:OnKeyDown()
+function searchBox:OnKeyDown(key)
 	diagnostics.Trace("searchBox:OnKeyDown");
+
+	if key == "UP" then
+		self.Parent.SearchPreviewContainerFrame.Parent:SelectPrevious();
+	elseif key == "DOWN" then
+		self.Parent.SearchPreviewContainerFrame.Parent:SelectNext();
+	end
 end
 
 function searchBox:ShowSearchPreviewResults()
@@ -137,7 +146,7 @@ function searchBox:ShowSearchPreviewResults()
 			button:Hide();
 		end
 	end
-	if numResults > 5 then
+	if numResults > addon.Options.db.SearchBox.NumberOfSearchPreviews then
 		searchPreviewContainer.ShowAllSearchResults:Show();
 		lastButton = searchPreviewContainer.ShowAllSearchResults;
 		searchPreviewContainer.ShowAllSearchResults.Text:SetText(string.format(ENCOUNTER_JOURNAL_SHOW_SEARCH_RESULTS, numResults));
@@ -182,7 +191,7 @@ end
 
 function searchBox:HideSearchPreview()
 	diagnostics.Trace("searchBox:HideSearchPreview");
-	
+
 	local searchPreviewContainer = self.SearchPreviewContainerFrame;
 	local searchPreviews = searchPreviewContainer.Buttons;
 	searchPreviewContainer:Hide();
@@ -196,43 +205,43 @@ end
 function searchBox:UpdateSearchPreview()
 	diagnostics.Trace("searchBox:UpdateSearchPreview");
 
-	if not self:HasFocus() or strlen(self:GetText() < addon.Options.db.SearchBox.MinimumCharactersToSearch) then
-		self.Parent:HideSearchPreview();
+	if not self.Frame:HasFocus() or strlen(self.Frame:GetText()) < addon.Options.db.SearchBox.MinimumCharactersToSearch then
+		self:HideSearchPreview();
 		return;
 	end
-	-- AchievementFrame.searchBox.searchPreviewUpdateDelay = 0;
-	if self:GetScript("OnUpdate") == nil then
-		self:SetScript("OnUpdate", AchievementFrameSearchBox_OnUpdate);
+	self.searchPreviewUpdateDelay = 0;
+	if self.Frame:GetScript("OnUpdate") == nil then
+		self.Frame:SetScript("OnUpdate", self.OnUpdate);
 	end
 end
 
 -- There is a delay before the search is updated to avoid a search progress bar if the search
 -- completes within the grace period.
 local ACHIEVEMENT_SEARCH_PREVIEW_UPDATE_DELAY = 0.3;
-function AchievementFrameSearchBox_OnUpdate (self, elapsed)
-	if ( self.fullSearchFinished ) then
-		AchievementFrame_ShowSearchPreviewResults();
+function searchBox:OnUpdate (elapsed)
+	if self.fullSearchFinished then
+		self.Parent:ShowSearchPreviewResults();
 		self.searchPreviewUpdateDelay = 0;
 		self:SetScript("OnUpdate", nil);
 		return;
 	end
 	self.searchPreviewUpdateDelay = self.searchPreviewUpdateDelay + elapsed;
-	if ( self.searchPreviewUpdateDelay > ACHIEVEMENT_SEARCH_PREVIEW_UPDATE_DELAY ) then
+	if self.searchPreviewUpdateDelay > ACHIEVEMENT_SEARCH_PREVIEW_UPDATE_DELAY then
 		self.searchPreviewUpdateDelay = 0;
 		self:SetScript("OnUpdate", nil);
-		if ( AchievementFrame.searchProgressBar:GetScript("OnUpdate") == nil ) then
-			AchievementFrame.searchProgressBar:SetScript("OnUpdate", AchievementFrameSearchProgressBar_OnUpdate);
-			local searchPreviewContainer = AchievementFrame.searchPreviewContainer;
-			local searchPreviews = searchPreviewContainer.searchPreviews;
-			for index = 1, ACHIEVEMENT_FRAME_NUM_SEARCH_PREVIEWS do
-				searchPreviews[index]:Hide();
-			end
-			searchPreviewContainer.showAllSearchResults:Hide();
-			searchPreviewContainer.borderAnchor:SetPoint("BOTTOM", 0, -5);
-			searchPreviewContainer.background:Show();
-			searchPreviewContainer:Show();
-			AchievementFrame.searchProgressBar:Show();
-			return;
-		end
+		-- if AchievementFrame.searchProgressBar:GetScript("OnUpdate") == nil then
+		-- 	AchievementFrame.searchProgressBar:SetScript("OnUpdate", AchievementFrameSearchProgressBar_OnUpdate);
+		-- 	local searchPreviewContainer = self.SearchPreviewContainerFrame;
+		-- 	local searchPreviews = searchPreviewContainer.Buttons;
+		-- 	for index = 1, ACHIEVEMENT_FRAME_NUM_SEARCH_PREVIEWS do
+		-- 		searchPreviews[index]:Hide();
+		-- 	end
+		-- 	searchPreviewContainer.showAllSearchResults:Hide();
+		-- 	searchPreviewContainer.borderAnchor:SetPoint("BOTTOM", 0, -5);
+		-- 	searchPreviewContainer.background:Show();
+		-- 	searchPreviewContainer:Show();
+		-- 	AchievementFrame.searchProgressBar:Show();
+		-- 	return;
+		-- end
 	end
 end

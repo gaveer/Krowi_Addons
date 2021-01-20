@@ -2,6 +2,10 @@ local _, addon = ...; -- Global addon namespace
 local gui = addon.GUI; -- Local GUI namespace
 local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
 
+gui.PopupDialog = {}; -- Global popup dialog namespace
+local popupDialog = gui.PopupDialog; -- Local pop up dialog namespace
+
+-- [[ External Link Popup Dialog ]] --
 local externalLink = "";
 local externalLinkDialog = "KROWIAF_EXTERNAL_LINK";
 StaticPopupDialogs[externalLinkDialog] = { -- Needs to be added to the Blizzard list
@@ -28,8 +32,8 @@ StaticPopupDialogs[externalLinkDialog] = { -- Needs to be added to the Blizzard 
 	end,
 }
 
-function gui.ShowExternalLinkPopupDialog(link)
-    diagnostics.Trace("gui.ShowExternalLinkPopupDialog");
+function popupDialog.ShowExternalLink(link)
+    diagnostics.Trace("popupDialog.ShowExternalLink");
     externalLink = link;
     StaticPopup_Show(externalLinkDialog);
 end

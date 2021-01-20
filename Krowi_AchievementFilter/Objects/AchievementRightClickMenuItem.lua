@@ -30,11 +30,11 @@ end
 -- [[ Specific calls that are used a lot to simplify other code ]] --
 
 function achRCMenItem:NewExtLink(name, externalLink)
-    return achRCMenItem:New(name, function() addon.GUI.ShowExternalLinkPopupDialog(externalLink); end);
+    return achRCMenItem:New(name, function() addon.GUI.PopupDialog.ShowExternalLink(externalLink); end);
 end
 
 function achRCMenItem:AddChildExtLinkFull(name, externalLink)
-    return self:AddChild(achRCMenItem:New(name, function() addon.GUI.ShowExternalLinkPopupDialog(externalLink); end));
+    return self:AddChild(achRCMenItem:New(name, function() addon.GUI.PopupDialog.ShowExternalLink(externalLink); end));
 end
 
 function achRCMenItem:AddChildAchCritInfoExtLinkFull(achievementID, criteriaID, externalLink)

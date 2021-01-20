@@ -1,6 +1,7 @@
 local _, addon = ...; -- Global addon namespace
 local gui = addon.GUI; -- Local GUI namespace
 local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+
 gui.AchievementFrameTabButton = {}; -- Global Achievement Frame Tab Button class
 local achFrameTabBtn = gui.AchievementFrameTabButton; -- Local Achievement Frame Tab Button class
 
@@ -16,10 +17,19 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxF
 
     local tabID = AchievementFrame.numTabs + 1;
     PanelTemplates_SetNumTabs(AchievementFrame, tabID);
+    self.ID = tabID;
+
+    self.CategoriesFrame = categoriesFrame;
+    self.AchievementsFrame = achievementsFrame;
+    self.SearchBoxFrame = searchBoxFrame;
 
     local frame = CreateFrame("Button", "AchievementFrameTab" .. tabID, AchievementFrame, "AchievementFrameTabButtonTemplate");
     frame:SetID(tabID);
     frame:SetText(text);
+    self.Frame = frame;
+	frame.Parent = self;
+
+    frame:RegisterEvent("ADDON_LOADED");
     frame:SetScript("OnClick", function(selfFunc)
         self:OnClick(selfFunc:GetID());
         PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
@@ -27,15 +37,8 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxF
     frame:SetScript("OnEvent", function(selfFunc, event, ...) -- Issue #1: Fix
         self:AchievementFrameTab_OnEvent(frame, self, event, ...);
     end);
-    frame:RegisterEvent("ADDON_LOADED");
 
-    self.Frame = frame;
-	frame.Parent = self;
-    self.ID = tabID;
     self.OnClick = self.Base_OnClick;
-    self.CategoriesFrame = categoriesFrame;
-    self.AchievementsFrame = achievementsFrame;
-    self.SearchBoxFrame = searchBoxFrame;
 
     hooksecurefunc("AchievementFrame_DisplayComparison", function ()
         self.OnClick = self.Comparison_OnClick;
@@ -105,8 +108,6 @@ end
 
 function achFrameTabBtn:Select()
     diagnostics.Trace("achFrameTabBtn:Select");
-
-    diagnostics.Debug(self.Frame.Selected);
 
     if not self.Frame.Selected then
         self:OnClick(self.ID);

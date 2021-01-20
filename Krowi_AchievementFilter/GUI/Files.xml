@@ -6,11 +6,9 @@
     <Script file="GUI/CategoryButton.lua" />
     <Script file="GUI/AchievementsFrame.lua" />
     <Script file="GUI/AchievementButton.lua" />
-    <Script file="GUI/ExternalLinkPopupDialog.lua" />
+    <Script file="GUI/PopupDialog.lua" />
 
-    <Script file="GUI/SearchPreviewButton.lua" />
-    <Script file="GUI/SearchPreviewContainer.lua" />
-    <Script file="GUI/SearchBox.lua" />
+    <Include file="GUI/Search/Files.xml" />
 
     <Include file="GUI/Templates.xml" />
     

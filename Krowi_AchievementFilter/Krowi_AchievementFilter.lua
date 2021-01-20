@@ -7,10 +7,6 @@ addon.Faction.IsAlliance = UnitFactionGroup("player") == "Alliance";
 addon.Faction.IsHorde = UnitFactionGroup("player") == "Horde";
 addon.Faction.IsNeutral = UnitFactionGroup("player") == "Neutral";
 
-function addon.InGuildView()
-    return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
-end
-
 local loadHelper = CreateFrame("Frame");
 loadHelper:RegisterEvent("ADDON_LOADED");
 loadHelper:RegisterEvent("PLAYER_LOGIN");
@@ -23,12 +19,15 @@ function loadHelper:OnEvent(event, arg1)
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
-            addon.GUI.SearchPreviewContainer = addon.GUI.SearchPreviewContainer:New();
-            addon.GUI.SearchBox = addon.GUI.SearchBox:New(addon.GUI.SearchPreviewContainer.Frame);
             addon.GUI.AchievementsFrame = addon.GUI.AchievementsFrame:New();
             addon.GUI.CategoriesFrame = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame.Frame);
+
+            addon.GUI.Search.Load();
+
             addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame.Frame, addon.GUI.AchievementsFrame.Frame, addon.GUI.SearchBox.Frame);
+            
             addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
+            -- HookDebug();
         end
     elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
         addon.Classic.Load();
@@ -56,13 +55,24 @@ function loadHelper:OnEvent(event, arg1)
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
 
-function addon.ResetView(categoriesButtons)
+function addon.InGuildView()
+    return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
+end
+
+function addon.ResetView(categoriesFrame)
     addon.Diagnostics.Trace("addon.ResetView");
-    
-    KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[1]); -- Select the 1st category
-    if categoriesButtons[1].Category.NotCollapsed then -- Make sure it's collapsed
-        KrowiAF_AchievementCategoryButton_OnClick(categoriesButtons[1]);
+
+	local scrollBar = categoriesFrame.Container.ScrollBar;
+	local buttons = categoriesFrame.Container.buttons;
+
+	scrollBar:SetValue(0);
+
+    KrowiAF_AchievementCategoryButton_OnClick(buttons[1]); -- Select the 1st category
+    if buttons[1].Category.NotCollapsed then -- Make sure it's collapsed
+        KrowiAF_AchievementCategoryButton_OnClick(buttons[1]);
     end
+
+    -- This should also clear the search box text but this is for later, not needed right now
 end
 
 function addon.GetCategoryInfoTitle(categoryID)
@@ -80,4 +90,10 @@ function addon.GetAchievement(id)
 			return achievement;
 		end
 	end
+end
+
+function addon.GetSafeScrollChildBottom(scrollChild)
+	addon.Diagnostics.Trace("GetSafeScrollChildBottom");
+
+	return scrollChild:GetBottom() or 0;
 end

@@ -268,33 +268,52 @@ function categoriesFrame:SelectButton(button, quick)
 	end
 end
 
-function categoriesFrame:SelectCategory(...)
-	diagnostics.Trace("categoriesFrame:Select");
+-- [[ API ]] --
+local function Select(self, category, quick)
+	diagnostics.Trace("Select");
 
-	local args
-	if type(...) == "table" then
-		args = ...;
-	else
-		args = {...};
-	end
+	local shown = false;
+	local previousScrollValue;
 
-	local buttons = self.Frame.Container.buttons;
-	addon.ResetView(buttons);
+	local container = self.Frame.Container;
+	local child = container.ScrollChild;
+	local scrollBar = container.ScrollBar;
 
-	for i, name in next, args do
-		diagnostics.Debug(tostring(i) .. " " .. name);
-		self:SelectButton(buttons[self:FindButtonIndex(name)], i ~= #args);
-		self:Update();
+	while not shown do
+		for _, button in next, container.buttons do
+			if button.Category == category and math.ceil(button:GetBottom()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
+				KrowiAF_AchievementCategoryButton_OnClick(button, nil, nil, quick);
+				shown = button;
+				break;
+			end
+		end
+
+		local _, maxVal = scrollBar:GetMinMaxValues();
+		if shown then
+			local newHeight = scrollBar:GetValue() + container:GetBottom() - shown:GetBottom();
+			newHeight = math.ceil(newHeight / scrollBar:GetValueStep()) * scrollBar:GetValueStep();
+			newHeight = min(newHeight, maxVal);
+			scrollBar:SetValue(newHeight);
+		else
+			local scrollValue = scrollBar:GetValue();
+			if scrollValue == maxVal or scrollValue == previousScrollValue then
+				return;
+			else
+				previousScrollValue = scrollValue;
+				HybridScrollFrame_OnMouseWheel(container, -1);
+			end
+		end
 	end
 end
 
-function categoriesFrame:FindButtonIndex(name)
-	diagnostics.Trace("categoriesFrame:FindButtonIndex");
+function categoriesFrame:SelectCategory(category)
+	diagnostics.Trace("categoriesFrame:SelectCategory");
 
-	local buttons = self.Frame.Container.buttons;
-	for i, button in next, buttons do
-		if string.match(button.name:lower(), name:lower()) then
-			return i;
-        end
+	local categoriesTree = category:GetTree();
+
+	addon.ResetView(self.Frame);
+
+	for i, cat in next, categoriesTree do
+		Select(self, cat, i ~= #categoriesTree);
 	end
 end

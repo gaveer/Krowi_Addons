@@ -113,13 +113,13 @@ function achievementCategory:GetTree()
     addon.Diagnostics.Trace("achievementCategory:GetTree");
 
 	local categories = {};
-    tinsert(categories, 1, self.Name);
+    tinsert(categories, 1, self);
 
 	local parent = self.Parent;
 	while parent ~= nil do
-		tinsert(categories, 1, parent.Name);
+		tinsert(categories, 1, parent);
 		parent = parent.Parent;
     end
-    
+
     return categories;
 end

@@ -156,7 +156,7 @@ end
 
 raids.TheRubySanctum = {}; -- 3.3
 function raids.TheRubySanctum.Load(catRaids)
-    local raid = catRaids:AddCatInstanceInfo(758);
+    local raid = catRaids:AddCatInstanceInfo(761); -- Issue #20: Broken, Fix
     local version = raid:AddCatDifficulty10();
     -- version:AddAchievementIDsWithIATLink(); -- No Glory available
     version:AddAchievementIDs(4817, 4818); -- Defeat the bosses in X

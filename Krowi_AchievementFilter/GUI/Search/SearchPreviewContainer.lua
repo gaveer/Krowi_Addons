@@ -25,25 +25,54 @@ function searchPreviewContainer:New()
     frame.Buttons = {};
     local searchPreview = CreateFrame("Button", "SearchPreview1", frame, "KrowiAF_AchievementSearchPreviewButtonTemplate");
     searchPreview:SetPoint("TOPLEFT");
+	searchPreview.ParentContainer = frame;
     tinsert(frame.Buttons, searchPreview);
     for i = 2, addon.Options.db.SearchBox.NumberOfSearchPreviews do
         searchPreview = CreateFrame("Button", "SearchPreview" .. i, frame, "KrowiAF_AchievementSearchPreviewButtonTemplate");
         searchPreview:SetPoint("TOPLEFT", frame.Buttons[i - 1], "BOTTOMLEFT");
+        searchPreview.ParentContainer = frame;
         tinsert(frame.Buttons, searchPreview);
     end
+    frame.ShowAllSearchResults.ParentContainer = frame;
     frame.ShowAllSearchResults:SetPoint("LEFT", frame.Buttons[1]);
     frame.ShowAllSearchResults:SetPoint("RIGHT", frame.Buttons[1]);
     frame.ShowAllSearchResults:SetPoint("TOP", frame.Buttons[#frame.Buttons], "BOTTOM");
 
-    -- frame:SetScript("OnShow", self.OnShow);
-    -- frame:SetScript("OnEnterPressed", self.OnEnterPressed);
-    -- frame:SetScript("OnTextChanged", self.OnTextChanged);
-    -- frame:SetScript("OnEditFocusLost", self.OnEditFocusLost);
-    -- frame:SetScript("OnEditFocusGained", self.OnEditFocusGained);
-    -- frame:SetScript("OnKeyDown", self.OnKeyDown);
-
-	-- tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
     frame:Hide();
 
 	return self;
+end
+
+function searchPreviewContainer:SelectNext()
+    diagnostics.Trace("searchPreviewContainer:SelectNext");
+
+    local buttons = self.Frame.Buttons;
+    for i = 1, #buttons, 1 do
+        local button = buttons[i - 1];
+        if button == nil then
+            button = self.Frame.ShowAllSearchResults;
+        end
+        if button.IsSelected then
+            KrowiAF_AchievementFrame_SetSearchPreviewSelection(buttons[i]);
+            return;
+        end
+    end
+    KrowiAF_AchievementFrame_SetSearchPreviewSelection(self.Frame.ShowAllSearchResults);
+end
+
+function searchPreviewContainer:SelectPrevious()
+    diagnostics.Trace("searchPreviewContainer:SelectPrevious");
+
+    local buttons = self.Frame.Buttons;
+    for i = #buttons, 1, -1 do
+        local button = buttons[i + 1];
+        if button == nil then
+            button = self.Frame.ShowAllSearchResults;
+        end
+        if button.IsSelected then
+            KrowiAF_AchievementFrame_SetSearchPreviewSelection(buttons[i]);
+            return;
+        end
+    end
+    KrowiAF_AchievementFrame_SetSearchPreviewSelection(self.Frame.ShowAllSearchResults);
 end

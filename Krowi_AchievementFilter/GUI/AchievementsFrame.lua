@@ -285,7 +285,7 @@ end
 
 function achievementsFrame:DisplayAchievement(button, achievement, index, selection, renderOffScreen)
 	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievement.ID);
-	diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
+	-- diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
 
 	if not id then
 		button:Hide();
@@ -404,28 +404,7 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 	return id;
 end
 
-function achievementsFrame:SelectVisibleAchievement(id, mouseButton, down, ignoreModifiers, anchor, offsetX, offsetY)
-	diagnostics.Trace("achievementsFrame:SelectVisibleAchievement");
-
-	if mouseButton == nil then
-		mouseButton = "LeftButton";
-	end
-
-	local buttons = self.Frame.Container.buttons;
-	KrowiAF_AchievementButton_OnClick(buttons[self:FindButtonIndex(id)], mouseButton, down, ignoreModifiers, anchor, offsetX, offsetY);
-end
-
-function achievementsFrame:FindButtonIndex(id)
-	diagnostics.Trace("achievementsFrame:FindButtonIndex");
-
-	local buttons = self.Frame.Container.buttons;
-	for i, button in next, buttons do
-		if button.id == id then
-			return i;
-        end
-	end
-end
-
+-- [[ API ]] --
 function achievementsFrame:SelectAchievement(id, mouseButton, down, ignoreModifiers, anchor, offsetX, offsetY)
 	diagnostics.Trace("achievementsFrame:SelectAchievement");
 
@@ -435,8 +414,37 @@ function achievementsFrame:SelectAchievement(id, mouseButton, down, ignoreModifi
 
 	local achievement = addon.GetAchievement(id);
 	local category = achievement:GetCategory();
-	local tree = category:GetTree();
 
-	self.CategoriesFrame:SelectCategory(tree);
-	self:SelectVisibleAchievement(id, mouseButton, down, ignoreModifiers, anchor, offsetX, offsetY);
+	self.CategoriesFrame:SelectCategory(category);
+
+	local shown = false;
+	local previousScrollValue;
+	local container = self.Frame.Container;
+	local child = container.ScrollChild;
+	local scrollBar = container.ScrollBar;
+
+	while not shown do
+		for _, button in next, container.buttons do
+			if button.id == id and math.ceil(button:GetTop()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
+				KrowiAF_AchievementButton_OnClick(button, mouseButton, down, ignoreModifiers, anchor, offsetX, offsetY);
+				shown = button;
+				break;
+			end
+		end
+
+		local _, maxVal = scrollBar:GetMinMaxValues();
+		if shown then
+			local newHeight = scrollBar:GetValue() + container:GetTop() - shown:GetTop();
+			newHeight = min(newHeight, maxVal);
+			scrollBar:SetValue(newHeight);
+		else
+			local scrollValue = scrollBar:GetValue();
+			if scrollValue == maxVal or scrollValue == previousScrollValue then
+				return;
+			else
+				previousScrollValue = scrollValue;
+				HybridScrollFrame_OnMouseWheel(container, -1);
+			end
+		end
+	end
 end

@@ -20,27 +20,27 @@ local function GetFELinks(achievementID, firstCriteriaXuFuID, headerName)
         headerName = addon.L["XUFU"];
     end
     local linkBase = "https://www.wow-petguide.com/?m=FamilyExorcist&s=";
-    local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(headerName, linkBase .. firstCriteriaXuFuID);
+    local item = addon.Objects.RightClickMenuItem:NewExtLink(headerName, linkBase .. firstCriteriaXuFuID);
 
     -- Offsets are based on wow-petguide.com IDs
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Sylla
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 1); -- Eyegor
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 3, linkBase .. firstCriteriaXuFuID + 2); -- Addius the Tormenter
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 4, linkBase .. firstCriteriaXuFuID - 3); -- Rotgut
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 5, linkBase .. firstCriteriaXuFuID - 2); -- Dundley Stickyfingers
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 6, linkBase .. firstCriteriaXuFuID - 4); -- Caregiver Maximillian
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 7, linkBase .. firstCriteriaXuFuID - 7); -- Zolla
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 8, linkBase .. firstCriteriaXuFuID - 6); -- Thenia
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 9, linkBase .. firstCriteriaXuFuID - 8); -- Stratios
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 10, linkBase .. firstCriteriaXuFuID + 4); -- Glitterdust
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 11, linkBase .. firstCriteriaXuFuID + 5); -- Faryl
+    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Sylla
+    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 1); -- Eyegor
+    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. firstCriteriaXuFuID + 2); -- Addius the Tormenter
+    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. firstCriteriaXuFuID - 3); -- Rotgut
+    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. firstCriteriaXuFuID - 2); -- Dundley Stickyfingers
+    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. firstCriteriaXuFuID - 4); -- Caregiver Maximillian
+    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. firstCriteriaXuFuID - 7); -- Zolla
+    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. firstCriteriaXuFuID - 6); -- Thenia
+    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. firstCriteriaXuFuID - 8); -- Stratios
+    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. firstCriteriaXuFuID + 4); -- Glitterdust
+    item:AddChildCritExtLinkFull(achievementID, 11, linkBase .. firstCriteriaXuFuID + 5); -- Faryl
 
     return item;
 end
 
 local function GetFEMetaLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/?m=FamilyExorcist&s=";
-    local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     local criteriaString, _, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(achievementID, 1);
     item:AddChild(GetFELinks(assetID, familyID.Aquatic, criteriaString));
@@ -68,18 +68,18 @@ end
 
 local function GetAAotALinks(achievementID, firstCriteriaXuFuID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=AbhorrentAdversaries&s=";
-    local item = addon.Objects.AchievementRightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Crystalsnap
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 7); -- Briarpaw
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 3, linkBase .. firstCriteriaXuFuID + 8); -- Chittermaw
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 4, linkBase .. firstCriteriaXuFuID + 9); -- Mistwing
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 5, linkBase .. firstCriteriaXuFuID + 5); -- Sewer Creeper
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 6, linkBase .. firstCriteriaXuFuID + 6); -- The Countess
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 7, linkBase .. firstCriteriaXuFuID + 1); -- Digallo
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 8, linkBase .. firstCriteriaXuFuID + 3); -- Gelatinous
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 9, linkBase .. firstCriteriaXuFuID + 2); -- Kostos
-    item:AddChildAchCritInfoExtLinkFull(achievementID, 10, linkBase .. firstCriteriaXuFuID + 4); -- Glurp
+    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Crystalsnap
+    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 7); -- Briarpaw
+    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. firstCriteriaXuFuID + 8); -- Chittermaw
+    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. firstCriteriaXuFuID + 9); -- Mistwing
+    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. firstCriteriaXuFuID + 5); -- Sewer Creeper
+    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. firstCriteriaXuFuID + 6); -- The Countess
+    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. firstCriteriaXuFuID + 1); -- Digallo
+    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. firstCriteriaXuFuID + 3); -- Gelatinous
+    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. firstCriteriaXuFuID + 2); -- Kostos
+    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. firstCriteriaXuFuID + 4); -- Glurp
 
     return item;
 end
@@ -87,16 +87,28 @@ end
 function petBattles.Load(expansion)
     local catZones = expansion:AddCatPetBattles();
     catZones:AddAchievementIDs(14867);
-    catZones:AddAchievementFull(14868):AddRCMenExtra(GetFELinks(14868, familyID.Aquatic)); -- Aquatic Apparitions
-    catZones:AddAchievementFull(14869):AddRCMenExtra(GetFELinks(14869, familyID.Beast)); -- Beast Busters
-    catZones:AddAchievementFull(14870):AddRCMenExtra(GetFELinks(14870, familyID.Critter)); -- Creepy Critters
-    catZones:AddAchievementFull(14871):AddRCMenExtra(GetFELinks(14871, familyID.Dragonkin)); -- Deathly Dragonkin
-    catZones:AddAchievementFull(14872):AddRCMenExtra(GetFELinks(14872, familyID.Elemental)); -- Eerie Elementals
-    catZones:AddAchievementFull(14873):AddRCMenExtra(GetFELinks(14873, familyID.Flying)); -- Flickering Fliers
-    catZones:AddAchievementFull(14874):AddRCMenExtra(GetFELinks(14874, familyID.Humanoid)); -- Haunted Humanoids
-    catZones:AddAchievementFull(14875):AddRCMenExtra(GetFELinks(14875, familyID.Magic)); -- Mummified Magics
-    catZones:AddAchievementFull(14876):AddRCMenExtra(GetFELinks(14876, familyID.Mechanical)); -- Macabre Mechanicals
-    catZones:AddAchievementFull(14877):AddRCMenExtra(GetFELinks(14877, familyID.Undead)); -- Unholy Undead
-    catZones:AddAchievementFull(14879):AddRCMenExtra(GetFEMetaLinks(14879)); -- Family Exorcist
-    catZones:AddAchievementFull(14881):AddRCMenExtra(GetAAotALinks(14881, 1199)); -- Abhorrent Adverdaries of the Afterlife
+    local achievement = catZones:AddAchievementFull(14868); -- Aquatic Apparitions
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Aquatic))
+    achievement = catZones:AddAchievementFull(14869); -- Beast Busters
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Beast));
+    achievement = catZones:AddAchievementFull(14870); -- Creepy Critters
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Critter));
+    achievement = catZones:AddAchievementFull(14871); -- Deathly Dragonkin
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Dragonkin));
+    achievement = catZones:AddAchievementFull(14872); -- Eerie Elementals
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Elemental));
+    achievement = catZones:AddAchievementFull(14873); -- Flickering Fliers
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Flying));
+    achievement = catZones:AddAchievementFull(14874); -- Haunted Humanoids
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Humanoid));
+    achievement = catZones:AddAchievementFull(14875); -- Mummified Magics
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Magic));
+    achievement = catZones:AddAchievementFull(14876); -- Macabre Mechanicals
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Mechanical));
+    achievement = catZones:AddAchievementFull(14877); -- Unholy Undead
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Undead));
+    achievement = catZones:AddAchievementFull(14879); -- Family Exorcist
+    achievement:AddRCMenExtra(GetFEMetaLinks(achievement.ID));
+    achievement = catZones:AddAchievementFull(14881); -- Abhorrent Adverdaries of the Afterlife
+    achievement:AddRCMenExtra(GetAAotALinks(achievement.ID, 1199));
 end

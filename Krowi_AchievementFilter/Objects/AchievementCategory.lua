@@ -4,13 +4,15 @@ local objects = addon.Objects;
 objects.AchievementCategory = {};
 local achievementCategory = objects.AchievementCategory;
 
-achievementCategory.__index = achievementCategory; -- Used to support OOP like code
-
-function achievementCategory:New(name) -- Create a new achievement category
+-- [[ Constructors ]] --
+achievementCategory.__index = achievementCategory;
+function achievementCategory:New(name)
     local self = {};
     setmetatable(self, achievementCategory);
+
     self.Name = name or "Unknown";
     self.Level = 0;
+
     return self;
 end
 
@@ -18,9 +20,10 @@ function achievementCategory:NewCatInfo(id) -- Create a new achievement category
     return achievementCategory:New(addon.GetCategoryInfoTitle(id));
 end
 
+-- [[ Other ]] --
 function achievementCategory:AddCategory(category) -- Add a child achievement category to an achievement category
     if self.Children == nil then
-        self.Children = {};
+        self.Children = {}; -- By creating the children table here we reduce memory usage because not every category has children
     end
     tinsert(self.Children, category);
     category.Parent = self;
@@ -30,7 +33,7 @@ end
 
 function achievementCategory:AddAchievement(achievement) -- Add an achievement to an achievement category
     if self.Achievements == nil then
-        self.Achievements = {};
+        self.Achievements = {}; -- By creating the achievements table here we reduce memory usage because not every category has achievements
     end
     tinsert(self.Achievements, achievement);
     return achievement;

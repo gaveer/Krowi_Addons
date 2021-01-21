@@ -4,7 +4,7 @@ local objects = addon.Objects;
 objects.Achievement = {};
 local achievement = objects.Achievement;
 
--- [[ Constructor ]] --
+-- [[ Constructors ]] --
 achievement.__index = achievement;
 function achievement:New(id, obtainable, hasWowheadLink, hasIATLink)
     local self = {};
@@ -18,6 +18,7 @@ function achievement:New(id, obtainable, hasWowheadLink, hasIATLink)
     return self;
 end
 
+-- [[ Other ]] --
 function achievement:AddRCMenExtra(rcMenExtra)
     self.RCMenExtra = rcMenExtra;
 end

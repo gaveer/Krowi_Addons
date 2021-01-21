@@ -1,4 +1,4 @@
---- Krowi-Tutorials-1.0
+--- KrowiTutorials-1.0
 --- Tutorials from Krowi based on MSA-Tutorials-1.0 from Marouan Sabbagh
 
 --- MSA-Tutorials-1.0
@@ -28,7 +28,7 @@ General Arguments
  savedvariable
  icon ........... Default is "?" icon. Image path (tga or blp).
  title .......... Default is "Tutorial".
- width .......... Default is 350. Internal frame width (without borders).
+ width .......... Default is 512 + 20. Internal frame width (without borders). Allows for 512 wide images to have some space between image and borders.
  font ........... Default is game font (empty string).
 
 Frame Arguments
@@ -66,21 +66,21 @@ local format = string.format
 local strfind = string.find
 local round = function(n) return floor(n + 0.5) end
 
-local Lib = LibStub:NewLibrary('Krowi-Tutorials-1.0', 4)
-if Lib then
-	Lib.NewFrame, Lib.NewButton, Lib.UpdateFrame = nil, nil, nil
-	Lib.numFrames = Lib.numFrames or 1
-	Lib.frames = Lib.frames or {}
+local lib = LibStub:NewLibrary('KrowiTutorials-1.0', 1)
+if lib then
+	lib.NewFrame, lib.NewButton, lib.UpdateFrame = nil, nil, nil
+	lib.numFrames = lib.numFrames or 1
+	lib.frames = lib.frames or {}
 else
 	return
 end
 
 local BUTTON_TEX = 'Interface\\Buttons\\UI-SpellbookIcon-%sPage-%s'
-local Frames = Lib.frames
+local Frames = lib.frames
 
 local default = {
 	title = "Tutorial",
-	width = 350,
+	width = 512 + 20,
 	font = "",
 	imageHeight = 128,
 	imageX = 0,
@@ -254,7 +254,7 @@ local function NewButton(frame, name, direction)
 end
 
 local function NewFrame(data)
-	local frame = CreateFrame('Frame', 'Tutorials'..Lib.numFrames, UIParent, 'ButtonFrameTemplate')
+	local frame = CreateFrame('Frame', 'Tutorials'..lib.numFrames, UIParent, 'ButtonFrameTemplate')
 	frame.portrait:SetPoint('TOPLEFT', data.icon and -4 or -3, data.icon and 6 or 5)
 	frame.portrait:SetTexture(data.icon or 'Interface\\TutorialFrame\\UI-HELP-PORTRAIT')
 	frame.Inset:SetPoint('TOPLEFT', 4, -23)
@@ -308,27 +308,27 @@ local function NewFrame(data)
 	anim:SetToAlpha(0)
 
 	frame.data = data
-	Lib.numFrames = Lib.numFrames + 1
+	lib.numFrames = lib.numFrames + 1
 	return frame
 end
 
 
 --[[ User API ]]--
 
-function Lib:RegisterTutorial(data)
+function lib:RegisterTutorial(data)
 	assert(type(data) == 'table', 'RegisterTutorials: 2nd arg must be a table', 2)
 	assert(self, 'RegisterTutorials: 1st arg was not provided', 2)
 
-	if not Lib.frames[self] then
-		Lib.frames[self] = NewFrame(data)
+	if not lib.frames[self] then
+		lib.frames[self] = NewFrame(data)
 	end
 end
 
-function Lib:TriggerTutorial(index, maxAdvance)
+function lib:TriggerTutorial(index, maxAdvance)
 	assert(type(index) == 'number', 'TriggerTutorial: 2nd arg must be a number', 2)
 	assert(self, 'RegisterTutorials: 1st arg was not provided', 2)
 
-	local frame = Lib.frames[self]
+	local frame = lib.frames[self]
 	if frame then
 		local sv = frame.data.key or frame.data.savedvariable
 		local table = frame.data.key and frame.data.savedvariable or _G
@@ -341,10 +341,10 @@ function Lib:TriggerTutorial(index, maxAdvance)
 	end
 end
 
-function Lib:ResetTutorial()
+function lib:ResetTutorial()
 	assert(self, 'RegisterTutorials: 1st arg was not provided', 2)
 
-	local frame = Lib.frames[self]
+	local frame = lib.frames[self]
 	if frame then
 		local sv = frame.data.key or frame.data.savedvariable
 		if sv then
@@ -356,10 +356,10 @@ function Lib:ResetTutorial()
 	end
 end
 
-function Lib:GetTutorial()
-	return self and Lib.frames[self] and Lib.frames[self].data
+function lib:GetTutorial()
+	return self and lib.frames[self] and lib.frames[self].data
 end
 
-function Lib:IsTutorialOpen()
-	return Lib.frames[self]:IsShown();
+function lib:IsTutorialOpen()
+	return lib.frames[self]:IsShown();
 end

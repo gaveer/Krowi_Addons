@@ -9,8 +9,6 @@ Globals.lua
 
 Libs/Files.xml
 
-Core/Files.xml
-
 Localization/Files.xml
 
 Krowi_AchievementFilter.lua

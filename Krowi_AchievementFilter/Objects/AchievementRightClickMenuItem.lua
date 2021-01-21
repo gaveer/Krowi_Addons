@@ -1,7 +1,8 @@
-local _, addon = ...; -- Global addon namespace
-local objects = addon.Objects; -- Local objects namespace
-objects.AchievementRightClickMenuItem = {}; -- Global Achievement Right Click Menu Item class
-local achRCMenItem = objects.AchievementRightClickMenuItem; -- Local Achievement Right Click Menu Item class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local objects = addon.Objects;
+objects.AchievementRightClickMenuItem = {};
+local achRCMenItem = objects.AchievementRightClickMenuItem;
 
 achRCMenItem.__index = achRCMenItem; -- Used to support OOP like code
 

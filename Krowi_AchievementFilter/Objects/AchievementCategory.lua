@@ -1,7 +1,8 @@
-local _, addon = ...; -- Global addon namespace
-local objects = addon.Objects; -- Local objects namespace
-objects.AchievementCategory = {}; -- Global achievement category class
-local achievementCategory = objects.AchievementCategory; -- Local achievement category class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local objects = addon.Objects;
+objects.AchievementCategory = {};
+local achievementCategory = objects.AchievementCategory;
 
 achievementCategory.__index = achievementCategory; -- Used to support OOP like code
 

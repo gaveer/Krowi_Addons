@@ -1,6 +1,6 @@
 local _, addon = ...; -- Global addon namespace
 
-addon.Tutorials = LibStub(addon.Libs.Tutorials); -- Global tutorial object
+addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
 local tutorials = addon.Tutorials; -- Local tutorial object
 
 tutorials.FeaturesTutorialPages = 3;

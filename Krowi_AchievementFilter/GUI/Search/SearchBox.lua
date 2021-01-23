@@ -8,7 +8,7 @@ searchBox.ID = 0; -- Local ID for naming, starts at 0 and will increment if a ne
 
 searchBox.__index = searchBox; -- Used to support OOP like code
 
-function searchBox:New(searchPreviewContainerFrame, achievementsFrame)
+function searchBox:New(searchPreviewContainerFrame, fullSearchResults, achievementsFrame)
     diagnostics.Trace("searchBox:New");
 
 	local self = {};
@@ -16,9 +16,10 @@ function searchBox:New(searchPreviewContainerFrame, achievementsFrame)
 
 	searchBox.ID = searchBox.ID + 1;
 	self.ID = searchBox.ID;
-	
+
 	self.SearchPreviewContainerFrame = searchPreviewContainerFrame;
 	self.SearchPreviewContainerFrame.SearchBox = self;
+	self.FullSearchResults = fullSearchResults;
 	self.AchievementsFrame = achievementsFrame;
 
     local frame = CreateFrame("EditBox", "KrowiAF_AchievementFrameSearchBox" .. self.ID, AchievementFrame, "SearchBoxTemplate");
@@ -115,9 +116,9 @@ function searchBox:OnKeyDown(key)
 	diagnostics.Trace("searchBox:OnKeyDown");
 
 	if key == "UP" then
-		self.Parent.SearchPreviewContainerFrame.Parent:SelectPrevious();
+		self.Parent.SearchPreviewContainerFrame:SelectPrevious();
 	elseif key == "DOWN" then
-		self.Parent.SearchPreviewContainerFrame.Parent:SelectNext();
+		self.Parent.SearchPreviewContainerFrame:SelectNext();
 	end
 end
 

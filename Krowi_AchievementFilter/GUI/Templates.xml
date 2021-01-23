@@ -103,7 +103,7 @@
 	</Frame>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 14 at time of writing -->
-	<Button name="KrowiAF_AchievementSearchPreviewButtonTemplate" virtual="true">
+	<Button name="KrowiAF_AchievementSearchPreviewTemplate" virtual="true">
 		<Size x="206" y="27"/>
 		<Layers>
 			<Layer level="OVERLAY" textureSubLevel="3">
@@ -357,7 +357,7 @@
 			</Button>
 			<ScrollFrame name="$parentScrollFrame" parentKey="Container" inherits="HybridScrollFrameTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent.topLeftCorner2" x="4" y="-8"/>
+					<Anchor point="TOPLEFT" relativeKey="$parent.topLeftCorner2" x="9" y="-8"/> <!-- Changed x value to align properly compared to Blizzard, originally 4 -->
 					<Anchor point="BOTTOMRIGHT" relativeKey="$parent.bottomRightCorner" x="-24" y="8"/>
 				</Anchors>
 				<Frames>
@@ -389,7 +389,7 @@
 	</Frame>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 66 at time of writing -->
-	<Button name="KrowiAF_AchievementFrameFullSearchResultsButtonTemplate" virtual="true">
+	<Button name="KrowiAF_AchievementFullSearchResultTemplate" virtual="true">
 		<Size x="575" y="49"/>
 		<Layers>
 			<Layer level="OVERLAY" textureSubLevel="2">
@@ -436,9 +436,9 @@
 		</PushedTexture>
 		<HighlightTexture atlas="search-highlight-large">
 		</HighlightTexture>
-		<Scripts>
+		<!-- <Scripts>
 			<OnClick function="KrowiAF_AcheivementFullSearchResultsButton_OnClick"/>
-		</Scripts>
+		</Scripts> -->
 	</Button>
 
 </Ui>

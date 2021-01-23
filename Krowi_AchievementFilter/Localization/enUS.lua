@@ -1,6 +1,6 @@
 local addonName, addon = ...;
 
-local L = LibStub(addon.Libs.AceLocale):NewLocale(addonName, "enUS", true, true);
+local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "enUS", true, true);
 
 -- Misc.
 L["WOWHEAD"] = "Wowhead";

@@ -1,6 +1,6 @@
 local addonName, addon = ...;
 
-addon.L = LibStub(addon.Libs.AceLocale):GetLocale(addonName);
+addon.L = LibStub("AceLocale-3.0"):GetLocale(addonName);
 
 addon.Faction = {}; -- Global faction data
 addon.Faction.IsAlliance = UnitFactionGroup("player") == "Alliance";
@@ -22,7 +22,7 @@ function loadHelper:OnEvent(event, arg1)
             addon.GUI.AchievementsFrame = addon.GUI.AchievementsFrame:New();
             addon.GUI.CategoriesFrame = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame);
 
-            addon.GUI.Search.Load();
+            addon.GUI.Search.Load(addon.GUI.AchievementsFrame);
 
             addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame, addon.GUI.AchievementsFrame, addon.GUI.SearchBox.Frame);
             

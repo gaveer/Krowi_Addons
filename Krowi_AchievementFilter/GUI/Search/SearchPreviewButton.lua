@@ -1,7 +1,6 @@
-local _, addon = ...; -- Global addon namespace
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
-addon.SearchPreviewButton = {};
-local searchPreviewButton = addon.SearchPreviewButton;
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
 
 function KrowiAF_AchievementSearchPreviewButton_OnClick(self)
     diagnostics.Trace("KrowiAF_AchievementSearchPreviewButton_OnClick");
@@ -17,7 +16,7 @@ end
 function KrowiAF_AchievementFrame_SetSearchPreviewSelection(button)
     diagnostics.Trace("KrowiAF_AchievementFrame_SetSearchPreviewSelection");
 
-	local searchPreviewContainer = addon.GUI.SearchPreviewContainer.Frame;
+	local searchPreviewContainer = button.ParentContainer;
     local buttons = searchPreviewContainer.Buttons;
     for _, btn in next, buttons do
         btn.SelectedTexture:Hide();
@@ -33,12 +32,12 @@ end
 function KrowiAF_AchievementFrame_ShowFullSearch(self)
     diagnostics.Trace("KrowiAF_AchievementFrame_ShowFullSearch");
 
-    self.ParentContainer.SearchBox.Frame.FullSearchResults:Update();
+    self.ParentContainer.SearchBox.FullSearchResults:Update(self.ParentContainer.SearchBox.Frame:GetText());
 	if GetNumFilteredAchievementsTest() == 0 then
-		self.ParentContainer.SearchBox.Frame.FullSearchResults.Frame:Hide();
+		self.ParentContainer.SearchBox.FullSearchResults:Hide();
 		return;
 	end
     self.ParentContainer.SearchBox:HideSearchPreview();
 	self.ParentContainer.SearchBox.Frame:ClearFocus();
-	self.ParentContainer.SearchBox.Frame.FullSearchResults.Frame:Show();
+	self.ParentContainer.SearchBox.FullSearchResults:Show();
 end

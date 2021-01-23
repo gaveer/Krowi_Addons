@@ -1,6 +1,6 @@
-local _, addon = ...; -- Global addon namespace
-local gui = addon.GUI; -- Local GUI namespace
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
 
 function KrowiAF_AchievementButton_OnLoad(self) -- Used in Templates - KrowiAF_AchievementTemplate
 	diagnostics.Trace("KrowiAF_AchievementButton_OnLoad");
@@ -15,20 +15,8 @@ function KrowiAF_AchievementButton_OnLoad(self) -- Used in Templates - KrowiAF_A
 	AchievementButton_OnLoad(self);
 end
 
-function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers, anchor, offsetX, offsetY) -- Used in Templates - KrowiAF_AchievementTemplate
-	diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
-
-	if button == "LeftButton" then
-		diagnostics.Debug("LeftButton");
-		OnClickLeftButton(self, ignoreModifiers);
-	elseif button == "RightButton" then
-		diagnostics.Debug("RightButton");
-		OnClickRightButton(self, anchor, offsetX, offsetY);
-	end
-end
-
 -- [[ OnClickLeftButton ]] --
-function OnClickLeftButton(self, ignoreModifiers)
+local function OnClickLeftButton(self, ignoreModifiers)
 	diagnostics.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
 
 	if IsModifiedClick() and not ignoreModifiers then
@@ -73,8 +61,9 @@ end
 
 -- [[ OnClickRightButton ]] --
 local rightClickMenu = LibStub("KrowiRightClickMenu-1.0");
+local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
-function OnClickRightButton(self, anchor, offsetX, offsetY)
+local function OnClickRightButton(self, anchor, offsetX, offsetY)
 	diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
 
 	-- Reset menu
@@ -93,7 +82,7 @@ function OnClickRightButton(self, anchor, offsetX, offsetY)
 	if not self.Achievement.HasNoWowheadLink then
 		local externalLink = "https://www.wowhead.com/achievement=" .. self.Achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
 		diagnostics.Debug(externalLink);
-		rightClickMenu:AddFull("Wowhead", function() gui.PopupDialog.ShowExternalLink(externalLink); end);
+		rightClickMenu:AddFull("Wowhead", function() popupDialog.ShowExternalLink(externalLink); end);
 	end
 
 	-- IAT Link
@@ -107,4 +96,16 @@ function OnClickRightButton(self, anchor, offsetX, offsetY)
 	end
 
 	rightClickMenu:Open(anchor, offsetX, offsetY);
+end
+
+function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers, anchor, offsetX, offsetY) -- Used in Templates - KrowiAF_AchievementTemplate
+	diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
+
+	if button == "LeftButton" then
+		diagnostics.Debug("LeftButton");
+		OnClickLeftButton(self, ignoreModifiers);
+	elseif button == "RightButton" then
+		diagnostics.Debug("RightButton");
+		OnClickRightButton(self, anchor, offsetX, offsetY);
+	end
 end

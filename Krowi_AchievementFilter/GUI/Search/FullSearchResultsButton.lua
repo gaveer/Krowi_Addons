@@ -1,11 +1,15 @@
-local _, addon = ...; -- Global addon namespace
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local gui = addon.GUI;
+gui.FullSearchResult = {};
+local fullSearchResult = gui.FullSearchResult;
 
-function KrowiAF_AcheivementFullSearchResultsButton_OnClick(self)
-    diagnostics.Trace("KrowiAF_AcheivementFullSearchResultsButton_OnClick");
+function fullSearchResult.OnClick(self, fullSearchResults, achievementsFrame)
+    diagnostics.Trace("fullSearchResult.OnClick");
 
     if self.AchievementID then
-        self.ParentContainer.ParentFrame.Parent.AchievementsFrame:SelectAchievement(self.AchievementID, nil, nil, true);
-        self.ParentContainer.ParentFrame:Hide();
+        fullSearchResults:Hide();
+        achievementsFrame:SelectAchievement(self.AchievementID, nil, nil, true);
 	end
 end

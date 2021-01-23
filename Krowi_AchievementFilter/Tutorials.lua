@@ -68,15 +68,15 @@ function tutorials.Load()
         onShow = function(self, i)
             if i == 1 then
                 OpenAchievementFrameAtTabButton1();
-                addon.ResetView(addon.GUI.CategoriesFrame.Frame);
-                self[i].shine = addon.GUI.TabButton1.Frame;
+                addon.ResetView(addon.GUI.CategoriesFrame);
+                self[i].shine = addon.GUI.TabButton1;
             elseif i == 2 then
                 OpenAchievementFrameAtTabButton1();
                 addon.GUI.CategoriesFrame:SelectCategory(addon.GetAchievement(14281):GetCategory());
-                self[i].shine = addon.GUI.CategoriesFrame.Frame;
+                self[i].shine = addon.GUI.CategoriesFrame;
             elseif i == 3 then
                 OpenAchievementFrameAtTabButton1();
-                local achievementsButtons = addon.GUI.AchievementsFrame.Frame.Container.buttons;
+                local achievementsButtons = addon.GUI.AchievementsFrame.Container.buttons;
                 addon.GUI.AchievementsFrame:SelectAchievement(1283, "RightButton", nil, true, achievementsButtons[1], 88, 34);
                 self[i].shine = DropDownList1;
             end
@@ -85,7 +85,7 @@ function tutorials.Load()
 end
 
 function tutorials.HookTrigger(hook)
-    hook.Frame:HookScript("OnClick", function()
+    hook:HookScript("OnClick", function()
         addon.Diagnostics.Trace("tutorials.HookTrigger OnClick");
         tutorials.TriggerTutorial(tutorials.FeaturesTutorial, tutorials.FeaturesTutorialPages);
     end)

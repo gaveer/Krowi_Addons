@@ -1,2 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.GUI = {}; -- Global GUI namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.GUI = {};
+local gui = addon.GUI;
+
+-- [[ KrowiPopopDialog ]] --
+gui.PopupDialog = LibStub("KrowiPopopDialog-1.0");

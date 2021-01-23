@@ -5,7 +5,7 @@ function KrowiAF_AcheivementFullSearchResultsButton_OnClick(self)
     diagnostics.Trace("KrowiAF_AcheivementFullSearchResultsButton_OnClick");
 
     if self.AchievementID then
-        self.ParentContainer.ParentFrame.Parent.AchievementsFrame.Parent:SelectAchievement(self.AchievementID, nil, nil, true);
+        self.ParentContainer.ParentFrame.Parent.AchievementsFrame:SelectAchievement(self.AchievementID, nil, nil, true);
         self.ParentContainer.ParentFrame:Hide();
 	end
 end

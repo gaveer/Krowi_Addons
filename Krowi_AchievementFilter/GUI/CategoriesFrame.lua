@@ -1,31 +1,32 @@
-local _, addon = ...; -- Global addon namespace
-local gui = addon.GUI; -- Local GUI namespace
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local gui = addon.GUI;
+gui.CategoriesFrame = {};
+local categoriesFrame = gui.CategoriesFrame;
 
-gui.CategoriesFrame = {}; -- Global categories frame class
-local categoriesFrame = gui.CategoriesFrame; -- Local categories frame class
-categoriesFrame.ID = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
+local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
+-- [[ Constructors ]] --
 categoriesFrame.__index = categoriesFrame; -- Used to support OOP like code
-
 function categoriesFrame:New(categories, achievementsFrame)
     diagnostics.Trace("categoriesFrame:New");
 
-	local self = {};
-	setmetatable(self, categoriesFrame);
+	-- Increment ID
+	numFrames = numFrames + 1;
 
-	categoriesFrame.ID = categoriesFrame.ID + 1;
-	self.ID = categoriesFrame.ID;
+	-- Create frame
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. numFrames, AchievementFrame, "KrowiAF_AchievementFrameCategoriesTemplate");
+	addon.InjectMetatable(frame, categoriesFrame);
 
-	self.Categories = categories;
-	self.SelectedCategory = self.Categories[1];
-	self.AchievementsFrame = achievementsFrame;
-	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
-	self.AchievementsFrame.Parent.CategoriesFrame = self;
+	-- Set properties
+	frame.ID = numFrames;
+	frame.Categories = categories;
+	frame.SelectedCategory = frame.Categories[1];
+	frame.AchievementsFrame = achievementsFrame;
+	frame.AchievementsFrame.CategoriesFrame = frame; -- Needed for API
 
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. self.ID, AchievementFrame, "KrowiAF_AchievementFrameCategoriesTemplate");
-	self.Frame = frame;
-	frame.Parent = self;
+	-- Set parents
 	frame.Container.ParentFrame = frame;
 	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
@@ -42,7 +43,7 @@ function categoriesFrame:New(categories, achievementsFrame)
 	frame.Container.ScrollBar.trackBG:Show();
 	frame.Container.update = function(container)
 		diagnostics.Trace("container.update");
-		container.ParentFrame.Parent:Update(); -- Issue #12: Broken
+		container.ParentFrame:Update(); -- Issue #12: Broken
 	end
 
 	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
@@ -51,7 +52,7 @@ function categoriesFrame:New(categories, achievementsFrame)
 		button.ParentContainer = frame.Container;
 	end
 
-	return self;
+	return frame;
 end
 
 function KrowiAF_AchievementFrameCategories_OnShow(self) -- Used in Templates - KrowiAF_AchievementFrameCategoriesTemplate
@@ -62,11 +63,10 @@ function KrowiAF_AchievementFrameCategories_OnShow(self) -- Used in Templates - 
 	AchievementFrameFilterDropDown:Hide();
 	AchievementFrameHeaderLeftDDLInset:Hide();
 	AchievementFrame.searchBox:Hide();
-	-- AchievementFrameHeaderRightDDLInset:Hide();
 
 	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
 
-	self.Parent:Update();
+	self:Update();
 end
 
 function KrowiAF_AchievementFrameCategories_OnHide() -- Used in Templates - KrowiAF_AchievementFrameCategoriesTemplate
@@ -83,7 +83,6 @@ function KrowiAF_AchievementFrameCategories_OnHide() -- Used in Templates - Krow
 		AchievementFrameHeaderLeftDDLInset:Hide();
 	end
 	AchievementFrame.searchBox:Show();
-	-- AchievementFrameHeaderRightDDLInset:Show();
 end
 
 function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
@@ -95,12 +94,12 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 
 	frame:SetWidth(categoriesWidth);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
-	frame.Parent.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
+	frame.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
 	AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
 	AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
 	AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
 	for _, button in next, frame.Container.buttons do
-		frame.Parent.DisplayButton(button, button.Category);
+		frame.DisplayButton(button, button.Category);
 	end
 	func(scrollBar);
 end
@@ -137,7 +136,7 @@ end
 function categoriesFrame:Update()
 	diagnostics.Trace("categoriesFrame:Update");
 
-	local scrollFrame = self.Frame.Container;
+	local scrollFrame = self.Container;
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
 
@@ -245,7 +244,7 @@ function categoriesFrame:SelectButton(button, quick)
 		button.Category.NotCollapsed = true;
 	end
 
-	local buttons = self.Frame.Container.buttons;
+	local buttons = self.Container.buttons;
 	for _, button in next, buttons do
 		if button.Category then
 			button.Category.IsSelected = nil; -- Issue #12: Fix
@@ -261,10 +260,9 @@ function categoriesFrame:SelectButton(button, quick)
 
 	if not quick then -- Skip refreshing achievements if we're still busy selecting the correct category
 		self.SelectedCategory = button.Category;
-		self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
-		self.AchievementsFrame.Parent:ClearSelection();
+		self.AchievementsFrame:ClearSelection();
 		self.AchievementsFrame.Container.ScrollBar:SetValue(0);
-		self.AchievementsFrame.Parent:Update();
+		self.AchievementsFrame:Update();
 	end
 end
 
@@ -275,7 +273,7 @@ local function Select(self, category, quick)
 	local shown = false;
 	local previousScrollValue;
 
-	local container = self.Frame.Container;
+	local container = self.Container;
 	local child = container.ScrollChild;
 	local scrollBar = container.ScrollBar;
 
@@ -311,7 +309,7 @@ function categoriesFrame:SelectCategory(category)
 
 	local categoriesTree = category:GetTree();
 
-	addon.ResetView(self.Frame);
+	addon.ResetView(self);
 
 	for i, cat in next, categoriesTree do
 		Select(self, cat, i ~= #categoriesTree);

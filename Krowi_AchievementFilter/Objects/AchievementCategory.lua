@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local diagnostics = addon.Diagnostics;
 local objects = addon.Objects;
 objects.AchievementCategory = {};
 local achievementCategory = objects.AchievementCategory;
@@ -114,7 +115,7 @@ function achievementCategory:AddAchievementIDsWithIATLink(...) -- Add a variable
 end
 
 function achievementCategory:GetTree()
-    addon.Diagnostics.Trace("achievementCategory:GetTree");
+    diagnostics.Trace("achievementCategory:GetTree");
 
 	local categories = {};
     tinsert(categories, 1, self);

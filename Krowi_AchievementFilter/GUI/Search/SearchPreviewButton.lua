@@ -7,7 +7,7 @@ function KrowiAF_AchievementSearchPreviewButton_OnClick(self)
     diagnostics.Trace("KrowiAF_AchievementSearchPreviewButton_OnClick");
 
     if self.AchievementID then
-        self.ParentContainer.SearchBox.AchievementsFrame.Parent:SelectAchievement(self.AchievementID, nil, nil, true);
+        self.ParentContainer.SearchBox.AchievementsFrame:SelectAchievement(self.AchievementID, nil, nil, true);
         self.ParentContainer:Hide();
         self.ParentContainer.SearchBox:HideSearchPreview();
         self.ParentContainer.SearchBox.Frame:ClearFocus();

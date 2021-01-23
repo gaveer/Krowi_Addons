@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local diagnostics = addon.Diagnostics;
 local objects = addon.Objects;
 objects.Achievement = {};
 local achievement = objects.Achievement;
@@ -24,7 +25,7 @@ function achievement:AddRCMenExtra(rcMenExtra)
 end
 
 function achievement:GetCategory()
-    addon.Diagnostics.Trace("achievement:GetCategory");
+    diagnostics.Trace("achievement:GetCategory");
 
     for _, category in next, addon.Categories do
         if category.Achievements ~= nil then

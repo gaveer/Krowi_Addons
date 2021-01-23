@@ -2,5 +2,6 @@
 !.gitignore
 !/.vscode
 !/Krowi_AchievementFilter
+!/Krowi_Libraries
 !/Krowi_OldCode
 !README.md

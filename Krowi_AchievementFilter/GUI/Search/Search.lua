@@ -5,6 +5,6 @@ local search = gui.Search; -- Local Search namespace
 
 function search.Load()
     addon.GUI.SearchPreviewContainer = addon.GUI.SearchPreviewContainer:New();
-    addon.GUI.SearchBox = addon.GUI.SearchBox:New(addon.GUI.SearchPreviewContainer.Frame, addon.GUI.AchievementsFrame.Frame);
-    addon.GUI.FullSearchResults = addon.GUI.FullSearchResults:New(addon.GUI.SearchBox.Frame, addon.GUI.AchievementsFrame.Frame);
+    addon.GUI.SearchBox = addon.GUI.SearchBox:New(addon.GUI.SearchPreviewContainer.Frame, addon.GUI.AchievementsFrame);
+    addon.GUI.FullSearchResults = addon.GUI.FullSearchResults:New(addon.GUI.SearchBox.Frame, addon.GUI.AchievementsFrame);
 end

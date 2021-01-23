@@ -20,11 +20,11 @@ function loadHelper:OnEvent(event, arg1)
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             addon.GUI.AchievementsFrame = addon.GUI.AchievementsFrame:New();
-            addon.GUI.CategoriesFrame = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame.Frame);
+            addon.GUI.CategoriesFrame = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame);
 
             addon.GUI.Search.Load();
 
-            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame.Frame, addon.GUI.AchievementsFrame.Frame, addon.GUI.SearchBox.Frame);
+            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame, addon.GUI.AchievementsFrame, addon.GUI.SearchBox.Frame);
             
             addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
             -- HookDebug();
@@ -96,4 +96,8 @@ function addon.GetSafeScrollChildBottom(scrollChild)
 	addon.Diagnostics.Trace("GetSafeScrollChildBottom");
 
 	return scrollChild:GetBottom() or 0;
+end
+
+function addon.InjectMetatable(tbl,meta)
+    return setmetatable(tbl,setmetatable(meta,getmetatable(tbl)));
 end

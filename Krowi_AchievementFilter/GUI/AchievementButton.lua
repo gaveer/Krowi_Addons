@@ -49,7 +49,7 @@ function OnClickLeftButton(self, ignoreModifiers)
 		return;
 	end
 
-	local achievementsFrame = self.ParentContainer.ParentFrame.Parent;
+	local achievementsFrame = self.ParentContainer.ParentFrame;
 
 	if self.selected then
 		if not self:IsMouseOver() then
@@ -72,63 +72,39 @@ function OnClickLeftButton(self, ignoreModifiers)
 end
 
 -- [[ OnClickRightButton ]] --
-local menuFrame = CreateFrame("Frame", "KrowiAFAchievementsButtonRightClickMenu", nil, "UIDropDownMenuTemplate");
-local menu = {};
+local rightClickMenu = LibStub("KrowiRightClickMenu-1.0");
 
 function OnClickRightButton(self, anchor, offsetX, offsetY)
 	diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
 
-	-- Make sure optional values are set to default if not used
-	anchor = anchor or "cursor";
-	offsetX = offsetX or 0;
-	offsetY = offsetY or 0;
-
 	-- Reset menu
-	menu = {};
+	rightClickMenu:Clear();
 
 	-- Always add header
 	local _, name = GetAchievementInfo(self.Achievement.ID);
-	tinsert(menu, {text = name, isTitle = true});
+	rightClickMenu:AddFull(name, nil, true);
 
 	-- Debug table
 	if diagnostics.DebugEnabled() then
-		tinsert(menu, {text = "Debug Table", func = function() diagnostics.DebugTable(self); end});
+		rightClickMenu:AddFull("Debug Table", function() diagnostics.DebugTable(self); end);
 	end
 
 	-- Wowhead link
 	if not self.Achievement.HasNoWowheadLink then
 		local externalLink = "https://www.wowhead.com/achievement=" .. self.Achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
 		diagnostics.Debug(externalLink);
-		tinsert(menu, {text = "Wowhead", func = function() gui.PopupDialog.ShowExternalLink(externalLink); end});
+		rightClickMenu:AddFull("Wowhead", function() gui.PopupDialog.ShowExternalLink(externalLink); end);
 	end
 
 	-- IAT Link
 	if self.Achievement.HasIATLink and addon.IsIATLoaded() then
-		tinsert(menu, {text = "IAT Tactics", func = function() IAT_DisplayAchievement(self.Achievement.ID); end});
+		rightClickMenu:AddFull("IAT Tactics", function() IAT_DisplayAchievement(self.Achievement.ID); end);
 	end
 
 	-- Extra menu defined at the achievement self
 	if self.Achievement.RCMenExtra ~= nil then
-		tinsert(menu, GetRightClickMenuExtra(self.Achievement.RCMenExtra));
+		rightClickMenu:Add(self.Achievement.RCMenExtra);
 	end
 
-	EasyMenu(menu, menuFrame, anchor, offsetX, offsetY, "MENU");
-end
-
-function GetRightClickMenuExtra(achRCMenItem)
-	-- diagnostics.Trace("GetRightClickMenuExtra"); -- Generates a lot of messages
-
-	local item = {};
-	item.text = achRCMenItem.Name;
-	item.func = achRCMenItem.Func;
-	item.isTitle = achRCMenItem.IsTitle;
-	if achRCMenItem.Children ~= nil then
-		item.hasArrow = true;
-		item.menuList = {};
-		for _, child in next, achRCMenItem.Children do
-			tinsert(item.menuList, GetRightClickMenuExtra(child));
-		end
-	end
-
-	return item;
+	rightClickMenu:Open(anchor, offsetX, offsetY);
 end

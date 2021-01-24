@@ -16,7 +16,7 @@ function achievementsFrame:New()
 	numFrames = numFrames + 1;
 
 	-- Create frame
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements" .. numFrames, AchievementFrame, "KrowiAF_AchievementFrameAchievementsTemplate");
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements" .. numFrames, AchievementFrame, "KrowiAF_AchievementsFrame_Template");
 	frame:SetWidth(504 - addon.Options.db.CategoriesFrameWidthOffset);
 	addon.InjectMetatable(frame, achievementsFrame);
 
@@ -46,17 +46,8 @@ function achievementsFrame:New()
 		container.ParentFrame:Update();
 	end
 
-	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementTemplate", 0, -2);
-	-- Doing post Load things
-	for _, button in next, frame.Container.buttons do
-		button.ParentContainer = frame.Container;
-		button:RegisterForClicks("LeftButtonUp", "RightButtonUp");
-
-		if not frame.UIFontHeight then
-			local _, fontHeight = button.description:GetFont();
-			frame.UIFontHeight = fontHeight;
-		end
-	end
+	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementButton_Template", 0, -2);
+	gui.AchievementButton.PostLoadButtons(frame);
 
 	hooksecurefunc("AchievementFrameAchievements_ForceUpdate", function()
 		frame:ForceUpdate();
@@ -69,9 +60,9 @@ function achievementsFrame:New()
 	return frame;
 end
 
-function KrowiAF_AchievementFrameAchievements_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementFrameAchievementsTemplate
+function KrowiAF_AchievementsFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementsFrame_Template
 	local addonName = ...;
-	diagnostics.Trace("KrowiAF_AchievementFrameAchievements_OnEvent - " .. event .. " - " .. addonName);
+	diagnostics.Trace("KrowiAF_AchievementsFrame_OnEvent - " .. event .. " - " .. addonName);
 
 	if event == "ADDON_LOADED" then
 		if addonName and addonName == "Overachiever" then
@@ -81,8 +72,8 @@ function KrowiAF_AchievementFrameAchievements_OnEvent(self, event, ...) -- Used 
 	end
 end
 
-function KrowiAF_AchievementFrameAchievements_OnShow(self) -- Used in Templates - KrowiAF_AchievementFrameAchievementsTemplate
-	diagnostics.Trace("KrowiAF_AchievementFrameAchievements_OnShow");
+function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
+	diagnostics.Trace("KrowiAF_AchievementsFrame_OnShow");
 
 	self:Update();
 end
@@ -402,7 +393,7 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 end
 
 -- [[ API ]] --
-function achievementsFrame:SelectAchievement(id, mouseButton, down, ignoreModifiers, anchor, offsetX, offsetY)
+function achievementsFrame:SelectAchievement(id, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
 	diagnostics.Trace("achievementsFrame:SelectAchievement");
 
 	if mouseButton == nil then
@@ -423,17 +414,23 @@ function achievementsFrame:SelectAchievement(id, mouseButton, down, ignoreModifi
 	while not shown do
 		for _, button in next, container.buttons do
 			if button.id == id and math.ceil(button:GetTop()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
-				KrowiAF_AchievementButton_OnClick(button, mouseButton, down, ignoreModifiers, anchor, offsetX, offsetY);
+				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
 				shown = button;
 				break;
 			end
 		end
 
 		local _, maxVal = scrollBar:GetMinMaxValues();
-		if shown then
+		if shown then -- Something's wrong here with calculating the scrollbar value
+			diagnostics.Debug(maxVal); -- 1672 - 1662
+			diagnostics.Debug(scrollBar:GetValue()); -- 252 - 168
+			diagnostics.Debug(container:GetTop()); -- 1061 - 1061
+			diagnostics.Debug(shown:GetTop()); -- 531 - 541
 			local newHeight = scrollBar:GetValue() + container:GetTop() - shown:GetTop();
+			diagnostics.Debug(newHeight); -- 782 - 688
 			newHeight = min(newHeight, maxVal);
 			scrollBar:SetValue(newHeight);
+			diagnostics.Debug(scrollBar:GetValue()); -- 756 - 672
 		else
 			local scrollValue = scrollBar:GetValue();
 			if scrollValue == maxVal or scrollValue == previousScrollValue then

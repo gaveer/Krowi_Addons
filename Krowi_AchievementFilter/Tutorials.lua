@@ -77,7 +77,7 @@ function tutorials.Load()
             elseif i == 3 then
                 OpenAchievementFrameAtTabButton1();
                 local achievementsButtons = addon.GUI.AchievementsFrame.Container.buttons;
-                addon.GUI.AchievementsFrame:SelectAchievement(1283, "RightButton", nil, true, achievementsButtons[1], 88, 34);
+                addon.GUI.AchievementsFrame:SelectAchievement(1283, "RightButton", true, achievementsButtons[1], 88, 34);
                 self[i].shine = DropDownList1;
             end
         end

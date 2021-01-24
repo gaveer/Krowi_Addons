@@ -1,10 +1,24 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
+local gui = addon.GUI;
+gui.CategoryButton = {};
+local categoryButton = gui.CategoryButton;
 
-function KrowiAF_AchievementCategoryButton_OnClick(self, button, down, quick) -- Used in Templates - KrowiAF_AchievementCategoryTemplate
-    diagnostics.Trace("KrowiAF_AchievementCategoryButton_OnClick for " .. self.name);
+function categoryButton.PostLoadButtons(categoriesFrame)
+	diagnostics.Trace("categoryButton.PostLoadButtons");
 
-    self.ParentContainer.ParentFrame:SelectButton(self, quick);
-    self.ParentContainer.ParentFrame:Update();
+	for _, button in next, categoriesFrame.Container.buttons do
+		button.Click = function(self, button, down, quick)
+			categoryButton.OnClick(self, categoriesFrame, quick);
+		end;
+		button:SetScript("OnClick", button.Click);
+	end
+end
+
+function categoryButton.OnClick(self, categoriesFrame, quick)
+    diagnostics.Trace("categoryButton.OnClick");
+
+    categoriesFrame:SelectButton(self, quick);
+    categoriesFrame:Update();
 end

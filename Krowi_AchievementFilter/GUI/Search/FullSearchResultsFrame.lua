@@ -15,7 +15,7 @@ function fullSearchResultsFrame:New(achievementsFrame)
 	-- Increment ID
 	numFrames = numFrames + 1;
 
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameFullSearchResults" .. numFrames, AchievementFrame, "KrowiAF_AchievementFrameFullSearchResultsTemplate");
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameFullSearchResults" .. numFrames, AchievementFrame, "KrowiAF_FullSearchResults_Template");
 	addon.InjectMetatable(frame, fullSearchResultsFrame);
 
 	-- Set properties
@@ -27,13 +27,8 @@ function fullSearchResultsFrame:New(achievementsFrame)
 		frame:Update();
     end
 
-    HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementFullSearchResultTemplate", 0, 0);
-    -- Doing post Load things
-	for _, button in next, frame.Container.buttons do
-		button:SetScript("OnClick", function(self)
-			gui.FullSearchResult.OnClick(self, frame, achievementsFrame);
-		end);
-	end
+    HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_FullSearchResultButton_Template", 0, 0);
+	gui.FullSearchResult.PostLoadButtons(frame, achievementsFrame);
 
 	return frame;
 end
@@ -73,7 +68,7 @@ function fullSearchResultsFrame:Update(query)
 	end
 	local totalHeight = numResults * 49;
 	HybridScrollFrame_Update(scrollFrame, totalHeight, 270);
-	if query then
+	if query then -- Will keep old titleText if no query
 		self.titleText:SetText(string.format(ENCOUNTER_JOURNAL_SEARCH_RESULTS, query, numResults));
 	end
 end

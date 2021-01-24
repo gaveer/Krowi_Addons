@@ -2,38 +2,35 @@
 ..\..\FrameXML\UI.xsd">
 
     <!-- Originally from Blizzard_AchievementUI.xml line 660 at time of writing -->
-	<Button name="KrowiAF_AchievementCategoryTemplate" inherits="AchievementCategoryTemplate" virtual="true">
+	<Button name="KrowiAF_AchievementCategoryButton_Template" inherits="AchievementCategoryTemplate" virtual="true">
 		<Scripts>
 			<OnLoad>
                 self:EnableMouse(true);
                 self:EnableMouseWheel(true);
 			</OnLoad>
-			<OnClick>
-				KrowiAF_AchievementCategoryButton_OnClick(self, button, down);
-			</OnClick>
+			<!-- OnClick is set in code -->
 		</Scripts>
 	</Button>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 772 at time of writing -->
-	<Button name="KrowiAF_AchievementTemplate" inherits="AchievementTemplate" virtual="true">
+	<Button name="KrowiAF_AchievementButton_Template" inherits="AchievementTemplate" virtual="true">
 		<Scripts>
-			<OnLoad inherit="prepend" function="KrowiAF_AchievementButton_OnLoad"/>
-			<OnClick>
-				-- this is also called from the shield's OnClick
-				KrowiAF_AchievementButton_OnClick(self, button, down);
-			</OnClick>
+			<OnLoad inherit="prepend">
+				AchievementButton_OnLoad(self);
+			</OnLoad>
+			<!-- OnClick is set in code -->
 		</Scripts>
 	</Button>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 1779 at time of writing -->
-	<Frame name="KrowiAF_AchievementFrameCategoriesTemplate" inherits="AchivementGoldBorderBackdrop" virtual="true">
+	<Frame name="KrowiAF_CategoriesFrame_Template" inherits="AchivementGoldBorderBackdrop" virtual="true">
 		<Anchors>
         	<Anchor point="TOPLEFT" relativeTo="AchievementFrameCategories"/>
         	<Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/>
         </Anchors>
 		<Scripts>
-			<OnShow function="KrowiAF_AchievementFrameCategories_OnShow"/>
-			<OnHide function="KrowiAF_AchievementFrameCategories_OnHide"/>
+			<OnShow function="KrowiAF_CategoriesFrame_OnShow"/>
+			<OnHide function="KrowiAF_CategoriesFrame_OnHide"/>
 		</Scripts>
 		<Frames>
 			<ScrollFrame name="$parentContainer" parentKey="Container" inherits="HybridScrollFrameTemplate">
@@ -54,7 +51,7 @@
 	</Frame>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 1806 at time of writing -->
-	<Frame name="KrowiAF_AchievementFrameAchievementsTemplate" virtual="true">
+	<Frame name="KrowiAF_AchievementsFrame_Template" virtual="true">
 		<Anchors>
         	<Anchor point="TOPLEFT" relativeTo="AchievementFrameCategories" relativePoint="TOPRIGHT" x="22" y="0"/>
         	<Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/>
@@ -80,8 +77,8 @@
 			</Layer>
 		</Layers>
 		<Scripts>
-        	<OnEvent function="KrowiAF_AchievementFrameAchievements_OnEvent"/>
-			<OnShow function="KrowiAF_AchievementFrameAchievements_OnShow"/>
+        	<OnEvent function="KrowiAF_AchievementsFrame_OnEvent"/>
+			<OnShow function="KrowiAF_AchievementsFrame_OnShow"/>
 		</Scripts>
 		<Frames>
 			<ScrollFrame name="$parentContainer" parentKey="Container" inherits="HybridScrollFrameTemplate">
@@ -103,7 +100,7 @@
 	</Frame>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 14 at time of writing -->
-	<Button name="KrowiAF_AchievementSearchPreviewTemplate" virtual="true">
+	<Button name="KrowiAF_SearchPreviewButton_Template" virtual="true">
 		<Size x="206" y="27"/>
 		<Layers>
 			<Layer level="OVERLAY" textureSubLevel="3">
@@ -144,14 +141,14 @@
 		<PushedTexture atlas="_search-rowbg">
 		</PushedTexture>
 		<Scripts>
-			<OnShow function="AchievementSearchPreviewButton_OnShow"/>
-			<OnEnter function="KrowiAF_AchievementFrame_SetSearchPreviewSelection"/>
-			<OnClick function="KrowiAF_AchievementSearchPreviewButton_OnClick"/>
+			<OnShow function="AchievementSearchPreviewButton_OnShow"/> <!-- Yes, use Blizzard one -->
+			<!-- OnEnter is set in code -->
+			<!-- OnClick is set in code -->
 		</Scripts>
 	</Button>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 2487 at time of writing -->
-	<Frame name="KrowiAF_AchievementFrameSearchPreviewContainerTemplate" virtual="true">
+	<Frame name="KrowiAF_SearchPreviewsFrame_Template" virtual="true">
 		<Size x="206" y="27"/>
 		<Anchors>
 			<Anchor point="TOPLEFT" relativeKey="$parent.searchBox" relativePoint="BOTTOMLEFT" x="-4" y="3"/> <!-- Achors to AchievementFrame.searchBox -->
@@ -205,7 +202,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Button parentKey="ShowAllSearchResults">
+			<Button parentKey="ShowFullSearchResultsButton">
 				<Size x="275" y="24"/>
 				<Layers>
 					<Layer level="OVERLAY" textureSubLevel="2">
@@ -233,23 +230,18 @@
 					<OnShow>
 						self:SetFrameLevel(self:GetParent():GetFrameLevel() + 10);
 					</OnShow>
-					<OnClick>
-						KrowiAF_AchievementFrame_ShowFullSearch(self);
-						PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
-					</OnClick>
-					<OnEnter function="KrowiAF_AchievementFrame_SetSearchPreviewSelection"/>
+					<!-- OnEnter is set in code -->
+					<!-- OnClick is set in code -->
 				</Scripts>
 			</Button>
 		</Frames>
 		<Scripts>
-			<OnShow>
-				self:SetFrameLevel(self:GetParent():GetFrameLevel() + 11);
-			</OnShow>
+			<OnShow function="KrowiAF_SearchPreviewsFrame_OnShow"/>
 		</Scripts>
 	</Frame>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 2683 at time of writing -->
-	<Frame name="KrowiAF_AchievementFrameFullSearchResultsTemplate" virtual="true">
+	<Frame name="KrowiAF_FullSearchResults_Template" virtual="true">
 		<Size x="600" y="382"/>
 		<Anchors>
 			<Anchor point="BOTTOM" x="0" y="7"/>
@@ -389,7 +381,7 @@
 	</Frame>
 
     <!-- Originally from Blizzard_AchievementUI.xml line 66 at time of writing -->
-	<Button name="KrowiAF_AchievementFullSearchResultTemplate" virtual="true">
+	<Button name="KrowiAF_FullSearchResultButton_Template" virtual="true">
 		<Size x="575" y="49"/>
 		<Layers>
 			<Layer level="OVERLAY" textureSubLevel="2">
@@ -436,9 +428,7 @@
 		</PushedTexture>
 		<HighlightTexture atlas="search-highlight-large">
 		</HighlightTexture>
-		<!-- <Scripts>
-			<OnClick function="KrowiAF_AcheivementFullSearchResultsButton_OnClick"/>
-		</Scripts> -->
+		<!-- OnClick is set in code -->
 	</Button>
 
 </Ui>

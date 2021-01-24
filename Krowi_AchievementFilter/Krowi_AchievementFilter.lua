@@ -24,7 +24,7 @@ function loadHelper:OnEvent(event, arg1)
 
             addon.GUI.Search.Load(addon.GUI.AchievementsFrame);
 
-            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame, addon.GUI.AchievementsFrame, addon.GUI.SearchBox.Frame);
+            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame, addon.GUI.AchievementsFrame, addon.GUI.SearchBoxFrame);
             
             addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
             -- HookDebug();
@@ -63,13 +63,13 @@ function addon.ResetView(categoriesFrame)
     addon.Diagnostics.Trace("addon.ResetView");
 
 	local scrollBar = categoriesFrame.Container.ScrollBar;
-	local buttons = categoriesFrame.Container.buttons;
+	local button = categoriesFrame.Container.buttons[1];
 
 	scrollBar:SetValue(0);
 
-    KrowiAF_AchievementCategoryButton_OnClick(buttons[1]); -- Select the 1st category
-    if buttons[1].Category.NotCollapsed then -- Make sure it's collapsed
-        KrowiAF_AchievementCategoryButton_OnClick(buttons[1]);
+    button:Click(); -- Select the 1st category
+    if button.Category.NotCollapsed then -- Make sure it's collapsed
+        button:Click();
     end
 
     -- This should also clear the search box text but this is for later, not needed right now

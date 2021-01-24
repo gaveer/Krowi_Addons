@@ -5,6 +5,6 @@
     <Script file="GUI/Search/FullSearchResultsFrame.lua" />
     <Script file="GUI/Search/SearchPreviewButton.lua" />
     <Script file="GUI/Search/SearchPreviewFrame.lua" />
-    <Script file="GUI/Search/SearchBox.lua" />
+    <Script file="GUI/Search/SearchBoxFrame.lua" />
     
 </Ui>

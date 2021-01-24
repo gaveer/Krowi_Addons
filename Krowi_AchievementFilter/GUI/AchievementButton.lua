@@ -1,23 +1,36 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
+local gui = addon.GUI;
+gui.AchievementButton = {};
+local achievementButton = gui.AchievementButton;
 
-function KrowiAF_AchievementButton_OnLoad(self) -- Used in Templates - KrowiAF_AchievementTemplate
-	diagnostics.Trace("KrowiAF_AchievementButton_OnLoad");
+function achievementButton.PostLoadButtons(achievementsFrame)
+	diagnostics.Trace("achievementButton.PostLoadButtons");
 
-	-- We need to overwrite the shield.OnClick so it calls the correct button OnClick
-	-- Doing this in code to not have to redo the entire template
-	self.shield:SetScript("OnClick", function(self)
-		local parent = self:GetParent();
-		KrowiAF_AchievementButton_OnClick(parent);
-	end);
+	for _, button in next, achievementsFrame.Container.buttons do
+		button:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+		button.Click = function(self, button, down, ignoreModifiers, anchor, offsetX, offsetY)
+			achievementButton.OnClick(self, button, achievementsFrame, ignoreModifiers, anchor, offsetX, offsetY);
+		end;
+		button:SetScript("OnClick", button.Click);
 
-	AchievementButton_OnLoad(self);
+		button.shield:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+		button.shield:SetScript("OnClick", function(self, button, down)
+			local parent = self:GetParent();
+			parent.Click(parent, button, achievementsFrame);
+		end);
+
+		if not achievementsFrame.UIFontHeight then
+			local _, fontHeight = button.description:GetFont();
+			achievementsFrame.UIFontHeight = fontHeight;
+		end
+	end
 end
 
 -- [[ OnClickLeftButton ]] --
-local function OnClickLeftButton(self, ignoreModifiers)
-	diagnostics.Trace("KrowiAF.AchievementsButton.OnClickLeftButton");
+local function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
+	diagnostics.Trace("OnClickLeftButton");
 
 	if IsModifiedClick() and not ignoreModifiers then
 		local handled = nil;
@@ -37,14 +50,12 @@ local function OnClickLeftButton(self, ignoreModifiers)
 		return;
 	end
 
-	local achievementsFrame = self.ParentContainer.ParentFrame;
-
 	if self.selected then
 		if not self:IsMouseOver() then
 			self.highlight:Hide();
 		end
 		achievementsFrame:ClearSelection();
-		HybridScrollFrame_CollapseButton(self.ParentContainer);
+		HybridScrollFrame_CollapseButton(achievementsFrame.Container);
 		achievementsFrame:Update();
 		return;
 	end
@@ -52,7 +63,7 @@ local function OnClickLeftButton(self, ignoreModifiers)
 	achievementsFrame:ClearSelection();
 	achievementsFrame:SelectButton(self);
 	achievementsFrame:DisplayAchievement(self, achievementsFrame.SelectedAchievement, self.index, self.Achievement);
-	HybridScrollFrame_ExpandButton(self.ParentContainer, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
+	HybridScrollFrame_ExpandButton(achievementsFrame.Container, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
 	achievementsFrame:Update();
 	if not ignoreModifiers then
 		achievementsFrame:AdjustSelection();
@@ -64,13 +75,15 @@ local rightClickMenu = LibStub("KrowiRightClickMenu-1.0");
 local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
 local function OnClickRightButton(self, anchor, offsetX, offsetY)
-	diagnostics.Trace("KrowiAF.AchievementsButton.OnClickRightButton");
+	diagnostics.Trace("OnClickRightButton");
+
+	local achievement = self.Achievement;
 
 	-- Reset menu
 	rightClickMenu:Clear();
 
 	-- Always add header
-	local _, name = GetAchievementInfo(self.Achievement.ID);
+	local _, name = GetAchievementInfo(achievement.ID);
 	rightClickMenu:AddFull(name, nil, true);
 
 	-- Debug table
@@ -79,31 +92,31 @@ local function OnClickRightButton(self, anchor, offsetX, offsetY)
 	end
 
 	-- Wowhead link
-	if not self.Achievement.HasNoWowheadLink then
-		local externalLink = "https://www.wowhead.com/achievement=" .. self.Achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
+	if not achievement.HasNoWowheadLink then
+		local externalLink = "https://www.wowhead.com/achievement=" .. achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
 		diagnostics.Debug(externalLink);
 		rightClickMenu:AddFull("Wowhead", function() popupDialog.ShowExternalLink(externalLink); end);
 	end
 
 	-- IAT Link
-	if self.Achievement.HasIATLink and addon.IsIATLoaded() then
-		rightClickMenu:AddFull("IAT Tactics", function() IAT_DisplayAchievement(self.Achievement.ID); end);
+	if achievement.HasIATLink and addon.IsIATLoaded() then
+		rightClickMenu:AddFull("IAT Tactics", function() IAT_DisplayAchievement(achievement.ID); end);
 	end
 
 	-- Extra menu defined at the achievement self
-	if self.Achievement.RCMenExtra ~= nil then
-		rightClickMenu:Add(self.Achievement.RCMenExtra);
+	if achievement.RCMenExtra ~= nil then
+		rightClickMenu:Add(achievement.RCMenExtra);
 	end
 
 	rightClickMenu:Open(anchor, offsetX, offsetY);
 end
 
-function KrowiAF_AchievementButton_OnClick(self, button, down, ignoreModifiers, anchor, offsetX, offsetY) -- Used in Templates - KrowiAF_AchievementTemplate
-	diagnostics.Trace("KrowiAF_AchievementButton_OnClick");
+function achievementButton.OnClick(self, button, achievementsFrame, ignoreModifiers, anchor, offsetX, offsetY) -- ignoreModifiers, anchor, offsetX, offsetY are used for in code calls
+	diagnostics.Trace("achievementButton.OnClick");
 
 	if button == "LeftButton" then
 		diagnostics.Debug("LeftButton");
-		OnClickLeftButton(self, ignoreModifiers);
+		OnClickLeftButton(self, ignoreModifiers, achievementsFrame);
 	elseif button == "RightButton" then
 		diagnostics.Debug("RightButton");
 		OnClickRightButton(self, anchor, offsetX, offsetY);

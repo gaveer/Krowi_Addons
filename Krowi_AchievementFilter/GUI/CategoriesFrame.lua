@@ -16,7 +16,7 @@ function categoriesFrame:New(categories, achievementsFrame)
 	numFrames = numFrames + 1;
 
 	-- Create frame
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. numFrames, AchievementFrame, "KrowiAF_AchievementFrameCategoriesTemplate");
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. numFrames, AchievementFrame, "KrowiAF_CategoriesFrame_Template");
 	addon.InjectMetatable(frame, categoriesFrame);
 
 	-- Set properties
@@ -46,17 +46,14 @@ function categoriesFrame:New(categories, achievementsFrame)
 		container.ParentFrame:Update(); -- Issue #12: Broken
 	end
 
-	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
-	-- Doing post Load things
-	for _, button in next, frame.Container.buttons do
-		button.ParentContainer = frame.Container;
-	end
+	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementCategoryButton_Template", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
+	gui.CategoryButton.PostLoadButtons(frame);
 
 	return frame;
 end
 
-function KrowiAF_AchievementFrameCategories_OnShow(self) -- Used in Templates - KrowiAF_AchievementFrameCategoriesTemplate
-	diagnostics.Trace("KrowiAF_AchievementFrameCategories_OnShow");
+function KrowiAF_CategoriesFrame_OnShow(self) -- Used in Templates - KrowiAF_CategoriesFrame_Template
+	diagnostics.Trace("KrowiAF_CategoriesFrame_OnShow");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Hide(); -- Issue #11: Fix
@@ -69,8 +66,8 @@ function KrowiAF_AchievementFrameCategories_OnShow(self) -- Used in Templates - 
 	self:Update();
 end
 
-function KrowiAF_AchievementFrameCategories_OnHide() -- Used in Templates - KrowiAF_AchievementFrameCategoriesTemplate
-	diagnostics.Trace("KrowiAF_AchievementFrameCategories_OnHide");
+function KrowiAF_CategoriesFrame_OnHide() -- Used in Templates - KrowiAF_CategoriesFrame_Template
+	diagnostics.Trace("KrowiAF_CategoriesFrame_OnHide");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Show(); -- Issue #11: Fix
@@ -99,7 +96,7 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
 	AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
 	for _, button in next, frame.Container.buttons do
-		frame.DisplayButton(button, button.Category);
+		frame.DisplayButton(button, button.Category, frame:GetWidth());
 	end
 	func(scrollBar);
 end
@@ -157,7 +154,7 @@ function categoriesFrame:Update()
 		category = displayCategories[i + offset];
 		displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		if category then
-			self.DisplayButton(buttons[i], category);
+			self.DisplayButton(buttons[i], category, self:GetWidth());
 			if category == self.SelectedCategory then
 				buttons[i]:LockHighlight();
 			else
@@ -173,7 +170,7 @@ function categoriesFrame:Update()
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
-function categoriesFrame.DisplayButton(button, category)
+function categoriesFrame.DisplayButton(button, category, baseWidth)
 	-- local name = "";
 	-- if category then
 	-- 	name = category.Name;
@@ -186,13 +183,15 @@ function categoriesFrame.DisplayButton(button, category)
 		return;
 	end
 
+	baseWidth = baseWidth or 197;
+
 	button:Show();
 	if category.Parent then -- Not top level category has parent
-		button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 15 - (category.Level - 1) * 5);
+		button:SetWidth(baseWidth - 15 - (category.Level - 1) * 5);
 		button.label:SetFontObject("GameFontHighlight");
 		button.background:SetVertexColor(0.6, 0.6, 0.6);
 	else -- Top level category has no parent
-		button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 10);
+		button:SetWidth(baseWidth - 10);
 		button.label:SetFontObject("GameFontNormal");
 		button.background:SetVertexColor(1, 1, 1);
 	end
@@ -280,7 +279,7 @@ local function Select(self, category, quick)
 	while not shown do
 		for _, button in next, container.buttons do
 			if button.Category == category and math.ceil(button:GetBottom()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
-				KrowiAF_AchievementCategoryButton_OnClick(button, nil, nil, quick);
+				button:Click(nil, nil, quick);
 				shown = button;
 				break;
 			end

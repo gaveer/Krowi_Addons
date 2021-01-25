@@ -64,14 +64,8 @@ function KrowiAF_AchievementsFrame_OnEvent(self, event, ...) -- Used in Template
 	local addonName = ...;
 	diagnostics.Trace("KrowiAF_AchievementsFrame_OnEvent - " .. event .. " - " .. addonName);
 
-<<<<<<< HEAD
-	if ( event == "ADDON_LOADED" ) then
-		local addonName = ...;
-		if ( addonName and addonName == "Overachiever" ) then -- Issue #19: Fix
-=======
 	if event == "ADDON_LOADED" then
 		if addonName and addonName == "Overachiever" then
->>>>>>> 9.0.2.9.0
 			Overachiever.UI_HookAchButtons(self.Container.buttons, self.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
             diagnostics.Debug("Overachiever compatibility enabled");
 		end

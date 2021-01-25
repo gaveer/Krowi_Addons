@@ -253,6 +253,11 @@ local function NewButton(frame, name, direction)
 	return button
 end
 
+local function FrameOnHide(self)
+	self.flash:Stop()
+	self.shine:Hide()
+end
+
 local function NewFrame(data)
 	local frame = CreateFrame('Frame', 'Tutorials'..lib.numFrames, UIParent, 'ButtonFrameTemplate')
 	frame.portrait:SetPoint('TOPLEFT', data.icon and -4 or -3, data.icon and 6 or 5)
@@ -277,10 +282,7 @@ local function NewFrame(data)
 	frame:SetClampedToScreen(true)
 	frame:EnableMouse(true)
 	frame:SetToplevel(true)
-	frame:SetScript('OnHide', function()
-		frame.flash:Stop()
-		frame.shine:Hide()
-	end)
+	frame:SetScript('OnHide', FrameOnHide);
 
 	frame.editbox = CreateFrame('EditBox', nil, frame, 'InputBoxTemplate')
 	frame.editbox:SetHeight(20)
@@ -311,7 +313,6 @@ local function NewFrame(data)
 	lib.numFrames = lib.numFrames + 1
 	return frame
 end
-
 
 --[[ User API ]]--
 
@@ -362,4 +363,13 @@ end
 
 function lib:IsTutorialOpen()
 	return lib.frames[self]:IsShown();
+end
+
+function lib:CloseButtonHook(func)
+	if lib.frames[self] then
+		lib.frames[self]:SetScript("OnHide", function(self)
+			FrameOnHide(self);
+			func();
+		end);
+	end
 end

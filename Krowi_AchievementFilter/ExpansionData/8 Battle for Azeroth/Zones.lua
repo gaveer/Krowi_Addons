@@ -6,7 +6,7 @@ zones.KulTiras = {}; -- 8.0
 function zones.KulTiras.Load(catZones)
     local zone = catZones:AddCatMapInfo(876);
     zone:AddCatQuests():AddAchievementIDs(12582, 12997, 12593, 12891, 13512, 13384, 12510, 13467, 13925, 13517, 13283, 13251, 13144, 13060, 13048, 14161, 14157);
-    -- 13488 (comes after 13251) is a hidden achievement identical to 13251, not addint it for now
+    -- 13488 (comes after 13251) is a hidden achievement identical to 13251, not adding it for now
     zone:AddCatExploration():AddAchievementIDs(12989, 13250, 14160, 14159, 14158, 13061, 12482, 13036, 13029, 13027, 14730);
     zone:AddCatPvP():AddAchievementIDs(13429, 13317, 12572, 12571, 12573, 12605, 12856, 12857, 12858, 12860, 12863, 12859, 12861, 12862, 13387, 13402, 13623);
     zone:AddCatReputation():AddAchievementIDs(12947, 12955, 12956);
@@ -169,7 +169,8 @@ zones.NazjatarA = {}; -- 8.2
 function zones.NazjatarA.Load(catZones)
     local zone = catZones:AddCatMapInfo(1355);
     zone:AddCatQuests():AddAchievementIDs(13710);
-    zone:AddCatExploration():AddAchievementIDs(13712, 13635, 13690, 13691, 13692, 13743, 13753, 13758, 13744, 13754, 13759, 13745, 13755, 13760, 13704, 13762, 13711, 13765, 13549, 13722, 13699, 13713, 13707, 13763, 13764, 13836, 13638);
+    zone:AddCatExploration():AddAchievementIDs(13712, 13635, 13690, 13691, 13692, 13743, 13753, 13758, 13744, 13754, 13759, 13745, 13755, 13760, 13704, 13762, 13711, 13765, 13549, 13722,
+                                                13699, 13713, 13707, 13763, 13764, 13836, 13638);
     zone:AddCatPvP():AddAchievementIDs(13569, 13568, 13720);
     zone:AddCatReputation():AddAchievementIDs(13558);
 end
@@ -178,7 +179,8 @@ zones.NazjatarH = {}; -- 8.2
 function zones.NazjatarH.Load(catZones)
     local zone = catZones:AddCatMapInfo(1355);
     zone:AddCatQuests():AddAchievementIDs(13709);
-    zone:AddCatExploration():AddAchievementIDs(13712, 13635, 13690, 13691, 13692, 13746, 13749, 13750, 13747, 13751, 13756, 13748, 13752, 13757, 13645, 13761, 13711, 13765, 13549, 13722, 13699, 13713, 13707, 13763, 13764, 13836, 13638);
+    zone:AddCatExploration():AddAchievementIDs(13712, 13635, 13690, 13691, 13692, 13746, 13749, 13750, 13747, 13751, 13756, 13748, 13752, 13757, 13645, 13761, 13711, 13765, 13549, 13722,
+                                                13699, 13713, 13707, 13763, 13764, 13836, 13638);
     zone:AddCatPvP():AddAchievementIDs(13569, 13568, 13720);
     zone:AddCatReputation():AddAchievementIDs(13559);
 end

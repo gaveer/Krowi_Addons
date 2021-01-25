@@ -3,7 +3,7 @@ local _, addon = ...; -- Global addon namespace
 addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
 local tutorials = addon.Tutorials; -- Local tutorial object
 
-tutorials.FeaturesTutorialPages = 3;
+tutorials.FeaturesTutorialPages = 5;
 tutorials.FeaturesTutorial = "Krowi_AchievementFilter_FeaturesTutorial";
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
@@ -20,13 +20,14 @@ local function OpenAchievementFrameAtTabButton1()
     end
     AchievementFrame_HideSearchPreview();
     addon.GUI.TabButton1:Select();
+    addon.ResetView(addon.GUI.CategoriesFrame, addon.GUI.SearchBoxFrame, addon.GUI.FullSearchResultsFrame);
 end
 
 function tutorials.Load()
     tutorials.RegisterTutorial(tutorials.FeaturesTutorial, {
         savedvariable = addon.Options.db,
         key = "FeaturesTutorial",
-        title = AF_NAME .. " - " .. AF_VERSION_BUILD,
+        title = AF_NAME .. " - " .. AF_BUILD_VERSION,
 		width = 512 + 20,
         {   -- 1
             imageHeight = 128,
@@ -65,10 +66,29 @@ function tutorials.Load()
             shineLeft = -7,
             shineRight = 7,
         },
+        {   -- 4
+            imageHeight = 256,
+            image = media .. "SearchPreview",
+            text = GetTitle(addon.L["FT_SEARCHPREVIEW_TITLE"]) ..
+                            addon.L["FT_SEARCHPREVIEW_DESC"],
+            shineTop = 30,
+            shineBottom = -140,
+            shineLeft = -11,
+            shineRight = 11,
+        },
+        {   -- 5
+            imageHeight = 256,
+            image = media .. "FullSearch",
+            text = GetTitle(addon.L["FT_FULLSEARCH_TITLE"]) ..
+                            addon.L["FT_FULLSEARCH_DESC"],
+            shineTop = 8,
+            shineBottom = -1,
+            shineLeft = -12,
+            shineRight = 13,
+        },
         onShow = function(self, i)
             if i == 1 then
                 OpenAchievementFrameAtTabButton1();
-                addon.ResetView(addon.GUI.CategoriesFrame);
                 self[i].shine = addon.GUI.TabButton1;
             elseif i == 2 then
                 OpenAchievementFrameAtTabButton1();
@@ -77,11 +97,25 @@ function tutorials.Load()
             elseif i == 3 then
                 OpenAchievementFrameAtTabButton1();
                 local achievementsButtons = addon.GUI.AchievementsFrame.Container.buttons;
-                addon.GUI.AchievementsFrame:SelectAchievement(1283, "RightButton", true, achievementsButtons[1], 88, 34);
+                addon.GUI.AchievementsFrame:SelectAchievementFromID(1283, "RightButton", true, achievementsButtons[1], 88, 34);
                 self[i].shine = DropDownList1;
+            elseif i == 4 then
+                OpenAchievementFrameAtTabButton1();
+                addon.GUI.SearchBoxFrame:SetText("cla");
+                self[i].shine = addon.GUI.SearchPreviewFrame;
+            elseif i == 5 then
+                OpenAchievementFrameAtTabButton1();
+                addon.GUI.SearchBoxFrame:SetText("cla");
+                addon.GUI.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
+                addon.GUI.SearchPreviewFrame.ShowFullSearchResultsButton:Click();
+                addon.GUI.SearchBoxFrame:SetText("");
+                self[i].shine = addon.GUI.FullSearchResultsFrame;
             end
         end
     });
+    tutorials.CloseButtonHook(tutorials.FeaturesTutorial, function()
+        addon.ResetView(addon.GUI.CategoriesFrame, addon.GUI.SearchBoxFrame, addon.GUI.FullSearchResultsFrame);
+    end);
 end
 
 function tutorials.HookTrigger(hook)

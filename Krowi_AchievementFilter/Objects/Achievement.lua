@@ -25,7 +25,11 @@ function achievement:AddRCMenExtra(rcMenExtra)
 end
 
 function achievement:GetCategory()
-    diagnostics.Trace("achievement:GetCategory");
+    diagnostics.Trace("achievement:GetCategory" .. " - " .. tostring(self.Category));
+
+    if self.Category then
+        return self.Category;
+    end
 
     for _, category in next, addon.Categories do
         if category.Achievements ~= nil then

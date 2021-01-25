@@ -19,6 +19,8 @@ L["C_SCENARIOS"] = "Scenarios";
 -- Options
 L["O_INFO"] = "Info";
 L["O_VERSION"] = "Version";
+L["O_BUILD"] = "Build";
+L["O_AUTHOR"] = "Author";
 L["O_ICON"] = "Icon";
 L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
@@ -54,3 +56,7 @@ L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click
                                 "- Link to %s\n" ..
                                 "- Link to %s if the achievement is related to Pet Battles and %s has relevant information about it\n" ..
                                 "- Shortcut to %s if tactics for the achievement are available (%s is %s)";
+L["FT_SEARCHPREVIEW_TITLE"] = "Searching";
+L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way with the only difference that it will only search achievements in this tab.";
+L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
+L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";

@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.MistsOfPandaria.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.MistsOfPandaria.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.MistsOfPandaria.Dungeons = {};
+local dungeons = addon.MistsOfPandaria.Dungeons;
 
 dungeons.TempleOfTheJadeSerpent = {} -- 5.0
 function dungeons.TempleOfTheJadeSerpent.Load(catDungeons)

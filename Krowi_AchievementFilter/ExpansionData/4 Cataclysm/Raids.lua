@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Cataclysm.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.Cataclysm.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Cataclysm.Raids = {};
+local raids = addon.Cataclysm.Raids;
 
 raids.BaradinHold = {}; -- 4.0
 function raids.BaradinHold.Load(catRaids)

@@ -18,8 +18,8 @@ end
 function fullSearchResult.OnClick(self, fullSearchResultsFrame, achievementsFrame)
     diagnostics.Trace("fullSearchResult.OnClick");
 
-    if self.AchievementID then
+    if self.Achievement then
         fullSearchResultsFrame:Hide();
-        achievementsFrame:SelectAchievement(self.AchievementID, nil, nil, true);
+        achievementsFrame:SelectAchievement(self.Achievement, nil, true);
 	end
 end

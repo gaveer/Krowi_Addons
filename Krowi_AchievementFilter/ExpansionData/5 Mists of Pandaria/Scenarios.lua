@@ -1,7 +1,8 @@
-local _, addon = ...; -- Global addon namespace
-addon.MistsOfPandaria.Scenarios = {}; -- Global expansion Raids namespace
-local scenarios = addon.MistsOfPandaria.Scenarios; -- Local expansion Raids namespace
-local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local achievementCategory = addon.Objects.AchievementCategory;
+addon.MistsOfPandaria.Scenarios = {};
+local scenarios = addon.MistsOfPandaria.Scenarios;
 
 -- Scenarios have to be looked up through the GetLFGDungeonInfo since these have no Encounter Journal info.
 
@@ -136,7 +137,7 @@ function scenarios.TheSecretsOfRagefire.Load(catDungeons)
 end
 
 function scenarios.Load(expansion)
-    local catScenarios = expansion:AddCategory(achCat:New(addon.L["C_SCENARIOS"]));
+    local catScenarios = expansion:AddCategory(achievementCategory:New(addon.L["C_SCENARIOS"]));
     catScenarios:AddAchievementIDs(7385); -- Overarching achievements
 
     scenarios.ABrewingStorm.Load(catScenarios);

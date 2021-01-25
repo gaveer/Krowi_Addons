@@ -1,13 +1,12 @@
-local _, addon = ...; -- Global addon namespace
-addon.Data = {}; -- Global expansion data
-local data = addon.Data; -- Local expansion data
-addon.Categories = {}; -- Global categories
-addon.Achievements = {}; -- Global categories
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+addon.Data = {};
+local data = addon.Data;
+addon.Categories = {};
+addon.Achievements = {};
 
 local function ConvertToAchievementFrameCategory(datum, categories, achievements)
-    -- diagnostics.Trace("ConvertToAchievementFrameCategory"); -- Generates a lot of messages
-
     if datum.Level == 0 then
         datum.NotHidden = true;
     end
@@ -31,9 +30,7 @@ local function ConvertToAchievementFrameCategory(datum, categories, achievements
     end
 end
 
-function data:GetList()
-    diagnostics.Trace("data:GetCategoryList");
-
+function data:GetLists()
     local categories = {};
     local achievements = {};
 
@@ -43,7 +40,7 @@ function data:GetList()
         end
     end
 
-    -- diagnostics.DebugTable(achievements, 1000);
+    diagnostics.Debug("     - Lists loaded");
 
     return categories, achievements;
 end

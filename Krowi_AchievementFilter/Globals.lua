@@ -8,9 +8,9 @@ AF_COLOR_GREEN = "|CFF00FF00";
 AF_COLOR_END = "|R";
 
 AF_NAME = "Krowi's " .. AF_COLOR_ADDON .. "Achievement Filter" .. AF_COLOR_END;
-AF_VERSION = GetBuildInfo();
-AF_BUILD = GetAddOnMetadata(addonName, "Version");
-AF_VERSION_BUILD = AF_VERSION .. "." .. AF_BUILD;
+AF_BUILD = GetBuildInfo();
+AF_VERSION = GetAddOnMetadata(addonName, "Version");
+AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
 
 function addon.IsIATLoaded()
     return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") > "3.14.1";

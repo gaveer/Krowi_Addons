@@ -1,12 +1,15 @@
-local _, addon = ...; -- Global addon namespace
-addon.TheBurningCrusade = {}; -- Global expansion namespace
-local theBurningCrusade = addon.TheBurningCrusade; -- Local expansion namespace
-local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local achievementCategory = addon.Objects.AchievementCategory;
+addon.TheBurningCrusade = {};
+local theBurningCrusade = addon.TheBurningCrusade;
 
 function theBurningCrusade.Load()
-    local expansion = achCat:NewCatInfo(14865);
+    local expansion = achievementCategory:NewCatInfo(14865);
     tinsert(addon.Data, expansion);
 
     theBurningCrusade.Dungeons.Load(expansion);
     theBurningCrusade.Raids.Load(expansion);
+    diagnostics.Debug("     - The Burning Crusade loaded");
 end

@@ -35,6 +35,7 @@
     <Script file="ExpansionData\8 Battle for Azeroth\Zones.lua" />
     <Script file="ExpansionData\8 Battle for Azeroth\Dungeons.lua" />
     <Script file="ExpansionData\8 Battle for Azeroth\Raids.lua" />
+    <Script file="ExpansionData\8 Battle for Azeroth\PetBattles.lua" />
 
     <Script file="ExpansionData\9 Shadowlands\Expansion.lua" />
     <Script file="ExpansionData\9 Shadowlands\Zones.lua" />

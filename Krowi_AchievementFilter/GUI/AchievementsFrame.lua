@@ -393,14 +393,14 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 end
 
 -- [[ API ]] --
-function achievementsFrame:SelectAchievement(id, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
 	diagnostics.Trace("achievementsFrame:SelectAchievement");
 
 	if mouseButton == nil then
 		mouseButton = "LeftButton";
 	end
 
-	local achievement = addon.GetAchievement(id);
+	-- local achievement = addon.GetAchievement(id);
 	local category = achievement:GetCategory();
 
 	self.CategoriesFrame:SelectCategory(category);
@@ -413,7 +413,7 @@ function achievementsFrame:SelectAchievement(id, mouseButton, ignoreModifiers, a
 
 	while not shown do
 		for _, button in next, container.buttons do
-			if button.id == id and math.ceil(button:GetTop()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
+			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
 				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
 				shown = button;
 				break;
@@ -421,16 +421,10 @@ function achievementsFrame:SelectAchievement(id, mouseButton, ignoreModifiers, a
 		end
 
 		local _, maxVal = scrollBar:GetMinMaxValues();
-		if shown then -- Something's wrong here with calculating the scrollbar value
-			diagnostics.Debug(maxVal); -- 1672 - 1662
-			diagnostics.Debug(scrollBar:GetValue()); -- 252 - 168
-			diagnostics.Debug(container:GetTop()); -- 1061 - 1061
-			diagnostics.Debug(shown:GetTop()); -- 531 - 541
+		if shown then
 			local newHeight = scrollBar:GetValue() + container:GetTop() - shown:GetTop();
-			diagnostics.Debug(newHeight); -- 782 - 688
 			newHeight = min(newHeight, maxVal);
 			scrollBar:SetValue(newHeight);
-			diagnostics.Debug(scrollBar:GetValue()); -- 756 - 672
 		else
 			local scrollValue = scrollBar:GetValue();
 			if scrollValue == maxVal or scrollValue == previousScrollValue then
@@ -441,4 +435,11 @@ function achievementsFrame:SelectAchievement(id, mouseButton, ignoreModifiers, a
 			end
 		end
 	end
+end
+
+function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+	diagnostics.Trace("achievementsFrame:SelectAchievementFromID");
+
+	local achievement = addon.GetAchievement(id);
+	self:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end

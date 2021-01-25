@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Shadowlands.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.Shadowlands.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Shadowlands.Dungeons = {};
+local dungeons = addon.Shadowlands.Dungeons;
 
 dungeons.TheNecroticWake = {}; -- 9.0
 function dungeons.TheNecroticWake.Load(catDungeons)

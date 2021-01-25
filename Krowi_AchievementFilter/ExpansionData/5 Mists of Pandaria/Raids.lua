@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.MistsOfPandaria.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.MistsOfPandaria.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.MistsOfPandaria.Raids = {};
+local raids = addon.MistsOfPandaria.Raids;
 
 raids.MogushanVaults = {}; -- 5.0
 function raids.MogushanVaults.Load(catRaids)

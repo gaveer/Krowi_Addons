@@ -3,11 +3,20 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- TBD
+
+## [9.0.2.9.0]
+### Added
 - Searching achievements in the new tab
+- Options related to the new search feature
+- Tutorials explaining the search feature
+- Battle for Azeroth Pet Battles (18 achievements)
+- Missing Shadowlands Pet Battles (1 achievements)
 
 ### Changed
 - Moved some code build frames into Templates.xml
 - Refactored functions to select categories and achievements (needed for searching achievements)
+- Moved code into libraries for other addons
 
 ## [9.0.2.8.1] - 2021-01-16
 ### Fixed
@@ -97,6 +106,7 @@ All notable changes to this project will be documented in this file.
 - The need for almost all localization
 
 [Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.2.9.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
 [9.0.2.8.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3170618
 [9.0.2.8.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3169416
 [v9.0.2.7.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3163711

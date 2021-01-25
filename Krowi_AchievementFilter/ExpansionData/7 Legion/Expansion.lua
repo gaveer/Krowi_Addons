@@ -1,12 +1,15 @@
-local _, addon = ...; -- Global addon namespace
-addon.Legion = {}; -- Global expansion namespace
-local legion = addon.Legion; -- Local expansion namespace
-local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local achievementCategory = addon.Objects.AchievementCategory;
+addon.Legion = {};
+local legion = addon.Legion;
 
 function legion.Load()
-    local expansion = achCat:NewCatInfo(15258);
+    local expansion = achievementCategory:NewCatInfo(15258);
     tinsert(addon.Data, expansion);
 
     legion.Dungeons.Load(expansion);
     legion.Raids.Load(expansion);
+    diagnostics.Debug("     - Legion loaded");
 end

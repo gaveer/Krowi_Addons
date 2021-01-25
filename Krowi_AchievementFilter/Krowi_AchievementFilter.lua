@@ -1,3 +1,4 @@
+-- [[ Namespaces ]] --
 local addonName, addon = ...;
 
 addon.L = LibStub("AceLocale-3.0"):GetLocale(addonName);
@@ -25,11 +26,11 @@ function loadHelper:OnEvent(event, arg1)
             addon.GUI.Search.Load(addon.GUI.AchievementsFrame);
 
             addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame, addon.GUI.AchievementsFrame, addon.GUI.SearchBoxFrame);
-            
+
             addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
-            -- HookDebug();
         end
     elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
+        addon.Diagnostics.Debug("- Loading expansion data");
         addon.Classic.Load();
         addon.TheBurningCrusade.Load();
         addon.WrathOfTheLichKing.Load();
@@ -39,18 +40,8 @@ function loadHelper:OnEvent(event, arg1)
         addon.Legion.Load();
         addon.BattleForAzeroth.Load();
         addon.Shadowlands.Load();
-        addon.Categories, addon.Achievements = addon.Data:GetList(); -- This freezes the game if we load it outside of the loading screen
-
-        -- TEST = {};
-        -- if addon.Diagnostics.DebugEnabled() then
-        --     for _, category in next, addon.Categories do
-        --         local parentName = "";
-        --         if category.Parent ~= nil then
-        --             parentName = category.Parent.Name;
-        --         end
-        --         tinsert(TEST, {parentName, category.Name});
-        --     end
-        -- end
+        addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
+        addon.Diagnostics.Debug("- Expansion data loaded");
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
@@ -59,20 +50,28 @@ function addon.InGuildView()
     return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
 end
 
-function addon.ResetView(categoriesFrame)
+function addon.ResetView(categoriesFrame, searchBoxFrame, fullSearchResultsFrame)
     addon.Diagnostics.Trace("addon.ResetView");
 
-	local scrollBar = categoriesFrame.Container.ScrollBar;
-	local button = categoriesFrame.Container.buttons[1];
+    if categoriesFrame.ID then -- Checking ID is to know if the frame is initialised or not
+        local scrollBar = categoriesFrame.Container.ScrollBar;
+        local button = categoriesFrame.Container.buttons[1];
 
-	scrollBar:SetValue(0);
+        scrollBar:SetValue(0);
 
-    button:Click(); -- Select the 1st category
-    if button.Category.NotCollapsed then -- Make sure it's collapsed
-        button:Click();
+        button:Click(); -- Select the 1st category
+        if button.Category.NotCollapsed then -- Make sure it's collapsed
+            button:Click();
+        end
     end
 
-    -- This should also clear the search box text but this is for later, not needed right now
+    if searchBoxFrame and searchBoxFrame.ID then
+        searchBoxFrame:SetText("");
+    end
+
+    if fullSearchResultsFrame and fullSearchResultsFrame.ID then
+        fullSearchResultsFrame:Hide();
+    end
 end
 
 function addon.GetCategoryInfoTitle(categoryID)

@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.WrathOfTheLichKing.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.WrathOfTheLichKing.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.WrathOfTheLichKing.Raids = {};
+local raids = addon.WrathOfTheLichKing.Raids;
 
 raids.VaultOfArchavon = {}; -- 3.0
 function raids.VaultOfArchavon.Load(catRaids)

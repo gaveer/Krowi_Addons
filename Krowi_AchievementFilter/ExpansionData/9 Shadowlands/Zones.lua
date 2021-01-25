@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Shadowlands.Zones = {}; -- Global expansion Zones namespace
-local zones = addon.Shadowlands.Zones; -- Local expansion Zones namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Shadowlands.Zones = {};
+local zones = addon.Shadowlands.Zones;
 
 -- zones.Oribos = {}; -- 9.0
 -- function zones.Oribos.Load(catZones)

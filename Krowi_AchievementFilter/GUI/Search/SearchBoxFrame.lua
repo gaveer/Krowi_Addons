@@ -59,6 +59,10 @@ end
 function searchBoxFrame:OnHide()
 	diagnostics.Trace("searchBoxFrame:OnHide");
 
+	if not AchievementFrame:IsShown() then
+		self:SetText("");
+	end
+	self.SearchPreviewFrame:Hide();
 	self.FullSearchResults:Hide();
 end
 
@@ -82,7 +86,22 @@ function searchBoxFrame:OnEnterPressed()
 	end
 end
 
-Results = {};
+local function GetSearchResults(text)
+    diagnostics.Trace("GetSearchResults");
+
+	local results = {};
+
+    for _, achievement in next, addon.Achievements do
+        local achievementID = achievement.ID;
+        local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = GetAchievementInfo(achievementID);
+        if string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower()) then
+			tinsert(results, achievement);
+			addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
+        end
+    end
+
+    return results;
+end
 
 function searchBoxFrame:OnTextChanged()
     diagnostics.Trace("searchBox:OnTextChanged");
@@ -90,8 +109,8 @@ function searchBoxFrame:OnTextChanged()
 	SearchBoxTemplate_OnTextChanged(self);
 
 	if strlen(self:GetText()) >= addon.Options.db.SearchBox.MinimumCharactersToSearch then
-		SetAchievementSearchStringTest(self); -- Must be some asynchronous function when called in Blizzard_AchievementUI
-		self:ShowSearchPreviewResults(Results);
+		self.Results = GetSearchResults(self:GetText());
+		self:ShowSearchPreviewResults();
 	else
 		self.SearchPreviewFrame:Hide();
 	end
@@ -111,7 +130,7 @@ function searchBoxFrame:OnEditFocusGained()
 	self.FullSearchResults:Hide();
 
 	if self:HasFocus() and strlen(self:GetText()) >= addon.Options.db.SearchBox.MinimumCharactersToSearch then
-		self:ShowSearchPreviewResults(Results);
+		self:ShowSearchPreviewResults();
 	else
 		self.SearchPreviewFrame:Hide();
 	end
@@ -121,15 +140,16 @@ function searchBoxFrame:OnKeyDown(key)
 	diagnostics.Trace("searchBoxFrame:OnKeyDown");
 
 	if key == "UP" then
-		self.SearchPreviewFrame:SelectPrevious(GetNumFilteredAchievementsTest());
+		self.SearchPreviewFrame:SelectPrevious(#self.Results);
 	elseif key == "DOWN" then
-		self.SearchPreviewFrame:SelectNext(GetNumFilteredAchievementsTest());
+		self.SearchPreviewFrame:SelectNext(#self.Results);
 	end
 end
 
-function searchBoxFrame:ShowSearchPreviewResults(results)
+function searchBoxFrame:ShowSearchPreviewResults()
     diagnostics.Trace("searchBoxFrame:ShowSearchPreviewResults");
 
+	local results = self.Results;
 	local numResults = #results;
 	if numResults > 0 then
 		self.SearchPreviewFrame.Buttons[1]:Enter();
@@ -144,7 +164,8 @@ function searchBoxFrame:ShowSearchPreviewResults(results)
 			local _, name, _, _, _, _, _, _, _, icon, _, _, _, _ = GetAchievementInfo(achievementID);
 			buttons[i].Name:SetText(name);
 			buttons[i].Icon:SetTexture(icon);
-			buttons[i].AchievementID = achievementID;
+			-- buttons[i].AchievementID = achievementID;
+			buttons[i].Achievement = results[i];
 			buttons[i]:Show();
 			lastButton = buttons[i];
 		else
@@ -166,33 +187,4 @@ function searchBoxFrame:ShowSearchPreviewResults(results)
 	else
 		searchPreviewContainer:Hide();
 	end
-end
-
-function SetAchievementSearchStringTest(self)
-    diagnostics.Trace("SetAchievementSearchStringTest");
-
-	local text = self:GetText();
-	local results = {};
-
-    for _, achievement in next, addon.Achievements do
-        local achievementID = achievement.ID;
-        local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = GetAchievementInfo(achievementID);
-        if string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower()) then
-			tinsert(results, achievement);
-			addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
-        end
-    end
-
-	self.Results = results;
-	Results = results;
-
-    return true;
-end
-
-function GetNumFilteredAchievementsTest()
-	return #Results;
-end
-
-function GetFilteredAchievementIDTest(index)
-	return Results[index].ID;
 end

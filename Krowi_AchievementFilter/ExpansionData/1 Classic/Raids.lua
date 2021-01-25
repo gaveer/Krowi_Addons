@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Classic.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.Classic.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Classic.Raids = {};
+local raids = addon.Classic.Raids;
 
 raids.MoltenCore = {}; -- 1.1
 function raids.MoltenCore.Load(catRaids)

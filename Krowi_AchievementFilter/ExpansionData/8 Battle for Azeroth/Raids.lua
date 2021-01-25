@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.BattleForAzeroth.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.BattleForAzeroth.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.BattleForAzeroth.Raids = {};
+local raids = addon.BattleForAzeroth.Raids;
 
 raids.Uldir = {}; -- 8.0
 function raids.Uldir.Load(catRaids)

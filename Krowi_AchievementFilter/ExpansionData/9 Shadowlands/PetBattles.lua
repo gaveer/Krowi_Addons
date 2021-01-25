@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Shadowlands.PetBattles = {}; -- Global expansion Pet Battles namespace
-local petBattles = addon.Shadowlands.PetBattles; -- Local expansion Pet Battles namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Shadowlands.PetBattles = {};
+local petBattles = addon.Shadowlands.PetBattles;
 
 local familyID = {
     Aquatic = 1338,
@@ -86,7 +87,7 @@ end
 
 function petBattles.Load(expansion)
     local catZones = expansion:AddCatPetBattles();
-    catZones:AddAchievementIDs(14867);
+    catZones:AddAchievementIDs(14867, 14625);
     local achievement = catZones:AddAchievementFull(14868); -- Aquatic Apparitions
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Aquatic))
     achievement = catZones:AddAchievementFull(14869); -- Beast Busters

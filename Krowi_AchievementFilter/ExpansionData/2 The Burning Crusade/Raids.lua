@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.TheBurningCrusade.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.TheBurningCrusade.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.TheBurningCrusade.Raids = {};
+local raids = addon.TheBurningCrusade.Raids;
 
 raids.Karazhan = {}; -- 2.0
 function raids.Karazhan.Load(catRaids)

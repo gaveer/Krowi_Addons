@@ -46,8 +46,8 @@ end
 function searchPreviewButton.OnClick(self, searchPreviewFrame, searchBoxFrame, achievementsFrame)
     diagnostics.Trace("searchPreviewButton.OnClick");
 
-    if self.AchievementID then
-        achievementsFrame:SelectAchievement(self.AchievementID, nil, nil, true);
+    if self.Achievement then
+        achievementsFrame:SelectAchievement(self.Achievement, nil, true);
         searchPreviewFrame:Hide();
         searchBoxFrame.SearchPreviewFrame:Hide();
         searchBoxFrame:ClearFocus();

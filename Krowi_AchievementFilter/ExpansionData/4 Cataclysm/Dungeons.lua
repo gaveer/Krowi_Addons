@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Cataclysm.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.Cataclysm.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Cataclysm.Dungeons = {};
+local dungeons = addon.Cataclysm.Dungeons;
 
 dungeons.BlackrockCaverns = {} -- 4.0
 function dungeons.BlackrockCaverns.Load(catDungeons)

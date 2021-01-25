@@ -16,6 +16,39 @@ local familyID = {
     Undead = 832
 }
 
+local function GetBoZaKTLinks(achievementID)
+    local linkBase = "https://www.wow-petguide.com/index.php?m=ShadowlandsWQs&s=";
+    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+
+    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 712); -- Crab People
+    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 707); -- This Little Piggy Has Sharp Tusks
+    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. 706); -- Automated Chaos
+    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. 711); -- Night Horrors
+    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. 710); -- Rogue Azerite
+    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. 709); -- What's the Buzz?
+    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. 705); -- Sea Creatures Are Weird
+    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. 704); -- Captured Evil
+    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. 701); -- Not So Bad Down Here
+    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. 702); -- Unbreakable
+    item:AddChildCritExtLinkFull(achievementID, 11, linkBase .. 699); -- That's a Big Carcass
+    item:AddChildCritExtLinkFull(achievementID, 12, linkBase .. 700); -- Strange Looking Dogs
+    item:AddChildCritExtLinkFull(achievementID, 13, linkBase .. 720); -- Marshdwellers
+    item:AddChildCritExtLinkFull(achievementID, 14, linkBase .. 719); -- Crawg in the Bog
+    item:AddChildCritExtLinkFull(achievementID, 15, linkBase .. 722); -- Pack Leader
+    item:AddChildCritExtLinkFull(achievementID, 16, linkBase .. 721); -- Accidental Dread
+    item:AddChildCritExtLinkFull(achievementID, 17, linkBase .. 724); -- Keeyo's Champions of Vol'dun
+    item:AddChildCritExtLinkFull(achievementID, 18, linkBase .. 727); -- Snakes on a Terrace
+    item:AddChildCritExtLinkFull(achievementID, 19, linkBase .. 726); -- What Do You Mean, Mind Controlling Plants?
+    item:AddChildCritExtLinkFull(achievementID, 20, linkBase .. 725); -- Desert Survivors
+    item:AddChildCritExtLinkFull(achievementID, 21, linkBase .. 717); -- Critters are Friends, Not Food
+    item:AddChildCritExtLinkFull(achievementID, 22, linkBase .. 714); -- Add More to the Collection
+    item:AddChildCritExtLinkFull(achievementID, 23, linkBase .. 716); -- You've Never Seen Jammer Upset
+    item:AddChildCritExtLinkFull(achievementID, 24, linkBase .. 715); -- Small Beginnings
+    
+
+    return item;
+end
+
 local function GetFBLinks(achievementID, firstCriteriaXuFuID, headerName)
     if headerName == nil then
         headerName = addon.L["XUFU"];
@@ -75,47 +108,49 @@ local function GetFBMetaLinks(achievementID)
     return item;
 end
 
-local function GetMMoMLinks(achievementID, firstCriteriaXuFuID)
+local function GetMMoMLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=Mechagon&s=";
     local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
-    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Gnomefeaster
-    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 4); -- Sputtertube
-    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. firstCriteriaXuFuID + 1); -- Goldenbot XD
-    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. firstCriteriaXuFuID + 5); -- Creakclank
-    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. firstCriteriaXuFuID + 2); -- CK-9 Micro-Oppression Unit
-    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. firstCriteriaXuFuID + 6); -- Unit 35
-    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. firstCriteriaXuFuID + 3); -- Unit 6
-    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. firstCriteriaXuFuID + 19); -- Unit 17
+    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1095); -- Gnomefeaster
+    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1099); -- Sputtertube
+    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. 1096); -- Goldenbot XD
+    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. 1100); -- Creakclank
+    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. 1097); -- CK-9 Micro-Oppression Unit
+    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. 1101); -- Unit 35
+    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. 1098); -- Unit 6
+    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. 1114); -- Unit 17
 
     return item;
 end
 
-local function GetNNoNLinks(achievementID, firstCriteriaXuFuID)
+local function GetNNoNLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=Nazjatar&s=";
     local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
-    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Prince Wiggletail
-    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 6); -- Chomp
-    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. firstCriteriaXuFuID + 1); -- Silence
-    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. firstCriteriaXuFuID + 7); -- Shadowspike Lurker
-    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. firstCriteriaXuFuID + 2); -- Pearlhusk Crawler
-    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. firstCriteriaXuFuID + 8); -- Elderspawn of Nalaada
-    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. firstCriteriaXuFuID + 3); -- Ravenous Scalespawn
-    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. firstCriteriaXuFuID + 9); -- Mindshackle
-    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. firstCriteriaXuFuID + 4); -- Kelpstone
-    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. firstCriteriaXuFuID + 10); -- Voltgorger
-    item:AddChildCritExtLinkFull(achievementID, 11, linkBase .. firstCriteriaXuFuID + 5); -- Frenzied Knifefang
-    item:AddChildCritExtLinkFull(achievementID, 12, linkBase .. firstCriteriaXuFuID + 11); -- Giant Opaline Conch
+    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1102); -- Prince Wiggletail
+    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1108); -- Chomp
+    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. 1103); -- Silence
+    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. 1109); -- Shadowspike Lurker
+    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. 1104); -- Pearlhusk Crawler
+    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. 1110); -- Elderspawn of Nalaada
+    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. 1105); -- Ravenous Scalespawn
+    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. 1111); -- Mindshackle
+    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. 1106); -- Kelpstone
+    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. 1112); -- Voltgorger
+    item:AddChildCritExtLinkFull(achievementID, 11, linkBase .. 1107); -- Frenzied Knifefang
+    item:AddChildCritExtLinkFull(achievementID, 12, linkBase .. 1113); -- Giant Opaline Conch
 
     return item;
 end
 
 function petBattles.Load(expansion)
     local catZones = expansion:AddCatPetBattles();
-    catZones:AddAchievementIDs(12930, 13693, 13694, 13715, 12936);
+    catZones:AddAchievementIDs(12930, 13693, 13694, 13715);
+    local achievement = catZones:AddAchievementFull(12936);
+    achievement:AddRCMenExtra(GetBoZaKTLinks(achievement.ID));
     local achievement = catZones:AddAchievementFull(13280); -- Hobbyist Aquarist
-    achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Aquatic))
+    achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Aquatic));
     achievement = catZones:AddAchievementFull(13270); -- Beast Mode
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Beast));
     achievement = catZones:AddAchievementFull(13271); -- Critters With Huge Teeth
@@ -137,7 +172,7 @@ function petBattles.Load(expansion)
     achievement = catZones:AddAchievementFull(13279); -- Family Battler
     achievement:AddRCMenExtra(GetFBMetaLinks(achievement.ID));
     achievement = catZones:AddAchievementFull(13625); -- Mighty Minions of Mechagon
-    achievement:AddRCMenExtra(GetMMoMLinks(achievement.ID, 1095));
+    achievement:AddRCMenExtra(GetMMoMLinks(achievement.ID));
     achievement = catZones:AddAchievementFull(13626); -- Nautical Nuisances of Nazjatar
-    achievement:AddRCMenExtra(GetNNoNLinks(achievement.ID, 1102));
+    achievement:AddRCMenExtra(GetNNoNLinks(achievement.ID));
 end

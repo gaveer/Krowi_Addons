@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 - Options related to the new search feature
 - Tutorials explaining the search feature
 - Battle for Azeroth Pet Battles (18 achievements)
-- Missing Shadowlands Pet Battles (1 achievements)
+- Missing Shadowlands Pet Battles (1 achievement)
 
 ### Changed
 - Moved some code build frames into Templates.xml

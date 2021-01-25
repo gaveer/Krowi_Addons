@@ -16,6 +16,30 @@ local familyID = {
     Undead = 1263
 }
 
+local function GetBitSLinks(achievementID)
+    local linkBase = "https://www.wow-petguide.com/index.php?m=ShadowlandsWQs&s=";
+    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+
+    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1197); -- Ardenweald's Tricksters
+    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1196); -- Airborne Defense Force
+    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. 1195); -- Lurking In The Shadows
+    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. 1194); -- Natural Defenders
+    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. 1192); -- The Mind Games of Addius
+    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. 1191); -- Eyegor's Special Friends
+    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. 1190); -- Resilient Survivors
+    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. 1189); -- Ashes Will Fall
+    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. 1187); -- Failed Experiment
+    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. 1186); -- Uncomfortably Undercover
+    item:AddChildCritExtLinkFull(achievementID, 11, linkBase .. 1185); -- Extra Pieces
+    item:AddChildCritExtLinkFull(achievementID, 12, linkBase .. 1184); -- Mighty Minions of Maldraxxus
+    item:AddChildCritExtLinkFull(achievementID, 13, linkBase .. 1182); -- Thenia's Loyal Companions
+    item:AddChildCritExtLinkFull(achievementID, 14, linkBase .. 1180); -- Micro Defense Force
+    item:AddChildCritExtLinkFull(achievementID, 15, linkBase .. 1179); -- Cliffs of Bastion
+    item:AddChildCritExtLinkFull(achievementID, 16, linkBase .. 1181); -- Mega Bite
+
+    return item;
+end
+
 local function GetFELinks(achievementID, firstCriteriaXuFuID, headerName)
     if headerName == nil then
         headerName = addon.L["XUFU"];
@@ -67,29 +91,31 @@ local function GetFEMetaLinks(achievementID)
     return item;
 end
 
-local function GetAAotALinks(achievementID, firstCriteriaXuFuID)
+local function GetAAotALinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=AbhorrentAdversaries&s=";
     local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
-    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Crystalsnap
-    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. firstCriteriaXuFuID + 7); -- Briarpaw
-    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. firstCriteriaXuFuID + 8); -- Chittermaw
-    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. firstCriteriaXuFuID + 9); -- Mistwing
-    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. firstCriteriaXuFuID + 5); -- Sewer Creeper
-    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. firstCriteriaXuFuID + 6); -- The Countess
-    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. firstCriteriaXuFuID + 1); -- Digallo
-    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. firstCriteriaXuFuID + 3); -- Gelatinous
-    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. firstCriteriaXuFuID + 2); -- Kostos
-    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. firstCriteriaXuFuID + 4); -- Glurp
+    item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1199); -- Crystalsnap
+    item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1206); -- Briarpaw
+    item:AddChildCritExtLinkFull(achievementID, 3, linkBase .. 1207); -- Chittermaw
+    item:AddChildCritExtLinkFull(achievementID, 4, linkBase .. 1208); -- Mistwing
+    item:AddChildCritExtLinkFull(achievementID, 5, linkBase .. 1204); -- Sewer Creeper
+    item:AddChildCritExtLinkFull(achievementID, 6, linkBase .. 1205); -- The Countess
+    item:AddChildCritExtLinkFull(achievementID, 7, linkBase .. 1200); -- Digallo
+    item:AddChildCritExtLinkFull(achievementID, 8, linkBase .. 1202); -- Gelatinous
+    item:AddChildCritExtLinkFull(achievementID, 9, linkBase .. 1201); -- Kostos
+    item:AddChildCritExtLinkFull(achievementID, 10, linkBase .. 1203); -- Glurp
 
     return item;
 end
 
 function petBattles.Load(expansion)
     local catZones = expansion:AddCatPetBattles();
-    catZones:AddAchievementIDs(14867, 14625);
-    local achievement = catZones:AddAchievementFull(14868); -- Aquatic Apparitions
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Aquatic))
+    catZones:AddAchievementIDs(14867);
+    local achievement = catZones:AddAchievementFull(14625);
+    achievement:AddRCMenExtra(GetBitSLinks(achievement.ID));
+    achievement = catZones:AddAchievementFull(14868); -- Aquatic Apparitions
+    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Aquatic));
     achievement = catZones:AddAchievementFull(14869); -- Beast Busters
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Beast));
     achievement = catZones:AddAchievementFull(14870); -- Creepy Critters
@@ -111,5 +137,5 @@ function petBattles.Load(expansion)
     achievement = catZones:AddAchievementFull(14879); -- Family Exorcist
     achievement:AddRCMenExtra(GetFEMetaLinks(achievement.ID));
     achievement = catZones:AddAchievementFull(14881); -- Abhorrent Adverdaries of the Afterlife
-    achievement:AddRCMenExtra(GetAAotALinks(achievement.ID, 1199));
+    achievement:AddRCMenExtra(GetAAotALinks(achievement.ID));
 end

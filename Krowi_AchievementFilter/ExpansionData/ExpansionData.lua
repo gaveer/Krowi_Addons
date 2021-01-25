@@ -1,12 +1,12 @@
-local _, addon = ...; -- Global addon namespace
-addon.Data = {}; -- Global expansion data
-local data = addon.Data; -- Local expansion data
-addon.Categories = {}; -- Global categories
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+addon.Data = {};
+local data = addon.Data;
+addon.Categories = {};
+addon.Achievements = {};
 
-local function ConvertToAchievementFrameCategory(datum, categories)
-    -- diagnostics.Trace("ConvertToAchievementFrameCategory"); -- Generates a lot of messages
-
+local function ConvertToAchievementFrameCategory(datum, categories, achievements)
     if datum.Level == 0 then
         datum.NotHidden = true;
     end
@@ -16,25 +16,31 @@ local function ConvertToAchievementFrameCategory(datum, categories)
     end
 
     tinsert(categories, datum);
+
+    if datum.Achievements ~= nil then
+        for _, achievement in next, datum.Achievements do
+            tinsert(achievements, achievement);
+        end
+    end
+
     if datum.Children ~= nil then
-        for i, child in next, datum.Children do
-            ConvertToAchievementFrameCategory(child, categories);
+        for _, child in next, datum.Children do
+            ConvertToAchievementFrameCategory(child, categories, achievements);
         end
     end
 end
 
-function data:GetCategoryList()
-    diagnostics.Trace("data:GetCategoryList");
-
-    -- diagnostics.DebugTable(self);
-
+function data:GetLists()
     local categories = {};
+    local achievements = {};
+
     for _, datum in next, self do
         if type(datum) == "table" then
-            ConvertToAchievementFrameCategory(datum, categories);
+            ConvertToAchievementFrameCategory(datum, categories, achievements);
         end
     end
 
-    -- diagnostics.DebugTable(categories);
-    return categories;
+    diagnostics.Debug("     - Lists loaded");
+
+    return categories, achievements;
 end

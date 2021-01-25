@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.WrathOfTheLichKing.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.WrathOfTheLichKing.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.WrathOfTheLichKing.Raids = {};
+local raids = addon.WrathOfTheLichKing.Raids;
 
 raids.VaultOfArchavon = {}; -- 3.0
 function raids.VaultOfArchavon.Load(catRaids)
@@ -73,7 +74,7 @@ function raids.Ulduar.Load(catRaids)
     raid:AddAchievementIDs(12297, 12302, 12309, 12310, 12311, 12399); -- Defeat the bosses in X
     
     local version = raid:AddCatDifficulty10();
-    version.Name = version.Name .. " (" .. GetCategoryInfo(15234) .. ")";
+    version.Name = version.Name .. " (" .. addon.GetCategoryInfoTitle(15234) .. ")";
     version:AddAchievementIDsUnobtainable(3097, 2907, 2905, 2911, 2909, 2913, 2914, 2915, 3056, -- Flame Leviathan
                                             2925, 2927, 2930, -- Ignis the Furnace
                                             2919, 2923, -- Razorscale
@@ -92,7 +93,7 @@ function raids.Ulduar.Load(catRaids)
     version:AddAchievementIDsUnobtainable(2886, 2888, 2890, 2892, 2894, 3036); -- Defeat the bosses in X
 
     version = raid:AddCatDifficulty25();
-    version.Name = version.Name .. " (" .. GetCategoryInfo(15234) .. ")";
+    version.Name = version.Name .. " (" .. addon.GetCategoryInfoTitle(15234) .. ")";
     version:AddAchievementIDsUnobtainable(3098, 2908, 2906, 2912, 2910, 2918, 2916, 2917, 3057, -- Flame Leviathan
                                             2926, 2928, 2929, -- Ignis the Furnace
                                             2921, 2924, -- Razorscale
@@ -156,7 +157,7 @@ end
 
 raids.TheRubySanctum = {}; -- 3.3
 function raids.TheRubySanctum.Load(catRaids)
-    local raid = catRaids:AddCatInstanceInfo(758);
+    local raid = catRaids:AddCatInstanceInfo(761); -- Issue #20: Broken, Fix
     local version = raid:AddCatDifficulty10();
     -- version:AddAchievementIDsWithIATLink(); -- No Glory available
     version:AddAchievementIDs(4817, 4818); -- Defeat the bosses in X

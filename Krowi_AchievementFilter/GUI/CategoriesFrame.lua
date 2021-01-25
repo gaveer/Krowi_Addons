@@ -1,89 +1,73 @@
-local _, addon = ...; -- Global addon namespace
-local gui = addon.GUI; -- Local GUI namespace
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local gui = addon.GUI;
+gui.CategoriesFrame = {};
+local categoriesFrame = gui.CategoriesFrame;
 
-gui.CategoriesFrame = {}; -- Global categories frame class
-local categoriesFrame = gui.CategoriesFrame; -- Local categories frame class
-categoriesFrame.ID = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
+local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
+-- [[ Constructors ]] --
 categoriesFrame.__index = categoriesFrame; -- Used to support OOP like code
-
 function categoriesFrame:New(categories, achievementsFrame)
     diagnostics.Trace("categoriesFrame:New");
 
-	local self = {};
-    setmetatable(self, categoriesFrame);
+	-- Increment ID
+	numFrames = numFrames + 1;
 
-	self.Categories = categories;
-	self.SelectedCategory = self.Categories[1];
-	self.AchievementsFrame = achievementsFrame;
-	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
+	-- Create frame
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. numFrames, AchievementFrame, "KrowiAF_CategoriesFrame_Template");
+	addon.InjectMetatable(frame, categoriesFrame);
 
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "AchivementGoldBorderBackdrop");
-	frame:SetPoint("TOPLEFT", AchievementFrameCategories);
-	frame:SetPoint("BOTTOM", AchievementFrameCategories);
-	self.Frame = frame;
-	frame.Parent = self;
+	-- Set properties
+	frame.ID = numFrames;
+	frame.Categories = categories;
+	frame.SelectedCategory = frame.Categories[1];
+	frame.AchievementsFrame = achievementsFrame;
+	frame.AchievementsFrame.CategoriesFrame = frame; -- Needed for API
 
-	local container = CreateFrame("ScrollFrame", "$parentContainer", frame, "HybridScrollFrameTemplate");
-	container:SetPoint("TOPLEFT", 0, -5);
-	container:SetPoint("BOTTOMRIGHT", 0, 5);
-	frame.Container = container;
-	container.ParentFrame = frame;
-
-	local scrollBar = CreateFrame("Slider", "$parentScrollBar", container, "HybridScrollBarTemplate");
-	scrollBar:SetPoint("TOPLEFT", container, "TOPRIGHT", 1, -14);
-	scrollBar:SetPoint("BOTTOMLEFT", container, "BOTTOMRIGHT", 1, 12);
-	container.ScrollBar = scrollBar;
-	scrollBar.ParentContainer = container;
-
-	frame:SetScript("OnShow", self.OnShow);
-	frame:SetScript("OnHide", self.OnHide);
+	-- Set parents
+	frame.Container.ParentFrame = frame;
+	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
 	frame:Hide();
 
-	scrollBar.Show = function()
-		self.Show_Hide(frame, scrollBar, getmetatable(scrollBar).__index.Show, 175, 22, 30);
+	frame.Container.ScrollBar.Show = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Show, 175, 22, 30);
 	end;
-	scrollBar.Hide = function()
-		self.Show_Hide(frame, scrollBar, getmetatable(scrollBar).__index.Hide, 197, 0, 30);
+	frame.Container.ScrollBar.Hide = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Hide, 197, 0, 30);
 	end;
 
-	scrollBar.trackBG:Show();
-	container.update = function(container)
+	frame.Container.ScrollBar.trackBG:Show();
+	frame.Container.update = function(container)
 		diagnostics.Trace("container.update");
-		container.ParentFrame.Parent:Update(); -- Issue #12: Broken
+		container.ParentFrame:Update(); -- Issue #12: Broken
 	end
 
-	HybridScrollFrame_CreateButtons(container, "KrowiAF_AchievementCategoryTemplate", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
-	-- Doing post Load things
-	for _, button in next, container.buttons do
-		button.ParentContainer = container;
-	end
+	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementCategoryButton_Template", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
+	gui.CategoryButton.PostLoadButtons(frame);
 
-	-- self:Update();
-
-	return self;
+	return frame;
 end
 
-function categoriesFrame:OnShow()
-	diagnostics.Trace("categoriesFrame.OnShow");
+function KrowiAF_CategoriesFrame_OnShow(self) -- Used in Templates - KrowiAF_CategoriesFrame_Template
+	diagnostics.Trace("KrowiAF_CategoriesFrame_OnShow");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Hide(); -- Issue #11: Fix
 	AchievementFrameFilterDropDown:Hide();
 	AchievementFrameHeaderLeftDDLInset:Hide();
 	AchievementFrame.searchBox:Hide();
-	AchievementFrameHeaderRightDDLInset:Hide();
 
 	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
 
-	self.Parent:Update();
+	self:Update();
 end
 
-function categoriesFrame:OnHide()
-	diagnostics.Trace("categoriesFrame:OnHide");
+function KrowiAF_CategoriesFrame_OnHide() -- Used in Templates - KrowiAF_CategoriesFrame_Template
+	diagnostics.Trace("KrowiAF_CategoriesFrame_OnHide");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Show(); -- Issue #11: Fix
@@ -96,7 +80,6 @@ function categoriesFrame:OnHide()
 		AchievementFrameHeaderLeftDDLInset:Hide();
 	end
 	AchievementFrame.searchBox:Show();
-	AchievementFrameHeaderRightDDLInset:Show();
 end
 
 function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
@@ -108,12 +91,12 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 
 	frame:SetWidth(categoriesWidth);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
-	frame.Parent.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
+	frame.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
 	AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
 	AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
 	AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
 	for _, button in next, frame.Container.buttons do
-		frame.Parent.DisplayButton(button, button.Category);
+		frame.DisplayButton(button, button.Category, frame:GetWidth());
 	end
 	func(scrollBar);
 end
@@ -150,7 +133,7 @@ end
 function categoriesFrame:Update()
 	diagnostics.Trace("categoriesFrame:Update");
 
-	local scrollFrame = self.Frame.Container;
+	local scrollFrame = self.Container;
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
 
@@ -171,7 +154,7 @@ function categoriesFrame:Update()
 		category = displayCategories[i + offset];
 		displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		if category then
-			self.DisplayButton(buttons[i], category);
+			self.DisplayButton(buttons[i], category, self:GetWidth());
 			if category == self.SelectedCategory then
 				buttons[i]:LockHighlight();
 			else
@@ -187,7 +170,7 @@ function categoriesFrame:Update()
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
-function categoriesFrame.DisplayButton(button, category)
+function categoriesFrame.DisplayButton(button, category, baseWidth)
 	-- local name = "";
 	-- if category then
 	-- 	name = category.Name;
@@ -200,13 +183,15 @@ function categoriesFrame.DisplayButton(button, category)
 		return;
 	end
 
+	baseWidth = baseWidth or 197;
+
 	button:Show();
 	if category.Parent then -- Not top level category has parent
-		button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 15 - (category.Level - 1) * 5);
+		button:SetWidth(baseWidth - 15 - (category.Level - 1) * 5);
 		button.label:SetFontObject("GameFontHighlight");
 		button.background:SetVertexColor(0.6, 0.6, 0.6);
 	else -- Top level category has no parent
-		button:SetWidth(button.ParentContainer.ParentFrame:GetWidth() - 10);
+		button:SetWidth(baseWidth - 10);
 		button.label:SetFontObject("GameFontNormal");
 		button.background:SetVertexColor(1, 1, 1);
 	end
@@ -231,7 +216,7 @@ function categoriesFrame.DisplayButton(button, category)
 	button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
 end
 
-function categoriesFrame:SelectButton(button)
+function categoriesFrame:SelectButton(button, quick)
 	diagnostics.Trace("categoriesFrame:SelectButton");
 
 	if button.Category.IsSelected and button.Category.NotCollapsed then -- Collapse selected categories -- Issue #12: Fix
@@ -258,7 +243,7 @@ function categoriesFrame:SelectButton(button)
 		button.Category.NotCollapsed = true;
 	end
 
-	local buttons = self.Frame.Container.buttons;
+	local buttons = self.Container.buttons;
 	for _, button in next, buttons do
 		if button.Category then
 			button.Category.IsSelected = nil; -- Issue #12: Fix
@@ -272,10 +257,60 @@ function categoriesFrame:SelectButton(button)
 		return
 	end
 
-	AchievementFrame_ShowSubFrame(self.Frame, self.AchievementsFrame);
-	self.SelectedCategory = button.Category;
-	self.AchievementsFrame.Parent:SetSelectedCategory(self.SelectedCategory);
-	self.AchievementsFrame.Parent:ClearSelection();
-	self.AchievementsFrame.Container.ScrollBar:SetValue(0);
-	self.AchievementsFrame.Parent:Update();
+	if not quick then -- Skip refreshing achievements if we're still busy selecting the correct category
+		self.SelectedCategory = button.Category;
+		self.AchievementsFrame:ClearSelection();
+		self.AchievementsFrame.Container.ScrollBar:SetValue(0);
+		self.AchievementsFrame:Update();
+	end
+end
+
+-- [[ API ]] --
+local function Select(self, category, quick)
+	diagnostics.Trace("Select");
+
+	local shown = false;
+	local previousScrollValue;
+
+	local container = self.Container;
+	local child = container.ScrollChild;
+	local scrollBar = container.ScrollBar;
+
+	while not shown do
+		for _, button in next, container.buttons do
+			if button.Category == category and math.ceil(button:GetBottom()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
+				button:Click(nil, nil, quick);
+				shown = button;
+				break;
+			end
+		end
+
+		local _, maxVal = scrollBar:GetMinMaxValues();
+		if shown then
+			local newHeight = scrollBar:GetValue() + container:GetBottom() - shown:GetBottom();
+			newHeight = math.ceil(newHeight / scrollBar:GetValueStep()) * scrollBar:GetValueStep();
+			newHeight = min(newHeight, maxVal);
+			scrollBar:SetValue(newHeight);
+		else
+			local scrollValue = scrollBar:GetValue();
+			if scrollValue == maxVal or scrollValue == previousScrollValue then
+				return;
+			else
+				previousScrollValue = scrollValue;
+				HybridScrollFrame_OnMouseWheel(container, -1);
+			end
+		end
+	end
+end
+
+function categoriesFrame:SelectCategory(category)
+	diagnostics.Trace("categoriesFrame:SelectCategory");
+
+	local categoriesTree = category:GetTree();
+
+	addon.ResetView(self);
+
+	for i, cat in next, categoriesTree do
+		Select(self, cat, i ~= #categoriesTree);
+	end
 end

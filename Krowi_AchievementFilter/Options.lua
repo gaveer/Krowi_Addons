@@ -11,6 +11,10 @@ local defaults = {
         CategoriesFrameWidthOffset = 0,
         Minimap = {
             hide = true
+        },
+        SearchBox = {
+            MinimumCharactersToSearch = 3,
+            NumberOfSearchPreviews = 5
         }
     }
 }
@@ -18,7 +22,7 @@ local defaults = {
 local function CreatePanel()
     local options = {
         name = AF_NAME,
-        handler = addon,
+        -- handler = addon,
         type = 'group',
         args = {
             Info = {
@@ -28,20 +32,36 @@ local function CreatePanel()
                 order = 1,
                 args = {
                     version = {
-                        name = addon.L["O_VERSION"] .. ": " .. AF_VERSION_BUILD,
+                        name = AF_COLOR_YELLOW .. addon.L["O_VERSION"] .. ": " .. AF_COLOR_END .. AF_VERSION,
                         type = "description",
-                        order = 1,
+                        width = "normal",
+                        fontSize = "medium",
+                        order = 1.1,
+                    },
+                    build = {
+                        name = AF_COLOR_YELLOW .. addon.L["O_BUILD"] .. ": " .. AF_COLOR_END .. AF_BUILD,
+                        type = "description",
+                        width = "normal",
+                        fontSize = "medium",
+                        order = 1.2,
                     },
                     openTutorial = {
                         name = "Help",
                         type = "execute",
-                        order = 2,
+                        order = 1.3,
                         func = function()
                             InterfaceOptionsFrame:Hide();
                             addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
                             addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
                         end
-                    }
+                    },
+                    author = {
+                        name = AF_COLOR_YELLOW .. addon.L["O_AUTHOR"] .. ": " .. AF_COLOR_END .. "Krowi",
+                        type = "description",
+                        width = "normal",
+                        fontSize = "medium",
+                        order = 2.1,
+                    },
                 },
             },
             Icon = {
@@ -83,11 +103,41 @@ local function CreatePanel()
                         max = 100,
                         step = 1,
                         width = "normal",
-                        order = 1,
+                        order = 1.1,
                         get = function () return addon.Options.db.CategoriesFrameWidthOffset; end,
                         set = function(_, value)
                             addon.Options.db.CategoriesFrameWidthOffset = value;
                             print(addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+                        end,
+                    },
+                    minimumCharactersToSearch = {
+                        name = addon.L["O_MIN_CHAR_TO_SEARCH"],
+                        desc = addon.L["O_MIN_CHAR_TO_SEARCH_DESC"],
+                        type = "range",
+                        min = 1,
+                        max = 10,
+                        step = 1,
+                        width = "normal",
+                        order = 1.2,
+                        get = function () return addon.Options.db.SearchBox.MinimumCharactersToSearch; end,
+                        set = function(_, value)
+                            addon.Options.db.SearchBox.MinimumCharactersToSearch = value;
+                            print(addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
+                        end,
+                    },
+                    numberOfSearchPreviews = {
+                        name = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
+                        desc = addon.L["O_NUM_OF_SEARCH_PREVIEWS_DESC"],
+                        type = "range",
+                        min = 1,
+                        max = 17,
+                        step = 1,
+                        width = "normal",
+                        order = 1.3,
+                        get = function () return addon.Options.db.SearchBox.NumberOfSearchPreviews; end,
+                        set = function(_, value)
+                            addon.Options.db.SearchBox.NumberOfSearchPreviews = value;
+                            print(addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
                         end,
                     }
                 }
@@ -103,7 +153,7 @@ local function CreatePanel()
                         desc = addon.L["O_ENABLE_DEBUG_INFO_DESC"],
                         type = "toggle",
                         width = "full",
-                        order = 1,
+                        order = 1.1,
                         get = function () return addon.Options.db.EnableDebugInfo; end,
                         set = function()
                             addon.Options.db.EnableDebugInfo = not addon.Options.db.EnableDebugInfo;
@@ -115,7 +165,7 @@ local function CreatePanel()
                         desc = addon.L["O_ENABLE_TRACE_INFO_DESC"],
                         type = "toggle",
                         width = "full",
-                        order = 2,
+                        order = 2.1,
                         get = function () return addon.Options.db.EnableTraceInfo; end,
                         set = function()
                             addon.Options.db.EnableTraceInfo = not addon.Options.db.EnableTraceInfo;
@@ -143,6 +193,8 @@ function options.Load()
     diagnostics.Debug("- Options loaded");
     diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
     diagnostics.Debug("     - " .. addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+    diagnostics.Debug("     - " .. addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
+    diagnostics.Debug("     - " .. addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
     diagnostics.Debug("     - " .. addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
     diagnostics.Debug("     - " .. addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
 end

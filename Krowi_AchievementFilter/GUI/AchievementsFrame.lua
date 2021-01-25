@@ -1,111 +1,87 @@
-local _, addon = ...; -- Global addon namespace
-local gui = addon.GUI; -- Local GUI namespace
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
-gui.AchievementsFrame = {}; -- Global achievements frame class
-local achievementsFrame = gui.AchievementsFrame; -- Local achievements frame class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local gui = addon.GUI;
+gui.AchievementsFrame = {};
+local achievementsFrame = gui.AchievementsFrame;
 
+local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
+
+-- [[ Constructors ]] --
 achievementsFrame.__index = achievementsFrame; -- Used to support OOP like code
-
 function achievementsFrame:New()
     diagnostics.Trace("achievementsFrame:New");
 
-	local self = {};
-	setmetatable(self, achievementsFrame);
+	-- Increment ID
+	numFrames = numFrames + 1;
 
-	self.SelectedCategory = nil;
-	self.SelectedAchievement = nil; -- Issue #6: Fix
-	self.UIFontHeight = nil;
-
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements", AchievementFrame);
+	-- Create frame
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements" .. numFrames, AchievementFrame, "KrowiAF_AchievementsFrame_Template");
 	frame:SetWidth(504 - addon.Options.db.CategoriesFrameWidthOffset);
-	frame:SetPoint("TOPLEFT", AchievementFrameCategories, "TOPRIGHT", 22, 0);
-	frame:SetPoint("BOTTOM", AchievementFrameCategories);
-	self.Frame = frame;
-	frame.Parent = self;
+	addon.InjectMetatable(frame, achievementsFrame);
 
-	local frameBackground = frame:CreateTexture("$parentBackground", "BACKGROUND");
-	frameBackground:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementBackground");
-	frameBackground:SetPoint("TOPLEFT", frame, "TOPLEFT", 3, -3);
-	frameBackground:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -3, 3);
-	frameBackground:SetTexCoord(0, 1, 0, 0.5);
+	-- Set properties
+	frame.ID = numFrames;
+	frame.SelectedAchievement = nil; -- Issue #6: Fix
+	frame.UIFontHeight = nil;
 
-	local frameArtwork = frame:CreateTexture(nil, "ARTWORK");
-	frameArtwork:SetAllPoints(frameBackground);
-	frameArtwork:SetColorTexture(0, 0, 0, 0.75);
-
-	local container = CreateFrame("ScrollFrame", "$parentContainer", frame, "HybridScrollFrameTemplate");
-	container:SetPoint("TOPLEFT", 4, -3);
-	container:SetPoint("BOTTOMRIGHT", 0, 5);
-	frame.Container = container;
-	container.ParentFrame = frame;
-
-	local scrollBar = CreateFrame("Slider", "$parentScrollBar", container, "HybridScrollBarTemplate");
-	scrollBar:SetPoint("TOPLEFT", container, "TOPRIGHT", 1, -16);
-	scrollBar:SetPoint("BOTTOMLEFT", container, "BOTTOMRIGHT", 1, 12);
-	container.ScrollBar = scrollBar;
-	scrollBar.ParentContainer = container;
-
-	local frameBorder = CreateFrame("Frame", nil, frame, "AchivementGoldBorderBackdrop");
-	frameBorder:SetAllPoints(frame);
+	-- Set parents
+	frame.Container.ParentFrame = frame;
+	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
 	frame:RegisterEvent("ADDON_LOADED");
-	frame:SetScript("OnEvent", self.OnEvent);
-	frame:SetScript("OnShow", self.OnShow);
 
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
 	frame:Hide();
 
-	scrollBar.Show = function()
-		self.Show_Hide(frame, scrollBar, getmetatable(scrollBar).__index.Show, 504, 8);
+	frame.Container.ScrollBar.Show = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Show, 504, 8);
 	end;
-	scrollBar.Hide = function()
-		self.Show_Hide(frame, scrollBar, getmetatable(scrollBar).__index.Hide, 530, 8);
+	frame.Container.ScrollBar.Hide = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Hide, 530, 8);
 	end;
 
-	scrollBar.trackBG:Show();
-	container.update = function(container)
-		container.ParentFrame.Parent:Update();
+	frame.Container.ScrollBar.trackBG:Show();
+	frame.Container.update = function(container)
+		container.ParentFrame:Update();
 	end
 
-	HybridScrollFrame_CreateButtons(container, "KrowiAF_AchievementTemplate", 0, -2);
-	-- Doing post Load things
-	for _, button in next, container.buttons do
-		button.ParentContainer = container;
-		button:RegisterForClicks("LeftButtonUp", "RightButtonUp");
-
-		if not self.UIFontHeight then
-			local _, fontHeight = button.description:GetFont();
-			self.UIFontHeight = fontHeight;
-		end
-	end
+	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementButton_Template", 0, -2);
+	gui.AchievementButton.PostLoadButtons(frame);
 
 	hooksecurefunc("AchievementFrameAchievements_ForceUpdate", function()
-		self:ForceUpdate();
+		frame:ForceUpdate();
 	end); -- Issue #3: Fix
 
 	if Overachiever then
-		Overachiever.UI_HookAchButtons(self.Frame.Container.buttons, self.Frame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
+		Overachiever.UI_HookAchButtons(frame.Container.buttons, frame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
 	end
 
-	return self;
+	return frame;
 end
 
-function achievementsFrame.OnEvent(self, event, ...)
+function KrowiAF_AchievementsFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementsFrame_Template
 	local addonName = ...;
-	diagnostics.Trace("achievementsFrame.OnEvent - " .. event .. " - " .. addonName);
+	diagnostics.Trace("KrowiAF_AchievementsFrame_OnEvent - " .. event .. " - " .. addonName);
 
+<<<<<<< HEAD
 	if ( event == "ADDON_LOADED" ) then
 		local addonName = ...;
 		if ( addonName and addonName == "Overachiever" ) then -- Issue #19: Fix
+=======
+	if event == "ADDON_LOADED" then
+		if addonName and addonName == "Overachiever" then
+>>>>>>> 9.0.2.9.0
 			Overachiever.UI_HookAchButtons(self.Container.buttons, self.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
+            diagnostics.Debug("Overachiever compatibility enabled");
 		end
 	end
 end
 
-function achievementsFrame.OnShow(self)
-	diagnostics.Trace("achievementsFrame.OnShow");
+function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
+	diagnostics.Trace("KrowiAF_AchievementsFrame_OnShow");
 
-	self.Parent:Update();
+	self:Update();
 end
 
 function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achievementsButtonOffset)
@@ -118,10 +94,6 @@ function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achie
 		button:SetWidth(achievementsWidth - achievementsButtonOffset);
 	end
 	func(self);
-end
-
-function achievementsFrame:SetSelectedCategory(category)
-	self.SelectedCategory = category;
 end
 
 local function GetFilteredAchievements(category) -- @TODO Gets all achievements right now regardles of the filter - need to look at this on a later time
@@ -152,8 +124,8 @@ end
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
-	local category = self.SelectedCategory;
-	local scrollFrame = self.Frame.Container;
+	local category = self.CategoriesFrame.SelectedCategory;
+	local scrollFrame = self.Container;
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
@@ -194,7 +166,7 @@ end
 function achievementsFrame:ForceUpdate() -- Issue #3: Fix
 	diagnostics.Trace("achievementsFrame:ForceUpdate");
 
-	if not self.Frame:IsShown() then -- Issue #8: Fix, Issue #10 : Broken
+	if not self:IsShown() then -- Issue #8: Fix, Issue #10 : Broken
 		return;
 	end
 
@@ -209,7 +181,7 @@ function achievementsFrame:ForceUpdate() -- Issue #3: Fix
 	AchievementFrameAchievementsObjectives:Hide();
 	AchievementFrameAchievementsObjectives.id = nil;
 
-	local buttons = self.Frame.Container.buttons;
+	local buttons = self.Container.buttons;
 	for _, button in next, buttons do
 		button.id = nil;
 	end
@@ -221,7 +193,7 @@ function achievementsFrame:ClearSelection()
 	diagnostics.Trace("achievementsFrame:ClearSelection");
 
 	AchievementFrameAchievementsObjectives:Hide();
-	for _, button in next, self.Frame.Container.buttons do
+	for _, button in next, self.Container.buttons do
 		button:Collapse();
 		if not button:IsMouseOver() then
 			button.highlight:Hide();
@@ -249,25 +221,25 @@ end
 function achievementsFrame:FindSelection()
 	diagnostics.Trace("achievementsFrame:FindSelection");
 
-	local _, maxVal = self.Frame.Container.ScrollBar:GetMinMaxValues();
-	local scrollHeight = self.Frame.Container:GetHeight();
+	local _, maxVal = self.Container.ScrollBar:GetMinMaxValues();
+	local scrollHeight = self.Container:GetHeight();
 	local newHeight = 0;
-	self.Frame.Container.ScrollBar:SetValue(0);
+	self.Container.ScrollBar:SetValue(0);
 	while true do
-		for _, button in next, self.Frame.Container.buttons do
+		for _, button in next, self.Container.buttons do
 			if button.selected then
-				newHeight = self.Frame.Container.ScrollBar:GetValue() + self.Frame.Container:GetTop() - button:GetTop();
+				newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetTop() - button:GetTop();
 				newHeight = min(newHeight, maxVal);
-				self.Frame.Container.ScrollBar:SetValue(newHeight);
+				self.Container.ScrollBar:SetValue(newHeight);
 				return;
 			end
 		end
-		if not self.Frame.Container.ScrollBar:IsVisible() or self.Frame.Container.ScrollBar:GetValue() == maxVal then
+		if not self.Container.ScrollBar:IsVisible() or self.Container.ScrollBar:GetValue() == maxVal then
 			return;
 		else
 			newHeight = newHeight + scrollHeight;
 			newHeight = min(newHeight, maxVal);
-			self.Frame.Container.ScrollBar:SetValue(newHeight);
+			self.Container.ScrollBar:SetValue(newHeight);
 		end
 	end
 end
@@ -277,7 +249,7 @@ function achievementsFrame:AdjustSelection()
 
 	local selectedButton;
 	-- check if selection is visible
-	for _, button in next, self.Frame.Container.buttons do
+	for _, button in next, self.Container.buttons do
 		if button.selected then
 			selectedButton = button;
 			break;
@@ -288,26 +260,26 @@ function achievementsFrame:AdjustSelection()
 		AchievementFrameAchievements_FindSelection();
 	else
 		local newHeight;
-		if ( selectedButton:GetTop() > self.Frame.Container:GetTop() ) then
-			newHeight = self.Frame.Container.ScrollBar:GetValue() + self.Frame.Container:GetTop() - selectedButton:GetTop();
-		elseif ( selectedButton:GetBottom() < self.Frame.Container:GetBottom() ) then
-			if ( selectedButton:GetHeight() > self.Frame.Container:GetHeight() ) then
-				newHeight = self.Frame.Container.ScrollBar:GetValue() + self.Frame.Container:GetTop() - selectedButton:GetTop();
+		if ( selectedButton:GetTop() > self.Container:GetTop() ) then
+			newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetTop() - selectedButton:GetTop();
+		elseif ( selectedButton:GetBottom() < self.Container:GetBottom() ) then
+			if ( selectedButton:GetHeight() > self.Container:GetHeight() ) then
+				newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetTop() - selectedButton:GetTop();
 			else
-				newHeight = self.Frame.Container.ScrollBar:GetValue() + self.Frame.Container:GetBottom() - selectedButton:GetBottom();
+				newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetBottom() - selectedButton:GetBottom();
 			end
 		end
 		if newHeight then
-			local _, maxVal = self.Frame.Container.ScrollBar:GetMinMaxValues();
+			local _, maxVal = self.Container.ScrollBar:GetMinMaxValues();
 			newHeight = min(newHeight, maxVal);
-			self.Frame.Container.ScrollBar:SetValue(newHeight);
+			self.Container.ScrollBar:SetValue(newHeight);
 		end
 	end
 end
 
 function achievementsFrame:DisplayAchievement(button, achievement, index, selection, renderOffScreen)
 	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievement.ID);
-	diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
+	-- diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
 
 	if not id then
 		button:Hide();
@@ -424,4 +396,56 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 	end
 
 	return id;
+end
+
+-- [[ API ]] --
+function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+	diagnostics.Trace("achievementsFrame:SelectAchievement");
+
+	if mouseButton == nil then
+		mouseButton = "LeftButton";
+	end
+
+	-- local achievement = addon.GetAchievement(id);
+	local category = achievement:GetCategory();
+
+	self.CategoriesFrame:SelectCategory(category);
+
+	local shown = false;
+	local previousScrollValue;
+	local container = self.Container;
+	local child = container.ScrollChild;
+	local scrollBar = container.ScrollBar;
+
+	while not shown do
+		for _, button in next, container.buttons do
+			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
+				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
+				shown = button;
+				break;
+			end
+		end
+
+		local _, maxVal = scrollBar:GetMinMaxValues();
+		if shown then
+			local newHeight = scrollBar:GetValue() + container:GetTop() - shown:GetTop();
+			newHeight = min(newHeight, maxVal);
+			scrollBar:SetValue(newHeight);
+		else
+			local scrollValue = scrollBar:GetValue();
+			if scrollValue == maxVal or scrollValue == previousScrollValue then
+				return;
+			else
+				previousScrollValue = scrollValue;
+				HybridScrollFrame_OnMouseWheel(container, -1);
+			end
+		end
+	end
+end
+
+function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+	diagnostics.Trace("achievementsFrame:SelectAchievementFromID");
+
+	local achievement = addon.GetAchievement(id);
+	self:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end

@@ -1,6 +1,6 @@
 local addonName, addon = ...;
 
-local L = LibStub(addon.Libs.AceLocale):NewLocale(addonName, "enUS", true, true);
+local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "enUS", true, true);
 
 -- Misc.
 L["WOWHEAD"] = "Wowhead";
@@ -19,12 +19,20 @@ L["C_SCENARIOS"] = "Scenarios";
 -- Options
 L["O_INFO"] = "Info";
 L["O_VERSION"] = "Version";
+L["O_BUILD"] = "Build";
+L["O_AUTHOR"] = "Author";
 L["O_ICON"] = "Icon";
 L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
 L["O_LAYOUT"] = "Layout";
 L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
 L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width";
+L["O_MIN_CHAR_TO_SEARCH"] = "Minimum characters to search";
+L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to start searching for achievements matching the query.\n" ..
+                                    "The smaller the number, the greater the impact on the game.";
+L["O_NUM_OF_SEARCH_PREVIEWS"] = "Number of search previews";
+L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n" ..
+                                        AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
 L["O_DEBUG"] = "Debug";
 L["O_ENABLE_DEBUG_INFO"] = "Enable debug info";
 L["O_ENABLE_DEBUG_INFO_DESC"] = "Enable / disable debug info";
@@ -48,3 +56,7 @@ L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click
                                 "- Link to %s\n" ..
                                 "- Link to %s if the achievement is related to Pet Battles and %s has relevant information about it\n" ..
                                 "- Shortcut to %s if tactics for the achievement are available (%s is %s)";
+L["FT_SEARCHPREVIEW_TITLE"] = "Searching";
+L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way with the only difference that it will only search achievements in this tab.";
+L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
+L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";

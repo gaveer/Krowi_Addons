@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Legion.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.Legion.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Legion.Raids = {};
+local raids = addon.Legion.Raids;
 
 raids.EmeraldNightmare = {}; -- 7.0
 function raids.EmeraldNightmare.Load(catRaids)

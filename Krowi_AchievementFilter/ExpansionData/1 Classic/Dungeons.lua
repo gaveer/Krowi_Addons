@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Classic.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.Classic.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Classic.Dungeons = {};
+local dungeons = addon.Classic.Dungeons;
 
 dungeons.Deadmines = {} -- 1.0
 function dungeons.Deadmines.Load(catDungeons)

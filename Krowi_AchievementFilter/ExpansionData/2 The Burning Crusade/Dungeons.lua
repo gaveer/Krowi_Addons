@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.TheBurningCrusade.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.TheBurningCrusade.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.TheBurningCrusade.Dungeons = {};
+local dungeons = addon.TheBurningCrusade.Dungeons;
 
 dungeons.HellfireRamparts = {} -- 2.0
 function dungeons.HellfireRamparts.Load(catDungeons)

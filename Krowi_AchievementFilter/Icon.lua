@@ -20,7 +20,7 @@ local function CreateIcon()
         end,
         OnTooltipShow = function(tt)
             tt:ClearLines();
-            tt:AddDoubleLine(AF_NAME, AF_VERSION_BUILD);
+            tt:AddDoubleLine(AF_NAME, AF_BUILD_VERSION);
             tt:AddLine(" "); -- Empty line
             tt:AddLine(addon.L["I_RIGHT_CLICK"]);
         end,

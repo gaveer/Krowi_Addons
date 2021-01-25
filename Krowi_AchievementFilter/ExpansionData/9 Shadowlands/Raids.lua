@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Shadowlands.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.Shadowlands.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Shadowlands.Raids = {};
+local raids = addon.Shadowlands.Raids;
 
 raids.CastleNathria = {}; -- 9.0
 function raids.CastleNathria.Load(catRaids)

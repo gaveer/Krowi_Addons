@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.WarlordsOfDreanor.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.WarlordsOfDreanor.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.WarlordsOfDreanor.Raids = {};
+local raids = addon.WarlordsOfDreanor.Raids;
 
 raids.Highmaul = {}; -- 6.0
 function raids.Highmaul.Load(catRaids)

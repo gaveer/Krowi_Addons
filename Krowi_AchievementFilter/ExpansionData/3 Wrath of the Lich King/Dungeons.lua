@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.WrathOfTheLichKing.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.WrathOfTheLichKing.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.WrathOfTheLichKing.Dungeons = {};
+local dungeons = addon.WrathOfTheLichKing.Dungeons;
 
 dungeons.UtgardeKeep = {} -- 3.0
 function dungeons.UtgardeKeep.Load(catDungeons)

@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.TheBurningCrusade.Raids = {}; -- Global expansion Raids namespace
-local raids = addon.TheBurningCrusade.Raids; -- Local expansion Raids namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.TheBurningCrusade.Raids = {};
+local raids = addon.TheBurningCrusade.Raids;
 
 raids.Karazhan = {}; -- 2.0
 function raids.Karazhan.Load(catRaids)
@@ -49,7 +50,7 @@ end
 raids.ZulAman = {}; -- 2.3
 function raids.ZulAman.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(77);
-    raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
+    raid.Name = raid.Name .. " (" .. addon.GetCategoryInfoTitle(15234) .. ")";
     raid:AddAchievementIDsUnobtainable(691); -- Defeat the bosses in X (Unobtainable)
     raid:AddAchievementIDsUnobtainable(430); -- Mounts (Unobtainable)
 end

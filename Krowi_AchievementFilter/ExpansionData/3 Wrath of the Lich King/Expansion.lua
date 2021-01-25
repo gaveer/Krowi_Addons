@@ -1,12 +1,15 @@
-local _, addon = ...; -- Global addon namespace
-addon.WrathOfTheLichKing = {}; -- Global expansion namespace
-local wrathOfTheLichKing = addon.WrathOfTheLichKing; -- Local expansion namespace
-local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local achievementCategory = addon.Objects.AchievementCategory;
+addon.WrathOfTheLichKing = {};
+local wrathOfTheLichKing = addon.WrathOfTheLichKing;
 
 function wrathOfTheLichKing.Load()
-    local expansion = achCat:NewCatInfo(14866);
+    local expansion = achievementCategory:NewCatInfo(14866);
     tinsert(addon.Data, expansion);
 
     wrathOfTheLichKing.Dungeons.Load(expansion);
     wrathOfTheLichKing.Raids.Load(expansion);
+    diagnostics.Debug("     - Wrath of the Lich King loaded");
 end

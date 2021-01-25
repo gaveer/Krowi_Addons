@@ -1,12 +1,15 @@
-local _, addon = ...; -- Global addon namespace
-addon.Classic = {}; -- Global expansion namespace
-local classic = addon.Classic; -- Local expansion namespace
-local achCat = addon.Objects.AchievementCategory; -- Local achievement category class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local achievementCategory = addon.Objects.AchievementCategory;
+addon.Classic = {};
+local classic = addon.Classic;
 
 function classic.Load()
-    local expansion = achCat:NewCatInfo(14864);
+    local expansion = achievementCategory:NewCatInfo(14864);
     tinsert(addon.Data, expansion);
 
     classic.Dungeons.Load(expansion);
     classic.Raids.Load(expansion);
+    diagnostics.Debug("     - Classic loaded");
 end

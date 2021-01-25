@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.BattleForAzeroth.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.BattleForAzeroth.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.BattleForAzeroth.Dungeons = {};
+local dungeons = addon.BattleForAzeroth.Dungeons;
 
 dungeons.Freelhold = {}; -- 8.0
 function dungeons.Freelhold.Load(catDungeons)
@@ -12,7 +13,8 @@ end
 dungeons.WaycrestManor = {}; -- 8.0
 function dungeons.WaycrestManor.Load(catDungeons)
     local dungeon = catDungeons:AddCatInstanceInfo(1021);
-    dungeon:AddAchievementIDsWithIATLink(12495, 12490, 12489); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDsWithIATLink(12495, 12490); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementFull(12489).Category = dungeon; -- Glory of the Wartorn Hero
     dungeon:AddAchievementIDs(12483, 12484, 12488); -- Defeat the bosses in X
 end
 
@@ -61,7 +63,8 @@ end
 dungeons.SiegeOfBoralus = {}; -- 8.0
 function dungeons.SiegeOfBoralus.Load(catDungeons)
     local dungeon = catDungeons:AddCatInstanceInfo(1023);
-    dungeon:AddAchievementIDsWithIATLink(12727, 12726, 12489); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementIDsWithIATLink(12727, 12726); -- Glory of the Wartorn Hero
+    dungeon:AddAchievementFull(12489).Category = dungeon; -- Glory of the Wartorn Hero
     dungeon:AddAchievementIDs(12847); -- Defeat the bosses in X
 end
 

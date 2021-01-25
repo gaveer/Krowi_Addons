@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.Legion.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.Legion.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.Legion.Dungeons = {};
+local dungeons = addon.Legion.Dungeons;
 
 dungeons.EyeOfAzshara = {} -- 7.0
 function dungeons.EyeOfAzshara.Load(catDungeons)

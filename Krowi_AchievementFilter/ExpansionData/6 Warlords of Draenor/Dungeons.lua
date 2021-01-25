@@ -1,6 +1,7 @@
-local _, addon = ...; -- Global addon namespace
-addon.WarlordsOfDreanor.Dungeons = {}; -- Global expansion Dungeons namespace
-local dungeons = addon.WarlordsOfDreanor.Dungeons; -- Local expansion Dungeons namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+addon.WarlordsOfDreanor.Dungeons = {};
+local dungeons = addon.WarlordsOfDreanor.Dungeons;
 
 dungeons.BloodmaulSlagMines = {} -- 6.0
 function dungeons.BloodmaulSlagMines.Load(catDungeons)

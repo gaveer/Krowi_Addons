@@ -1,24 +1,43 @@
-local _, addon = ...; -- Global addon namespace
-local objects = addon.Objects; -- Local objects namespace
-objects.Achievement = {}; -- Global achievement class
-local achievement = objects.Achievement; -- Local achievement class
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+local objects = addon.Objects;
+objects.Achievement = {};
+local achievement = objects.Achievement;
 
-achievement.__index = achievement; -- Used to support OOP like code
-
-function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Create a new achievement
+-- [[ Constructors ]] --
+achievement.__index = achievement;
+function achievement:New(id, obtainable, hasWowheadLink, hasIATLink)
     local self = {};
     setmetatable(self, achievement);
+
     self.ID = id or 0;
-    if obtainable == false then -- We only want this variable present if the achievement is not obtainable anymore to reduce memory usage
-        self.NotObtainable = true;
-    end
-    if hasWowheadLink == false then -- We only want this variable present if there is no Wowhead link to reduce memory usage
-        self.HasNoWowheadLink = true;
-    end
+    self.NotObtainable = obtainable == false; -- By inverting this we reduce memory usage because 99% is obtainable
+    self.HasNoWowheadLink = hasWowheadLink == false; -- By inverting this we reduce memory usage because 99% has a Wowhead link
     self.HasIATLink = hasIATLink;
+
     return self;
 end
 
+-- [[ Other ]] --
 function achievement:AddRCMenExtra(rcMenExtra)
     self.RCMenExtra = rcMenExtra;
+end
+
+function achievement:GetCategory()
+    diagnostics.Trace("achievement:GetCategory" .. " - " .. tostring(self.Category));
+
+    if self.Category then
+        return self.Category;
+    end
+
+    for _, category in next, addon.Categories do
+        if category.Achievements ~= nil then
+            for _, achievement in next, category.Achievements do
+                if achievement.ID == self.ID then
+                    return category;
+                end
+            end
+        end
+    end
 end

@@ -3,11 +3,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- TBD
+- Achievement window height can now be changed up to double the original height
 
-## [9.0.2.9.0]
+### Changed
+- Changing the width of the categories now also changes the width of the achievement window instead of making the achievements smaller
+
+### Fixed
+- Issue #21: Selecting the same achievement multiple times during search toggles the selection state
+- Issue #22: Visual bugs
+
+## [9.0.2.9.0] - 2021-01-27
 ### Added
-- Searching achievements in the new tab
+- Searching achievements in the new tab (Feature #17)
 - Options related to the new search feature
 - Tutorials explaining the search feature
 - Battle for Azeroth Pet Battles (18 achievements)
@@ -18,15 +25,18 @@ All notable changes to this project will be documented in this file.
 - Refactored functions to select categories and achievements (needed for searching achievements)
 - Moved code into libraries for other addons
 
+### Fixed
+- Issue #20: The Ruby Sanctum category has the name of Icecrown Citadel under WotLK Raids
+
 ## [9.0.2.8.1] - 2021-01-16
 ### Fixed
 - Issue #19: 'Overachiever' (a nil value)
 
 ## [9.0.2.8.0] - 2021-01-15
 ### Added
-- Battle for Azeroth zones (220+ achievements for Horde and Alliance combined)
+- Battle for Azeroth zones (170+ achievements for either Horde and Alliance)
 - The width of the categories list can be adjusted in options; negative values will narrow it, positive values will widen it
-- Tutorial explaining the features of the addon; showed when opening the new achievement window tab for the first time or when clicking the Help button in Interface -> Addons -> Options
+- Tutorial explaining the features of the addon; showed when opening the new achievement window tab for the first time or when clicking the Help button in Interface -> Addons -> Options (Feature #14)
 
 ### Changed
 - Interface -> Addons -> Options is now handled by Ace3
@@ -59,7 +69,7 @@ All notable changes to this project will be documented in this file.
 
 ## [90002.5.0] - 2020-12-29
 ### Added
-- Shadowlands pet battles
+- Shadowlands pet battles (13 achievements)
 
 ## [90002.4.0] - 2020-12-26
 ### Added
@@ -68,20 +78,23 @@ All notable changes to this project will be documented in this file.
 
 ## [90002.3.0] - 2020-11-27
 ### Added
-- Shadowlands zones
+- Shadowlands zones (93 achievements)
 
 ## [90002.2.0] - 2020-11-23
 ### Added
-- Mists of Pandaria scenarios
+- Mists of Pandaria scenarios (60 achievements)
 
 ### Fixed
 - Issue #8: Toggling achievement tracking does not update the achievement for Blizzard achievement tracking
 
 ## [90002.1.0] - 2020-11-22
 ### Added
-- Classic dungeons and raids
-- The Burning Crusade dungeons and raids
-- Wrath of the Lich King dungeons and raids
+- Classic dungeons (60 achievements)
+- Classic raids (11 achievements)
+- The Burning Crusade dungeons (36 achievements)
+- The Burning Crusade raids (13 achievements)
+- Wrath of the Lich King dungeons (80 achievements)
+- Wrath of the Lich King raids (366 achievements, including 136 legacy Ulduar achievements)
 
 ### Fixed
 - Issue #1: Overachiever_Tabs overwrites AchievementFrame_UpdateTabs breaking our hook
@@ -92,15 +105,21 @@ All notable changes to this project will be documented in this file.
 
 ## [90002.0.2 Beta] - 2020-11-20
 ### Added
-- Cataclysm dungeons
-- Mists of Pandaria dungeons
-- Warlords of Draenor dungeons
-- Legion dungeons
+- Cataclysm dungeons (66 achievements)
+- Cataclysm raids (69 achievements)
+- Mists of Pandaria dungeons (94 achievements)
+- Mists of Pandaria raids (117 achievements)
+- Warlords of Draenor dungeons (91 achievements)
+- Warlords of Draenor raids (81 achievements)
+- Legion dungeons (72 achievements)
+- Legion raids (111 achievements)
 
 ## [90002.Beta 0.1] - 2020-11-19
 ### Added
-- Shadowlands raids and dungeons
-- Battle for Azeroth dungeons
+- Battle for Azeroth dungeons (63 achievements)
+- Battle for Azeroth raids (106 achievements)
+- Shadowlands dungeons (50 achievements)
+- Shadowlands raids (26 achievements)
 
 ### Removed
 - The need for almost all localization

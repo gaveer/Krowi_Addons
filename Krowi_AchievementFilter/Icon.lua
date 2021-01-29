@@ -12,7 +12,10 @@ local function CreateIcon()
         icon = "Interface\\Icons\\achievement_dungeon_heroic_gloryoftheraider",
         OnClick = function(self, button)
             diagnostics.Debug("Icon clicked with " .. button);
-            if button == "RightButton" then
+            if button == "LeftButton" then
+                diagnostics.Trace("icon.AchievementFilterLDB.OnClick with LeftButton");
+                addon.OpenAchievementFrameAtTabButton1();
+            elseif button == "RightButton" then
                 diagnostics.Trace("icon.AchievementFilterLDB.OnClick with RightButton");
                 InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
                 InterfaceOptionsFrame_OpenToCategory(AF_NAME);
@@ -22,6 +25,7 @@ local function CreateIcon()
             tt:ClearLines();
             tt:AddDoubleLine(AF_NAME, AF_BUILD_VERSION);
             tt:AddLine(" "); -- Empty line
+            tt:AddLine(addon.L["I_LEFT_CLICK"]);
             tt:AddLine(addon.L["I_RIGHT_CLICK"]);
         end,
     });

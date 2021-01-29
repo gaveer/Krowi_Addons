@@ -17,6 +17,7 @@ L["C_ZONES"] = "Zones";
 L["C_SCENARIOS"] = "Scenarios";
 
 -- Options
+L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
 L["O_INFO"] = "Info";
 L["O_VERSION"] = "Version";
 L["O_BUILD"] = "Build";
@@ -25,14 +26,18 @@ L["O_ICON"] = "Icon";
 L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
 L["O_LAYOUT"] = "Layout";
-L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
-L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width";
+L["O_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
+L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width.\n\n" .. 
+                                            "This value can be changed while the achievement window is open while having the %s tab selected. This will however lag your game.\n\n%s";
+L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] = "Achievement window height offset";
+L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"] = "The height that will be added to or subtracted from the default achievement window height.\n\n" .. 
+                                                "This value can be changed while the achievement window is open while having the %s tab selected. This will however lag your game.\n\n%s";
+L["O_SEARCH"] = "Search";
 L["O_MIN_CHAR_TO_SEARCH"] = "Minimum characters to search";
 L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to start searching for achievements matching the query.\n" ..
                                     "The smaller the number, the greater the impact on the game.";
 L["O_NUM_OF_SEARCH_PREVIEWS"] = "Number of search previews";
-L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n" ..
-                                        AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
+L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n%s";
 L["O_DEBUG"] = "Debug";
 L["O_ENABLE_DEBUG_INFO"] = "Enable debug info";
 L["O_ENABLE_DEBUG_INFO_DESC"] = "Enable / disable debug info";
@@ -40,6 +45,7 @@ L["O_ENABLE_TRACE_INFO"] = "Enable trace info";
 L["O_ENABLE_TRACE_INFO_DESC"] = "Enable / disable trace info";
 
 -- Icon
+L["I_LEFT_CLICK"] = "Left-click " .. AF_COLOR_ADDON .. "to open the Achievement window." .. AF_COLOR_END;
 L["I_RIGHT_CLICK"] = "Right-click " .. AF_COLOR_ADDON .. "for Options." .. AF_COLOR_END;
 
 -- Tutorials

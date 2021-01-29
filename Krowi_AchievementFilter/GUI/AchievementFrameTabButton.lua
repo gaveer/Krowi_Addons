@@ -91,9 +91,13 @@ function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedT
     if clickedTab == thisTabID then -- Our tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -5);
         thisTab.Selected = true;
+        gui.SetAchievementFrameWidth(addon.Options.db.CategoriesFrameWidthOffset);
+        gui.SetAchievementFrameHeight(addon.Options.db.AchievementFrameHeightOffset);
     else -- Another tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -3);
         thisTab.Selected = nil;
+        gui.ResetAchievementFrameWidth();
+        gui.ResetAchievementFrameHeight();
     end
 end
 

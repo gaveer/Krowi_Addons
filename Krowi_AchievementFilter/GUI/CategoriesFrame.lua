@@ -189,11 +189,15 @@ function categoriesFrame.DisplayButton(button, category, baseWidth)
 	if category.Parent then -- Not top level category has parent
 		button:SetWidth(baseWidth - 15 - (category.Level - 1) * 5);
 		button.label:SetFontObject("GameFontHighlight");
-		button.background:SetVertexColor(0.6, 0.6, 0.6);
+		button.BackgroundLeft:SetVertexColor(0.6, 0.6, 0.6);
+		button.BackgroundMid:SetVertexColor(0.6, 0.6, 0.6);
+		button.BackgroundRight:SetVertexColor(0.6, 0.6, 0.6);
 	else -- Top level category has no parent
 		button:SetWidth(baseWidth - 10);
 		button.label:SetFontObject("GameFontNormal");
-		button.background:SetVertexColor(1, 1, 1);
+		button.BackgroundLeft:SetVertexColor(1, 1, 1);
+		button.BackgroundMid:SetVertexColor(1, 1, 1);
+		button.BackgroundRight:SetVertexColor(1, 1, 1);
 	end
 
 	button.label:SetText(category.Name);
@@ -257,8 +261,8 @@ function categoriesFrame:SelectButton(button, quick)
 		return
 	end
 
+	self.SelectedCategory = button.Category; -- Issue #21: Broken, Fix
 	if not quick then -- Skip refreshing achievements if we're still busy selecting the correct category
-		self.SelectedCategory = button.Category;
 		self.AchievementsFrame:ClearSelection();
 		self.AchievementsFrame.Container.ScrollBar:SetValue(0);
 		self.AchievementsFrame:Update();
@@ -266,7 +270,7 @@ function categoriesFrame:SelectButton(button, quick)
 end
 
 -- [[ API ]] --
-local function Select(self, category, quick)
+local function Select(self, category, collapsed, quick)
 	diagnostics.Trace("Select");
 
 	local shown = false;
@@ -291,6 +295,10 @@ local function Select(self, category, quick)
 			newHeight = math.ceil(newHeight / scrollBar:GetValueStep()) * scrollBar:GetValueStep();
 			newHeight = min(newHeight, maxVal);
 			scrollBar:SetValue(newHeight);
+
+			if collapsed then
+				shown:Click(nil, nil, quick);
+			end
 		else
 			local scrollValue = scrollBar:GetValue();
 			if scrollValue == maxVal or scrollValue == previousScrollValue then
@@ -303,14 +311,12 @@ local function Select(self, category, quick)
 	end
 end
 
-function categoriesFrame:SelectCategory(category)
+function categoriesFrame:SelectCategory(category, collapsed)
 	diagnostics.Trace("categoriesFrame:SelectCategory");
 
 	local categoriesTree = category:GetTree();
 
-	addon.ResetView(self);
-
 	for i, cat in next, categoriesTree do
-		Select(self, cat, i ~= #categoriesTree);
+		Select(self, cat, collapsed, i ~= #categoriesTree);
 	end
 end

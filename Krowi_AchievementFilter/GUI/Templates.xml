@@ -2,13 +2,81 @@
 ..\..\FrameXML\UI.xsd">
 
     <!-- Originally from Blizzard_AchievementUI.xml line 660 at time of writing -->
-	<Button name="KrowiAF_AchievementCategoryButton_Template" inherits="AchievementCategoryTemplate" virtual="true">
+	<Button name="KrowiAF_AchievementCategoryButton_Template" virtual="true">
+	 	<Size x="158" y="24"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackgroundLeft" file="Interface\AchievementFrame\UI-Achievement-Category-Background" parentKey="BackgroundLeft">
+					<Size x="20" y="32"/>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.078125" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentBackgroundRight" file="Interface\AchievementFrame\UI-Achievement-Category-Background" parentKey="BackgroundRight">
+					<Size x="34" y="32"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0.53125" right="0.6640625" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentBackgroundMid" file="Interface\AchievementFrame\UI-Achievement-Category-Background" parentKey="BackgroundMid">
+					<Size y="32"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.BackgroundLeft" relativePoint="TOPRIGHT"/>
+						<Anchor point="TOPRIGHT" relativeKey="$parent.BackgroundRight" relativePoint="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0.078125" right="0.53125" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parentLabel" text="This is a Category" inherits="GameFontNormalLeftBottom" wordwrap="false" parentKey="label">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="16" y="4"/>
+						<Anchor point="TOPRIGHT" x="-8" y="-4"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="HIGHLIGHT">
+				<Texture name="$parentHighlightLeft" file="Interface\AchievementFrame\UI-Achievement-Category-Highlight" alphaMode="ADD" parentKey="HighlightLeft">
+					<Size x="20" y="32"/>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.078125" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentHighlightRight" file="Interface\AchievementFrame\UI-Achievement-Category-Highlight" alphaMode="ADD" parentKey="HighlightRight">
+					<Size x="34" y="32"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT"/>
+					</Anchors>
+					<TexCoords left="0.53125" right="0.6640625" top="0" bottom="1"/>
+				</Texture>
+				<Texture name="$parentHighlightMid" file="Interface\AchievementFrame\UI-Achievement-Category-Highlight" alphaMode="ADD" parentKey="HighlightMid">
+					<Size y="32"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.HighlightLeft" relativePoint="TOPRIGHT"/>
+						<Anchor point="TOPRIGHT" relativeKey="$parent.HighlightRight" relativePoint="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0.078125" right="0.53125" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+		</Layers>
 		<Scripts>
 			<OnLoad>
                 self:EnableMouse(true);
                 self:EnableMouseWheel(true);
 			</OnLoad>
 			<!-- OnClick is set in code -->
+			<OnEnter>
+				if ( self.showTooltipFunc ) then
+					self.showTooltipFunc(self);
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:SetMinimumWidth(0, false);
+				GameTooltip:Hide();
+			</OnLeave>
 		</Scripts>
 	</Button>
 
@@ -26,7 +94,8 @@
 	<Frame name="KrowiAF_CategoriesFrame_Template" inherits="AchivementGoldBorderBackdrop" virtual="true">
 		<Anchors>
         	<Anchor point="TOPLEFT" relativeTo="AchievementFrameCategories"/>
-        	<Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/>
+        	<!-- <Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/> -->
+        	<Anchor point="BOTTOM" y="20"/> <!-- relativeTo="AchievementFrame" -->
         </Anchors>
 		<Scripts>
 			<OnShow function="KrowiAF_CategoriesFrame_OnShow"/>
@@ -54,7 +123,8 @@
 	<Frame name="KrowiAF_AchievementsFrame_Template" virtual="true">
 		<Anchors>
         	<Anchor point="TOPLEFT" relativeTo="AchievementFrameCategories" relativePoint="TOPRIGHT" x="22" y="0"/>
-        	<Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/>
+        	<!-- <Anchor point="BOTTOM" relativeTo="AchievementFrameCategories"/> -->
+        	<Anchor point="BOTTOM" y="20"/> <!-- relativeTo="AchievementFrame" -->
         </Anchors>
 		<Layers>
 			<Layer level="BACKGROUND">
@@ -165,7 +235,7 @@
 			<Layer level="OVERLAY">
 				<Texture inherits="UI-Frame-BotCornerLeft" parentKey="BorderAnchor">
 					<Anchors>
-						<Anchor point="LEFT" x="-7" y="0"/>
+						<Anchor point="LEFT" x="-8" y="0"/>
 						<Anchor point="BOTTOM" x="0" y="-5"/>
 					</Anchors>
 				</Texture>
@@ -242,8 +312,9 @@
 
     <!-- Originally from Blizzard_AchievementUI.xml line 2683 at time of writing -->
 	<Frame name="KrowiAF_FullSearchResults_Template" virtual="true">
-		<Size x="600" y="382"/>
+		<Size x="600"/>
 		<Anchors>
+			<Anchor point="TOP" x="0" y="-112"/>
 			<Anchor point="BOTTOM" x="0" y="7"/>
 		</Anchors>
 		<Layers>

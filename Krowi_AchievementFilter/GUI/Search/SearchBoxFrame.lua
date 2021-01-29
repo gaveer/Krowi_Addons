@@ -181,7 +181,7 @@ function searchBoxFrame:ShowSearchPreviewResults()
 		searchPreviewContainer.ShowFullSearchResultsButton:Hide();
 	end
 	if lastButton then
-		searchPreviewContainer.BorderAnchor:SetPoint("BOTTOM", lastButton, "BOTTOM", 0, -5);
+		searchPreviewContainer.BorderAnchor:SetPoint("BOTTOM", lastButton, "BOTTOM", 0, -8);
 		searchPreviewContainer.Background:Hide();
 		searchPreviewContainer:Show();
 	else

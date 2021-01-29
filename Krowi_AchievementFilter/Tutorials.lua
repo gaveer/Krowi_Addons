@@ -1,4 +1,6 @@
-local _, addon = ...; -- Global addon namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
 
 addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
 local tutorials = addon.Tutorials; -- Local tutorial object
@@ -9,18 +11,6 @@ local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
 local function GetTitle(title)
     return AF_COLOR_YELLOW .. title .. AF_COLOR_END .. "\n\n";
-end
-
-local function OpenAchievementFrameAtTabButton1()
-    if not IsAddOnLoaded("Blizzard_AchievementUI") then
-        LoadAddOn("Blizzard_AchievementUI");
-    end
-    if not AchievementFrame:IsShown() then
-        AchievementFrame_ToggleAchievementFrame();
-    end
-    AchievementFrame_HideSearchPreview();
-    addon.GUI.TabButton1:Select();
-    addon.ResetView(addon.GUI.CategoriesFrame, addon.GUI.SearchBoxFrame, addon.GUI.FullSearchResultsFrame);
 end
 
 function tutorials.Load()
@@ -72,7 +62,6 @@ function tutorials.Load()
             text = GetTitle(addon.L["FT_SEARCHPREVIEW_TITLE"]) ..
                             addon.L["FT_SEARCHPREVIEW_DESC"],
             shineTop = 30,
-            shineBottom = -140,
             shineLeft = -11,
             shineRight = 11,
         },
@@ -88,23 +77,37 @@ function tutorials.Load()
         },
         onShow = function(self, i)
             if i == 1 then
-                OpenAchievementFrameAtTabButton1();
+                addon.OpenAchievementFrameAtTabButton1();
                 self[i].shine = addon.GUI.TabButton1;
             elseif i == 2 then
-                OpenAchievementFrameAtTabButton1();
+                addon.OpenAchievementFrameAtTabButton1();
                 addon.GUI.CategoriesFrame:SelectCategory(addon.GetAchievement(14281):GetCategory());
                 self[i].shine = addon.GUI.CategoriesFrame;
             elseif i == 3 then
-                OpenAchievementFrameAtTabButton1();
+                addon.OpenAchievementFrameAtTabButton1();
                 local achievementsButtons = addon.GUI.AchievementsFrame.Container.buttons;
                 addon.GUI.AchievementsFrame:SelectAchievementFromID(1283, "RightButton", true, achievementsButtons[1], 88, 34);
                 self[i].shine = DropDownList1;
             elseif i == 4 then
-                OpenAchievementFrameAtTabButton1();
+                addon.OpenAchievementFrameAtTabButton1();
                 addon.GUI.SearchBoxFrame:SetText("cla");
+                addon.GUI.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
+                local bottom;
+                if addon.GUI.SearchPreviewFrame.ShowFullSearchResultsButton:IsShown() then
+                    bottom = addon.GUI.SearchPreviewFrame.ShowFullSearchResultsButton:GetBottom();
+                else
+                    local buttons = addon.GUI.SearchPreviewFrame.Buttons;
+                    for _, button in next, buttons do
+                        if button:IsShown() then
+                            bottom = button:GetBottom();
+                        end
+                    end
+                end
+                self[i].shineBottom = bottom - addon.GUI.SearchPreviewFrame:GetBottom() - 10;
                 self[i].shine = addon.GUI.SearchPreviewFrame;
             elseif i == 5 then
-                OpenAchievementFrameAtTabButton1();
+                -- open this and see the buig in the full search resultds
+                addon.OpenAchievementFrameAtTabButton1();
                 addon.GUI.SearchBoxFrame:SetText("cla");
                 addon.GUI.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
                 addon.GUI.SearchPreviewFrame.ShowFullSearchResultsButton:Click();
@@ -114,13 +117,15 @@ function tutorials.Load()
         end
     });
     tutorials.CloseButtonHook(tutorials.FeaturesTutorial, function()
+        diagnostics.Trace("tutorials.CloseButtonHook");
+
         addon.ResetView(addon.GUI.CategoriesFrame, addon.GUI.SearchBoxFrame, addon.GUI.FullSearchResultsFrame);
     end);
 end
 
 function tutorials.HookTrigger(hook)
     hook:HookScript("OnClick", function()
-        addon.Diagnostics.Trace("tutorials.HookTrigger OnClick");
+        diagnostics.Trace("tutorials.HookTrigger OnClick");
         tutorials.TriggerTutorial(tutorials.FeaturesTutorial, tutorials.FeaturesTutorialPages);
     end)
 end

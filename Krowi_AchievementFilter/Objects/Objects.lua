@@ -4,6 +4,7 @@ addon.Objects = {};
 local objects = addon.Objects;
 
 -- [[ KrowiRightClickMenuItem ]] --
+
 objects.RightClickMenuItem = LibStub("KrowiRightClickMenuItem-1.0");
 local rightClickMenuItem = objects.RightClickMenuItem;
 

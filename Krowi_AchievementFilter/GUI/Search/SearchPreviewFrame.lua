@@ -50,7 +50,8 @@ end
 
 function KrowiAF_SearchPreviewsFrame_OnShow(self)
     diagnostics.Trace("KrowiAF_SearchPreviewsFrame_OnShow");
-
+    
+    self:SetFrameLevel(self:GetParent():GetFrameLevel() + 7);
     self.ShowFullSearchResultsButton:SetPoint("TOP", self.Buttons[self:GetNumButtons()], "BOTTOM");
 end
 

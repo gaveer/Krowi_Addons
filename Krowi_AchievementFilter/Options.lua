@@ -1,7 +1,9 @@
-local _, addon = ...; -- Global addon namespace
-addon.Options = {}; -- Global options namespace (will be overwritten by the object)
-local options = addon.Options; -- Local options namespace (will be overwritten by the object)
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
+addon.Options = {}; -- Will be overwritten in Load (intended)
+local options = addon.Options;
 
 local defaults = {
     profile = {
@@ -9,6 +11,7 @@ local defaults = {
         EnableDebugInfo = false,
         EnableTraceInfo = false,
         CategoriesFrameWidthOffset = 0,
+        AchievementFrameHeightOffset = 0,
         Minimap = {
             hide = true
         },
@@ -19,10 +22,13 @@ local defaults = {
     }
 }
 
+local maxNumberOfSearchPreviews = function()
+    return 17 + math.floor(addon.Options.db.AchievementFrameHeightOffset / 29);
+end
+
 local function CreatePanel()
-    local options = {
+    local optionsTable = {
         name = AF_NAME,
-        -- handler = addon,
         type = 'group',
         args = {
             Info = {
@@ -96,20 +102,65 @@ local function CreatePanel()
                 order = 3,
                 args = {
                     categoriesFrameWidthOffset = {
-                        name = addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"],
-                        desc = addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET_DESC"],
+                        name = addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"],
+                        desc = string.format(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"], addon.L["T_TAB_TEXT"], addon.L["O_REQUIRES_RELOAD"]),
                         type = "range",
-                        min = -100,
-                        max = 100,
+                        min = 0,
+                        max = 250,
                         step = 1,
-                        width = "normal",
+                        width = 1.5,
                         order = 1.1,
-                        get = function () return addon.Options.db.CategoriesFrameWidthOffset; end,
+                        get = function ()
+                            return addon.Options.db.CategoriesFrameWidthOffset;
+                        end,
                         set = function(_, value)
+                            if addon.Options.db.CategoriesFrameWidthOffset == value then
+                                return;
+                            end;
+
                             addon.Options.db.CategoriesFrameWidthOffset = value;
-                            print(addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+                            addon.Event:SendMessage("UpdateAchievementFrameWidth", addon.Options.db.CategoriesFrameWidthOffset);
+
+                            diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
                         end,
                     },
+                    achievementFrameHeightOffset = {
+                        name = addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"],
+                        desc = string.format(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"], addon.L["T_TAB_TEXT"], addon.L["O_REQUIRES_RELOAD"]),
+                        type = "range",
+                        min = 0,
+                        max = 500,
+                        step = 1,
+                        width = 1.5,
+                        order = 1.2,
+                        get = function ()
+                            return addon.Options.db.AchievementFrameHeightOffset;
+                        end,
+                        set = function(_, value)
+                            if addon.Options.db.AchievementFrameHeightOffset == value then
+                                return;
+                            end;
+
+                            addon.Options.db.AchievementFrameHeightOffset = value;
+                            local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Search.args.numberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
+                            numberOfSearchPreviews.max = maxNumberOfSearchPreviews();
+                            if numberOfSearchPreviews.get() > numberOfSearchPreviews.max then
+                                numberOfSearchPreviews.set(nil, numberOfSearchPreviews.max);
+                            end
+                            addon.Event:SendMessage("UpdateAchievementFrameHeight", addon.Options.db.AchievementFrameHeightOffset);
+
+                            diagnostics.Debug(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] .. ": " .. tostring(addon.Options.db.AchievementFrameHeightOffset));
+                            
+                        end,
+                    }
+                }
+            },
+            Search = {
+                name = addon.L["O_SEARCH"],
+                type = "group",
+                inline = true,
+                order = 4,
+                args = {
                     minimumCharactersToSearch = {
                         name = addon.L["O_MIN_CHAR_TO_SEARCH"],
                         desc = addon.L["O_MIN_CHAR_TO_SEARCH_DESC"],
@@ -117,27 +168,39 @@ local function CreatePanel()
                         min = 1,
                         max = 10,
                         step = 1,
-                        width = "normal",
-                        order = 1.2,
-                        get = function () return addon.Options.db.SearchBox.MinimumCharactersToSearch; end,
+                        width = 1.5,
+                        order = 1.1,
+                        get = function ()
+                            return addon.Options.db.SearchBox.MinimumCharactersToSearch;
+                        end,
                         set = function(_, value)
+                            if addon.Options.db.SearchBox.MinimumCharactersToSearch == value then
+                                return;
+                            end;
+
                             addon.Options.db.SearchBox.MinimumCharactersToSearch = value;
-                            print(addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
+
+                            diagnostics.Debug(addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
                         end,
                     },
                     numberOfSearchPreviews = {
                         name = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
-                        desc = addon.L["O_NUM_OF_SEARCH_PREVIEWS_DESC"],
+                        desc = string.format(addon.L["O_NUM_OF_SEARCH_PREVIEWS_DESC"], addon.L["O_REQUIRES_RELOAD"]),
                         type = "range",
                         min = 1,
-                        max = 17,
+                        max = maxNumberOfSearchPreviews(),
                         step = 1,
-                        width = "normal",
-                        order = 1.3,
+                        width = 1.5,
+                        order = 1.2,
                         get = function () return addon.Options.db.SearchBox.NumberOfSearchPreviews; end,
                         set = function(_, value)
+                            if addon.Options.db.SearchBox.NumberOfSearchPreviews == value then
+                                return;
+                            end;
+
                             addon.Options.db.SearchBox.NumberOfSearchPreviews = value;
-                            print(addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
+
+                            diagnostics.Debug(addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
                         end,
                     }
                 }
@@ -146,7 +209,7 @@ local function CreatePanel()
                 name = addon.L["O_DEBUG"],
                 type = "group",
                 inline = true,
-                order = 4,
+                order = 5,
                 args = {
                     enableDebugInfo = {
                         name = addon.L["O_ENABLE_DEBUG_INFO"],
@@ -157,7 +220,8 @@ local function CreatePanel()
                         get = function () return addon.Options.db.EnableDebugInfo; end,
                         set = function()
                             addon.Options.db.EnableDebugInfo = not addon.Options.db.EnableDebugInfo;
-                            print(addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
+
+                            diagnostics.Debug(addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
                         end,
                     },
                     enableTraceInfo = {
@@ -169,7 +233,8 @@ local function CreatePanel()
                         get = function () return addon.Options.db.EnableTraceInfo; end,
                         set = function()
                             addon.Options.db.EnableTraceInfo = not addon.Options.db.EnableTraceInfo;
-                            print(addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
+
+                            diagnostics.Debug(addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
                         end,
                     }
                 }
@@ -177,22 +242,22 @@ local function CreatePanel()
         },
     }
 
-    local aceConfig = LibStub("AceConfig-3.0")
-    local aceConfigDialog = LibStub("AceConfigDialog-3.0")
-    aceConfig:RegisterOptionsTable(AF_NAME, options)
-    aceConfigDialog:AddToBlizOptions(AF_NAME, nil, nil)
+    LibStub("AceConfig-3.0"):RegisterOptionsTable(AF_NAME, optionsTable);
+    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(AF_NAME, nil, nil);
 end
 
 -- Load the options
 function options.Load()
-    CreatePanel();
-
-    addon.Options = LibStub("AceDB-3.0"):New("Krowi_AchievementFilterOptions", defaults, true);
+    addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
     addon.Options.db = addon.Options.profile;
+    -- addon.Options.db.SearchBox.NumberOfSearchPreviews = min(addon.Options.db.SearchBox.NumberOfSearchPreviews, maxNumberOfSearchPreviews + math.floor(addon.Options.db.AchievementFrameHeightOffset / 29));
+
+    -- add something to check if the options panel closes that we prompt for a reload
+    CreatePanel();
 
     diagnostics.Debug("- Options loaded");
     diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. addon.L["O_SHOW_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+    diagnostics.Debug("     - " .. addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
     diagnostics.Debug("     - " .. addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
     diagnostics.Debug("     - " .. addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
     diagnostics.Debug("     - " .. addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));

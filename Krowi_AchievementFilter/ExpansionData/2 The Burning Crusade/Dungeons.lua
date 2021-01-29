@@ -55,7 +55,7 @@ dungeons.SethekkHalls = {} -- 2.0
 function dungeons.SethekkHalls.Load(catDungeons)
 	local dungeon = catDungeons:AddCatInstanceInfo(252);
     dungeon:AddAchievementIDs(653, 674); -- Defeat the bosses in X
-    dungeon:AddAchievementFull(883, true); -- Mounts (Obtainable)
+    dungeon:AddNewAchievement(883, true); -- Mounts (Obtainable)
 end
 
 dungeons.ShadowLabyrinth = {} -- 2.0
@@ -98,7 +98,7 @@ dungeons.MagistersTerrace = {} -- 2.4
 function dungeons.MagistersTerrace.Load(catDungeons)
 	local dungeon = catDungeons:AddCatInstanceInfo(249);
     dungeon:AddAchievementIDs(661, 682); -- Defeat the bosses in X
-    dungeon:AddAchievementFull(884, true); -- Mounts (Obtainable)
+    dungeon:AddNewAchievement(884, true); -- Mounts (Obtainable)
 end
 
 function dungeons.Load(expansion)

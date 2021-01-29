@@ -1,8 +1,8 @@
 ## Interface: 90002
-## Title: Krowi's Achievement Filter
-## Version: 9.0
+## Title: Krowi's |cFF1D92C2Achievement Filter|r
+## Version: 10.0
 ## Author: Krowi
-## SavedVariables: Krowi_AchievementFilterOptions
+## SavedVariables: Options
 ## Notes: Filters your achievements.
 
 Globals.lua

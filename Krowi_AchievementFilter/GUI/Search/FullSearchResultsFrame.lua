@@ -23,6 +23,13 @@ function fullSearchResultsFrame:New(achievementsFrame)
 
     frame:Hide();
 
+	frame.Container.ScrollBar.Show = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Show, 575, 22, 30);
+	end;
+	frame.Container.ScrollBar.Hide = function()
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Hide, 597, 0, 30);
+	end;
+
     frame.Container.update = function()
 		frame:Update();
     end
@@ -31,6 +38,25 @@ function fullSearchResultsFrame:New(achievementsFrame)
 	gui.FullSearchResult.PostLoadButtons(frame, achievementsFrame);
 
 	return frame;
+end
+
+function fullSearchResultsFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
+	diagnostics.Trace("fullSearchResultsFrame.Show_Hide");
+
+	-- local db = addon.Options.db;
+	-- categoriesWidth = categoriesWidth + db.CategoriesFrameWidthOffset;
+	-- watermarkWidthOffset = watermarkWidthOffset + db.CategoriesFrameWidthOffset;
+
+	-- frame:SetWidth(categoriesWidth);
+	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
+	-- frame.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
+	-- AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
+	-- AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
+	-- AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
+	for _, button in next, frame.Container.buttons do
+		button:SetWidth(categoriesWidth);
+	end
+	func(scrollBar);
 end
 
 local savedQuery, savedResults;

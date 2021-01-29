@@ -147,32 +147,32 @@ end
 function petBattles.Load(expansion)
     local catZones = expansion:AddCatPetBattles();
     catZones:AddAchievementIDs(12930, 13693, 13694, 13715);
-    local achievement = catZones:AddAchievementFull(12936);
+    local achievement = catZones:AddNewAchievement(12936);
     achievement:AddRCMenExtra(GetBoZaKTLinks(achievement.ID));
-    local achievement = catZones:AddAchievementFull(13280); -- Hobbyist Aquarist
+    local achievement = catZones:AddNewAchievement(13280); -- Hobbyist Aquarist
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Aquatic));
-    achievement = catZones:AddAchievementFull(13270); -- Beast Mode
+    achievement = catZones:AddNewAchievement(13270); -- Beast Mode
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Beast));
-    achievement = catZones:AddAchievementFull(13271); -- Critters With Huge Teeth
+    achievement = catZones:AddNewAchievement(13271); -- Critters With Huge Teeth
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Critter));
-    achievement = catZones:AddAchievementFull(13272); -- Dragons Make Everything Better
+    achievement = catZones:AddNewAchievement(13272); -- Dragons Make Everything Better
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Dragonkin));
-    achievement = catZones:AddAchievementFull(13273); -- Element of Success
+    achievement = catZones:AddNewAchievement(13273); -- Element of Success
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Elemental));
-    achievement = catZones:AddAchievementFull(13274); -- Fun With Flying
+    achievement = catZones:AddNewAchievement(13274); -- Fun With Flying
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Flying));
-    achievement = catZones:AddAchievementFull(13281); -- Human Resources
+    achievement = catZones:AddNewAchievement(13281); -- Human Resources
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Humanoid));
-    achievement = catZones:AddAchievementFull(13275); -- Magician's Secrets
+    achievement = catZones:AddNewAchievement(13275); -- Magician's Secrets
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Magic));
-    achievement = catZones:AddAchievementFull(13277); -- Machine Learning
+    achievement = catZones:AddNewAchievement(13277); -- Machine Learning
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Mechanical));
-    achievement = catZones:AddAchievementFull(13278); -- Not Quite Dead Yet
+    achievement = catZones:AddNewAchievement(13278); -- Not Quite Dead Yet
     achievement:AddRCMenExtra(GetFBLinks(achievement.ID, familyID.Undead));
-    achievement = catZones:AddAchievementFull(13279); -- Family Battler
+    achievement = catZones:AddNewAchievement(13279); -- Family Battler
     achievement:AddRCMenExtra(GetFBMetaLinks(achievement.ID));
-    achievement = catZones:AddAchievementFull(13625); -- Mighty Minions of Mechagon
+    achievement = catZones:AddNewAchievement(13625); -- Mighty Minions of Mechagon
     achievement:AddRCMenExtra(GetMMoMLinks(achievement.ID));
-    achievement = catZones:AddAchievementFull(13626); -- Nautical Nuisances of Nazjatar
+    achievement = catZones:AddNewAchievement(13626); -- Nautical Nuisances of Nazjatar
     achievement:AddRCMenExtra(GetNNoNLinks(achievement.ID));
 end

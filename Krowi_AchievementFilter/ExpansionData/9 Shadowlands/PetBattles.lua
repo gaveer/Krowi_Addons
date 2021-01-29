@@ -112,30 +112,30 @@ end
 function petBattles.Load(expansion)
     local catZones = expansion:AddCatPetBattles();
     catZones:AddAchievementIDs(14867);
-    local achievement = catZones:AddAchievementFull(14625);
+    local achievement = catZones:AddNewAchievement(14625);
     achievement:AddRCMenExtra(GetBitSLinks(achievement.ID));
-    achievement = catZones:AddAchievementFull(14868); -- Aquatic Apparitions
+    achievement = catZones:AddNewAchievement(14868); -- Aquatic Apparitions
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Aquatic));
-    achievement = catZones:AddAchievementFull(14869); -- Beast Busters
+    achievement = catZones:AddNewAchievement(14869); -- Beast Busters
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Beast));
-    achievement = catZones:AddAchievementFull(14870); -- Creepy Critters
+    achievement = catZones:AddNewAchievement(14870); -- Creepy Critters
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Critter));
-    achievement = catZones:AddAchievementFull(14871); -- Deathly Dragonkin
+    achievement = catZones:AddNewAchievement(14871); -- Deathly Dragonkin
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Dragonkin));
-    achievement = catZones:AddAchievementFull(14872); -- Eerie Elementals
+    achievement = catZones:AddNewAchievement(14872); -- Eerie Elementals
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Elemental));
-    achievement = catZones:AddAchievementFull(14873); -- Flickering Fliers
+    achievement = catZones:AddNewAchievement(14873); -- Flickering Fliers
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Flying));
-    achievement = catZones:AddAchievementFull(14874); -- Haunted Humanoids
+    achievement = catZones:AddNewAchievement(14874); -- Haunted Humanoids
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Humanoid));
-    achievement = catZones:AddAchievementFull(14875); -- Mummified Magics
+    achievement = catZones:AddNewAchievement(14875); -- Mummified Magics
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Magic));
-    achievement = catZones:AddAchievementFull(14876); -- Macabre Mechanicals
+    achievement = catZones:AddNewAchievement(14876); -- Macabre Mechanicals
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Mechanical));
-    achievement = catZones:AddAchievementFull(14877); -- Unholy Undead
+    achievement = catZones:AddNewAchievement(14877); -- Unholy Undead
     achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Undead));
-    achievement = catZones:AddAchievementFull(14879); -- Family Exorcist
+    achievement = catZones:AddNewAchievement(14879); -- Family Exorcist
     achievement:AddRCMenExtra(GetFEMetaLinks(achievement.ID));
-    achievement = catZones:AddAchievementFull(14881); -- Abhorrent Adverdaries of the Afterlife
+    achievement = catZones:AddNewAchievement(14881); -- Abhorrent Adverdaries of the Afterlife
     achievement:AddRCMenExtra(GetAAotALinks(achievement.ID));
 end

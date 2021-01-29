@@ -1,15 +1,17 @@
 -- [[ Namespaces ]] --
+
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 local objects = addon.Objects;
 objects.AchievementCategory = {};
-local achievementCategory = objects.AchievementCategory;
+local category = objects.AchievementCategory; -- Locally we can use just category
 
 -- [[ Constructors ]] --
-achievementCategory.__index = achievementCategory;
-function achievementCategory:New(name)
+
+category.__index = category;
+function category:New(name) -- Creates a new achievement category
     local self = {};
-    setmetatable(self, achievementCategory);
+    setmetatable(self, category);
 
     self.Name = name or "Unknown";
     self.Level = 0;
@@ -17,22 +19,23 @@ function achievementCategory:New(name)
     return self;
 end
 
-function achievementCategory:NewCatInfo(id) -- Create a new achievement category using GetCategoryInfo(id)
-    return achievementCategory:New(addon.GetCategoryInfoTitle(id));
+function category:NewCatInfo(id) -- Creates a new achievement category with the title from GetCategoryInfo(id) as name
+    return category:New(GetCategoryInfo(id));
 end
 
--- [[ Other ]] --
-function achievementCategory:AddCategory(category) -- Add a child achievement category to an achievement category
+-- [[ Methods ]] --
+
+function category:AddCategory(cat) -- Adds a child achievement category to the achievement category
     if self.Children == nil then
         self.Children = {}; -- By creating the children table here we reduce memory usage because not every category has children
     end
-    tinsert(self.Children, category);
-    category.Parent = self;
-    category.Level = self.Level + 1;
-    return category;
+    tinsert(self.Children, cat);
+    cat.Parent = self;
+    cat.Level = self.Level + 1;
+    return cat;
 end
 
-function achievementCategory:AddAchievement(achievement) -- Add an achievement to an achievement category
+function category:AddAchievement(achievement) -- Adds an achievement to the achievement category
     if self.Achievements == nil then
         self.Achievements = {}; -- By creating the achievements table here we reduce memory usage because not every category has achievements
     end
@@ -40,82 +43,8 @@ function achievementCategory:AddAchievement(achievement) -- Add an achievement t
     return achievement;
 end
 
-function achievementCategory:AddCatZones() -- Add a child Zones achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.L["C_ZONES"]));
-end
-
-function achievementCategory:AddCatQuests() -- Add a child Quests achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15447))); -- Achievement_Category table
-end
-
-function achievementCategory:AddCatExploration() -- Add a child Exploration achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(97))); -- Achievement_Category table
-end
-
-function achievementCategory:AddCatPvP() -- Add a child PvP achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15270))); -- Achievement_Category table
-end
-
-function achievementCategory:AddCatReputation() -- Add a child Reputation achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15273))); -- Achievement_Category table
-end
-
-function achievementCategory:AddCatDungeons() -- Add a child Dungeons achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15272))); -- Achievement_Category table
-end
-
-function achievementCategory:AddCatRaids() -- Add a child Raids achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15271))); -- Achievement_Category table
-end
-
-function achievementCategory:AddCatPetBattles() -- Add a child Pet Battles achievement category to an achievement category
-    return self:AddCategory(achievementCategory:New(addon.GetCategoryInfoTitle(15117))); -- Achievement_Category table
-end
-
-function achievementCategory:AddCatMapInfo(id) -- Add a child zone achievement category using C_Map.GetMapInfo(id).name to an achievement category
-    return self:AddCategory(achievementCategory:New(C_Map.GetMapInfo(id).name)); -- UiMap table
-end
-
-function achievementCategory:AddCatInstanceInfo(id) -- Add a child instance achievement category using EJ_GetInstanceInfo(id) to an achievement category
-    return self:AddCategory(achievementCategory:New(EJ_GetInstanceInfo(id))); -- JournalInstance table
-end
-
-function achievementCategory:AddCatDifficulty10() -- Add a child difficulty achievement category using GetDifficultyInfo(3) to an achievement category
-    return self:AddCategory(achievementCategory:New(GetDifficultyInfo(3))); -- Difficulty table
-end
-
-function achievementCategory:AddCatDifficulty25() -- Add a child difficulty achievement category using GetDifficultyInfo(4) to an achievement category
-    return self:AddCategory(achievementCategory:New(GetDifficultyInfo(4))); -- Difficulty table
-end
-
-function achievementCategory:AddCatLFGDungeonInfo(id) -- Add a child instance achievement category using GetLFGDungeonInfo(id) to an achievement category
-    return self:AddCategory(achievementCategory:New(GetLFGDungeonInfo(id))); -- LFGDungeons table
-end
-
-function achievementCategory:AddAchievementFull(id, obtainable, hasWowheadLink, hasIATLink) -- Add an achievement to an achievement category
-    return self:AddAchievement(addon.Objects.Achievement:New(id, obtainable, hasWowheadLink, hasIATLink));
-end
-
-function achievementCategory:AddAchievementIDs(...) -- Add a variable number of achievements from achievement IDs to an achievement category
-    for _, id in next, {...} do
-        self:AddAchievement(addon.Objects.Achievement:New(id));
-    end
-end
-
-function achievementCategory:AddAchievementIDsUnobtainable(...) -- Add a variable number of unobtainable achievements from achievement IDs to an achievement category
-    for _, id in next, {...} do
-        self:AddAchievement(addon.Objects.Achievement:New(id, false));
-    end
-end
-
-function achievementCategory:AddAchievementIDsWithIATLink(...) -- Add a variable number of achievements from achievement IDs to an achievement category with IAT links active
-    for _, id in next, {...} do
-        self:AddAchievement(addon.Objects.Achievement:New(id, nil, nil, true));
-    end
-end
-
-function achievementCategory:GetTree()
-    diagnostics.Trace("achievementCategory:GetTree");
+function category:GetTree()
+    diagnostics.Trace("category:GetTree");
 
 	local categories = {};
     tinsert(categories, 1, self);

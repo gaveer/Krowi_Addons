@@ -17,7 +17,7 @@ function achievementsFrame:New()
 
 	-- Create frame
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements" .. numFrames, AchievementFrame, "KrowiAF_AchievementsFrame_Template");
-	frame:SetWidth(504 - addon.Options.db.CategoriesFrameWidthOffset);
+	frame:SetWidth(504);
 	addon.InjectMetatable(frame, achievementsFrame);
 
 	-- Set properties
@@ -80,8 +80,6 @@ end
 
 function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achievementsButtonOffset)
 	diagnostics.Trace("achievementsFrame.Show_Hide");
-
-	achievementsWidth = achievementsWidth - addon.Options.db.CategoriesFrameWidthOffset
 
 	frame:SetWidth(achievementsWidth);
 	for _, button in next, frame.Container.buttons do

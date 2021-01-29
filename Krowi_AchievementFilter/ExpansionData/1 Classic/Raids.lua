@@ -12,7 +12,7 @@ end
 raids.OnyxiasLair = {}; -- 1.1
 function raids.OnyxiasLair.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(760);
-    raid.Name = raid.Name .. " (" .. addon.GetCategoryInfoTitle(15234) .. ")";
+    raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
     raid:AddAchievementIDsUnobtainable(684); -- Defeat the bosses in X
 end
 
@@ -25,7 +25,7 @@ end
 raids.ZulGurub = {}; -- 1.7
 function raids.ZulGurub.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(76);
-    raid.Name = raid.Name .. " (" .. addon.GetCategoryInfoTitle(15234) .. ")";
+    raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
     raid:AddAchievementIDsUnobtainable(560, 688); -- Defeat the bosses in X (Unobtainable)
     raid:AddAchievementIDsUnobtainable(880, 881); -- Mounts (Unobtainable)
 end
@@ -40,7 +40,7 @@ raids.TempleOfAhnQiraj = {}; -- 1.9
 function raids.TempleOfAhnQiraj.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(744);
     raid:AddAchievementIDs(687); -- Defeat the bosses in X
-    raid:AddAchievementFull(424, true); -- Mounts (Obtainable)
+    raid:AddNewAchievement(424, true); -- Mounts (Obtainable)
 end
 
 function raids.Load(expansion)

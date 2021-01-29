@@ -7,7 +7,7 @@ raids.Karazhan = {}; -- 2.0
 function raids.Karazhan.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(745);
     raid:AddAchievementIDs(690); -- Defeat the bosses in X
-    raid:AddAchievementFull(882, true); -- Mounts (Obtainable)
+    raid:AddNewAchievement(882, true); -- Mounts (Obtainable)
 end
 
 raids.GruulsLair = {}; -- 2.0
@@ -32,7 +32,7 @@ raids.TheEye = {}; -- 2.0
 function raids.TheEye.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(749);
     raid:AddAchievementIDs(696); -- Defeat the bosses in X
-    raid:AddAchievementFull(885, true); -- Mounts (Obtainable)
+    raid:AddNewAchievement(885, true); -- Mounts (Obtainable)
 end
 
 raids.TheBattleForMountHyjal = {}; -- 2.0
@@ -50,7 +50,7 @@ end
 raids.ZulAman = {}; -- 2.3
 function raids.ZulAman.Load(catRaids)
     local raid = catRaids:AddCatInstanceInfo(77);
-    raid.Name = raid.Name .. " (" .. addon.GetCategoryInfoTitle(15234) .. ")";
+    raid.Name = raid.Name .. " (" .. GetCategoryInfo(15234) .. ")";
     raid:AddAchievementIDsUnobtainable(691); -- Defeat the bosses in X (Unobtainable)
     raid:AddAchievementIDsUnobtainable(430); -- Mounts (Unobtainable)
 end

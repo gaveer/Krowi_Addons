@@ -4,9 +4,11 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 - Achievement window height can now be changed up to double the original height
+- Right clicking the search box will clear it (option)
 
 ### Changed
 - Changing the width of the categories now also changes the width of the achievement window instead of making the achievements smaller
+- Tutorial page 4 has additional information about the options related to it
 
 ### Fixed
 - Issue #21: Selecting the same achievement multiple times during search toggles the selection state

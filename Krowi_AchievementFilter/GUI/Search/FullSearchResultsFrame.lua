@@ -24,10 +24,10 @@ function fullSearchResultsFrame:New(achievementsFrame)
     frame:Hide();
 
 	frame.Container.ScrollBar.Show = function()
-		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Show, 575, 22, 30);
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Show, 575, -24);
 	end;
 	frame.Container.ScrollBar.Hide = function()
-		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Hide, 597, 0, 30);
+		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Hide, 597, 0);
 	end;
 
     frame.Container.update = function()
@@ -40,39 +40,43 @@ function fullSearchResultsFrame:New(achievementsFrame)
 	return frame;
 end
 
-function fullSearchResultsFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX, watermarkWidthOffset)
+function fullSearchResultsFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX)
 	diagnostics.Trace("fullSearchResultsFrame.Show_Hide");
 
-	-- local db = addon.Options.db;
-	-- categoriesWidth = categoriesWidth + db.CategoriesFrameWidthOffset;
-	-- watermarkWidthOffset = watermarkWidthOffset + db.CategoriesFrameWidthOffset;
-
-	-- frame:SetWidth(categoriesWidth);
+	frame.Container:SetPoint("BOTTOMRIGHT", frame.bottomRightCorner, achievementsOffsetX, 8);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
-	-- frame.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
-	-- AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
-	-- AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
-	-- AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
-	for _, button in next, frame.Container.buttons do
+	local lastVisible = 0;
+	local buttons = frame.Container.buttons;
+	for _, button in next, buttons do
 		button:SetWidth(categoriesWidth);
+		if button:IsShown() then
+			lastVisible = button;
+		end
 	end
 	func(scrollBar);
+	local offset = 0;
+	if not scrollBar:IsShown() then
+		offset = max(0, lastVisible:GetBottom() - frame:GetBottom() - 12);
+	end
+	frame:SetPoint("TOP", 0, -112 - offset);
 end
 
 local savedQuery, savedResults;
 function fullSearchResultsFrame:Update(query, results)
 	diagnostics.Trace("fullSearchResults:Update");
 
+	self:SetPoint("TOP", 0, -112); -- Need to reset the frame before we can adjust again
+
 	savedQuery = query or savedQuery;
 	savedResults = results or savedResults;
 
-    local numResults = #savedResults;
+    self.NumResults = #savedResults;
 	local scrollFrame = self.Container;
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
 	for i, button in next, buttons do
 		local index = offset + i;
-		if index <= numResults then
+		if index <= self.NumResults then
 			local achievementID = savedResults[index].ID;
 			local _, name, _, completed, _, _, _, _, _, icon, _, _, _, _ = GetAchievementInfo(achievementID);
 			button.name:SetText(name);
@@ -97,7 +101,7 @@ function fullSearchResultsFrame:Update(query, results)
 			button:Hide();
 		end
 	end
-	local totalHeight = numResults * 49;
+	local totalHeight = self.NumResults * 49;
 	HybridScrollFrame_Update(scrollFrame, totalHeight, 270);
-	self.titleText:SetText(string.format(ENCOUNTER_JOURNAL_SEARCH_RESULTS, savedQuery, numResults));
+	self.titleText:SetText(string.format(ENCOUNTER_JOURNAL_SEARCH_RESULTS, savedQuery, self.NumResults));
 end

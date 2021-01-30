@@ -418,7 +418,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<ScrollFrame name="$parentScrollFrame" parentKey="Container" inherits="HybridScrollFrameTemplate">
+			<ScrollFrame name="$parentContainer" parentKey="Container" inherits="HybridScrollFrameTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeKey="$parent.topLeftCorner2" x="9" y="-8"/> <!-- Changed x value to align properly compared to Blizzard, originally 4 -->
 					<Anchor point="BOTTOMRIGHT" relativeKey="$parent.bottomRightCorner" x="-24" y="8"/>

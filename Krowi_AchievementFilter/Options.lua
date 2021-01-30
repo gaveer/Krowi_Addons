@@ -17,7 +17,8 @@ local defaults = {
         },
         SearchBox = {
             MinimumCharactersToSearch = 3,
-            NumberOfSearchPreviews = 5
+            NumberOfSearchPreviews = 5,
+            ClearOnRightClick = false
         }
     }
 }
@@ -161,6 +162,19 @@ local function CreatePanel()
                 inline = true,
                 order = 4,
                 args = {
+                    clearOnRightClick = {
+                        name = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"],
+                        desc = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"],
+                        type = "toggle",
+                        width = "full",
+                        order = 1,
+                        get = function () return addon.Options.db.SearchBox.ClearOnRightClick; end,
+                        set = function()
+                            addon.Options.db.SearchBox.ClearOnRightClick = not addon.Options.db.SearchBox.ClearOnRightClick;
+
+                            diagnostics.Debug(addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] .. ": " .. tostring(addon.Options.db.SearchBox.ClearOnRightClick));
+                        end,
+                    },
                     minimumCharactersToSearch = {
                         name = addon.L["O_MIN_CHAR_TO_SEARCH"],
                         desc = addon.L["O_MIN_CHAR_TO_SEARCH_DESC"],
@@ -169,7 +183,7 @@ local function CreatePanel()
                         max = 10,
                         step = 1,
                         width = 1.5,
-                        order = 1.1,
+                        order = 2.1,
                         get = function ()
                             return addon.Options.db.SearchBox.MinimumCharactersToSearch;
                         end,
@@ -191,7 +205,7 @@ local function CreatePanel()
                         max = maxNumberOfSearchPreviews(),
                         step = 1,
                         width = 1.5,
-                        order = 1.2,
+                        order = 2.2,
                         get = function () return addon.Options.db.SearchBox.NumberOfSearchPreviews; end,
                         set = function(_, value)
                             if addon.Options.db.SearchBox.NumberOfSearchPreviews == value then

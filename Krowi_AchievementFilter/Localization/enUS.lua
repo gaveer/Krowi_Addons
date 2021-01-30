@@ -33,6 +33,8 @@ L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] = "Achievement window height offset";
 L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"] = "The height that will be added to or subtracted from the default achievement window height.\n\n" .. 
                                                 "This value can be changed while the achievement window is open while having the %s tab selected. This will however lag your game.\n\n%s";
 L["O_SEARCH"] = "Search";
+L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] = "Clear search field on Right Click";
+L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"] = "Enable / disable the option to clear the search field when Right Clicking in it";
 L["O_MIN_CHAR_TO_SEARCH"] = "Minimum characters to search";
 L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to start searching for achievements matching the query.\n" ..
                                     "The smaller the number, the greater the impact on the game.";
@@ -63,6 +65,11 @@ L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click
                                 "- Link to %s if the achievement is related to Pet Battles and %s has relevant information about it\n" ..
                                 "- Shortcut to %s if tactics for the achievement are available (%s is %s)";
 L["FT_SEARCHPREVIEW_TITLE"] = "Searching";
-L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way with the only difference that it will only search achievements in this tab.";
+L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way but it will only search achievements in this tab.\n\n" ..
+                                "Additionally, there are a couple of new options:\n" ..
+                                "- %s\n" ..
+                                "- %s\n" ..
+                                "- %s\n\n" ..
+                                "All options can be found under Game Menu -> Interface -> AddOns -> %s";
 L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
 L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";

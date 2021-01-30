@@ -60,7 +60,11 @@ function tutorials.Load()
             imageHeight = 256,
             image = media .. "SearchPreview",
             text = GetTitle(addon.L["FT_SEARCHPREVIEW_TITLE"]) ..
-                            addon.L["FT_SEARCHPREVIEW_DESC"],
+                            string.format(addon.L["FT_SEARCHPREVIEW_DESC"],
+                                            addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"],
+                                            addon.L["O_MIN_CHAR_TO_SEARCH"],
+                                            addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
+                                            AF_NAME),
             shineTop = 30,
             shineLeft = -11,
             shineRight = 11,
@@ -106,12 +110,12 @@ function tutorials.Load()
                 self[i].shineBottom = bottom - addon.GUI.SearchPreviewFrame:GetBottom() - 10;
                 self[i].shine = addon.GUI.SearchPreviewFrame;
             elseif i == 5 then
-                -- open this and see the buig in the full search resultds
                 addon.OpenAchievementFrameAtTabButton1();
                 addon.GUI.SearchBoxFrame:SetText("cla");
                 addon.GUI.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
                 addon.GUI.SearchPreviewFrame.ShowFullSearchResultsButton:Click();
                 addon.GUI.SearchBoxFrame:SetText("");
+                addon.GUI.SearchBoxFrame:OnTextChanged();
                 self[i].shine = addon.GUI.FullSearchResultsFrame;
             end
         end

@@ -36,6 +36,7 @@ function searchBoxFrame:New(searchPreviewFrame, fullSearchResults, achievementsF
     frame:SetScript("OnEditFocusLost", frame.OnEditFocusLost);
     frame:SetScript("OnEditFocusGained", frame.OnEditFocusGained);
     frame:SetScript("OnKeyDown", frame.OnKeyDown);
+	frame:SetScript("OnMouseDown", frame.OnMouseDown);
 
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
     frame:Hide();
@@ -96,7 +97,7 @@ local function GetSearchResults(text)
         local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = GetAchievementInfo(achievementID);
         if string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower()) then
 			tinsert(results, achievement);
-			addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
+			-- addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
         end
     end
 
@@ -143,6 +144,17 @@ function searchBoxFrame:OnKeyDown(key)
 		self.SearchPreviewFrame:SelectPrevious(#self.Results);
 	elseif key == "DOWN" then
 		self.SearchPreviewFrame:SelectNext(#self.Results);
+	end
+end
+
+function searchBoxFrame:OnMouseDown(button)
+	diagnostics.Trace("searchBoxFrame:OnMouseDown");
+
+	if addon.Options.db.SearchBox.ClearOnRightClick then
+		if button == "RightButton" then
+			self:SetText("");
+			self:OnTextChanged();
+		end
 	end
 end
 

@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- TBD
+
+## [9.0.2.10.0]
+### Added
 - Achievement window height can now be changed up to double the original height
 - Right clicking the search box will clear it (option)
 - Left Click on minimap icon will toggle the Achievement Window to the new tab
@@ -131,6 +135,7 @@ All notable changes to this project will be documented in this file.
 - The need for almost all localization
 
 [Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.2.10.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3189892
 [9.0.2.9.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3183198
 [9.0.2.8.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3170618
 [9.0.2.8.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3169416

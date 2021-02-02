@@ -1,5 +1,5 @@
 --[[
-	Krowi's Right Click Menu License
+	Krowi's Menu License
         Copyright ©2020-2020 The contents of this library, excluding third-party resources, are
         copyrighted to their authors with all rights reserved.
 
@@ -18,7 +18,7 @@
         the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary("KrowiRightClickMenuItem-1.0", 1);
+local lib = LibStub:NewLibrary("KrowiMenuItem-1.0", 1);
 
 if not lib then
 	return;

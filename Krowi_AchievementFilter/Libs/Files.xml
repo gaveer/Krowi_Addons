@@ -17,6 +17,6 @@
     <Script file="Libs\MetaLua\MetaLua.lua" />
     <Include file="Libs\KrowiPopopDialog-1.0\KrowiPopopDialog-1.0.xml" />
     <Include file="Libs\KrowiTutorials-1.0\KrowiTutorials-1.0.xml" />
-    <Include file="Libs\KrowiRightClickMenu-1.0\KrowiRightClickMenu-1.0.xml" />
+    <Include file="Libs\KrowiMenu-1.0\KrowiMenu-1.0.xml" />
     
 </Ui>

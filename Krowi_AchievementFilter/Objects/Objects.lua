@@ -3,12 +3,12 @@ local _, addon = ...;
 addon.Objects = {};
 local objects = addon.Objects;
 
--- [[ KrowiRightClickMenuItem ]] --
+-- [[ KrowiMenuItem ]] --
 
-objects.RightClickMenuItem = LibStub("KrowiRightClickMenuItem-1.0");
-local rightClickMenuItem = objects.RightClickMenuItem;
+objects.MenuItem = LibStub("KrowiMenuItem-1.0");
+local menuItem = objects.MenuItem;
 
-function rightClickMenuItem:AddChildCritExtLinkFull(achievementID, criteriaNum, externalLink)
+function menuItem:AddChildCritExtLinkFull(achievementID, criteriaNum, externalLink)
     local criteriaString = GetAchievementCriteriaInfo(achievementID, criteriaNum)
     return self:AddChildExtLinkFull(criteriaString, externalLink);
 end

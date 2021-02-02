@@ -1,5 +1,5 @@
 --[[
-	Krowi's Right Click Menu License
+	Krowi's Menu License
         Copyright ©2020-2020 The contents of this library, excluding third-party resources, are
         copyrighted to their authors with all rights reserved.
 
@@ -18,16 +18,16 @@
         the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary("KrowiRightClickMenu-1.0", 1);
+local lib = LibStub:NewLibrary("KrowiMenu-1.0", 1);
 
 if not lib then
 	return;
 end
 
-local rightClickMenuItem = LibStub("KrowiRightClickMenuItem-1.0");
+local menuItem = LibStub("KrowiMenuItem-1.0");
 
 -- [[ Other ]] --
-local menuFrame = CreateFrame("Frame", "KrowiRightClickMenu", nil, "UIDropDownMenuTemplate");
+local menuFrame = CreateFrame("Frame", "KrowiMenu", nil, "UIDropDownMenuTemplate");
 local menu = {};
 
 local function Convert(rcItem)
@@ -55,7 +55,7 @@ function lib:Add(rcItem)
 end
 
 function lib:AddFull(name, func, isTitle)
-    self:Add(rightClickMenuItem:New(name, func, isTitle));
+    self:Add(menuItem:New(name, func, isTitle));
 end
 
 function lib:Open(anchor, offsetX, offsetY)

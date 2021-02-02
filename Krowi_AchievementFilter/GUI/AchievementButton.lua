@@ -71,7 +71,7 @@ local function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
 end
 
 -- [[ OnClickRightButton ]] --
-local rightClickMenu = LibStub("KrowiRightClickMenu-1.0");
+local rightClickMenu = LibStub("KrowiMenu-1.0");
 local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
 local function OnClickRightButton(self, anchor, offsetX, offsetY)

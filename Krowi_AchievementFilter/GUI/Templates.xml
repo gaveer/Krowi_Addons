@@ -502,4 +502,16 @@
 		<!-- OnClick is set in code -->
 	</Button>
 
+	<Button name="RematchFilterButtonTemplate" inherits="RematchStretchButtonTemplate" virtual="true">
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="Arrow" file="Interface\ChatFrame\ChatFrameExpandArrow">
+					<Size x="10" y="12"/>
+					<Anchors>
+						<Anchor point="RIGHT" x="-5" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Button>
 </Ui>

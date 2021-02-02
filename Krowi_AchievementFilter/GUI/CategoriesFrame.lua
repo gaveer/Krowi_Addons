@@ -317,7 +317,13 @@ function categoriesFrame:SelectCategory(category, collapsed)
 	local categoriesTree = category:GetTree();
 
 	for i, cat in next, categoriesTree do
-		if not cat.IsSelected or (not cat.NotCollapsed and collapsed) then -- Issue #23: Fix
+		diagnostics.Debug(cat.Name);
+		diagnostics.Debug(cat.IsSelected);
+		diagnostics.Debug(cat.NotCollapsed);
+		diagnostics.Debug(collapsed);
+		diagnostics.Debug(not cat.IsSelected);
+		diagnostics.Debug(cat.NotCollapsed == collapsed);
+		if not cat.IsSelected or (cat.NotCollapsed == collapsed) then -- Issue #23: Fix -- Issue #25 Broken, Fix
 			Select(self, cat, collapsed, i ~= #categoriesTree); -- Issue #23: Broken
 		end
 	end

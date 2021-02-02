@@ -84,19 +84,19 @@ function tutorials.Load()
             local gui = addon.GUI;
 
             if i == 1 then
-                gui.ToggleAchievementFrameAtTab1();
+                gui.ToggleAchievementFrameAtTab1(true);
                 self[i].shine = tabButton1;
             elseif i == 2 then
-                gui.ToggleAchievementFrameAtTab1();
+                gui.ToggleAchievementFrameAtTab1(true);
                 categoriesFrame:SelectCategory(addon.GetAchievement(14281):GetCategory());
                 self[i].shine = categoriesFrame;
             elseif i == 3 then
-                gui.ToggleAchievementFrameAtTab1();
+                gui.ToggleAchievementFrameAtTab1(true);
                 local achievementsButtons = achievementsFrame.Container.buttons;
                 achievementsFrame:SelectAchievementFromID(1283, "RightButton", true, achievementsButtons[1], 88, 34);
                 self[i].shine = DropDownList1;
             elseif i == 4 then
-                gui.ToggleAchievementFrameAtTab1();
+                gui.ToggleAchievementFrameAtTab1(true);
                 searchBoxFrame:SetText("cla");
                 searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
                 local bottom;
@@ -113,7 +113,7 @@ function tutorials.Load()
                 self[i].shineBottom = bottom - searchPreviewFrame:GetBottom() - 10;
                 self[i].shine = searchPreviewFrame;
             elseif i == 5 then
-                gui.ToggleAchievementFrameAtTab1();
+                gui.ToggleAchievementFrameAtTab1(true);
                 searchBoxFrame:SetText("cla");
                 searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
                 searchPreviewFrame.ShowFullSearchResultsButton:Click();

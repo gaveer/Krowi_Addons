@@ -18,7 +18,7 @@ local familyID = {
 
 local function GetBitSLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=ShadowlandsWQs&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.MenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1197); -- Ardenweald's Tricksters
     item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1196); -- Airborne Defense Force
@@ -45,7 +45,7 @@ local function GetFELinks(achievementID, firstCriteriaXuFuID, headerName)
         headerName = addon.L["XUFU"];
     end
     local linkBase = "https://www.wow-petguide.com/?m=FamilyExorcist&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(headerName, linkBase .. firstCriteriaXuFuID);
+    local item = addon.Objects.MenuItem:NewExtLink(headerName, linkBase .. firstCriteriaXuFuID);
 
     -- Offsets are based on wow-petguide.com IDs
     item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Sylla
@@ -65,7 +65,7 @@ end
 
 local function GetFEMetaLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/?m=FamilyExorcist&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.MenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     local criteriaString, _, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(achievementID, 1);
     item:AddChild(GetFELinks(assetID, familyID.Aquatic, criteriaString));
@@ -93,7 +93,7 @@ end
 
 local function GetAAotALinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=AbhorrentAdversaries&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.MenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1199); -- Crystalsnap
     item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1206); -- Briarpaw

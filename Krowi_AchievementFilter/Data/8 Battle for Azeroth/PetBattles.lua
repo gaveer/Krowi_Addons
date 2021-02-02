@@ -18,7 +18,7 @@ local familyID = {
 
 local function GetBoZaKTLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=ShadowlandsWQs&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.MenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 712); -- Crab People
     item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 707); -- This Little Piggy Has Sharp Tusks
@@ -54,7 +54,7 @@ local function GetFBLinks(achievementID, firstCriteriaXuFuID, headerName)
         headerName = addon.L["XUFU"];
     end
     local linkBase = "https://www.wow-petguide.com/?m=FamilyBattler&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(headerName, linkBase .. firstCriteriaXuFuID);
+    local item = addon.Objects.MenuItem:NewExtLink(headerName, linkBase .. firstCriteriaXuFuID);
 
     -- Offsets are based on wow-petguide.com IDs
     item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. firstCriteriaXuFuID); -- Captain Hermes
@@ -82,7 +82,7 @@ end
 
 local function GetFBMetaLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/?m=FamilyBattler&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.MenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     local criteriaString, _, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(achievementID, 1);
     item:AddChild(GetFBLinks(assetID, familyID.Aquatic, criteriaString));
@@ -110,7 +110,7 @@ end
 
 local function GetMMoMLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=Mechagon&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.MenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1095); -- Gnomefeaster
     item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1099); -- Sputtertube
@@ -126,7 +126,7 @@ end
 
 local function GetNNoNLinks(achievementID)
     local linkBase = "https://www.wow-petguide.com/index.php?m=Nazjatar&s=";
-    local item = addon.Objects.RightClickMenuItem:NewExtLink(addon.L["XUFU"], linkBase);
+    local item = addon.Objects.MenuItem:NewExtLink(addon.L["XUFU"], linkBase);
 
     item:AddChildCritExtLinkFull(achievementID, 1, linkBase .. 1102); -- Prince Wiggletail
     item:AddChildCritExtLinkFull(achievementID, 2, linkBase .. 1108); -- Chomp

@@ -9,6 +9,8 @@
 
     <Include file="GUI/Search/Files.xml" />
 
+    <Script file="GUI/Filter.lua" />
+
     <Include file="GUI/Templates.xml" />
     
 </Ui>

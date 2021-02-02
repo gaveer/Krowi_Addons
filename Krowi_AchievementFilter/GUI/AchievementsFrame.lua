@@ -438,5 +438,6 @@ function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifi
 	diagnostics.Trace("achievementsFrame:SelectAchievementFromID");
 
 	local achievement = addon.GetAchievement(id);
+	diagnostics.Debug(achievement.ID);
 	self:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end

@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - TBD
 
+### Changed
+- Right click menu items have no bullets in front of their names anymore
+
 ## [9.0.2.10.0] - 2021-02-02
 ### Added
 - Achievement window height can now be changed up to double the original height

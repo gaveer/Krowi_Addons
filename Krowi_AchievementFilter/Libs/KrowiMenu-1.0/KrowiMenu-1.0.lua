@@ -30,15 +30,16 @@ local menuItem = LibStub("KrowiMenuItem-1.0");
 local menuFrame = CreateFrame("Frame", "KrowiMenu", nil, "UIDropDownMenuTemplate");
 local menu = {};
 
-local function Convert(rcItem)
+local function Convert(srcItem)
 	local item = {};
-	item.text = rcItem.Name;
-	item.func = rcItem.Func;
-	item.isTitle = rcItem.IsTitle;
-	if rcItem.Children ~= nil then
+	item.text = srcItem.Text or "NO TEXT";
+	item.func = srcItem.Func;
+	item.isTitle = srcItem.IsTitle or false;
+	item.notCheckable = srcItem.NotCheckable or true;
+	if srcItem.Children ~= nil then
 		item.hasArrow = true;
 		item.menuList = {};
-		for _, child in next, rcItem.Children do
+		for _, child in next, srcItem.Children do
 			tinsert(item.menuList, Convert(child));
 		end
 	end
@@ -50,12 +51,12 @@ function lib:Clear()
     menu = {};
 end
 
-function lib:Add(rcItem)
-    tinsert(menu, Convert(rcItem));
+function lib:Add(item)
+    tinsert(menu, Convert(item));
 end
 
-function lib:AddFull(name, func, isTitle)
-    self:Add(menuItem:New(name, func, isTitle));
+function lib:AddFull(...)
+    self:Add(menuItem:New(...));
 end
 
 function lib:Open(anchor, offsetX, offsetY)
@@ -65,4 +66,8 @@ function lib:Open(anchor, offsetX, offsetY)
     offsetY = offsetY or 0;
 
 	EasyMenu(menu, menuFrame, anchor, offsetX, offsetY, "MENU");
+end
+
+function lib:GetMenu()
+	return menu;
 end

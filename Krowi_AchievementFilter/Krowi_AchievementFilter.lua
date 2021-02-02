@@ -25,6 +25,9 @@ function loadHelper:OnEvent(event, arg1)
             addon.Options.Load();
             addon.Icon.Load();
             addon.Tutorials.Load();
+            if addon.Diagnostics.DebugEnabled() then
+                addon.GUI.Filter.Load(); -- TESTING !!!!!
+            end
 
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             local gui = addon.GUI;

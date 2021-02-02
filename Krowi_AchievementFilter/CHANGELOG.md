@@ -1,10 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-### Added
-- TBD
-
 ## [9.0.2.10.0] - 2021-02-02
 ### Added
 - Achievement window height can now be changed up to double the original height
@@ -134,7 +130,6 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
 [9.0.2.10.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3189892
 [9.0.2.9.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3183198
 [9.0.2.8.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3170618

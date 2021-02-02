@@ -130,7 +130,7 @@ function gui.ResetView()
     end
 end
 
-function gui.ToggleAchievementFrameAtTab1()
+function gui.ToggleAchievementFrameAtTab1(forceOpen) -- Issue #26 Broken, Fix
     diagnostics.Trace("gui.ToggleAchievementFrameAtTab1");
 
     if not IsAddOnLoaded("Blizzard_AchievementUI") then
@@ -139,7 +139,7 @@ function gui.ToggleAchievementFrameAtTab1()
 
     AchievementFrameComparison:Hide();
     AchievementFrameTab_OnClick = AchievementFrameBaseTab_OnClick;
-	if AchievementFrame:IsShown() and AchievementFrame.selectedTab == 4 then
+	if AchievementFrame:IsShown() and AchievementFrame.selectedTab == 4 and not forceOpen then
 		HideUIPanel(AchievementFrame);
 	else
 		ShowUIPanel(AchievementFrame);

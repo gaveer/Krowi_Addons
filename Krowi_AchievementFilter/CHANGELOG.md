@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - TBD
 
-## [9.0.2.10.0]
+## [9.0.2.10.0] - 2021-02-02
 ### Added
 - Achievement window height can now be changed up to double the original height
 - Right clicking the search box will clear it (option)

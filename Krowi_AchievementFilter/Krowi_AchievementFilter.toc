@@ -20,6 +20,6 @@ Tutorials.lua
 
 Objects/Files.xml
 
-ExpansionData/Files.xml
+Data/Files.xml
 
 GUI/Files.xml

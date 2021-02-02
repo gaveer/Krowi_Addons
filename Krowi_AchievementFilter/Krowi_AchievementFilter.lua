@@ -5,6 +5,10 @@ addon.L = LibStub("AceLocale-3.0"):GetLocale(addonName);
 addon.Event = {};
 LibStub("AceEvent-3.0"):Embed(addon.Event);
 
+-- [[ Binding names ]] --
+BINDING_HEADER_AF_NAME = AF_NAME;
+BINDING_NAME_AF_OPEN_TAB1 = addon.L["BINDING_NAME_AF_OPEN_TAB1"];
+
 addon.Faction = {}; -- Global faction data
 addon.Faction.IsAlliance = UnitFactionGroup("player") == "Alliance";
 addon.Faction.IsHorde = UnitFactionGroup("player") == "Horde";
@@ -21,40 +25,33 @@ function loadHelper:OnEvent(event, arg1)
             addon.Options.Load();
             addon.Icon.Load();
             addon.Tutorials.Load();
+
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
-            addon.GUI.SetAchievementFrameHeight(addon.Options.db.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons
+            local gui = addon.GUI;
+            local tutorials = addon.Tutorials;
 
-            addon.GUI.AchievementsFrame = addon.GUI.AchievementsFrame:New();
-            addon.GUI.CategoriesFrame = addon.GUI.CategoriesFrame:New(addon.Categories, addon.GUI.AchievementsFrame);
+            gui.SetAchievementFrameHeight(addon.Options.db.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
 
-            addon.GUI.Search.Load(addon.GUI.AchievementsFrame);
+            gui.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
+            gui.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
+            gui.AddFrame("FullSearchResultsFrame", gui.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
+            gui.AddFrame("SearchPreviewFrame", gui.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
+            gui.AddFrame("SearchBoxFrame", gui.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));
+            gui.AddFrame("TabButton1", gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], gui.GetFrames("CategoriesFrame", "AchievementsFrame", "SearchBoxFrame")));
 
-            addon.GUI.TabButton1 = addon.GUI.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], addon.GUI.CategoriesFrame, addon.GUI.AchievementsFrame, addon.GUI.SearchBoxFrame);
+            gui.ResetAchievementFrameHeight();
 
-            addon.GUI.ResetAchievementFrameHeight();
-
-            addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
+            tutorials.SetFrames(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
+            tutorials.HookTrigger(gui.GetFrame("TabButton1"));
         end
+
     elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
         addon.Diagnostics.Debug("- Loading expansion data");
-        addon.Classic.Load();
-        addon.TheBurningCrusade.Load();
-        addon.WrathOfTheLichKing.Load();
-        addon.Cataclysm.Load();
-        addon.MistsOfPandaria.Load();
-        addon.WarlordsOfDreanor.Load();
-        addon.Legion.Load();
-        addon.BattleForAzeroth.Load();
-        addon.Shadowlands.Load();
-        addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
+        addon.Data.Load();
         addon.Diagnostics.Debug("- Expansion data loaded");
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
-
-function addon.InGuildView()
-    return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
-end
 
 function addon.GetAchievement(id)
     addon.Diagnostics.Trace("addon.GetAchievement");
@@ -66,41 +63,6 @@ function addon.GetAchievement(id)
 	end
 end
 
-function addon.GetSafeScrollChildBottom(scrollChild)
-	addon.Diagnostics.Trace("GetSafeScrollChildBottom");
-
-	return scrollChild:GetBottom() or 0;
-end
-
-function addon.InjectMetatable(tbl,meta)
-    return setmetatable(tbl,setmetatable(meta,getmetatable(tbl)));
-end
-
-function addon.ResetView(categoriesFrame, searchBoxFrame, fullSearchResultsFrame)
-
-    if categoriesFrame and categoriesFrame.ID then -- Checking ID is to know if the frame is initialised or not
-        -- We want to have Classic selected and collapsed
-        -- Achievement 1283 has Dungeons as parent but we need its parent which is Classic
-        categoriesFrame:SelectCategory(addon.GetAchievement(1283):GetCategory().Parent, true);
-    end
-
-    if searchBoxFrame and searchBoxFrame.ID then
-        searchBoxFrame:SetText("");
-    end
-
-    if fullSearchResultsFrame and fullSearchResultsFrame.ID then
-        fullSearchResultsFrame:Hide();
-    end
-end
-
-function addon.OpenAchievementFrameAtTabButton1()
-    if not IsAddOnLoaded("Blizzard_AchievementUI") then
-        LoadAddOn("Blizzard_AchievementUI");
-    end
-    if not AchievementFrame:IsShown() then
-        AchievementFrame_ToggleAchievementFrame();
-    end
-    AchievementFrame_HideSearchPreview();
-    addon.GUI.TabButton1:Select();
-    addon.ResetView(addon.GUI.CategoriesFrame, addon.GUI.SearchBoxFrame, addon.GUI.FullSearchResultsFrame);
+function addon.InjectMetatable(tbl, meta)
+    return setmetatable(tbl, setmetatable(meta, getmetatable(tbl)));
 end

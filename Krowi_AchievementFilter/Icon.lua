@@ -14,7 +14,7 @@ local function CreateIcon()
             diagnostics.Debug("Icon clicked with " .. button);
             if button == "LeftButton" then
                 diagnostics.Trace("icon.AchievementFilterLDB.OnClick with LeftButton");
-                addon.OpenAchievementFrameAtTabButton1();
+                addon.GUI.ToggleAchievementFrameAtTab1();
             elseif button == "RightButton" then
                 diagnostics.Trace("icon.AchievementFilterLDB.OnClick with RightButton");
                 InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory

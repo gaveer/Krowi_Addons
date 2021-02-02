@@ -62,12 +62,17 @@ function achFrameTabBtn:AchievementFrameTab_OnEvent(event, ...)
 	end
 end
 
+
+local function InGuildView()
+    return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
+end
+
 function achFrameTabBtn:Base_OnClick(id)
     diagnostics.Trace("achFrameTabBtn:Base_OnClick");
 
 	AchievementFrame_UpdateTabs(id);
 
-    if addon.InGuildView() then
+    if InGuildView() then
         AchievementFrame_ToggleView();
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();

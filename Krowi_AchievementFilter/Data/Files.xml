@@ -1,0 +1,46 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
+
+    <Script file="Data\Data.lua" />
+
+    <Script file="Data\1 Classic\Expansion.lua" />
+    <Script file="Data\1 Classic\Dungeons.lua" />
+    <Script file="Data\1 Classic\Raids.lua" />
+
+    <Script file="Data\2 The Burning Crusade\Expansion.lua" />
+    <Script file="Data\2 The Burning Crusade\Dungeons.lua" />
+    <Script file="Data\2 The Burning Crusade\Raids.lua" />
+
+    <Script file="Data\3 Wrath of the Lich King\Expansion.lua" />
+    <Script file="Data\3 Wrath of the Lich King\Dungeons.lua" />
+    <Script file="Data\3 Wrath of the Lich King\Raids.lua" />
+
+    <Script file="Data\4 Cataclysm\Expansion.lua" />
+    <Script file="Data\4 Cataclysm\Dungeons.lua" />
+    <Script file="Data\4 Cataclysm\Raids.lua" />
+
+    <Script file="Data\5 Mists of Pandaria\Expansion.lua" />
+    <Script file="Data\5 Mists of Pandaria\Scenarios.lua" />
+    <Script file="Data\5 Mists of Pandaria\Dungeons.lua" />
+    <Script file="Data\5 Mists of Pandaria\Raids.lua" />
+
+    <Script file="Data\6 Warlords of Draenor\Expansion.lua" />
+    <Script file="Data\6 Warlords of Draenor\Dungeons.lua" />
+    <Script file="Data\6 Warlords of Draenor\Raids.lua" />
+
+    <Script file="Data\7 Legion\Expansion.lua" />
+    <Script file="Data\7 Legion\Dungeons.lua" />
+    <Script file="Data\7 Legion\Raids.lua" />
+
+    <Script file="Data\8 Battle for Azeroth\Expansion.lua" />
+    <Script file="Data\8 Battle for Azeroth\Zones.lua" />
+    <Script file="Data\8 Battle for Azeroth\Dungeons.lua" />
+    <Script file="Data\8 Battle for Azeroth\Raids.lua" />
+    <Script file="Data\8 Battle for Azeroth\PetBattles.lua" />
+
+    <Script file="Data\9 Shadowlands\Expansion.lua" />
+    <Script file="Data\9 Shadowlands\Zones.lua" />
+    <Script file="Data\9 Shadowlands\Dungeons.lua" />
+    <Script file="Data\9 Shadowlands\Raids.lua" />
+    <Script file="Data\9 Shadowlands\PetBattles.lua" />
+    
+</Ui>

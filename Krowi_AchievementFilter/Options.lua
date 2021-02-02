@@ -1,5 +1,4 @@
 -- [[ Namespaces ]] --
-
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 addon.Options = {}; -- Will be overwritten in Load (intended)
@@ -10,15 +9,15 @@ local defaults = {
         ShowMinimapIcon = false,
         EnableDebugInfo = false,
         EnableTraceInfo = false,
-        CategoriesFrameWidthOffset = 0,
-        AchievementFrameHeightOffset = 0,
+        CategoriesFrameWidthOffset = 25,
+        AchievementFrameHeightOffset = 250,
         Minimap = {
-            hide = true
+            hide = true -- not ShowMinimapIcon
         },
         SearchBox = {
             MinimumCharactersToSearch = 3,
             NumberOfSearchPreviews = 5,
-            ClearOnRightClick = false
+            ClearOnRightClick = true
         }
     }
 }
@@ -264,7 +263,6 @@ end
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
     addon.Options.db = addon.Options.profile;
-    -- addon.Options.db.SearchBox.NumberOfSearchPreviews = min(addon.Options.db.SearchBox.NumberOfSearchPreviews, maxNumberOfSearchPreviews + math.floor(addon.Options.db.AchievementFrameHeightOffset / 29));
 
     -- add something to check if the options panel closes that we prompt for a reload
     CreatePanel();

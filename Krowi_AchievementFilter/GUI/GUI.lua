@@ -4,7 +4,31 @@ local diagnostics = addon.Diagnostics;
 addon.GUI = {};
 local gui = addon.GUI;
 
+-- [[ Frames ]] --
+local frames = {};
+
+function gui.AddFrame(name, frame)
+    frames[name] = frame;
+
+    return frames[name];
+end
+
+function gui.GetFrame(name)
+    return frames[name];
+end
+
+function gui.GetFrames(...)
+    local table = {};
+    for _, name in next, {...} do
+        tinsert(table, frames[name]);
+    end
+
+    return unpack(table);
+end
+
+-- [[ AchievementFrame Width ]] --
 local defaultAchievementFrameWidth;
+
 function gui.SetAchievementFrameWidth(offset)
     diagnostics.Trace("gui.SetAchievementFrameWidth");
 
@@ -22,8 +46,22 @@ function gui.ResetAchievementFrameWidth()
     end
 end
 
+local function UpdateAchievementFrameWidth(message , offset)
+    if frames["TabButton1"] and frames["TabButton1"].Selected then -- Need to check if it exists since this can be triggered before it's created
+        frames["AchievementsFrame"]:Hide();
+        frames["CategoriesFrame"]:Hide();
+        gui.SetAchievementFrameWidth(offset);
+        frames["AchievementsFrame"]:Show();
+        frames["CategoriesFrame"]:Show();
+    end
+end
+
+addon.Event:RegisterMessage("UpdateAchievementFrameWidth", UpdateAchievementFrameWidth);
+
+-- [[ AchievementFrame Height ]] --
 local defaultAchievementFrameHeight;
 local defaultAchievementFrameMetalBorderHeight;
+
 function gui.SetAchievementFrameHeight(offset)
     diagnostics.Trace("gui.SetAchievementFrameHeight");
 
@@ -46,25 +84,72 @@ function gui.ResetAchievementFrameHeight()
     end
 end
 
-local function UpdateAchievementFrameWidth(message , offset)
-    if addon.GUI.TabButton1 and addon.GUI.TabButton1.Selected then
-        addon.GUI.AchievementsFrame:Hide();
-        addon.GUI.CategoriesFrame:Hide();
-        gui.SetAchievementFrameWidth(offset);
-        addon.GUI.AchievementsFrame:Show();
-        addon.GUI.CategoriesFrame:Show();
-    end
-end
-
 local function UpdateAchievementFrameHeight(message, offset)
-    if addon.GUI.TabButton1 and addon.GUI.TabButton1.Selected then
-        addon.GUI.AchievementsFrame:Hide();
-        addon.GUI.CategoriesFrame:Hide();
+    if frames["TabButton1"] and frames["TabButton1"].Selected then -- Need to check if it exists since this can be triggered before it's created
+        frames["AchievementsFrame"]:Hide();
+        frames["CategoriesFrame"]:Hide();
         gui.SetAchievementFrameHeight(offset);
-        addon.GUI.AchievementsFrame:Show();
-        addon.GUI.CategoriesFrame:Show();
+        frames["AchievementsFrame"]:Show();
+        frames["CategoriesFrame"]:Show();
     end
 end
 
-addon.Event:RegisterMessage("UpdateAchievementFrameWidth", UpdateAchievementFrameWidth);
 addon.Event:RegisterMessage("UpdateAchievementFrameHeight", UpdateAchievementFrameHeight);
+
+-- [[ Other ]] --
+function gui.GetSafeScrollChildBottom(scrollChild)
+	diagnostics.Trace("gui.GetSafeScrollChildBottom");
+
+	return scrollChild:GetBottom() or 0;
+end
+
+function gui.ResetView()
+	diagnostics.Trace("gui.ResetView");
+
+    if frames["CategoriesFrame"] and frames["CategoriesFrame"].ID then -- Checking ID is to know if the frame is initialised or not
+        -- We want to have Classic selected and collapsed
+        -- Achievement 1283 has Dungeons as parent but we need its parent which is Classic
+        -- local cat = addon.GetAchievement(1283):GetCategory().Parent;
+        -- diagnostics.Debug(cat.Name);
+        -- diagnostics.Debug(cat.IsSelected);
+        -- diagnostics.Debug(cat.NotCollapsed);
+        -- diagnostics.Debug(frames["CategoriesFrame"].SelectedCategory.Name);
+        -- diagnostics.Debug(frames["CategoriesFrame"].SelectedCategory.IsSelected);
+        -- diagnostics.Debug(frames["CategoriesFrame"].SelectedCategory.NotCollapsed);
+        frames["CategoriesFrame"]:SelectCategory(addon.GetAchievement(1283):GetCategory().Parent, true);
+        -- frames["CategoriesFrame"].SelectedCategory = addon.Categories[1];
+        -- frames["CategoriesFrame"]:Update();
+    end
+
+    if frames["SearchBoxFrame"] and frames["SearchBoxFrame"].ID then
+        frames["SearchBoxFrame"]:SetText("");
+    end
+
+    if frames["FullSearchResultsFrame"] and frames["FullSearchResultsFrame"].ID then
+        frames["FullSearchResultsFrame"]:Hide();
+    end
+end
+
+function gui.ToggleAchievementFrameAtTab1()
+    diagnostics.Trace("gui.ToggleAchievementFrameAtTab1");
+
+    if not IsAddOnLoaded("Blizzard_AchievementUI") then
+        LoadAddOn("Blizzard_AchievementUI");
+    end
+
+    AchievementFrameComparison:Hide();
+    AchievementFrameTab_OnClick = AchievementFrameBaseTab_OnClick;
+	if AchievementFrame:IsShown() and AchievementFrame.selectedTab == 4 then
+		HideUIPanel(AchievementFrame);
+	else
+		ShowUIPanel(AchievementFrame);
+        AchievementFrame_SetTabs();
+        AchievementFrame_HideSearchPreview();
+        frames["TabButton1"]:Select();
+        gui.ResetView();
+	end
+end
+
+function KrowiAF_ToggleAchievementFrameAtTab1()
+    gui.ToggleAchievementFrameAtTab1();
+end

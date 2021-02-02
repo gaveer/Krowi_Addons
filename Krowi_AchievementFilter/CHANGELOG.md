@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Achievement window height can now be changed up to double the original height
 - Right clicking the search box will clear it (option)
+- Left Click on minimap icon will toggle the Achievement Window to the new tab
+- Keybinding under Game Menu -> Key Bindings -> AddOns to toggle the Achievement Window to the new tab
 
 ### Changed
 - Changing the width of the categories now also changes the width of the achievement window instead of making the achievements smaller
@@ -13,6 +15,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Issue #21: Selecting the same achievement multiple times during search toggles the selection state
 - Issue #22: Visual bugs
+- Issue #23: Searching achievement in category that is selected and not collapsed will trigger error
+- Issue #24: When Ace3 libraries are not installed as an addon, loading this addon causes errors
 
 ## [9.0.2.9.0] - 2021-01-27
 ### Added

@@ -81,14 +81,12 @@ function fullSearchResultsFrame:Update(query, results)
 			local _, name, _, completed, _, _, _, _, _, icon, _, _, _, _ = GetAchievementInfo(achievementID);
 			button.name:SetText(name);
 			button.icon:SetTexture(icon);
-			-- button.AchievementID = achievementID;
 			button.Achievement = savedResults[index];
 			if completed then
 				button.resultType:SetText(ACHIEVEMENTFRAME_FILTER_COMPLETED);
 			else
 				button.resultType:SetText(ACHIEVEMENTFRAME_FILTER_INCOMPLETE);
 			end
-			-- local achievement = addon.GetAchievement(achievementID);
 			local category = savedResults[index]:GetCategory();
 			local categoriesTree = category:GetTree();
 			local path = categoriesTree[1].Name;

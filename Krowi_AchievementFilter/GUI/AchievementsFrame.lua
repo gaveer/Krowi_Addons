@@ -398,7 +398,6 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 		mouseButton = "LeftButton";
 	end
 
-	-- local achievement = addon.GetAchievement(id);
 	local category = achievement:GetCategory();
 
 	self.CategoriesFrame:SelectCategory(category);
@@ -411,7 +410,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	while not shown do
 		for _, button in next, container.buttons do
-			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
+			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
 				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
 				shown = button;
 				break;

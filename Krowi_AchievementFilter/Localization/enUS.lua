@@ -46,6 +46,9 @@ L["O_ENABLE_DEBUG_INFO_DESC"] = "Enable / disable debug info";
 L["O_ENABLE_TRACE_INFO"] = "Enable trace info";
 L["O_ENABLE_TRACE_INFO_DESC"] = "Enable / disable trace info";
 
+-- Keybindings
+L["BINDING_NAME_AF_OPEN_TAB1"] = "Toggle Achievement Window";
+
 -- Icon
 L["I_LEFT_CLICK"] = "Left-click " .. AF_COLOR_ADDON .. "to open the Achievement window." .. AF_COLOR_END;
 L["I_RIGHT_CLICK"] = "Right-click " .. AF_COLOR_ADDON .. "for Options." .. AF_COLOR_END;

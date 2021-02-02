@@ -282,7 +282,7 @@ local function Select(self, category, collapsed, quick)
 
 	while not shown do
 		for _, button in next, container.buttons do
-			if button.Category == category and math.ceil(button:GetBottom()) >= math.ceil(addon.GetSafeScrollChildBottom(child)) then
+			if button.Category == category and math.ceil(button:GetBottom()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
 				button:Click(nil, nil, quick);
 				shown = button;
 				break;
@@ -317,6 +317,8 @@ function categoriesFrame:SelectCategory(category, collapsed)
 	local categoriesTree = category:GetTree();
 
 	for i, cat in next, categoriesTree do
-		Select(self, cat, collapsed, i ~= #categoriesTree);
+		if not cat.IsSelected or (not cat.NotCollapsed and collapsed) then -- Issue #23: Fix
+			Select(self, cat, collapsed, i ~= #categoriesTree); -- Issue #23: Broken
+		end
 	end
 end

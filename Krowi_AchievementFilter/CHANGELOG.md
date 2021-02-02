@@ -8,6 +8,11 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Right click menu items have no bullets in front of their names anymore
 
+## [9.0.2.10.1] - 2021-02-02
+### Fixed
+- Issue #25: Tutorial step 3 does not toggle the correct categories to show the right click menu
+- Issue #26: Going through the tutorial, the Achievement Window toggles instead of staying open
+
 ## [9.0.2.10.0] - 2021-02-02
 ### Added
 - Achievement window height can now be changed up to double the original height
@@ -138,6 +143,7 @@ All notable changes to this project will be documented in this file.
 - The need for almost all localization
 
 [Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.2.10.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3190348
 [9.0.2.10.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3189892
 [9.0.2.9.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3183198
 [9.0.2.8.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3170618

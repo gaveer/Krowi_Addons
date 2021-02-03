@@ -16,6 +16,13 @@ L["T_TAB_TEXT"] = "Achievement Filter";
 L["C_ZONES"] = "Zones";
 L["C_SCENARIOS"] = "Scenarios";
 
+-- Filters
+L["F_COMPLETED"] = "Completed";
+L["F_NOT_COMPLETED"] = "Not Completed";
+L["F_SORT_BY"] = "Sort By";
+L["F_DEFAULT"] = "Default";
+L["F_NAME"] = "Name";
+
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
 L["O_INFO"] = "Info";

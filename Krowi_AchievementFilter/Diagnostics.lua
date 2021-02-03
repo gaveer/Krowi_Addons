@@ -1,5 +1,4 @@
 -- [[ Namespaces ]] --
-
 local _, addon = ...;
 addon.Diagnostics = {};
 local diagnostics = addon.Diagnostics;

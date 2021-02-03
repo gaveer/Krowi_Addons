@@ -28,19 +28,19 @@ local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
 -- [[ Constructors ]] --
 lib.__index = lib;
-function lib:New(text, func, isTitle)
+function lib:New(info)
     local self = {};
     setmetatable(self, lib);
 
-    self.Text = text;
-    self.Func = func;
-    self.IsTitle = isTitle;
+    for k, v in next, info do
+        self[k] = v;
+    end
 
     return self;
 end
 
 function lib:NewExtLink(text, externalLink)
-    return lib:New(text, function() popupDialog.ShowExternalLink(externalLink); end);
+    return lib:New({Text = text, Func = function() popupDialog.ShowExternalLink(externalLink); end});
 end
 
 -- [[ Other ]] --
@@ -54,10 +54,10 @@ function lib:AddChild(item)
     return item;
 end
 
-function lib:AddChildFull(...)
-    return self:AddChild(lib:New(...));
+function lib:AddChildFull(info)
+    return self:AddChild(lib:New(info));
 end
 
-function lib:AddChildExtLinkFull(...)
-    return self:AddChild(lib:NewExtLink(...));
+function lib:AddChildExtLinkFull(text, externalLink)
+    return self:AddChild(lib:NewExtLink(text, externalLink));
 end

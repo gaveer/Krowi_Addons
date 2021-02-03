@@ -18,6 +18,13 @@ local defaults = {
             MinimumCharactersToSearch = 3,
             NumberOfSearchPreviews = 5,
             ClearOnRightClick = true
+        },
+        Filters = {
+            Completion = {
+                Completed = true,
+                NotCompleted = true
+            },
+            SortBy = addon.L["F_DEFAULT"]
         }
     }
 }

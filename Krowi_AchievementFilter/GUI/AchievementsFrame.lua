@@ -94,19 +94,19 @@ local function GetFilteredAchievements(category) -- @TODO Gets all achievements 
 	local achievements = {};
 	if category.Achievements ~= nil then
 		for _, achievement in next, category.Achievements do
-			-- if ACHIEVEMENTUI_SELECTEDFILTER == AchievementFrame_GetCategoryNumAchievements_All then
+			if addon.Options.db.Filters.Completion.Completed and addon.Options.db.Filters.Completion.NotCompleted then
 				tinsert(achievements, achievement);
-			-- elseif ACHIEVEMENTUI_SELECTEDFILTER == AchievementFrame_GetCategoryNumAchievements_Complete then
-			-- 	local _, _, _, completed = GetAchievementInfo(achievement.ID);
-			-- 	if completed then
-			-- 		tinsert(achievements, achievement.ID);
-			-- 	end
-			-- elseif ACHIEVEMENTUI_SELECTEDFILTER == AchievementFrame_GetCategoryNumAchievements_Incomplete then
-			-- 	local _, _, _, completed = GetAchievementInfo(achievement.ID);
-			-- 	if not completed then
-			-- 		tinsert(achievements, achievement.ID);
-			-- 	end
-			-- end
+			elseif addon.Options.db.Filters.Completion.Completed then
+				local _, _, _, completed = GetAchievementInfo(achievement.ID);
+				if completed then
+					tinsert(achievements, achievement);
+				end
+			elseif addon.Options.db.Filters.Completion.NotCompleted then
+				local _, _, _, completed = GetAchievementInfo(achievement.ID);
+				if not completed then
+					tinsert(achievements, achievement);
+				end
+			end
 		end
 	end
 

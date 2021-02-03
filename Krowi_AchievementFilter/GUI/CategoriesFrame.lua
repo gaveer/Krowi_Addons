@@ -58,7 +58,7 @@ function KrowiAF_CategoriesFrame_OnShow(self) -- Used in Templates - KrowiAF_Cat
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Hide(); -- Issue #11: Fix
 	AchievementFrameFilterDropDown:Hide();
-	AchievementFrameHeaderLeftDDLInset:Hide();
+	AchievementFrameHeaderLeftDDLInset:Show(); -- This can be hidden if on summary screen
 	AchievementFrame.searchBox:Hide();
 
 	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
@@ -317,12 +317,12 @@ function categoriesFrame:SelectCategory(category, collapsed)
 	local categoriesTree = category:GetTree();
 
 	for i, cat in next, categoriesTree do
-		diagnostics.Debug(cat.Name);
-		diagnostics.Debug(cat.IsSelected);
-		diagnostics.Debug(cat.NotCollapsed);
-		diagnostics.Debug(collapsed);
-		diagnostics.Debug(not cat.IsSelected);
-		diagnostics.Debug(cat.NotCollapsed == collapsed);
+		-- diagnostics.Debug(cat.Name);
+		-- diagnostics.Debug(cat.IsSelected);
+		-- diagnostics.Debug(cat.NotCollapsed);
+		-- diagnostics.Debug(collapsed);
+		-- diagnostics.Debug(not cat.IsSelected);
+		-- diagnostics.Debug(cat.NotCollapsed == collapsed);
 		if not cat.IsSelected or (cat.NotCollapsed == collapsed) then -- Issue #23: Fix -- Issue #25 Broken, Fix
 			Select(self, cat, collapsed, i ~= #categoriesTree); -- Issue #23: Broken
 		end

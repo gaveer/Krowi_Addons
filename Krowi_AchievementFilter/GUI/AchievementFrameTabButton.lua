@@ -7,7 +7,7 @@ local achFrameTabBtn = gui.AchievementFrameTabButton;
 
 -- [[ Constructors ]] --
 achFrameTabBtn.__index = achFrameTabBtn; -- Used to support OOP like code
-function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxFrame)
+function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame)
     diagnostics.Trace("achievementFrameTabButton:New");
 
 	-- Increment ID
@@ -23,6 +23,7 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, searchBoxF
     frame.ID = AchievementFrame.numTabs;
     frame.CategoriesFrame = categoriesFrame;
     frame.AchievementsFrame = achievementsFrame;
+    frame.FilterButton = filterButton;
     frame.SearchBoxFrame = searchBoxFrame;
 
     frame:RegisterEvent("ADDON_LOADED");
@@ -77,7 +78,7 @@ function achFrameTabBtn:Base_OnClick(id)
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();
     end
-    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame, self.SearchBoxFrame);
+    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame, self.FilterButton, self.SearchBoxFrame);
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 end
 

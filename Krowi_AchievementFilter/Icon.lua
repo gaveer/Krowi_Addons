@@ -1,5 +1,6 @@
-local _, addon = ...; -- Global addon namespace
-local diagnostics = addon.Diagnostics; -- Local diagnostics namespace
+-- [[ Namespaces ]] --
+local _, addon = ...;
+local diagnostics = addon.Diagnostics;
 
 -- Using LibDBIcon instead of creating the icon from scratch is the automatic integration with other addons that also use LibDataBroker
 addon.Icon = LibStub("LibDBIcon-1.0"); -- Global icon object

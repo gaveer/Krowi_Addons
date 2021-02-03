@@ -25,9 +25,6 @@ function loadHelper:OnEvent(event, arg1)
             addon.Options.Load();
             addon.Icon.Load();
             addon.Tutorials.Load();
-            if addon.Diagnostics.DebugEnabled() then
-                addon.GUI.Filter.Load(); -- TESTING !!!!!
-            end
 
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             local gui = addon.GUI;
@@ -37,10 +34,11 @@ function loadHelper:OnEvent(event, arg1)
 
             gui.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
             gui.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
+            gui.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrame("AchievementsFrame")));
             gui.AddFrame("FullSearchResultsFrame", gui.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
             gui.AddFrame("SearchPreviewFrame", gui.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
             gui.AddFrame("SearchBoxFrame", gui.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));
-            gui.AddFrame("TabButton1", gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], gui.GetFrames("CategoriesFrame", "AchievementsFrame", "SearchBoxFrame")));
+            gui.AddFrame("TabButton1", gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], gui.GetFrames("CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame")));
 
             gui.ResetAchievementFrameHeight();
 

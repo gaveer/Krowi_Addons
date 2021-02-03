@@ -84,23 +84,23 @@ local function OnClickRightButton(self, anchor, offsetX, offsetY)
 
 	-- Always add header
 	local _, name = GetAchievementInfo(achievement.ID);
-	rightClickMenu:AddFull(name, nil, true);
+	rightClickMenu:AddFull({Text = name, IsTitle = true});
 
 	-- Debug table
 	if diagnostics.DebugEnabled() then
-		rightClickMenu:AddFull("Debug Table", function() diagnostics.DebugTable(self); end);
+		rightClickMenu:AddFull({Text = "Debug Table", Func = function() diagnostics.DebugTable(self); end});
 	end
 
 	-- Wowhead link
 	if not achievement.HasNoWowheadLink then
 		local externalLink = "https://www.wowhead.com/achievement=" .. achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
 		diagnostics.Debug(externalLink);
-		rightClickMenu:AddFull("Wowhead", function() popupDialog.ShowExternalLink(externalLink); end);
+		rightClickMenu:AddFull({Text = "Wowhead", Func = function() popupDialog.ShowExternalLink(externalLink); end});
 	end
 
 	-- IAT Link
 	if achievement.HasIATLink and addon.IsIATLoaded() then
-		rightClickMenu:AddFull("IAT Tactics", function() diagnostics.Debug(IAT_DisplayAchievement(achievement.ID)); end);
+		rightClickMenu:AddFull({Text = "IAT Tactics", Func = function() diagnostics.Debug(IAT_DisplayAchievement(achievement.ID)); end});
 	end
 
 	-- Extra menu defined at the achievement self

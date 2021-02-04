@@ -52,6 +52,9 @@ Note: All other arguments can be used as a general!
  buttonClick .... Function with button's click action.
  buttonLeft, buttonBottom
  shine .......... [optional] The frame to anchor the flashing "look at me!" glow.
+ shineAll ....... [optional] Set shineTop, shineBottom, shineLeft, shineRight to the same value, can be overwritten by the invidual arguments or shineWidth and shineHeight
+ shineWidth ..... [optional] Set shineLeft, shineRight to the same value, can be overwritten by the invidual arguments
+ shineHeight .... [optional] Set shineTop, shineBottom to the same value, can be overwritten by the invidual arguments
  shineTop, shineBottom, shineLeft, shineRight
  point .......... Default is "CENTER".
  anchor ......... Default is "UIParent".
@@ -200,19 +203,46 @@ local function UpdateFrame(frame, i)
 	else
 		frame.button:Hide()
 	end
-	
+
 	-- Shine
 	if data.shine then
 		frame.shine:SetParent(data.shine)
-		frame.shine:SetPoint('BOTTOMRIGHT', data.shineRight or 0, data.shineBottom or 0)
-		frame.shine:SetPoint('TOPLEFT', data.shineLeft or 0, data.shineTop or 0)
+		local shineTop, shineBottom, shineLeft, shineRight = 0, 0, 0, 0;
+		if data.shineAll then
+			shineTop = data.shineAll;
+			shineBottom = -data.shineAll;
+			shineLeft = -data.shineAll;
+			shineRight = data.shineAll;
+		end
+		if data.shineHeight then
+			shineTop = data.shineHeight;
+			shineBottom = -data.shineHeight;
+		end
+		if data.shineWidth then
+			shineLeft = -data.shineWidth;
+			shineRight = data.shineWidth;
+		end
+		if data.shineTop then
+			shineTop = data.shineTop;
+		end
+		if data.shineBottom then
+			shineBottom = data.shineBottom;
+		end
+		if data.shineLeft then
+			shineLeft = data.shineLeft;
+		end
+		if data.shineRight then
+			shineRight = data.shineRight;
+		end
+		frame.shine:SetPoint('BOTTOMRIGHT', shineRight, shineBottom)
+		frame.shine:SetPoint('TOPLEFT', shineLeft, shineTop)
 		frame.shine:Show()
 		frame.flash:Play()
 	else
 		frame.flash:Stop()
 		frame.shine:Hide()
 	end
-	
+
 	-- Buttons
 	if i == 1 then
 		frame.prev:Disable()
@@ -225,7 +255,7 @@ local function UpdateFrame(frame, i)
 	else
 		frame.next:Disable()
 	end
-	
+
 	-- Save
 	local sv = frame.data.key or frame.data.savedvariable
 	if sv then

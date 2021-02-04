@@ -35,10 +35,8 @@ function tutorials.Load()
             image = media .. "Grouping",
             text = GetTitle(addon.L["FT_GROUPING_TITLE"]) ..
                             addon.L["FT_GROUPING_DESC"],
-            shineTop = 6,
-            shineBottom = -6,
-            shineLeft = -7,
-            shineRight = 7,
+            shineHeight = 6,
+            shineWidth = 7,
         },
         {   -- 3
 		    imageHeight = 256,
@@ -91,10 +89,7 @@ function tutorials.Load()
                                             AF_COLOR_YELLOW .. addon.L["F_NAME"] .. AF_COLOR_END,
                                             AF_COLOR_YELLOW .. addon.L["F_REVERSE_SORT"] .. AF_COLOR_END),
 
-            shineTop = 5,
-            shineBottom = -5,
-            shineLeft = -5,
-            shineRight = 5,
+            shineAll = 7,
         },
         onShow = function(self, i)
             local gui = addon.GUI;

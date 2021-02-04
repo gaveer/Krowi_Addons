@@ -22,6 +22,7 @@ L["F_NOT_COMPLETED"] = "Not Completed";
 L["F_SORT_BY"] = "Sort By";
 L["F_DEFAULT"] = "Default";
 L["F_NAME"] = "Name";
+L["F_REVERSE_SORT"] = "Reverse Sort";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
@@ -83,3 +84,13 @@ L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is pos
                                 "All options can be found under Game Menu -> Interface -> AddOns -> %s";
 L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
 L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";
+L["FT_FILTER_TITLE"] = "Enhanced filtering and sorting";
+L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with only the option to select All, Earned or Incomplete achievements. Here it's enhanced with\n\n" ..
+                        "Filtering (multiple filters can be selected at the same time):\n" ..
+                        "- %s: Show completed achievements\n" ..
+                        "- %s: Show not completed achievements\n\n" ..
+                        "Sorting:\n" ..
+                        "- %s: No sorting applied\n" ..
+                        "- %s: Sort achievements based on their names\n" ..
+                        "- %s: When this is selected, invert the order of the sorted achievements\n\n" ..
+                        "More filter and sorting options will be added in later versions. Requests possible.";

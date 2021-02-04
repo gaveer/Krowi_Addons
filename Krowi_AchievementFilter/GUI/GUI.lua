@@ -109,16 +109,7 @@ function gui.ResetView()
     if frames["CategoriesFrame"] and frames["CategoriesFrame"].ID then -- Checking ID is to know if the frame is initialised or not
         -- We want to have Classic selected and collapsed
         -- Achievement 1283 has Dungeons as parent but we need its parent which is Classic
-        -- local cat = addon.GetAchievement(1283):GetCategory().Parent;
-        -- diagnostics.Debug(cat.Name);
-        -- diagnostics.Debug(cat.IsSelected);
-        -- diagnostics.Debug(cat.NotCollapsed);
-        -- diagnostics.Debug(frames["CategoriesFrame"].SelectedCategory.Name);
-        -- diagnostics.Debug(frames["CategoriesFrame"].SelectedCategory.IsSelected);
-        -- diagnostics.Debug(frames["CategoriesFrame"].SelectedCategory.NotCollapsed);
         frames["CategoriesFrame"]:SelectCategory(addon.GetAchievement(1283):GetCategory().Parent, true);
-        -- frames["CategoriesFrame"].SelectedCategory = addon.Categories[1];
-        -- frames["CategoriesFrame"]:Update();
     end
 
     if frames["SearchBoxFrame"] and frames["SearchBoxFrame"].ID then
@@ -130,7 +121,7 @@ function gui.ResetView()
     end
 end
 
-function gui.ToggleAchievementFrameAtTab1(forceOpen)
+function gui.ToggleAchievementFrameAtTab1(forceOpen) -- Issue #26 Broken, Fix
     diagnostics.Trace("gui.ToggleAchievementFrameAtTab1");
 
     if not IsAddOnLoaded("Blizzard_AchievementUI") then

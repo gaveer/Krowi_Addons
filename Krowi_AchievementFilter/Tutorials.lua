@@ -5,7 +5,7 @@ local diagnostics = addon.Diagnostics;
 addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
 local tutorials = addon.Tutorials; -- Local tutorial object
 
-tutorials.FeaturesTutorialPages = 5;
+tutorials.FeaturesTutorialPages = 6;
 tutorials.FeaturesTutorial = "Krowi_AchievementFilter_FeaturesTutorial";
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
@@ -13,7 +13,7 @@ local function GetTitle(title)
     return AF_COLOR_YELLOW .. title .. AF_COLOR_END .. "\n\n";
 end
 
-local tabButton1, categoriesFrame, achievementsFrame, searchBoxFrame, searchPreviewFrame, fullSearchResultsFrame;
+local tabButton1, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame, searchPreviewFrame, fullSearchResultsFrame;
 function tutorials.Load()
     tutorials.RegisterTutorial(tutorials.FeaturesTutorial, {
         savedvariable = addon.Options.db,
@@ -80,6 +80,22 @@ function tutorials.Load()
             shineLeft = -12,
             shineRight = 13,
         },
+        {   -- 6
+            imageHeight = 256,
+            image = media .. "Filter",
+            text = GetTitle(addon.L["FT_FILTER_TITLE"]) ..
+                            string.format(addon.L["FT_FILTER_DESC"],
+                                            AF_COLOR_YELLOW .. addon.L["F_COMPLETED"] .. AF_COLOR_END,
+                                            AF_COLOR_YELLOW .. addon.L["F_NOT_COMPLETED"] .. AF_COLOR_END,
+                                            AF_COLOR_YELLOW .. addon.L["F_DEFAULT"] .. AF_COLOR_END,
+                                            AF_COLOR_YELLOW .. addon.L["F_NAME"] .. AF_COLOR_END,
+                                            AF_COLOR_YELLOW .. addon.L["F_REVERSE_SORT"] .. AF_COLOR_END),
+
+            shineTop = 5,
+            shineBottom = -5,
+            shineLeft = -5,
+            shineRight = 5,
+        },
         onShow = function(self, i)
             local gui = addon.GUI;
 
@@ -120,6 +136,10 @@ function tutorials.Load()
                 searchBoxFrame:SetText("");
                 searchBoxFrame:OnTextChanged();
                 self[i].shine = fullSearchResultsFrame;
+            elseif i == 6 then
+                gui.ToggleAchievementFrameAtTab1(true);
+                self[i].shine = filterButton;
+                print(filterButton:GetTop());
             end
         end
     });
@@ -130,10 +150,11 @@ function tutorials.Load()
     end);
 end
 
-function tutorials.SetFrames(tabBtn1, catFrame, achFrame, srchBxFrame, srchPrvwFrame, fullSrchRsltsFrame)
+function tutorials.SetFrames(tabBtn1, catFrame, achFrame, fltrBtn, srchBxFrame, srchPrvwFrame, fullSrchRsltsFrame)
     tabButton1 = tabBtn1;
     categoriesFrame = catFrame;
     achievementsFrame = achFrame;
+    filterButton = fltrBtn;
     searchBoxFrame = srchBxFrame;
     searchPreviewFrame = srchPrvwFrame;
     fullSearchResultsFrame = fullSrchRsltsFrame;

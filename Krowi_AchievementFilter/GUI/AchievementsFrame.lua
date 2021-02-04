@@ -88,25 +88,46 @@ function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achie
 	func(self);
 end
 
-local function GetFilteredAchievements(category) -- @TODO Gets all achievements right now regardles of the filter - need to look at this on a later time
+local function GetFilteredAchievements(category)
 	diagnostics.Trace("GetFilteredAchievements");
 
 	local achievements = {};
 	if category.Achievements ~= nil then
+		-- Filter achievements
 		for _, achievement in next, category.Achievements do
 			if addon.Options.db.Filters.Completion.Completed and addon.Options.db.Filters.Completion.NotCompleted then
 				tinsert(achievements, achievement);
-			elseif addon.Options.db.Filters.Completion.Completed then
+			else
 				local _, _, _, completed = GetAchievementInfo(achievement.ID);
-				if completed then
+				if addon.Options.db.Filters.Completion.Completed and completed then
 					tinsert(achievements, achievement);
-				end
-			elseif addon.Options.db.Filters.Completion.NotCompleted then
-				local _, _, _, completed = GetAchievementInfo(achievement.ID);
-				if not completed then
+				elseif addon.Options.db.Filters.Completion.NotCompleted and not completed then
 					tinsert(achievements, achievement);
 				end
 			end
+		end
+
+		-- Sort achievements
+		if addon.Options.db.Filters.SortBy.Criteria == addon.L["F_DEFAULT"] then
+			diagnostics.Debug("Sort By " .. addon.L["F_DEFAULT"]);
+			if addon.Options.db.Filters.SortBy.ReverseSort then
+				local tmpTbl = {};
+				for i = #achievements, 1, -1 do
+					tinsert(tmpTbl, achievements[i]);
+				end
+				achievements = tmpTbl;
+			end
+		elseif addon.Options.db.Filters.SortBy.Criteria == addon.L["F_NAME"] then
+			diagnostics.Debug("Sort By " .. addon.L["F_NAME"]);
+			table.sort(achievements, function(a, b)
+				local _, nameA = GetAchievementInfo(a.ID);
+				local _, nameB = GetAchievementInfo(b.ID);
+				local compare = nameA:lower() < nameB:lower();
+				if addon.Options.db.Filters.SortBy.ReverseSort then
+					compare = not compare;
+				end
+				return compare;
+			end);
 		end
 	end
 

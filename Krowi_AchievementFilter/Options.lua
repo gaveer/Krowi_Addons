@@ -24,7 +24,10 @@ local defaults = {
                 Completed = true,
                 NotCompleted = true
             },
-            SortBy = addon.L["F_DEFAULT"]
+            SortBy = {
+                Criteria = addon.L["F_DEFAULT"],
+                ReverseSort = false
+            }
         }
     }
 }

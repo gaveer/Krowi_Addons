@@ -42,7 +42,7 @@ function loadHelper:OnEvent(event, arg1)
 
             gui.ResetAchievementFrameHeight();
 
-            tutorials.SetFrames(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
+            tutorials.SetFrames(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
             tutorials.HookTrigger(gui.GetFrame("TabButton1"));
         end
 

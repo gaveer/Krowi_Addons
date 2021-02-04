@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 ### Added
-- TBD
+- Filtering and Sorting achievements in the new tab (Features #16 and #18)
 
 ### Changed
 - Right click menu items have no bullets in front of their names anymore

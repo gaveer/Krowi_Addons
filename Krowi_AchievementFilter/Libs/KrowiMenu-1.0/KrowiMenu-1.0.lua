@@ -43,6 +43,7 @@ local function Convert(srcItem)
 		item.notCheckable = srcItem.NotCheckable;
 	end
 	item.keepShownOnClick = srcItem.KeepShownOnClick;
+	item.ignoreAsMenuSelection = srcItem.IgnoreAsMenuSelection;
 	if srcItem.Children ~= nil then
 		item.hasArrow = true;
 		item.menuList = {};
@@ -50,10 +51,6 @@ local function Convert(srcItem)
 			tinsert(item.menuList, Convert(child));
 		end
 	end
-
-	-- Additional properties
-	item.KeepSelected = srcItem.KeepSelected;
-	item.UpdateOthers = srcItem.UpdateOthers;
 
 	return item;
 end
@@ -87,50 +84,94 @@ function lib:Toggle(anchor, offsetX, offsetY)
 	end
 end
 
-local function UIDropDownMenuButton_OnClick(self)
-	local checked = self.checked;
-	if type (checked) == "function" then
-		checked = checked(self);
+function lib:SetSelectedName(name)
+	menuFrame.selectedName2 = name; -- Using another property we ommit the visual bugs the other property causes (buttons not selecting correctly on partial redraw)
+	menuFrame.selectedName = nil; -- When we'd use this one, Blizzard code would overwrite info.checked with 1, not looking at the function anymore until the menu is full closed and opened again
+	menuFrame.selectedID = nil;
+	menuFrame.selectedValue = nil;
+	self:UIDropDownMenu_Refresh(menuFrame);
+end
+
+function lib:GetSelectedName(frame)
+	return frame.selectedName2;
+end
+
+local function GetChild(frame, name, key)
+	if (frame[key]) then
+		return frame[key];
+	elseif name then
+		return _G[name..key];
 	end
-	if self.keepShownOnClick then
-		if not self.notCheckable then
-			if not checked then
-				_G[self:GetName().."Check"]:Show();
-				_G[self:GetName().."UnCheck"]:Hide();
-				checked = true;
+	return nil;
+end
+
+function lib:UIDropDownMenu_Refresh(frame, useValue, dropdownLevel)
+	local maxWidth = 0;
+	local somethingChecked = nil;
+	if not dropdownLevel then
+		dropdownLevel = UIDROPDOWNMENU_MENU_LEVEL;
+	end
+	local listFrame = _G["DropDownList"..dropdownLevel];
+	listFrame.numButtons = listFrame.numButtons or 0;
+	-- Just redraws the existing menu
+	for i = 1, UIDROPDOWNMENU_MAXBUTTONS do
+		local button = _G["DropDownList"..dropdownLevel.."Button"..i];
+		local checked = nil;
+		if i <= listFrame.numButtons then
+			-- See if checked or not
+			if lib:GetSelectedName(frame) then
+				if button:GetText() == lib:GetSelectedName(frame) then
+					checked = 1;
+				end
 			end
 		end
-	else
-		self:GetParent():Hide();
+		if button.checked and type(button.checked) == "function" then
+			checked = button.checked(button);
+		end
+		if not button.notCheckable and button:IsShown() then
+			-- If checked show check image
+			local checkImage = _G["DropDownList"..dropdownLevel.."Button"..i.."Check"];
+			local uncheckImage = _G["DropDownList"..dropdownLevel.."Button"..i.."UnCheck"];
+			if not button.ignoreAsMenuSelection then
+				if checked then
+						somethingChecked = true;
+						local icon = GetChild(frame, frame:GetName(), "Icon");
+						if (button.iconOnly and icon and button.icon) then
+							UIDropDownMenu_SetIconImage(icon, button.icon, button.iconInfo);
+						elseif useValue then
+							UIDropDownMenu_SetText(frame, button.value);
+							icon:Hide();
+						else
+							UIDropDownMenu_SetText(frame, button:GetText());
+							icon:Hide();
+						end
+					button:LockHighlight();
+					checkImage:Show();
+					uncheckImage:Hide();
+				else
+					button:UnlockHighlight();
+					checkImage:Hide();
+					uncheckImage:Show();
+				end
+			end
+		end
+		if button:IsShown() then
+			local width = UIDropDownMenu_GetButtonWidth(button);
+			if width > maxWidth then
+				maxWidth = width;
+			end
+		end
 	end
-	if type (self.checked) ~= "function" then
-		self.checked = checked;
+	if somethingChecked == nil then
+		UIDropDownMenu_SetText(frame, VIDEO_QUALITY_LABEL6);
+		local icon = GetChild(frame, frame:GetName(), "Icon");
+		icon:Hide();
 	end
-	-- saving this here because func might use a dropdown, changing this self's attributes
-	local playSound = true;
-	if self.noClickSound then
-		playSound = false;
-	end
-	local func = self.func;
-	if func then
-		func(self, self.arg1, self.arg2, checked);
-	else
-		return;
-	end
-	if playSound then
-		PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
-	end
-
-	if self.UpdateOthers then
-		
+	if not frame.noResize then
+		for i=1, UIDROPDOWNMENU_MAXBUTTONS do
+			local button = _G["DropDownList"..dropdownLevel.."Button"..i];
+			button:SetWidth(maxWidth);
+		end
+		UIDropDownMenu_RefreshDropDownSize(_G["DropDownList"..dropdownLevel]);
 	end
 end
-
-local function UIDropDownMenu_AddButton_Extra(info, level)
-	if info.KeepSelected and level then
-		local button = _G[_G["DropDownList"..level]:GetName().."Button"..info.index];
-		button.UpdateOthers = info.UpdateOthers;
-		button:SetScript("OnClick", UIDropDownMenuButton_OnClick);
-	end
-end
-hooksecurefunc("UIDropDownMenu_AddButton", UIDropDownMenu_AddButton_Extra);

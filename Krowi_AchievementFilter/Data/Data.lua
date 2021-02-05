@@ -18,8 +18,8 @@ function data.Load()
     addon.Shadowlands.Load();
     addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
     -- LOADTEST();
-    
-    diagnostics.DebugTable(addon.Achievements);
+
+    -- diagnostics.DebugTable(addon.Achievements);
 end
 
 local function ConvertToAchievementFrameCategory(datum, categories, achievements)
@@ -82,4 +82,5 @@ function LOADTEST()
     categories["1.1"]:AddCategory(categories["1.1.2"]);
     categories["1.2"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(15271)));
     categories["1"]:AddCategory(categories["1.2"]);
+    
 end

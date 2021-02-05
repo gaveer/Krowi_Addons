@@ -37,7 +37,7 @@ end
 function filterButton:UpdateAchievementFrame()
     diagnostics.Trace("filterButton:UpdateAchievementFrame");
 
-    self.CategoriesFrame:Update();
+    self.CategoriesFrame:Update(true);
     self.AchievementsFrame:ForceUpdate(true); -- Issue #27: Fix
 end
 

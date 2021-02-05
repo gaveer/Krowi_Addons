@@ -37,11 +37,11 @@ L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
 L["O_LAYOUT"] = "Layout";
 L["O_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
-L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width.\n\n" .. 
-                                            "This value can be changed while the achievement window is open while having the %s tab selected. This will however lag your game.\n\n%s";
+L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width.\n\n" ..
+                                            "This value can be changed while the achievement window is open while having the {tabName} tab selected. This will however lag your game.\n\n{reloadRequired}";
 L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] = "Achievement window height offset";
-L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"] = "The height that will be added to or subtracted from the default achievement window height.\n\n" .. 
-                                                "This value can be changed while the achievement window is open while having the %s tab selected. This will however lag your game.\n\n%s";
+L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"] = "The height that will be added to or subtracted from the default achievement window height.\n\n" ..
+                                                "This value can be changed while the achievement window is open while having the {tabName} tab selected. This will however lag your game.\n\n{reloadRequired}";
 L["O_SEARCH"] = "Search";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] = "Clear search field on Right Click";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"] = "Enable / disable the option to clear the search field when Right Clicking in it";
@@ -49,7 +49,7 @@ L["O_MIN_CHAR_TO_SEARCH"] = "Minimum characters to search";
 L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to start searching for achievements matching the query.\n" ..
                                     "The smaller the number, the greater the impact on the game.";
 L["O_NUM_OF_SEARCH_PREVIEWS"] = "Number of search previews";
-L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n%s";
+L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n{reloadRequired}";
 L["O_DEBUG"] = "Debug";
 L["O_ENABLE_DEBUG_INFO"] = "Enable debug info";
 L["O_ENABLE_DEBUG_INFO_DESC"] = "Enable / disable debug info";
@@ -74,9 +74,9 @@ L["FT_GROUPING_DESC"] = "Instead of grouping achievements by type and then by ex
 L["FT_RIGHTCLICKMENU_TITLE"] = "Right-click menu";
 L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click menu.\n\n" ..
                                 "Features:\n" ..
-                                "- Link to %s\n" ..
-                                "- Link to %s if the achievement is related to Pet Battles and %s has relevant information about it\n" ..
-                                "- Shortcut to %s if tactics for the achievement are available (%s is %s)";
+                                "- Link to {wowhead}\n" ..
+                                "- Link to {xuFuPetGuides} if the achievement is related to Pet Battles and {xuFuPetGuides} has relevant information about it\n" ..
+                                "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})";
 L["FT_SEARCHPREVIEW_TITLE"] = "Searching";
 L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way but it will only search achievements in this tab.\n\n" ..
                                 "Additionally, there are a couple of new options:\n" ..
@@ -98,3 +98,5 @@ L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with
                         "- %s: Sort achievements based on their names\n" ..
                         "- %s: When this is selected, invert the order of the sorted achievements\n\n" ..
                         "More filter and sorting options will be added in later versions. Requests possible.";
+
+L["TEST"] = "Hello {name}, welcome to {company}."

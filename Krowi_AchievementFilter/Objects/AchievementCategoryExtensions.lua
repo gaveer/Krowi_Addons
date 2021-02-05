@@ -1,12 +1,10 @@
 -- [[ Namespaces ]] --
-
 local _, addon = ...;
 local objects = addon.Objects;
 local category = objects.AchievementCategory; -- Locally we can use just category
 local achievement = objects.Achievement;
 
 -- [[ Add Child Category Extensions ]] --
-
 function category:AddCatZones() -- See AddCategory - with 'Zones' as name
     return self:AddCategory(category:New(addon.L["C_ZONES"]));
 end
@@ -60,7 +58,6 @@ function category:AddCatLFGDungeonInfo(id) -- See AddCategory - with the name fr
 end
 
 -- [[ Add Achievement Extensions ]] --
-
 function category:AddNewAchievement(id, obtainable, hasWowheadLink, hasIATLink) -- Adds a new achievement to the achievement category
     return self:AddAchievement(achievement:New(id, obtainable, hasWowheadLink, hasIATLink));
 end

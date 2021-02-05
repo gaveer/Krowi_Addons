@@ -85,6 +85,8 @@ function tutorials.Load()
                             string.format(addon.L["FT_FILTER_DESC"],
                                             AF_COLOR_YELLOW .. addon.L["F_COMPLETED"] .. AF_COLOR_END,
                                             AF_COLOR_YELLOW .. addon.L["F_NOT_COMPLETED"] .. AF_COLOR_END,
+                                            AF_COLOR_YELLOW .. addon.L["F_OBTAINABLE"] .. AF_COLOR_END,
+                                            AF_COLOR_YELLOW .. addon.L["F_NOT_OBTAINABLE"] .. AF_COLOR_END,
                                             AF_COLOR_YELLOW .. addon.L["F_DEFAULT"] .. AF_COLOR_END,
                                             AF_COLOR_YELLOW .. addon.L["F_NAME"] .. AF_COLOR_END,
                                             AF_COLOR_YELLOW .. addon.L["F_REVERSE_SORT"] .. AF_COLOR_END),

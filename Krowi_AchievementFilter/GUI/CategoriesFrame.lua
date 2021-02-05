@@ -96,31 +96,33 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
 	AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
 	for _, button in next, frame.Container.buttons do
-		frame.DisplayButton(button, button.Category, frame:GetWidth());
+		frame:DisplayButton(button, button.Category, frame:GetWidth());
 	end
 	func(scrollBar);
 end
 
-local function GetAchievementNumbers(category)
+local function GetAchievementNumbers(self, category)
 	-- diagnostics.Trace("GetAchievementNumbers"); -- Generates a lot of messages
 
 	local numOfAch, numOfCompAch, numOfIncompAch = 0, 0, 0;
 
 	if category.Achievements ~= nil then
 		for _, achievement in next, category.Achievements do
-			numOfAch = numOfAch + 1;
-			local _, _, _, completed = GetAchievementInfo(achievement.ID);
-			if completed then
-				numOfCompAch = numOfCompAch + 1;
-			else
-				numOfIncompAch = numOfIncompAch + 1;
+			if self.FilterButton and self.FilterButton:Validate(achievement) > 0 then
+				numOfAch = numOfAch + 1;
+				local _, _, _, completed = GetAchievementInfo(achievement.ID);
+				if completed then
+					numOfCompAch = numOfCompAch + 1;
+				else
+					numOfIncompAch = numOfIncompAch + 1;
+				end
 			end
 		end
 	end
 
 	if category.Children ~= nil then
 		for _, child in next, category.Children do
-			local childNumOfAch, childNumOfCompAch, childNumOfIncompAch = GetAchievementNumbers(child);
+			local childNumOfAch, childNumOfCompAch, childNumOfIncompAch = GetAchievementNumbers(self, child);
 			numOfAch = numOfAch + childNumOfAch;
 			numOfCompAch = numOfCompAch + childNumOfCompAch;
 			numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
@@ -139,9 +141,10 @@ function categoriesFrame:Update()
 
 	local displayCategories = {};
 	for _, category in next, self.Categories do
-		-- if not category.Hidden then -- If already visible, keep visible
 		if category.NotHidden then -- If already visible, keep visible
-			tinsert(displayCategories, category);
+			if GetAchievementNumbers(self, category) > 0 then
+				tinsert(displayCategories, category);
+			end
 			-- diagnostics.Debug("Showing " .. category.Name);
 		end
 	end
@@ -154,7 +157,7 @@ function categoriesFrame:Update()
 		category = displayCategories[i + offset];
 		displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		if category then
-			self.DisplayButton(buttons[i], category, self:GetWidth());
+			self:DisplayButton(buttons[i], category, self:GetWidth());
 			if category == self.SelectedCategory then
 				buttons[i]:LockHighlight();
 			else
@@ -170,12 +173,12 @@ function categoriesFrame:Update()
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
-function categoriesFrame.DisplayButton(button, category, baseWidth)
+function categoriesFrame:DisplayButton(button, category, baseWidth)
 	-- local name = "";
 	-- if category then
 	-- 	name = category.Name;
 	-- end
-	-- diagnostics.Trace("categoriesFrame.DisplayButton for " .. name); -- Generates a lot of messages
+	-- diagnostics.Trace("categoriesFrame:DisplayButton for " .. name); -- Generates a lot of messages
 
 	if not category then
 		button.Category = nil;
@@ -211,7 +214,7 @@ function categoriesFrame.DisplayButton(button, category, baseWidth)
 	button.Category = category;
 
 	-- For the tooltip
-	local numOfAch, numOfCompAch = GetAchievementNumbers(category);
+	local numOfAch, numOfCompAch = GetAchievementNumbers(self, category);
 	button.name = category.Name;
 	button.text = nil;
 	button.numAchievements = numOfAch;

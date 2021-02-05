@@ -24,6 +24,10 @@ local defaults = {
                 Completed = true,
                 NotCompleted = true
             },
+            Obtainability = {
+                Obtainable = true,
+                NotObtainable = false
+            },
             SortBy = {
                 Criteria = addon.L["F_DEFAULT"],
                 ReverseSort = false

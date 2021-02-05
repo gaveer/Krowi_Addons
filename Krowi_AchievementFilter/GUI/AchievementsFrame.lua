@@ -88,22 +88,15 @@ function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achie
 	func(self);
 end
 
-local function GetFilteredAchievements(category)
+local function GetFilteredAchievements(self, category)
 	diagnostics.Trace("GetFilteredAchievements");
 
 	local achievements = {};
 	if category.Achievements ~= nil then
 		-- Filter achievements
 		for _, achievement in next, category.Achievements do
-			if addon.Options.db.Filters.Completion.Completed and addon.Options.db.Filters.Completion.NotCompleted then
+			if self.FilterButton and self.FilterButton:Validate(achievement) > 0 then
 				tinsert(achievements, achievement);
-			else
-				local _, _, _, completed = GetAchievementInfo(achievement.ID);
-				if addon.Options.db.Filters.Completion.Completed and completed then
-					tinsert(achievements, achievement);
-				elseif addon.Options.db.Filters.Completion.NotCompleted and not completed then
-					tinsert(achievements, achievement);
-				end
 			end
 		end
 
@@ -142,7 +135,7 @@ function achievementsFrame:Update()
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
-	local achievements = GetFilteredAchievements(category);
+	local achievements = GetFilteredAchievements(self, category);
 	local numButtons = #buttons;
 
 	local selection = self.SelectedAchievement;
@@ -176,11 +169,15 @@ function achievementsFrame:Update()
 	end
 end
 
-function achievementsFrame:ForceUpdate() -- Issue #3: Fix
+function achievementsFrame:ForceUpdate(toTop) -- Issue #3: Fix
 	diagnostics.Trace("achievementsFrame:ForceUpdate");
 
 	if not self:IsShown() then -- Issue #8: Fix, Issue #10 : Broken
 		return;
+	end
+
+	if toTop then -- Issue #27: Fix
+		self.Container.ScrollBar:SetValue(0);
 	end
 
 	-- Issue #8: Broken
@@ -417,6 +414,10 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	if mouseButton == nil then
 		mouseButton = "LeftButton";
+	end
+
+	if self.FilterButton then
+		self.FilterButton:SetFilters(achievement);
 	end
 
 	local category = achievement:GetCategory();

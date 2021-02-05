@@ -1,5 +1,4 @@
 -- [[ Namespaces ]] --
-
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 local objects = addon.Objects;
@@ -8,15 +7,18 @@ local achievement = objects.Achievement;
 
 
 -- [[ Constructors ]] --
-
 achievement.__index = achievement;
 function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Creates a new achievement
     local self = {};
     setmetatable(self, achievement);
 
     self.ID = id or 0;
-    self.NotObtainable = obtainable == false; -- By inverting this we reduce memory usage because 99% is obtainable
-    self.HasNoWowheadLink = hasWowheadLink == false; -- By inverting this we reduce memory usage because 99% has a Wowhead link
+    if obtainable == false then -- We only want to set it if it's not obtainable, otherwise nil
+        self.NotObtainable = true; -- By inverting this we reduce memory usage because 99% is obtainable
+    end
+    if hasWowheadLink == false then -- We only want to set it if it's not obtainable, otherwise nil
+        self.HasNoWowheadLink = true; -- By inverting this we reduce memory usage because 99% has a Wowhead link
+    end
     self.HasIATLink = hasIATLink;
 
     return self;
@@ -24,7 +26,6 @@ end
 
 
 -- [[ Methods ]] --
-
 function achievement:AddRCMenExtra(rcMenExtra) -- Adds extra content to the achievement's right click menu, calling this method multiple times will overwrite the previous call
 
     self.RCMenExtra = rcMenExtra;

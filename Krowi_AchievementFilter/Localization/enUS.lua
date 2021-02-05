@@ -19,6 +19,8 @@ L["C_SCENARIOS"] = "Scenarios";
 -- Filters
 L["F_COMPLETED"] = "Completed";
 L["F_NOT_COMPLETED"] = "Not Completed";
+L["F_OBTAINABLE"] = "Obtainable";
+L["F_NOT_OBTAINABLE"] = "Not Obtainable";
 L["F_SORT_BY"] = "Sort By";
 L["F_DEFAULT"] = "Default";
 L["F_NAME"] = "Name";
@@ -88,7 +90,9 @@ L["FT_FILTER_TITLE"] = "Enhanced filtering and sorting";
 L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with only the option to select All, Earned or Incomplete achievements. Here it's enhanced with\n\n" ..
                         "Filtering (multiple filters can be selected at the same time):\n" ..
                         "- %s: Show completed achievements\n" ..
-                        "- %s: Show not completed achievements\n\n" ..
+                        "- %s: Show not completed achievements\n" ..
+                        "- %s: Show obtainable achievements\n" ..
+                        "- %s: Show not obtainable achievements\n\n" ..
                         "Sorting:\n" ..
                         "- %s: No sorting applied\n" ..
                         "- %s: Sort achievements based on their names\n" ..

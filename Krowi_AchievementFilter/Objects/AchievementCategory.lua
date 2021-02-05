@@ -1,5 +1,4 @@
 -- [[ Namespaces ]] --
-
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 local objects = addon.Objects;
@@ -7,7 +6,6 @@ objects.AchievementCategory = {};
 local category = objects.AchievementCategory; -- Locally we can use just category
 
 -- [[ Constructors ]] --
-
 category.__index = category;
 function category:New(name) -- Creates a new achievement category
     local self = {};
@@ -15,6 +13,7 @@ function category:New(name) -- Creates a new achievement category
 
     self.Name = name or "Unknown";
     self.Level = 0;
+    self.NotHidden = true;
 
     return self;
 end
@@ -24,7 +23,6 @@ function category:NewCatInfo(id) -- Creates a new achievement category with the 
 end
 
 -- [[ Methods ]] --
-
 function category:AddCategory(cat) -- Adds a child achievement category to the achievement category
     if self.Children == nil then
         self.Children = {}; -- By creating the children table here we reduce memory usage because not every category has children
@@ -32,6 +30,7 @@ function category:AddCategory(cat) -- Adds a child achievement category to the a
     tinsert(self.Children, cat);
     cat.Parent = self;
     cat.Level = self.Level + 1;
+    cat.NotHidden = nil; -- Has parent so initially we are hidden
     return cat;
 end
 

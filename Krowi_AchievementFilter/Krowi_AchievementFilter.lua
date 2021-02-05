@@ -34,7 +34,7 @@ function loadHelper:OnEvent(event, arg1)
 
             gui.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
             gui.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
-            gui.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrame("AchievementsFrame")));
+            gui.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrames("CategoriesFrame", "AchievementsFrame")));
             gui.AddFrame("FullSearchResultsFrame", gui.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
             gui.AddFrame("SearchPreviewFrame", gui.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
             gui.AddFrame("SearchBoxFrame", gui.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));

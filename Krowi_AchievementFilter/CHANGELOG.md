@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Added
 - Filtering and Sorting achievements in the new tab (Features #16 and #18)
+- Tutorial added explaining the filtering and search features
+- When filters are applied and certain categories would be empty, these categories are now hidden
+- When searching for an achievement that is hidden due to a filter, filters will automatically get adjusted to show the achievement
 
 ### Changed
 - Right click menu items have no bullets in front of their names anymore

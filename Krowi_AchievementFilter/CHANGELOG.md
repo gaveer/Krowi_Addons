@@ -1,10 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-### Added
-TBD
-
 ## [9.0.2.11.0] - 2021-02-05
 ### Added
 - Filtering and Sorting achievements in the new tab (Features #16 and #18)
@@ -149,7 +145,6 @@ TBD
 ### Removed
 - The need for almost all localization
 
-[Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
 [9.0.2.11.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3193640
 [9.0.2.10.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3190348
 [9.0.2.10.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3189892

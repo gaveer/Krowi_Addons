@@ -5,7 +5,6 @@ local objects = addon.Objects;
 objects.Achievement = {};
 local achievement = objects.Achievement;
 
-
 -- [[ Constructors ]] --
 achievement.__index = achievement;
 function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Creates a new achievement
@@ -24,10 +23,8 @@ function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Creates 
     return self;
 end
 
-
 -- [[ Methods ]] --
 function achievement:AddRCMenExtra(rcMenExtra) -- Adds extra content to the achievement's right click menu, calling this method multiple times will overwrite the previous call
-
     self.RCMenExtra = rcMenExtra;
 end
 

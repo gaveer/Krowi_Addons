@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 TBD
 
+### Changed
+- Category tooltip info is now cached instead of fetching it every time resulting in huge performance increases to up to 10 times faster GUI loading
+
 ## [9.0.2.11.0] - 2021-02-05
 ### Added
 - Filtering and Sorting achievements in the new tab (Features #16 and #18)

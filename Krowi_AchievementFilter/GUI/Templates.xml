@@ -98,6 +98,7 @@
         	<Anchor point="BOTTOM" y="20"/> <!-- relativeTo="AchievementFrame" -->
         </Anchors>
 		<Scripts>
+        	<OnEvent function="KrowiAF_CategoriesFrame_OnEvent"/>
 			<OnShow function="KrowiAF_CategoriesFrame_OnShow"/>
 			<OnHide function="KrowiAF_CategoriesFrame_OnHide"/>
 		</Scripts>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="E:/World of Warcraft/_retail_/Interface/AddOns/Krowi_Databases/Krowi_AchievementFilter.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1884"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,19:mainAchievementCategory"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Achievement" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="79"/><column index="3" value="121"/><column index="4" value="79"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementCategory" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="63"/><column index="3" value="98"/><column index="4" value="66"/><column index="5" value="76"/><column index="6" value="98"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementCategoryAchievement" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="82"/><column index="3" value="107"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementHasIATLink" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementHasNoWowheadLink" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementNotObtainable" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementUnobtainable" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Function" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="144"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Krowi_AchievementFilter_SelectAllData.sql">select AC.ID as ID, AC.Location, P.Location || AC.Location as conc,
+	case when AC.FunctionValue IS NULL
+		then F.Call
+		else replace(F.Call, 'id', AC.FunctionValue)
+	end as Function,
+	P.ID as ParentID, AC.Name as Name, P.Name as Parent, A.ID as AchievementID,
+	case when ANO.ID is not NULL
+		then 'false'
+	end as Obtainable,
+	case when AHNWL.ID is not NULL
+		then 'false'
+	end as HasWowheadLink,
+	case when AHIATL.ID is not NULL
+		then 'true'
+	end as HasIATLink
+from AchievementCategory AC
+	left join AchievementCategory P
+	on AC.ParentID = P.ID
+	left join Function F
+	on AC.FunctionID = F.ID
+	left join AchievementCategoryAchievement ACA
+	on AC.ID = ACA.CategoryID
+	left join Achievement A
+	on ACA.AchievementID = A.ID
+	left join AchievementNotObtainable as ANO
+	on A.ID = ANO.ID
+	left join AchievementHasNoWowheadLink as AHNWL
+	on A.ID = AHNWL.ID
+	left join AchievementHasIATLink as AHIATL
+	on A.ID = AHIATL.ID
+order by
+	AC.ID ASC</sql><sql name="Krowi_AchievementFilter_SelectCategoriesRecursive.sql">WITH CTE_AchievementCategory(ID, ParentID, Location, LocationPath) AS (
+  SELECT ID, ParentID, Location, substr('0' || Location, -2, 2)
+  FROM AchievementCategory AC
+  WHERE ParentID IS NULL
+  UNION ALL
+  SELECT AC.ID, AC.ParentID, AC.Location, CTEAC.LocationPath || '.' || substr('0' || AC.Location, -2, 2)
+  FROM AchievementCategory AC INNER JOIN CTE_AchievementCategory CTEAC
+  ON CTEAC.ID = AC.ParentID
+)
+SELECT
+	CTEAC.LocationPath as Location,
+	AC.ID as ID,
+	case when AC.FunctionValue IS NULL
+		then F.Call
+		else replace(F.Call, 'id', AC.FunctionValue)
+	end as Function,
+	P.ID as ParentID,
+	AC.Name as Name,
+	P.Name as Parent,
+	A.ID as AchievementID,
+	case when ANO.ID is not NULL
+		then 'false'
+	end as Obtainable,
+	case when AHNWL.ID is not NULL
+		then 'false'
+	end as HasWowheadLink,
+	case when AHIATL.ID is not NULL
+		then 'true'
+	end as HasIATLink
+FROM
+	CTE_AchievementCategory CTEAC
+	left join AchievementCategory AC
+	on CTEAC.ID = AC.ID
+	left join AchievementCategory P
+	on AC.ParentID = P.ID
+	left join Function F
+	on AC.FunctionID = F.ID
+	left join AchievementCategoryAchievement ACA
+	on AC.ID = ACA.CategoryID
+	left join Achievement A
+	on ACA.AchievementID = A.ID
+	left join AchievementNotObtainable as ANO
+	on A.ID = ANO.ID
+	left join AchievementHasNoWowheadLink as AHNWL
+	on A.ID = AHNWL.ID
+	left join AchievementHasIATLink as AHIATL
+	on A.ID = AHIATL.ID
+ORDER BY CTEAC.LocationPath</sql><sql name="3.sql">insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (3,'Wailing Caverns',2,4,240);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (4,'Shadowfang Keep',2,4,64);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (5,'Blackfathom Deeps',2,4,227);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (6,'The Stockade',2,4,238);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (7,'Gnomeregan',2,4,231);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (8,'Razorfen Kraul',2,4,233);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (9,'Razorfen Downs',2,4,234);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (10,'Scarlet Halls',2,4,311);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (11,'Scarlet Monastery',2,4,316);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (12,'Uldaman',2,4,239);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (13,'Zul''Farrak',2,4,241);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (14,'Maraudon',2,4,232);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (15,'The Temple Of Atal''hakkar',2,4,237);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (16,'Blackrock Depths',2,4,228);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (17,'LowerBlackrockSpire',2,4,229);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (18,'Dire Maul',2,4,230);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (19,'Scholomance',2,4,246);
+insert into AchievementCategory ('Location','Name','ParentID','FunctionID','FunctionValue') values (20,'Stratholme',2,4,236);</sql><sql name="Krowi_AchievementFilter_InsertAchievement.sql">INSERT INTO Achievement (ID)
+VALUES
+	(5093);
+INSERT INTO AchievementCategoryAchievement (CategoryID, AchievementID)
+SELECT ID, 5093
+	FROM AchievementCategory
+	WHERE FunctionValue = 64;</sql><sql name="SQL 6">WITH CTE_AchievementCategory(ID, ParentID, Location, LocationPath) AS (
+                                    SELECT ID, ParentID, Location, substr('0' || Location, -2, 2)
+                                    FROM AchievementCategory AC
+                                    WHERE ParentID IS NULL
+                                    UNION ALL
+                                    SELECT AC.ID, AC.ParentID, AC.Location, CTEAC.LocationPath || '.' || substr('0' || AC.Location, -2, 2)
+                                    FROM AchievementCategory AC INNER JOIN CTE_AchievementCategory CTEAC
+                                    ON CTEAC.ID = AC.ParentID
+                                    )
+                                    SELECT
+                                        AC.*, F.*, CTEAC.LocationPath
+                                    FROM
+                                        CTE_AchievementCategory CTEAC
+                                        left join AchievementCategory AC
+                                        on CTEAC.ID = AC.ID
+                                        left join AchievementCategory P
+                                        on AC.ParentID = P.ID
+                                        left join Function F
+                                        on AC.FunctionID = F.ID
+                                    ORDER BY CTEAC.LocationPath</sql><current_tab id="4"/></tab_sql></sqlb_project>

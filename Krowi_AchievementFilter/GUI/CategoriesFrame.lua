@@ -30,6 +30,8 @@ function categoriesFrame:New(categories, achievementsFrame)
 	frame.Container.ParentFrame = frame;
 	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
+	frame:RegisterEvent("ADDON_LOADED");
+
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
 	frame:Hide();
 
@@ -52,14 +54,30 @@ function categoriesFrame:New(categories, achievementsFrame)
 	return frame;
 end
 
+function KrowiAF_CategoriesFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementsFrame_Template
+	local addonName = ...;
+	diagnostics.Trace("KrowiAF_CategoriesFrame_OnEvent - " .. event .. " - " .. addonName);
+
+	if event == "ADDON_LOADED" then
+		if addonName and addonName == "Overachiever_Tabs" then
+			Overachiever_LeftFrame:HookScript("OnHide", function()
+				if self:IsShown() then
+					AchievementFrameHeaderLeftDDLInset:Show();
+				end
+			end);
+            diagnostics.Debug("Overachiever_Tabs compatibility enabled");
+		end
+	end
+end
+
 function KrowiAF_CategoriesFrame_OnShow(self) -- Used in Templates - KrowiAF_CategoriesFrame_Template
 	diagnostics.Trace("KrowiAF_CategoriesFrame_OnShow");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Hide(); -- Issue #11: Fix
 	AchievementFrameFilterDropDown:Hide();
-	AchievementFrameHeaderLeftDDLInset:Show(); -- This can be hidden if on summary screen
 	AchievementFrame.searchBox:Hide();
+	AchievementFrameHeaderLeftDDLInset:Show();
 
 	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
 
@@ -72,10 +90,7 @@ function KrowiAF_CategoriesFrame_OnHide() -- Used in Templates - KrowiAF_Categor
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Show(); -- Issue #11: Fix
 	AchievementFrameCategoriesBG:SetWidth(195); -- Set back to default value
-	if AchievementFrameAchievements:IsShown() then
-		AchievementFrameFilterDropDown:Show();
-		AchievementFrameHeaderLeftDDLInset:Show();
-	else
+	if not AchievementFrameAchievements:IsShown() then
 		AchievementFrameFilterDropDown:Hide();
 		AchievementFrameHeaderLeftDDLInset:Hide();
 	end

@@ -62,25 +62,29 @@ local function tinsertR(table, value)
     return value;
 end
 
+
 function LOADTEST()
-    local categories = {};
-    categories["1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(14864)));
-    categories["1"].NotHidden = true;
-    categories["1.1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(15272)));
-    categories["1"]:AddCategory(categories["1.1"]);
-    categories["1.1.1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(EJ_GetInstanceInfo(63)));
-    categories["1.1"]:AddCategory(categories["1.1.1"]);
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(628 , nil, nil, nil)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5083, nil, nil, nil)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5366, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5367, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5368, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5369, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5370, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5371, nil, nil, true)));
-    categories["1.1.2"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(EJ_GetInstanceInfo(226)));
-    categories["1.1"]:AddCategory(categories["1.1.2"]);
-    categories["1.2"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(15271)));
-    categories["1"]:AddCategory(categories["1.2"]);
-    
+    -- local categories = {};
+    -- categories["1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(14864)));
+    -- categories["1"].NotHidden = true;
+    -- categories["1.1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(15272)));
+    -- categories["1"]:AddCategory(categories["1.1"]);
+    -- categories["1.1.1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(EJ_GetInstanceInfo(63)));
+    -- categories["1.1"]:AddCategory(categories["1.1.1"]);
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(628 , nil, nil, nil)));
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5083, nil, nil, nil)));
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5366, nil, nil, true)));
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5367, nil, nil, true)));
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5368, nil, nil, true)));
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5369, nil, nil, true)));
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5370, nil, nil, true)));
+    -- categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5371, nil, nil, true)));
+    -- categories["1.1.2"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(EJ_GetInstanceInfo(226)));
+    -- categories["1.1"]:AddCategory(categories["1.1.2"]);
+    -- categories["1.2"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(15271)));
+    -- categories["1"]:AddCategory(categories["1.2"]);
+
+    -- for _, cat in next, addon.Categories do
+    --     tinsert(TEST, cat.Name .. "," .. cat.Parent.Name, )
+    -- end
 end

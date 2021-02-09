@@ -8,14 +8,15 @@ WITH CTE_AchievementCategory(ID, ParentID, Location, LocationPath) AS (
   ON CTEAC.ID = AC.ParentID
 )
 SELECT
-	CTEAC.LocationPath as Location,
+	CTEAC.LocationPath as CLocation,
+	substr('0' || ACA.Location, -2, 2) as ALocation,
 	AC.ID as ID,
 	case when AC.FunctionValue IS NULL
 		then F.Call
 		else replace(F.Call, 'id', AC.FunctionValue)
 	end as NameFunction,
 	case when ACIL.ID IS NOT NULL
-		then (select Call
+		then ' .. " " .. ' || (select Call
 			from Function
 			where ID = 5)
 	end as Legacy,
@@ -25,12 +26,15 @@ SELECT
 	A.ID as AchievementID,
 	case when ANO.ID is not NULL
 		then 'false'
+		else 'nil'
 	end as Obtainable,
 	case when AHNWL.ID is not NULL
 		then 'false'
+		else 'nil'
 	end as HasWowheadLink,
 	case when AHIATL.ID is not NULL
 		then 'true'
+		else 'nil'
 	end as HasIATLink
 FROM
 	CTE_AchievementCategory CTEAC
@@ -52,4 +56,6 @@ FROM
 	on A.ID = AHNWL.ID
 	left join AchievementHasIATLink as AHIATL
 	on A.ID = AHIATL.ID
-ORDER BY CTEAC.LocationPath
+ORDER BY
+	CLocation ASC,
+	ALocation ASC

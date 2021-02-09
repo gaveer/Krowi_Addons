@@ -9,16 +9,18 @@ namespace DbManager
         public int ID { get; set; }
         public int Location { get; set; }
         public string Name { get; set; }
+        public bool IsLegacy { get; set; }
         public AchievementCategory Parent { get; set; }
         public Function Function { get; set; }
         public int FunctionValue { get; set; }
         public List<Achievement> Achievements { get; set; }
 
-        public AchievementCategory(int id, int location, string name, Function function, int functionValue, AchievementCategory parent = null)
+        public AchievementCategory(int id, int location, string name, Function function, int functionValue, AchievementCategory parent = null, bool isLegacy = false)
         {
             ID = id;
             Location = location;
             Name = name;
+            IsLegacy = isLegacy;
             Parent = parent;
             Function = function;
             FunctionValue = functionValue;
@@ -82,7 +84,7 @@ namespace DbManager
                                 ON CTEAC.ID = AC.ParentID
                                 )
                                 SELECT
-                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, F.ID, F.Call, CTEAC.LocationPath
+                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, F.ID, F.Call, CTEAC.LocationPath, ACIL.ID
                                 FROM
                                     CTE_AchievementCategory CTEAC
                                     left join AchievementCategory AC
@@ -91,12 +93,14 @@ namespace DbManager
                                     on AC.ParentID = P.ID
                                     left join Function F
                                     on AC.FunctionID = F.ID
+                                    left join AchievementCategoryIsLegacy ACIL
+                                    on AC.ID = ACIL.ID
                                 ORDER BY CTEAC.LocationPath";
 
             var categories = new List<AchievementCategory>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(6), reader.GetString(7)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), reader.IsDBNull(3) ? null : categories.Find(c => c.ID == reader.GetInt32(3))));
+                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(6), reader.GetString(7)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), reader.IsDBNull(3) ? null : categories.Find(c => c.ID == reader.GetInt32(3)), !reader.IsDBNull(9)));
 
             return categories;
         }
@@ -154,6 +158,16 @@ namespace DbManager
             cmd.Parameters.AddWithValue("@FunctionValue", category.FunctionValue == -1 ? DBNull.Value : category.FunctionValue);
 
             cmd.ExecuteNonQuery();
+
+            if (category.IsLegacy)
+            {
+                cmd.Parameters.Clear();
+
+                cmd.CommandText = @"INSERT INTO AchievementCategoryIsLegacy (ID) VALUES (@ID)";
+                cmd.Parameters.AddWithValue("@ID", GetLast(connection).ID);
+
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public static void UpdateLocations(SqliteConnection connection, AchievementCategory selectedCategory, List<AchievementCategory> categories)

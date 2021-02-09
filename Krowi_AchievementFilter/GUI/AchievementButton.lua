@@ -100,7 +100,7 @@ local function OnClickRightButton(self, anchor, offsetX, offsetY)
 
 	-- IAT Link
 	if achievement.HasIATLink and addon.IsIATLoaded() then
-		rightClickMenu:AddFull({Text = "IAT Tactics", Func = function() diagnostics.Debug(IAT_DisplayAchievement(achievement.ID)); end});
+		rightClickMenu:AddFull({Text = "IAT Tactics", Func = function() IAT_DisplayAchievement(achievement.ID); end});
 	end
 
 	-- Extra menu defined at the achievement self

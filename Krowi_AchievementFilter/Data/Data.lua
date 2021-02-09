@@ -7,17 +7,18 @@ addon.Categories = {};
 addon.Achievements = {};
 
 function data.Load()
-    addon.Classic.Load();
-    addon.TheBurningCrusade.Load();
-    addon.WrathOfTheLichKing.Load();
-    addon.Cataclysm.Load();
-    addon.MistsOfPandaria.Load();
-    addon.WarlordsOfDreanor.Load();
-    addon.Legion.Load();
-    addon.BattleForAzeroth.Load();
-    addon.Shadowlands.Load();
-    addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
+    -- addon.Classic.Load();
+    -- addon.TheBurningCrusade.Load();
+    -- addon.WrathOfTheLichKing.Load();
+    -- addon.Cataclysm.Load();
+    -- addon.MistsOfPandaria.Load();
+    -- addon.WarlordsOfDreanor.Load();
+    -- addon.Legion.Load();
+    -- addon.BattleForAzeroth.Load();
+    -- addon.Shadowlands.Load();
+    -- addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
     -- LOADTEST();
+    addon.ExportedData.Load(addon.Categories, addon.Achievements);
 
     -- diagnostics.DebugTable(addon.Achievements);
 end

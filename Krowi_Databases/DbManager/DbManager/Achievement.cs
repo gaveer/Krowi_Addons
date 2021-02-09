@@ -10,13 +10,15 @@ namespace DbManager
     public class Achievement
     {
         public int ID { get; set; }
+        public int Location { get; set; }
         public bool Obtainable { get; set; }
         public bool HasWowheadLink { get; set; }
         public bool HasIATLink { get; set; }
 
-        public Achievement(int id, bool obtainable = true, bool hasWowheadLink = true, bool hasIATLink = false)
+        public Achievement(int id, int location, bool obtainable = true, bool hasWowheadLink = true, bool hasIATLink = false)
         {
             ID = id;
+            Location = location;
             Obtainable = obtainable;
             HasWowheadLink = hasWowheadLink;
             HasIATLink = hasIATLink;
@@ -38,15 +40,80 @@ namespace DbManager
                 throw new ArgumentNullException(nameof(connection));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT A.ID AS ID, ANO.ID AS NotObtainable, AHNWL.ID AS HasNoWowheadLink, AHIATL.ID AS HasIATLink, ACA.CategoryID AS CategoryID FROM Achievement A LEFT JOIN AchievementNotObtainable ANO ON A.ID = ANO.ID LEFT JOIN AchievementHasNoWowheadLink AHNWL ON A.ID = AHNWL.ID LEFT JOIN AchievementHasIATLink AHIATL ON A.ID = AHIATL.ID LEFT JOIN AchievementCategoryAchievement ACA ON A.ID = ACA.AchievementID WHERE ACA.CategoryID = @Category";
+            cmd.CommandText = "SELECT A.ID AS ID, ACA.Location, ANO.ID, AHNWL.ID, AHIATL.ID, ACA.CategoryID FROM Achievement A LEFT JOIN AchievementNotObtainable ANO ON A.ID = ANO.ID LEFT JOIN AchievementHasNoWowheadLink AHNWL ON A.ID = AHNWL.ID LEFT JOIN AchievementHasIATLink AHIATL ON A.ID = AHIATL.ID LEFT JOIN AchievementCategoryAchievement ACA ON A.ID = ACA.AchievementID WHERE ACA.CategoryID = @Category ORDER BY ACA.Location ASC";
             cmd.Parameters.AddWithValue("@Category", category.ID);
 
             var achievements = new List<Achievement>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    achievements.Add(new Achievement(reader.GetInt32(0), reader.IsDBNull(1), reader.IsDBNull(2), !reader.IsDBNull(3)));
+                    achievements.Add(new Achievement(reader.GetInt32(0), reader.GetInt32(1), reader.IsDBNull(2), reader.IsDBNull(3), !reader.IsDBNull(4)));
 
             return achievements;
+        }
+
+        public static void Add(SqliteConnection connection, Achievement achievement, AchievementCategory category)
+        {
+            if (connection == null)
+                throw new ArgumentNullException(nameof(connection));
+            if (achievement == null)
+                throw new ArgumentNullException(nameof(achievement));
+            if (category == null)
+                throw new ArgumentNullException(nameof(category));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"INSERT INTO Achievement (ID) VALUES (@ID)";
+            cmd.Parameters.AddWithValue("@ID", achievement.ID);
+
+            cmd.ExecuteNonQuery();
+
+            if (!achievement.Obtainable)
+            {
+                cmd.CommandText = @"INSERT INTO AchievementNotObtainable (ID) VALUES (@ID)";
+
+                cmd.ExecuteNonQuery();
+            }
+
+            if (!achievement.HasWowheadLink)
+            {
+                cmd.CommandText = @"INSERT INTO AchievementHasNoWowheadLink (ID) VALUES (@ID)";
+
+                cmd.ExecuteNonQuery();
+            }
+
+            if (achievement.HasIATLink)
+            {
+                cmd.CommandText = @"INSERT INTO AchievementHasIATLink (ID) VALUES (@ID)";
+
+                cmd.ExecuteNonQuery();
+            }
+
+            cmd.CommandText = @"INSERT INTO AchievementCategoryAchievement (Location, CategoryID, AchievementID) VALUES (@Location, @CategoryID, @ID)";
+            cmd.Parameters.AddWithValue("@Location", achievement.Location);
+            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void UpdateLocations(SqliteConnection connection, Achievement selectedAchievement, List<Achievement> achievements)
+        {
+            if (connection == null)
+                throw new ArgumentNullException(nameof(connection));
+            if (selectedAchievement == null)
+                throw new ArgumentNullException(nameof(selectedAchievement));
+            if (achievements == null)
+                throw new ArgumentNullException(nameof(achievements));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"UPDATE AchievementCategoryAchievement SET Location = @Location WHERE AchievementID = @AchievementID";
+            for (int i = 0; i < achievements.Count; i++)
+                if (achievements[i].Location >= selectedAchievement.Location && achievements[i] != selectedAchievement)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Location", i + 1);
+                    cmd.Parameters.AddWithValue("@AchievementID", achievements[i].ID);
+
+                    cmd.ExecuteNonQuery();
+                }
         }
     }
 }

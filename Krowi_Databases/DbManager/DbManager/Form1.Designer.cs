@@ -58,11 +58,16 @@ namespace DbManager
             this.lsbFunctions = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.cbxLegacyCategory = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rdbNoFaction = new System.Windows.Forms.RadioButton();
+            this.rdbAlliance = new System.Windows.Forms.RadioButton();
+            this.rdbHorde = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // lsbAchievementCategories1
@@ -105,7 +110,7 @@ namespace DbManager
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnExport);
-            this.groupBox3.Location = new System.Drawing.Point(809, 463);
+            this.groupBox3.Location = new System.Drawing.Point(809, 556);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(212, 55);
             this.groupBox3.TabIndex = 25;
@@ -124,6 +129,7 @@ namespace DbManager
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txtAchievementID);
             this.groupBox2.Controls.Add(this.btnAchievementRemove);
@@ -133,7 +139,7 @@ namespace DbManager
             this.groupBox2.Controls.Add(this.cbxHasWowheadLink);
             this.groupBox2.Location = new System.Drawing.Point(809, 277);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(212, 180);
+            this.groupBox2.Size = new System.Drawing.Size(212, 273);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "New Achievement";
@@ -156,7 +162,7 @@ namespace DbManager
             // 
             // btnAchievementRemove
             // 
-            this.btnAchievementRemove.Location = new System.Drawing.Point(13, 143);
+            this.btnAchievementRemove.Location = new System.Drawing.Point(13, 237);
             this.btnAchievementRemove.Name = "btnAchievementRemove";
             this.btnAchievementRemove.Size = new System.Drawing.Size(186, 23);
             this.btnAchievementRemove.TabIndex = 22;
@@ -178,7 +184,7 @@ namespace DbManager
             // 
             // btnAchievementAdd
             // 
-            this.btnAchievementAdd.Location = new System.Drawing.Point(13, 114);
+            this.btnAchievementAdd.Location = new System.Drawing.Point(13, 208);
             this.btnAchievementAdd.Name = "btnAchievementAdd";
             this.btnAchievementAdd.Size = new System.Drawing.Size(186, 23);
             this.btnAchievementAdd.TabIndex = 21;
@@ -369,6 +375,50 @@ namespace DbManager
             this.cbxLegacyCategory.Text = "Is Legacy";
             this.cbxLegacyCategory.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rdbHorde);
+            this.groupBox4.Controls.Add(this.rdbAlliance);
+            this.groupBox4.Controls.Add(this.rdbNoFaction);
+            this.groupBox4.Location = new System.Drawing.Point(6, 114);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(200, 88);
+            this.groupBox4.TabIndex = 23;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Faction";
+            // 
+            // rdbNoFaction
+            // 
+            this.rdbNoFaction.AutoSize = true;
+            this.rdbNoFaction.Checked = true;
+            this.rdbNoFaction.Location = new System.Drawing.Point(6, 19);
+            this.rdbNoFaction.Name = "rdbNoFaction";
+            this.rdbNoFaction.Size = new System.Drawing.Size(77, 17);
+            this.rdbNoFaction.TabIndex = 0;
+            this.rdbNoFaction.TabStop = true;
+            this.rdbNoFaction.Text = "No Faction";
+            this.rdbNoFaction.UseVisualStyleBackColor = true;
+            // 
+            // rdbAlliance
+            // 
+            this.rdbAlliance.AutoSize = true;
+            this.rdbAlliance.Location = new System.Drawing.Point(6, 42);
+            this.rdbAlliance.Name = "rdbAlliance";
+            this.rdbAlliance.Size = new System.Drawing.Size(62, 17);
+            this.rdbAlliance.TabIndex = 1;
+            this.rdbAlliance.Text = "Alliance";
+            this.rdbAlliance.UseVisualStyleBackColor = true;
+            // 
+            // rdbHorde
+            // 
+            this.rdbHorde.AutoSize = true;
+            this.rdbHorde.Location = new System.Drawing.Point(6, 65);
+            this.rdbHorde.Name = "rdbHorde";
+            this.rdbHorde.Size = new System.Drawing.Size(54, 17);
+            this.rdbHorde.TabIndex = 2;
+            this.rdbHorde.Text = "Horde";
+            this.rdbHorde.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,6 +435,8 @@ namespace DbManager
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -420,6 +472,10 @@ namespace DbManager
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.CheckBox cbxLegacyCategory;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rdbHorde;
+        private System.Windows.Forms.RadioButton rdbAlliance;
+        private System.Windows.Forms.RadioButton rdbNoFaction;
     }
 }
 

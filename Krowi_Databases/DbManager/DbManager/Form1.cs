@@ -222,10 +222,16 @@ namespace DbManager
             List<int> IDs = txtAchievementID.Text.Split(',').Select(int.Parse).ToList();
             foreach (var ID in IDs)
             {
+                Faction faction = Faction.NoFaction;
+                if (rdbAlliance.Checked)
+                    faction = Faction.Alliance;
+                else if (rdbHorde.Checked)
+                    faction = Faction.Horde;
+
                 int location = lsbAchievements.Items.Count > 0 ? ((Achievement)lsbAchievements.SelectedItem).Location + 1 : 1;
                 AchievementCategory category = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
 
-                var achievement = new Achievement(ID, location, cbxObtainable.Checked, cbxHasWowheadLink.Checked, cbxHasIATLink.Checked);
+                var achievement = new Achievement(ID, faction, location, cbxObtainable.Checked, cbxHasWowheadLink.Checked, cbxHasIATLink.Checked);
                 Achievement.Add(Connection, achievement, category);
 
                 Achievement.UpdateLocations(Connection, achievement, lsbAchievements.Items.Cast<Achievement>().ToList());
@@ -237,11 +243,14 @@ namespace DbManager
             cbxObtainable.Checked = true;
             cbxHasWowheadLink.Checked = true;
             cbxHasIATLink.Checked = false;
+            rdbNoFaction.Checked = true;
         }
 
         private void btnAchievementRemove_Click(object sender, EventArgs e)
         {
+            Achievement.Remove(Connection, (Achievement)lsbAchievements.SelectedItem);
 
+            RefreshAchievements(Connection);
         }
 
         private void RefreshAchievements(SqliteConnection connection)
@@ -297,7 +306,13 @@ namespace DbManager
                 var achievements = Achievement.GetWithCategory(Connection, category);
                 foreach (var achievement in achievements)
                 {
-                    sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(achievement.HasIATLink ? "true" : "nil")})));");
+                    if (achievement.Faction == Faction.Alliance)
+                        sb.AppendLineTabbed(1, "if addon.Faction.IsAlliance then");
+                    else if (achievement.Faction == Faction.Horde)
+                        sb.AppendLineTabbed(1, "if addon.Faction.IsHorde then");
+                    sb.AppendLineTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(achievement.HasIATLink ? "true" : "nil")})));");
+                    if (achievement.Faction != Faction.NoFaction)
+                        sb.AppendLineTabbed(1, "end");
                 }
             }
 

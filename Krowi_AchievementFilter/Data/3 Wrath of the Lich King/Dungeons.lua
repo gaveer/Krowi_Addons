@@ -70,7 +70,7 @@ dungeons.TheOculus = {} -- 3.0
 function dungeons.TheOculus.Load(catDungeons)
 	local dungeon = catDungeons:AddCatInstanceInfo(282);
     dungeon:AddAchievementIDsWithIATLink(1868, 2046, 2045, 2044, 1871); -- Glory of the Hero
-    dungeon:AddAchievementIDs(478, 498); -- Defeat the bosses in X
+    dungeon:AddAchievementIDs(487, 498); -- Defeat the bosses in X
 end
 
 dungeons.UtgardePinnacle = {} -- 3.0

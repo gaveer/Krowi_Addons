@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Achievement.cs" />
     <Compile Include="AchievementCategory.cs" />
+    <Compile Include="Faction.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -37,7 +37,6 @@ namespace DbManager
                 throw new ArgumentNullException(nameof(connection));
             if (category == null)
                 throw new ArgumentNullException(nameof(category));
-
             if (connection == null)
                 throw new ArgumentNullException(nameof(connection));
 
@@ -63,7 +62,7 @@ namespace DbManager
                 throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO Achievement (ID, Faction) VALUES (@ID, @Faction)";
+            cmd.CommandText = @"INSERT OR REPLACE INTO Achievement (ID, Faction) VALUES (@ID, @Faction)";
             cmd.Parameters.AddWithValue("@ID", achievement.ID);
             cmd.Parameters.AddWithValue("@Faction", (int)achievement.Faction);
 
@@ -71,26 +70,26 @@ namespace DbManager
 
             if (!achievement.Obtainable)
             {
-                cmd.CommandText = @"INSERT INTO AchievementNotObtainable (ID) VALUES (@ID)";
+                cmd.CommandText = @"INSERT OR REPLACE INTO AchievementNotObtainable (ID) VALUES (@ID)";
 
                 cmd.ExecuteNonQuery();
             }
 
             if (!achievement.HasWowheadLink)
             {
-                cmd.CommandText = @"INSERT INTO AchievementHasNoWowheadLink (ID) VALUES (@ID)";
+                cmd.CommandText = @"INSERT OR REPLACE INTO AchievementHasNoWowheadLink (ID) VALUES (@ID)";
 
                 cmd.ExecuteNonQuery();
             }
 
             if (achievement.HasIATLink)
             {
-                cmd.CommandText = @"INSERT INTO AchievementHasIATLink (ID) VALUES (@ID)";
+                cmd.CommandText = @"INSERT OR REPLACE INTO AchievementHasIATLink (ID) VALUES (@ID)";
 
                 cmd.ExecuteNonQuery();
             }
 
-            cmd.CommandText = @"INSERT INTO AchievementCategoryAchievement (Location, CategoryID, AchievementID) VALUES (@Location, @CategoryID, @ID)";
+            cmd.CommandText = @"INSERT OR REPLACE INTO AchievementCategoryAchievement (Location, CategoryID, AchievementID) VALUES (@Location, @CategoryID, @ID)";
             cmd.Parameters.AddWithValue("@Location", achievement.Location);
             cmd.Parameters.AddWithValue("@CategoryID", category.ID);
 
@@ -147,6 +146,22 @@ namespace DbManager
 
             cmd.CommandText = @"DELETE FROM Achievement WHERE ID = @ID";
             cmd.ExecuteNonQuery();
+        }
+
+        public static List<int> FindDuplicateIDs(SqliteConnection connection)
+        {
+            if (connection == null)
+                throw new ArgumentNullException(nameof(connection));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT AchievementID, COUNT(*) C FROM AchievementCategoryAchievement GROUP BY AchievementID HAVING C > 1";
+
+            var IDs = new List<int>();
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    IDs.Add(reader.GetInt32(0));
+
+            return IDs;
         }
     }
 }

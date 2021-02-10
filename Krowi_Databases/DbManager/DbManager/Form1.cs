@@ -84,6 +84,12 @@ namespace DbManager
         #region AchievementCategory
         private void btnAchievementCategoryAdd_Click(object sender, EventArgs e)
         {
+            if (lsbFunctions.SelectedIndex == 0)
+            {
+                MessageBox.Show("Invalid function selected!" + Environment.NewLine + Environment.NewLine + "Category is not added.", "Invalid function", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             int location = cbxCategoryAsParent.Checked ? 1 : ((AchievementCategory)lsbAchievementCategories1.SelectedItem).Location + 1;
             AchievementCategory parent = cbxCategoryAsParent.Checked ? (AchievementCategory)lsbAchievementCategories1.SelectedItem : ((AchievementCategory)lsbAchievementCategories1.SelectedItem).Parent;
 
@@ -296,6 +302,7 @@ namespace DbManager
             sb.AppendLine("");
             sb.AppendLineTabbed(1, "local tmpCategories = {};");
 
+            var duplicates = Achievement.FindDuplicateIDs(Connection);
             var categories = AchievementCategory.GetAll(Connection);
             foreach (var category in categories)
             {
@@ -310,7 +317,9 @@ namespace DbManager
                         sb.AppendLineTabbed(1, "if addon.Faction.IsAlliance then");
                     else if (achievement.Faction == Faction.Horde)
                         sb.AppendLineTabbed(1, "if addon.Faction.IsHorde then");
-                    sb.AppendLineTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(achievement.HasIATLink ? "true" : "nil")})));");
+
+                    sb.AppendLineTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, nil, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
+
                     if (achievement.Faction != Faction.NoFaction)
                         sb.AppendLineTabbed(1, "end");
                 }
@@ -330,6 +339,14 @@ namespace DbManager
             for (int i = 0; i < numberOfTabs; i++)
                 stringBuilder.Append("    ");
             stringBuilder.AppendLine(text);
+            return stringBuilder;
+        }
+
+        public static StringBuilder AppendTabbed(this StringBuilder stringBuilder, int numberOfTabs, string text)
+        {
+            for (int i = 0; i < numberOfTabs; i++)
+                stringBuilder.Append("    ");
+            stringBuilder.Append(text);
             return stringBuilder;
         }
     }

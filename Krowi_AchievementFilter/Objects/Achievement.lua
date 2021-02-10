@@ -7,7 +7,7 @@ local achievement = objects.Achievement;
 
 -- [[ Constructors ]] --
 achievement.__index = achievement;
-function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Creates a new achievement
+function achievement:New(id, obtainable, hasWowheadLink, hasIATLink, category) -- Creates a new achievement
     local self = {};
     setmetatable(self, achievement);
 
@@ -19,9 +19,14 @@ function achievement:New(id, obtainable, hasWowheadLink, hasIATLink) -- Creates 
         self.HasNoWowheadLink = true; -- By inverting this we reduce memory usage because 99% has a Wowhead link
     end
     self.HasIATLink = hasIATLink;
+    self.Category = category;
 
     return self;
 end
+
+-- function achievement:NewFromTable(table)
+--     return self:New(table.id, table.obtainable, table.hasWowheadLink, table.hasIATLink, table.category);
+-- end
 
 -- [[ Methods ]] --
 function achievement:AddRCMenExtra(rcMenExtra) -- Adds extra content to the achievement's right click menu, calling this method multiple times will overwrite the previous call

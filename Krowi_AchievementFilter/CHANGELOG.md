@@ -8,6 +8,7 @@ TBD
 ### Changed
 - Category tooltip info is now cached instead of fetching it every time resulting in huge performance increases to up to 10 times faster GUI loading
 - Data is now stored and maintained in a SQLite database with an export to lua if new data is added
+- IAT v3.18.0 or higher required
 
 ## [9.0.2.11.0] - 2021-02-05
 ### Added

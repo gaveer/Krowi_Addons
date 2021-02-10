@@ -57,28 +57,64 @@ namespace DbManager
             if (connection == null)
                 throw new ArgumentNullException(nameof(connection));
 
-            var achievementCategoriesListBoxes = new List<ListBox> { lsbAchievementCategories1 };
+            var selectedID = lsbAchievementCategories1.SelectedItem != null ? ((AchievementCategory)lsbAchievementCategories1.SelectedItem).ID : -1;
 
-            foreach (var listBox in achievementCategoriesListBoxes)
-            {
-                var selectedID = listBox.SelectedItem != null ? ((AchievementCategory)listBox.SelectedItem).ID : -1;
+            var categories = AchievementCategory.GetAll(connection);
+            lsbAchievementCategories1.Items.Clear(); // Clear before adding new categories
+            lsbAchievementCategories1.Items.Add(new AchievementCategory(-1, 0, null, null, 0)); // Empty Category
+            foreach (var category in categories)
+                lsbAchievementCategories1.Items.Add(category);
 
-                var categories = AchievementCategory.GetAll(connection);
-                listBox.Items.Clear(); // Clear before adding new categories
-                listBox.Items.Add(new AchievementCategory(-1, 0, null, null, 0)); // Empty Category
-                foreach (var category in categories)
-                    listBox.Items.Add(category);
+            if (lsbAchievementCategories1.Items.Count > 0)
+                lsbAchievementCategories1.SelectedIndex = 0;
+            if (selectedID > 0)
+                foreach (AchievementCategory item in lsbAchievementCategories1.Items)
+                    if (item.ID == selectedID)
+                    {
+                        lsbAchievementCategories1.SelectedItem = item;
+                        break;
+                    }
 
-                if (listBox.Items.Count > 0)
-                    listBox.SelectedIndex = 0;
-                if (selectedID > 0)
-                    foreach (AchievementCategory item in listBox.Items)
-                        if (item.ID == selectedID)
-                        {
-                            listBox.SelectedItem = item;
-                            break;
-                        }
-            }
+            //foreach (var category in categories)
+            //{
+            //    if (category.Parent == null)
+            //        treeView1.Nodes.Add(category.ID.ToString(), category.Name);
+            //    else
+            //    {
+            //        if (category.Parent.ID == 56)
+            //            Console.WriteLine(56);
+
+            //        var node = FindTreeNode(treeView1.Nodes, category.Parent.ID.ToString());
+            //        node.Nodes.Add(category.ID.ToString(), category.Name);
+            //    }
+            //}
+        }
+
+        //public TreeNode FindTreeNode(TreeNodeCollection nodes, string key)
+        //{
+        //    if (nodes.ContainsKey(key))
+        //        return nodes[nodes.IndexOfKey(key)];
+
+        //    foreach (TreeNode node in nodes)
+        //    {
+        //        if (node.Nodes.ContainsKey(key))
+        //            return node.Nodes[node.Nodes.IndexOfKey(key)];
+
+        //        if (node.Nodes.Count > 0)
+        //        {
+        //            var foundNode = FindTreeNode(node.Nodes, key);
+        //            if (foundNode != null)
+        //                return foundNode;
+        //        }
+        //    }
+
+        //    return null;
+        //}
+
+        public AchievementCategory GetNodeAchievementCategory(TreeNode node)
+        {
+            var categories = AchievementCategory.GetAll(Connection);
+            return categories.Single(x => x.ID == Convert.ToInt32(node.Name));
         }
 
         #region AchievementCategory
@@ -261,14 +297,19 @@ namespace DbManager
 
         private void RefreshAchievements(SqliteConnection connection)
         {
-            var achievements = Achievement.GetWithCategory(connection, (AchievementCategory)lsbAchievementCategories1.SelectedItem);
-
             lsbAchievements.Items.Clear(); // Clear before adding new categories
-            foreach (var achievement in achievements)
-                lsbAchievements.Items.Add(achievement);
 
-            if (lsbAchievements.Items.Count > 0)
-                lsbAchievements.SelectedIndex = lsbAchievements.Items.Count - 1;
+            var category = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
+            if (category != null)
+            {
+                var achievements = Achievement.GetWithCategory(connection, (AchievementCategory)lsbAchievementCategories1.SelectedItem);
+
+                foreach (var achievement in achievements)
+                    lsbAchievements.Items.Add(achievement);
+
+                if (lsbAchievements.Items.Count > 0)
+                    lsbAchievements.SelectedIndex = lsbAchievements.Items.Count - 1;
+            }
         }
         #endregion
 
@@ -319,6 +360,18 @@ namespace DbManager
                         sb.AppendLineTabbed(1, "if addon.Faction.IsHorde then");
 
                     sb.AppendLineTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, nil, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
+
+                    // new
+                    //sb.AppendTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:NewFromTable{{id = {achievement.ID}");
+                    //if (!achievement.Obtainable)
+                    //    sb.Append(", obtainable = false");
+                    //if (!achievement.HasWowheadLink)
+                    //    sb.Append(", hasWowheadLink = false");
+                    //if (achievement.HasIATLink)
+                    //    sb.Append(", hasIATLink = true");
+                    //if (duplicates.Any(x => x == achievement.ID))
+                    //    sb.Append($", category = tmpCategories[{category.ID}]");
+                    //sb.AppendLine("}));");
 
                     if (achievement.Faction != Faction.NoFaction)
                         sb.AppendLineTabbed(1, "end");

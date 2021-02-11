@@ -7,7 +7,7 @@ local achievement = objects.Achievement;
 
 -- [[ Constructors ]] --
 achievement.__index = achievement;
-function achievement:New(id, obtainable, hasWowheadLink, hasIATLink, category) -- Creates a new achievement
+function achievement:New(id, obtainable, hasWowheadLink, --[[ hasIATLink, ]] category) -- Creates a new achievement
     local self = {};
     setmetatable(self, achievement);
 
@@ -18,7 +18,7 @@ function achievement:New(id, obtainable, hasWowheadLink, hasIATLink, category) -
     if hasWowheadLink == false then -- We only want to set it if it's not obtainable, otherwise nil
         self.HasNoWowheadLink = true; -- By inverting this we reduce memory usage because 99% has a Wowhead link
     end
-    self.HasIATLink = hasIATLink;
+    -- self.HasIATLink = hasIATLink;
     self.Category = category;
 
     return self;

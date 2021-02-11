@@ -20,6 +20,10 @@ namespace DbManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            txtCategoryName.GotFocus += TxtCategoryName_GotFocus;
+            txtFunctionValue.GotFocus += TxtFunctionValue_GotFocus;
+            txtAchievementID.GotFocus += TxtAchievementID_GotFocus;
+
             ConnStrBuilder.DataSource = "../../../../Krowi_AchievementFilter.db";
 
             Connection = new SqliteConnection(ConnStrBuilder.ConnectionString);
@@ -27,6 +31,24 @@ namespace DbManager
 
             RefreshCategories(Connection);
             RefreshFunctions(Connection);
+        }
+
+        private void TxtCategoryName_GotFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCategoryName.Text))
+                txtCategoryName.Text = Clipboard.GetText();
+        }
+
+        private void TxtFunctionValue_GotFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtFunctionValue.Text))
+                txtFunctionValue.Text = Clipboard.GetText();
+        }
+
+        private void TxtAchievementID_GotFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtAchievementID.Text))
+                txtAchievementID.Text = Clipboard.GetText();
         }
 
         #region AchievementCategory
@@ -360,7 +382,7 @@ namespace DbManager
 
         private void btnAchievementRemove_Click(object sender, EventArgs e)
         {
-            Achievement.Remove(Connection, (Achievement)lsbAchievements.SelectedItem);
+            Achievement.Remove(Connection, (Achievement)lsbAchievements.SelectedItem, ((AchievementCategoryTreeNode)treeView1.SelectedNode).AchievementCategory);
 
             RefreshAchievements(Connection);
         }
@@ -412,7 +434,7 @@ namespace DbManager
                     else if (achievement.Faction == Faction.Horde)
                         sb.AppendLineTabbed(1, "if addon.Faction.IsHorde then");
 
-                    sb.AppendLineTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, nil, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
+                    sb.AppendLineTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
 
                     // new
                     //sb.AppendTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:NewFromTable{{id = {achievement.ID}");

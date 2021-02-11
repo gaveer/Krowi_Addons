@@ -81,22 +81,30 @@ namespace DbManager
             cmd.ExecuteNonQuery();
         }
 
-        public static void Remove(SqliteConnection connection, Achievement achievement)
+        public static void Remove(SqliteConnection connection, Achievement achievement, AchievementCategory category)
         {
             _ = connection ?? throw new ArgumentNullException(nameof(connection));
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
 
+            var isDuplicate = FindDuplicateIDs(connection).Contains(achievement.ID);
+
             var sb = new StringBuilder();
-            if (!achievement.Obtainable)
-                sb.AppendLine(@"DELETE FROM AchievementNotObtainable WHERE ID = @ID;");
-            if (!achievement.HasWowheadLink)
-                sb.AppendLine(@"DELETE FROM AchievementHasNoWowheadLink WHERE ID = @ID;");
-            sb.AppendLine(@"DELETE FROM AchievementCategoryAchievement WHERE AchievementID = @ID;");
-            sb.AppendLine(@"DELETE FROM Achievement WHERE ID = @ID;");
+            if (!isDuplicate)
+            {
+                if (!achievement.Obtainable)
+                    sb.AppendLine(@"DELETE FROM AchievementNotObtainable WHERE ID = @ID;");
+                if (!achievement.HasWowheadLink)
+                    sb.AppendLine(@"DELETE FROM AchievementHasNoWowheadLink WHERE ID = @ID;");
+                sb.AppendLine(@"DELETE FROM AchievementCategoryAchievement WHERE AchievementID = @ID;");
+                sb.AppendLine(@"DELETE FROM Achievement WHERE ID = @ID;");
+            }
+            else
+                sb.AppendLine(@"DELETE FROM AchievementCategoryAchievement WHERE AchievementID = @ID AND CategoryID = @CategoryID;");
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = sb.ToString();
             cmd.Parameters.AddWithValue("@ID", achievement.ID);
+            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
             cmd.ExecuteNonQuery();
         }
 

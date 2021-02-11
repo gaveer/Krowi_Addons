@@ -29,7 +29,6 @@ namespace DbManager
         /// </summary>
         private void InitializeComponent()
         {
-            this.lsbAchievementCategories1 = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -44,7 +43,6 @@ namespace DbManager
             this.btnAchievementRemove = new System.Windows.Forms.Button();
             this.cbxObtainable = new System.Windows.Forms.CheckBox();
             this.btnAchievementAdd = new System.Windows.Forms.Button();
-            this.cbxHasIATLink = new System.Windows.Forms.CheckBox();
             this.cbxHasWowheadLink = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbxLegacyCategory = new System.Windows.Forms.CheckBox();
@@ -71,16 +69,6 @@ namespace DbManager
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lsbAchievementCategories1
-            // 
-            this.lsbAchievementCategories1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lsbAchievementCategories1.FormattingEnabled = true;
-            this.lsbAchievementCategories1.Location = new System.Drawing.Point(3, 3);
-            this.lsbAchievementCategories1.Name = "lsbAchievementCategories1";
-            this.lsbAchievementCategories1.Size = new System.Drawing.Size(300, 861);
-            this.lsbAchievementCategories1.TabIndex = 0;
-            this.lsbAchievementCategories1.SelectedIndexChanged += new System.EventHandler(this.lsbAchievementCategories1_SelectedIndexChanged);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -94,13 +82,12 @@ namespace DbManager
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lsbAchievements);
+            this.tabPage1.Controls.Add(this.lsbFunctions);
             this.tabPage1.Controls.Add(this.treeView1);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.lsbAchievements);
-            this.tabPage1.Controls.Add(this.lsbFunctions);
-            this.tabPage1.Controls.Add(this.lsbAchievementCategories1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -112,7 +99,7 @@ namespace DbManager
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnExport);
-            this.groupBox3.Location = new System.Drawing.Point(809, 556);
+            this.groupBox3.Location = new System.Drawing.Point(759, 532);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(212, 55);
             this.groupBox3.TabIndex = 25;
@@ -137,11 +124,10 @@ namespace DbManager
             this.groupBox2.Controls.Add(this.btnAchievementRemove);
             this.groupBox2.Controls.Add(this.cbxObtainable);
             this.groupBox2.Controls.Add(this.btnAchievementAdd);
-            this.groupBox2.Controls.Add(this.cbxHasIATLink);
             this.groupBox2.Controls.Add(this.cbxHasWowheadLink);
-            this.groupBox2.Location = new System.Drawing.Point(809, 277);
+            this.groupBox2.Location = new System.Drawing.Point(759, 277);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(212, 273);
+            this.groupBox2.Size = new System.Drawing.Size(212, 249);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "New Achievement";
@@ -151,7 +137,7 @@ namespace DbManager
             this.groupBox4.Controls.Add(this.rdbHorde);
             this.groupBox4.Controls.Add(this.rdbAlliance);
             this.groupBox4.Controls.Add(this.rdbNoFaction);
-            this.groupBox4.Location = new System.Drawing.Point(6, 114);
+            this.groupBox4.Location = new System.Drawing.Point(6, 91);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 88);
             this.groupBox4.TabIndex = 23;
@@ -208,7 +194,7 @@ namespace DbManager
             // 
             // btnAchievementRemove
             // 
-            this.btnAchievementRemove.Location = new System.Drawing.Point(13, 237);
+            this.btnAchievementRemove.Location = new System.Drawing.Point(13, 214);
             this.btnAchievementRemove.Name = "btnAchievementRemove";
             this.btnAchievementRemove.Size = new System.Drawing.Size(186, 23);
             this.btnAchievementRemove.TabIndex = 22;
@@ -230,23 +216,13 @@ namespace DbManager
             // 
             // btnAchievementAdd
             // 
-            this.btnAchievementAdd.Location = new System.Drawing.Point(13, 208);
+            this.btnAchievementAdd.Location = new System.Drawing.Point(11, 185);
             this.btnAchievementAdd.Name = "btnAchievementAdd";
             this.btnAchievementAdd.Size = new System.Drawing.Size(186, 23);
             this.btnAchievementAdd.TabIndex = 21;
             this.btnAchievementAdd.Text = "Add";
             this.btnAchievementAdd.UseVisualStyleBackColor = true;
             this.btnAchievementAdd.Click += new System.EventHandler(this.btnAchievementAdd_Click);
-            // 
-            // cbxHasIATLink
-            // 
-            this.cbxHasIATLink.AutoSize = true;
-            this.cbxHasIATLink.Location = new System.Drawing.Point(13, 91);
-            this.cbxHasIATLink.Name = "cbxHasIATLink";
-            this.cbxHasIATLink.Size = new System.Drawing.Size(88, 17);
-            this.cbxHasIATLink.TabIndex = 19;
-            this.cbxHasIATLink.Text = "Has IAT Link";
-            this.cbxHasIATLink.UseVisualStyleBackColor = true;
             // 
             // cbxHasWowheadLink
             // 
@@ -274,7 +250,7 @@ namespace DbManager
             this.groupBox1.Controls.Add(this.btnAchievementCategoryAdd);
             this.groupBox1.Controls.Add(this.btnAchievementCategoryMoveDown);
             this.groupBox1.Controls.Add(this.btnAchievementCategoryRemove);
-            this.groupBox1.Location = new System.Drawing.Point(809, 6);
+            this.groupBox1.Location = new System.Drawing.Point(759, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(212, 265);
             this.groupBox1.TabIndex = 23;
@@ -397,7 +373,7 @@ namespace DbManager
             // 
             this.lsbAchievements.Dock = System.Windows.Forms.DockStyle.Left;
             this.lsbAchievements.FormattingEnabled = true;
-            this.lsbAchievements.Location = new System.Drawing.Point(553, 3);
+            this.lsbAchievements.Location = new System.Drawing.Point(503, 3);
             this.lsbAchievements.Name = "lsbAchievements";
             this.lsbAchievements.Size = new System.Drawing.Size(250, 861);
             this.lsbAchievements.TabIndex = 15;
@@ -406,10 +382,10 @@ namespace DbManager
             // 
             this.lsbFunctions.Dock = System.Windows.Forms.DockStyle.Left;
             this.lsbFunctions.FormattingEnabled = true;
-            this.lsbFunctions.Location = new System.Drawing.Point(303, 3);
+            this.lsbFunctions.Location = new System.Drawing.Point(253, 3);
             this.lsbFunctions.Name = "lsbFunctions";
             this.lsbFunctions.Size = new System.Drawing.Size(250, 861);
-            this.lsbFunctions.TabIndex = 1;
+            this.lsbFunctions.TabIndex = 2;
             // 
             // tabPage2
             // 
@@ -423,11 +399,13 @@ namespace DbManager
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(917, 690);
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView1.HideSelection = false;
+            this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(268, 841);
-            this.treeView1.TabIndex = 26;
-            this.treeView1.Visible = false;
+            this.treeView1.Size = new System.Drawing.Size(250, 861);
+            this.treeView1.TabIndex = 1;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // Form1
             // 
@@ -452,8 +430,6 @@ namespace DbManager
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox lsbAchievementCategories1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -472,7 +448,6 @@ namespace DbManager
         private System.Windows.Forms.Button btnAchievementRemove;
         private System.Windows.Forms.Button btnAchievementAdd;
         private System.Windows.Forms.CheckBox cbxHasWowheadLink;
-        private System.Windows.Forms.CheckBox cbxHasIATLink;
         private System.Windows.Forms.CheckBox cbxObtainable;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtAchievementID;

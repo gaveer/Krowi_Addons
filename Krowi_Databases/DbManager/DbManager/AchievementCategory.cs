@@ -1,10 +1,11 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DbManager
 {
-    public class AchievementCategory : IComparable<AchievementCategory>, IEquatable<AchievementCategory>, ICloneable
+    public class AchievementCategory : IComparable<AchievementCategory>, IEquatable<AchievementCategory>
     {
         public int ID { get; set; }
         public int Location { get; set; }
@@ -60,41 +61,41 @@ namespace DbManager
 
         public bool Equals(AchievementCategory other)
         {
-            return ID == other.ID;
-        }
-
-        public object Clone()
-        {
-            return MemberwiseClone();
+            return ID == other?.ID;
         }
 
         public static List<AchievementCategory> GetAll(SqliteConnection connection)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"WITH CTE_AchievementCategory(ID, ParentID, Location, LocationPath) AS (
-                                SELECT ID, ParentID, Location, substr('0' || Location, -2, 2)
-                                FROM AchievementCategory AC
-                                WHERE ParentID IS NULL
+                                SELECT
+                                    ID, ParentID, Location, substr('0' || Location, -2, 2)
+                                FROM
+                                    AchievementCategory AC
+                                WHERE
+                                    ParentID IS NULL
                                 UNION ALL
-                                SELECT AC.ID, AC.ParentID, AC.Location, CTEAC.LocationPath || '.' || substr('0' || AC.Location, -2, 2)
-                                FROM AchievementCategory AC INNER JOIN CTE_AchievementCategory CTEAC
-                                ON CTEAC.ID = AC.ParentID
+                                SELECT
+                                    AC.ID, AC.ParentID, AC.Location, CTEAC.LocationPath || '.' || substr('0' || AC.Location, -2, 2)
+                                FROM
+                                    AchievementCategory AC
+                                    INNER JOIN CTE_AchievementCategory CTEAC
+                                        ON CTEAC.ID = AC.ParentID
                                 )
                                 SELECT
                                     AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, F.ID, F.Call, CTEAC.LocationPath, ACIL.ID
                                 FROM
                                     CTE_AchievementCategory CTEAC
-                                    left join AchievementCategory AC
-                                    on CTEAC.ID = AC.ID
-                                    left join AchievementCategory P
-                                    on AC.ParentID = P.ID
-                                    left join Function F
-                                    on AC.FunctionID = F.ID
-                                    left join AchievementCategoryIsLegacy ACIL
-                                    on AC.ID = ACIL.ID
+                                    LEFT JOIN AchievementCategory AC
+                                        ON CTEAC.ID = AC.ID
+                                    LEFT JOIN AchievementCategory P
+                                        ON AC.ParentID = P.ID
+                                    LEFT JOIN Function F
+                                        ON AC.FunctionID = F.ID
+                                    LEFT JOIN AchievementCategoryIsLegacy ACIL
+                                        ON AC.ID = ACIL.ID
                                 ORDER BY CTEAC.LocationPath";
 
             var categories = new List<AchievementCategory>();
@@ -107,17 +108,16 @@ namespace DbManager
 
         public static List<AchievementCategory> GetWithParent(SqliteConnection connection, AchievementCategory parent)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
 
             var cmd = connection.CreateCommand();
             if (parent != null)
             {
-                cmd.CommandText = @"SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID = @ParentID";
+                cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID = @ParentID";
                 cmd.Parameters.AddWithValue("@ParentID", parent.ID);
             }
             else
-                cmd.CommandText = @"SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID IS NULL";
+                cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID IS NULL";
 
             var categories = new List<AchievementCategory>();
             using (var reader = cmd.ExecuteReader())
@@ -129,11 +129,10 @@ namespace DbManager
 
         public static AchievementCategory GetLast(SqliteConnection connection)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue, ParentID FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID ORDER BY AC.ID DESC LIMIT 1";
+            cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue, ParentID FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID ORDER BY AC.ID DESC LIMIT 1";
 
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
@@ -144,43 +143,34 @@ namespace DbManager
 
         public static void Add(SqliteConnection connection, AchievementCategory category)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
-            if (category == null)
-                throw new ArgumentNullException(nameof(category));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+
+            var sb = new StringBuilder();
+            sb.AppendLine("INSERT INTO AchievementCategory (Location, Name, ParentID, FunctionID, FunctionValue) VALUES (@Location, @Name, @ParentID, @FunctionID, @FunctionValue);");
+            if (category.IsLegacy)
+                sb.AppendLine("INSERT INTO AchievementCategoryIsLegacy (ID) VALUES (@ID);");
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO AchievementCategory (Location, Name, ParentID, FunctionID, FunctionValue) VALUES (@Location, @Name, @ParentID, @FunctionID, @FunctionValue)";
+            cmd.CommandText = sb.ToString();
             cmd.Parameters.AddWithValue("@Location", category.Location);
             cmd.Parameters.AddWithValue("@Name", category.Name);
             cmd.Parameters.AddWithValue("@ParentID", category.Parent == null ? DBNull.Value : category.Parent.ID);
             cmd.Parameters.AddWithValue("@FunctionID", category.Function.ID);
             cmd.Parameters.AddWithValue("@FunctionValue", category.FunctionValue == -1 ? DBNull.Value : category.FunctionValue);
+            cmd.Parameters.AddWithValue("@ID", GetLast(connection).ID);
 
             cmd.ExecuteNonQuery();
-
-            if (category.IsLegacy)
-            {
-                cmd.Parameters.Clear();
-
-                cmd.CommandText = @"INSERT INTO AchievementCategoryIsLegacy (ID) VALUES (@ID)";
-                cmd.Parameters.AddWithValue("@ID", GetLast(connection).ID);
-
-                cmd.ExecuteNonQuery();
-            }
         }
 
         public static void UpdateLocations(SqliteConnection connection, AchievementCategory selectedCategory, List<AchievementCategory> categories)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
-            if (selectedCategory == null)
-                throw new ArgumentNullException(nameof(selectedCategory));
-            if (categories == null)
-                throw new ArgumentNullException(nameof(categories));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
+            _ = categories ?? throw new ArgumentNullException(nameof(categories));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"UPDATE AchievementCategory SET Location = @Location WHERE ID = @ID";
+            cmd.CommandText = "UPDATE AchievementCategory SET Location = @Location WHERE ID = @ID";
             for (int i = 0; i < categories.Count; i++)
                 if (categories[i].Location >= selectedCategory.Location && categories[i] != selectedCategory)
                 {
@@ -194,10 +184,8 @@ namespace DbManager
 
         public static void UpdateParent(SqliteConnection connection, AchievementCategory category, AchievementCategory parent, int location)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
-            if (category == null)
-                throw new ArgumentNullException(nameof(category));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = category ?? throw new ArgumentNullException(nameof(category));
 
             category.Parent = parent;
             category.Location = location;
@@ -205,11 +193,12 @@ namespace DbManager
             var cmd = connection.CreateCommand();
             if (parent != null)
             {
-                cmd.CommandText = @"UPDATE AchievementCategory SET Location = @Location, ParentID = @ParentID WHERE ID = @ID";
+                cmd.CommandText = "UPDATE AchievementCategory SET Location = @Location, ParentID = @ParentID WHERE ID = @ID";
                 cmd.Parameters.AddWithValue("@ParentID", category.Parent.ID);
             }
             else
-                cmd.CommandText = @"UPDATE AchievementCategory SET Location = @Location, ParentID = NULL WHERE ID = @ID";
+                cmd.CommandText = "UPDATE AchievementCategory SET Location = @Location, ParentID = NULL WHERE ID = @ID";
+
             cmd.Parameters.AddWithValue("@Location", category.Location);
             cmd.Parameters.AddWithValue("@ID", category.ID);
 
@@ -218,13 +207,16 @@ namespace DbManager
 
         public static void Remove(SqliteConnection connection, AchievementCategory category)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
-            if (category == null)
-                throw new ArgumentNullException(nameof(category));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+
+            var sb = new StringBuilder();
+            if (category.IsLegacy)
+                sb.AppendLine("DELETE FROM AchievementCategoryIsLegacy WHERE ID = @ID;");
+            sb.AppendLine("DELETE FROM AchievementCategory WHERE ID = @ID;");
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"DELETE FROM AchievementCategory WHERE ID = @ID";
+            cmd.CommandText = sb.ToString();
             cmd.Parameters.AddWithValue("@ID", category.ID);
 
             cmd.ExecuteNonQuery();
@@ -232,24 +224,17 @@ namespace DbManager
 
         public static void Swap(SqliteConnection connection, AchievementCategory category1, AchievementCategory category2)
         {
-            if (connection == null)
-                throw new ArgumentNullException(nameof(connection));
-            if (category1 == null)
-                throw new ArgumentNullException(nameof(category1));
-            if (category2 == null)
-                throw new ArgumentNullException(nameof(category2));
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = category1 ?? throw new ArgumentNullException(nameof(category1));
+            _ = category2 ?? throw new ArgumentNullException(nameof(category2));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"UPDATE AchievementCategory SET Location = @Location WHERE ID = @ID";
-            cmd.Parameters.AddWithValue("@Location", category2.Location);
-            cmd.Parameters.AddWithValue("@ID", category1.ID);
-
-            cmd.ExecuteNonQuery();
-
-            cmd.Parameters.Clear();
-
-            cmd.Parameters.AddWithValue("@Location", category1.Location);
-            cmd.Parameters.AddWithValue("@ID", category2.ID);
+            cmd.CommandText = @"UPDATE AchievementCategory SET Location = @Location1 WHERE ID = @ID1;
+                                UPDATE AchievementCategory SET Location = @Location2 WHERE ID = @ID2;";
+            cmd.Parameters.AddWithValue("@Location1", category2.Location);
+            cmd.Parameters.AddWithValue("@ID1", category1.ID);
+            cmd.Parameters.AddWithValue("@Location2", category1.Location);
+            cmd.Parameters.AddWithValue("@ID2", category2.ID);
 
             cmd.ExecuteNonQuery();
         }

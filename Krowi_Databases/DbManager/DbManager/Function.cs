@@ -1,9 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DbManager
 {
@@ -30,6 +27,8 @@ namespace DbManager
 
         public static List<Function> GetAll(SqliteConnection connection)
         {
+            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+
             var functions = new List<Function>();
             var selectCmd = connection.CreateCommand();
             selectCmd.CommandText = @"SELECT ID, Call, Description FROM Function";

@@ -29,6 +29,16 @@ namespace DbManager
             RefreshFunctions(Connection);
         }
 
+        #region AchievementCategory
+        private AchievementCategory GetSelectedAchievementCategory()
+        {
+            AchievementCategory selectedCategory = null;
+            if (treeView1.SelectedNode != null)
+                selectedCategory = ((AchievementCategoryTreeNode)treeView1.SelectedNode).AchievementCategory;
+
+            return selectedCategory;
+        }
+
         private void RefreshFunctions(SqliteConnection connection)
         {
             if (connection == null)
@@ -57,67 +67,49 @@ namespace DbManager
             if (connection == null)
                 throw new ArgumentNullException(nameof(connection));
 
-            var selectedID = lsbAchievementCategories1.SelectedItem != null ? ((AchievementCategory)lsbAchievementCategories1.SelectedItem).ID : -1;
+            var selectedCategory = GetSelectedAchievementCategory();
 
             var categories = AchievementCategory.GetAll(connection);
-            lsbAchievementCategories1.Items.Clear(); // Clear before adding new categories
-            lsbAchievementCategories1.Items.Add(new AchievementCategory(-1, 0, null, null, 0)); // Empty Category
+
+            treeView1.Nodes.Clear();
             foreach (var category in categories)
-                lsbAchievementCategories1.Items.Add(category);
+            {
+                if (category.Parent == null)
+                    treeView1.Nodes.Add(new AchievementCategoryTreeNode(category));
+                else
+                {
+                    var node = FindTreeNode(treeView1.Nodes, category.Parent);
+                    node.Nodes.Add(new AchievementCategoryTreeNode(category));
+                }
+            }
 
-            if (lsbAchievementCategories1.Items.Count > 0)
-                lsbAchievementCategories1.SelectedIndex = 0;
-            if (selectedID > 0)
-                foreach (AchievementCategory item in lsbAchievementCategories1.Items)
-                    if (item.ID == selectedID)
-                    {
-                        lsbAchievementCategories1.SelectedItem = item;
-                        break;
-                    }
+            if (selectedCategory != null)
+            {
+                var node = FindTreeNode(treeView1.Nodes, selectedCategory);
+                if (node != null)
+                    treeView1.SelectedNode = node;
+            }
 
-            //foreach (var category in categories)
-            //{
-            //    if (category.Parent == null)
-            //        treeView1.Nodes.Add(category.ID.ToString(), category.Name);
-            //    else
-            //    {
-            //        if (category.Parent.ID == 56)
-            //            Console.WriteLine(56);
-
-            //        var node = FindTreeNode(treeView1.Nodes, category.Parent.ID.ToString());
-            //        node.Nodes.Add(category.ID.ToString(), category.Name);
-            //    }
-            //}
         }
 
-        //public TreeNode FindTreeNode(TreeNodeCollection nodes, string key)
-        //{
-        //    if (nodes.ContainsKey(key))
-        //        return nodes[nodes.IndexOfKey(key)];
-
-        //    foreach (TreeNode node in nodes)
-        //    {
-        //        if (node.Nodes.ContainsKey(key))
-        //            return node.Nodes[node.Nodes.IndexOfKey(key)];
-
-        //        if (node.Nodes.Count > 0)
-        //        {
-        //            var foundNode = FindTreeNode(node.Nodes, key);
-        //            if (foundNode != null)
-        //                return foundNode;
-        //        }
-        //    }
-
-        //    return null;
-        //}
-
-        public AchievementCategory GetNodeAchievementCategory(TreeNode node)
+        private AchievementCategoryTreeNode FindTreeNode(TreeNodeCollection nodes, AchievementCategory category)
         {
-            var categories = AchievementCategory.GetAll(Connection);
-            return categories.Single(x => x.ID == Convert.ToInt32(node.Name));
+            foreach (AchievementCategoryTreeNode node in nodes)
+            {
+                if (node.AchievementCategory.Equals(category))
+                    return node;
+
+                if (node.Nodes.Count > 0)
+                {
+                    var found = FindTreeNode(node.Nodes, category);
+                    if (found != null)
+                        return found;
+                }
+            }
+
+            return null;
         }
 
-        #region AchievementCategory
         private void btnAchievementCategoryAdd_Click(object sender, EventArgs e)
         {
             if (lsbFunctions.SelectedIndex == 0)
@@ -126,17 +118,31 @@ namespace DbManager
                 return;
             }
 
-            int location = cbxCategoryAsParent.Checked ? 1 : ((AchievementCategory)lsbAchievementCategories1.SelectedItem).Location + 1;
-            AchievementCategory parent = cbxCategoryAsParent.Checked ? (AchievementCategory)lsbAchievementCategories1.SelectedItem : ((AchievementCategory)lsbAchievementCategories1.SelectedItem).Parent;
+            var selectedCategory = GetSelectedAchievementCategory();
+            if (selectedCategory == null)
+            {
+                MessageBox.Show("No category selected!" + Environment.NewLine + Environment.NewLine + "Category is not added.", "No category", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int location = cbxCategoryAsParent.Checked ? 1 : selectedCategory.Location + 1;
+            AchievementCategory parent = cbxCategoryAsParent.Checked ? selectedCategory : selectedCategory.Parent;
 
             var category = new AchievementCategory(-1, location, txtCategoryName.Text, (Function)lsbFunctions.SelectedItem, string.IsNullOrEmpty(txtFunctionValue.Text) ? -1 : Convert.ToInt32(txtFunctionValue.Text), parent, cbxLegacyCategory.Checked);
             AchievementCategory.Add(Connection, category);
 
             if (!cbxCategoryAsParent.Checked)
             {
-                lsbAchievementCategories1.Items.Insert(lsbAchievementCategories1.SelectedIndex + 1, category);
+                var node = FindTreeNode(treeView1.Nodes, parent);
+                TreeNodeCollection nodes = null;
+                if (node != null && node.Nodes != null)
+                    nodes = node.Nodes;
+                else
+                    nodes = treeView1.Nodes;
 
-                var categories = lsbAchievementCategories1.Items.Cast<AchievementCategory>().Where(x => x.Parent == ((AchievementCategory)lsbAchievementCategories1.SelectedItem).Parent).ToList();
+                nodes.Insert(treeView1.SelectedNode.Index + 1, new AchievementCategoryTreeNode(category)); // Need to add this to ensure correct location numbers
+
+                var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
                 AchievementCategory.UpdateLocations(Connection, AchievementCategory.GetLast(Connection), categories);
             }
@@ -150,82 +156,121 @@ namespace DbManager
 
             // Overwrite the refresh set index to select the new category
             category = AchievementCategory.GetLast(Connection);
-            foreach (AchievementCategory item in lsbAchievementCategories1.Items)
-                if (item.ID == category.ID)
-                {
-                    lsbAchievementCategories1.SelectedItem = item;
-                    break;
-                }
+            var selectNode = FindTreeNode(treeView1.Nodes, category);
+            treeView1.SelectedNode = selectNode;
         }
 
         private void btnAchievementCategoryRemove_Click(object sender, EventArgs e)
         {
-            var removedCategory = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
-            AchievementCategory.Remove(Connection, (AchievementCategory)lsbAchievementCategories1.SelectedItem);
+            var selectedCategory = GetSelectedAchievementCategory();
+            if (selectedCategory == null)
+            {
+                MessageBox.Show("No category selected!" + Environment.NewLine + Environment.NewLine + "Category is not added.", "No category", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            lsbAchievementCategories1.Items.RemoveAt(lsbAchievementCategories1.SelectedIndex);
+            AchievementCategory.Remove(Connection, selectedCategory);
 
-            var categories = lsbAchievementCategories1.Items.Cast<AchievementCategory>().Where(x => x.Parent == removedCategory.Parent).ToList();
+            var node = treeView1.SelectedNode.Parent;
+            TreeNodeCollection nodes = null;
+            if (node != null && node.Nodes != null)
+                nodes = node.Nodes;
+            else
+                nodes = treeView1.Nodes;
 
-            AchievementCategory.UpdateLocations(Connection, removedCategory, categories);
+            treeView1.SelectedNode.Remove();
+
+            var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
+            AchievementCategory.UpdateLocations(Connection, selectedCategory, categories);
 
             RefreshCategories(Connection);
         }
 
         private void btnAchievementCategoryMoveRight_Click(object sender, EventArgs e)
         {
-            var selectedCategory = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
-
-            var index = lsbAchievementCategories1.SelectedIndex - 1;
-            if (index < 0)
+            var prevNode = (AchievementCategoryTreeNode)treeView1.SelectedNode.PrevNode;
+            if (prevNode?.AchievementCategory is null)
                 return;
 
-            //if (selectedCategory.Parent == ((AchievementCategory)lsbAchievementCategories1.Items[index]).Parent)
-            //    return;
+            var selectedCategory = GetSelectedAchievementCategory();
 
-            var categories = lsbAchievementCategories1.Items.Cast<AchievementCategory>().Where(x => x.Parent == selectedCategory.Parent && x.ID > 0).ToList();
+            var location = 1;
+            if (prevNode.Nodes.Count > 0)
+                location = ((AchievementCategoryTreeNode)prevNode.Nodes[prevNode.Nodes.Count - 1]).AchievementCategory.Location + 1;
 
-            var filteredIndex = categories.FindIndex(x => x == selectedCategory);
+            AchievementCategory.UpdateParent(Connection, selectedCategory, prevNode.AchievementCategory, location);
 
-            if (filteredIndex == 0)
-                return;
+            var node = treeView1.SelectedNode.Parent;
+            TreeNodeCollection nodes = null;
+            if (node != null && node.Nodes != null)
+                nodes = node.Nodes;
+            else
+                nodes = treeView1.Nodes;
 
-            AchievementCategory.UpdateParent(Connection, selectedCategory, categories[filteredIndex - 1], ((AchievementCategory)lsbAchievementCategories1.Items[index]).Location + 1);
+            treeView1.SelectedNode.Remove();
 
-            categories.RemoveAt(filteredIndex);
+            var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
-            AchievementCategory.UpdateLocations(Connection, categories[filteredIndex - 1], categories);
+            AchievementCategory.UpdateLocations(Connection, prevNode.AchievementCategory, categories);
 
             RefreshCategories(Connection);
         }
 
         private void btnAchievementCategoryMoveLeft_Click(object sender, EventArgs e)
         {
-            var selectedCategory = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
-            AchievementCategory oldCategory = (AchievementCategory)selectedCategory.Clone();
-
-            if (selectedCategory.Parent == null)
+            var parentNode = (AchievementCategoryTreeNode)treeView1.SelectedNode.Parent;
+            if (parentNode?.AchievementCategory is null)
                 return;
+
+            var selectedCategory = GetSelectedAchievementCategory();
 
             AchievementCategory.UpdateParent(Connection, selectedCategory, selectedCategory.Parent.Parent, selectedCategory.Parent.Location + 1);
 
-            // Update the locations for the new level
-            var categories = lsbAchievementCategories1.Items.Cast<AchievementCategory>().Where(x => x.Parent == selectedCategory.Parent).ToList();
+            var node = parentNode.Parent;
+            TreeNodeCollection nodes = null;
+            if (node != null && node.Nodes != null)
+                nodes = node.Nodes;
+            else
+                nodes = treeView1.Nodes;
+
+            nodes.Insert(parentNode.Index + 1, new AchievementCategoryTreeNode(selectedCategory)); // Need to add this to ensure correct location numbers
+
+            var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
             AchievementCategory.UpdateLocations(Connection, selectedCategory, categories);
 
-            // Update locations for the previous level
-            categories = lsbAchievementCategories1.Items.Cast<AchievementCategory>().Where(x => x.Parent == oldCategory.Parent).ToList();
-
-            AchievementCategory.UpdateLocations(Connection, oldCategory, categories);
+            var nextNode = (AchievementCategoryTreeNode)treeView1.SelectedNode.NextNode;
+            if (nextNode is not null)
+            {
+                treeView1.SelectedNode.Remove();
+                var prevNode = (AchievementCategoryTreeNode)nextNode.PrevNode;
+                if (prevNode?.AchievementCategory is not null)
+                {
+                    var categories2 = prevNode.Parent.Nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
+                    AchievementCategory.UpdateLocations(Connection, prevNode.AchievementCategory, categories2);
+                }
+                else // removed item was 1st element so we use next element and adjust from a fictional 1st element
+                {
+                    var categories2 = nextNode.Parent.Nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
+                    AchievementCategory.UpdateLocations(Connection, new AchievementCategory(-1, -1, "TEMP", null, -1), categories2);
+                }
+            }
 
             RefreshCategories(Connection);
         }
 
         private void btnAchievementCategoryMoveDown_Click(object sender, EventArgs e)
         {
-            var selectedCategory = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
-            var categories = lsbAchievementCategories1.Items.Cast<AchievementCategory>().Where(x => x.Parent == selectedCategory.Parent && x.ID > 0).ToList();
+            var selectedCategory = GetSelectedAchievementCategory();
+
+            var node = treeView1.SelectedNode.Parent;
+            TreeNodeCollection nodes = null;
+            if (node != null && node.Nodes != null)
+                nodes = node.Nodes;
+            else
+                nodes = treeView1.Nodes;
+
+            var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
             var filteredIndex = categories.FindIndex(x => x == selectedCategory);
 
@@ -239,8 +284,16 @@ namespace DbManager
 
         private void btnAchievementCategoryMoveUp_Click(object sender, EventArgs e)
         {
-            var selectedCategory = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
-            var categories = lsbAchievementCategories1.Items.Cast<AchievementCategory>().Where(x => x.Parent == selectedCategory.Parent && x.ID > 0).ToList();
+            var selectedCategory = GetSelectedAchievementCategory();
+
+            var node = treeView1.SelectedNode.Parent;
+            TreeNodeCollection nodes = null;
+            if (node != null && node.Nodes != null)
+                nodes = node.Nodes;
+            else
+                nodes = treeView1.Nodes;
+
+            var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
             var filteredIndex = categories.FindIndex(x => x == selectedCategory);
 
@@ -254,7 +307,25 @@ namespace DbManager
         #endregion
 
         #region Achievement
-        private void lsbAchievementCategories1_SelectedIndexChanged(object sender, EventArgs e)
+        private void RefreshAchievements(SqliteConnection connection)
+        {
+            lsbAchievements.Items.Clear(); // Clear before adding new categories
+
+            var category = GetSelectedAchievementCategory();
+
+            if (category != null)
+            {
+                var achievements = Achievement.GetWithCategory(connection, category);
+
+                foreach (var achievement in achievements)
+                    lsbAchievements.Items.Add(achievement);
+
+                if (lsbAchievements.Items.Count > 0) // Select latest achievement
+                    lsbAchievements.SelectedIndex = lsbAchievements.Items.Count - 1;
+            }
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             RefreshAchievements(Connection);
         }
@@ -271,9 +342,9 @@ namespace DbManager
                     faction = Faction.Horde;
 
                 int location = lsbAchievements.Items.Count > 0 ? ((Achievement)lsbAchievements.SelectedItem).Location + 1 : 1;
-                AchievementCategory category = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
+                var category = GetSelectedAchievementCategory();
 
-                var achievement = new Achievement(ID, faction, location, cbxObtainable.Checked, cbxHasWowheadLink.Checked, cbxHasIATLink.Checked);
+                var achievement = new Achievement(ID, faction, location, cbxObtainable.Checked, cbxHasWowheadLink.Checked);
                 Achievement.Add(Connection, achievement, category);
 
                 Achievement.UpdateLocations(Connection, achievement, lsbAchievements.Items.Cast<Achievement>().ToList());
@@ -284,7 +355,6 @@ namespace DbManager
             txtAchievementID.Clear();
             cbxObtainable.Checked = true;
             cbxHasWowheadLink.Checked = true;
-            cbxHasIATLink.Checked = false;
             rdbNoFaction.Checked = true;
         }
 
@@ -293,23 +363,6 @@ namespace DbManager
             Achievement.Remove(Connection, (Achievement)lsbAchievements.SelectedItem);
 
             RefreshAchievements(Connection);
-        }
-
-        private void RefreshAchievements(SqliteConnection connection)
-        {
-            lsbAchievements.Items.Clear(); // Clear before adding new categories
-
-            var category = (AchievementCategory)lsbAchievementCategories1.SelectedItem;
-            if (category != null)
-            {
-                var achievements = Achievement.GetWithCategory(connection, (AchievementCategory)lsbAchievementCategories1.SelectedItem);
-
-                foreach (var achievement in achievements)
-                    lsbAchievements.Items.Add(achievement);
-
-                if (lsbAchievements.Items.Count > 0)
-                    lsbAchievements.SelectedIndex = lsbAchievements.Items.Count - 1;
-            }
         }
         #endregion
 
@@ -383,6 +436,7 @@ namespace DbManager
             using var file = new StreamWriter(@"../../../../../Krowi_AchievementFilter/Data/ExportedData.lua");
             file.WriteLine(sb.ToString());
         }
+
     }
 
     public static class Extensions

@@ -1,4 +1,4 @@
--- [[ Exported at 2021-02-11 21-00-26 ]] --
+-- [[ Exported at 2021-02-12 15-10-46 ]] --
 -- [[ This code is automatically generated as an export from a SQLite database ]] --
 -- [[ and is not meant for manual edit. ]] --
 
@@ -1363,6 +1363,205 @@ function exportedData.Load(categories, achievements)
     tmpCategories[222]:AddAchievement(InsertAndReturn(achievements, achievement:New(8295, nil, nil, nil)));
     tmpCategories[222]:AddAchievement(InsertAndReturn(achievements, achievement:New(8294, nil, nil, nil)));
     tmpCategories[222]:AddAchievement(InsertAndReturn(achievements, achievement:New(8327, nil, nil, nil)));
+    tmpCategories[223] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15233))); -- Warlords of Dreanor
+    tmpCategories[224] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15272))); -- Dungeons
+    tmpCategories[223]:AddCategory(tmpCategories[224]);
+    tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(9391, nil, nil, nil)));
+    tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(9396, nil, nil, nil)));
+    tmpCategories[226] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(385))); -- Bloodmaul Slag Mines
+    tmpCategories[224]:AddCategory(tmpCategories[226]);
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(9005, nil, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(8993, nil, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(9008, nil, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(9037, nil, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(9046, nil, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(10076, nil, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(8875, false, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(8876, false, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(8877, false, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(8878, false, nil, nil)));
+    tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(9620, false, nil, nil)));
+    tmpCategories[227] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(558))); -- Iron Docks
+    tmpCategories[224]:AddCategory(tmpCategories[227]);
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(9081, nil, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(9083, nil, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(9082, nil, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(9038, nil, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(9047, nil, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(10079, nil, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(8997, false, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(8998, false, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(8999, false, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(9000, false, nil, nil)));
+    tmpCategories[227]:AddAchievement(InsertAndReturn(achievements, achievement:New(9621, false, nil, nil)));
+    tmpCategories[228] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(547))); -- Auchindoun
+    tmpCategories[224]:AddCategory(tmpCategories[228]);
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(9023, nil, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(9551, nil, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(9552, nil, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(9039, nil, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(9049, nil, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(10080, nil, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(8879, false, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(8880, false, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(8881, false, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(8882, false, nil, nil)));
+    tmpCategories[228]:AddAchievement(InsertAndReturn(achievements, achievement:New(9622, false, nil, nil)));
+    tmpCategories[229] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(476))); -- Skyreach
+    tmpCategories[224]:AddCategory(tmpCategories[229]);
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(9033, nil, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(9035, nil, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(9034, nil, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(9036, nil, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(8843, nil, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(8844, nil, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(10081, nil, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(8871, false, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(8872, false, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(8873, false, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(8874, false, nil, nil)));
+    tmpCategories[229]:AddAchievement(InsertAndReturn(achievements, achievement:New(9623, false, nil, nil)));
+    tmpCategories[230] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(536))); -- Grimrail Depot
+    tmpCategories[224]:AddCategory(tmpCategories[230]);
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(9024, nil, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(9007, nil, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(9043, nil, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(9052, nil, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(10082, nil, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(8887, false, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(8888, false, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(8889, false, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(8890, false, nil, nil)));
+    tmpCategories[230]:AddAchievement(InsertAndReturn(achievements, achievement:New(9625, false, nil, nil)));
+    tmpCategories[231] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(556))); -- The Everbloom
+    tmpCategories[224]:AddCategory(tmpCategories[231]);
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9017, nil, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9493, nil, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9223, nil, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9044, nil, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9053, nil, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(10083, nil, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9001, false, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9002, false, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9003, false, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9004, false, nil, nil)));
+    tmpCategories[231]:AddAchievement(InsertAndReturn(achievements, achievement:New(9624, false, nil, nil)));
+    tmpCategories[232] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(537))); -- Shadowmoon Burial Grounds
+    tmpCategories[224]:AddCategory(tmpCategories[232]);
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(9018, nil, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(9025, nil, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(9026, nil, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(9041, nil, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(9054, nil, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(10084, nil, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(8883, false, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(8884, false, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(8885, false, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(8886, false, nil, nil)));
+    tmpCategories[232]:AddAchievement(InsertAndReturn(achievements, achievement:New(9626, false, nil, nil)));
+    tmpCategories[233] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(559))); -- Upper Blackrock Spire
+    tmpCategories[224]:AddCategory(tmpCategories[233]);
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(9045, nil, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(9058, nil, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(9056, nil, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(9057, nil, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(9042, nil, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(9055, nil, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(10085, nil, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(8891, false, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(8892, false, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(8893, false, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(8894, false, nil, nil)));
+    tmpCategories[233]:AddAchievement(InsertAndReturn(achievements, achievement:New(9627, false, nil, nil)));
+    tmpCategories[225] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15271))); -- Raids
+    tmpCategories[223]:AddCategory(tmpCategories[225]);
+    tmpCategories[225]:AddAchievement(InsertAndReturn(achievements, achievement:New(8985, nil, nil, nil)));
+    tmpCategories[225]:AddAchievement(InsertAndReturn(achievements, achievement:New(10149, nil, nil, nil)));
+    tmpCategories[234] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(477))); -- Highmaul
+    tmpCategories[225]:AddCategory(tmpCategories[234]);
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8948, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8947, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8974, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8975, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8958, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8976, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8977, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8949, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8960, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8961, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8962, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8963, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8964, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8965, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8986, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8987, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8988, nil, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(9441, false, nil, nil)));
+    tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(9442, false, nil, nil)));
+    tmpCategories[235] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(457))); -- Blackrock Foundry
+    tmpCategories[225]:AddCategory(tmpCategories[235]);
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8979, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8978, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8930, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8980, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8929, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8983, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8981, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8982, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8984, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8952, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8967, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8966, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8970, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8968, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8932, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8971, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8956, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8969, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8972, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8973, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8989, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8990, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8991, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8992, nil, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(9444, false, nil, nil)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(9443, false, nil, nil)));
+    tmpCategories[236] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(669))); -- Hellfire Citadel
+    tmpCategories[225]:AddCategory(tmpCategories[236]);
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10026, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10057, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10013, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10054, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(9972, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(9979, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(9988, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10086, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(9989, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10012, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10087, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10030, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10073, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10027, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10032, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10033, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10034, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10035, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10253, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10037, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10040, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10041, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10038, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10039, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10042, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10043, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10023, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10024, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10025, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10020, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10019, nil, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(9680, false, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10044, false, nil, nil)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10045, false, nil, nil)));
     tmpCategories[6] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15439))); -- Shadowlands
 end
 

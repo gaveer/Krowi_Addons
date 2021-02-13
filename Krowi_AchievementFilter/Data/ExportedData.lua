@@ -1,4 +1,4 @@
--- [[ Exported at 2021-02-12 20-06-47 ]] --
+-- [[ Exported at 2021-02-13 13-04-14 ]] --
 -- [[ This code is automatically generated as an export from a SQLite database ]] --
 -- [[ and is not meant for manual edit. ]] --
 
@@ -133,7 +133,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[7] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(741))); -- Molten Core
     tmpCategories[3]:AddCategory(tmpCategories[7]);
     tmpCategories[7]:AddAchievement(InsertAndReturn(achievements, achievement:New(686, nil, nil, nil)));
-    tmpCategories[26] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(760) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Onyxias Lair (Legacy)
+    tmpCategories[26] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(760) .. " (" .. GetCategoryInfo(15234) .. ")")); -- Onyxia's Lair (Legacy)
     tmpCategories[3]:AddCategory(tmpCategories[26]);
     tmpCategories[26]:AddAchievement(InsertAndReturn(achievements, achievement:New(684, false, nil, nil)));
     tmpCategories[27] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(742))); -- Blackwing Lair
@@ -181,7 +181,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[56]:AddCategory(tmpCategories[62]);
     tmpCategories[62]:AddAchievement(InsertAndReturn(achievements, achievement:New(656, nil, nil, nil)));
     tmpCategories[62]:AddAchievement(InsertAndReturn(achievements, achievement:New(677, nil, nil, nil)));
-    tmpCategories[63] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(250))); -- Mana Tombs
+    tmpCategories[63] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(250))); -- Mana-Tombs
     tmpCategories[56]:AddCategory(tmpCategories[63]);
     tmpCategories[63]:AddAchievement(InsertAndReturn(achievements, achievement:New(651, nil, nil, nil)));
     tmpCategories[63]:AddAchievement(InsertAndReturn(achievements, achievement:New(671, nil, nil, nil)));
@@ -1668,7 +1668,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[239]:AddAchievement(InsertAndReturn(achievements, achievement:New(11180, nil, nil, nil)));
     tmpCategories[239]:AddAchievement(InsertAndReturn(achievements, achievement:New(11763, nil, nil, nil)));
     tmpCategories[239]:AddAchievement(InsertAndReturn(achievements, achievement:New(11987, nil, nil, nil)));
-    tmpCategories[253] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(768))); -- Emerald Nightmare
+    tmpCategories[253] = InsertAndReturn(categories, achievementCategory:New(EJ_GetInstanceInfo(768))); -- The Emerald Nightmare
     tmpCategories[239]:AddCategory(tmpCategories[253]);
     tmpCategories[253]:AddAchievement(InsertAndReturn(achievements, achievement:New(10555, nil, nil, nil)));
     tmpCategories[253]:AddAchievement(InsertAndReturn(achievements, achievement:New(10830, nil, nil, nil)));
@@ -1786,6 +1786,533 @@ function exportedData.Load(categories, achievements)
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(11991, nil, nil, nil)));
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(12110, false, nil, nil)));
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(12111, false, nil, nil)));
+    tmpCategories[258] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15305))); -- Battle for Azeroth
+    tmpCategories[259] = InsertAndReturn(categories, achievementCategory:New(addon.L["C_ZONES"])); -- Zones
+    tmpCategories[258]:AddCategory(tmpCategories[259]);
+    tmpCategories[271] = InsertAndReturn(categories, achievementCategory:New(addon.Faction.IsAlliance and C_Map.GetMapInfo(876).name or (addon.Faction.IsHorde and C_Map.GetMapInfo(875).name or addon.L["C_NO_FACTION"]))); -- Kul Tiras or Zandalar
+    tmpCategories[259]:AddCategory(tmpCategories[271]);
+    tmpCategories[272] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[271]:AddCategory(tmpCategories[272]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12582, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12997, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12593, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12891, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12555, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12479, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13294, nil, nil, nil)));
+    end
+    tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13512, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13384, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12510, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13467, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13925, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12509, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13466, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13924, nil, nil, nil)));
+    end
+    tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13517, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13283, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13251, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13284, nil, nil, nil)));
+    end
+    tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13144, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13060, nil, nil, nil)));
+    end
+    tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13048, nil, nil, nil)));
+    if addon.Faction.IsHorde then
+        tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(13263, nil, nil, nil)));
+    end
+    tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(14161, nil, nil, nil)));
+    tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(14157, nil, nil, nil)));
+    tmpCategories[273] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[271]:AddCategory(tmpCategories[273]);
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(12989, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(13250, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(14160, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(14159, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(14158, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(13061, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(12482, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(13036, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(13029, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(13027, nil, nil, nil)));
+    tmpCategories[273]:AddAchievement(InsertAndReturn(achievements, achievement:New(14730, nil, nil, nil)));
+    tmpCategories[274] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[271]:AddCategory(tmpCategories[274]);
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(13429, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(13317, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12572, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12571, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12573, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12605, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12604, nil, nil, nil)));
+    end
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12856, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12857, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12858, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12860, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12863, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12859, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12861, nil, nil, nil)));
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(12862, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(13387, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(13388, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(13402, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(13403, nil, nil, nil)));
+    end
+    tmpCategories[274]:AddAchievement(InsertAndReturn(achievements, achievement:New(13623, nil, nil, nil)));
+    tmpCategories[275] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[271]:AddCategory(tmpCategories[275]);
+    tmpCategories[275]:AddAchievement(InsertAndReturn(achievements, achievement:New(12947, nil, nil, nil)));
+    tmpCategories[275]:AddAchievement(InsertAndReturn(achievements, achievement:New(12955, nil, nil, nil)));
+    tmpCategories[275]:AddAchievement(InsertAndReturn(achievements, achievement:New(12956, nil, nil, nil)));
+    tmpCategories[276] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(895).name)); -- Tiragarde Sound
+    tmpCategories[259]:AddCategory(tmpCategories[276]);
+    tmpCategories[281] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[276]:AddCategory(tmpCategories[281]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[281]:AddAchievement(InsertAndReturn(achievements, achievement:New(12473, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[281]:AddAchievement(InsertAndReturn(achievements, achievement:New(13059, nil, nil, nil)));
+    end
+    tmpCategories[281]:AddAchievement(InsertAndReturn(achievements, achievement:New(13050, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[281]:AddAchievement(InsertAndReturn(achievements, achievement:New(13049, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[281]:AddAchievement(InsertAndReturn(achievements, achievement:New(12087, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[281]:AddAchievement(InsertAndReturn(achievements, achievement:New(13285, nil, nil, nil)));
+    end
+    tmpCategories[278] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[276]:AddCategory(tmpCategories[278]);
+    tmpCategories[278]:AddAchievement(InsertAndReturn(achievements, achievement:New(12556, nil, nil, nil)));
+    tmpCategories[278]:AddAchievement(InsertAndReturn(achievements, achievement:New(12939, nil, nil, nil)));
+    tmpCategories[278]:AddAchievement(InsertAndReturn(achievements, achievement:New(12852, nil, nil, nil)));
+    tmpCategories[278]:AddAchievement(InsertAndReturn(achievements, achievement:New(13057, nil, nil, nil)));
+    tmpCategories[278]:AddAchievement(InsertAndReturn(achievements, achievement:New(13058, nil, nil, nil)));
+    tmpCategories[279] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[276]:AddCategory(tmpCategories[279]);
+    tmpCategories[279]:AddAchievement(InsertAndReturn(achievements, achievement:New(12577, nil, nil, nil)));
+    tmpCategories[280] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[276]:AddCategory(tmpCategories[280]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[280]:AddAchievement(InsertAndReturn(achievements, achievement:New(12951, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[280]:AddAchievement(InsertAndReturn(achievements, achievement:New(12954, nil, nil, nil)));
+    end
+    tmpCategories[282] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(896).name)); -- Drustvar
+    tmpCategories[259]:AddCategory(tmpCategories[282]);
+    tmpCategories[283] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[282]:AddCategory(tmpCategories[283]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[283]:AddAchievement(InsertAndReturn(achievements, achievement:New(12497, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[283]:AddAchievement(InsertAndReturn(achievements, achievement:New(13435, nil, nil, nil)));
+    end
+    tmpCategories[284] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[282]:AddCategory(tmpCategories[284]);
+    tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(12557, nil, nil, nil)));
+    tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(12941, nil, nil, nil)));
+    tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(12995, nil, nil, nil)));
+    tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(13087, nil, nil, nil)));
+    tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(13083, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(13082, nil, nil, nil)));
+    end
+    tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(13064, nil, nil, nil)));
+    tmpCategories[284]:AddAchievement(InsertAndReturn(achievements, achievement:New(13094, nil, nil, nil)));
+    tmpCategories[285] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[282]:AddCategory(tmpCategories[285]);
+    tmpCategories[285]:AddAchievement(InsertAndReturn(achievements, achievement:New(12579, nil, nil, nil)));
+    tmpCategories[286] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[282]:AddCategory(tmpCategories[286]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[286]:AddAchievement(InsertAndReturn(achievements, achievement:New(12952, nil, nil, nil)));
+    end
+    tmpCategories[287] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(942).name)); -- Stormsong Valley
+    tmpCategories[259]:AddCategory(tmpCategories[287]);
+    tmpCategories[288] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[287]:AddCategory(tmpCategories[288]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(12496, nil, nil, nil)));
+    end
+    tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(13054, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(13053, nil, nil, nil)));
+    end
+    tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(13047, nil, nil, nil)));
+    tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(13046, nil, nil, nil)));
+    tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(13045, nil, nil, nil)));
+    tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(13042, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[288]:AddAchievement(InsertAndReturn(achievements, achievement:New(13062, nil, nil, nil)));
+    end
+    tmpCategories[289] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[287]:AddCategory(tmpCategories[289]);
+    tmpCategories[289]:AddAchievement(InsertAndReturn(achievements, achievement:New(12558, nil, nil, nil)));
+    tmpCategories[289]:AddAchievement(InsertAndReturn(achievements, achievement:New(12940, nil, nil, nil)));
+    tmpCategories[289]:AddAchievement(InsertAndReturn(achievements, achievement:New(12853, nil, nil, nil)));
+    tmpCategories[289]:AddAchievement(InsertAndReturn(achievements, achievement:New(13051, nil, nil, nil)));
+    tmpCategories[290] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[287]:AddCategory(tmpCategories[290]);
+    tmpCategories[290]:AddAchievement(InsertAndReturn(achievements, achievement:New(12578, nil, nil, nil)));
+    tmpCategories[291] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[287]:AddCategory(tmpCategories[291]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[291]:AddAchievement(InsertAndReturn(achievements, achievement:New(12953, nil, nil, nil)));
+    end
+    tmpCategories[292] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(862).name)); -- Zuldazar
+    tmpCategories[259]:AddCategory(tmpCategories[292]);
+    tmpCategories[293] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[292]:AddCategory(tmpCategories[293]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13440, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(11861, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(12480, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(12481, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13441, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13039, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13038, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13037, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(12719, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13020, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(12614, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13030, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13573, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13542, nil, nil, nil)));
+    end
+    tmpCategories[293]:AddAchievement(InsertAndReturn(achievements, achievement:New(13035, nil, nil, nil)));
+    tmpCategories[294] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[292]:AddCategory(tmpCategories[294]);
+    tmpCategories[294]:AddAchievement(InsertAndReturn(achievements, achievement:New(12559, nil, nil, nil)));
+    tmpCategories[294]:AddAchievement(InsertAndReturn(achievements, achievement:New(12944, nil, nil, nil)));
+    tmpCategories[294]:AddAchievement(InsertAndReturn(achievements, achievement:New(12851, nil, nil, nil)));
+    tmpCategories[295] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[292]:AddCategory(tmpCategories[295]);
+    tmpCategories[295]:AddAchievement(InsertAndReturn(achievements, achievement:New(12575, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[295]:AddAchievement(InsertAndReturn(achievements, achievement:New(13439, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[295]:AddAchievement(InsertAndReturn(achievements, achievement:New(13438, nil, nil, nil)));
+    end
+    tmpCategories[296] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[292]:AddCategory(tmpCategories[296]);
+    if addon.Faction.IsHorde then
+        tmpCategories[296]:AddAchievement(InsertAndReturn(achievements, achievement:New(12950, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[296]:AddAchievement(InsertAndReturn(achievements, achievement:New(12957, nil, nil, nil)));
+    end
+    tmpCategories[297] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(863).name)); -- Nazmir
+    tmpCategories[259]:AddCategory(tmpCategories[297]);
+    tmpCategories[298] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[297]:AddCategory(tmpCategories[298]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[298]:AddAchievement(InsertAndReturn(achievements, achievement:New(13426, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[298]:AddAchievement(InsertAndReturn(achievements, achievement:New(13026, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[298]:AddAchievement(InsertAndReturn(achievements, achievement:New(11868, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[298]:AddAchievement(InsertAndReturn(achievements, achievement:New(13025, nil, nil, nil)));
+    end
+    tmpCategories[298]:AddAchievement(InsertAndReturn(achievements, achievement:New(13023, nil, nil, nil)));
+    if addon.Faction.IsHorde then
+        tmpCategories[298]:AddAchievement(InsertAndReturn(achievements, achievement:New(13022, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[298]:AddAchievement(InsertAndReturn(achievements, achievement:New(13021, nil, nil, nil)));
+    end
+    tmpCategories[299] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[297]:AddCategory(tmpCategories[299]);
+    tmpCategories[299]:AddAchievement(InsertAndReturn(achievements, achievement:New(12561, nil, nil, nil)));
+    tmpCategories[299]:AddAchievement(InsertAndReturn(achievements, achievement:New(12942, nil, nil, nil)));
+    tmpCategories[299]:AddAchievement(InsertAndReturn(achievements, achievement:New(12771, nil, nil, nil)));
+    tmpCategories[299]:AddAchievement(InsertAndReturn(achievements, achievement:New(12588, nil, nil, nil)));
+    tmpCategories[299]:AddAchievement(InsertAndReturn(achievements, achievement:New(13024, nil, nil, nil)));
+    tmpCategories[299]:AddAchievement(InsertAndReturn(achievements, achievement:New(13028, nil, nil, nil)));
+    tmpCategories[300] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[297]:AddCategory(tmpCategories[300]);
+    tmpCategories[300]:AddAchievement(InsertAndReturn(achievements, achievement:New(12574, nil, nil, nil)));
+    tmpCategories[301] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[297]:AddCategory(tmpCategories[301]);
+    if addon.Faction.IsHorde then
+        tmpCategories[301]:AddAchievement(InsertAndReturn(achievements, achievement:New(12948, nil, nil, nil)));
+    end
+    tmpCategories[302] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(864).name)); -- Voldun
+    tmpCategories[259]:AddCategory(tmpCategories[302]);
+    tmpCategories[303] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[302]:AddCategory(tmpCategories[303]);
+    if addon.Faction.IsHorde then
+        tmpCategories[303]:AddAchievement(InsertAndReturn(achievements, achievement:New(12478, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[303]:AddAchievement(InsertAndReturn(achievements, achievement:New(13437, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[303]:AddAchievement(InsertAndReturn(achievements, achievement:New(13009, nil, nil, nil)));
+    end
+    tmpCategories[303]:AddAchievement(InsertAndReturn(achievements, achievement:New(13011, nil, nil, nil)));
+    if addon.Faction.IsHorde then
+        tmpCategories[303]:AddAchievement(InsertAndReturn(achievements, achievement:New(13014, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[303]:AddAchievement(InsertAndReturn(achievements, achievement:New(13041, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[303]:AddAchievement(InsertAndReturn(achievements, achievement:New(13017, nil, nil, nil)));
+    end
+    tmpCategories[304] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[302]:AddCategory(tmpCategories[304]);
+    tmpCategories[304]:AddAchievement(InsertAndReturn(achievements, achievement:New(12560, nil, nil, nil)));
+    tmpCategories[304]:AddAchievement(InsertAndReturn(achievements, achievement:New(12943, nil, nil, nil)));
+    tmpCategories[304]:AddAchievement(InsertAndReturn(achievements, achievement:New(12849, nil, nil, nil)));
+    tmpCategories[304]:AddAchievement(InsertAndReturn(achievements, achievement:New(13016, nil, nil, nil)));
+    tmpCategories[304]:AddAchievement(InsertAndReturn(achievements, achievement:New(13018, nil, nil, nil)));
+    tmpCategories[305] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[302]:AddCategory(tmpCategories[305]);
+    tmpCategories[305]:AddAchievement(InsertAndReturn(achievements, achievement:New(12576, nil, nil, nil)));
+    tmpCategories[306] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[302]:AddCategory(tmpCategories[306]);
+    if addon.Faction.IsHorde then
+        tmpCategories[306]:AddAchievement(InsertAndReturn(achievements, achievement:New(12949, nil, nil, nil)));
+    end
+    tmpCategories[307] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1462).name)); -- Mechagon Island
+    tmpCategories[259]:AddCategory(tmpCategories[307]);
+    tmpCategories[308] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[307]:AddCategory(tmpCategories[308]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[308]:AddAchievement(InsertAndReturn(achievements, achievement:New(13553, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[308]:AddAchievement(InsertAndReturn(achievements, achievement:New(13700, nil, nil, nil)));
+    end
+    tmpCategories[308]:AddAchievement(InsertAndReturn(achievements, achievement:New(13790, nil, nil, nil)));
+    tmpCategories[308]:AddAchievement(InsertAndReturn(achievements, achievement:New(13791, nil, nil, nil)));
+    tmpCategories[309] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[307]:AddCategory(tmpCategories[309]);
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13776, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13470, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13472, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13482, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13473, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13474, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13696, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13686, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13475, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13477, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13476, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13555, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13478, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13479, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13556, nil, nil, nil)));
+    tmpCategories[309]:AddAchievement(InsertAndReturn(achievements, achievement:New(13541, nil, nil, nil)));
+    tmpCategories[310] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[307]:AddCategory(tmpCategories[310]);
+    tmpCategories[310]:AddAchievement(InsertAndReturn(achievements, achievement:New(13570, nil, nil, nil)));
+    tmpCategories[311] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[307]:AddCategory(tmpCategories[311]);
+    tmpCategories[311]:AddAchievement(InsertAndReturn(achievements, achievement:New(13557, nil, nil, nil)));
+    tmpCategories[312] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1355).name)); -- Nazjatar
+    tmpCategories[259]:AddCategory(tmpCategories[312]);
+    tmpCategories[313] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[312]:AddCategory(tmpCategories[313]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[313]:AddAchievement(InsertAndReturn(achievements, achievement:New(13710, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[313]:AddAchievement(InsertAndReturn(achievements, achievement:New(13709, nil, nil, nil)));
+    end
+    tmpCategories[314] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(97))); -- Exploration
+    tmpCategories[312]:AddCategory(tmpCategories[314]);
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13712, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13635, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13690, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13691, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13692, nil, nil, nil)));
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13743, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13753, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13758, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13744, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13754, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13759, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13745, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13755, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13760, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13704, nil, nil, nil)));
+    end
+    if addon.Faction.IsAlliance then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13762, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13746, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13749, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13750, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13747, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13751, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13756, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13748, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13752, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13757, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13645, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13761, nil, nil, nil)));
+    end
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13711, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13765, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13549, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13722, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13699, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13713, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13707, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13763, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13764, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13836, nil, nil, nil)));
+    tmpCategories[314]:AddAchievement(InsertAndReturn(achievements, achievement:New(13638, nil, nil, nil)));
+    tmpCategories[315] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15270))); -- PvP
+    tmpCategories[312]:AddCategory(tmpCategories[315]);
+    tmpCategories[315]:AddAchievement(InsertAndReturn(achievements, achievement:New(13569, nil, nil, nil)));
+    tmpCategories[315]:AddAchievement(InsertAndReturn(achievements, achievement:New(13568, nil, nil, nil)));
+    tmpCategories[315]:AddAchievement(InsertAndReturn(achievements, achievement:New(13720, nil, nil, nil)));
+    tmpCategories[316] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[312]:AddCategory(tmpCategories[316]);
+    if addon.Faction.IsAlliance then
+        tmpCategories[316]:AddAchievement(InsertAndReturn(achievements, achievement:New(13558, nil, nil, nil)));
+    end
+    if addon.Faction.IsHorde then
+        tmpCategories[316]:AddAchievement(InsertAndReturn(achievements, achievement:New(13559, nil, nil, nil)));
+    end
+    tmpCategories[317] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1530).name)); -- Vale of Eternal Blossoms
+    tmpCategories[259]:AddCategory(tmpCategories[317]);
+    tmpCategories[318] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[317]:AddCategory(tmpCategories[318]);
+    tmpCategories[318]:AddAchievement(InsertAndReturn(achievements, achievement:New(14154, nil, nil, nil)));
+    tmpCategories[321] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[317]:AddCategory(tmpCategories[321]);
+    tmpCategories[321]:AddAchievement(InsertAndReturn(achievements, achievement:New(14156, nil, nil, nil)));
+    tmpCategories[322] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1527).name)); -- Uldum
+    tmpCategories[259]:AddCategory(tmpCategories[322]);
+    tmpCategories[323] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15447))); -- Quests
+    tmpCategories[322]:AddCategory(tmpCategories[323]);
+    tmpCategories[323]:AddAchievement(InsertAndReturn(achievements, achievement:New(14153, nil, nil, nil)));
+    tmpCategories[324] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15273))); -- Reputation
+    tmpCategories[322]:AddCategory(tmpCategories[324]);
+    tmpCategories[324]:AddAchievement(InsertAndReturn(achievements, achievement:New(14155, nil, nil, nil)));
     tmpCategories[6] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15439))); -- Shadowlands
 end
 

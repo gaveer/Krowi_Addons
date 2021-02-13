@@ -51,6 +51,12 @@ namespace DbManager
                 txtAchievementID.Text = Clipboard.GetText();
         }
 
+        private void lsbFunctions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCategoryName.Text))
+                txtCategoryName.Text = ((Function)lsbFunctions.SelectedItem).Description;
+        }
+
         #region AchievementCategory
         private AchievementCategory GetSelectedAchievementCategory()
         {
@@ -458,7 +464,6 @@ namespace DbManager
             using var file = new StreamWriter(@"../../../../../Krowi_AchievementFilter/Data/ExportedData.lua");
             file.WriteLine(sb.ToString());
         }
-
     }
 
     public static class Extensions

@@ -31,6 +31,9 @@ namespace DbManager
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lsbAchievements = new System.Windows.Forms.ListBox();
+            this.lsbFunctions = new System.Windows.Forms.ListBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnExport = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -57,10 +60,7 @@ namespace DbManager
             this.btnAchievementCategoryAdd = new System.Windows.Forms.Button();
             this.btnAchievementCategoryMoveDown = new System.Windows.Forms.Button();
             this.btnAchievementCategoryRemove = new System.Windows.Forms.Button();
-            this.lsbAchievements = new System.Windows.Forms.ListBox();
-            this.lsbFunctions = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -95,6 +95,35 @@ namespace DbManager
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Krowi\'s Achievement Filter";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lsbAchievements
+            // 
+            this.lsbAchievements.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lsbAchievements.FormattingEnabled = true;
+            this.lsbAchievements.Location = new System.Drawing.Point(503, 3);
+            this.lsbAchievements.Name = "lsbAchievements";
+            this.lsbAchievements.Size = new System.Drawing.Size(250, 861);
+            this.lsbAchievements.TabIndex = 15;
+            // 
+            // lsbFunctions
+            // 
+            this.lsbFunctions.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lsbFunctions.FormattingEnabled = true;
+            this.lsbFunctions.Location = new System.Drawing.Point(253, 3);
+            this.lsbFunctions.Name = "lsbFunctions";
+            this.lsbFunctions.Size = new System.Drawing.Size(250, 861);
+            this.lsbFunctions.TabIndex = 2;
+            this.lsbFunctions.SelectedIndexChanged += new System.EventHandler(this.lsbFunctions_SelectedIndexChanged);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView1.HideSelection = false;
+            this.treeView1.Location = new System.Drawing.Point(3, 3);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(250, 861);
+            this.treeView1.TabIndex = 1;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // groupBox3
             // 
@@ -369,24 +398,6 @@ namespace DbManager
             this.btnAchievementCategoryRemove.UseVisualStyleBackColor = true;
             this.btnAchievementCategoryRemove.Click += new System.EventHandler(this.btnAchievementCategoryRemove_Click);
             // 
-            // lsbAchievements
-            // 
-            this.lsbAchievements.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lsbAchievements.FormattingEnabled = true;
-            this.lsbAchievements.Location = new System.Drawing.Point(503, 3);
-            this.lsbAchievements.Name = "lsbAchievements";
-            this.lsbAchievements.Size = new System.Drawing.Size(250, 861);
-            this.lsbAchievements.TabIndex = 15;
-            // 
-            // lsbFunctions
-            // 
-            this.lsbFunctions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lsbFunctions.FormattingEnabled = true;
-            this.lsbFunctions.Location = new System.Drawing.Point(253, 3);
-            this.lsbFunctions.Name = "lsbFunctions";
-            this.lsbFunctions.Size = new System.Drawing.Size(250, 861);
-            this.lsbFunctions.TabIndex = 2;
-            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -396,16 +407,6 @@ namespace DbManager
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Empty";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.HideSelection = false;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(250, 861);
-            this.treeView1.TabIndex = 1;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // Form1
             // 

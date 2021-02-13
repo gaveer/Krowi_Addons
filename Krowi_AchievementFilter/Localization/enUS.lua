@@ -15,6 +15,7 @@ L["T_TAB_TEXT"] = "Achievement Filter";
 -- Categories
 L["C_ZONES"] = "Zones";
 L["C_SCENARIOS"] = "Scenarios";
+L["C_NO_FACTION"] = "No Faction";
 
 -- Filters
 L["F_COMPLETED"] = "Completed";

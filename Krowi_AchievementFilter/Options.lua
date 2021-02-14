@@ -28,6 +28,11 @@ local defaults = {
                 Obtainable = true,
                 NotObtainable = false
             },
+            Faction = {
+                Neutral = true,
+                Alliance = addon.Faction.IsAlliance,
+                Horde = addon.Faction.IsHorde
+            },
             SortBy = {
                 Criteria = addon.L["F_DEFAULT"],
                 ReverseSort = false

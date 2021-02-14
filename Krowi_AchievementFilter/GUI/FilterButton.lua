@@ -100,6 +100,7 @@ function filterButton:OnMouseDown()
                                 NotCheckable = false,
                                 KeepShownOnClick = true
                             });
+    -- Add faction options here
 
     -- Sort By
     local sortBy = addon.Objects.MenuItem:New({Text = addon.L["F_SORT_BY"]});

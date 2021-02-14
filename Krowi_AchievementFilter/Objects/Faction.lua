@@ -1,9 +1,10 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local objects = addon.Objects;
 
-objects.Faction = {
-    NoFaction = -1,
-    Horde = 0,
-    Alliance = 1
+objects.Faction = core.Enum{
+    "NoFaction", -- Also nil
+    "Alliance",
+    "Horde"
 };

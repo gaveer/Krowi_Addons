@@ -5,6 +5,8 @@
 ## SavedVariables: Options, TEST
 ## Notes: Filters your achievements.
 
+Core/Files.xml
+
 Globals.lua
 
 Libs/Files.xml

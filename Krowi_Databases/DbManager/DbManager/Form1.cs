@@ -404,6 +404,7 @@ namespace DbManager
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
             sb.AppendLine("local objects = addon.Objects;");
+            sb.AppendLine("local faction = objects.Faction;");
             sb.AppendLine("local achievementCategory = objects.AchievementCategory;");
             sb.AppendLine("local achievement = objects.Achievement;");
             sb.AppendLine("addon.ExportedData = {};");
@@ -435,12 +436,12 @@ namespace DbManager
                 var achievements = Achievement.GetWithCategory(Connection, category);
                 foreach (var achievement in achievements)
                 {
-                    if (achievement.Faction == Faction.Alliance)
-                        sb.AppendLineTabbed(1, "if addon.Faction.IsAlliance then");
-                    else if (achievement.Faction == Faction.Horde)
-                        sb.AppendLineTabbed(1, "if addon.Faction.IsHorde then");
+                    //if (achievement.Faction == Faction.Alliance)
+                    //    sb.AppendLineTabbed(1, "if addon.Faction.IsAlliance then");
+                    //else if (achievement.Faction == Faction.Horde)
+                    //    sb.AppendLineTabbed(1, "if addon.Faction.IsHorde then");
 
-                    sb.AppendLineTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
+                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
 
                     // new
                     //sb.AppendTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:NewFromTable{{id = {achievement.ID}");
@@ -454,8 +455,8 @@ namespace DbManager
                     //    sb.Append($", category = tmpCategories[{category.ID}]");
                     //sb.AppendLine("}));");
 
-                    if (achievement.Faction != Faction.NoFaction)
-                        sb.AppendLineTabbed(1, "end");
+                    //if (achievement.Faction != Faction.NoFaction)
+                    //    sb.AppendLineTabbed(1, "end");
                 }
             }
 

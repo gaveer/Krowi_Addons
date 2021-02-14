@@ -100,7 +100,42 @@ function filterButton:OnMouseDown()
                                 NotCheckable = false,
                                 KeepShownOnClick = true
                             });
-    -- Add faction options here
+    rightClickMenu:AddFull({    Text = addon.L["F_NEUTRAL"],
+                                Checked = function() -- Same
+                                    return addon.Options.db.Filters.Faction.Neutral;
+                                end,
+                                Func = function()
+                                    addon.Options.db.Filters.Faction.Neutral = not addon.Options.db.Filters.Faction.Neutral;
+                                    self:UpdateAchievementFrame();
+                                end,
+                                IsNotRadio = true,
+                                NotCheckable = false,
+                                KeepShownOnClick = true
+                            });
+    rightClickMenu:AddFull({    Text = addon.L["F_ALLIANCE"],
+                                Checked = function() -- Same
+                                    return addon.Options.db.Filters.Faction.Alliance;
+                                end,
+                                Func = function()
+                                    addon.Options.db.Filters.Faction.Alliance = not addon.Options.db.Filters.Faction.Alliance;
+                                    self:UpdateAchievementFrame();
+                                end,
+                                IsNotRadio = true,
+                                NotCheckable = false,
+                                KeepShownOnClick = true
+                            });
+    rightClickMenu:AddFull({    Text = addon.L["F_HORDE"],
+                                Checked = function() -- Same
+                                    return addon.Options.db.Filters.Faction.Horde;
+                                end,
+                                Func = function()
+                                    addon.Options.db.Filters.Faction.Horde = not addon.Options.db.Filters.Faction.Horde;
+                                    self:UpdateAchievementFrame();
+                                end,
+                                IsNotRadio = true,
+                                NotCheckable = false,
+                                KeepShownOnClick = true
+                            });
 
     -- Sort By
     local sortBy = addon.Objects.MenuItem:New({Text = addon.L["F_SORT_BY"]});
@@ -162,6 +197,7 @@ function filterButton:Validate(achievement)
 	if not addon.Options.db.Filters.Obtainability.NotObtainable and achievement.NotObtainable then
 		return -4;
 	end
+    -- Need to add faction filter
 
 	return 1;
 end
@@ -186,6 +222,8 @@ function filterButton:SetFilters(achievement)
         elseif id == -4 then
             addon.Options.db.Filters.Obtainability.NotObtainable = not addon.Options.db.Filters.Obtainability.NotObtainable;
         end
+        -- Need to add faction filter
+
         iterations = iterations + 1;
     end
 end

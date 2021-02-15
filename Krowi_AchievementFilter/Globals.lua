@@ -13,5 +13,17 @@ AF_VERSION = GetAddOnMetadata(addonName, "Version");
 AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
 
 function addon.IsIATLoaded()
-    return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") > "3.14.1";
+    return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
+end
+
+function addon.ReplaceVars(str, vars)
+    -- Allow replace_vars{str, vars} syntax as well as replace_vars(str, {vars})
+    if not vars then
+        vars = str
+        str = vars[1]
+    end
+    return (string.gsub(str, "({([^}]+)})",
+        function(whole,i)
+            return vars[i] or whole
+        end));
 end

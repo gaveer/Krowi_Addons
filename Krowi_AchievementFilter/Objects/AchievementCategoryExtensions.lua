@@ -58,8 +58,8 @@ function category:AddCatLFGDungeonInfo(id) -- See AddCategory - with the name fr
 end
 
 -- [[ Add Achievement Extensions ]] --
-function category:AddNewAchievement(id, obtainable, hasWowheadLink, hasIATLink) -- Adds a new achievement to the achievement category
-    return self:AddAchievement(achievement:New(id, obtainable, hasWowheadLink, hasIATLink));
+function category:AddNewAchievement(id, obtainable, hasWowheadLink --[[ , hasIATLink ]]) -- Adds a new achievement to the achievement category
+    return self:AddAchievement(achievement:New(id, obtainable, hasWowheadLink --[[ , hasIATLink ]]));
 end
 
 function category:AddAchievementIDs(...) -- Adds a variable number of achievements from achievement IDs to the achievement category
@@ -76,6 +76,6 @@ end
 
 function category:AddAchievementIDsWithIATLink(...) -- Adds a variable number of achievements from achievement IDs to the achievement category with IAT links active
     for _, id in next, {...} do
-        self:AddAchievement(achievement:New(id, nil, nil, true));
+        self:AddAchievement(achievement:New(id, nil, nil --[[ , true ]]));
     end
 end

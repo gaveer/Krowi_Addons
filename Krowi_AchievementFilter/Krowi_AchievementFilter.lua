@@ -27,6 +27,10 @@ function loadHelper:OnEvent(event, arg1)
             addon.Tutorials.Load();
 
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
+            addon.Diagnostics.Debug("- Loading expansion data");
+            addon.Data.Load();
+            addon.Diagnostics.Debug("- Expansion data loaded");
+
             local gui = addon.GUI;
             local tutorials = addon.Tutorials;
 
@@ -47,9 +51,10 @@ function loadHelper:OnEvent(event, arg1)
         end
 
     elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
-        addon.Diagnostics.Debug("- Loading expansion data");
-        addon.Data.Load();
-        addon.Diagnostics.Debug("- Expansion data loaded");
+        -- Experimenting with loading it in "ADDON_LOADED" since there is a huge performance increase in loading data in the back
+        -- addon.Diagnostics.Debug("- Loading expansion data");
+        -- addon.Data.Load();
+        -- addon.Diagnostics.Debug("- Expansion data loaded");
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

@@ -30,6 +30,8 @@ function categoriesFrame:New(categories, achievementsFrame)
 	frame.Container.ParentFrame = frame;
 	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
+	frame:RegisterEvent("ADDON_LOADED");
+
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
 	frame:Hide();
 
@@ -52,14 +54,30 @@ function categoriesFrame:New(categories, achievementsFrame)
 	return frame;
 end
 
+function KrowiAF_CategoriesFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementsFrame_Template
+	local addonName = ...;
+	diagnostics.Trace("KrowiAF_CategoriesFrame_OnEvent - " .. event .. " - " .. addonName);
+
+	if event == "ADDON_LOADED" then
+		if addonName and addonName == "Overachiever_Tabs" then
+			Overachiever_LeftFrame:HookScript("OnHide", function()
+				if self:IsShown() then
+					AchievementFrameHeaderLeftDDLInset:Show();
+				end
+			end);
+            diagnostics.Debug("Overachiever_Tabs compatibility enabled");
+		end
+	end
+end
+
 function KrowiAF_CategoriesFrame_OnShow(self) -- Used in Templates - KrowiAF_CategoriesFrame_Template
 	diagnostics.Trace("KrowiAF_CategoriesFrame_OnShow");
 
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Hide(); -- Issue #11: Fix
 	AchievementFrameFilterDropDown:Hide();
-	AchievementFrameHeaderLeftDDLInset:Show(); -- This can be hidden if on summary screen
 	AchievementFrame.searchBox:Hide();
+	AchievementFrameHeaderLeftDDLInset:Show();
 
 	AchievementFrameCategoriesBG:SetTexCoord(0, 0.5, 0, 1); -- Set this global texture for player achievements
 
@@ -72,10 +90,7 @@ function KrowiAF_CategoriesFrame_OnHide() -- Used in Templates - KrowiAF_Categor
 	-- First handle the visibility of certain frames
 	AchievementFrameCategories:Show(); -- Issue #11: Fix
 	AchievementFrameCategoriesBG:SetWidth(195); -- Set back to default value
-	if AchievementFrameAchievements:IsShown() then
-		AchievementFrameFilterDropDown:Show();
-		AchievementFrameHeaderLeftDDLInset:Show();
-	else
+	if not AchievementFrameAchievements:IsShown() then
 		AchievementFrameFilterDropDown:Hide();
 		AchievementFrameHeaderLeftDDLInset:Hide();
 	end
@@ -104,7 +119,8 @@ end
 local function GetAchievementNumbers(self, category)
 	-- diagnostics.Trace("GetAchievementNumbers"); -- Generates a lot of messages
 
-	local numOfAch, numOfCompAch, numOfIncompAch = 0, 0, 0;
+	-- numOfIncompAch is not used right now so we can leave this one out untill needed
+	local numOfAch, numOfCompAch = 0, 0; -- , numOfIncompAch = 0
 
 	if category.Achievements ~= nil then
 		for _, achievement in next, category.Achievements do
@@ -113,8 +129,8 @@ local function GetAchievementNumbers(self, category)
 				local _, _, _, completed = GetAchievementInfo(achievement.ID);
 				if completed then
 					numOfCompAch = numOfCompAch + 1;
-				else
-					numOfIncompAch = numOfIncompAch + 1;
+				-- else
+				-- 	numOfIncompAch = numOfIncompAch + 1;
 				end
 			end
 		end
@@ -122,17 +138,22 @@ local function GetAchievementNumbers(self, category)
 
 	if category.Children ~= nil then
 		for _, child in next, category.Children do
-			local childNumOfAch, childNumOfCompAch, childNumOfIncompAch = GetAchievementNumbers(self, child);
+			local childNumOfAch, childNumOfCompAch = GetAchievementNumbers(self, child); -- , childNumOfIncompAch
 			numOfAch = numOfAch + childNumOfAch;
 			numOfCompAch = numOfCompAch + childNumOfCompAch;
-			numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
+			-- numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
 		end
 	end
 
-	return numOfAch, numOfCompAch, numOfIncompAch;
+	-- Caching the data in the category increases memory usage but improves performance which is more important here
+	category.NumOfAch = numOfAch;
+	category.NumOfCompAch = numOfCompAch;
+	-- category.NumOfIncompAch = numOfIncompAch;
+
+	return numOfAch, numOfCompAch; -- , numOfIncompAch
 end
 
-function categoriesFrame:Update()
+function categoriesFrame:Update(getAchNums)
 	diagnostics.Trace("categoriesFrame:Update");
 
 	local scrollFrame = self.Container;
@@ -142,7 +163,11 @@ function categoriesFrame:Update()
 	local displayCategories = {};
 	for _, category in next, self.Categories do
 		if category.NotHidden then -- If already visible, keep visible
-			if GetAchievementNumbers(self, category) > 0 then
+			if category.NumOfAch == nil or getAchNums then -- Huge increase over performance if we cache the achievement numbers and only update them when needed
+				if GetAchievementNumbers(self, category) > 0 then
+					tinsert(displayCategories, category);
+				end
+			elseif category.NumOfAch > 0 then
 				tinsert(displayCategories, category);
 			end
 			-- diagnostics.Debug("Showing " .. category.Name);
@@ -214,7 +239,7 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	button.Category = category;
 
 	-- For the tooltip
-	local numOfAch, numOfCompAch = GetAchievementNumbers(self, category);
+	local numOfAch, numOfCompAch = category.NumOfAch, category.NumOfCompAch;
 	button.name = category.Name;
 	button.text = nil;
 	button.numAchievements = numOfAch;
@@ -246,16 +271,17 @@ function categoriesFrame:SelectButton(button, quick)
 				end
 				category.NotCollapsed = nil;
 			end
+			category.IsSelected = nil; -- Issue #12: Fix
 		end
 		button.Category.NotCollapsed = true;
 	end
 
-	local buttons = self.Container.buttons;
-	for _, button in next, buttons do
-		if button.Category then
-			button.Category.IsSelected = nil; -- Issue #12: Fix
-		end
-	end
+	-- local buttons = self.Container.buttons;
+	-- for _, button in next, buttons do
+	-- 	if button.Category then
+	-- 		button.Category.IsSelected = nil; -- Issue #12: Fix
+	-- 	end
+	-- end
 
 	button.Category.IsSelected = true; -- Issue #12: Fix
 
@@ -320,12 +346,6 @@ function categoriesFrame:SelectCategory(category, collapsed)
 	local categoriesTree = category:GetTree();
 
 	for i, cat in next, categoriesTree do
-		-- diagnostics.Debug(cat.Name);
-		-- diagnostics.Debug(cat.IsSelected);
-		-- diagnostics.Debug(cat.NotCollapsed);
-		-- diagnostics.Debug(collapsed);
-		-- diagnostics.Debug(not cat.IsSelected);
-		-- diagnostics.Debug(cat.NotCollapsed == collapsed);
 		if not cat.IsSelected or (cat.NotCollapsed == collapsed) then -- Issue #23: Fix -- Issue #25 Broken, Fix
 			Select(self, cat, collapsed, i ~= #categoriesTree); -- Issue #23: Broken
 		end

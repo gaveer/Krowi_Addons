@@ -28,6 +28,11 @@ local defaults = {
                 Obtainable = true,
                 NotObtainable = false
             },
+            Faction = {
+                Neutral = true,
+                Alliance = addon.Faction.IsAlliance,
+                Horde = addon.Faction.IsHorde
+            },
             SortBy = {
                 Criteria = addon.L["F_DEFAULT"],
                 ReverseSort = false
@@ -117,7 +122,9 @@ local function CreatePanel()
                 args = {
                     categoriesFrameWidthOffset = {
                         name = addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"],
-                        desc = string.format(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"], addon.L["T_TAB_TEXT"], addon.L["O_REQUIRES_RELOAD"]),
+                        desc = addon.ReplaceVars{addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"],
+                                                    tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
+                                                    reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
                         type = "range",
                         min = 0,
                         max = 250,
@@ -140,7 +147,9 @@ local function CreatePanel()
                     },
                     achievementFrameHeightOffset = {
                         name = addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"],
-                        desc = string.format(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"], addon.L["T_TAB_TEXT"], addon.L["O_REQUIRES_RELOAD"]),
+                        desc = addon.ReplaceVars{addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"],
+                                                    tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
+                                                    reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
                         type = "range",
                         min = 0,
                         max = 500,
@@ -212,7 +221,8 @@ local function CreatePanel()
                     },
                     numberOfSearchPreviews = {
                         name = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
-                        desc = string.format(addon.L["O_NUM_OF_SEARCH_PREVIEWS_DESC"], addon.L["O_REQUIRES_RELOAD"]),
+                        desc = addon.ReplaceVars{addon.L["O_NUM_OF_SEARCH_PREVIEWS_DESC"],
+                                                    reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
                         type = "range",
                         min = 1,
                         max = maxNumberOfSearchPreviews(),

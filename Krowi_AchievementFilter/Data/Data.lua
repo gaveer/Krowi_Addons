@@ -7,19 +7,28 @@ addon.Categories = {};
 addon.Achievements = {};
 
 function data.Load()
-    addon.Classic.Load();
-    addon.TheBurningCrusade.Load();
-    addon.WrathOfTheLichKing.Load();
-    addon.Cataclysm.Load();
-    addon.MistsOfPandaria.Load();
-    addon.WarlordsOfDreanor.Load();
-    addon.Legion.Load();
-    addon.BattleForAzeroth.Load();
-    addon.Shadowlands.Load();
-    addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
-    -- LOADTEST();
-    
-    diagnostics.DebugTable(addon.Achievements);
+    -- addon.Classic.Load();
+    -- addon.TheBurningCrusade.Load();
+    -- addon.WrathOfTheLichKing.Load();
+    -- addon.Cataclysm.Load();
+    -- addon.MistsOfPandaria.Load();
+    -- addon.WarlordsOfDreanor.Load();
+    -- addon.Legion.Load();
+    -- addon.BattleForAzeroth.Load();
+    -- addon.Shadowlands.Load();
+    -- addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
+    addon.ExportedData.Load(addon.Categories, addon.Achievements);
+
+    -- Load Pet Battle Right Click Menus like before since adding this to the database might be a lot of unneeded work
+    local rcMenExtras = {};
+    addon.BattleForAzerothPetBattles.LoadRCMenExtra(rcMenExtras);
+    addon.ShadowlandsPetBattles.LoadRCMenExtra(rcMenExtras);
+
+    for _, achievement in next, addon.Achievements do
+        if rcMenExtras[achievement.ID] ~= nil then
+            achievement:AddRCMenExtra(rcMenExtras[achievement.ID]);
+        end
+    end
 end
 
 local function ConvertToAchievementFrameCategory(datum, categories, achievements)
@@ -55,31 +64,4 @@ function data:GetLists()
     diagnostics.Debug("     - Lists loaded");
 
     return categories, achievements;
-end
-
-local function tinsertR(table, value)
-    tinsert(table, value);
-    return value;
-end
-
-function LOADTEST()
-    local categories = {};
-    categories["1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(14864)));
-    categories["1"].NotHidden = true;
-    categories["1.1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(15272)));
-    categories["1"]:AddCategory(categories["1.1"]);
-    categories["1.1.1"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(EJ_GetInstanceInfo(63)));
-    categories["1.1"]:AddCategory(categories["1.1.1"]);
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(628 , nil, nil, nil)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5083, nil, nil, nil)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5366, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5367, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5368, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5369, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5370, nil, nil, true)));
-    categories["1.1.1"]:AddAchievement(tinsertR(addon.Achievements, addon.Objects.Achievement:New(5371, nil, nil, true)));
-    categories["1.1.2"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(EJ_GetInstanceInfo(226)));
-    categories["1.1"]:AddCategory(categories["1.1.2"]);
-    categories["1.2"] = tinsertR(addon.Categories, addon.Objects.AchievementCategory:New(GetCategoryInfo(15271)));
-    categories["1"]:AddCategory(categories["1.2"]);
 end

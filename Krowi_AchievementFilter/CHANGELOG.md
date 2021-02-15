@@ -1,9 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [9.0.2.12.0] - 2021-02-15
 ### Added
-TBD
+- Filtering by Neutral, Alliance and Horde achievements now possible
+
+### Changed
+- Category tooltip info is now cached instead of fetching it every time resulting in huge performance increases to up to 10 times faster GUI loading
+- Data is now stored and maintained in a SQLite database with an export to lua if new data is added
+- IAT v3.18.0 or higher required
 
 ## [9.0.2.11.0] - 2021-02-05
 ### Added
@@ -149,7 +154,7 @@ TBD
 ### Removed
 - The need for almost all localization
 
-[Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.2.12.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3205404
 [9.0.2.11.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3193640
 [9.0.2.10.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3190348
 [9.0.2.10.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3189892

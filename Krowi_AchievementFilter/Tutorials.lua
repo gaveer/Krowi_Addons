@@ -42,14 +42,12 @@ function tutorials.Load()
 		    imageHeight = 256,
             image = media .. "RightClick",
             text = GetTitle(addon.L["FT_RIGHTCLICKMENU_TITLE"]) ..
-                            string.format(addon.L["FT_RIGHTCLICKMENU_DESC"],
-                                            AF_COLOR_YELLOW .. addon.L["WOWHEAD"] .. AF_COLOR_END,
-                                            AF_COLOR_YELLOW .. addon.L["XUFU"] .. AF_COLOR_END,
-                                            AF_COLOR_YELLOW .. addon.L["XUFU"] .. AF_COLOR_END,
-                                            AF_COLOR_YELLOW .. addon.L["IAT"] .. AF_COLOR_END,
-                                            AF_COLOR_YELLOW .. addon.L["IAT"] .. AF_COLOR_END,
-                                            (addon.IsIATLoaded() and (AF_COLOR_GREEN .. addon.L["INSTALLED"]:lower() .. AF_COLOR_END) or
-                                                (AF_COLOR_RED .. addon.L["NOT INSTALLED"]:lower() .. AF_COLOR_END))),
+                            addon.ReplaceVars{addon.L["FT_RIGHTCLICKMENU_DESC"],
+                                            wowhead = AF_COLOR_YELLOW .. addon.L["WOWHEAD"] .. AF_COLOR_END,
+                                            xuFuPetGuides = AF_COLOR_YELLOW .. addon.L["XUFU"] .. AF_COLOR_END,
+                                            IAT = AF_COLOR_YELLOW .. addon.L["IAT"] .. AF_COLOR_END,
+                                            installed = (addon.IsIATLoaded() and (AF_COLOR_GREEN .. addon.L["INSTALLED"]:lower() .. AF_COLOR_END) or
+                                                (AF_COLOR_RED .. addon.L["NOT INSTALLED"]:lower() .. AF_COLOR_END))},
             shineTop = 6,
             shineBottom = -6,
             shineLeft = -7,

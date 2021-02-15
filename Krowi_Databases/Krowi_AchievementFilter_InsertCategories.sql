@@ -1,0 +1,1 @@
+insert into AchievementCategory ('ID','Name','FunctionID','Value') values ('011','Classic',1,14864);

@@ -1,7 +1,7 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
-addon.Shadowlands.PetBattles = {};
-local petBattles = addon.Shadowlands.PetBattles;
+addon.ShadowlandsPetBattles = {};
+local petBattles = addon.ShadowlandsPetBattles;
 
 local familyID = {
     Aquatic = 1338,
@@ -109,33 +109,18 @@ local function GetAAotALinks(achievementID)
     return item;
 end
 
-function petBattles.Load(expansion)
-    local catZones = expansion:AddCatPetBattles();
-    catZones:AddAchievementIDs(14867);
-    local achievement = catZones:AddNewAchievement(14625); -- Battle in the Shadowlands
-    achievement:AddRCMenExtra(GetBitSLinks(achievement.ID));
-    achievement = catZones:AddNewAchievement(14868); -- Aquatic Apparitions
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Aquatic));
-    achievement = catZones:AddNewAchievement(14869); -- Beast Busters
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Beast));
-    achievement = catZones:AddNewAchievement(14870); -- Creepy Critters
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Critter));
-    achievement = catZones:AddNewAchievement(14871); -- Deathly Dragonkin
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Dragonkin));
-    achievement = catZones:AddNewAchievement(14872); -- Eerie Elementals
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Elemental));
-    achievement = catZones:AddNewAchievement(14873); -- Flickering Fliers
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Flying));
-    achievement = catZones:AddNewAchievement(14874); -- Haunted Humanoids
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Humanoid));
-    achievement = catZones:AddNewAchievement(14875); -- Mummified Magics
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Magic));
-    achievement = catZones:AddNewAchievement(14876); -- Macabre Mechanicals
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Mechanical));
-    achievement = catZones:AddNewAchievement(14877); -- Unholy Undead
-    achievement:AddRCMenExtra(GetFELinks(achievement.ID, familyID.Undead));
-    achievement = catZones:AddNewAchievement(14879); -- Family Exorcist
-    achievement:AddRCMenExtra(GetFEMetaLinks(achievement.ID));
-    achievement = catZones:AddNewAchievement(14881); -- Abhorrent Adverdaries of the Afterlife
-    achievement:AddRCMenExtra(GetAAotALinks(achievement.ID));
+function petBattles.LoadRCMenExtra(rcMenExtras)
+    rcMenExtras[14625] = GetBitSLinks(14625); -- Battle in the Shadowlands
+    rcMenExtras[14868] = GetFELinks(14868, familyID.Aquatic); -- Aquatic Apparitions
+    rcMenExtras[14869] = GetFELinks(14869, familyID.Beast); -- Beast Busters
+    rcMenExtras[14870] = GetFELinks(14870, familyID.Critter); -- Creepy Critters
+    rcMenExtras[14871] = GetFELinks(14871, familyID.Dragonkin); -- Deathly Dragonkin
+    rcMenExtras[14872] = GetFELinks(14872, familyID.Elemental); -- Eerie Elementals
+    rcMenExtras[14873] = GetFELinks(14873, familyID.Flying); -- Flickering Fliers
+    rcMenExtras[14874] = GetFELinks(14874, familyID.Humanoid); -- Haunted Humanoids
+    rcMenExtras[14875] = GetFELinks(14875, familyID.Magic); -- Mummified Magics
+    rcMenExtras[14876] = GetFELinks(14876, familyID.Mechanical); -- Macabre Mechanicals
+    rcMenExtras[14877] = GetFELinks(14877, familyID.Undead); -- Unholy Undead
+    rcMenExtras[14879] = GetFEMetaLinks(14879); -- Family Exorcist
+    rcMenExtras[14881] = GetAAotALinks(14881); -- Abhorrent Adverdaries of the Afterlife
 end

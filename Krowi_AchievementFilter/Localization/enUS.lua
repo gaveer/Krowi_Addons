@@ -22,6 +22,7 @@ L["F_COMPLETED"] = "Completed";
 L["F_NOT_COMPLETED"] = "Not Completed";
 L["F_OBTAINABLE"] = "Obtainable";
 L["F_NOT_OBTAINABLE"] = "Not Obtainable";
+L["F_FACTION"] = "Faction";
 L["F_NEUTRAL"] = "Neutral";
 L["F_ALLIANCE"] = "Alliance";
 L["F_HORDE"] = "Horde";

@@ -18,6 +18,17 @@ function data.Load()
     -- addon.Shadowlands.Load();
     -- addon.Categories, addon.Achievements = addon.Data:GetLists(); -- This freezes the game if we load it outside of the loading screen
     addon.ExportedData.Load(addon.Categories, addon.Achievements);
+
+    -- Load Pet Battle Right Click Menus like before since adding this to the database might be a lot of unneeded work
+    local rcMenExtras = {};
+    addon.BattleForAzerothPetBattles.LoadRCMenExtra(rcMenExtras);
+    addon.ShadowlandsPetBattles.LoadRCMenExtra(rcMenExtras);
+
+    for _, achievement in next, addon.Achievements do
+        if rcMenExtras[achievement.ID] ~= nil then
+            achievement:AddRCMenExtra(rcMenExtras[achievement.ID]);
+        end
+    end
 end
 
 local function ConvertToAchievementFrameCategory(datum, categories, achievements)

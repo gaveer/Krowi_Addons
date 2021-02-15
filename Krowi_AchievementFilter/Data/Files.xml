@@ -2,6 +2,8 @@
 
     <Script file="Data\Data.lua" />
     <Script file="Data\ExportedData.lua" />
+    <Script file="Data\BattleForAzerothPetBattles.lua" />
+    <Script file="Data\ShadowlandsPetBattles.lua" />
 
     <Script file="Data\1 Classic\Expansion.lua" />
     <Script file="Data\1 Classic\Dungeons.lua" />

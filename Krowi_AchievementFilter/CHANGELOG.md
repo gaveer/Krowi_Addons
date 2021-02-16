@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.2.13.0] - 
 ### Added
-- TBD
+- Legion Zones (90 achievements)
 
 ## [9.0.2.12.0] - 2021-02-15
 ### Added
@@ -68,7 +68,7 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.2.8.0] - 2021-01-15
 ### Added
-- Battle for Azeroth zones (170+ achievements for either Horde and Alliance)
+- Battle for Azeroth Zones (222 achievements for either Horde and Alliance)
 - The width of the categories list can be adjusted in options; negative values will narrow it, positive values will widen it
 - Tutorial explaining the features of the addon; showed when opening the new achievement window tab for the first time or when clicking the Help button in Interface -> Addons -> Options (Feature #14)
 

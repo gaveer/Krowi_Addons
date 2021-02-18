@@ -129,7 +129,7 @@
         </Anchors>
 		<Layers>
 			<Layer level="BACKGROUND">
-				<Texture name="$parentBackground" file="Interface\AchievementFrame\UI-Achievement-AchievementBackground">
+				<Texture name="$parentBackground" file="Interface\AchievementFrame\UI-Achievement-AchievementBackground" parentKey="Background">
 					<Anchors>
 						<Anchor point="TOPLEFT" x="3" y="-3"/>
 						<Anchor point="BOTTOMRIGHT" x="-3" y="3"/>
@@ -138,7 +138,7 @@
 				</Texture>
 			</Layer>
 			<Layer level="ARTWORK">
-				<Texture>
+				<Texture parentKey="Artwork">
 					<Anchors>
 						<Anchor point="TOPLEFT"/>
 						<Anchor point="BOTTOMRIGHT"/>

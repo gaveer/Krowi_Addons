@@ -1,6 +1,7 @@
 -- [[ Namespaces ]] --
 local addonName, addon = ...;
 
+-- [[ Ace ]] --
 addon.L = LibStub("AceLocale-3.0"):GetLocale(addonName);
 addon.Event = {};
 LibStub("AceEvent-3.0"):Embed(addon.Event);
@@ -9,14 +10,14 @@ LibStub("AceEvent-3.0"):Embed(addon.Event);
 BINDING_HEADER_AF_NAME = AF_NAME;
 BINDING_NAME_AF_OPEN_TAB1 = addon.L["BINDING_NAME_AF_OPEN_TAB1"];
 
-addon.Faction = {}; -- Global faction data
+-- [[ Faction data ]] --
+addon.Faction = {};
 addon.Faction.IsAlliance = UnitFactionGroup("player") == "Alliance";
 addon.Faction.IsHorde = UnitFactionGroup("player") == "Horde";
 addon.Faction.IsNeutral = UnitFactionGroup("player") == "Neutral";
 
 local loadHelper = CreateFrame("Frame");
 loadHelper:RegisterEvent("ADDON_LOADED");
-loadHelper:RegisterEvent("PLAYER_LOGIN");
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then
@@ -27,7 +28,6 @@ function loadHelper:OnEvent(event, arg1)
             addon.Tutorials.Load();
 
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
-            addon.Diagnostics.Debug("- Loading expansion data");
             addon.Data.Load();
             addon.Diagnostics.Debug("- Expansion data loaded");
 
@@ -48,13 +48,14 @@ function loadHelper:OnEvent(event, arg1)
 
             tutorials.SetFrames(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
             tutorials.HookTrigger(gui.GetFrame("TabButton1"));
-        end
+            
+            gui.ElvUISkin.Apply(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
 
-    elseif event == "PLAYER_LOGIN" then -- This needs player achievement info which is not yet available on "ADDON_LOADED"
-        -- Experimenting with loading it in "ADDON_LOADED" since there is a huge performance increase in loading data in the back
-        -- addon.Diagnostics.Debug("- Loading expansion data");
-        -- addon.Data.Load();
-        -- addon.Diagnostics.Debug("- Expansion data loaded");
+            addon.Diagnostics.Debug("- GUI loaded");
+
+        elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
+            addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
+        end
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

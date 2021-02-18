@@ -13,4 +13,6 @@
 
     <Include file="GUI/Templates.xml" />
     
+    <Script file="GUI/ElvUISkin.lua" />
+    
 </Ui>

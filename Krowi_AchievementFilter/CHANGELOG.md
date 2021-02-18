@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [9.0.2.13.0] - 
 ### Added
 - Legion Zones (90 achievements)
+- Most parts of the Achievement window are now skinned when ElvUI's Blizzard Skins and Achievements are selected (Compatibility #7)
 
 ## [9.0.2.12.0] - 2021-02-15
 ### Added

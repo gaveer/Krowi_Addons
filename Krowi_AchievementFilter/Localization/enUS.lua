@@ -79,29 +79,31 @@ L["FT_GROUPING_DESC"] = "Instead of grouping achievements by type and then by ex
 L["FT_RIGHTCLICKMENU_TITLE"] = "Right-click menu";
 L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click menu.\n\n" ..
                                 "Features:\n" ..
-                                "- Link to {wowhead}\n" ..
-                                "- Link to {xuFuPetGuides} if the achievement is related to Pet Battles and {xuFuPetGuides} has relevant information about it\n" ..
-                                "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})";
+                                AF_TAB .. "- Link to {wowhead}\n" ..
+                                AF_TAB .. "- Link to {xuFuPetGuides} if the achievement is related to Pet Battles and {xuFuPetGuides} has relevant information about it\n" ..
+                                AF_TAB .. "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})";
 L["FT_SEARCHPREVIEW_TITLE"] = "Searching";
 L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way but it will only search achievements in this tab.\n\n" ..
                                 "Additionally, there are a couple of new options:\n" ..
-                                "- %s\n" ..
-                                "- %s\n" ..
-                                "- %s\n\n" ..
-                                "All options can be found under Game Menu -> Interface -> AddOns -> %s";
+                                AF_TAB .. "- {clearOnRightClick}\n" ..
+                                AF_TAB .. "- {minCharToSearch}\n" ..
+                                AF_TAB .. "- {numSearchPreviews}\n\n" ..
+                                "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
 L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
 L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";
 L["FT_FILTER_TITLE"] = "Enhanced filtering and sorting";
 L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with only the option to select All, Earned or Incomplete achievements. Here it's enhanced with\n\n" ..
                         "Filtering (multiple filters can be selected at the same time):\n" ..
-                        "- %s: Show completed achievements\n" ..
-                        "- %s: Show not completed achievements\n" ..
-                        "- %s: Show obtainable achievements\n" ..
-                        "- %s: Show not obtainable achievements\n\n" ..
+                        "- {completed}: Show completed achievements\n" ..
+                        "- {notCompleted}: Show not completed achievements\n" ..
+                        "- {obtainable}: Show obtainable achievements\n" ..
+                        "- {notObtainable}: Show not obtainable achievements\n" ..
+                        "- {faction}\n" ..
+                        AF_TAB .. "- {neutral}: Show achievements that both Alliance and Horde can earn\n" ..
+                        AF_TAB .. "- {alliance}: Show achievements only Alliance can earn\n" ..
+                        AF_TAB .. "- {horde}: Show achievements only Horde can earn\n\n" ..
                         "Sorting:\n" ..
-                        "- %s: No sorting applied\n" ..
-                        "- %s: Sort achievements based on their names\n" ..
-                        "- %s: When this is selected, invert the order of the sorted achievements\n\n" ..
+                        "- {noSorting}: No sorting applied\n" ..
+                        "- {sortByName}: Sort achievements based on their names\n" ..
+                        "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
                         "More filter and sorting options will be added in later versions. Requests possible.";
-
-L["TEST"] = "Hello {name}, welcome to {company}."

@@ -7,6 +7,8 @@ AF_COLOR_YELLOW = "|cFFFFD100";
 AF_COLOR_GREEN = "|cFF00FF00";
 AF_COLOR_END = "|r";
 
+AF_TAB = "|T:1:4|t";
+
 AF_NAME = GetAddOnMetadata(addonName, "Title");
 AF_BUILD = GetBuildInfo();
 AF_VERSION = GetAddOnMetadata(addonName, "Version");

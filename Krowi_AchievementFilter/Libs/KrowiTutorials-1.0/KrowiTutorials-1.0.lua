@@ -352,7 +352,7 @@ local function ApplyElvUISkin(frame)
     local engine = unpack(ElvUI);
     local blizzardSkins = engine.private.skins.blizzard;
     local tutorials = blizzardSkins.enable and blizzardSkins.tutorials;
-    
+
 	if not tutorials then
 		return;
 	end

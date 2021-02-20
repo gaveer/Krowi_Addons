@@ -9,22 +9,29 @@ gui.ElvUISkin = {};
 local elvUISkin = gui.ElvUISkin;
 
 local function Enable()
-    local enabled;
-    local engine;
-    local skins;
+    local options, achievements, miscFrames;
+    local engine, skins;
 
     if ElvUI ~= nil then
         engine = unpack(ElvUI);
         skins = engine:GetModule("Skins");
         local blizzardSkins = engine.private.skins.blizzard;
         diagnostics.Debug("ElvUI compatibility enabled");
+        diagnostics.Debug("     - Ace3 skins enabled: " .. tostring(engine.private.skins.ace3Enable));
         diagnostics.Debug("     - Blizzard skins enabled: " .. tostring(blizzardSkins.enable));
         diagnostics.Debug("     - Blizzard Achievements skin enabled: " .. tostring(blizzardSkins.achievement));
-        enabled = blizzardSkins.enable and blizzardSkins.achievement;
-        diagnostics.Debug("     - Apply ElvUI Skin: " .. tostring(enabled));
+        diagnostics.Debug("     - Blizzard Misc Frames skin enabled: " .. tostring(blizzardSkins.misc));
+        diagnostics.Debug("     - Blizzard Tutorials skin enabled: " .. tostring(blizzardSkins.tutorials));
+        options = engine.private.skins.ace3Enable;
+        achievements = blizzardSkins.enable and blizzardSkins.achievement;
+        miscFrames = blizzardSkins.enable and blizzardSkins.misc;
+        diagnostics.Debug("     - Apply ElvUI Skin to Options: " .. tostring(options));
+        diagnostics.Debug("     - Apply ElvUI Skin to Achievements: " .. tostring(achievements));
+        diagnostics.Debug("     - Apply ElvUI Skin to RC Menu, Filter Menu and Popup Dialog: " .. tostring(miscFrames));
+        diagnostics.Debug("     - Apply ElvUI Skin to Tutorials: " .. tostring(blizzardSkins.enable and blizzardSkins.tutorials));
     end
 
-    return enabled, engine, skins;
+    return options, achievements, miscFrames, engine, skins;
 end
 
 local function ApplyToCategoriesFrame(categoriesFrame, skins)
@@ -220,16 +227,15 @@ end
 function elvUISkin.Apply(tabButton1, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame, searchPreviewFrame, fullSearchResultsFrame)
 	diagnostics.Trace("elvUISkin.Apply");
 
-    local enabled, engine, skins = Enable();
-    if not enabled then
-        return;
-    end
+    local options, achievements, miscFrames, engine, skins = Enable();
 
-    skins:HandleTab(tabButton1);
-    ApplyToCategoriesFrame(categoriesFrame, skins);
-    ApplyToAchievementsFrame(achievementsFrame, engine, skins);
-    ApplyToFilterButton(filterButton, achievementsFrame, skins);
-    ApplyToSearchBoxFrame(searchBoxFrame, achievementsFrame, skins);
-    ApplyToSearchPreviewFrame(searchPreviewFrame, achievementsFrame, engine, skins);
-    ApplyToFullSearchResultsFrame(fullSearchResultsFrame, skins);
+    if achievements then
+        skins:HandleTab(tabButton1);
+        ApplyToCategoriesFrame(categoriesFrame, skins);
+        ApplyToAchievementsFrame(achievementsFrame, engine, skins);
+        ApplyToFilterButton(filterButton, achievementsFrame, skins);
+        ApplyToSearchBoxFrame(searchBoxFrame, achievementsFrame, skins);
+        ApplyToSearchPreviewFrame(searchPreviewFrame, achievementsFrame, engine, skins);
+        ApplyToFullSearchResultsFrame(fullSearchResultsFrame, skins);
+    end
 end

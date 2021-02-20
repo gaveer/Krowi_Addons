@@ -108,7 +108,7 @@ function tutorials.Load()
                 self[i].shine = DropDownList1;
             elseif i == 4 then
                 gui.ToggleAchievementFrameAtTab1(true);
-                searchBoxFrame:SetText("cla");
+                searchBoxFrame:SetText("myt");
                 searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
                 local bottom;
                 if searchPreviewFrame.ShowFullSearchResultsButton:IsShown() then
@@ -125,7 +125,7 @@ function tutorials.Load()
                 self[i].shine = searchPreviewFrame;
             elseif i == 5 then
                 gui.ToggleAchievementFrameAtTab1(true);
-                searchBoxFrame:SetText("cla");
+                searchBoxFrame:SetText("myt");
                 searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
                 searchPreviewFrame.ShowFullSearchResultsButton:Click();
                 searchBoxFrame:SetText("");

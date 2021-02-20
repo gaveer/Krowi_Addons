@@ -73,3 +73,12 @@ end
 function addon.InjectMetatable(tbl, meta)
     return setmetatable(tbl, setmetatable(meta, getmetatable(tbl)));
 end
+
+-- local f = CreateFrame("Frame", nil, UIParent)
+-- f:SetAllPoints();
+-- f:SetPoint("CENTER")
+-- f:SetSize(64, 64)
+
+-- f.tex = f:CreateTexture()
+-- f.tex:SetAllPoints(f)
+-- f.tex:SetTexture("Interface\\AddOns\\Krowi_AchievementFilter\\Media\\Black")

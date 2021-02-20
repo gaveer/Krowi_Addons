@@ -301,13 +301,13 @@ local function NewFrame(data)
 		frame.text:SetFont(data.font, 12)
 	end
 	frame.text:SetJustifyH('LEFT')
-	
+
 	frame.prev = NewButton(frame, 'Prev', -1)
 	frame.next = NewButton(frame, 'Next', 1)
-	
+
 	frame.pageNum = frame:CreateFontString(nil, nil, 'GameFontHighlightSmall')
 	frame.pageNum:SetPoint('BOTTOM', 0, 10)
-	
+
 	frame:SetFrameStrata('DIALOG')
 	frame:SetClampedToScreen(true)
 	frame:EnableMouse(true)
@@ -344,6 +344,30 @@ local function NewFrame(data)
 	return frame
 end
 
+local function ApplyElvUISkin(frame)
+    if ElvUI == nil then
+		return;
+	end
+
+    local engine = unpack(ElvUI);
+    local blizzardSkins = engine.private.skins.blizzard;
+    local tutorials = blizzardSkins.enable and blizzardSkins.tutorials;
+    
+	if not tutorials then
+		return;
+	end
+
+    local skins = engine:GetModule("Skins");
+
+	frame:StripTextures();
+	frame:CreateBackdrop('Transparent');
+
+	skins:HandleCloseButton(frame.CloseButton);
+	skins:HandleNextPrevButton(frame.prev, 'left');
+	skins:HandleNextPrevButton(frame.next, 'right');
+
+end
+
 --[[ User API ]]--
 
 function lib:RegisterTutorial(data)
@@ -352,6 +376,7 @@ function lib:RegisterTutorial(data)
 
 	if not lib.frames[self] then
 		lib.frames[self] = NewFrame(data)
+		ApplyElvUISkin(lib.frames[self]);
 	end
 end
 

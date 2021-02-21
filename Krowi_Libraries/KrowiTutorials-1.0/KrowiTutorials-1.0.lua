@@ -208,32 +208,52 @@ local function UpdateFrame(frame, i)
 	if data.shine then
 		frame.shine:SetParent(data.shine)
 		local shineTop, shineBottom, shineLeft, shineRight = 0, 0, 0, 0;
+
+		data.shineAll = type(data.shineAll) == "function" and data.shineAll() or data.shineAll;
 		if data.shineAll then
 			shineTop = data.shineAll;
 			shineBottom = -data.shineAll;
 			shineLeft = -data.shineAll;
 			shineRight = data.shineAll;
 		end
+
+		data.shineHeight = type(data.shineHeight) == "function" and data.shineHeight() or data.shineHeight;
 		if data.shineHeight then
 			shineTop = data.shineHeight;
 			shineBottom = -data.shineHeight;
 		end
+
+		data.shineWidth = type(data.shineWidth) == "function" and data.shineWidth() or data.shineWidth;
 		if data.shineWidth then
 			shineLeft = -data.shineWidth;
 			shineRight = data.shineWidth;
 		end
+
+		data.shineTop = type(data.shineTop) == "function" and data.shineTop() or data.shineTop;
 		if data.shineTop then
 			shineTop = data.shineTop;
 		end
+
+		data.shineBottom = type(data.shineBottom) == "function" and data.shineBottom() or data.shineBottom;
 		if data.shineBottom then
 			shineBottom = data.shineBottom;
 		end
+
+		data.shineLeft = type(data.shineLeft) == "function" and data.shineLeft() or data.shineLeft;
 		if data.shineLeft then
 			shineLeft = data.shineLeft;
 		end
+
+		data.shineRight = type(data.shineRight) == "function" and data.shineRight() or data.shineRight;
 		if data.shineRight then
 			shineRight = data.shineRight;
 		end
+
+		-- print(shineRight)
+		-- print(shineLeft)
+		-- print(shineTop)
+		-- print(shineBottom)
+
 		frame.shine:SetPoint('BOTTOMRIGHT', shineRight, shineBottom)
 		frame.shine:SetPoint('TOPLEFT', shineLeft, shineTop)
 		frame.shine:Show()

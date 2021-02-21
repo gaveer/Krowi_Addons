@@ -55,6 +55,21 @@ L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to st
                                     "The smaller the number, the greater the impact on the game.";
 L["O_NUM_OF_SEARCH_PREVIEWS"] = "Number of search previews";
 L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n{reloadRequired}";
+L["O_STYLE"] = "ElvUI Skins";
+L["O_STYLE_DESC"] = "Each of the options below are controlled by ElvUI and are just informational.\n" ..
+                    "To change these, go to Game Menu -> ElvUI -> Skins and check the desired options. See each option below for what to check.";
+L["O_SKIN_ACHIEVEMENT"] = "Skin Achievements";
+L["O_SKIN_ACHIEVEMENT_DESC"] = "Applies the ElvUI skin to the Achievements Window.\n" ..
+                                "-> Blizzard + Achievements";
+L["O_SKIN_MISC_FRAMES"] = "Skin Misc Frames";
+L["O_SKIN_MISC_FRAMES_DESC"] = "Applies the ElvUI skin to the Filter Menu, Right Click Menu and Popup Dialog.\n" ..
+                                "-> Blizzard + Misc Frames";
+L["O_SKIN_OPTIONS"] = "Skin Ace3";
+L["O_SKIN_OPTIONS_DESC"] = "Applies the ElvUI skin to the Options.\n" ..
+                                "-> Ace3";
+L["O_SKIN_TUTORIALS"] = "Skin Tutorials";
+L["O_SKIN_TUTORIALS_DESC"] = "Applies the ElvUI skin to the Tutorials.\n" ..
+                                "-> Blizzard + Tutorials";
 L["O_DEBUG"] = "Debug";
 L["O_ENABLE_DEBUG_INFO"] = "Enable debug info";
 L["O_ENABLE_DEBUG_INFO_DESC"] = "Enable / disable debug info";

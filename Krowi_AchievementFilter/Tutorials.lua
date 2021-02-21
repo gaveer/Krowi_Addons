@@ -15,6 +15,8 @@ end
 
 local tabButton1, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame, searchPreviewFrame, fullSearchResultsFrame;
 function tutorials.Load()
+    diagnostics.Trace("tutorials.Load");
+
     tutorials.RegisterTutorial(tutorials.FeaturesTutorial, {
         savedvariable = addon.Options.db,
         key = "FeaturesTutorial",
@@ -23,12 +25,12 @@ function tutorials.Load()
         {   -- 1
             imageHeight = 128,
             image = media .. "TabButton",
-            text = "<html><body><p>" .. GetTitle(addon.L["FT_TABBUTTON_TITLE"]) ..
-                            addon.L["FT_TABBUTTON_DESC"] .. "</p></body></html>",
-			shineTop = 12,
-			shineBottom = -21,
-			shineLeft = 2,
-			shineRight = -2,
+            text = GetTitle(addon.L["FT_TABBUTTON_TITLE"]) ..
+                            addon.L["FT_TABBUTTON_DESC"],
+			shineTop = addon.Options.db.ElvUISkin.Tutorials and 7 or 12,
+			shineBottom = addon.Options.db.ElvUISkin.Tutorials and -6 or -21,
+			shineLeft = addon.Options.db.ElvUISkin.Tutorials and 1 or 2,
+			shineRight = addon.Options.db.ElvUISkin.Tutorials and 0 or -2,
         },
         {   -- 2
             imageHeight = 512,
@@ -37,6 +39,9 @@ function tutorials.Load()
                             addon.L["FT_GROUPING_DESC"],
             shineHeight = 6,
             shineWidth = 7,
+            shineTop = addon.Options.db.ElvUISkin.Tutorials and 7 or nil,
+            shineLeft = addon.Options.db.ElvUISkin.Tutorials and -10 or nil,
+            shineRight = addon.Options.db.ElvUISkin.Tutorials and 8 or nil,
         },
         {   -- 3
 		    imageHeight = 256,
@@ -48,10 +53,8 @@ function tutorials.Load()
                                             IAT = AF_COLOR_YELLOW .. addon.L["IAT"] .. AF_COLOR_END,
                                             installed = (addon.IsIATLoaded() and (AF_COLOR_GREEN .. addon.L["INSTALLED"]:lower() .. AF_COLOR_END) or
                                                 (AF_COLOR_RED .. addon.L["NOT INSTALLED"]:lower() .. AF_COLOR_END))},
-            shineTop = 6,
-            shineBottom = -6,
-            shineLeft = -7,
-            shineRight = 7,
+            shineHeight = addon.Options.db.ElvUISkin.MiscFrames and 9 or 6,
+            shineWidth = addon.Options.db.ElvUISkin.MiscFrames and 10 or 7,
         },
         {   -- 4
             imageHeight = 256,
@@ -62,8 +65,8 @@ function tutorials.Load()
                                             minCharToSearch = addon.L["O_MIN_CHAR_TO_SEARCH"],
                                             numSearchPreviews = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
                                             addonName = AF_NAME},
-            shineTop = 30,
-            shineLeft = -11,
+            shineTop = addon.Options.db.ElvUISkin.Tutorials and 10 or 30,
+            shineLeft = addon.Options.db.ElvUISkin.Tutorials and -10 or -11,
             shineRight = 11,
         },
         {   -- 5
@@ -71,10 +74,10 @@ function tutorials.Load()
             image = media .. "FullSearch",
             text = GetTitle(addon.L["FT_FULLSEARCH_TITLE"]) ..
                             addon.L["FT_FULLSEARCH_DESC"],
-            shineTop = 8,
-            shineBottom = -1,
-            shineLeft = -12,
-            shineRight = 13,
+            shineTop = addon.Options.db.ElvUISkin.Tutorials and 9 or 8,
+            shineBottom = addon.Options.db.ElvUISkin.Tutorials and -10 or -1,
+            shineLeft = addon.Options.db.ElvUISkin.Tutorials and -11 or -12,
+            shineRight = addon.Options.db.ElvUISkin.Tutorials and 11 or 13,
         },
         {   -- 6
             imageHeight = 256,
@@ -94,6 +97,8 @@ function tutorials.Load()
                                             reverseSort = AF_COLOR_YELLOW .. addon.L["F_REVERSE_SORT"] .. AF_COLOR_END},
 
             shineAll = 7,
+            shineHeight = addon.Options.db.ElvUISkin.Tutorials and 8 or nil,
+            shineWidth = addon.Options.db.ElvUISkin.Tutorials and 10 or nil,
         },
         onShow = function(self, i)
             local gui = addon.GUI;

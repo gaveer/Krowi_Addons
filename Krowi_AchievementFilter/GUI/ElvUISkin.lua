@@ -7,32 +7,7 @@ local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
 gui.ElvUISkin = {};
 local elvUISkin = gui.ElvUISkin;
-
-local function Enable()
-    local options, achievements, miscFrames;
-    local engine, skins;
-
-    if ElvUI ~= nil then
-        engine = unpack(ElvUI);
-        skins = engine:GetModule("Skins");
-        local blizzardSkins = engine.private.skins.blizzard;
-        diagnostics.Debug("ElvUI compatibility enabled");
-        diagnostics.Debug("     - Ace3 skins enabled: " .. tostring(engine.private.skins.ace3Enable));
-        diagnostics.Debug("     - Blizzard skins enabled: " .. tostring(blizzardSkins.enable));
-        diagnostics.Debug("     - Blizzard Achievements skin enabled: " .. tostring(blizzardSkins.achievement));
-        diagnostics.Debug("     - Blizzard Misc Frames skin enabled: " .. tostring(blizzardSkins.misc));
-        diagnostics.Debug("     - Blizzard Tutorials skin enabled: " .. tostring(blizzardSkins.tutorials));
-        options = engine.private.skins.ace3Enable;
-        achievements = blizzardSkins.enable and blizzardSkins.achievement;
-        miscFrames = blizzardSkins.enable and blizzardSkins.misc;
-        diagnostics.Debug("     - Apply ElvUI Skin to Options: " .. tostring(options));
-        diagnostics.Debug("     - Apply ElvUI Skin to Achievements: " .. tostring(achievements));
-        diagnostics.Debug("     - Apply ElvUI Skin to RC Menu, Filter Menu and Popup Dialog: " .. tostring(miscFrames));
-        diagnostics.Debug("     - Apply ElvUI Skin to Tutorials: " .. tostring(blizzardSkins.enable and blizzardSkins.tutorials));
-    end
-
-    return options, achievements, miscFrames, engine, skins;
-end
+-- local engine, skins;
 
 local function ApplyToCategoriesFrame(categoriesFrame, skins)
     -- Frame
@@ -224,12 +199,41 @@ local function ApplyToFullSearchResultsFrame(fullSearchResultsFrame, skins)
 	skins:HandleScrollBar(fullSearchResultsFrame.Container.ScrollBar);
 end
 
+local engine, skins;
+function elvUISkin.Load()
+	diagnostics.Trace("elvUISkin.Load");
+
+    if ElvUI ~= nil then
+        engine = unpack(ElvUI);
+        skins = engine:GetModule("Skins");
+        local blizzardSkins = engine.private.skins.blizzard;
+        diagnostics.Debug("ElvUI compatibility enabled");
+        diagnostics.Debug("     - Ace3 skins enabled: " .. tostring(engine.private.skins.ace3Enable));
+        diagnostics.Debug("     - Blizzard skins enabled: " .. tostring(blizzardSkins.enable));
+        diagnostics.Debug("     - Blizzard Achievements skin enabled: " .. tostring(blizzardSkins.achievement));
+        diagnostics.Debug("     - Blizzard Misc Frames skin enabled: " .. tostring(blizzardSkins.misc));
+        diagnostics.Debug("     - Blizzard Tutorials skin enabled: " .. tostring(blizzardSkins.tutorials));
+
+        addon.Options.db.ElvUISkin.Achievements = blizzardSkins.enable and blizzardSkins.achievement;
+        addon.Options.db.ElvUISkin.MiscFrames = blizzardSkins.enable and blizzardSkins.misc;
+        addon.Options.db.ElvUISkin.Options = engine.private.skins.ace3Enable;
+        addon.Options.db.ElvUISkin.Tutorials = blizzardSkins.enable and blizzardSkins.tutorials;
+
+        diagnostics.Debug("     - Apply ElvUI Skin to Achievements: " .. tostring(addon.Options.db.ElvUISkin.Achievements));
+        diagnostics.Debug("     - Apply ElvUI Skin to RC Menu, Filter Menu and Popup Dialog: " .. tostring(addon.Options.db.ElvUISkin.MiscFrames));
+        diagnostics.Debug("     - Apply ElvUI Skin to Options: " .. tostring(addon.Options.db.ElvUISkin.Options));
+        diagnostics.Debug("     - Apply ElvUI Skin to Tutorials: " .. tostring(addon.Options.db.ElvUISkin.Tutorials));
+    end
+
+    -- return addon.Options.db.ElvUISkin.Achievements, engine, skins;
+end
+
 function elvUISkin.Apply(tabButton1, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame, searchPreviewFrame, fullSearchResultsFrame)
 	diagnostics.Trace("elvUISkin.Apply");
 
-    local options, achievements, miscFrames, engine, skins = Enable();
+    -- local enabled, engine, skins = elvUISkin.Load();
 
-    if achievements then
+    if addon.Options.db.ElvUISkin.Achievements then
         skins:HandleTab(tabButton1);
         ApplyToCategoriesFrame(categoriesFrame, skins);
         ApplyToAchievementsFrame(achievementsFrame, engine, skins);

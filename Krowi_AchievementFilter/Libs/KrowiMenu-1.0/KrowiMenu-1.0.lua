@@ -31,11 +31,16 @@ local menuFrame = CreateFrame("Frame", "KrowiMenu", nil, "UIDropDownMenuTemplate
 local menu = {};
 
 local function Convert(srcItem)
+	if srcItem.IsSeparator then
+		return {IsSeparator = true};
+	end
+
 	local item = {};
 	item.text = srcItem.Text or "INFO TEXT";
 	item.checked = srcItem.Checked;
 	item.func = srcItem.Func;
 	item.isTitle = srcItem.IsTitle;
+	item.disabled = srcItem.Disabled;
 	item.isNotRadio = srcItem.IsNotRadio;
 	if srcItem.NotCheckable == nil then
 		item.notCheckable = true; -- NotCheckable by default
@@ -67,13 +72,31 @@ function lib:AddFull(info)
     self:Add(menuItem:New(info));
 end
 
+function lib:AddSeparator()
+    tinsert(menu, {IsSeparator = true});
+end
+
+local function Initialize(frame, level, menuList)
+	for i, _ in next, menuList do
+		local value = menuList[i]
+		value.index = i;
+		if value.IsSeparator then
+			UIDropDownMenu_AddSeparator(level);
+		else
+			UIDropDownMenu_AddButton(value, level);
+		end
+	end
+end
+
 function lib:Open(anchor, offsetX, offsetY)
     -- Make sure optional values are set to default if not used
 	anchor = anchor or "cursor";
 	offsetX = offsetX or 0;
     offsetY = offsetY or 0;
 
-	EasyMenu(menu, menuFrame, anchor, offsetX, offsetY, "MENU");
+	menuFrame.displayMode = "MENU";
+	UIDropDownMenu_Initialize(menuFrame, Initialize, "MENU", nil, menu);
+	ToggleDropDownMenu(1, nil, menuFrame, anchor, offsetX, offsetY, menu, nil, nil);
 end
 
 function lib:Toggle(anchor, offsetX, offsetY)

@@ -18,6 +18,7 @@ addon.Faction.IsNeutral = UnitFactionGroup("player") == "Neutral";
 
 local loadHelper = CreateFrame("Frame");
 loadHelper:RegisterEvent("ADDON_LOADED");
+loadHelper:RegisterEvent("PLAYER_LOGIN");
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then
@@ -48,7 +49,7 @@ function loadHelper:OnEvent(event, arg1)
 
             tutorials.SetFrames(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
             tutorials.HookTrigger(gui.GetFrame("TabButton1"));
-            
+
             gui.ElvUISkin.Apply(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
 
             addon.Diagnostics.Debug("- GUI loaded");
@@ -56,6 +57,8 @@ function loadHelper:OnEvent(event, arg1)
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
             addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
         end
+    elseif event == "PLAYER_LOGIN" then
+        addon.Options.SetFilters();
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
@@ -82,3 +85,11 @@ end
 -- f.tex = f:CreateTexture()
 -- f.tex:SetAllPoints(f)
 -- f.tex:SetTexture("Interface\\AddOns\\Krowi_AchievementFilter\\Media\\Black")
+
+-- local KrowiAF_UIDropDownMenu_AddButton = UIDropDownMenu_AddButton;
+-- UIDropDownMenu_AddButton = function(info, level)
+--     if addon and addon.Diagnostics then
+--         addon.Diagnostics.DebugTable(info);
+--     end
+--     KrowiAF_UIDropDownMenu_AddButton(info, level);
+-- end

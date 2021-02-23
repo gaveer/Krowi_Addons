@@ -37,6 +37,12 @@ namespace DbManager
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnExport = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rdbNecrolord = new System.Windows.Forms.RadioButton();
+            this.rdbNightFae = new System.Windows.Forms.RadioButton();
+            this.rdbVenthyr = new System.Windows.Forms.RadioButton();
+            this.rdbKyrian = new System.Windows.Forms.RadioButton();
+            this.rdbNoCovenant = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rdbHorde = new System.Windows.Forms.RadioButton();
             this.rdbAlliance = new System.Windows.Forms.RadioButton();
@@ -65,6 +71,7 @@ namespace DbManager
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -104,6 +111,7 @@ namespace DbManager
             this.lsbAchievements.Name = "lsbAchievements";
             this.lsbAchievements.Size = new System.Drawing.Size(250, 861);
             this.lsbAchievements.TabIndex = 15;
+            this.lsbAchievements.SelectedIndexChanged += new System.EventHandler(this.lsbAchievements_SelectedIndexChanged);
             // 
             // lsbFunctions
             // 
@@ -128,7 +136,7 @@ namespace DbManager
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnExport);
-            this.groupBox3.Location = new System.Drawing.Point(759, 532);
+            this.groupBox3.Location = new System.Drawing.Point(759, 672);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(212, 55);
             this.groupBox3.TabIndex = 25;
@@ -147,6 +155,7 @@ namespace DbManager
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox5);
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.txtAchievementID);
@@ -156,10 +165,76 @@ namespace DbManager
             this.groupBox2.Controls.Add(this.cbxHasWowheadLink);
             this.groupBox2.Location = new System.Drawing.Point(759, 277);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(212, 249);
+            this.groupBox2.Size = new System.Drawing.Size(212, 389);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "New Achievement";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rdbNecrolord);
+            this.groupBox5.Controls.Add(this.rdbNightFae);
+            this.groupBox5.Controls.Add(this.rdbVenthyr);
+            this.groupBox5.Controls.Add(this.rdbKyrian);
+            this.groupBox5.Controls.Add(this.rdbNoCovenant);
+            this.groupBox5.Location = new System.Drawing.Point(6, 185);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 135);
+            this.groupBox5.TabIndex = 24;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Covenant";
+            // 
+            // rdbNecrolord
+            // 
+            this.rdbNecrolord.AutoSize = true;
+            this.rdbNecrolord.Location = new System.Drawing.Point(6, 111);
+            this.rdbNecrolord.Name = "rdbNecrolord";
+            this.rdbNecrolord.Size = new System.Drawing.Size(71, 17);
+            this.rdbNecrolord.TabIndex = 4;
+            this.rdbNecrolord.Text = "Necrolord";
+            this.rdbNecrolord.UseVisualStyleBackColor = true;
+            // 
+            // rdbNightFae
+            // 
+            this.rdbNightFae.AutoSize = true;
+            this.rdbNightFae.Location = new System.Drawing.Point(6, 88);
+            this.rdbNightFae.Name = "rdbNightFae";
+            this.rdbNightFae.Size = new System.Drawing.Size(71, 17);
+            this.rdbNightFae.TabIndex = 3;
+            this.rdbNightFae.Text = "Night Fae";
+            this.rdbNightFae.UseVisualStyleBackColor = true;
+            // 
+            // rdbVenthyr
+            // 
+            this.rdbVenthyr.AutoSize = true;
+            this.rdbVenthyr.Location = new System.Drawing.Point(6, 65);
+            this.rdbVenthyr.Name = "rdbVenthyr";
+            this.rdbVenthyr.Size = new System.Drawing.Size(61, 17);
+            this.rdbVenthyr.TabIndex = 2;
+            this.rdbVenthyr.Text = "Venthyr";
+            this.rdbVenthyr.UseVisualStyleBackColor = true;
+            // 
+            // rdbKyrian
+            // 
+            this.rdbKyrian.AutoSize = true;
+            this.rdbKyrian.Location = new System.Drawing.Point(6, 42);
+            this.rdbKyrian.Name = "rdbKyrian";
+            this.rdbKyrian.Size = new System.Drawing.Size(54, 17);
+            this.rdbKyrian.TabIndex = 1;
+            this.rdbKyrian.Text = "Kyrian";
+            this.rdbKyrian.UseVisualStyleBackColor = true;
+            // 
+            // rdbNoCovenant
+            // 
+            this.rdbNoCovenant.AutoSize = true;
+            this.rdbNoCovenant.Checked = true;
+            this.rdbNoCovenant.Location = new System.Drawing.Point(6, 19);
+            this.rdbNoCovenant.Name = "rdbNoCovenant";
+            this.rdbNoCovenant.Size = new System.Drawing.Size(88, 17);
+            this.rdbNoCovenant.TabIndex = 0;
+            this.rdbNoCovenant.TabStop = true;
+            this.rdbNoCovenant.Text = "No Covenant";
+            this.rdbNoCovenant.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -223,7 +298,7 @@ namespace DbManager
             // 
             // btnAchievementRemove
             // 
-            this.btnAchievementRemove.Location = new System.Drawing.Point(13, 214);
+            this.btnAchievementRemove.Location = new System.Drawing.Point(13, 355);
             this.btnAchievementRemove.Name = "btnAchievementRemove";
             this.btnAchievementRemove.Size = new System.Drawing.Size(186, 23);
             this.btnAchievementRemove.TabIndex = 22;
@@ -245,7 +320,7 @@ namespace DbManager
             // 
             // btnAchievementAdd
             // 
-            this.btnAchievementAdd.Location = new System.Drawing.Point(11, 185);
+            this.btnAchievementAdd.Location = new System.Drawing.Point(13, 326);
             this.btnAchievementAdd.Name = "btnAchievementAdd";
             this.btnAchievementAdd.Size = new System.Drawing.Size(186, 23);
             this.btnAchievementAdd.TabIndex = 21;
@@ -422,6 +497,8 @@ namespace DbManager
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -463,6 +540,12 @@ namespace DbManager
         private System.Windows.Forms.RadioButton rdbAlliance;
         private System.Windows.Forms.RadioButton rdbNoFaction;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton rdbNecrolord;
+        private System.Windows.Forms.RadioButton rdbNightFae;
+        private System.Windows.Forms.RadioButton rdbVenthyr;
+        private System.Windows.Forms.RadioButton rdbKyrian;
+        private System.Windows.Forms.RadioButton rdbNoCovenant;
     }
 }
 

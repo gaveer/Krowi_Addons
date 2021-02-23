@@ -61,3 +61,7 @@ end
 function lib:AddChildExtLinkFull(text, externalLink)
     return self:AddChild(lib:NewExtLink(text, externalLink));
 end
+
+function lib:AddSeparator()
+    return self:AddChildFull({IsSeparator = true});
+end

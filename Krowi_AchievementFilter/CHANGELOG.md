@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 ## [9.0.2.13.0] - 
 ### Added
 - Legion Zones (90 achievements)
+- Shadowlands Covenant Sanctums (42 achievements)
+- Filtering by Neutral, Kyrian, Venthyr, Night Fae and Necrolord achievements now possible
 - The Achievement window is now skinned when ElvUI's Blizzard Skins and Achievements are selected (Compatibility #7)
 - Right Click Menu, Filter Menu and Popup Dialog for copying links are skinned when ElvUI's Blizzard Skins and Misc Frames are selected (Compatibility #7)
 - Options are skinned when ElvUI's Ace3 Skins are selected (Compatibility #7)

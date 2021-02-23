@@ -18,18 +18,24 @@ L["C_SCENARIOS"] = "Scenarios";
 L["C_NO_FACTION"] = "No Faction";
 
 -- Filters
-L["F_COMPLETED"] = "Completed";
-L["F_NOT_COMPLETED"] = "Not Completed";
-L["F_OBTAINABLE"] = "Obtainable";
-L["F_NOT_OBTAINABLE"] = "Not Obtainable";
-L["F_FACTION"] = "Faction";
-L["F_NEUTRAL"] = "Neutral";
-L["F_ALLIANCE"] = "Alliance";
-L["F_HORDE"] = "Horde";
-L["F_SORT_BY"] = "Sort By";
-L["F_DEFAULT"] = "Default";
-L["F_NAME"] = "Name";
-L["F_REVERSE_SORT"] = "Reverse Sort";
+L["Completed"] = "Completed";
+L["Not Completed"] = "Not Completed";
+L["Obtainable"] = "Obtainable";
+L["Not Obtainable"] = "Not Obtainable";
+L["Faction"] = "Faction";
+L["Covenant"] = "Covenant";
+L["Neutral"] = "Neutral";
+L["Alliance"] = "Alliance";
+L["Horde"] = "Horde";
+L["Kyrian"] = C_Covenants.GetCovenantData(1).name;
+L["Venthyr"] = C_Covenants.GetCovenantData(2).name;
+L["Night Fae"] = C_Covenants.GetCovenantData(3).name;
+L["Necrolord"] = C_Covenants.GetCovenantData(4).name;
+L["Select all"] = "Select all";
+L["Sort By"] = "Sort By";
+L["Default"] = "Default";
+L["Name"] = "Name";
+L["Reverse Sort"] = "Reverse Sort";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;

@@ -3,6 +3,7 @@
 
     <Script file="Objects/Objects.lua" />
     <Script file="Objects/Faction.lua" />
+    <Script file="Objects/Covenant.lua" />
     <Script file="Objects/Achievement.lua" />
     <Script file="Objects/AchievementCategory.lua" />
     <Script file="Objects/AchievementCategoryExtensions.lua" />

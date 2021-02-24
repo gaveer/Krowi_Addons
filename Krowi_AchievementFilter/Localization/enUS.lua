@@ -18,18 +18,24 @@ L["C_SCENARIOS"] = "Scenarios";
 L["C_NO_FACTION"] = "No Faction";
 
 -- Filters
-L["F_COMPLETED"] = "Completed";
-L["F_NOT_COMPLETED"] = "Not Completed";
-L["F_OBTAINABLE"] = "Obtainable";
-L["F_NOT_OBTAINABLE"] = "Not Obtainable";
-L["F_FACTION"] = "Faction";
-L["F_NEUTRAL"] = "Neutral";
-L["F_ALLIANCE"] = "Alliance";
-L["F_HORDE"] = "Horde";
-L["F_SORT_BY"] = "Sort By";
-L["F_DEFAULT"] = "Default";
-L["F_NAME"] = "Name";
-L["F_REVERSE_SORT"] = "Reverse Sort";
+L["Completed"] = "Completed";
+L["Not Completed"] = "Not Completed";
+L["Obtainable"] = "Obtainable";
+L["Not Obtainable"] = "Not Obtainable";
+L["Faction"] = "Faction";
+L["Covenant"] = "Covenant";
+L["Neutral"] = "Neutral";
+L["Alliance"] = "Alliance";
+L["Horde"] = "Horde";
+L["Kyrian"] = C_Covenants.GetCovenantData(1).name;
+L["Venthyr"] = C_Covenants.GetCovenantData(2).name;
+L["Night Fae"] = C_Covenants.GetCovenantData(3).name;
+L["Necrolord"] = C_Covenants.GetCovenantData(4).name;
+L["Select all"] = "Select all";
+L["Sort By"] = "Sort By";
+L["Default"] = "Default";
+L["Name"] = "Name";
+L["Reverse Sort"] = "Reverse Sort";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
@@ -55,6 +61,21 @@ L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to st
                                     "The smaller the number, the greater the impact on the game.";
 L["O_NUM_OF_SEARCH_PREVIEWS"] = "Number of search previews";
 L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n{reloadRequired}";
+L["O_STYLE"] = "ElvUI Skins";
+L["O_STYLE_DESC"] = "Each of the options below are controlled by ElvUI and are just informational.\n" ..
+                    "To change these, go to Game Menu -> ElvUI -> Skins and check the desired options. See each option below for what to check.";
+L["O_SKIN_ACHIEVEMENT"] = "Skin Achievements";
+L["O_SKIN_ACHIEVEMENT_DESC"] = "Applies the ElvUI skin to the Achievements Window.\n" ..
+                                "-> Blizzard + Achievements";
+L["O_SKIN_MISC_FRAMES"] = "Skin Misc Frames";
+L["O_SKIN_MISC_FRAMES_DESC"] = "Applies the ElvUI skin to the Filter Menu, Right Click Menu and Popup Dialog.\n" ..
+                                "-> Blizzard + Misc Frames";
+L["O_SKIN_OPTIONS"] = "Skin Ace3";
+L["O_SKIN_OPTIONS_DESC"] = "Applies the ElvUI skin to the Options.\n" ..
+                                "-> Ace3";
+L["O_SKIN_TUTORIALS"] = "Skin Tutorials";
+L["O_SKIN_TUTORIALS_DESC"] = "Applies the ElvUI skin to the Tutorials.\n" ..
+                                "-> Blizzard + Tutorials";
 L["O_DEBUG"] = "Debug";
 L["O_ENABLE_DEBUG_INFO"] = "Enable debug info";
 L["O_ENABLE_DEBUG_INFO_DESC"] = "Enable / disable debug info";
@@ -79,29 +100,31 @@ L["FT_GROUPING_DESC"] = "Instead of grouping achievements by type and then by ex
 L["FT_RIGHTCLICKMENU_TITLE"] = "Right-click menu";
 L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click menu.\n\n" ..
                                 "Features:\n" ..
-                                "- Link to {wowhead}\n" ..
-                                "- Link to {xuFuPetGuides} if the achievement is related to Pet Battles and {xuFuPetGuides} has relevant information about it\n" ..
-                                "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})";
+                                AF_TAB .. "- Link to {wowhead}\n" ..
+                                AF_TAB .. "- Link to {xuFuPetGuides} if the achievement is related to Pet Battles and {xuFuPetGuides} has relevant information about it\n" ..
+                                AF_TAB .. "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})";
 L["FT_SEARCHPREVIEW_TITLE"] = "Searching";
 L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way but it will only search achievements in this tab.\n\n" ..
                                 "Additionally, there are a couple of new options:\n" ..
-                                "- %s\n" ..
-                                "- %s\n" ..
-                                "- %s\n\n" ..
-                                "All options can be found under Game Menu -> Interface -> AddOns -> %s";
+                                AF_TAB .. "- {clearOnRightClick}\n" ..
+                                AF_TAB .. "- {minCharToSearch}\n" ..
+                                AF_TAB .. "- {numSearchPreviews}\n\n" ..
+                                "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
 L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
 L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";
 L["FT_FILTER_TITLE"] = "Enhanced filtering and sorting";
 L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with only the option to select All, Earned or Incomplete achievements. Here it's enhanced with\n\n" ..
                         "Filtering (multiple filters can be selected at the same time):\n" ..
-                        "- %s: Show completed achievements\n" ..
-                        "- %s: Show not completed achievements\n" ..
-                        "- %s: Show obtainable achievements\n" ..
-                        "- %s: Show not obtainable achievements\n\n" ..
+                        "- {completed}: Show completed achievements\n" ..
+                        "- {notCompleted}: Show not completed achievements\n" ..
+                        "- {obtainable}: Show obtainable achievements\n" ..
+                        "- {notObtainable}: Show not obtainable achievements\n" ..
+                        "- {faction}\n" ..
+                        AF_TAB .. "- {neutral}: Show achievements that both Alliance and Horde can earn\n" ..
+                        AF_TAB .. "- {alliance}: Show achievements only Alliance can earn\n" ..
+                        AF_TAB .. "- {horde}: Show achievements only Horde can earn\n\n" ..
                         "Sorting:\n" ..
-                        "- %s: No sorting applied\n" ..
-                        "- %s: Sort achievements based on their names\n" ..
-                        "- %s: When this is selected, invert the order of the sorted achievements\n\n" ..
+                        "- {noSorting}: No sorting applied\n" ..
+                        "- {sortByName}: Sort achievements based on their names\n" ..
+                        "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
                         "More filter and sorting options will be added in later versions. Requests possible.";
-
-L["TEST"] = "Hello {name}, welcome to {company}."

@@ -57,6 +57,32 @@ namespace DbManager
                 txtCategoryName.Text = ((Function)lsbFunctions.SelectedItem).Description;
         }
 
+        private void lsbAchievements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var achievement = (Achievement)lsbAchievements.SelectedItem;
+
+            cbxObtainable.Checked = achievement.Obtainable;
+            cbxHasWowheadLink.Checked = achievement.HasWowheadLink;
+
+            if (achievement.Faction == Faction.NoFaction)
+                rdbNoFaction.Checked = true;
+            else if (achievement.Faction == Faction.Alliance)
+                rdbAlliance.Checked = true;
+            else if (achievement.Faction == Faction.Horde)
+                rdbHorde.Checked = true;
+
+            if (achievement.Covenant == Covenant.NoCovenant)
+                rdbNoCovenant.Checked = true;
+            else if (achievement.Covenant == Covenant.Kyrian)
+                rdbKyrian.Checked = true;
+            else if (achievement.Covenant == Covenant.Venthyr)
+                rdbVenthyr.Checked = true;
+            else if (achievement.Covenant == Covenant.NightFae)
+                rdbNightFae.Checked = true;
+            else if (achievement.Covenant == Covenant.Necrolord)
+                rdbNecrolord.Checked = true;
+        }
+
         #region AchievementCategory
         private AchievementCategory GetSelectedAchievementCategory()
         {
@@ -369,10 +395,20 @@ namespace DbManager
                 else if (rdbHorde.Checked)
                     faction = Faction.Horde;
 
+                Covenant covenant = Covenant.NoCovenant;
+                if (rdbKyrian.Checked)
+                    covenant = Covenant.Kyrian;
+                else if (rdbVenthyr.Checked)
+                    covenant = Covenant.Venthyr;
+                else if (rdbNightFae.Checked)
+                    covenant = Covenant.NightFae;
+                else if (rdbNecrolord.Checked)
+                    covenant = Covenant.Necrolord;
+
                 int location = lsbAchievements.Items.Count > 0 ? ((Achievement)lsbAchievements.SelectedItem).Location + 1 : 1;
                 var category = GetSelectedAchievementCategory();
 
-                var achievement = new Achievement(ID, faction, location, cbxObtainable.Checked, cbxHasWowheadLink.Checked);
+                var achievement = new Achievement(ID, faction, covenant, location, cbxObtainable.Checked, cbxHasWowheadLink.Checked);
                 Achievement.Add(Connection, achievement, category);
 
                 Achievement.UpdateLocations(Connection, achievement, lsbAchievements.Items.Cast<Achievement>().ToList());
@@ -405,6 +441,7 @@ namespace DbManager
             sb.AppendLine("local _, addon = ...;");
             sb.AppendLine("local objects = addon.Objects;");
             sb.AppendLine("local faction = objects.Faction;");
+            sb.AppendLine("local covenant = objects.Covenant;");
             sb.AppendLine("local achievementCategory = objects.AchievementCategory;");
             sb.AppendLine("local achievement = objects.Achievement;");
             sb.AppendLine("addon.ExportedData = {};");
@@ -441,7 +478,8 @@ namespace DbManager
                     //else if (achievement.Faction == Faction.Horde)
                     //    sb.AppendLineTabbed(1, "if addon.Faction.IsHorde then");
 
-                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
+                    var covenant = achievement.Covenant == Covenant.NoCovenant ? "nil" : $"covenant.{achievement.Covenant}";
+                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {covenant}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
 
                     // new
                     //sb.AppendTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:NewFromTable{{id = {achievement.ID}");

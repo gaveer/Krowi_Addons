@@ -136,12 +136,14 @@ local function GetAchievementNumbers(self, category)
 		end
 	end
 
+	local showCollapseIcon = false;
 	if category.Children ~= nil then
 		for _, child in next, category.Children do
 			local childNumOfAch, childNumOfCompAch = GetAchievementNumbers(self, child); -- , childNumOfIncompAch
 			numOfAch = numOfAch + childNumOfAch;
 			numOfCompAch = numOfCompAch + childNumOfCompAch;
 			-- numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
+			showCollapseIcon = showCollapseIcon or childNumOfAch > 0;
 		end
 	end
 
@@ -149,6 +151,7 @@ local function GetAchievementNumbers(self, category)
 	category.NumOfAch = numOfAch;
 	category.NumOfCompAch = numOfCompAch;
 	-- category.NumOfIncompAch = numOfIncompAch;
+	category.ShowCollapseIcon = showCollapseIcon;
 
 	return numOfAch, numOfCompAch; -- , numOfIncompAch
 end
@@ -229,7 +232,7 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	end
 
 	button.label:SetText(category.Name);
-	if category.Children ~= nil and #category.Children ~= 0 then
+	if category.Children ~= nil and #category.Children ~= 0 and category.ShowCollapseIcon then
 		if category.NotCollapsed then
 			button.label:SetText("- " .. category.Name);
 		else
@@ -244,7 +247,7 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	button.text = nil;
 	button.numAchievements = numOfAch;
 	button.numCompleted = numOfCompAch;
-	button.numCompletedText = numOfCompAch.."/"..numOfAch;
+	button.numCompletedText = numOfCompAch .. "/" .. numOfAch;
 	button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
 end
 
@@ -259,7 +262,7 @@ function categoriesFrame:SelectButton(button, quick)
 			end
 		end
 	else -- Open selected category, close other highest level categories
-		for i, category in next, self.Categories do
+		for _, category in next, self.Categories do
 			if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
 				category.NotCollapsed = nil;
 			end

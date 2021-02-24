@@ -9,14 +9,16 @@ namespace DbManager
     {
         public int ID { get; set; }
         public Faction Faction { get; set; }
+        public Covenant Covenant { get; set; }
         public int Location { get; set; }
         public bool Obtainable { get; set; }
         public bool HasWowheadLink { get; set; }
 
-        public Achievement(int id, Faction faction, int location, bool obtainable = true, bool hasWowheadLink = true)
+        public Achievement(int id, Faction faction, Covenant covenant, int location, bool obtainable = true, bool hasWowheadLink = true)
         {
             ID = id;
             Faction = faction;
+            Covenant = covenant;
             Location = location;
             Obtainable = obtainable;
             HasWowheadLink = hasWowheadLink;
@@ -24,7 +26,7 @@ namespace DbManager
 
         public override string ToString()
         {
-            return $"{ID} - {Enum.GetName(typeof(Faction), Faction)}{(Obtainable ? " - Obtainable" : "")}{(HasWowheadLink ? " - Wowhead" : "")}";
+            return $"{ID} - {Enum.GetName(typeof(Faction), Faction)}{(Covenant != Covenant.NoCovenant ? $" - {Covenant}" : "")}{(Obtainable ? " - Obtainable" : "")}{(HasWowheadLink ? " - Wowhead" : "")}";
         }
 
         public static List<Achievement> GetWithCategory(SqliteConnection connection, AchievementCategory category)
@@ -34,7 +36,7 @@ namespace DbManager
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
-                                    A.ID, ACA.Location, ANO.ID, AHNWL.ID, A.Faction
+                                    A.ID, ACA.Location, ANO.ID, AHNWL.ID, A.Faction, AC.CovenantID
                                 FROM
                                     Achievement A
                                     LEFT JOIN AchievementNotObtainable ANO
@@ -43,6 +45,8 @@ namespace DbManager
                                         ON A.ID = AHNWL.ID
                                     LEFT JOIN AchievementCategoryAchievement ACA
                                         ON A.ID = ACA.AchievementID
+									LEFT JOIN AchievementCovenant AC
+										ON A.ID = AC.AchievementID
                                     WHERE
                                         ACA.CategoryID = @Category
                                     ORDER BY
@@ -52,7 +56,10 @@ namespace DbManager
             var achievements = new List<Achievement>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(4), reader.GetInt32(1), reader.IsDBNull(2), reader.IsDBNull(3)));
+                {
+                    Covenant covenant = reader.IsDBNull(5) ? Covenant.NoCovenant : (Covenant)reader.GetInt32(5);
+                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(4), covenant, reader.GetInt32(1), reader.IsDBNull(2), reader.IsDBNull(3)));
+                }
 
             return achievements;
         }
@@ -69,12 +76,15 @@ namespace DbManager
                 sb.AppendLine(@"INSERT OR REPLACE INTO AchievementNotObtainable (ID) VALUES (@ID);");
             if (!achievement.HasWowheadLink)
                 sb.AppendLine(@"INSERT OR REPLACE INTO AchievementHasNoWowheadLink (ID) VALUES (@ID);");
+            if (achievement.Covenant != Covenant.NoCovenant)
+                sb.AppendLine(@"INSERT OR REPLACE INTO AchievementCovenant (AchievementID, CovenantID) VALUES (@ID, @Covenant);");
             sb.AppendLine(@"INSERT OR REPLACE INTO AchievementCategoryAchievement (Location, CategoryID, AchievementID) VALUES (@Location, @CategoryID, @ID);");
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = sb.ToString();
             cmd.Parameters.AddWithValue("@ID", achievement.ID);
             cmd.Parameters.AddWithValue("@Faction", (int)achievement.Faction);
+            cmd.Parameters.AddWithValue("@Covenant", (int)achievement.Covenant);
             cmd.Parameters.AddWithValue("@Location", achievement.Location);
             cmd.Parameters.AddWithValue("@CategoryID", category.ID);
 
@@ -95,6 +105,8 @@ namespace DbManager
                     sb.AppendLine(@"DELETE FROM AchievementNotObtainable WHERE ID = @ID;");
                 if (!achievement.HasWowheadLink)
                     sb.AppendLine(@"DELETE FROM AchievementHasNoWowheadLink WHERE ID = @ID;");
+                if (achievement.Covenant != Covenant.NoCovenant)
+                    sb.AppendLine(@"DELETE FROM AchievementCovenant WHERE AchievementID = @ID;");
                 sb.AppendLine(@"DELETE FROM AchievementCategoryAchievement WHERE AchievementID = @ID;");
                 sb.AppendLine(@"DELETE FROM Achievement WHERE ID = @ID;");
             }

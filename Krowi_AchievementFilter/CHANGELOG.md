@@ -1,9 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [9.0.2.13.0] - 2021-02-24
 ### Added
-- TBD
+- Legion Zones (90 achievements)
+- Shadowlands Torghast (30 achievements)
+- Shadowlands Covenant Sanctums (42 achievements)
+- Filtering by Neutral, Kyrian, Venthyr, Night Fae and Necrolord achievements now possible
+- The Achievement window is now skinned when ElvUI's Blizzard Skins and Achievements are selected (Compatibility #7)
+- Right Click Menu, Filter Menu and Popup Dialog for copying links are skinned when ElvUI's Blizzard Skins and Misc Frames are selected (Compatibility #7)
+- Options are skinned when ElvUI's Ace3 Skins are selected (Compatibility #7)
+- Tutorials are skinned when ElvUI's Blizzard Skins and Tutorials are selected (Compatibility #7)
+
+### Changed
+- Updated all tutorial images to have a fade to transparent instead of fade to black to better work with ElvUI's Blizzard Skins and Tutorials (Compatibility #7)
 
 ## [9.0.2.12.0] - 2021-02-15
 ### Added
@@ -68,7 +78,7 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.2.8.0] - 2021-01-15
 ### Added
-- Battle for Azeroth zones (170+ achievements for either Horde and Alliance)
+- Battle for Azeroth Zones (222 achievements for either Horde and Alliance)
 - The width of the categories list can be adjusted in options; negative values will narrow it, positive values will widen it
 - Tutorial explaining the features of the addon; showed when opening the new achievement window tab for the first time or when clicking the Help button in Interface -> Addons -> Options (Feature #14)
 
@@ -158,7 +168,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[Unreleased]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.2.13.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3215749
 [9.0.2.12.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3205404
 [9.0.2.11.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3193640
 [9.0.2.10.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3190348

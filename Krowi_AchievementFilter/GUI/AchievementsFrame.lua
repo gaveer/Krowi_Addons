@@ -101,8 +101,8 @@ local function GetFilteredAchievements(self, category)
 		end
 
 		-- Sort achievements
-		if addon.Options.db.Filters.SortBy.Criteria == addon.L["F_DEFAULT"] then
-			diagnostics.Debug("Sort By " .. addon.L["F_DEFAULT"]);
+		if addon.Options.db.Filters.SortBy.Criteria == addon.L["Default"] then
+			diagnostics.Debug("Sort By " .. addon.L["Default"]);
 			if addon.Options.db.Filters.SortBy.ReverseSort then
 				local tmpTbl = {};
 				for i = #achievements, 1, -1 do
@@ -110,8 +110,8 @@ local function GetFilteredAchievements(self, category)
 				end
 				achievements = tmpTbl;
 			end
-		elseif addon.Options.db.Filters.SortBy.Criteria == addon.L["F_NAME"] then
-			diagnostics.Debug("Sort By " .. addon.L["F_NAME"]);
+		elseif addon.Options.db.Filters.SortBy.Criteria == addon.L["Name"] then
+			diagnostics.Debug("Sort By " .. addon.L["Name"]);
 			table.sort(achievements, function(a, b)
 				local _, nameA = GetAchievementInfo(a.ID);
 				local _, nameB = GetAchievementInfo(b.ID);

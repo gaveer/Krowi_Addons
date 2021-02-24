@@ -31,6 +31,9 @@ function filterButton:New(categoriesFrame, achievementsFrame)
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, button:GetName());
     button:Hide();
 
+    -- Set localization for texts already translated by Blizzard
+
+
     return button;
 end
 
@@ -52,7 +55,7 @@ function filterButton:OnMouseDown()
 	rightClickMenu:Clear();
 
     -- Filters
-    rightClickMenu:AddFull({    Text = addon.L["F_COMPLETED"],
+    rightClickMenu:AddFull({    Text = addon.L["Completed"],
                                 Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
                                     return addon.Options.db.Filters.Completion.Completed
                                 end,
@@ -64,7 +67,7 @@ function filterButton:OnMouseDown()
                                 NotCheckable = false,
                                 KeepShownOnClick = true
                             });
-    rightClickMenu:AddFull({    Text = addon.L["F_NOT_COMPLETED"],
+    rightClickMenu:AddFull({    Text = addon.L["Not Completed"],
                                 Checked = function() -- Same
                                     return addon.Options.db.Filters.Completion.NotCompleted
                                 end,
@@ -76,7 +79,7 @@ function filterButton:OnMouseDown()
                                 NotCheckable = false,
                                 KeepShownOnClick = true
                             });
-    rightClickMenu:AddFull({    Text = addon.L["F_OBTAINABLE"],
+    rightClickMenu:AddFull({    Text = addon.L["Obtainable"],
                                 Checked = function() -- Same
                                     return addon.Options.db.Filters.Obtainability.Obtainable
                                 end,
@@ -88,7 +91,7 @@ function filterButton:OnMouseDown()
                                 NotCheckable = false,
                                 KeepShownOnClick = true
                             });
-    rightClickMenu:AddFull({    Text = addon.L["F_NOT_OBTAINABLE"],
+    rightClickMenu:AddFull({    Text = addon.L["Not Obtainable"],
                                 Checked = function() -- Same
                                     return addon.Options.db.Filters.Obtainability.NotObtainable;
                                 end,
@@ -101,8 +104,8 @@ function filterButton:OnMouseDown()
                                 KeepShownOnClick = true
                             });
 
-    local faction = addon.Objects.MenuItem:New({Text = addon.L["F_FACTION"]});
-    faction:AddChildFull({  Text = addon.L["F_NEUTRAL"],
+    local faction = addon.Objects.MenuItem:New({Text = addon.L["Faction"]});
+    faction:AddChildFull({  Text = addon.L["Neutral"],
                             Checked = function() -- Same
                                 return addon.Options.db.Filters.Faction.Neutral;
                             end,
@@ -114,7 +117,7 @@ function filterButton:OnMouseDown()
                             NotCheckable = false,
                             KeepShownOnClick = true
                         });
-    faction:AddChildFull({  Text = addon.L["F_ALLIANCE"],
+    faction:AddChildFull({  Text = addon.L["Alliance"],
                             Checked = function() -- Same
                                 return addon.Options.db.Filters.Faction.Alliance;
                             end,
@@ -126,7 +129,7 @@ function filterButton:OnMouseDown()
                             NotCheckable = false,
                             KeepShownOnClick = true
                         });
-    faction:AddChildFull({  Text = addon.L["F_HORDE"],
+    faction:AddChildFull({  Text = addon.L["Horde"],
                             Checked = function() -- Same
                                 return addon.Options.db.Filters.Faction.Horde;
                             end,
@@ -138,35 +141,118 @@ function filterButton:OnMouseDown()
                             NotCheckable = false,
                             KeepShownOnClick = true
                         });
+    faction:AddSeparator();
+    faction:AddChildFull({  Text = addon.L["Select all"],
+                            Func = function()
+                                for faction, _ in next, addon.Options.db.Filters.Faction do
+                                    addon.Options.db.Filters.Faction[faction] = true;
+                                end
+                                self:UpdateAchievementFrame();
+                            end
+                        });
     rightClickMenu:Add(faction);
 
+    local covenant = addon.Objects.MenuItem:New({Text = addon.L["Covenant"]});
+    covenant:AddChildFull({ Text = addon.L["Neutral"],
+                            Checked = function() -- Same
+                                return addon.Options.db.Filters.Covenant.Neutral;
+                            end,
+                            Func = function()
+                                addon.Options.db.Filters.Covenant.Neutral = not addon.Options.db.Filters.Covenant.Neutral;
+                                self:UpdateAchievementFrame();
+                            end,
+                            IsNotRadio = true,
+                            NotCheckable = false,
+                            KeepShownOnClick = true
+                        });
+    covenant:AddChildFull({ Text = addon.L["Kyrian"],
+                            Checked = function() -- Same
+                                return addon.Options.db.Filters.Covenant.Kyrian;
+                            end,
+                            Func = function()
+                                addon.Options.db.Filters.Covenant.Kyrian = not addon.Options.db.Filters.Covenant.Kyrian;
+                                self:UpdateAchievementFrame();
+                            end,
+                            IsNotRadio = true,
+                            NotCheckable = false,
+                            KeepShownOnClick = true
+                        });
+    covenant:AddChildFull({ Text = addon.L["Venthyr"],
+                            Checked = function() -- Same
+                                return addon.Options.db.Filters.Covenant.Venthyr;
+                            end,
+                            Func = function()
+                                addon.Options.db.Filters.Covenant.Venthyr = not addon.Options.db.Filters.Covenant.Venthyr;
+                                self:UpdateAchievementFrame();
+                            end,
+                            IsNotRadio = true,
+                            NotCheckable = false,
+                            KeepShownOnClick = true
+                        });
+    covenant:AddChildFull({ Text = addon.L["Night Fae"],
+                            Checked = function() -- Same
+                                return addon.Options.db.Filters.Covenant.NightFae;
+                            end,
+                            Func = function()
+                                addon.Options.db.Filters.Covenant.NightFae = not addon.Options.db.Filters.Covenant.NightFae;
+                                self:UpdateAchievementFrame();
+                            end,
+                            IsNotRadio = true,
+                            NotCheckable = false,
+                            KeepShownOnClick = true
+                        });
+    covenant:AddChildFull({ Text = addon.L["Necrolord"],
+                            Checked = function() -- Same
+                                return addon.Options.db.Filters.Covenant.Necrolord;
+                            end,
+                            Func = function()
+                                addon.Options.db.Filters.Covenant.Necrolord = not addon.Options.db.Filters.Covenant.Necrolord;
+                                self:UpdateAchievementFrame();
+                            end,
+                            IsNotRadio = true,
+                            NotCheckable = false,
+                            KeepShownOnClick = true
+                        });
+    covenant:AddSeparator();
+    covenant:AddChildFull({ Text = addon.L["Select all"],
+                            Func = function()
+                                for covenant, _ in next, addon.Options.db.Filters.Covenant do
+                                    addon.Options.db.Filters.Covenant[covenant] = true;
+                                end
+                                self:UpdateAchievementFrame();
+                            end
+                        });
+    rightClickMenu:Add(covenant);
+    rightClickMenu:AddSeparator();
+
     -- Sort By
-    local sortBy = addon.Objects.MenuItem:New({Text = addon.L["F_SORT_BY"]});
-    sortBy:AddChildFull({   Text = addon.L["F_DEFAULT"],
+    local sortBy = addon.Objects.MenuItem:New({Text = addon.L["Sort By"]});
+    sortBy:AddChildFull({   Text = addon.L["Default"],
                             Checked = function() -- Same
-                                return addon.Options.db.Filters.SortBy.Criteria == addon.L["F_DEFAULT"]
+                                return addon.Options.db.Filters.SortBy.Criteria == addon.L["Default"]
                             end,
                             Func = function()
-                                addon.Options.db.Filters.SortBy.Criteria = addon.L["F_DEFAULT"];
-                                rightClickMenu:SetSelectedName(addon.L["F_DEFAULT"]);
+                                addon.Options.db.Filters.SortBy.Criteria = addon.L["Default"];
+                                rightClickMenu:SetSelectedName(addon.L["Default"]);
                                 self.AchievementsFrame:Update();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
                         });
-    sortBy:AddChildFull({   Text = addon.L["F_NAME"],
+    sortBy:AddChildFull({   Text = addon.L["Name"],
                             Checked = function() -- Same
-                                return addon.Options.db.Filters.SortBy.Criteria == addon.L["F_NAME"]
+                                return addon.Options.db.Filters.SortBy.Criteria == addon.L["Name"]
                             end,
                             Func = function()
-                                addon.Options.db.Filters.SortBy.Criteria = addon.L["F_NAME"];
-                                rightClickMenu:SetSelectedName(addon.L["F_NAME"]);
+                                addon.Options.db.Filters.SortBy.Criteria = addon.L["Name"];
+                                rightClickMenu:SetSelectedName(addon.L["Name"]);
                                 self.AchievementsFrame:Update();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
                         });
-    sortBy:AddChildFull({   Text = addon.L["F_REVERSE_SORT"],
+    sortBy:AddSeparator();
+    sortBy:AddChildFull({   Text = addon.L["Reverse Sort"],
                             Checked = function() -- Same
                                 return addon.Options.db.Filters.SortBy.ReverseSort
                             end,
@@ -209,6 +295,21 @@ function filterButton:Validate(achievement)
 	if not addon.Options.db.Filters.Faction.Horde and achievement.Faction == addon.Objects.Faction.Horde then
 		return -7;
 	end
+	if not addon.Options.db.Filters.Covenant.Neutral and achievement.Covenant == nil then
+		return -8;
+	end
+	if not addon.Options.db.Filters.Covenant.Kyrian and achievement.Covenant == addon.Objects.Covenant.Kyrian then
+		return -9;
+	end
+	if not addon.Options.db.Filters.Covenant.Venthyr and achievement.Covenant == addon.Objects.Covenant.Venthyr then
+		return -10;
+	end
+	if not addon.Options.db.Filters.Covenant.NightFae and achievement.Covenant == addon.Objects.Covenant.NightFae then
+		return -11;
+	end
+	if not addon.Options.db.Filters.Covenant.Necrolord and achievement.Covenant == addon.Objects.Covenant.Necrolord then
+		return -12;
+	end
 
 	return 1;
 end
@@ -238,6 +339,16 @@ function filterButton:SetFilters(achievement)
             addon.Options.db.Filters.Faction.Alliance = not addon.Options.db.Filters.Faction.Alliance;
         elseif id == -7 then
             addon.Options.db.Filters.Faction.Horde = not addon.Options.db.Filters.Faction.Horde;
+        elseif id == -8 then
+            addon.Options.db.Filters.Covenant.Neutral = not addon.Options.db.Filters.Covenant.Neutral;
+        elseif id == -9 then
+            addon.Options.db.Filters.Covenant.Kyrian = not addon.Options.db.Filters.Covenant.Kyrian;
+        elseif id == -10 then
+            addon.Options.db.Filters.Covenant.Venthyr = not addon.Options.db.Filters.Covenant.Venthyr;
+        elseif id == -11 then
+            addon.Options.db.Filters.Covenant.NightFae = not addon.Options.db.Filters.Covenant.NightFae;
+        elseif id == -12 then
+            addon.Options.db.Filters.Covenant.Necrolord = not addon.Options.db.Filters.Covenant.Necrolord;
         end
 
         iterations = iterations + 1;

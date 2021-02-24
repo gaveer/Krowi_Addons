@@ -30,13 +30,26 @@ local defaults = {
             },
             Faction = {
                 Neutral = true,
-                Alliance = addon.Faction.IsAlliance,
-                Horde = addon.Faction.IsHorde
+                Alliance = false,
+                Horde = false
+            },
+            Covenant = {
+                Neutral = true,
+                Kyrian = false,
+                Venthyr = false,
+                NightFae = false,
+                Necrolord = false
             },
             SortBy = {
-                Criteria = addon.L["F_DEFAULT"],
+                Criteria = addon.L["Default"],
                 ReverseSort = false
             }
+        },
+        ElvUISkin = {
+            Achievements = false,
+            MiscFrames = false,
+            Options = false,
+            Tutorials = false
         }
     }
 }
@@ -242,11 +255,65 @@ local function CreatePanel()
                     }
                 }
             },
+            Style = {
+                name = addon.L["O_STYLE"],
+                type = "group",
+                inline = true,
+                order = 5,
+                args = {
+                    description = {
+                        name = addon.L["O_STYLE_DESC"],
+                        type = "description",
+                        width = "full",
+                        order = 1.1,
+                    },
+                    skinAchievement = {
+                        name = addon.L["O_SKIN_ACHIEVEMENT"],
+                        desc = addon.L["O_SKIN_ACHIEVEMENT_DESC"],
+                        descStyle = "inline",
+                        disabled = true,
+                        type = "toggle",
+                        width = "full",
+                        order = 2.1,
+                        get = function () return addon.Options.db.ElvUISkin.Achievements; end,
+                    },
+                    skinMiscFrames = {
+                        name = addon.L["O_SKIN_MISC_FRAMES"],
+                        desc = addon.L["O_SKIN_MISC_FRAMES_DESC"],
+                        descStyle = "inline",
+                        disabled = true,
+                        type = "toggle",
+                        width = "full",
+                        order = 3.1,
+                        get = function () return addon.Options.db.ElvUISkin.MiscFrames; end,
+                    },
+                    skinAce3 = {
+                        name = addon.L["O_SKIN_OPTIONS"],
+                        desc = addon.L["O_SKIN_OPTIONS_DESC"],
+                        descStyle = "inline",
+                        disabled = true,
+                        type = "toggle",
+                        width = "full",
+                        order = 4.1,
+                        get = function () return addon.Options.db.ElvUISkin.Options; end,
+                    },
+                    skinTutorials = {
+                        name = addon.L["O_SKIN_TUTORIALS"],
+                        desc = addon.L["O_SKIN_TUTORIALS_DESC"],
+                        descStyle = "inline",
+                        disabled = true,
+                        type = "toggle",
+                        width = "full",
+                        order = 5.1,
+                        get = function () return addon.Options.db.ElvUISkin.Tutorials; end,
+                    }
+                }
+            },
             Debug = {
                 name = addon.L["O_DEBUG"],
                 type = "group",
                 inline = true,
-                order = 5,
+                order = 6,
                 args = {
                     enableDebugInfo = {
                         name = addon.L["O_ENABLE_DEBUG_INFO"],
@@ -283,10 +350,27 @@ local function CreatePanel()
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(AF_NAME, nil, nil);
 end
 
+local function SetFilters()
+    -- Always reset faction filter
+    addon.Options.db.Filters.Faction.Neutral = true;
+    addon.Options.db.Filters.Faction.Alliance = addon.Faction.IsAlliance;
+    addon.Options.db.Filters.Faction.Horde = addon.Faction.IsHorde;
+
+    -- Always reset covenant filter
+    for covenant, _ in next, addon.Options.db.Filters.Covenant do
+        addon.Options.db.Filters.Covenant[covenant] = false;
+    end
+    addon.Options.db.Filters.Covenant.Neutral = true;
+    addon.Options.db.Filters.Covenant[addon.Objects.Covenant[addon.Objects.Covenant.GetActiveCovenant()]] = true;
+end
+
 -- Load the options
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
+    addon.Options.SetFilters = SetFilters;
     addon.Options.db = addon.Options.profile;
+
+    addon.GUI.ElvUISkin.Load();
 
     -- add something to check if the options panel closes that we prompt for a reload
     CreatePanel();

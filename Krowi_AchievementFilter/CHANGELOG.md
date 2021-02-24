@@ -1,9 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.2.13.0] - 
+## [9.0.2.13.0] - 2021-02-24
 ### Added
 - Legion Zones (90 achievements)
+- Shadowlands Torghast (30 achievements)
 - Shadowlands Covenant Sanctums (42 achievements)
 - Filtering by Neutral, Kyrian, Venthyr, Night Fae and Necrolord achievements now possible
 - The Achievement window is now skinned when ElvUI's Blizzard Skins and Achievements are selected (Compatibility #7)

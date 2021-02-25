@@ -64,20 +64,20 @@ local function CreatePanel()
         type = 'group',
         args = {
             Info = {
-                name = addon.L["O_INFO"],
+                name = addon.L["Info"],
                 type = "group",
                 inline = true,
                 order = 1,
                 args = {
                     version = {
-                        name = AF_COLOR_YELLOW .. addon.L["O_VERSION"] .. ": " .. AF_COLOR_END .. AF_VERSION,
+                        name = AF_COLOR_YELLOW .. addon.L["Version"] .. ": " .. AF_COLOR_END .. AF_VERSION,
                         type = "description",
                         width = "normal",
                         fontSize = "medium",
                         order = 1.1,
                     },
                     build = {
-                        name = AF_COLOR_YELLOW .. addon.L["O_BUILD"] .. ": " .. AF_COLOR_END .. AF_BUILD,
+                        name = AF_COLOR_YELLOW .. addon.L["Build"] .. ": " .. AF_COLOR_END .. AF_BUILD,
                         type = "description",
                         width = "normal",
                         fontSize = "medium",
@@ -94,7 +94,7 @@ local function CreatePanel()
                         end
                     },
                     author = {
-                        name = AF_COLOR_YELLOW .. addon.L["O_AUTHOR"] .. ": " .. AF_COLOR_END .. "Krowi",
+                        name = AF_COLOR_YELLOW .. addon.L["Author"] .. ": " .. AF_COLOR_END .. "Krowi",
                         type = "description",
                         width = "normal",
                         fontSize = "medium",
@@ -103,7 +103,7 @@ local function CreatePanel()
                 },
             },
             Icon = {
-                name = addon.L["O_ICON"],
+                name = addon.L["Icon"],
                 type = "group",
                 inline = true,
                 order = 2,

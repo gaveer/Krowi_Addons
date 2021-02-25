@@ -3,7 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.2.14.0]
 ### Added
-- TBD
+- Legion Legion Class Hall (38 achievements)
+- Missing Battle for Azeroth Pet Battles (1 achievement)
+- Battle for Azeroth Island Expeditions (64 achievements)
+- Battle for Azeroth War Effort (34 achievements)
+- Battle for Azeroth Heart of Azeroth (11 achievements)
+- Battle for Azeroth Visions of N'Zoth (21 achievements)
 
 ## [9.0.2.13.0] - 2021-02-24
 ### Added

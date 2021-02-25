@@ -6,7 +6,7 @@ local achievement = objects.Achievement;
 
 -- [[ Add Child Category Extensions ]] --
 function category:AddCatZones() -- See AddCategory - with 'Zones' as name
-    return self:AddCategory(category:New(addon.L["C_ZONES"]));
+    return self:AddCategory(category:New(addon.L["Zones"]));
 end
 
 function category:AddCatQuests() -- See AddCategory - with 'Quests' as name

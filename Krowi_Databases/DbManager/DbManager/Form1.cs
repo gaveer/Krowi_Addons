@@ -386,11 +386,19 @@ namespace DbManager
 
         private void btnAchievementAdd_Click(object sender, EventArgs e)
         {
-            List<int> IDs = txtAchievementID.Text.Split(',').Select(int.Parse).ToList();
-            foreach (var ID in IDs)
+            List<string> groups = txtAchievementID.Text.Split(',').ToList();
+            List<(int ID, Faction Faction)> IDsAndFactions;
+            if (groups[0].Contains("_"))
+                IDsAndFactions = groups.Select(g => g.Split('_')).Select(g => (int.Parse(g[0]), (Faction)int.Parse(g[1]))).ToList();
+            else
+                IDsAndFactions = groups.Select(g => (int.Parse(g), Faction.Undefined)).ToList();
+
+            foreach (var (ID, preFaction) in IDsAndFactions)
             {
                 Faction faction = Faction.NoFaction;
-                if (rdbAlliance.Checked)
+                if (preFaction != Faction.Undefined)
+                    faction = preFaction;
+                else if (rdbAlliance.Checked)
                     faction = Faction.Alliance;
                 else if (rdbHorde.Checked)
                     faction = Faction.Horde;

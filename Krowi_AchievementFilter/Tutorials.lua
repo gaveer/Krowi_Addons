@@ -48,11 +48,11 @@ function tutorials.Load()
             image = media .. "RightClick",
             text = GetTitle(addon.L["FT_RIGHTCLICKMENU_TITLE"]) ..
                             addon.ReplaceVars{addon.L["FT_RIGHTCLICKMENU_DESC"],
-                                            wowhead = AF_COLOR_YELLOW .. addon.L["WOWHEAD"] .. AF_COLOR_END,
-                                            xuFuPetGuides = AF_COLOR_YELLOW .. addon.L["XUFU"] .. AF_COLOR_END,
-                                            IAT = AF_COLOR_YELLOW .. addon.L["IAT"] .. AF_COLOR_END,
-                                            installed = (addon.IsIATLoaded() and (AF_COLOR_GREEN .. addon.L["INSTALLED"]:lower() .. AF_COLOR_END) or
-                                                (AF_COLOR_RED .. addon.L["NOT INSTALLED"]:lower() .. AF_COLOR_END))},
+                                            wowhead = AF_COLOR_YELLOW .. addon.L["Wowhead"] .. AF_COLOR_END,
+                                            xuFuPetGuides = AF_COLOR_YELLOW .. addon.L["Xu-Fu's Pet Guides"] .. AF_COLOR_END,
+                                            IAT = AF_COLOR_YELLOW .. addon.L["Instance Achievement Tracker"] .. AF_COLOR_END,
+                                            installed = (addon.IsIATLoaded() and (AF_COLOR_GREEN .. addon.L["Installed"]:lower() .. AF_COLOR_END) or
+                                                (AF_COLOR_RED .. addon.L["Not installed"]:lower() .. AF_COLOR_END))},
             shineHeight = addon.Options.db.ElvUISkin.MiscFrames and 9 or 6,
             shineWidth = addon.Options.db.ElvUISkin.MiscFrames and 10 or 7,
         },

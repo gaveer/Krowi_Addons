@@ -136,7 +136,7 @@ namespace DbManager
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnExport);
-            this.groupBox3.Location = new System.Drawing.Point(759, 672);
+            this.groupBox3.Location = new System.Drawing.Point(759, 671);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(212, 55);
             this.groupBox3.TabIndex = 25;
@@ -165,7 +165,7 @@ namespace DbManager
             this.groupBox2.Controls.Add(this.cbxHasWowheadLink);
             this.groupBox2.Location = new System.Drawing.Point(759, 277);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(212, 389);
+            this.groupBox2.Size = new System.Drawing.Size(212, 388);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "New Achievement";

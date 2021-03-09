@@ -114,3 +114,7 @@ L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with
                         AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..
                         AF_TAB .. "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
                         "More filter and sorting options will be added in later versions. Requests possible.";
+
+-- NPC Names
+L["Andurs"] = "Andurs"; -- Wowhead npc=105387
+L["Rydyr"] = "Rydyr"; -- Wowhead npc=105386

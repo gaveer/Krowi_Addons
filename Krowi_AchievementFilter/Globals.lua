@@ -29,3 +29,17 @@ function addon.ReplaceVars(str, vars)
             return vars[i] or whole
         end));
 end
+
+function addon.GetAchievement(id)
+    addon.Diagnostics.Trace("addon.GetAchievement");
+
+	for _, achievement in next, addon.Achievements do
+		if achievement.ID == id then
+			return achievement;
+		end
+	end
+end
+
+function addon.InjectMetatable(tbl, meta)
+    return setmetatable(tbl, setmetatable(meta, getmetatable(tbl)));
+end

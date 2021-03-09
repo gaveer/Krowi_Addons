@@ -1,4 +1,4 @@
--- [[ Exported at 2021-02-25 16-49-33 ]] --
+-- [[ Exported at 2021-03-03 15-46-44 ]] --
 -- [[ This code is automatically generated as an export from a SQLite database ]] --
 -- [[ and is not meant for manual edit. ]] --
 
@@ -1904,6 +1904,31 @@ function exportedData.Load(categories, achievements)
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(12111, nil, nil, false, nil, nil)));
     tmpCategories[430] = InsertAndReturn(categories, achievementCategory:New(GetCategoryInfo(15117))); -- Pet Battles
     tmpCategories[237]:AddCategory(tmpCategories[430]);
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(11233, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(10876, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9686, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9687, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9688, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9689, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9690, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9691, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9692, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9693, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9694, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9695, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(9696, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12088, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12089, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12091, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12092, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12093, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12094, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12095, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12096, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12097, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12098, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12099, nil, nil, nil, nil, nil)));
+    tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12100, nil, nil, nil, nil, nil)));
     tmpCategories[429] = InsertAndReturn(categories, achievementCategory:New(addon.L["Class Hall"])); -- Class Hall
     tmpCategories[237]:AddCategory(tmpCategories[429]);
     tmpCategories[429]:AddAchievement(InsertAndReturn(achievements, achievement:New(10994, nil, nil, nil, nil, nil)));

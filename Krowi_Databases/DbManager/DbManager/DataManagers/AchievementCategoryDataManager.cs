@@ -1,72 +1,23 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using DbManager.Objects;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DbManager
+namespace DbManager.DataManagers
 {
-    public class AchievementCategory : IComparable<AchievementCategory>, IEquatable<AchievementCategory>
+    public class AchievementCategoryDataManager
     {
-        public int ID { get; set; }
-        public int Location { get; set; }
-        public string Name { get; set; }
-        public bool IsLegacy { get; set; }
-        public AchievementCategory Parent { get; set; }
-        public Function Function { get; set; }
-        public int FunctionValue { get; set; }
-        public List<Achievement> Achievements { get; set; }
+        private SqliteConnection connection;
 
-        public AchievementCategory(int id, int location, string name, Function function, int functionValue, AchievementCategory parent = null, bool isLegacy = false)
+        public AchievementCategoryDataManager(SqliteConnection connection)
         {
-            ID = id;
-            Location = location;
-            Name = name;
-            IsLegacy = isLegacy;
-            Parent = parent;
-            Function = function;
-            FunctionValue = functionValue;
-            Achievements = new List<Achievement>();
+            this.connection = connection;
         }
 
-        public string GetParentNames()
+        public List<AchievementCategory> GetAll()
         {
-            string val = null;
-            if (Parent != null)
-            {
-                val = Parent.GetParentNames();
-                if (val == null)
-                    val = $"{Parent.Name}";
-                else
-                    val = $"{Parent.Name} - {val}";
-            }
-
-            return val;
-        }
-
-        public override string ToString()
-        {
-            if (ID > 0)
-            {
-                var parentNames = GetParentNames();
-                return $"{ID} - {Name}{(string.IsNullOrEmpty(parentNames) ? "" : $" - {parentNames}")}";
-            }
-            else
-                return "";
-        }
-
-        public int CompareTo(AchievementCategory other)
-        {
-            return ID.CompareTo(other);
-        }
-
-        public bool Equals(AchievementCategory other)
-        {
-            return ID == other?.ID;
-        }
-
-        public static List<AchievementCategory> GetAll(SqliteConnection connection)
-        {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"WITH CTE_AchievementCategory(ID, ParentID, Location, LocationPath) AS (
@@ -106,9 +57,9 @@ namespace DbManager
             return categories;
         }
 
-        public static List<AchievementCategory> GetWithParent(SqliteConnection connection, AchievementCategory parent)
+        public List<AchievementCategory> GetWithParent(AchievementCategory parent)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
 
             var cmd = connection.CreateCommand();
             if (parent != null)
@@ -127,23 +78,23 @@ namespace DbManager
             return categories;
         }
 
-        public static AchievementCategory GetLast(SqliteConnection connection)
+        public AchievementCategory GetLast()
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue, ParentID FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID ORDER BY AC.ID DESC LIMIT 1";
 
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    return new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(3), reader.GetString(4)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), reader.IsDBNull(6) ? null : GetAll(connection).Find(c => c.ID == reader.GetInt32(6)));
+                    return new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(3), reader.GetString(4)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), reader.IsDBNull(6) ? null : GetAll().Find(c => c.ID == reader.GetInt32(6)));
 
             return null;
         }
 
-        public static void Add(SqliteConnection connection, AchievementCategory category)
+        public void Add(AchievementCategory category)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var sb = new StringBuilder();
@@ -158,14 +109,14 @@ namespace DbManager
             cmd.Parameters.AddWithValue("@ParentID", category.Parent == null ? DBNull.Value : category.Parent.ID);
             cmd.Parameters.AddWithValue("@FunctionID", category.Function.ID);
             cmd.Parameters.AddWithValue("@FunctionValue", category.FunctionValue == -1 ? DBNull.Value : category.FunctionValue);
-            cmd.Parameters.AddWithValue("@ID", GetLast(connection).ID);
+            cmd.Parameters.AddWithValue("@ID", GetLast().ID);
 
             cmd.ExecuteNonQuery();
         }
 
-        public static void UpdateLocations(SqliteConnection connection, AchievementCategory selectedCategory, List<AchievementCategory> categories)
+        public void UpdateLocations(AchievementCategory selectedCategory, List<AchievementCategory> categories)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
             _ = categories ?? throw new ArgumentNullException(nameof(categories));
 
@@ -182,9 +133,9 @@ namespace DbManager
                 }
         }
 
-        public static void UpdateParent(SqliteConnection connection, AchievementCategory category, AchievementCategory parent, int location)
+        public void UpdateParent(AchievementCategory category, AchievementCategory parent, int location)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             category.Parent = parent;
@@ -205,9 +156,9 @@ namespace DbManager
             cmd.ExecuteNonQuery();
         }
 
-        public static void Remove(SqliteConnection connection, AchievementCategory category)
+        public void Remove(AchievementCategory category)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var sb = new StringBuilder();
@@ -222,9 +173,9 @@ namespace DbManager
             cmd.ExecuteNonQuery();
         }
 
-        public static void Swap(SqliteConnection connection, AchievementCategory category1, AchievementCategory category2)
+        public void Swap(AchievementCategory category1, AchievementCategory category2)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category1 ?? throw new ArgumentNullException(nameof(category1));
             _ = category2 ?? throw new ArgumentNullException(nameof(category2));
 

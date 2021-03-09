@@ -1,4 +1,4 @@
-﻿namespace DbManager
+﻿namespace DbManager.Objects
 {
     public enum Covenant
     {

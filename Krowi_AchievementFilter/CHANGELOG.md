@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.14.0]
+## [9.0.5.14.0] - 2021-03-10
 ### Added
 - Legion Pet Battles (with external links) (25 achievements)
 - Legion Legion Class Hall (38 achievements)
@@ -181,7 +181,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.0.5.14.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.5.14.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3234117
 [9.0.2.13.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3215749
 [9.0.2.12.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3205404
 [9.0.2.11.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3193640

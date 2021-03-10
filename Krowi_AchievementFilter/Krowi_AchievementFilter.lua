@@ -63,20 +63,6 @@ function loadHelper:OnEvent(event, arg1)
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
 
-function addon.GetAchievement(id)
-    addon.Diagnostics.Trace("addon.GetAchievement");
-
-	for _, achievement in next, addon.Achievements do
-		if achievement.ID == id then
-			return achievement;
-		end
-	end
-end
-
-function addon.InjectMetatable(tbl, meta)
-    return setmetatable(tbl, setmetatable(meta, getmetatable(tbl)));
-end
-
 -- local f = CreateFrame("Frame", nil, UIParent)
 -- f:SetAllPoints();
 -- f:SetPoint("CENTER")

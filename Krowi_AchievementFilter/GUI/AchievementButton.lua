@@ -103,9 +103,9 @@ local function OnClickRightButton(self, anchor, offsetX, offsetY)
 		rightClickMenu:AddFull({Text = "IAT Tactics", Func = function() IAT_DisplayAchievement(achievement.ID); end});
 	end
 
-	-- Extra menu defined at the achievement self
-	if achievement.RCMenExtra ~= nil then
-		rightClickMenu:Add(achievement.RCMenExtra);
+	-- Extra menu defined at the achievement self including pet battles
+	if addon.RCMenuExtras[achievement.ID] ~= nil then
+		rightClickMenu:Add(addon.RCMenuExtras[achievement.ID]);
 	end
 
 	rightClickMenu:Open(anchor, offsetX, offsetY);

@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using DbManager.Objects;
+using System.Windows.Forms;
 
-namespace DbManager
+namespace DbManager.GUI
 {
     public class AchievementCategoryTreeNode : TreeNode
     {

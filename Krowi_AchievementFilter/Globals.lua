@@ -7,7 +7,7 @@ AF_COLOR_YELLOW = "|cFFFFD100";
 AF_COLOR_GREEN = "|cFF00FF00";
 AF_COLOR_END = "|r";
 
-AF_TAB = "|T:1:4|t";
+AF_TAB = "|T:1:8|t";
 
 AF_NAME = GetAddOnMetadata(addonName, "Title");
 AF_BUILD = GetBuildInfo();
@@ -28,4 +28,18 @@ function addon.ReplaceVars(str, vars)
         function(whole,i)
             return vars[i] or whole
         end));
+end
+
+function addon.GetAchievement(id)
+    addon.Diagnostics.Trace("addon.GetAchievement");
+
+	for _, achievement in next, addon.Achievements do
+		if achievement.ID == id then
+			return achievement;
+		end
+	end
+end
+
+function addon.InjectMetatable(tbl, meta)
+    return setmetatable(tbl, setmetatable(meta, getmetatable(tbl)));
 end

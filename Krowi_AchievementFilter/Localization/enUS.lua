@@ -1,49 +1,35 @@
+-- [[ Namespaces ]] --
 local addonName, addon = ...;
-
 local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "enUS", true, true);
 
+-- Load strings into the localization that are already localized by Blizzard
+addon.GlobalStrings.Load(L);
+
 -- Misc.
-L["WOWHEAD"] = "Wowhead";
-L["XUFU"] = "Xu-Fu's Pet Guides";
-L["IAT"] = "Instance Achievement Tracker";
-L["INSTALLED"] = "Installed";
-L["NOT INSTALLED"] = "Not installed";
+L["Wowhead"] = "Wowhead";
+L["Xu-Fu's Pet Guides"] = "Xu-Fu's Pet Guides";
+L["Instance Achievement Tracker"] = "Instance Achievement Tracker";
+L["Installed"] = "Installed";
+L["Not installed"] = "Not installed";
 
 -- Tab
 L["T_TAB_TEXT"] = "Achievement Filter";
 
 -- Categories
-L["C_ZONES"] = "Zones";
-L["C_SCENARIOS"] = "Scenarios";
-L["C_NO_FACTION"] = "No Faction";
+L["Zones"] = "Zones";
+L["Class Hall"] = "Class Hall";
 
 -- Filters
-L["Completed"] = "Completed";
-L["Not Completed"] = "Not Completed";
 L["Obtainable"] = "Obtainable";
 L["Not Obtainable"] = "Not Obtainable";
-L["Faction"] = "Faction";
 L["Covenant"] = "Covenant";
-L["Neutral"] = "Neutral";
-L["Alliance"] = "Alliance";
-L["Horde"] = "Horde";
-L["Kyrian"] = C_Covenants.GetCovenantData(1).name;
-L["Venthyr"] = C_Covenants.GetCovenantData(2).name;
-L["Night Fae"] = C_Covenants.GetCovenantData(3).name;
-L["Necrolord"] = C_Covenants.GetCovenantData(4).name;
 L["Select all"] = "Select all";
-L["Sort By"] = "Sort By";
-L["Default"] = "Default";
-L["Name"] = "Name";
 L["Reverse Sort"] = "Reverse Sort";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
-L["O_INFO"] = "Info";
-L["O_VERSION"] = "Version";
-L["O_BUILD"] = "Build";
-L["O_AUTHOR"] = "Author";
-L["O_ICON"] = "Icon";
+L["Build"] = "Build";
+L["Author"] = "Author";
 L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
 L["O_LAYOUT"] = "Layout";
@@ -115,16 +101,20 @@ L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previo
 L["FT_FILTER_TITLE"] = "Enhanced filtering and sorting";
 L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with only the option to select All, Earned or Incomplete achievements. Here it's enhanced with\n\n" ..
                         "Filtering (multiple filters can be selected at the same time):\n" ..
-                        "- {completed}: Show completed achievements\n" ..
-                        "- {notCompleted}: Show not completed achievements\n" ..
-                        "- {obtainable}: Show obtainable achievements\n" ..
-                        "- {notObtainable}: Show not obtainable achievements\n" ..
-                        "- {faction}\n" ..
-                        AF_TAB .. "- {neutral}: Show achievements that both Alliance and Horde can earn\n" ..
-                        AF_TAB .. "- {alliance}: Show achievements only Alliance can earn\n" ..
-                        AF_TAB .. "- {horde}: Show achievements only Horde can earn\n\n" ..
+                        AF_TAB .. "- {completed}: Show completed achievements\n" ..
+                        AF_TAB .. "- {notCompleted}: Show not completed achievements\n" ..
+                        AF_TAB .. "- {obtainable}: Show obtainable achievements\n" ..
+                        AF_TAB .. "- {notObtainable}: Show not obtainable achievements\n" ..
+                        AF_TAB .. "- {faction}\n" ..
+                        AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that both Alliance and Horde can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {alliance}: Show achievements only Alliance can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {horde}: Show achievements only Horde can earn\n\n" ..
                         "Sorting:\n" ..
-                        "- {noSorting}: No sorting applied\n" ..
-                        "- {sortByName}: Sort achievements based on their names\n" ..
-                        "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
+                        AF_TAB .. "- {noSorting}: No sorting applied\n" ..
+                        AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..
+                        AF_TAB .. "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
                         "More filter and sorting options will be added in later versions. Requests possible.";
+
+-- NPC Names
+L["Andurs"] = "Andurs"; -- Wowhead npc=105387
+L["Rydyr"] = "Rydyr"; -- Wowhead npc=105386

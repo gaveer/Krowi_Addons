@@ -17,7 +17,7 @@ function achievement:New(id, faction, covenant, obtainable, hasWowheadLink, --[[
     if obtainable == false then -- We only want to set it if it's not obtainable, otherwise nil
         self.NotObtainable = true; -- By inverting this we reduce memory usage because 99% is obtainable
     end
-    if hasWowheadLink == false then -- We only want to set it if it's not obtainable, otherwise nil
+    if hasWowheadLink == false then -- We only want to set it if it has no Wowhead link, otherwise nil
         self.HasNoWowheadLink = true; -- By inverting this we reduce memory usage because 99% has a Wowhead link
     end
     -- self.HasIATLink = hasIATLink;

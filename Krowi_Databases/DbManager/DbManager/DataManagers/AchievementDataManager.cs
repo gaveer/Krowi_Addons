@@ -1,37 +1,23 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using DbManager.Objects;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DbManager
+namespace DbManager.DataManagers
 {
-    public class Achievement
+    public class AchievementDataManager
     {
-        public int ID { get; set; }
-        public Faction Faction { get; set; }
-        public Covenant Covenant { get; set; }
-        public int Location { get; set; }
-        public bool Obtainable { get; set; }
-        public bool HasWowheadLink { get; set; }
+        private SqliteConnection connection;
 
-        public Achievement(int id, Faction faction, Covenant covenant, int location, bool obtainable = true, bool hasWowheadLink = true)
+        public AchievementDataManager(SqliteConnection connection)
         {
-            ID = id;
-            Faction = faction;
-            Covenant = covenant;
-            Location = location;
-            Obtainable = obtainable;
-            HasWowheadLink = hasWowheadLink;
+            this.connection = connection;
         }
 
-        public override string ToString()
+        public List<Achievement> GetWithCategory(AchievementCategory category)
         {
-            return $"{ID} - {Enum.GetName(typeof(Faction), Faction)}{(Covenant != Covenant.NoCovenant ? $" - {Covenant}" : "")}{(Obtainable ? " - Obtainable" : "")}{(HasWowheadLink ? " - Wowhead" : "")}";
-        }
-
-        public static List<Achievement> GetWithCategory(SqliteConnection connection, AchievementCategory category)
-        {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
@@ -47,10 +33,10 @@ namespace DbManager
                                         ON A.ID = ACA.AchievementID
 									LEFT JOIN AchievementCovenant AC
 										ON A.ID = AC.AchievementID
-                                    WHERE
-                                        ACA.CategoryID = @Category
-                                    ORDER BY
-                                        ACA.Location ASC;";
+                                WHERE
+                                    ACA.CategoryID = @Category
+                                ORDER BY
+                                    ACA.Location ASC;";
             cmd.Parameters.AddWithValue("@Category", category.ID);
 
             var achievements = new List<Achievement>();
@@ -64,9 +50,42 @@ namespace DbManager
             return achievements;
         }
 
-        public static void Add(SqliteConnection connection, Achievement achievement, AchievementCategory category)
+        public Achievement GetWithID(int ID)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+                                    A.ID, ACA.Location, ANO.ID, AHNWL.ID, A.Faction, AC.CovenantID
+                                FROM
+                                    Achievement A
+                                    LEFT JOIN AchievementNotObtainable ANO
+                                        ON A.ID = ANO.ID
+                                    LEFT JOIN AchievementHasNoWowheadLink AHNWL
+                                        ON A.ID = AHNWL.ID
+                                    LEFT JOIN AchievementCategoryAchievement ACA
+                                        ON A.ID = ACA.AchievementID
+									LEFT JOIN AchievementCovenant AC
+										ON A.ID = AC.AchievementID
+                                WHERE
+                                        A.ID = @ID
+                                LIMIT 1;";
+            cmd.Parameters.AddWithValue("@ID", ID);
+
+            Achievement achievement = null;
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                {
+                    Covenant covenant = reader.IsDBNull(5) ? Covenant.NoCovenant : (Covenant)reader.GetInt32(5);
+                    achievement = new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(4), covenant, reader.GetInt32(1), reader.IsDBNull(2), reader.IsDBNull(3));
+                }
+
+            return achievement;
+        }
+
+        public void Add(Achievement achievement, AchievementCategory category)
+        {
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
@@ -91,12 +110,12 @@ namespace DbManager
             cmd.ExecuteNonQuery();
         }
 
-        public static void Remove(SqliteConnection connection, Achievement achievement, AchievementCategory category)
+        public void Remove(Achievement achievement, AchievementCategory category)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
 
-            var isDuplicate = FindDuplicateIDs(connection).Contains(achievement.ID);
+            var isDuplicate = FindDuplicateIDs().Contains(achievement.ID);
 
             var sb = new StringBuilder();
             if (!isDuplicate)
@@ -120,9 +139,9 @@ namespace DbManager
             cmd.ExecuteNonQuery();
         }
 
-        public static void UpdateLocations(SqliteConnection connection, Achievement selectedAchievement, List<Achievement> achievements)
+        public void UpdateLocations(Achievement selectedAchievement, List<Achievement> achievements)
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = selectedAchievement ?? throw new ArgumentNullException(nameof(selectedAchievement));
             _ = achievements ?? throw new ArgumentNullException(nameof(achievements));
 
@@ -139,9 +158,9 @@ namespace DbManager
                 }
         }
 
-        public static List<int> FindDuplicateIDs(SqliteConnection connection)
+        public List<int> FindDuplicateIDs()
         {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT AchievementID, COUNT(*) C FROM AchievementCategoryAchievement GROUP BY AchievementID HAVING C > 1";
@@ -152,6 +171,24 @@ namespace DbManager
                     IDs.Add(reader.GetInt32(0));
 
             return IDs;
+        }
+
+        public void Swap(Achievement achievement1, Achievement achievement2, AchievementCategory category)
+        {
+            _ = connection ?? throw new NullReferenceException(nameof(connection));
+            _ = achievement1 ?? throw new ArgumentNullException(nameof(achievement1));
+            _ = achievement2 ?? throw new ArgumentNullException(nameof(achievement2));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"UPDATE AchievementCategoryAchievement SET Location = @Location1 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID1;
+                                UPDATE AchievementCategoryAchievement SET Location = @Location2 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID2;";
+            cmd.Parameters.AddWithValue("@Location1", achievement2.Location);
+            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+            cmd.Parameters.AddWithValue("@AchievementID1", achievement1.ID);
+            cmd.Parameters.AddWithValue("@Location2", achievement1.Location);
+            cmd.Parameters.AddWithValue("@AchievementID2", achievement2.ID);
+
+            cmd.ExecuteNonQuery();
         }
     }
 }

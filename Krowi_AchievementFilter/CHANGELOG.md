@@ -3,7 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.15.0] - 
 ### Added
-- TBD
+- Warlords of Draenor Garrison (151 achievements)
+- Missing Legion Legion Class Hall (1 achievement)
+- Current Zone category (for now always visible and need to close/open the window or select the category again in order to refresh)
+<!-- - All Shadowlands achievements should have zone data except for Pet Battles -->
+- All Battle for Azeroth achievements should have zone data except for Pet Battles
+- Filter to collapse a series of achievements so only the last completed and first not completed are visible
+
+### Changed
+- Battle for Azeroth Island Expeditions are now split per Island Expeditions
+- Battle for Azeroth War Effort are now split per War Effort
 
 ## [9.0.5.14.0] - 2021-03-10
 ### Added

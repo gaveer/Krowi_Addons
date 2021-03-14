@@ -92,6 +92,10 @@ local function GetFilteredAchievements(self, category)
 	diagnostics.Trace("GetFilteredAchievements");
 
 	local achievements = {};
+	-- Some special code to refresh the current zone achievements
+	if category == addon.CurrentZoneCategory then
+		addon.Data.GetCurrentZoneAchievements();
+	end
 	if category.Achievements ~= nil then
 		-- Filter achievements
 		for _, achievement in next, category.Achievements do
@@ -102,7 +106,7 @@ local function GetFilteredAchievements(self, category)
 
 		-- Sort achievements
 		if addon.Options.db.Filters.SortBy.Criteria == addon.L["Default"] then
-			diagnostics.Debug("Sort By " .. addon.L["Default"]);
+			-- diagnostics.Debug("Sort By " .. addon.L["Default"]);
 			if addon.Options.db.Filters.SortBy.ReverseSort then
 				local tmpTbl = {};
 				for i = #achievements, 1, -1 do
@@ -111,7 +115,7 @@ local function GetFilteredAchievements(self, category)
 				achievements = tmpTbl;
 			end
 		elseif addon.Options.db.Filters.SortBy.Criteria == addon.L["Name"] then
-			diagnostics.Debug("Sort By " .. addon.L["Name"]);
+			-- diagnostics.Debug("Sort By " .. addon.L["Name"]);
 			table.sort(achievements, function(a, b)
 				local _, nameA = GetAchievementInfo(a.ID);
 				local _, nameB = GetAchievementInfo(b.ID);
@@ -127,19 +131,23 @@ local function GetFilteredAchievements(self, category)
 	return achievements;
 end
 
+local cachedCategory, cachedAchievements; -- Caching this speeds up the scrolling of achievements when the selected category isn't changed
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
-	local category = self.CategoriesFrame.SelectedCategory;
+	local categoryChanged = cachedCategory ~= self.CategoriesFrame.SelectedCategory;
+	cachedCategory = self.CategoriesFrame.SelectedCategory;
 	local scrollFrame = self.Container;
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
-	local achievements = GetFilteredAchievements(self, category);
+	if categoryChanged or self.CategoriesFrame.SelectedCategory.HasFlexibleData then
+		cachedAchievements = GetFilteredAchievements(self, cachedCategory);
+	end
 	local numButtons = #buttons;
 
-	local selection = self.SelectedAchievement;
-	if selection then
+	-- local selection = self.SelectedAchievement;
+	if self.SelectedAchievement then
 		AchievementFrameAchievementsObjectives:Hide();
 	end
 
@@ -149,22 +157,23 @@ function achievementsFrame:Update()
 	local displayedHeight = 0;
 	for i = 1, numButtons do
 		achievementIndex = i + offset;
-		if achievementIndex > #achievements then
+		if achievementIndex > #cachedAchievements then
 			buttons[i]:Hide();
 		else
-			self:DisplayAchievement(buttons[i], achievements[achievementIndex], achievementIndex, selection);
+			self:DisplayAchievement(buttons[i], cachedAchievements[achievementIndex], achievementIndex, self.SelectedAchievement);
 			displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		end
 	end
 
-	local totalHeight = #achievements * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	local totalHeight = #cachedAchievements * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
 	totalHeight = totalHeight + extraHeight - ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
 
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 
-	if selection then
-		self.SelectedAchievement = selection;
-	else
+	-- if selection then
+	-- 	self.SelectedAchievement = selection;
+	-- else
+	if not self.SelectedAchievement then
 		HybridScrollFrame_CollapseButton(scrollFrame);
 	end
 end
@@ -180,14 +189,11 @@ function achievementsFrame:ForceUpdate(toTop) -- Issue #3: Fix
 		self.Container.ScrollBar:SetValue(0);
 	end
 
-	-- Issue #8: Broken
-	if self.SelectedAchievement then
-		local nextID = GetNextAchievement(self.SelectedAchievement.ID);
-		local id, _, _, completed = GetAchievementInfo(self.SelectedAchievement.ID);
-		if nextID and completed then
-			self.SelectedAchievement = nil;
-		end
+	if self.FilterButton then
+		self.SelectedAchievement = self.FilterButton:GetHighestAchievementWhenCollapseSeries(self.SelectedAchievement);
 	end
+
+	-- Issue #8: Broken
 	AchievementFrameAchievementsObjectives:Hide();
 	AchievementFrameAchievementsObjectives.id = nil;
 
@@ -195,6 +201,10 @@ function achievementsFrame:ForceUpdate(toTop) -- Issue #3: Fix
 	for _, button in next, buttons do
 		button.id = nil;
 	end
+
+	-- Clear the cache
+	cachedCategory = nil;
+	cachedAchievements = nil;
 
 	self:Update();
 end
@@ -382,8 +392,11 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 
 	AchievementButton_UpdatePlusMinusTexture(button);
 
+	-- if selection then
+	-- 	diagnostics.Debug(tostring(selection.ID) .. " - " .. tostring(id) .. " - " .. tostring(button.selected) .. " - " .. tostring(not button:IsMouseOver()));
+	-- end
 	if selection and id == selection.ID then
-		self.SelectedAchievement = achievement;
+		-- self.SelectedAchievement = achievement;
 		button.selected = true;
 		button.highlight:Show();
 		local height = AchievementButton_DisplayObjectives(button, button.id, button.completed, renderOffScreen);
@@ -397,7 +410,7 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 		end
 	elseif button.selected then
 		button.selected = nil;
-		if not button:IsMouseOver() then
+		if not button:IsMouseOver() then -- This causes the first 2 - 3 achievement to be highlighted when changing the filter if the mouse is over one of the achievements
 			button.highlight:Hide();
 		end
 		button:Collapse();
@@ -417,6 +430,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 	end
 
 	if self.FilterButton then
+		achievement = self.FilterButton:GetHighestAchievementWhenCollapseSeries(achievement);
 		self.FilterButton:SetFilters(achievement);
 	end
 

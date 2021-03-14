@@ -16,6 +16,7 @@ L["Not installed"] = "Not installed";
 L["T_TAB_TEXT"] = "Achievement Filter";
 
 -- Categories
+L["Current Zone"] = "Current Zone";
 L["Zones"] = "Zones";
 L["Class Hall"] = "Class Hall";
 
@@ -25,6 +26,7 @@ L["Not Obtainable"] = "Not Obtainable";
 L["Covenant"] = "Covenant";
 L["Select all"] = "Select all";
 L["Reverse Sort"] = "Reverse Sort";
+L["Collapse Series"] = "Collapse Series";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;

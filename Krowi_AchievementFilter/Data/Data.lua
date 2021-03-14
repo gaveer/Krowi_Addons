@@ -4,15 +4,26 @@ local diagnostics = addon.Diagnostics;
 addon.Data = {};
 local data = addon.Data;
 addon.Categories = {};
+addon.CurrentZoneCategory = {};
 addon.Achievements = {};
 addon.RCMenuExtras = {};
 
 function data.Load()
-    addon.ExportedData.Load(addon.Categories, addon.Achievements);
+    addon.CurrentZoneCategory = addon.ExportedData.Load(addon.Categories, addon.Achievements);
     addon.ExportedPetBattles.Load(addon.RCMenuExtras);
+    -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsWithZone(C_Map.GetBestMapForUnit("player"));
 
     -- TEST = {};
     -- data.PrintCriteria(14881, nil, 0);
+end
+
+local cachedZone;
+function data.GetCurrentZoneAchievements()
+	diagnostics.Trace("data.GetCurrentZoneAchievements");
+    if cachedZone ~= C_Map.GetBestMapForUnit("player") then
+        cachedZone = C_Map.GetBestMapForUnit("player");
+        addon.CurrentZoneCategory.Achievements = addon.GetAchievementsWithZone(cachedZone);
+    end
 end
 
 -- local function ConvertToAchievementFrameCategory(datum, categories, achievements)

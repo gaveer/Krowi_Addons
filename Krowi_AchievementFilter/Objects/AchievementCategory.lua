@@ -7,20 +7,21 @@ local category = objects.AchievementCategory; -- Locally we can use just categor
 
 -- [[ Constructors ]] --
 category.__index = category;
-function category:New(name) -- Creates a new achievement category
+function category:New(name, mapIDs) -- Creates a new achievement category
     local self = {};
     setmetatable(self, category);
 
     self.Name = name or "Unknown";
+    self.MapIDs = mapIDs or {};
     self.Level = 0;
     self.NotHidden = true;
 
     return self;
 end
 
-function category:NewCatInfo(id) -- Creates a new achievement category with the title from GetCategoryInfo(id) as name
-    return category:New(GetCategoryInfo(id));
-end
+-- function category:NewCatInfo(id) -- Creates a new achievement category with the title from GetCategoryInfo(id) as name
+--     return category:New(GetCategoryInfo(id));
+-- end
 
 -- [[ Methods ]] --
 function category:AddCategory(cat) -- Adds a child achievement category to the achievement category

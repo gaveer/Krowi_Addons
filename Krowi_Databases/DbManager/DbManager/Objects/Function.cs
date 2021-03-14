@@ -6,7 +6,7 @@
         public string Call { get; set; }
         public string Description { get; set; }
 
-        public Function(int id, string call, string description = null)
+        public Function(int id, string call, string description)
         {
             ID = id;
             Call = call;

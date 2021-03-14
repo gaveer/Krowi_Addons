@@ -19,6 +19,9 @@ addon.Faction.IsNeutral = UnitFactionGroup("player") == "Neutral";
 local loadHelper = CreateFrame("Frame");
 loadHelper:RegisterEvent("ADDON_LOADED");
 loadHelper:RegisterEvent("PLAYER_LOGIN");
+-- loadHelper:RegisterEvent("ZONE_CHANGED");
+-- loadHelper:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+loadHelper:RegisterEvent("UNIT_AREA_CHANGED");
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then
@@ -59,6 +62,21 @@ function loadHelper:OnEvent(event, arg1)
         end
     elseif event == "PLAYER_LOGIN" then
         addon.Options.SetFilters();
+
+        if addon.Diagnostics.DebugEnabled then
+            hooksecurefunc(WorldMapFrame, "OnMapChanged", function() 
+                local mapID = WorldMapFrame.mapID;
+                print(mapID);
+            end);
+        end
+    -- elseif event == "ZONE_CHANGED" then
+    --     addon.Diagnostics.Debug("ZONE_CHANGED");
+    -- elseif event == "ZONE_CHANGED_NEW_AREA" then
+    --     addon.Diagnostics.Debug("ZONE_CHANGED_NEW_AREA");
+    -- elseif event == "UNIT_AREA_CHANGED" then
+    --     addon.Diagnostics.Debug("UNIT_AREA_CHANGED");
+
+        -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsWithZone(C_Map.GetBestMapForUnit("player"));
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

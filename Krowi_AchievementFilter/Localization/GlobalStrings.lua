@@ -6,6 +6,7 @@ local globalStrings = addon.GlobalStrings;
 function globalStrings.Load(L)
     -- Categories
     L["Scenarios"] = SCENARIOS;
+    L["Garrison"] = GARRISON_LOCATION_TOOLTIP;
 
     -- Filters
     L["Completed"] = CRITERIA_COMPLETED;

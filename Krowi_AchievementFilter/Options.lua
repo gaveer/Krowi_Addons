@@ -40,6 +40,7 @@ local defaults = {
                 NightFae = false,
                 Necrolord = false
             },
+            CollapseSeries = false,
             SortBy = {
                 Criteria = addon.L["Default"],
                 ReverseSort = false

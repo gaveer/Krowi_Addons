@@ -40,6 +40,25 @@ function addon.GetAchievement(id)
 	end
 end
 
+function addon.GetAchievementsWithZone(mapID)
+    addon.Diagnostics.Trace("addon.GetAchievementsWithZone");
+
+    local achievements = {};
+	for _, category in next, addon.Categories do
+        for _, catMapID in next, category.MapIDs do
+            if catMapID == mapID then
+                if category.Achievements ~= nil then
+                    for _, achievement in next, category.Achievements do
+                        tinsert(achievements, achievement);
+                    end
+                end
+                break;
+            end
+        end
+	end
+    return achievements;
+end
+
 function addon.InjectMetatable(tbl, meta)
     return setmetatable(tbl, setmetatable(meta, getmetatable(tbl)));
 end

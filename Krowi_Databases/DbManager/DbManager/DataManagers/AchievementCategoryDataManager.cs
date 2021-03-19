@@ -62,7 +62,7 @@ namespace DbManager.DataManagers
             _ = connection ?? throw new NullReferenceException(nameof(connection));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT UIMapID FROM AchievementCategoryUIMap WHERE AchievementCategoryID == @AchievementCategoryID";
+            cmd.CommandText = "SELECT UIMapID FROM AchievementCategoryUIMap WHERE AchievementCategoryID == @AchievementCategoryID ORDER BY UIMapID";
             cmd.Parameters.AddWithValue("@AchievementCategoryID", category.ID);
 
             var mapIDs = new List<int>();

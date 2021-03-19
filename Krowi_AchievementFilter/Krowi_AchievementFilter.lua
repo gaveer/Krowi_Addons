@@ -21,7 +21,7 @@ loadHelper:RegisterEvent("ADDON_LOADED");
 loadHelper:RegisterEvent("PLAYER_LOGIN");
 -- loadHelper:RegisterEvent("ZONE_CHANGED");
 -- loadHelper:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-loadHelper:RegisterEvent("UNIT_AREA_CHANGED");
+-- loadHelper:RegisterEvent("UNIT_AREA_CHANGED");
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then
@@ -64,7 +64,7 @@ function loadHelper:OnEvent(event, arg1)
         addon.Options.SetFilters();
 
         if addon.Diagnostics.DebugEnabled then
-            hooksecurefunc(WorldMapFrame, "OnMapChanged", function() 
+            hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
                 local mapID = WorldMapFrame.mapID;
                 print(mapID);
             end);

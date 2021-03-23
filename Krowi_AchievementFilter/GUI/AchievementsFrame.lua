@@ -92,10 +92,6 @@ local function GetFilteredAchievements(self, category)
 	diagnostics.Trace("GetFilteredAchievements");
 
 	local achievements = {};
-	-- Some special code to refresh the current zone achievements
-	if category == addon.CurrentZoneCategory then
-		addon.Data.GetCurrentZoneAchievements();
-	end
 	if category.Achievements ~= nil then
 		-- Filter achievements
 		for _, achievement in next, category.Achievements do
@@ -141,7 +137,13 @@ function achievementsFrame:Update()
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
-	if categoryChanged or self.CategoriesFrame.SelectedCategory.HasFlexibleData then
+	local zoneChanged;
+	if self.CategoriesFrame.SelectedCategory.HasFlexibleData then
+		-- if cachedCategory == addon.CurrentZoneCategory then
+			zoneChanged = addon.Data.GetCurrentZoneAchievements();
+		-- end
+	end
+	if categoryChanged or zoneChanged then
 		cachedAchievements = GetFilteredAchievements(self, cachedCategory);
 	end
 	local numButtons = #buttons;

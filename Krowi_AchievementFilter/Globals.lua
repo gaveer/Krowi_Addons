@@ -43,9 +43,20 @@ end
 function addon.GetAchievementsWithZone(mapID)
     addon.Diagnostics.Trace("addon.GetAchievementsWithZone");
 
+    -- Maybe add a recursive feature to check parent categories for zone IDs
     local achievements = {};
 	for _, category in next, addon.Categories do
-        for _, catMapID in next, category.MapIDs do
+        local mapIDs = {};
+        local categoryTree = category:GetTree();
+        for _, cat in next, categoryTree do
+            if cat.MapIDs ~= nil then
+                for _, catMapID in next, cat.MapIDs do
+                    tinsert(mapIDs, catMapID);
+                end
+            end
+        end
+
+        for _, catMapID in next, mapIDs do
             if catMapID == mapID then
                 if category.Achievements ~= nil then
                     for _, achievement in next, category.Achievements do

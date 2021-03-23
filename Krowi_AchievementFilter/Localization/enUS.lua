@@ -108,9 +108,16 @@ L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with
                         AF_TAB .. "- {obtainable}: Show obtainable achievements\n" ..
                         AF_TAB .. "- {notObtainable}: Show not obtainable achievements\n" ..
                         AF_TAB .. "- {faction}\n" ..
-                        AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that both Alliance and Horde can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {alliance}: Show achievements only Alliance can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {horde}: Show achievements only Horde can earn\n\n" ..
+                        AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that both {alliance_wc} and {horde_wc} can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {alliance}: Show achievements only {alliance_wc} can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {horde}: Show achievements only {horde_wc} can earn\n" ..
+                        AF_TAB .. "- {covenant}\n" ..
+                        AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that all covenants can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {kyrian}: Show achievements only {kyrian_wc} can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {venthyr}: Show achievements only {venthyr_wc} can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {nightfae}: Show achievements only {nightfae_wc} can earn\n" ..
+                        AF_TAB .. AF_TAB .. "- {necrolord}: Show achievements only {necrolord_wc} can earn\n" ..
+                        AF_TAB .. "- {collapseseries}: Show only the last completed and first not completed achievement in a series\n\n" ..
                         "Sorting:\n" ..
                         AF_TAB .. "- {noSorting}: No sorting applied\n" ..
                         AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..

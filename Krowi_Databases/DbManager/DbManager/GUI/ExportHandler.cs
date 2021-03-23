@@ -76,7 +76,7 @@ namespace DbManager.GUI
                 foreach (var achievement in achievements)
                 {
                     var covenant = achievement.Covenant == Covenant.NoCovenant ? "nil" : $"covenant.{achievement.Covenant}";
-                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {covenant}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
+                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {covenant}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {/*(duplicates.Any(x => x == achievement.ID) ? */$"tmpCategories[{category.ID}]"/* : "nil")*/})));"); // {(achievement.HasIATLink ? "true" : "nil")}
 
                     // new
                     //sb.AppendTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:NewFromTable{{id = {achievement.ID}");

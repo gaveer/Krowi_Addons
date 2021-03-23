@@ -20,9 +20,11 @@ end
 local cachedZone;
 function data.GetCurrentZoneAchievements()
 	diagnostics.Trace("data.GetCurrentZoneAchievements");
+
     if cachedZone ~= C_Map.GetBestMapForUnit("player") then
         cachedZone = C_Map.GetBestMapForUnit("player");
         addon.CurrentZoneCategory.Achievements = addon.GetAchievementsWithZone(cachedZone);
+        return true; -- Output that the zone has changed
     end
 end
 

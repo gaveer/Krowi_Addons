@@ -60,15 +60,23 @@ namespace DbManager.GUI
             var categories = achCatDatMan.GetAll();
             foreach (var category in categories)
             {
-                sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New({category.Function.Call.Replace("id", category.FunctionValue.ToString())}{(category.IsLegacy ? $" .. \" (\" .. {funDatMan.GetLegacyFunction().Call} .. \")\"" : "")})); -- {category.Name}");
+                var mapIDs = achCatDatMan.GetMapIDs(category);
+
+                sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New({category.Function.Call.Replace("id", category.FunctionValue.ToString())}{(category.IsLegacy ? $" .. \" (\" .. {funDatMan.GetLegacyFunction().Call} .. \")\"" : "")}, {(mapIDs.Any() ? $"{{{string.Join(", ", mapIDs)}}}" : "nil")})); -- {category.Name}");
                 if (category.Parent != null)
                     sb.AppendLineTabbed(1, $"tmpCategories[{category.Parent.ID}]:AddCategory(tmpCategories[{category.ID}]);");
+                if (category.Function.Description == "Current Zone")
+                {
+                    sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}].AlwaysVisible = true;");
+                    sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}].HasFlexibleData = true;");
+                    sb.AppendLineTabbed(1, $"local currentZoneCategory = tmpCategories[{category.ID}];");
+                }
 
                 var achievements = achDatMan.GetWithCategory(category);
                 foreach (var achievement in achievements)
                 {
                     var covenant = achievement.Covenant == Covenant.NoCovenant ? "nil" : $"covenant.{achievement.Covenant}";
-                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {covenant}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {(duplicates.Any(x => x == achievement.ID) ? $"tmpCategories[{category.ID}]" : "nil")})));"); // {(achievement.HasIATLink ? "true" : "nil")}
+                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {covenant}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {/*(duplicates.Any(x => x == achievement.ID) ? */$"tmpCategories[{category.ID}]"/* : "nil")*/})));"); // {(achievement.HasIATLink ? "true" : "nil")}
 
                     // new
                     //sb.AppendTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:NewFromTable{{id = {achievement.ID}");
@@ -102,6 +110,8 @@ namespace DbManager.GUI
                 }
             }
 
+            sb.AppendLine("");
+            sb.AppendLineTabbed(1, "return currentZoneCategory;");
             sb.AppendLine("end");
 
             using var file = new StreamWriter(@"../../../../../Krowi_AchievementFilter/Data/ExportedData.lua");

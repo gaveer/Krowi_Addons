@@ -26,7 +26,7 @@ namespace DbManager.GUI
 
             var functions = DataManager.GetAll();
 
-            lsbFunctions.Items.Add(new Function(-1, null)); // Empty Function
+            lsbFunctions.Items.Add(new Function(-1, null, null)); // Empty Function
             foreach (var function in functions)
                 lsbFunctions.Items.Add(function);
 

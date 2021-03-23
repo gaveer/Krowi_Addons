@@ -32,7 +32,7 @@ namespace DbManager
             connection.Open();
 
             functionHandler = new FunctionHandler(connection, lsbFunctions);
-            achievementCategoryHandler = new AchievementCategoryHandler(connection, tvwAchievementCategories, functionHandler);
+            achievementCategoryHandler = new AchievementCategoryHandler(connection, tvwAchievementCategories, txtMapIDs, functionHandler);
             achievementHandler = new AchievementHandler(connection, lsbAchievements, achievementCategoryHandler);
             xuFuEncounterHandler = new XuFuEncounterHandler(connection, btnGetXuFuIDs, pgbXuFu);
             achievementCriteriaHandler = new AchievementCriteriaHandler(connection, achievementHandler.DataManager, xuFuEncounterHandler.DataManager);
@@ -71,6 +71,10 @@ namespace DbManager
         private void TvwAchievementCategories_AfterSelect(object sender, TreeViewEventArgs e)
         {
             achievementHandler.RefreshListBox();
+
+            var category = achievementCategoryHandler.GetSelectedAchievementCategory();
+            category.MapIDs = achievementCategoryHandler.DataManager.GetMapIDs(category);
+            txtMapIDs.Text = string.Join(", ", category.MapIDs);
         }
 
         private void LsbFunctions_SelectedIndexChanged(object sender, EventArgs e)
@@ -112,7 +116,7 @@ namespace DbManager
         private void btnAchievementCategoryAdd_Click(object sender, EventArgs e)
         {
             var functionValue = string.IsNullOrEmpty(txtFunctionValue.Text) ? -1 : Convert.ToInt32(txtFunctionValue.Text);
-            achievementCategoryHandler.Add(cbxCategoryAsParent.Checked, txtCategoryName.Text, functionValue, cbxLegacyCategory.Checked);
+            achievementCategoryHandler.Add(cbxCategoryAsParent.Checked, txtCategoryName.Text, functionValue, cbxLegacyCategory.Checked, txtMapIDs.Text);
 
             cbxCategoryAsParent.Checked = false;
             txtCategoryName.Clear();
@@ -213,6 +217,11 @@ namespace DbManager
         private void BtnExportPetBattles_Click(object sender, EventArgs e)
         {
             exportHandler.ExportPetBattles();
+        }
+
+        private void BtnUpdateMapIDs_Click(object sender, EventArgs e)
+        {
+            achievementCategoryHandler.UpdateMapIDs(txtMapIDs.Text);
         }
     }
 }

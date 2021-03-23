@@ -40,6 +40,7 @@ local defaults = {
                 NightFae = false,
                 Necrolord = false
             },
+            CollapseSeries = true,
             SortBy = {
                 Criteria = addon.L["Default"],
                 ReverseSort = false
@@ -372,7 +373,7 @@ function options.Load()
 
     addon.GUI.ElvUISkin.Load();
 
-    -- add something to check if the options panel closes that we prompt for a reload
+    -- TODO: add something to check if the options panel closes that we prompt for a reload
     CreatePanel();
 
     diagnostics.Debug("- Options loaded");

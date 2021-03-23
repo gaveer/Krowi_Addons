@@ -13,8 +13,9 @@ namespace DbManager.Objects
         public Function Function { get; set; }
         public int FunctionValue { get; set; }
         public List<Achievement> Achievements { get; set; }
+        public List<int> MapIDs { get; set; }
 
-        public AchievementCategory(int id, int location, string name, Function function, int functionValue, AchievementCategory parent = null, bool isLegacy = false)
+        public AchievementCategory(int id, int location, string name, Function function, int functionValue, AchievementCategory parent = null, bool isLegacy = false, List<int> uiMapID = null)
         {
             ID = id;
             Location = location;
@@ -24,6 +25,7 @@ namespace DbManager.Objects
             Function = function;
             FunctionValue = functionValue;
             Achievements = new List<Achievement>();
+            MapIDs = uiMapID ?? new List<int>();
         }
 
         public string GetParentNames()

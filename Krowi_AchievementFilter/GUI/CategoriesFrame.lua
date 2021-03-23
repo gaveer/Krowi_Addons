@@ -32,7 +32,13 @@ function categoriesFrame:New(categories, achievementsFrame)
 
 	frame:RegisterEvent("ADDON_LOADED");
 
-	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
+	-- We need to insert the categories frame infront of the achievements frame
+	for i, frameName in next, ACHIEVEMENTFRAME_SUBFRAMES do
+		if frameName == frame.AchievementsFrame:GetName() then
+			tinsert(ACHIEVEMENTFRAME_SUBFRAMES, i, frame:GetName());
+			break;
+		end
+	end
 	frame:Hide();
 
 	frame.Container.ScrollBar.Show = function()
@@ -124,7 +130,7 @@ local function GetAchievementNumbers(self, category)
 
 	if category.Achievements ~= nil then
 		for _, achievement in next, category.Achievements do
-			if self.FilterButton and self.FilterButton:Validate(achievement) > 0 then
+			if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then
 				numOfAch = numOfAch + 1;
 				local _, _, _, completed = GetAchievementInfo(achievement.ID);
 				if completed then
@@ -165,12 +171,12 @@ function categoriesFrame:Update(getAchNums)
 
 	local displayCategories = {};
 	for _, category in next, self.Categories do
-		if category.NotHidden then -- If already visible, keep visible
-			if category.NumOfAch == nil or getAchNums then -- Huge increase over performance if we cache the achievement numbers and only update them when needed
-				if GetAchievementNumbers(self, category) > 0 then
+		if category.NotHidden or category.AlwaysVisible then -- If already visible, keep visible
+			if category.NumOfAch == nil or getAchNums or category.HasFlexibleData then -- Huge increase over performance if we cache the achievement numbers and only update them when needed
+				if GetAchievementNumbers(self, category) > 0 or category.AlwaysVisible then
 					tinsert(displayCategories, category);
 				end
-			elseif category.NumOfAch > 0 then
+			elseif category.NumOfAch > 0 or category.AlwaysVisible then
 				tinsert(displayCategories, category);
 			end
 			-- diagnostics.Debug("Showing " .. category.Name);
@@ -288,9 +294,10 @@ function categoriesFrame:SelectButton(button, quick)
 
 	button.Category.IsSelected = true; -- Issue #12: Fix
 
-	if button.Category == self.SelectedCategory then
-		-- If this category was selected already, bail after changing collapsed states
-		return
+	if button.Category == self.SelectedCategory and button.Category.HasFlexibleData ~= true then
+		-- If this category was selected already,
+		-- bail after changing collapsed states.
+		return;
 	end
 
 	self.SelectedCategory = button.Category; -- Issue #21: Broken, Fix

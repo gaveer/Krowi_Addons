@@ -150,6 +150,7 @@ function filterButton:OnMouseDown()
                                 self:UpdateAchievementFrame();
                             end
                         });
+
     rightClickMenu:Add(faction);
 
     local covenant = addon.Objects.MenuItem:New({Text = addon.L["Covenant"]});
@@ -223,6 +224,20 @@ function filterButton:OnMouseDown()
                             end
                         });
     rightClickMenu:Add(covenant);
+
+    rightClickMenu:AddFull({    Text = addon.L["Collapse Series"],
+                                Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
+                                    return addon.Options.db.Filters.CollapseSeries
+                                end,
+                                Func = function()
+                                    addon.Options.db.Filters.CollapseSeries = not addon.Options.db.Filters.CollapseSeries;
+                                    self:UpdateAchievementFrame();
+                                end,
+                                IsNotRadio = true,
+                                NotCheckable = false,
+                                KeepShownOnClick = true
+                            });
+
     rightClickMenu:AddSeparator();
 
     -- Sort By
@@ -270,7 +285,7 @@ function filterButton:OnMouseDown()
 	rightClickMenu:Toggle(self, 96, 15);
 end
 
-function filterButton:Validate(achievement)
+function filterButton:Validate(achievement, ignoreCollapseSeries)
     -- diagnostics.Trace("filterButton:Validate " .. tostring(achievement.ID)); -- Generates a lot of messages
 
 	local _, _, _, completed = GetAchievementInfo(achievement.ID);
@@ -310,6 +325,19 @@ function filterButton:Validate(achievement)
 	if not addon.Options.db.Filters.Covenant.Necrolord and achievement.Covenant == addon.Objects.Covenant.Necrolord then
 		return -12;
 	end
+    if addon.Options.db.Filters.CollapseSeries and ignoreCollapseSeries ~= true then
+        local _, nextCompleted = GetNextAchievement(achievement.ID);
+        if nextCompleted then
+            return -13;
+        end
+        local prevID = GetPreviousAchievement(achievement.ID);
+        if prevID ~= nil then
+            local _, _, _, prevCompleted = GetAchievementInfo(prevID);
+            if not prevCompleted then
+                return -13;
+            end
+        end
+    end
 
 	return 1;
 end
@@ -349,8 +377,36 @@ function filterButton:SetFilters(achievement)
             addon.Options.db.Filters.Covenant.NightFae = not addon.Options.db.Filters.Covenant.NightFae;
         elseif id == -12 then
             addon.Options.db.Filters.Covenant.Necrolord = not addon.Options.db.Filters.Covenant.Necrolord;
+        elseif id == -13 then
+            return; -- This filter can't be changed here. See AchievementsFrame SelectAchievement
         end
 
         iterations = iterations + 1;
     end
+end
+
+function filterButton:GetHighestAchievementWhenCollapseSeries(achievement)
+    diagnostics.Trace("filterButton:GetHighestCollapsedSeriesAchievement");
+
+    if not achievement then
+        return;
+    end
+
+    if addon.Options.db.Filters.CollapseSeries then
+		local nextID, completed = GetNextAchievement(achievement.ID);
+		local nextAchievement = addon.GetAchievement(nextID);
+		if nextAchievement and completed then
+			local newID, newAchievement;
+			while nextAchievement and completed do
+				newID, completed = GetNextAchievement(nextAchievement.ID);
+				newAchievement = addon.GetAchievement(newID);
+				if newAchievement and completed then
+					nextAchievement = newAchievement;
+				end
+			end
+			achievement = nextAchievement;
+		end
+	end
+
+    return achievement;
 end

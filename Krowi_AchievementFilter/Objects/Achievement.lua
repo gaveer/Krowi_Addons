@@ -26,10 +26,6 @@ function achievement:New(id, faction, covenant, obtainable, hasWowheadLink, --[[
     return self;
 end
 
--- function achievement:NewFromTable(table)
---     return self:New(table.id, table.obtainable, table.hasWowheadLink, table.hasIATLink, table.category);
--- end
-
 -- [[ Methods ]] --
 function achievement:AddRCMenExtra(rcMenExtra) -- Adds extra content to the achievement's right click menu, calling this method multiple times will overwrite the previous call
     self.RCMenExtra = rcMenExtra;

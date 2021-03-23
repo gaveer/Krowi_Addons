@@ -63,12 +63,12 @@ function loadHelper:OnEvent(event, arg1)
     elseif event == "PLAYER_LOGIN" then
         addon.Options.SetFilters();
 
-        -- if addon.Diagnostics.DebugEnabled then
-        --     hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
-        --         local mapID = WorldMapFrame.mapID;
-        --         print(mapID);
-        --     end);
-        -- end
+        if addon.Diagnostics.DebugEnabled then
+            hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
+                local mapID = WorldMapFrame.mapID;
+                print(mapID);
+            end);
+        end
     -- elseif event == "ZONE_CHANGED" then
     --     addon.Diagnostics.Debug("ZONE_CHANGED");
     -- elseif event == "ZONE_CHANGED_NEW_AREA" then

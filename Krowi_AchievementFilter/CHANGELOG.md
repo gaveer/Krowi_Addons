@@ -3,14 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.16.0] - 
 ### Added
-- TBD
+- Warlords of Draenor Zones (109 achievements) + zone data except for the shared zone group
 
 ## [9.0.5.15.0] - 2021-03-23
 ### Added
 - Warlords of Draenor Garrison (151 achievements)
 - Missing Legion Legion Class Hall (1 achievement)
 - Current Zone category (for now always visible and need to close/open the window or select the category again in order to refresh)
-- All Warlords of Draenor achievements should have zone data except for Pet Battles and the shared zone group
+- All Warlords of Draenor achievements should have zone data except for Pet Battles
 - All Legion achievements should have zone data except for Pet Battles and the shared zone group
 - All Battle for Azeroth achievements should have zone data except for Pet Battles and the shared zone group
 - All Shadowlands achievements should have zone data except for Pet Battles

@@ -42,6 +42,8 @@ namespace DbManager.GUI
         public void Add(string achievementIDs, Faction faction, Covenant covenant, bool isObtainable, bool hasWowheadLink)
         {
             List<string> groups = achievementIDs.Split(',').ToList();
+            groups = groups.Select(x => x.Trim()).ToList();
+            groups = groups.Where(x => !string.IsNullOrEmpty(x)).ToList();
             List<(int ID, Faction Faction)> IDsAndFactions;
             if (groups[0].Contains("_"))
                 IDsAndFactions = groups.Select(g => g.Split('_')).Select(g => (int.Parse(g[0]), (Faction)int.Parse(g[1]))).ToList();

@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
 gui.SearchPreviewFrame = {};
@@ -18,7 +19,7 @@ function searchPreviewFrame:New(fullSearchResultsFrame, achievementsFrame)
 	-- Create frame
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameSearchPreviewContainer" .. numFrames, AchievementFrame, "KrowiAF_SearchPreviewsFrame_Template");
 	frame:SetPoint("TOPLEFT", AchievementFrame.searchBox, "BOTTOMLEFT", -4, 3);
-	addon.InjectMetatable(frame, searchPreviewFrame);
+	core.InjectMetatable(frame, searchPreviewFrame);
 
 	-- Set properties
     frame.ID = numFrames;

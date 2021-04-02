@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
 gui.FullSearchResultsFrame = {};
@@ -16,7 +17,7 @@ function fullSearchResultsFrame:New(achievementsFrame)
 	numFrames = numFrames + 1;
 
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameFullSearchResults" .. numFrames, AchievementFrame, "KrowiAF_FullSearchResults_Template");
-	addon.InjectMetatable(frame, fullSearchResultsFrame);
+	core.InjectMetatable(frame, fullSearchResultsFrame);
 
 	-- Set properties
 	frame.ID = numFrames;

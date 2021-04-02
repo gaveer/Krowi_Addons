@@ -105,7 +105,7 @@ namespace DbManager.GUI
             else
                 mapIDs = mapIDsString.Split(',').Select(x => int.Parse(x.Trim())).ToList();
 
-            var category = new AchievementCategory(-1, location, achievementCategoryName, function, functionValue, parent, isLegacy, mapIDs);
+            var category = new AchievementCategory(-1, location, achievementCategoryName, function, functionValue, parent: parent, isLegacy: isLegacy, uiMapID: mapIDs);
             DataManager.Add(category);
 
             if (!asParent)

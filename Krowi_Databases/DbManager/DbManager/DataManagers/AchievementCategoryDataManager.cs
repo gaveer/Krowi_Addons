@@ -36,7 +36,7 @@ namespace DbManager.DataManagers
                                         ON CTEAC.ID = AC.ParentID
                                 )
                                 SELECT
-                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, F.ID, F.Call, CTEAC.LocationPath, ACIL.ID, F.Description
+                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, F.ID, F.Call, CTEAC.LocationPath, ACIL.ID, F.Description, ACIPMIDs.ID
                                 FROM
                                     CTE_AchievementCategory CTEAC
                                     LEFT JOIN AchievementCategory AC
@@ -47,12 +47,14 @@ namespace DbManager.DataManagers
                                         ON AC.FunctionID = F.ID
                                     LEFT JOIN AchievementCategoryIsLegacy ACIL
                                         ON AC.ID = ACIL.ID
+									LEFT JOIN AchievementCategoryIgnoreParentMapIDs ACIPMIDs
+										ON AC.ID = ACIPMIDs.ID
                                 ORDER BY CTEAC.LocationPath";
 
             var categories = new List<AchievementCategory>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(6), reader.GetString(7), reader.GetString(10)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), reader.IsDBNull(3) ? null : categories.Find(c => c.ID == reader.GetInt32(3)), !reader.IsDBNull(9)));
+                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(6), reader.GetString(7), reader.GetString(10)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), parent: reader.IsDBNull(3) ? null : categories.Find(c => c.ID == reader.GetInt32(3)), isLegacy: !reader.IsDBNull(9), ignoreParentMapIDs: !reader.IsDBNull(11)));
 
             return categories;
         }
@@ -73,26 +75,26 @@ namespace DbManager.DataManagers
             return mapIDs;
         }
 
-        public List<AchievementCategory> GetWithParent(AchievementCategory parent)
-        {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
+        //public List<AchievementCategory> GetWithParent(AchievementCategory parent)
+        //{
+        //    _ = connection ?? throw new NullReferenceException(nameof(connection));
 
-            var cmd = connection.CreateCommand();
-            if (parent != null)
-            {
-                cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID = @ParentID";
-                cmd.Parameters.AddWithValue("@ParentID", parent.ID);
-            }
-            else
-                cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue, F.Description FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID IS NULL";
+        //    var cmd = connection.CreateCommand();
+        //    if (parent != null)
+        //    {
+        //        cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID = @ParentID";
+        //        cmd.Parameters.AddWithValue("@ParentID", parent.ID);
+        //    }
+        //    else
+        //        cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue, F.Description FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID WHERE ParentID IS NULL";
 
-            var categories = new List<AchievementCategory>();
-            using (var reader = cmd.ExecuteReader())
-                while (reader.Read())
-                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(3), reader.GetString(4), reader.GetString(6)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), parent));
+        //    var categories = new List<AchievementCategory>();
+        //    using (var reader = cmd.ExecuteReader())
+        //        while (reader.Read())
+        //            categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(3), reader.GetString(4), reader.GetString(6)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), parent));
 
-            return categories;
-        }
+        //    return categories;
+        //}
 
         public AchievementCategory GetLast()
         {
@@ -103,7 +105,7 @@ namespace DbManager.DataManagers
 
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    return new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(3), reader.GetString(4), reader.GetString(7)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), reader.IsDBNull(6) ? null : GetAll().Find(c => c.ID == reader.GetInt32(6)));
+                    return new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(3), reader.GetString(4), reader.GetString(7)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), parent: reader.IsDBNull(6) ? null : GetAll().Find(c => c.ID == reader.GetInt32(6)));
 
             return null;
         }

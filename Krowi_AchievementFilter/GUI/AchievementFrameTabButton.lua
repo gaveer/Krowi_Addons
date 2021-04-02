@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
 gui.AchievementFrameTabButton = {};
@@ -17,7 +18,7 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, filterButt
     local frame = CreateFrame("Button", "AchievementFrameTab" .. AchievementFrame.numTabs, AchievementFrame, "AchievementFrameTabButtonTemplate"); -- Blizzard naming
     frame:SetID(AchievementFrame.numTabs);
     frame:SetText(text);
-    addon.InjectMetatable(frame, achFrameTabBtn);
+    core.InjectMetatable(frame, achFrameTabBtn);
 
 	-- Set properties
     frame.ID = AchievementFrame.numTabs;

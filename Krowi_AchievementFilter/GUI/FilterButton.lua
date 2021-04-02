@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
 gui.FilterButton = {};
@@ -17,7 +18,7 @@ function filterButton:New(categoriesFrame, achievementsFrame)
 
     -- Create button
     local button = CreateFrame("DropDownToggleButton", "KrowiAF_FilterButton" .. numButtons, AchievementFrame, "KrowiAF_FilterButton_Template");
-    addon.InjectMetatable(button, filterButton);
+    core.InjectMetatable(button, filterButton);
     button:SetScript("OnMouseDown", filterButton.OnMouseDown);
 	button:SetFrameLevel(button:GetParent():GetFrameLevel() + 7);
 

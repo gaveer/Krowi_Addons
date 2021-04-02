@@ -1,12 +1,27 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.0.5.16.0] - 2021-04-02
+### Added
+- Cataclysm Dungeons and Raids zone data
+- Cataclysm Tol Barad (11 achievements) + zone data
+- Mists of Pandaria Zones (145 achievements) + zone data except for the shared zone group
+- Mists of Pandaria Dungeons, Raids and Scenarios have zone data
+- Mists of Pandaria Pet Battles (7 achievements)
+- Missing Mists of Pandaria Scenario A Little Patience (6 achievements) + zone data
+- Mists of Pandaria Proving Grounds (38 achievements) + zone data
+- Warlords of Draenor Zones (109 achievements) + zone data except for the shared zone group
+- Warlords of Draenor Pet Battles (5 achievements)
+
+### Fixed
+- 2 wrong achievements in The Nighthold raid
+
 ## [9.0.5.15.0] - 2021-03-23
 ### Added
-- Warlords of Draenor Garrison (151 achievements)
+- Warlords of Draenor Garrison (151 achievements) + zone data
 - Missing Legion Legion Class Hall (1 achievement)
 - Current Zone category (for now always visible and need to close/open the window or select the category again in order to refresh)
-- All Warlords of Draenor achievements should have zone data except for Pet Battles and the shared zone group
+- All Warlords of Draenor achievements should have zone data except for Pet Battles
 - All Legion achievements should have zone data except for Pet Battles and the shared zone group
 - All Battle for Azeroth achievements should have zone data except for Pet Battles and the shared zone group
 - All Shadowlands achievements should have zone data except for Pet Battles
@@ -196,6 +211,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
+[9.0.5.16.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3259864
 [9.0.5.15.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3248934
 [9.0.5.14.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3234117
 [9.0.2.13.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3215749

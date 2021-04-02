@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 
 addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
@@ -47,7 +48,7 @@ function tutorials.Load()
 		    imageHeight = 256,
             image = media .. "RightClick",
             text = GetTitle(addon.L["FT_RIGHTCLICKMENU_TITLE"]) ..
-                            addon.ReplaceVars{addon.L["FT_RIGHTCLICKMENU_DESC"],
+                            core.ReplaceVars{addon.L["FT_RIGHTCLICKMENU_DESC"],
                                             wowhead = AF_COLOR_YELLOW .. addon.L["Wowhead"] .. AF_COLOR_END,
                                             xuFuPetGuides = AF_COLOR_YELLOW .. addon.L["Xu-Fu's Pet Guides"] .. AF_COLOR_END,
                                             IAT = AF_COLOR_YELLOW .. addon.L["Instance Achievement Tracker"] .. AF_COLOR_END,
@@ -60,7 +61,7 @@ function tutorials.Load()
             imageHeight = 256,
             image = media .. "SearchPreview",
             text = GetTitle(addon.L["FT_SEARCHPREVIEW_TITLE"]) ..
-                            addon.ReplaceVars{addon.L["FT_SEARCHPREVIEW_DESC"],
+                            core.ReplaceVars{addon.L["FT_SEARCHPREVIEW_DESC"],
                                             clearOnRightClick = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"],
                                             minCharToSearch = addon.L["O_MIN_CHAR_TO_SEARCH"],
                                             numSearchPreviews = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
@@ -83,7 +84,7 @@ function tutorials.Load()
             imageHeight = 256,
             image = media .. "Filter",
             text = GetTitle(addon.L["FT_FILTER_TITLE"]) ..
-                            addon.ReplaceVars{addon.L["FT_FILTER_DESC"],
+                            core.ReplaceVars{addon.L["FT_FILTER_DESC"],
                                             completed = AF_COLOR_YELLOW .. addon.L["Completed"] .. AF_COLOR_END,
                                             notCompleted = AF_COLOR_YELLOW .. addon.L["Not Completed"] .. AF_COLOR_END,
                                             obtainable = AF_COLOR_YELLOW .. addon.L["Obtainable"] .. AF_COLOR_END,

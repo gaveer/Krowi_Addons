@@ -62,7 +62,7 @@ namespace DbManager.GUI
             {
                 var mapIDs = achCatDatMan.GetMapIDs(category);
 
-                sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New({category.Function.Call.Replace("id", category.FunctionValue.ToString())}{(category.IsLegacy ? $" .. \" (\" .. {funDatMan.GetLegacyFunction().Call} .. \")\"" : "")}, {(mapIDs.Any() ? $"{{{string.Join(", ", mapIDs)}}}" : "nil")})); -- {category.Name}");
+                sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New({category.Function.Call.Replace("id", category.FunctionValue.ToString())}{(category.IsLegacy ? $" .. \" (\" .. {funDatMan.GetLegacyFunction().Call} .. \")\"" : "")}, {(category.IgnoreParentMapIDs ? "true" : "nil")}, {(mapIDs.Any() ? $"{{{string.Join(", ", mapIDs)}}}" : "nil")})); -- {category.Name}");
                 if (category.Parent != null)
                     sb.AppendLineTabbed(1, $"tmpCategories[{category.Parent.ID}]:AddCategory(tmpCategories[{category.ID}]);");
                 if (category.Function.Description == "Current Zone")
@@ -157,7 +157,7 @@ namespace DbManager.GUI
                             if (!string.IsNullOrEmpty(crit.ExternalLink))
                             {
                                 var list = $"rcMenExtras[{achievement.ID}]";
-                                sb.AppendLineTabbed(1, $"{list} = objects.MenuItem:NewExtLink(addon.L[\"Xu-Fu's Pet Guides\"], \"{criteria[0].ExternalLink}\");");
+                                sb.AppendLineTabbed(1, $"{list} = objects.MenuItem:NewExtLink(addon.L[\"Xu-Fu's Pet Guides\"], \"{criteria[0].ExternalLink}\"); -- {criteria[0].Name}");
 
                                 var subCriteria = achCritDatMan.GetWithParentID(crit.ID);
                                 GetSubCriteria(sb, crit.ID.Substring(1), subCriteria, list: list);

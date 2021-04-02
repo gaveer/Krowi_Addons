@@ -1,4 +1,4 @@
--- [[ Exported at 2021-03-21 15-37-09 ]] --
+-- [[ Exported at 2021-04-02 18-29-25 ]] --
 -- [[ This code is automatically generated as an export from a SQLite database ]] --
 -- [[ and is not meant for manual edit. ]] --
 
@@ -18,7 +18,98 @@ function exportedPetBattles.Load(rcMenExtras)
         rcMenExtras[i] = nil;
     end
 
-    rcMenExtras[10876] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/16");
+    rcMenExtras[6606] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/3"); -- Taming Pandaria
+    rcMenExtras[6606]:AddChildCritExtLinkFull(6606, 1, "https://www.wow-petguide.com/Encounter/36");
+    rcMenExtras[6606]:AddChildCritExtLinkFull(6606, 2, "https://www.wow-petguide.com/Encounter/31");
+    rcMenExtras[6606]:AddChildCritExtLinkFull(6606, 3, "https://www.wow-petguide.com/Encounter/68");
+    rcMenExtras[6606]:AddChildCritExtLinkFull(6606, 4, "https://www.wow-petguide.com/Encounter/32");
+    rcMenExtras[6606]:AddChildCritExtLinkFull(6606, 5, "https://www.wow-petguide.com/Encounter/35");
+    rcMenExtras[6606]:AddChildCritExtLinkFull(6606, 6, "https://www.wow-petguide.com/Encounter/34");
+    rcMenExtras[6606]:AddChildCritExtLinkFull(6606, 7, "https://www.wow-petguide.com/Encounter/33");
+    rcMenExtras[8410] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/8"); -- The Celestial Tournament
+    rcMenExtras[8518] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/8"); -- Master of the Masters
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 1, "https://www.wow-petguide.com/Encounter/42");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 2, "https://www.wow-petguide.com/Encounter/38");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 3, "https://www.wow-petguide.com/Encounter/47");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 4, "https://www.wow-petguide.com/Encounter/39");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 5, "https://www.wow-petguide.com/Encounter/41");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 6, "https://www.wow-petguide.com/Encounter/43");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 7, "https://www.wow-petguide.com/Encounter/45");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 8, "https://www.wow-petguide.com/Encounter/37");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 9, "https://www.wow-petguide.com/Encounter/46");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 10, "https://www.wow-petguide.com/Encounter/49");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 11, "https://www.wow-petguide.com/Encounter/51");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 12, "https://www.wow-petguide.com/Encounter/52");
+    rcMenExtras[8518]:AddChildCritExtLinkFull(8518, 13, "https://www.wow-petguide.com/Encounter/50");
+    rcMenExtras[9069] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/12"); -- An Awfully Big Adventure
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 1, "https://www.wow-petguide.com/Encounter/112");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 2, "https://www.wow-petguide.com/Encounter/92");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 3, "https://www.wow-petguide.com/Encounter/122");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 4, "https://www.wow-petguide.com/Encounter/86");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 5, "https://www.wow-petguide.com/Encounter/130");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 6, "https://www.wow-petguide.com/Encounter/132");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 7, "https://www.wow-petguide.com/Encounter/135");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 8, "https://www.wow-petguide.com/Encounter/106");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 9, "https://www.wow-petguide.com/Encounter/82");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 10, "https://www.wow-petguide.com/Encounter/117");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 11, "https://www.wow-petguide.com/Encounter/105");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 12, "https://www.wow-petguide.com/Encounter/93");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 13, "https://www.wow-petguide.com/Encounter/89");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 14, "https://www.wow-petguide.com/Encounter/111");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 15, "https://www.wow-petguide.com/Encounter/109");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 16, "https://www.wow-petguide.com/Encounter/94");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 17, "https://www.wow-petguide.com/Encounter/139");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 18, "https://www.wow-petguide.com/Encounter/123");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 19, "https://www.wow-petguide.com/Encounter/113");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 20, "https://www.wow-petguide.com/Encounter/116");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 21, "https://www.wow-petguide.com/Encounter/90");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 22, "https://www.wow-petguide.com/Encounter/138");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 23, "https://www.wow-petguide.com/Encounter/124");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 24, "https://www.wow-petguide.com/Encounter/110");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 25, "https://www.wow-petguide.com/Encounter/126");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 26, "https://www.wow-petguide.com/Encounter/127");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 27, "https://www.wow-petguide.com/Encounter/120");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 28, "https://www.wow-petguide.com/Encounter/129");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 29, "https://www.wow-petguide.com/Encounter/136");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 30, "https://www.wow-petguide.com/Encounter/121");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 31, "https://www.wow-petguide.com/Encounter/128");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 32, "https://www.wow-petguide.com/Encounter/107");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 33, "https://www.wow-petguide.com/Encounter/84");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 34, "https://www.wow-petguide.com/Encounter/134");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 35, "https://www.wow-petguide.com/Encounter/88");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 36, "https://www.wow-petguide.com/Encounter/95");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 37, "https://www.wow-petguide.com/Encounter/80");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 38, "https://www.wow-petguide.com/Encounter/96");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 39, "https://www.wow-petguide.com/Encounter/104");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 40, "https://www.wow-petguide.com/Encounter/97");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 41, "https://www.wow-petguide.com/Encounter/108");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 42, "https://www.wow-petguide.com/Encounter/114");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 43, "https://www.wow-petguide.com/Encounter/85");
+    rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 44, "https://www.wow-petguide.com/Encounter/81");
+    rcMenExtras[9724] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/5"); -- Taming Draenor
+    rcMenExtras[9724]:AddChildCritExtLinkFull(9724, 1, "https://www.wow-petguide.com/Encounter/16");
+    rcMenExtras[9724]:AddChildCritExtLinkFull(9724, 2, "https://www.wow-petguide.com/Encounter/17");
+    rcMenExtras[9724]:AddChildCritExtLinkFull(9724, 3, "https://www.wow-petguide.com/Encounter/18");
+    rcMenExtras[9724]:AddChildCritExtLinkFull(9724, 4, "https://www.wow-petguide.com/Encounter/19");
+    rcMenExtras[9724]:AddChildCritExtLinkFull(9724, 5, "https://www.wow-petguide.com/Encounter/20");
+    rcMenExtras[9724]:AddChildCritExtLinkFull(9724, 6, "https://www.wow-petguide.com/Encounter/21");
+    rcMenExtras[10052] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/9"); -- Tiny Terrors in Tanaan
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 1, "https://www.wow-petguide.com/Encounter/66");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 2, "https://www.wow-petguide.com/Encounter/65");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 3, "https://www.wow-petguide.com/Encounter/67");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 4, "https://www.wow-petguide.com/Encounter/64");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 5, "https://www.wow-petguide.com/Encounter/63");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 6, "https://www.wow-petguide.com/Encounter/62");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 7, "https://www.wow-petguide.com/Encounter/61");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 8, "https://www.wow-petguide.com/Encounter/60");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 9, "https://www.wow-petguide.com/Encounter/59");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 10, "https://www.wow-petguide.com/Encounter/58");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 11, "https://www.wow-petguide.com/Encounter/57");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 12, "https://www.wow-petguide.com/Encounter/56");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 13, "https://www.wow-petguide.com/Encounter/55");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 14, "https://www.wow-petguide.com/Encounter/54");
+    rcMenExtras[10052]:AddChildCritExtLinkFull(10052, 15, "https://www.wow-petguide.com/Encounter/53");
+    rcMenExtras[10876] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/16"); -- Battle on the Broken Isles
     rcMenExtras[10876]:AddChildCritExtLinkFull(10876, 1, "https://www.wow-petguide.com/Encounter/153");
     rcMenExtras[10876]:AddChildCritExtLinkFull(10876, 3, "https://www.wow-petguide.com/Encounter/155");
     rcMenExtras[10876]:AddChildCritExtLinkFull(10876, 4, "https://www.wow-petguide.com/Encounter/156");
@@ -56,7 +147,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[10876]:AddChildCritExtLinkFull(10876, 34, "https://www.wow-petguide.com/Encounter/162");
     rcMenExtras[10876]:AddChildCritExtLinkFull(10876, 35, "https://www.wow-petguide.com/Encounter/163");
     rcMenExtras[10876]:AddChildCritExtLinkFull(10876, 37, "https://www.wow-petguide.com/Encounter/165");
-    rcMenExtras[9686] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/187");
+    rcMenExtras[9686] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/187"); -- Aquatic Acquiescence
     rcMenExtras[9686]:AddChildCritExtLinkFull(9686, 1, "https://www.wow-petguide.com/Encounter/191");
     rcMenExtras[9686]:AddChildCritExtLinkFull(9686, 2, "https://www.wow-petguide.com/Encounter/188");
     rcMenExtras[9686]:AddChildCritExtLinkFull(9686, 3, "https://www.wow-petguide.com/Encounter/190");
@@ -72,7 +163,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9686]:AddChildCritExtLinkFull(9686, 13, "https://www.wow-petguide.com/Encounter/201");
     rcMenExtras[9686]:AddChildCritExtLinkFull(9686, 14, "https://www.wow-petguide.com/Encounter/193");
     rcMenExtras[9686]:AddChildCritExtLinkFull(9686, 15, "https://www.wow-petguide.com/Encounter/192");
-    rcMenExtras[9687] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/202");
+    rcMenExtras[9687] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/202"); -- Best of the Beasts
     rcMenExtras[9687]:AddChildCritExtLinkFull(9687, 1, "https://www.wow-petguide.com/Encounter/206");
     rcMenExtras[9687]:AddChildCritExtLinkFull(9687, 2, "https://www.wow-petguide.com/Encounter/203");
     rcMenExtras[9687]:AddChildCritExtLinkFull(9687, 3, "https://www.wow-petguide.com/Encounter/205");
@@ -88,7 +179,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9687]:AddChildCritExtLinkFull(9687, 13, "https://www.wow-petguide.com/Encounter/216");
     rcMenExtras[9687]:AddChildCritExtLinkFull(9687, 14, "https://www.wow-petguide.com/Encounter/208");
     rcMenExtras[9687]:AddChildCritExtLinkFull(9687, 15, "https://www.wow-petguide.com/Encounter/207");
-    rcMenExtras[9688] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/217");
+    rcMenExtras[9688] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/217"); -- Mousing Around
     rcMenExtras[9688]:AddChildCritExtLinkFull(9688, 1, "https://www.wow-petguide.com/Encounter/221");
     rcMenExtras[9688]:AddChildCritExtLinkFull(9688, 2, "https://www.wow-petguide.com/Encounter/218");
     rcMenExtras[9688]:AddChildCritExtLinkFull(9688, 3, "https://www.wow-petguide.com/Encounter/220");
@@ -104,7 +195,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9688]:AddChildCritExtLinkFull(9688, 13, "https://www.wow-petguide.com/Encounter/231");
     rcMenExtras[9688]:AddChildCritExtLinkFull(9688, 14, "https://www.wow-petguide.com/Encounter/223");
     rcMenExtras[9688]:AddChildCritExtLinkFull(9688, 15, "https://www.wow-petguide.com/Encounter/222");
-    rcMenExtras[9689] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/232");
+    rcMenExtras[9689] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/232"); -- Dragons!
     rcMenExtras[9689]:AddChildCritExtLinkFull(9689, 1, "https://www.wow-petguide.com/Encounter/236");
     rcMenExtras[9689]:AddChildCritExtLinkFull(9689, 2, "https://www.wow-petguide.com/Encounter/233");
     rcMenExtras[9689]:AddChildCritExtLinkFull(9689, 3, "https://www.wow-petguide.com/Encounter/235");
@@ -120,7 +211,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9689]:AddChildCritExtLinkFull(9689, 13, "https://www.wow-petguide.com/Encounter/246");
     rcMenExtras[9689]:AddChildCritExtLinkFull(9689, 14, "https://www.wow-petguide.com/Encounter/238");
     rcMenExtras[9689]:AddChildCritExtLinkFull(9689, 15, "https://www.wow-petguide.com/Encounter/237");
-    rcMenExtras[9690] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/247");
+    rcMenExtras[9690] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/247"); -- Ragnaros, Watch and Learn
     rcMenExtras[9690]:AddChildCritExtLinkFull(9690, 1, "https://www.wow-petguide.com/Encounter/251");
     rcMenExtras[9690]:AddChildCritExtLinkFull(9690, 2, "https://www.wow-petguide.com/Encounter/248");
     rcMenExtras[9690]:AddChildCritExtLinkFull(9690, 3, "https://www.wow-petguide.com/Encounter/250");
@@ -136,7 +227,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9690]:AddChildCritExtLinkFull(9690, 13, "https://www.wow-petguide.com/Encounter/261");
     rcMenExtras[9690]:AddChildCritExtLinkFull(9690, 14, "https://www.wow-petguide.com/Encounter/253");
     rcMenExtras[9690]:AddChildCritExtLinkFull(9690, 15, "https://www.wow-petguide.com/Encounter/252");
-    rcMenExtras[9691] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/262");
+    rcMenExtras[9691] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/262"); -- Flock Together
     rcMenExtras[9691]:AddChildCritExtLinkFull(9691, 1, "https://www.wow-petguide.com/Encounter/266");
     rcMenExtras[9691]:AddChildCritExtLinkFull(9691, 2, "https://www.wow-petguide.com/Encounter/263");
     rcMenExtras[9691]:AddChildCritExtLinkFull(9691, 3, "https://www.wow-petguide.com/Encounter/265");
@@ -152,7 +243,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9691]:AddChildCritExtLinkFull(9691, 13, "https://www.wow-petguide.com/Encounter/276");
     rcMenExtras[9691]:AddChildCritExtLinkFull(9691, 14, "https://www.wow-petguide.com/Encounter/268");
     rcMenExtras[9691]:AddChildCritExtLinkFull(9691, 15, "https://www.wow-petguide.com/Encounter/267");
-    rcMenExtras[9692] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/277");
+    rcMenExtras[9692] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/277"); -- Murlocs, Harpies, and Wolvar, Oh My!
     rcMenExtras[9692]:AddChildCritExtLinkFull(9692, 1, "https://www.wow-petguide.com/Encounter/281");
     rcMenExtras[9692]:AddChildCritExtLinkFull(9692, 2, "https://www.wow-petguide.com/Encounter/278");
     rcMenExtras[9692]:AddChildCritExtLinkFull(9692, 3, "https://www.wow-petguide.com/Encounter/280");
@@ -168,7 +259,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9692]:AddChildCritExtLinkFull(9692, 13, "https://www.wow-petguide.com/Encounter/291");
     rcMenExtras[9692]:AddChildCritExtLinkFull(9692, 14, "https://www.wow-petguide.com/Encounter/283");
     rcMenExtras[9692]:AddChildCritExtLinkFull(9692, 15, "https://www.wow-petguide.com/Encounter/282");
-    rcMenExtras[9693] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/292");
+    rcMenExtras[9693] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/292"); -- Master of Magic
     rcMenExtras[9693]:AddChildCritExtLinkFull(9693, 1, "https://www.wow-petguide.com/Encounter/296");
     rcMenExtras[9693]:AddChildCritExtLinkFull(9693, 2, "https://www.wow-petguide.com/Encounter/293");
     rcMenExtras[9693]:AddChildCritExtLinkFull(9693, 3, "https://www.wow-petguide.com/Encounter/295");
@@ -184,7 +275,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9693]:AddChildCritExtLinkFull(9693, 13, "https://www.wow-petguide.com/Encounter/306");
     rcMenExtras[9693]:AddChildCritExtLinkFull(9693, 14, "https://www.wow-petguide.com/Encounter/298");
     rcMenExtras[9693]:AddChildCritExtLinkFull(9693, 15, "https://www.wow-petguide.com/Encounter/297");
-    rcMenExtras[9694] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/307");
+    rcMenExtras[9694] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/307"); -- Roboteer
     rcMenExtras[9694]:AddChildCritExtLinkFull(9694, 1, "https://www.wow-petguide.com/Encounter/311");
     rcMenExtras[9694]:AddChildCritExtLinkFull(9694, 2, "https://www.wow-petguide.com/Encounter/308");
     rcMenExtras[9694]:AddChildCritExtLinkFull(9694, 3, "https://www.wow-petguide.com/Encounter/310");
@@ -200,7 +291,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9694]:AddChildCritExtLinkFull(9694, 13, "https://www.wow-petguide.com/Encounter/321");
     rcMenExtras[9694]:AddChildCritExtLinkFull(9694, 14, "https://www.wow-petguide.com/Encounter/313");
     rcMenExtras[9694]:AddChildCritExtLinkFull(9694, 15, "https://www.wow-petguide.com/Encounter/312");
-    rcMenExtras[9695] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/322");
+    rcMenExtras[9695] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/322"); -- The Lil' Necromancer
     rcMenExtras[9695]:AddChildCritExtLinkFull(9695, 1, "https://www.wow-petguide.com/Encounter/326");
     rcMenExtras[9695]:AddChildCritExtLinkFull(9695, 2, "https://www.wow-petguide.com/Encounter/323");
     rcMenExtras[9695]:AddChildCritExtLinkFull(9695, 3, "https://www.wow-petguide.com/Encounter/325");
@@ -216,7 +307,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[9695]:AddChildCritExtLinkFull(9695, 13, "https://www.wow-petguide.com/Encounter/336");
     rcMenExtras[9695]:AddChildCritExtLinkFull(9695, 14, "https://www.wow-petguide.com/Encounter/328");
     rcMenExtras[9695]:AddChildCritExtLinkFull(9695, 15, "https://www.wow-petguide.com/Encounter/327");
-    rcMenExtras[9696] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/17");
+    rcMenExtras[9696] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/17"); -- Family Familiar
     local tempA9686 = rcMenExtras[9696]:AddChildCritExtLinkFull(9696, 1, "https://www.wow-petguide.com/Encounter/187");
     tempA9686:AddChildCritExtLinkFull(9686, 1, "https://www.wow-petguide.com/Encounter/191");
     tempA9686:AddChildCritExtLinkFull(9686, 2, "https://www.wow-petguide.com/Encounter/188");
@@ -377,7 +468,7 @@ function exportedPetBattles.Load(rcMenExtras)
     tempA9695:AddChildCritExtLinkFull(9695, 13, "https://www.wow-petguide.com/Encounter/336");
     tempA9695:AddChildCritExtLinkFull(9695, 14, "https://www.wow-petguide.com/Encounter/328");
     tempA9695:AddChildCritExtLinkFull(9695, 15, "https://www.wow-petguide.com/Encounter/327");
-    rcMenExtras[12088] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/42");
+    rcMenExtras[12088] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/42"); -- Anomalous Animals of Argus
     rcMenExtras[12088]:AddChildCritExtLinkFull(12088, 1, "https://www.wow-petguide.com/Encounter/480");
     rcMenExtras[12088]:AddChildCritExtLinkFull(12088, 2, "https://www.wow-petguide.com/Encounter/478");
     rcMenExtras[12088]:AddChildCritExtLinkFull(12088, 3, "https://www.wow-petguide.com/Encounter/476");
@@ -396,7 +487,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12088]:AddChildCritExtLinkFull(12088, 16, "https://www.wow-petguide.com/Encounter/469");
     rcMenExtras[12088]:AddChildCritExtLinkFull(12088, 17, "https://www.wow-petguide.com/Encounter/468");
     rcMenExtras[12088]:AddChildCritExtLinkFull(12088, 18, "https://www.wow-petguide.com/Encounter/471");
-    rcMenExtras[12089] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/657");
+    rcMenExtras[12089] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/657"); -- Aquatic Assault
     rcMenExtras[12089]:AddChildCritExtLinkFull(12089, 1, "https://www.wow-petguide.com/Encounter/669");
     rcMenExtras[12089]:AddChildCritExtLinkFull(12089, 2, "https://www.wow-petguide.com/Encounter/667");
     rcMenExtras[12089]:AddChildCritExtLinkFull(12089, 3, "https://www.wow-petguide.com/Encounter/665");
@@ -415,7 +506,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12089]:AddChildCritExtLinkFull(12089, 16, "https://www.wow-petguide.com/Encounter/658");
     rcMenExtras[12089]:AddChildCritExtLinkFull(12089, 17, "https://www.wow-petguide.com/Encounter/657");
     rcMenExtras[12089]:AddChildCritExtLinkFull(12089, 18, "https://www.wow-petguide.com/Encounter/660");
-    rcMenExtras[12091] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/636");
+    rcMenExtras[12091] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/636"); -- Beast Blitz
     rcMenExtras[12091]:AddChildCritExtLinkFull(12091, 1, "https://www.wow-petguide.com/Encounter/648");
     rcMenExtras[12091]:AddChildCritExtLinkFull(12091, 2, "https://www.wow-petguide.com/Encounter/646");
     rcMenExtras[12091]:AddChildCritExtLinkFull(12091, 3, "https://www.wow-petguide.com/Encounter/644");
@@ -434,7 +525,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12091]:AddChildCritExtLinkFull(12091, 16, "https://www.wow-petguide.com/Encounter/637");
     rcMenExtras[12091]:AddChildCritExtLinkFull(12091, 17, "https://www.wow-petguide.com/Encounter/636");
     rcMenExtras[12091]:AddChildCritExtLinkFull(12091, 18, "https://www.wow-petguide.com/Encounter/639");
-    rcMenExtras[12092] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/573");
+    rcMenExtras[12092] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/573"); -- Critical Critters
     rcMenExtras[12092]:AddChildCritExtLinkFull(12092, 1, "https://www.wow-petguide.com/Encounter/585");
     rcMenExtras[12092]:AddChildCritExtLinkFull(12092, 2, "https://www.wow-petguide.com/Encounter/583");
     rcMenExtras[12092]:AddChildCritExtLinkFull(12092, 3, "https://www.wow-petguide.com/Encounter/581");
@@ -453,7 +544,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12092]:AddChildCritExtLinkFull(12092, 16, "https://www.wow-petguide.com/Encounter/574");
     rcMenExtras[12092]:AddChildCritExtLinkFull(12092, 17, "https://www.wow-petguide.com/Encounter/573");
     rcMenExtras[12092]:AddChildCritExtLinkFull(12092, 18, "https://www.wow-petguide.com/Encounter/576");
-    rcMenExtras[12093] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/510");
+    rcMenExtras[12093] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/510"); -- Draconic Destruction
     rcMenExtras[12093]:AddChildCritExtLinkFull(12093, 1, "https://www.wow-petguide.com/Encounter/522");
     rcMenExtras[12093]:AddChildCritExtLinkFull(12093, 2, "https://www.wow-petguide.com/Encounter/520");
     rcMenExtras[12093]:AddChildCritExtLinkFull(12093, 3, "https://www.wow-petguide.com/Encounter/518");
@@ -472,7 +563,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12093]:AddChildCritExtLinkFull(12093, 16, "https://www.wow-petguide.com/Encounter/511");
     rcMenExtras[12093]:AddChildCritExtLinkFull(12093, 17, "https://www.wow-petguide.com/Encounter/510");
     rcMenExtras[12093]:AddChildCritExtLinkFull(12093, 18, "https://www.wow-petguide.com/Encounter/513");
-    rcMenExtras[12094] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/615");
+    rcMenExtras[12094] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/615"); -- Elemental Escalation
     rcMenExtras[12094]:AddChildCritExtLinkFull(12094, 1, "https://www.wow-petguide.com/Encounter/627");
     rcMenExtras[12094]:AddChildCritExtLinkFull(12094, 2, "https://www.wow-petguide.com/Encounter/625");
     rcMenExtras[12094]:AddChildCritExtLinkFull(12094, 3, "https://www.wow-petguide.com/Encounter/623");
@@ -491,7 +582,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12094]:AddChildCritExtLinkFull(12094, 16, "https://www.wow-petguide.com/Encounter/616");
     rcMenExtras[12094]:AddChildCritExtLinkFull(12094, 17, "https://www.wow-petguide.com/Encounter/615");
     rcMenExtras[12094]:AddChildCritExtLinkFull(12094, 18, "https://www.wow-petguide.com/Encounter/618");
-    rcMenExtras[12095] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/531");
+    rcMenExtras[12095] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/531"); -- Fierce Fliers
     rcMenExtras[12095]:AddChildCritExtLinkFull(12095, 1, "https://www.wow-petguide.com/Encounter/543");
     rcMenExtras[12095]:AddChildCritExtLinkFull(12095, 2, "https://www.wow-petguide.com/Encounter/541");
     rcMenExtras[12095]:AddChildCritExtLinkFull(12095, 3, "https://www.wow-petguide.com/Encounter/539");
@@ -510,7 +601,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12095]:AddChildCritExtLinkFull(12095, 16, "https://www.wow-petguide.com/Encounter/532");
     rcMenExtras[12095]:AddChildCritExtLinkFull(12095, 17, "https://www.wow-petguide.com/Encounter/531");
     rcMenExtras[12095]:AddChildCritExtLinkFull(12095, 18, "https://www.wow-petguide.com/Encounter/534");
-    rcMenExtras[12096] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/489");
+    rcMenExtras[12096] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/489"); -- Humanoid Havoc
     rcMenExtras[12096]:AddChildCritExtLinkFull(12096, 1, "https://www.wow-petguide.com/Encounter/501");
     rcMenExtras[12096]:AddChildCritExtLinkFull(12096, 2, "https://www.wow-petguide.com/Encounter/499");
     rcMenExtras[12096]:AddChildCritExtLinkFull(12096, 3, "https://www.wow-petguide.com/Encounter/497");
@@ -529,7 +620,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12096]:AddChildCritExtLinkFull(12096, 16, "https://www.wow-petguide.com/Encounter/490");
     rcMenExtras[12096]:AddChildCritExtLinkFull(12096, 17, "https://www.wow-petguide.com/Encounter/489");
     rcMenExtras[12096]:AddChildCritExtLinkFull(12096, 18, "https://www.wow-petguide.com/Encounter/492");
-    rcMenExtras[12097] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/594");
+    rcMenExtras[12097] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/594"); -- Magical Mayhem
     rcMenExtras[12097]:AddChildCritExtLinkFull(12097, 1, "https://www.wow-petguide.com/Encounter/606");
     rcMenExtras[12097]:AddChildCritExtLinkFull(12097, 2, "https://www.wow-petguide.com/Encounter/604");
     rcMenExtras[12097]:AddChildCritExtLinkFull(12097, 3, "https://www.wow-petguide.com/Encounter/602");
@@ -548,7 +639,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12097]:AddChildCritExtLinkFull(12097, 16, "https://www.wow-petguide.com/Encounter/595");
     rcMenExtras[12097]:AddChildCritExtLinkFull(12097, 17, "https://www.wow-petguide.com/Encounter/594");
     rcMenExtras[12097]:AddChildCritExtLinkFull(12097, 18, "https://www.wow-petguide.com/Encounter/597");
-    rcMenExtras[12098] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/678");
+    rcMenExtras[12098] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/678"); -- Mechanical Melee
     rcMenExtras[12098]:AddChildCritExtLinkFull(12098, 1, "https://www.wow-petguide.com/Encounter/690");
     rcMenExtras[12098]:AddChildCritExtLinkFull(12098, 2, "https://www.wow-petguide.com/Encounter/688");
     rcMenExtras[12098]:AddChildCritExtLinkFull(12098, 3, "https://www.wow-petguide.com/Encounter/686");
@@ -567,7 +658,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12098]:AddChildCritExtLinkFull(12098, 16, "https://www.wow-petguide.com/Encounter/679");
     rcMenExtras[12098]:AddChildCritExtLinkFull(12098, 17, "https://www.wow-petguide.com/Encounter/678");
     rcMenExtras[12098]:AddChildCritExtLinkFull(12098, 18, "https://www.wow-petguide.com/Encounter/681");
-    rcMenExtras[12099] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/552");
+    rcMenExtras[12099] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/552"); -- Unstoppable Undead
     rcMenExtras[12099]:AddChildCritExtLinkFull(12099, 1, "https://www.wow-petguide.com/Encounter/564");
     rcMenExtras[12099]:AddChildCritExtLinkFull(12099, 2, "https://www.wow-petguide.com/Encounter/562");
     rcMenExtras[12099]:AddChildCritExtLinkFull(12099, 3, "https://www.wow-petguide.com/Encounter/560");
@@ -586,7 +677,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12099]:AddChildCritExtLinkFull(12099, 16, "https://www.wow-petguide.com/Encounter/553");
     rcMenExtras[12099]:AddChildCritExtLinkFull(12099, 17, "https://www.wow-petguide.com/Encounter/552");
     rcMenExtras[12099]:AddChildCritExtLinkFull(12099, 18, "https://www.wow-petguide.com/Encounter/555");
-    rcMenExtras[12100] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/42");
+    rcMenExtras[12100] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/42"); -- Family Fighter
     local tempA12089 = rcMenExtras[12100]:AddChildCritExtLinkFull(12100, 1, "https://www.wow-petguide.com/Encounter/657");
     tempA12089:AddChildCritExtLinkFull(12089, 1, "https://www.wow-petguide.com/Encounter/669");
     tempA12089:AddChildCritExtLinkFull(12089, 2, "https://www.wow-petguide.com/Encounter/667");
@@ -777,7 +868,7 @@ function exportedPetBattles.Load(rcMenExtras)
     tempA12099:AddChildCritExtLinkFull(12099, 16, "https://www.wow-petguide.com/Encounter/553");
     tempA12099:AddChildCritExtLinkFull(12099, 17, "https://www.wow-petguide.com/Encounter/552");
     tempA12099:AddChildCritExtLinkFull(12099, 18, "https://www.wow-petguide.com/Encounter/555");
-    rcMenExtras[12936] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/51");
+    rcMenExtras[12936] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/51"); -- Battle on Zandalar and Kul Tiras
     rcMenExtras[12936]:AddChildCritExtLinkFull(12936, 1, "https://www.wow-petguide.com/Encounter/712");
     rcMenExtras[12936]:AddChildCritExtLinkFull(12936, 2, "https://www.wow-petguide.com/Encounter/707");
     rcMenExtras[12936]:AddChildCritExtLinkFull(12936, 3, "https://www.wow-petguide.com/Encounter/706");
@@ -802,7 +893,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[12936]:AddChildCritExtLinkFull(12936, 22, "https://www.wow-petguide.com/Encounter/714");
     rcMenExtras[12936]:AddChildCritExtLinkFull(12936, 23, "https://www.wow-petguide.com/Encounter/716");
     rcMenExtras[12936]:AddChildCritExtLinkFull(12936, 24, "https://www.wow-petguide.com/Encounter/715");
-    rcMenExtras[13280] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/969");
+    rcMenExtras[13280] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/969"); -- Hobbyist Aquarist
     rcMenExtras[13280]:AddChildCritExtLinkFull(13280, 1, "https://www.wow-petguide.com/Encounter/982");
     rcMenExtras[13280]:AddChildCritExtLinkFull(13280, 2, "https://www.wow-petguide.com/Encounter/976");
     rcMenExtras[13280]:AddChildCritExtLinkFull(13280, 3, "https://www.wow-petguide.com/Encounter/981");
@@ -822,7 +913,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13280]:AddChildCritExtLinkFull(13280, 17, "https://www.wow-petguide.com/Encounter/987");
     rcMenExtras[13280]:AddChildCritExtLinkFull(13280, 18, "https://www.wow-petguide.com/Encounter/984");
     rcMenExtras[13280]:AddChildCritExtLinkFull(13280, 19, "https://www.wow-petguide.com/Encounter/985");
-    rcMenExtras[13270] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/939");
+    rcMenExtras[13270] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/939"); -- Beast Mode
     rcMenExtras[13270]:AddChildCritExtLinkFull(13270, 1, "https://www.wow-petguide.com/Encounter/952");
     rcMenExtras[13270]:AddChildCritExtLinkFull(13270, 2, "https://www.wow-petguide.com/Encounter/946");
     rcMenExtras[13270]:AddChildCritExtLinkFull(13270, 3, "https://www.wow-petguide.com/Encounter/951");
@@ -842,7 +933,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13270]:AddChildCritExtLinkFull(13270, 17, "https://www.wow-petguide.com/Encounter/957");
     rcMenExtras[13270]:AddChildCritExtLinkFull(13270, 18, "https://www.wow-petguide.com/Encounter/954");
     rcMenExtras[13270]:AddChildCritExtLinkFull(13270, 19, "https://www.wow-petguide.com/Encounter/955");
-    rcMenExtras[13271] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/849");
+    rcMenExtras[13271] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/849"); -- Critters With Huge Teeth
     rcMenExtras[13271]:AddChildCritExtLinkFull(13271, 1, "https://www.wow-petguide.com/Encounter/862");
     rcMenExtras[13271]:AddChildCritExtLinkFull(13271, 2, "https://www.wow-petguide.com/Encounter/856");
     rcMenExtras[13271]:AddChildCritExtLinkFull(13271, 3, "https://www.wow-petguide.com/Encounter/861");
@@ -862,7 +953,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13271]:AddChildCritExtLinkFull(13271, 17, "https://www.wow-petguide.com/Encounter/867");
     rcMenExtras[13271]:AddChildCritExtLinkFull(13271, 18, "https://www.wow-petguide.com/Encounter/864");
     rcMenExtras[13271]:AddChildCritExtLinkFull(13271, 19, "https://www.wow-petguide.com/Encounter/865");
-    rcMenExtras[13272] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/759");
+    rcMenExtras[13272] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/759"); -- Dragons Make Everything Better
     rcMenExtras[13272]:AddChildCritExtLinkFull(13272, 1, "https://www.wow-petguide.com/Encounter/772");
     rcMenExtras[13272]:AddChildCritExtLinkFull(13272, 2, "https://www.wow-petguide.com/Encounter/766");
     rcMenExtras[13272]:AddChildCritExtLinkFull(13272, 3, "https://www.wow-petguide.com/Encounter/771");
@@ -882,7 +973,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13272]:AddChildCritExtLinkFull(13272, 17, "https://www.wow-petguide.com/Encounter/777");
     rcMenExtras[13272]:AddChildCritExtLinkFull(13272, 18, "https://www.wow-petguide.com/Encounter/774");
     rcMenExtras[13272]:AddChildCritExtLinkFull(13272, 19, "https://www.wow-petguide.com/Encounter/775");
-    rcMenExtras[13273] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/909");
+    rcMenExtras[13273] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/909"); -- Element of Success
     rcMenExtras[13273]:AddChildCritExtLinkFull(13273, 1, "https://www.wow-petguide.com/Encounter/922");
     rcMenExtras[13273]:AddChildCritExtLinkFull(13273, 2, "https://www.wow-petguide.com/Encounter/916");
     rcMenExtras[13273]:AddChildCritExtLinkFull(13273, 3, "https://www.wow-petguide.com/Encounter/921");
@@ -902,7 +993,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13273]:AddChildCritExtLinkFull(13273, 17, "https://www.wow-petguide.com/Encounter/927");
     rcMenExtras[13273]:AddChildCritExtLinkFull(13273, 18, "https://www.wow-petguide.com/Encounter/924");
     rcMenExtras[13273]:AddChildCritExtLinkFull(13273, 19, "https://www.wow-petguide.com/Encounter/925");
-    rcMenExtras[13274] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/789");
+    rcMenExtras[13274] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/789"); -- Fun With Flying
     rcMenExtras[13274]:AddChildCritExtLinkFull(13274, 1, "https://www.wow-petguide.com/Encounter/802");
     rcMenExtras[13274]:AddChildCritExtLinkFull(13274, 2, "https://www.wow-petguide.com/Encounter/796");
     rcMenExtras[13274]:AddChildCritExtLinkFull(13274, 3, "https://www.wow-petguide.com/Encounter/801");
@@ -922,7 +1013,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13274]:AddChildCritExtLinkFull(13274, 17, "https://www.wow-petguide.com/Encounter/807");
     rcMenExtras[13274]:AddChildCritExtLinkFull(13274, 18, "https://www.wow-petguide.com/Encounter/804");
     rcMenExtras[13274]:AddChildCritExtLinkFull(13274, 19, "https://www.wow-petguide.com/Encounter/805");
-    rcMenExtras[13281] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/729");
+    rcMenExtras[13281] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/729"); -- Human Resources
     rcMenExtras[13281]:AddChildCritExtLinkFull(13281, 1, "https://www.wow-petguide.com/Encounter/742");
     rcMenExtras[13281]:AddChildCritExtLinkFull(13281, 2, "https://www.wow-petguide.com/Encounter/736");
     rcMenExtras[13281]:AddChildCritExtLinkFull(13281, 3, "https://www.wow-petguide.com/Encounter/741");
@@ -942,7 +1033,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13281]:AddChildCritExtLinkFull(13281, 17, "https://www.wow-petguide.com/Encounter/747");
     rcMenExtras[13281]:AddChildCritExtLinkFull(13281, 18, "https://www.wow-petguide.com/Encounter/744");
     rcMenExtras[13281]:AddChildCritExtLinkFull(13281, 19, "https://www.wow-petguide.com/Encounter/745");
-    rcMenExtras[13275] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/879");
+    rcMenExtras[13275] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/879"); -- Magician's Secrets
     rcMenExtras[13275]:AddChildCritExtLinkFull(13275, 1, "https://www.wow-petguide.com/Encounter/892");
     rcMenExtras[13275]:AddChildCritExtLinkFull(13275, 2, "https://www.wow-petguide.com/Encounter/886");
     rcMenExtras[13275]:AddChildCritExtLinkFull(13275, 3, "https://www.wow-petguide.com/Encounter/891");
@@ -962,7 +1053,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13275]:AddChildCritExtLinkFull(13275, 17, "https://www.wow-petguide.com/Encounter/897");
     rcMenExtras[13275]:AddChildCritExtLinkFull(13275, 18, "https://www.wow-petguide.com/Encounter/894");
     rcMenExtras[13275]:AddChildCritExtLinkFull(13275, 19, "https://www.wow-petguide.com/Encounter/895");
-    rcMenExtras[13277] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/999");
+    rcMenExtras[13277] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/999"); -- Machine Learning
     rcMenExtras[13277]:AddChildCritExtLinkFull(13277, 1, "https://www.wow-petguide.com/Encounter/1012");
     rcMenExtras[13277]:AddChildCritExtLinkFull(13277, 2, "https://www.wow-petguide.com/Encounter/1006");
     rcMenExtras[13277]:AddChildCritExtLinkFull(13277, 3, "https://www.wow-petguide.com/Encounter/1011");
@@ -982,7 +1073,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13277]:AddChildCritExtLinkFull(13277, 17, "https://www.wow-petguide.com/Encounter/1017");
     rcMenExtras[13277]:AddChildCritExtLinkFull(13277, 18, "https://www.wow-petguide.com/Encounter/1014");
     rcMenExtras[13277]:AddChildCritExtLinkFull(13277, 19, "https://www.wow-petguide.com/Encounter/1015");
-    rcMenExtras[13278] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/819");
+    rcMenExtras[13278] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/819"); -- Not Quite Dead Yet
     rcMenExtras[13278]:AddChildCritExtLinkFull(13278, 1, "https://www.wow-petguide.com/Encounter/832");
     rcMenExtras[13278]:AddChildCritExtLinkFull(13278, 2, "https://www.wow-petguide.com/Encounter/826");
     rcMenExtras[13278]:AddChildCritExtLinkFull(13278, 3, "https://www.wow-petguide.com/Encounter/831");
@@ -1002,7 +1093,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13278]:AddChildCritExtLinkFull(13278, 17, "https://www.wow-petguide.com/Encounter/837");
     rcMenExtras[13278]:AddChildCritExtLinkFull(13278, 18, "https://www.wow-petguide.com/Encounter/834");
     rcMenExtras[13278]:AddChildCritExtLinkFull(13278, 19, "https://www.wow-petguide.com/Encounter/835");
-    rcMenExtras[13279] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/54");
+    rcMenExtras[13279] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/54"); -- Family Battler
     local tempA13280 = rcMenExtras[13279]:AddChildCritExtLinkFull(13279, 1, "https://www.wow-petguide.com/Encounter/969");
     tempA13280:AddChildCritExtLinkFull(13280, 1, "https://www.wow-petguide.com/Encounter/982");
     tempA13280:AddChildCritExtLinkFull(13280, 2, "https://www.wow-petguide.com/Encounter/976");
@@ -1203,7 +1294,7 @@ function exportedPetBattles.Load(rcMenExtras)
     tempA13278:AddChildCritExtLinkFull(13278, 17, "https://www.wow-petguide.com/Encounter/837");
     tempA13278:AddChildCritExtLinkFull(13278, 18, "https://www.wow-petguide.com/Encounter/834");
     tempA13278:AddChildCritExtLinkFull(13278, 19, "https://www.wow-petguide.com/Encounter/835");
-    rcMenExtras[13625] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/61");
+    rcMenExtras[13625] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/61"); -- Mighty Minions of Mechagon
     rcMenExtras[13625]:AddChildCritExtLinkFull(13625, 1, "https://www.wow-petguide.com/Encounter/1095");
     rcMenExtras[13625]:AddChildCritExtLinkFull(13625, 2, "https://www.wow-petguide.com/Encounter/1099");
     rcMenExtras[13625]:AddChildCritExtLinkFull(13625, 3, "https://www.wow-petguide.com/Encounter/1096");
@@ -1212,7 +1303,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13625]:AddChildCritExtLinkFull(13625, 6, "https://www.wow-petguide.com/Encounter/1101");
     rcMenExtras[13625]:AddChildCritExtLinkFull(13625, 7, "https://www.wow-petguide.com/Encounter/1098");
     rcMenExtras[13625]:AddChildCritExtLinkFull(13625, 8, "https://www.wow-petguide.com/Encounter/1114");
-    rcMenExtras[13626] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/62");
+    rcMenExtras[13626] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/62"); -- Nautical Nuisances of Nazjatar
     rcMenExtras[13626]:AddChildCritExtLinkFull(13626, 1, "https://www.wow-petguide.com/Encounter/1102");
     rcMenExtras[13626]:AddChildCritExtLinkFull(13626, 2, "https://www.wow-petguide.com/Encounter/1108");
     rcMenExtras[13626]:AddChildCritExtLinkFull(13626, 3, "https://www.wow-petguide.com/Encounter/1103");
@@ -1225,7 +1316,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[13626]:AddChildCritExtLinkFull(13626, 10, "https://www.wow-petguide.com/Encounter/1112");
     rcMenExtras[13626]:AddChildCritExtLinkFull(13626, 11, "https://www.wow-petguide.com/Encounter/1107");
     rcMenExtras[13626]:AddChildCritExtLinkFull(13626, 12, "https://www.wow-petguide.com/Encounter/1113");
-    rcMenExtras[13695] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/61");
+    rcMenExtras[13695] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/61"); -- Team Aquashock
     local tempA13626 = rcMenExtras[13695]:AddChildCritExtLinkFull(13695, 3, "https://www.wow-petguide.com/Section/62");
     tempA13626:AddChildCritExtLinkFull(13626, 1, "https://www.wow-petguide.com/Encounter/1102");
     tempA13626:AddChildCritExtLinkFull(13626, 2, "https://www.wow-petguide.com/Encounter/1108");
@@ -1248,7 +1339,7 @@ function exportedPetBattles.Load(rcMenExtras)
     tempA13625:AddChildCritExtLinkFull(13625, 6, "https://www.wow-petguide.com/Encounter/1101");
     tempA13625:AddChildCritExtLinkFull(13625, 7, "https://www.wow-petguide.com/Encounter/1098");
     tempA13625:AddChildCritExtLinkFull(13625, 8, "https://www.wow-petguide.com/Encounter/1114");
-    rcMenExtras[14625] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/70");
+    rcMenExtras[14625] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/70"); -- Battle in the Shadowlands
     rcMenExtras[14625]:AddChildCritExtLinkFull(14625, 1, "https://www.wow-petguide.com/Encounter/1197");
     rcMenExtras[14625]:AddChildCritExtLinkFull(14625, 2, "https://www.wow-petguide.com/Encounter/1196");
     rcMenExtras[14625]:AddChildCritExtLinkFull(14625, 3, "https://www.wow-petguide.com/Encounter/1195");
@@ -1265,7 +1356,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14625]:AddChildCritExtLinkFull(14625, 14, "https://www.wow-petguide.com/Encounter/1180");
     rcMenExtras[14625]:AddChildCritExtLinkFull(14625, 15, "https://www.wow-petguide.com/Encounter/1179");
     rcMenExtras[14625]:AddChildCritExtLinkFull(14625, 16, "https://www.wow-petguide.com/Encounter/1181");
-    rcMenExtras[14868] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1340");
+    rcMenExtras[14868] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1340"); -- Aquatic Apparitions
     rcMenExtras[14868]:AddChildCritExtLinkFull(14868, 1, "https://www.wow-petguide.com/Encounter/1338");
     rcMenExtras[14868]:AddChildCritExtLinkFull(14868, 2, "https://www.wow-petguide.com/Encounter/1339");
     rcMenExtras[14868]:AddChildCritExtLinkFull(14868, 3, "https://www.wow-petguide.com/Encounter/1340");
@@ -1277,7 +1368,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14868]:AddChildCritExtLinkFull(14868, 9, "https://www.wow-petguide.com/Encounter/1330");
     rcMenExtras[14868]:AddChildCritExtLinkFull(14868, 10, "https://www.wow-petguide.com/Encounter/1342");
     rcMenExtras[14868]:AddChildCritExtLinkFull(14868, 11, "https://www.wow-petguide.com/Encounter/1343");
-    rcMenExtras[14869] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1325");
+    rcMenExtras[14869] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1325"); -- Beast Busters
     rcMenExtras[14869]:AddChildCritExtLinkFull(14869, 1, "https://www.wow-petguide.com/Encounter/1323");
     rcMenExtras[14869]:AddChildCritExtLinkFull(14869, 2, "https://www.wow-petguide.com/Encounter/1324");
     rcMenExtras[14869]:AddChildCritExtLinkFull(14869, 3, "https://www.wow-petguide.com/Encounter/1325");
@@ -1289,7 +1380,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14869]:AddChildCritExtLinkFull(14869, 9, "https://www.wow-petguide.com/Encounter/1315");
     rcMenExtras[14869]:AddChildCritExtLinkFull(14869, 10, "https://www.wow-petguide.com/Encounter/1327");
     rcMenExtras[14869]:AddChildCritExtLinkFull(14869, 11, "https://www.wow-petguide.com/Encounter/1328");
-    rcMenExtras[14870] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1280");
+    rcMenExtras[14870] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1280"); -- Creepy Critters
     rcMenExtras[14870]:AddChildCritExtLinkFull(14870, 1, "https://www.wow-petguide.com/Encounter/1278");
     rcMenExtras[14870]:AddChildCritExtLinkFull(14870, 2, "https://www.wow-petguide.com/Encounter/1279");
     rcMenExtras[14870]:AddChildCritExtLinkFull(14870, 3, "https://www.wow-petguide.com/Encounter/1280");
@@ -1301,7 +1392,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14870]:AddChildCritExtLinkFull(14870, 9, "https://www.wow-petguide.com/Encounter/1270");
     rcMenExtras[14870]:AddChildCritExtLinkFull(14870, 10, "https://www.wow-petguide.com/Encounter/1282");
     rcMenExtras[14870]:AddChildCritExtLinkFull(14870, 11, "https://www.wow-petguide.com/Encounter/1283");
-    rcMenExtras[14871] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1235");
+    rcMenExtras[14871] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1235"); -- Deathly Dragonkin
     rcMenExtras[14871]:AddChildCritExtLinkFull(14871, 1, "https://www.wow-petguide.com/Encounter/1233");
     rcMenExtras[14871]:AddChildCritExtLinkFull(14871, 2, "https://www.wow-petguide.com/Encounter/1234");
     rcMenExtras[14871]:AddChildCritExtLinkFull(14871, 3, "https://www.wow-petguide.com/Encounter/1235");
@@ -1313,7 +1404,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14871]:AddChildCritExtLinkFull(14871, 9, "https://www.wow-petguide.com/Encounter/1225");
     rcMenExtras[14871]:AddChildCritExtLinkFull(14871, 10, "https://www.wow-petguide.com/Encounter/1237");
     rcMenExtras[14871]:AddChildCritExtLinkFull(14871, 11, "https://www.wow-petguide.com/Encounter/1238");
-    rcMenExtras[14872] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1310");
+    rcMenExtras[14872] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1310"); -- Eerie Elementals
     rcMenExtras[14872]:AddChildCritExtLinkFull(14872, 1, "https://www.wow-petguide.com/Encounter/1308");
     rcMenExtras[14872]:AddChildCritExtLinkFull(14872, 2, "https://www.wow-petguide.com/Encounter/1309");
     rcMenExtras[14872]:AddChildCritExtLinkFull(14872, 3, "https://www.wow-petguide.com/Encounter/1310");
@@ -1325,7 +1416,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14872]:AddChildCritExtLinkFull(14872, 9, "https://www.wow-petguide.com/Encounter/1300");
     rcMenExtras[14872]:AddChildCritExtLinkFull(14872, 10, "https://www.wow-petguide.com/Encounter/1312");
     rcMenExtras[14872]:AddChildCritExtLinkFull(14872, 11, "https://www.wow-petguide.com/Encounter/1313");
-    rcMenExtras[14873] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1250");
+    rcMenExtras[14873] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1250"); -- Flickering Fliers
     rcMenExtras[14873]:AddChildCritExtLinkFull(14873, 1, "https://www.wow-petguide.com/Encounter/1248");
     rcMenExtras[14873]:AddChildCritExtLinkFull(14873, 2, "https://www.wow-petguide.com/Encounter/1249");
     rcMenExtras[14873]:AddChildCritExtLinkFull(14873, 3, "https://www.wow-petguide.com/Encounter/1250");
@@ -1337,7 +1428,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14873]:AddChildCritExtLinkFull(14873, 9, "https://www.wow-petguide.com/Encounter/1240");
     rcMenExtras[14873]:AddChildCritExtLinkFull(14873, 10, "https://www.wow-petguide.com/Encounter/1252");
     rcMenExtras[14873]:AddChildCritExtLinkFull(14873, 11, "https://www.wow-petguide.com/Encounter/1253");
-    rcMenExtras[14874] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1220");
+    rcMenExtras[14874] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1220"); -- Haunted Humanoids
     rcMenExtras[14874]:AddChildCritExtLinkFull(14874, 1, "https://www.wow-petguide.com/Encounter/1218");
     rcMenExtras[14874]:AddChildCritExtLinkFull(14874, 2, "https://www.wow-petguide.com/Encounter/1219");
     rcMenExtras[14874]:AddChildCritExtLinkFull(14874, 3, "https://www.wow-petguide.com/Encounter/1220");
@@ -1349,7 +1440,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14874]:AddChildCritExtLinkFull(14874, 9, "https://www.wow-petguide.com/Encounter/1210");
     rcMenExtras[14874]:AddChildCritExtLinkFull(14874, 10, "https://www.wow-petguide.com/Encounter/1222");
     rcMenExtras[14874]:AddChildCritExtLinkFull(14874, 11, "https://www.wow-petguide.com/Encounter/1223");
-    rcMenExtras[14875] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1295");
+    rcMenExtras[14875] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1295"); -- Mummified Magics
     rcMenExtras[14875]:AddChildCritExtLinkFull(14875, 1, "https://www.wow-petguide.com/Encounter/1293");
     rcMenExtras[14875]:AddChildCritExtLinkFull(14875, 2, "https://www.wow-petguide.com/Encounter/1294");
     rcMenExtras[14875]:AddChildCritExtLinkFull(14875, 3, "https://www.wow-petguide.com/Encounter/1295");
@@ -1361,7 +1452,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14875]:AddChildCritExtLinkFull(14875, 9, "https://www.wow-petguide.com/Encounter/1285");
     rcMenExtras[14875]:AddChildCritExtLinkFull(14875, 10, "https://www.wow-petguide.com/Encounter/1297");
     rcMenExtras[14875]:AddChildCritExtLinkFull(14875, 11, "https://www.wow-petguide.com/Encounter/1298");
-    rcMenExtras[14876] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1355");
+    rcMenExtras[14876] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1355"); -- Macabre Mechanicals
     rcMenExtras[14876]:AddChildCritExtLinkFull(14876, 1, "https://www.wow-petguide.com/Encounter/1353");
     rcMenExtras[14876]:AddChildCritExtLinkFull(14876, 2, "https://www.wow-petguide.com/Encounter/1354");
     rcMenExtras[14876]:AddChildCritExtLinkFull(14876, 3, "https://www.wow-petguide.com/Encounter/1355");
@@ -1373,7 +1464,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14876]:AddChildCritExtLinkFull(14876, 9, "https://www.wow-petguide.com/Encounter/1345");
     rcMenExtras[14876]:AddChildCritExtLinkFull(14876, 10, "https://www.wow-petguide.com/Encounter/1357");
     rcMenExtras[14876]:AddChildCritExtLinkFull(14876, 11, "https://www.wow-petguide.com/Encounter/1358");
-    rcMenExtras[14877] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1265");
+    rcMenExtras[14877] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Encounter/1265"); -- Unholy Undead
     rcMenExtras[14877]:AddChildCritExtLinkFull(14877, 1, "https://www.wow-petguide.com/Encounter/1263");
     rcMenExtras[14877]:AddChildCritExtLinkFull(14877, 2, "https://www.wow-petguide.com/Encounter/1264");
     rcMenExtras[14877]:AddChildCritExtLinkFull(14877, 3, "https://www.wow-petguide.com/Encounter/1265");
@@ -1385,7 +1476,7 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[14877]:AddChildCritExtLinkFull(14877, 9, "https://www.wow-petguide.com/Encounter/1255");
     rcMenExtras[14877]:AddChildCritExtLinkFull(14877, 10, "https://www.wow-petguide.com/Encounter/1267");
     rcMenExtras[14877]:AddChildCritExtLinkFull(14877, 11, "https://www.wow-petguide.com/Encounter/1268");
-    rcMenExtras[14879] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/73");
+    rcMenExtras[14879] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/73"); -- Family Exorcist
     local tempA14868 = rcMenExtras[14879]:AddChildCritExtLinkFull(14879, 1, "https://www.wow-petguide.com/Encounter/1340");
     tempA14868:AddChildCritExtLinkFull(14868, 1, "https://www.wow-petguide.com/Encounter/1338");
     tempA14868:AddChildCritExtLinkFull(14868, 2, "https://www.wow-petguide.com/Encounter/1339");
@@ -1506,7 +1597,7 @@ function exportedPetBattles.Load(rcMenExtras)
     tempA14877:AddChildCritExtLinkFull(14877, 9, "https://www.wow-petguide.com/Encounter/1255");
     tempA14877:AddChildCritExtLinkFull(14877, 10, "https://www.wow-petguide.com/Encounter/1267");
     tempA14877:AddChildCritExtLinkFull(14877, 11, "https://www.wow-petguide.com/Encounter/1268");
-    rcMenExtras[14881] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/72");
+    rcMenExtras[14881] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], "https://www.wow-petguide.com/Section/72"); -- Abhorrent Adversaries of the Afterlife
     rcMenExtras[14881]:AddChildCritExtLinkFull(14881, 1, "https://www.wow-petguide.com/Encounter/1199");
     rcMenExtras[14881]:AddChildCritExtLinkFull(14881, 2, "https://www.wow-petguide.com/Encounter/1206");
     rcMenExtras[14881]:AddChildCritExtLinkFull(14881, 3, "https://www.wow-petguide.com/Encounter/1207");

@@ -14,22 +14,6 @@ AF_BUILD = GetBuildInfo();
 AF_VERSION = GetAddOnMetadata(addonName, "Version");
 AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
 
-function addon.IsIATLoaded()
-    return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
-end
-
-function addon.ReplaceVars(str, vars)
-    -- Allow replace_vars{str, vars} syntax as well as replace_vars(str, {vars})
-    if not vars then
-        vars = str
-        str = vars[1]
-    end
-    return (string.gsub(str, "({([^}]+)})",
-        function(whole,i)
-            return vars[i] or whole
-        end));
-end
-
 function addon.GetAchievement(id)
     addon.Diagnostics.Trace("addon.GetAchievement");
 
@@ -40,18 +24,22 @@ function addon.GetAchievement(id)
 	end
 end
 
-function addon.GetAchievementsWithZone(mapID)
-    addon.Diagnostics.Trace("addon.GetAchievementsWithZone");
+function addon.GetAchievementsInZone(mapID)
+    addon.Diagnostics.Trace("addon.GetAchievementsInZone");
 
     -- Maybe add a recursive feature to check parent categories for zone IDs
     local achievements = {};
 	for _, category in next, addon.Categories do
         local mapIDs = {};
-        local categoryTree = category:GetTree();
-        for _, cat in next, categoryTree do
-            if cat.MapIDs ~= nil then
-                for _, catMapID in next, cat.MapIDs do
-                    tinsert(mapIDs, catMapID);
+        if category.IgnoreParentMapIDs then
+            mapIDs = category.MapIDs;
+        else
+            local categoryTree = category:GetTree();
+            for _, cat in next, categoryTree do
+                if cat.MapIDs ~= nil and not cat.IgnoreParentMapIDs then
+                    for _, catMapID in next, cat.MapIDs do
+                        tinsert(mapIDs, catMapID);
+                    end
                 end
             end
         end
@@ -68,8 +56,4 @@ function addon.GetAchievementsWithZone(mapID)
         end
 	end
     return achievements;
-end
-
-function addon.InjectMetatable(tbl, meta)
-    return setmetatable(tbl, setmetatable(meta, getmetatable(tbl)));
 end

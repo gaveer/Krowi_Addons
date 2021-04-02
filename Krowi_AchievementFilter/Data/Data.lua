@@ -11,10 +11,10 @@ addon.RCMenuExtras = {};
 function data.Load()
     addon.CurrentZoneCategory = addon.ExportedData.Load(addon.Categories, addon.Achievements);
     addon.ExportedPetBattles.Load(addon.RCMenuExtras);
-    -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsWithZone(C_Map.GetBestMapForUnit("player"));
+    -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(C_Map.GetBestMapForUnit("player"));
 
     -- TEST = {};
-    -- data.PrintCriteria(14881, nil, 0);
+    -- data.PrintCriteria(8518, nil, 0);
 end
 
 local cachedZone;
@@ -23,45 +23,10 @@ function data.GetCurrentZoneAchievements()
 
     if cachedZone ~= C_Map.GetBestMapForUnit("player") then
         cachedZone = C_Map.GetBestMapForUnit("player");
-        addon.CurrentZoneCategory.Achievements = addon.GetAchievementsWithZone(cachedZone);
+        addon.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(cachedZone);
         return true; -- Output that the zone has changed
     end
 end
-
--- local function ConvertToAchievementFrameCategory(datum, categories, achievements)
---     if diagnostics.DebugEnabled() then
---         datum.Name = datum.Level .. " " .. datum.Name;
---     end
-
---     tinsert(categories, datum);
-
---     if datum.Achievements ~= nil then
---         for _, achievement in next, datum.Achievements do
---             tinsert(achievements, achievement);
---         end
---     end
-
---     if datum.Children ~= nil then
---         for _, child in next, datum.Children do
---             ConvertToAchievementFrameCategory(child, categories, achievements);
---         end
---     end
--- end
-
--- function data:GetLists()
---     local categories = {};
---     local achievements = {};
-
---     for _, datum in next, self do
---         if type(datum) == "table" then
---             ConvertToAchievementFrameCategory(datum, categories, achievements);
---         end
---     end
-
---     diagnostics.Debug("     - Lists loaded");
-
---     return categories, achievements;
--- end
 
 -- function data.PrintCriteria(achievementID, parentCriteriaID, criteriaNumber)
 --     local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);

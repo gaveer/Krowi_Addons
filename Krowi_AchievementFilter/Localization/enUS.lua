@@ -11,6 +11,8 @@ L["Xu-Fu's Pet Guides"] = "Xu-Fu's Pet Guides";
 L["Instance Achievement Tracker"] = "Instance Achievement Tracker";
 L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
+L["Tutorial"] = "Tutorial";
+L["Discord"] = "Discord";
 
 -- Tab
 L["T_TAB_TEXT"] = "Achievement Filter";
@@ -32,6 +34,8 @@ L["Collapse Series"] = "Collapse Series";
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
 L["Build"] = "Build";
 L["Author"] = "Author";
+L["O_TUTORIAL_DESC"] = "Open the tutorials from the start";
+L["O_DISCORD_DESC"] = "Open a popup dialog with a link to the Krowi's Addons Discord server. Here you can post comments, reports, remarks, ideas or anything else related.";
 L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
 L["O_LAYOUT"] = "Layout";
@@ -49,7 +53,7 @@ L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to st
                                     "The smaller the number, the greater the impact on the game.";
 L["O_NUM_OF_SEARCH_PREVIEWS"] = "Number of search previews";
 L["O_NUM_OF_SEARCH_PREVIEWS_DESC"] = "The numbers of achievements shown as a preview of the full list of found achievements.\n\n{reloadRequired}";
-L["O_STYLE"] = "ElvUI Skins";
+L["O_STYLE"] = "ElvUI Skins Status";
 L["O_STYLE_DESC"] = "Each of the options below are controlled by ElvUI and are just informational.\n" ..
                     "To change these, go to Game Menu -> ElvUI -> Skins and check the desired options. See each option below for what to check.";
 L["O_SKIN_ACHIEVEMENT"] = "Skin Achievements";

@@ -16,6 +16,17 @@ addon.Faction.IsAlliance = UnitFactionGroup("player") == "Alliance";
 addon.Faction.IsHorde = UnitFactionGroup("player") == "Horde";
 addon.Faction.IsNeutral = UnitFactionGroup("player") == "Neutral";
 
+-- [[ Covenant data ]] --
+function addon.GetActiveCovenant()
+    return C_Covenants.GetActiveCovenantID() + 1; -- 1 offset since Covenant Enum is 1 based (lua) and Covenant Database Table 0 based
+end
+
+-- [[ IAT integration ]] --
+function addon.IsIATLoaded()
+    return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
+end
+
+-- [[ Load addon ]] --
 local loadHelper = CreateFrame("Frame");
 loadHelper:RegisterEvent("ADDON_LOADED");
 loadHelper:RegisterEvent("PLAYER_LOGIN");
@@ -63,12 +74,12 @@ function loadHelper:OnEvent(event, arg1)
     elseif event == "PLAYER_LOGIN" then
         addon.Options.SetFilters();
 
-        -- if addon.Diagnostics.DebugEnabled then
-        --     hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
-        --         local mapID = WorldMapFrame.mapID;
-        --         print(mapID);
-        --     end);
-        -- end
+        if addon.Diagnostics.DebugEnabled then
+            hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
+                local mapID = WorldMapFrame.mapID;
+                print(mapID);
+            end);
+        end
     -- elseif event == "ZONE_CHANGED" then
     --     addon.Diagnostics.Debug("ZONE_CHANGED");
     -- elseif event == "ZONE_CHANGED_NEW_AREA" then
@@ -76,11 +87,12 @@ function loadHelper:OnEvent(event, arg1)
     -- elseif event == "UNIT_AREA_CHANGED" then
     --     addon.Diagnostics.Debug("UNIT_AREA_CHANGED");
 
-        -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsWithZone(C_Map.GetBestMapForUnit("player"));
+        -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(C_Map.GetBestMapForUnit("player"));
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
 
+-- [[ SCREENSHOT MODE ]] --
 -- local f = CreateFrame("Frame", nil, UIParent)
 -- f:SetAllPoints();
 -- f:SetPoint("CENTER")
@@ -90,6 +102,7 @@ loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
 -- f.tex:SetAllPoints(f)
 -- f.tex:SetTexture("Interface\\AddOns\\Krowi_AchievementFilter\\Media\\Black")
 
+-- [[ DEBUGGING ]] --
 -- local KrowiAF_UIDropDownMenu_AddButton = UIDropDownMenu_AddButton;
 -- UIDropDownMenu_AddButton = function(info, level)
 --     if addon and addon.Diagnostics then

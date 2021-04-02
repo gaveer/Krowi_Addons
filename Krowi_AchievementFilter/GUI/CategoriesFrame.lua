@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
 gui.CategoriesFrame = {};
@@ -17,7 +18,7 @@ function categoriesFrame:New(categories, achievementsFrame)
 
 	-- Create frame
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. numFrames, AchievementFrame, "KrowiAF_CategoriesFrame_Template");
-	addon.InjectMetatable(frame, categoriesFrame);
+	core.InjectMetatable(frame, categoriesFrame);
 
 	-- Set properties
 	frame.ID = numFrames;

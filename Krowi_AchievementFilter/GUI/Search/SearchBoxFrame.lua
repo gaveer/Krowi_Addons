@@ -1,5 +1,6 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
+local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
 gui.SearchBoxFrame = {};
@@ -20,7 +21,7 @@ function searchBoxFrame:New(searchPreviewFrame, fullSearchResults, achievementsF
 	frame:SetPoint("TOPLEFT", AchievementFrame.searchBox);
     frame:SetPoint("BOTTOMRIGHT", AchievementFrame.searchBox);
     frame:SetMaxLetters(40);
-	addon.InjectMetatable(frame, searchBoxFrame);
+	core.InjectMetatable(frame, searchBoxFrame);
 
 	-- Set properties
 	frame.ID = numFrames;

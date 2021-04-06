@@ -1,9 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.17.0] - 
+## [9.0.5.17.0] - 2021-04-06
 ### Added
-- TBD
+- Cataclysm Zones (145 achievements) + zone data except for the shared zone group
+- Missing Cataclysm Tol Barad (3 achievements)
+
+### Changed
+- Cataclysm Tol Barad moved to Zones
+
+### Fixed
+- Issue #33: Random numbers in chat
 
 ## [9.0.5.16.0] - 2021-04-02
 ### Added
@@ -215,7 +222,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.0.5.17.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.5.17.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3264965
 [9.0.5.16.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3259864
 [9.0.5.15.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3248934
 [9.0.5.14.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3234117

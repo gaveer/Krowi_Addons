@@ -74,7 +74,7 @@ function loadHelper:OnEvent(event, arg1)
     elseif event == "PLAYER_LOGIN" then
         addon.Options.SetFilters();
 
-        if addon.Diagnostics.DebugEnabled then
+        if addon.Diagnostics.DebugEnabled() then
             hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
                 local mapID = WorldMapFrame.mapID;
                 print(mapID);

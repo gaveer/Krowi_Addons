@@ -1,9 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.17.0] - 
+## [9.0.5.17.0] - 2021-04-06
 ### Added
-- TBD
+- Cataclysm Zones (145 achievements) + zone data except for the shared zone group
+- Missing Cataclysm Tol Barad (3 achievements)
+
+### Changed
+- Cataclysm Tol Barad moved to Zones
+
+### Fixed
+- Issue #33: Random numbers in chat
 
 ## [9.0.5.16.0] - 2021-04-02
 ### Added

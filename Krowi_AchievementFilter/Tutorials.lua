@@ -121,7 +121,7 @@ function tutorials.Load()
                 self[i].shine = tabButton1;
             elseif i == 2 then
                 gui.ToggleAchievementFrameAtTab1(true);
-                categoriesFrame:SelectCategory(addon.GetAchievement(14281):GetCategory());
+                categoriesFrame:SelectCategory(addon.GetAchievement(14281).Category);
                 self[i].shine = categoriesFrame;
             elseif i == 3 then
                 gui.ToggleAchievementFrameAtTab1(true);

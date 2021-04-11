@@ -437,7 +437,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 		self.FilterButton:SetFilters(achievement);
 	end
 
-	local category = achievement:GetCategory();
+	local category = achievement.Category;
 
 	self.CategoriesFrame:SelectCategory(category);
 

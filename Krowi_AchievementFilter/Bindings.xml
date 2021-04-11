@@ -1,19 +1,4 @@
 <Bindings>
-	<!-- <Binding name='Raid Marker' runOnUp='true' category='BINDING_HEADER_ELVUI'>
-		RaidMark_HotkeyPressed(keystate)
-	</Binding>
-	<Binding name='Toggle Chat (Left)' runOnUp='false' category='BINDING_HEADER_ELVUI'>
-		HideLeftChat()
-	</Binding>
-	<Binding name='Toggle Chat (Right)' runOnUp='false' category='BINDING_HEADER_ELVUI'>
-		HideRightChat()
-	</Binding>
-	<Binding name='Toggle Chat (Both)' runOnUp='false' category='BINDING_HEADER_ELVUI'>
-		HideBothChat()
-	</Binding>
-	<Binding name="OVERACHIEVER_TAB_WATCH" category="ADDONS">
-		Overachiever.OpenTab("Overachiever_WatchFrame");
-	</Binding> -->
     <Binding name="AF_OPEN_TAB1" header="AF_NAME" category="ADDONS">
         KrowiAF_ToggleAchievementFrameAtTab1();
     </Binding>

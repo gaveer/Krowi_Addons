@@ -5,18 +5,12 @@ using System.Collections.Generic;
 
 namespace DbManager.DataManagers
 {
-    public class PetBattleLinksDataManager
+    public class PetBattleLinksDataManager : DataManagerBase
     {
-        private SqliteConnection connection;
-
-        public PetBattleLinksDataManager(SqliteConnection connection)
-        {
-            this.connection = connection;
-        }
+        public PetBattleLinksDataManager(SqliteConnection connection) : base(connection) { }
 
         public void Add(PetBattleLink petBattleLink, Achievement achievement)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = petBattleLink ?? throw new ArgumentNullException(nameof(petBattleLink));
 
             var cmd = connection.CreateCommand();
@@ -34,8 +28,6 @@ namespace DbManager.DataManagers
 
         public PetBattleLink GetWithID(string ID)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT ID, CriteriaNum, Name, ParentID, ExternalLink, PetFamilyID FROM PetBattleLinks WHERE ID = @ID ORDER BY CriteriaNum";
             cmd.Parameters.AddWithValue("@ID", ID);
@@ -50,8 +42,6 @@ namespace DbManager.DataManagers
 
         public List<PetBattleLink> GetWithParentID(string parentID)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT ID, CriteriaNum, Name, ParentID, ExternalLink, PetFamilyID FROM PetBattleLinks WHERE ParentID = @ParentID ORDER BY CriteriaNum";
             cmd.Parameters.AddWithValue("@ParentID", parentID);
@@ -66,8 +56,6 @@ namespace DbManager.DataManagers
 
         public List<PetBattleLink> GetWithAchievementID(int achievementID)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT ID, CriteriaNum, Name, ParentID, ExternalLink, PetFamilyID FROM PetBattleLinks WHERE AchievementID = @AchievementID ORDER BY CriteriaNum";
             cmd.Parameters.AddWithValue("@AchievementID", achievementID);
@@ -82,7 +70,6 @@ namespace DbManager.DataManagers
 
         public void UpdateExternalLink(PetBattleLink achievementCriteria)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = achievementCriteria ?? throw new ArgumentNullException(nameof(achievementCriteria));
 
             var cmd = connection.CreateCommand();

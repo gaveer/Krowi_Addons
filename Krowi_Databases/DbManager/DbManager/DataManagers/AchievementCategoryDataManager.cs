@@ -6,19 +6,12 @@ using System.Text;
 
 namespace DbManager.DataManagers
 {
-    public class AchievementCategoryDataManager
+    public class AchievementCategoryDataManager : DataManagerBase
     {
-        private SqliteConnection connection;
-
-        public AchievementCategoryDataManager(SqliteConnection connection)
-        {
-            this.connection = connection;
-        }
+        public AchievementCategoryDataManager(SqliteConnection connection) : base(connection) { }
 
         public List<AchievementCategory> GetAll()
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"WITH CTE_AchievementCategory(ID, ParentID, Location, LocationPath) AS (
                                 SELECT
@@ -61,8 +54,6 @@ namespace DbManager.DataManagers
 
         public List<int> GetMapIDs(AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT UIMapID FROM AchievementCategoryUIMap WHERE AchievementCategoryID == @AchievementCategoryID ORDER BY UIMapID";
             cmd.Parameters.AddWithValue("@AchievementCategoryID", category.ID);
@@ -77,8 +68,6 @@ namespace DbManager.DataManagers
 
         //public List<AchievementCategory> GetWithParent(AchievementCategory parent)
         //{
-        //    _ = connection ?? throw new NullReferenceException(nameof(connection));
-
         //    var cmd = connection.CreateCommand();
         //    if (parent != null)
         //    {
@@ -98,8 +87,6 @@ namespace DbManager.DataManagers
 
         public AchievementCategory GetLast()
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue, ParentID, F.Description FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID ORDER BY AC.ID DESC LIMIT 1";
 
@@ -112,7 +99,6 @@ namespace DbManager.DataManagers
 
         public void Add(AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
@@ -149,7 +135,6 @@ namespace DbManager.DataManagers
 
         public void UpdateMapIDs(AchievementCategory selectedCategory, List<int> mapIDs)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
             _ = mapIDs ?? throw new ArgumentNullException(nameof(mapIDs));
 
@@ -173,7 +158,6 @@ namespace DbManager.DataManagers
 
         public void UpdateLocations(AchievementCategory selectedCategory, List<AchievementCategory> categories)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
             _ = categories ?? throw new ArgumentNullException(nameof(categories));
 
@@ -192,7 +176,6 @@ namespace DbManager.DataManagers
 
         public void UpdateParent(AchievementCategory category, AchievementCategory parent, int location)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             category.Parent = parent;
@@ -215,7 +198,6 @@ namespace DbManager.DataManagers
 
         public void Remove(AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var sb = new StringBuilder();
@@ -232,7 +214,6 @@ namespace DbManager.DataManagers
 
         public void Swap(AchievementCategory category1, AchievementCategory category2)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category1 ?? throw new ArgumentNullException(nameof(category1));
             _ = category2 ?? throw new ArgumentNullException(nameof(category2));
 

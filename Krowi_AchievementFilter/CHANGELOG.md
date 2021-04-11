@@ -3,7 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.18.0] - 
 ### Added
-- TBD
+- The Burning Crusade Dungeons and Raids zone data
+- Wrath of the Lich King Dungeons and Raids zone data including difficulty filtering
+- Missing Classic Dungeon Stratholme (1 achievement)
+- Missing Cataclysm Uldum (1 achievement)
+- Missing Mists of Pandaria Isle of Giants (1 achievement)
+- Missing Warlords of Draenor Tanaan Jungle (1 achievement)
+- Missing Legion Zone Argus Map ID
+
+### Changed
+- Code cleanup
 
 ## [9.0.5.17.0] - 2021-04-06
 ### Added

@@ -1,49 +1,44 @@
 ﻿using DbManager.Objects;
 using Microsoft.Data.Sqlite;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DbManager.DataManagers
 {
-    public class FunctionDataManager
+    public class FunctionDataManager : DataManagerBase
     {
-        private SqliteConnection connection;
+        private readonly List<Function> functions = new List<Function>();
 
-        public FunctionDataManager(SqliteConnection connection)
+        public FunctionDataManager(SqliteConnection connection) : base(connection) { }
+
+        public List<Function> GetAll(bool refresh = false)
         {
-            this.connection = connection;
-        }
-
-        public List<Function> Functions { get; private set; } = new List<Function>();
-
-        public List<Function> GetAll()
-        {
-            _ = connection ?? throw new ArgumentNullException(nameof(connection));
+            if (!refresh)
+                if (functions.Any())
+                    return functions;
 
             var selectCmd = connection.CreateCommand();
-            selectCmd.CommandText = @"SELECT ID, Call, Description FROM Function";
+            selectCmd.CommandText = @"  SELECT
+                                            ID, Call, Description
+                                        FROM
+                                            Function";
 
             using (var reader = selectCmd.ExecuteReader())
             {
-                Functions.Clear();
+                functions.Clear();
                 while (reader.Read())
-                {
-                    var function = new Function(reader.GetInt32(0), reader.GetString(1), reader.IsDBNull(2) ? null : reader.GetString(2));
-                    Functions.Add(function);
-                    Console.WriteLine(function);
-                }
+                    functions.Add(new Function(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
             }
 
-            return Functions;
+            return functions;
         }
 
         public Function GetLegacyFunction()
         {
-            if (Functions.Count == 0)
+            if (functions.Count == 0)
                 GetAll();
 
-            return Functions.Single(x => x.ID == 5);
+            return functions.Single(x => x.ID == 5);
         }
     }
 }

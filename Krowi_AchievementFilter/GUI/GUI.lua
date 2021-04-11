@@ -109,7 +109,7 @@ function gui.ResetView()
     if frames["CategoriesFrame"] and frames["CategoriesFrame"].ID then -- Checking ID is to know if the frame is initialised or not
         -- We want to have Classic selected and collapsed
         -- Achievement 1283 has Dungeons as parent but we need its parent which is Classic
-        frames["CategoriesFrame"]:SelectCategory(addon.Categories[1], true); -- addon.GetAchievement(1283):GetCategory().Parent
+        frames["CategoriesFrame"]:SelectCategory(addon.Categories[1], true);
     end
 
     if frames["SearchBoxFrame"] and frames["SearchBoxFrame"].ID then

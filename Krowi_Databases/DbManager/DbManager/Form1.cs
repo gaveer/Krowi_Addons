@@ -1,4 +1,5 @@
-﻿using DbManager.GUI;
+﻿using DbManager.DataManagers;
+using DbManager.GUI;
 using DbManager.Objects;
 using Microsoft.Data.Sqlite;
 using System;
@@ -36,7 +37,7 @@ namespace DbManager
             achievementHandler = new AchievementHandler(connection, lsbAchievements, achievementCategoryHandler);
             xuFuEncounterHandler = new XuFuEncounterHandler(connection, btnGetXuFuIDs, pgbXuFu);
             achievementCriteriaHandler = new AchievementCriteriaHandler(connection, achievementHandler.DataManager, xuFuEncounterHandler.DataManager);
-            exportHandler = new ExportHandler(connection, functionHandler.DataManager, achievementCriteriaHandler.DataManager);
+            exportHandler = new ExportHandler((AchievementDataManager)achievementHandler.DataManager, (AchievementCategoryDataManager)achievementCategoryHandler.DataManager, (FunctionDataManager)functionHandler.DataManager, (PetBattleLinksDataManager)achievementCriteriaHandler.DataManager);
 
             achievementCategoryHandler.RefreshTreeView();
             functionHandler.RefreshListBox();

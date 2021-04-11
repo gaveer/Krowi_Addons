@@ -27,31 +27,51 @@ end
 function addon.GetAchievementsInZone(mapID)
     addon.Diagnostics.Trace("addon.GetAchievementsInZone");
 
-    -- Maybe add a recursive feature to check parent categories for zone IDs
+    -- Differentiate between 10 and 25 man raids
+    local player10 = GetDifficultyInfo(3); -- 10 player
+    local player10Hc = GetDifficultyInfo(5); -- 10 player
+    local player25 = GetDifficultyInfo(4); -- 25 player
+    local player25Hc = GetDifficultyInfo(6); -- 25 player
+    local _, _, _, difficulty = GetInstanceInfo();
+
     local achievements = {};
 	for _, category in next, addon.Categories do
-        local mapIDs = {};
-        if category.IgnoreParentMapIDs then
-            mapIDs = category.MapIDs;
-        else
-            local categoryTree = category:GetTree();
-            for _, cat in next, categoryTree do
-                if cat.MapIDs ~= nil and not cat.IgnoreParentMapIDs then
-                    for _, catMapID in next, cat.MapIDs do
-                        tinsert(mapIDs, catMapID);
-                    end
-                end
+        -- First check difficulty
+        local checkCategory = true;
+        if difficulty ~= "" then
+            if difficulty == player10 or difficulty == player10Hc then
+                checkCategory = not string.find(category.Name, player25);
+            elseif difficulty == player25 or difficulty == player25Hc then
+                checkCategory = not string.find(category.Name, player10);
             end
         end
 
-        for _, catMapID in next, mapIDs do
-            if catMapID == mapID then
-                if category.Achievements ~= nil then
-                    for _, achievement in next, category.Achievements do
-                        tinsert(achievements, achievement);
+        if checkCategory then
+            -- Get map IDs
+            local mapIDs = {};
+            if category.IgnoreParentMapIDs then
+                mapIDs = category.MapIDs;
+            else
+                local categoryTree = category:GetTree();
+                for _, cat in next, categoryTree do
+                    if cat.MapIDs ~= nil and not cat.IgnoreParentMapIDs then
+                        for _, catMapID in next, cat.MapIDs do
+                            tinsert(mapIDs, catMapID);
+                        end
                     end
                 end
-                break;
+            end
+
+            -- Get achievements
+            for _, catMapID in next, mapIDs do
+                if catMapID == mapID then
+                    if category.Achievements ~= nil then
+                        for _, achievement in next, category.Achievements do
+                            tinsert(achievements, achievement);
+                        end
+                    end
+                    break;
+                end
             end
         end
 	end

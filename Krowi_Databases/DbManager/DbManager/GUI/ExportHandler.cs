@@ -58,6 +58,9 @@ namespace DbManager.GUI
             var categories = achCatDatMan.GetAll();
             foreach (var category in categories)
             {
+                if (!category.Active)
+                    continue;
+
                 var mapIDs = achCatDatMan.GetMapIDs(category);
 
                 sb.AppendTabbed(1, $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New("); // New

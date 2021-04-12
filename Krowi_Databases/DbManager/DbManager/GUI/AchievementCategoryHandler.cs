@@ -286,5 +286,13 @@ namespace DbManager.GUI
 
             RefreshTreeView();
         }
+
+        public void ChangeActiveState(bool active)
+        {
+            var selectedCategory = GetSelectedAchievementCategory();
+            selectedCategory.Active = active;
+            DataManager.ChangeActiveState(selectedCategory);
+            //RefreshTreeView();
+        }
     }
 }

@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.18.0] - 
 ### Added
+- Classic Dungeons and Raids zone data
 - The Burning Crusade Dungeons and Raids zone data
 - Wrath of the Lich King Dungeons and Raids zone data including difficulty filtering
 - Missing Classic Dungeon Stratholme (1 achievement)
@@ -10,9 +11,11 @@ All notable changes to this project will be documented in this file.
 - Missing Mists of Pandaria Isle of Giants (1 achievement)
 - Missing Warlords of Draenor Tanaan Jungle (1 achievement)
 - Missing Legion Zone Argus Map ID
+- Missing Shadowlands Zone The Maw Map IDs
 
 ### Changed
 - Code cleanup
+- Removed Classic Dungeons Deadmines, Shadowfang Keep, Scarlet Halls, Scarlet Monastery and Scholomance
 
 ## [9.0.5.17.0] - 2021-04-06
 ### Added

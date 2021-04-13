@@ -1,4 +1,4 @@
--- [[ Exported at 2021-04-13 00-45-58 ]] --
+-- [[ Exported at 2021-04-13 20-54-54 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3729,6 +3729,9 @@ function exportedData.Load(categories, achievements)
     tmpCategories[419]:AddAchievement(InsertAndReturn(achievements, achievement:New(14638, tmpCategories[419], nil, nil, nil, nil)));
     tmpCategories[419]:AddAchievement(InsertAndReturn(achievements, achievement:New(14639, tmpCategories[419], nil, nil, nil, nil)));
     tmpCategories[419]:AddAchievement(InsertAndReturn(achievements, achievement:New(14777, tmpCategories[419], nil, nil, nil, nil)));
+    tmpCategories[419]:AddAchievement(InsertAndReturn(achievements, achievement:New(15023, tmpCategories[419], nil, nil, nil, nil)));
+    tmpCategories[419]:AddAchievement(InsertAndReturn(achievements, achievement:New(15024, tmpCategories[419], nil, nil, nil, nil)));
+    tmpCategories[419]:AddAchievement(InsertAndReturn(achievements, achievement:New(15025, tmpCategories[419], nil, nil, nil, nil)));
     tmpCategories[423] = InsertAndReturn(categories, achievementCategory:New(C_Covenants.GetCovenantData(1).name, {1707, 1708}, true)); -- Kyrian
     tmpCategories[419]:AddCategory(tmpCategories[423]);
     tmpCategories[423]:AddAchievement(InsertAndReturn(achievements, achievement:New(14851, tmpCategories[423], nil, covenant.Kyrian, nil, nil)));

@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.18.0] - 
+## [9.0.5.18.0] - 2021-04-13
 ### Added
 - Classic Dungeons and Raids zone data
 - The Burning Crusade Dungeons and Raids zone data
@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Missing Warlords of Draenor Tanaan Jungle (1 achievement)
 - Missing Legion Zone Argus Map ID
 - Missing Shadowlands Zone The Maw Map IDs
+- New Shadowlands Covenant (3 achievements)
 
 ### Changed
 - Code cleanup

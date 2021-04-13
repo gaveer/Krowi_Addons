@@ -1,9 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.18.0] - 
+## [9.0.5.18.0] - 2021-04-13
 ### Added
-- TBD
+- Classic Dungeons and Raids zone data
+- The Burning Crusade Dungeons and Raids zone data
+- Wrath of the Lich King Dungeons and Raids zone data including difficulty filtering
+- Missing Classic Dungeon Stratholme (1 achievement)
+- Missing Cataclysm Uldum (1 achievement)
+- Missing Mists of Pandaria Isle of Giants (1 achievement)
+- Missing Warlords of Draenor Tanaan Jungle (1 achievement)
+- Missing Legion Zone Argus Map ID
+- Missing Shadowlands Zone The Maw Map IDs
+- New Shadowlands Covenant (3 achievements)
+
+### Changed
+- Code cleanup
+- Removed Classic Dungeons Deadmines, Shadowfang Keep, Scarlet Halls, Scarlet Monastery and Scholomance
 
 ## [9.0.5.17.0] - 2021-04-06
 ### Added
@@ -226,7 +239,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.0.5.18.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.5.18.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3275157
 [9.0.5.17.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3264965
 [9.0.5.16.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3259864
 [9.0.5.15.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3248934

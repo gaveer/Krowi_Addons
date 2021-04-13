@@ -88,7 +88,7 @@ function fullSearchResultsFrame:Update(query, results)
 			else
 				button.resultType:SetText(ACHIEVEMENTFRAME_FILTER_INCOMPLETE);
 			end
-			local category = savedResults[index]:GetCategory();
+			local category = savedResults[index].Category;
 			local categoriesTree = category:GetTree();
 			local path = categoriesTree[1].Name;
 			for j = 2, #categoriesTree do

@@ -7,13 +7,13 @@ local category = objects.AchievementCategory; -- Locally we can use just categor
 
 -- [[ Constructors ]] --
 category.__index = category;
-function category:New(name, ignoreParentMapIDs, mapIDs) -- Creates a new achievement category
+function category:New(name, mapIDs, ignoreParentMapIDs) -- Creates a new achievement category
     local self = {};
     setmetatable(self, category);
 
     self.Name = name or "Unknown";
-    self.IgnoreParentMapIDs = ignoreParentMapIDs;
     self.MapIDs = mapIDs or {};
+    self.IgnoreParentMapIDs = ignoreParentMapIDs;
     self.Level = 0;
     self.NotHidden = true;
 

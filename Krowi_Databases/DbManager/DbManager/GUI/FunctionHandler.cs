@@ -15,7 +15,7 @@ namespace DbManager.GUI
             DataManager = new FunctionDataManager(connection);
         }
 
-        public FunctionDataManager DataManager { get; }
+        public IDataManager DataManager { get; }
 
         public void RefreshListBox()
         {
@@ -24,7 +24,7 @@ namespace DbManager.GUI
 
             lsbFunctions.Items.Clear(); // Clear before adding new functions
 
-            var functions = DataManager.GetAll();
+            var functions = ((FunctionDataManager)DataManager).GetAll();
 
             lsbFunctions.Items.Add(new Function(-1, null, null)); // Empty Function
             foreach (var function in functions)

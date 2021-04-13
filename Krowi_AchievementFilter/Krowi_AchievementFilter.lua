@@ -30,9 +30,6 @@ end
 local loadHelper = CreateFrame("Frame");
 loadHelper:RegisterEvent("ADDON_LOADED");
 loadHelper:RegisterEvent("PLAYER_LOGIN");
--- loadHelper:RegisterEvent("ZONE_CHANGED");
--- loadHelper:RegisterEvent("ZONE_CHANGED_NEW_AREA");
--- loadHelper:RegisterEvent("UNIT_AREA_CHANGED");
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then
@@ -80,33 +77,16 @@ function loadHelper:OnEvent(event, arg1)
                 print(mapID);
             end);
         end
-    -- elseif event == "ZONE_CHANGED" then
-    --     addon.Diagnostics.Debug("ZONE_CHANGED");
-    -- elseif event == "ZONE_CHANGED_NEW_AREA" then
-    --     addon.Diagnostics.Debug("ZONE_CHANGED_NEW_AREA");
-    -- elseif event == "UNIT_AREA_CHANGED" then
-    --     addon.Diagnostics.Debug("UNIT_AREA_CHANGED");
-
-        -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(C_Map.GetBestMapForUnit("player"));
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
 
 -- [[ SCREENSHOT MODE ]] --
--- local f = CreateFrame("Frame", nil, UIParent)
+-- local f = CreateFrame("Frame", nil, UIParent);
 -- f:SetAllPoints();
--- f:SetPoint("CENTER")
--- f:SetSize(64, 64)
+-- f:SetPoint("CENTER");
+-- f:SetSize(64, 64);
 
--- f.tex = f:CreateTexture()
--- f.tex:SetAllPoints(f)
--- f.tex:SetTexture("Interface\\AddOns\\Krowi_AchievementFilter\\Media\\Black")
-
--- [[ DEBUGGING ]] --
--- local KrowiAF_UIDropDownMenu_AddButton = UIDropDownMenu_AddButton;
--- UIDropDownMenu_AddButton = function(info, level)
---     if addon and addon.Diagnostics then
---         addon.Diagnostics.DebugTable(info);
---     end
---     KrowiAF_UIDropDownMenu_AddButton(info, level);
--- end
+-- f.tex = f:CreateTexture();
+-- f.tex:SetAllPoints(f);
+-- f.tex:SetTexture("Interface\\AddOns\\Krowi_AchievementFilter\\Media\\Black");

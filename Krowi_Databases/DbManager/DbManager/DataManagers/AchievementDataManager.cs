@@ -6,18 +6,12 @@ using System.Text;
 
 namespace DbManager.DataManagers
 {
-    public class AchievementDataManager
+    public class AchievementDataManager : DataManagerBase
     {
-        private SqliteConnection connection;
-
-        public AchievementDataManager(SqliteConnection connection)
-        {
-            this.connection = connection;
-        }
+        public AchievementDataManager(SqliteConnection connection) : base(connection) { }
 
         public List<Achievement> GetWithCategory(AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
@@ -52,8 +46,6 @@ namespace DbManager.DataManagers
 
         public Achievement GetWithID(int ID)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
                                     A.ID, ACA.Location, ANO.ID, AHNWL.ID, A.Faction, AC.CovenantID
@@ -85,7 +77,6 @@ namespace DbManager.DataManagers
 
         public void Add(Achievement achievement, AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
@@ -112,7 +103,6 @@ namespace DbManager.DataManagers
 
         public void Remove(Achievement achievement, AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
 
             var isDuplicate = FindDuplicateIDs().Contains(achievement.ID);
@@ -141,7 +131,6 @@ namespace DbManager.DataManagers
 
         public void UpdateLocations(Achievement selectedAchievement, List<Achievement> achievements)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = selectedAchievement ?? throw new ArgumentNullException(nameof(selectedAchievement));
             _ = achievements ?? throw new ArgumentNullException(nameof(achievements));
 
@@ -160,10 +149,15 @@ namespace DbManager.DataManagers
 
         public List<int> FindDuplicateIDs()
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT AchievementID, COUNT(*) C FROM AchievementCategoryAchievement GROUP BY AchievementID HAVING C > 1";
+            cmd.CommandText = @"SELECT
+                                    AchievementID, COUNT(*) C
+                                FROM
+                                    AchievementCategoryAchievement
+                                GROUP BY
+                                    AchievementID
+                                HAVING
+                                    C > 1";
 
             var IDs = new List<int>();
             using (var reader = cmd.ExecuteReader())
@@ -175,13 +169,26 @@ namespace DbManager.DataManagers
 
         public void Swap(Achievement achievement1, Achievement achievement2, AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = achievement1 ?? throw new ArgumentNullException(nameof(achievement1));
             _ = achievement2 ?? throw new ArgumentNullException(nameof(achievement2));
+            _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"UPDATE AchievementCategoryAchievement SET Location = @Location1 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID1;
-                                UPDATE AchievementCategoryAchievement SET Location = @Location2 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID2;";
+            cmd.CommandText = @"UPDATE
+                                    AchievementCategoryAchievement
+                                SET
+                                    Location = @Location1
+                                WHERE
+                                    CategoryID = @CategoryID AND
+                                    AchievementID = @AchievementID1;
+                                UPDATE
+                                    AchievementCategoryAchievement
+                                SET
+                                    Location = @Location2
+                                WHERE
+                                    CategoryID = @CategoryID AND
+                                    AchievementID = @AchievementID2;";
+
             cmd.Parameters.AddWithValue("@Location1", achievement2.Location);
             cmd.Parameters.AddWithValue("@CategoryID", category.ID);
             cmd.Parameters.AddWithValue("@AchievementID1", achievement1.ID);

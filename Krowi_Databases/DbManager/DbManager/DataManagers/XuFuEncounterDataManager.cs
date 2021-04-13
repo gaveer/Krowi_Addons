@@ -5,18 +5,12 @@ using System.Collections.Generic;
 
 namespace DbManager.DataManagers
 {
-    public class XuFuEncounterDataManager
+    public class XuFuEncounterDataManager : DataManagerBase
     {
-        private SqliteConnection connection;
-
-        public XuFuEncounterDataManager(SqliteConnection connection)
-        {
-            this.connection = connection;
-        }
+        public XuFuEncounterDataManager(SqliteConnection connection) : base(connection) { }
 
         public void Add(XuFuEncounter xuFuEncounter)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = xuFuEncounter ?? throw new ArgumentNullException(nameof(xuFuEncounter));
 
             var cmd = connection.CreateCommand();
@@ -32,7 +26,6 @@ namespace DbManager.DataManagers
 
         public List<XuFuEncounter> GetMatches(PetBattleLink achievementCriteria)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = achievementCriteria ?? throw new ArgumentNullException(nameof(achievementCriteria));
 
             var cmd = connection.CreateCommand();

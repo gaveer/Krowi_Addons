@@ -81,6 +81,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataManagers\DataManagerBase.cs" />
+    <Compile Include="DataManagers\IDataManager.cs" />
     <Compile Include="DataManagers\PetBattleLinksDataManager.cs" />
     <Compile Include="DataManagers\XuFuEncounterDataManager.cs" />
     <Compile Include="ExtensionMethods.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="GUI\AchievementHandler.cs" />
     <Compile Include="GUI\ExportHandler.cs" />
     <Compile Include="GUI\FunctionHandler.cs" />
+    <Compile Include="GUI\IGUIHandler.cs" />
     <Compile Include="GUI\XuFuEncounterHandler.cs" />
     <Compile Include="Objects\Achievement.cs" />
     <Compile Include="Objects\AchievementCategory.cs" />

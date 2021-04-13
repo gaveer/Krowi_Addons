@@ -2,9 +2,9 @@
 {
     public class Function
     {
-        public int ID { get; set; }
-        public string Call { get; set; }
-        public string Description { get; set; }
+        public int ID { get; }
+        public string Call { get; }
+        public string Description { get; }
 
         public Function(int id, string call, string description)
         {
@@ -16,7 +16,7 @@
         public override string ToString()
         {
             if (ID > 0)
-                return $"{ID} - {Call}{(string.IsNullOrEmpty(Description) ? "" : $" - {Description}")}";
+                return $"{Description}";
             else
                 return "";
         }

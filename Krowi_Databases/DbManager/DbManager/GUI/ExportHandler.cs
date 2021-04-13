@@ -1,6 +1,5 @@
 ﻿using DbManager.DataManagers;
 using DbManager.Objects;
-using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,25 +10,25 @@ namespace DbManager.GUI
 {
     public class ExportHandler
     {
-        private AchievementDataManager achDatMan;
-        private AchievementCategoryDataManager achCatDatMan;
-        private FunctionDataManager funDatMan;
-        private PetBattleLinksDataManager achCritDatMan;
+        private readonly AchievementDataManager achDatMan;
+        private readonly AchievementCategoryDataManager achCatDatMan;
+        private readonly FunctionDataManager funDatMan;
+        private readonly PetBattleLinksDataManager petBatLinDatMan;
 
-        public ExportHandler(SqliteConnection connection, FunctionDataManager functionDataManager, PetBattleLinksDataManager achievementCriteriaDataManager)
+        public ExportHandler(AchievementDataManager achievementDataManager, AchievementCategoryDataManager achievementCategoryDataManager, FunctionDataManager functionDataManager, PetBattleLinksDataManager petBattleLinksDataManager)
         {
-            achDatMan = new AchievementDataManager(connection);
-            achCatDatMan = new AchievementCategoryDataManager(connection);
+            achDatMan = achievementDataManager;
+            achCatDatMan = achievementCategoryDataManager;
             funDatMan = functionDataManager;
-            achCritDatMan = achievementCriteriaDataManager;
+            petBatLinDatMan = petBattleLinksDataManager;
         }
 
         public void ExportAchievementFilter()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"-- [[ Exported at {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")} ]] --");
-            sb.AppendLine($"-- [[ This code is automatically generated as an export from a SQLite database ]] --");
-            sb.AppendLine($"-- [[ and is not meant for manual edit. ]] --");
+            sb.AppendLine($"-- [[ Exported at {DateTime.Now:yyyy-MM-dd HH-mm-ss} ]] --");
+            sb.AppendLine($"-- [[ This code is automatically generated as an export from ]] --");
+            sb.AppendLine($"-- [[ an SQLite database and is not meant for manual edit. ]] --");
             sb.AppendLine("");
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
@@ -56,13 +55,22 @@ namespace DbManager.GUI
             sb.AppendLine("");
             sb.AppendLineTabbed(1, "local tmpCategories = {};");
 
-            var duplicates = achDatMan.FindDuplicateIDs();
             var categories = achCatDatMan.GetAll();
             foreach (var category in categories)
             {
+                if (!category.Active)
+                    continue;
+
                 var mapIDs = achCatDatMan.GetMapIDs(category);
 
-                sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New({category.Function.Call.Replace("id", category.FunctionValue.ToString())}{(category.IsLegacy ? $" .. \" (\" .. {funDatMan.GetLegacyFunction().Call} .. \")\"" : "")}, {(category.IgnoreParentMapIDs ? "true" : "nil")}, {(mapIDs.Any() ? $"{{{string.Join(", ", mapIDs)}}}" : "nil")})); -- {category.Name}");
+                sb.AppendTabbed(1, $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New("); // New
+                sb.Append(category.Function.Call.Replace("id", category.FunctionValue.ToString())); // Category name
+                sb.Append($"{(category.IsLegacy ? $" .. \" (\" .. {funDatMan.GetLegacyFunction().Call} .. \")\"" : "")}"); // Legacy if applicable
+                sb.Append(", ");
+                sb.Append($"{(mapIDs.Any() ? $"{{{string.Join(", ", mapIDs)}}}" : "nil")}"); // MapIDs
+                sb.Append(", ");
+                sb.Append($"{(category.IgnoreParentMapIDs ? "true" : "nil")}"); // IgnoreParentMapIDs
+                sb.AppendLine($")); -- {category.Name}");
                 if (category.Parent != null)
                     sb.AppendLineTabbed(1, $"tmpCategories[{category.Parent.ID}]:AddCategory(tmpCategories[{category.ID}]);");
                 if (category.Function.Description == "Current Zone")
@@ -75,38 +83,19 @@ namespace DbManager.GUI
                 var achievements = achDatMan.GetWithCategory(category);
                 foreach (var achievement in achievements)
                 {
-                    var covenant = achievement.Covenant == Covenant.NoCovenant ? "nil" : $"covenant.{achievement.Covenant}";
-                    sb.AppendLineTabbed(/*achievement.Faction == Faction.NoFaction ?*/ 1/* : 2*/, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New({achievement.ID}, {(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}")}, {covenant}, {(achievement.Obtainable ? "nil" : "false")}, {(achievement.HasWowheadLink ? "nil" : "false")}, {/*(duplicates.Any(x => x == achievement.ID) ? */$"tmpCategories[{category.ID}]"/* : "nil")*/})));"); // {(achievement.HasIATLink ? "true" : "nil")}
-
-                    // new
-                    //sb.AppendTabbed(achievement.Faction == Faction.NoFaction ? 1 : 2, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:NewFromTable{{id = {achievement.ID}");
-                    //if (!achievement.Obtainable)
-                    //    sb.Append(", obtainable = false");
-                    //if (!achievement.HasWowheadLink)
-                    //    sb.Append(", hasWowheadLink = false");
-                    //if (achievement.HasIATLink)
-                    //    sb.Append(", hasIATLink = true");
-                    //if (duplicates.Any(x => x == achievement.ID))
-                    //    sb.Append($", category = tmpCategories[{category.ID}]");
-                    //sb.AppendLine("}));");
-
-                    //if (achievement.Faction != Faction.NoFaction)
-                    //    sb.AppendLineTabbed(1, "end");
-
-                    //var criteria = achCritDatMan.GetWithAchievementID(achievement.ID);
-                    //if (criteria.Any())
-                    //{
-                    //    sb.AppendLineTabbed(1, $"rcMenExtras[{achievement.ID}] = objects.MenuItem:New({{Text = addon.L[\"Xu-Fu's Pet Guides\"]}});");
-                    //    foreach (var crit in criteria)
-                    //    {
-                    //        var subCriteria = achCritDatMan.GetWithParentID(crit.ID);
-
-                    //        if (!string.IsNullOrEmpty(crit.ExternalLink) || subCriteria.Any())
-                    //            sb.AppendLineTabbed(1, $"rcMenExtras[{achievement.ID}]:AddChildCritExtLinkFull({achievement.ID}, {crit.CriteriaNumber}, \"{crit.ExternalLink ?? subCriteria[0].ExternalLink}\");");
-
-                    //        // moet nog de subcriteria toevoegen
-                    //    }
-                    //}
+                    sb.AppendTabbed(1, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New(");
+                    sb.Append(achievement.ID); // ID
+                    sb.Append(", ");
+                    sb.Append($"tmpCategories[{category.ID}]"); // Category
+                    sb.Append(", ");
+                    sb.Append(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}"); // Faction
+                    sb.Append(", ");
+                    sb.Append(achievement.Covenant == Covenant.NoCovenant ? "nil" : $"covenant.{achievement.Covenant}"); // Covenant
+                    sb.Append(", ");
+                    sb.Append(achievement.Obtainable ? "nil" : "false"); // Obtainable
+                    sb.Append(", ");
+                    sb.Append(achievement.HasWowheadLink ? "nil" : "false"); // HasWowheadLink
+                    sb.AppendLine($")));");
                 }
             }
 
@@ -121,9 +110,9 @@ namespace DbManager.GUI
         public void ExportPetBattles()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"-- [[ Exported at {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")} ]] --");
-            sb.AppendLine($"-- [[ This code is automatically generated as an export from a SQLite database ]] --");
-            sb.AppendLine($"-- [[ and is not meant for manual edit. ]] --");
+            sb.AppendLine($"-- [[ Exported at {DateTime.Now:yyyy-MM-dd HH-mm-ss} ]] --");
+            sb.AppendLine($"-- [[ This code is automatically generated as an export from ]] --");
+            sb.AppendLine($"-- [[ an SQLite database and is not meant for manual edit. ]] --");
             sb.AppendLine("");
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
@@ -131,17 +120,11 @@ namespace DbManager.GUI
             sb.AppendLine("addon.ExportedPetBattles = {};");
             sb.AppendLine("local exportedPetBattles = addon.ExportedPetBattles");
             sb.AppendLine("");
-            sb.AppendLine("local function GetAchievementName(achievementID)");
-            sb.AppendLineTabbed(1, "local _, name = GetAchievementInfo(achievementID);");
-            sb.AppendLineTabbed(1, "return name;");
-            sb.AppendLine("end");
-            sb.AppendLine("");
             sb.AppendLine("function exportedPetBattles.Load(rcMenExtras)");
             sb.AppendLineTabbed(1, "for i, _ in next, rcMenExtras do");
             sb.AppendLineTabbed(2, "rcMenExtras[i] = nil;");
             sb.AppendLineTabbed(1, "end");
             sb.AppendLine("");
-            //sb.AppendLineTabbed(1, "local tmpCategories = {};");
 
             var categories = achCatDatMan.GetAll();
             foreach (var category in categories)
@@ -149,18 +132,18 @@ namespace DbManager.GUI
                 var achievements = achDatMan.GetWithCategory(category);
                 foreach (var achievement in achievements)
                 {
-                    var criteria = achCritDatMan.GetWithAchievementID(achievement.ID);
+                    var criteria = petBatLinDatMan.GetWithAchievementID(achievement.ID);
                     if (criteria.Any())
                     {
-                        foreach (var crit in criteria)
+                        foreach (var criterion in criteria)
                         {
-                            if (!string.IsNullOrEmpty(crit.ExternalLink))
+                            if (!string.IsNullOrEmpty(criterion.ExternalLink))
                             {
                                 var list = $"rcMenExtras[{achievement.ID}]";
                                 sb.AppendLineTabbed(1, $"{list} = objects.MenuItem:NewExtLink(addon.L[\"Xu-Fu's Pet Guides\"], \"{criteria[0].ExternalLink}\"); -- {criteria[0].Name}");
 
-                                var subCriteria = achCritDatMan.GetWithParentID(crit.ID);
-                                GetSubCriteria(sb, crit.ID.Substring(1), subCriteria, list: list);
+                                var subCriteria = petBatLinDatMan.GetWithParentID(criterion.ID);
+                                GetSubCriteria(sb, criterion.ID.Substring(1), subCriteria, list: list);
                             }
                         }
                     }
@@ -175,36 +158,26 @@ namespace DbManager.GUI
 
         private void GetSubCriteria(StringBuilder sb, string achievementID, List<PetBattleLink> criteria, string assign = "", string list = "")
         {
-            foreach (var crit in criteria)
+            foreach (var criterion in criteria)
             {
-                if (!string.IsNullOrEmpty(crit.ExternalLink))
+                if (!string.IsNullOrEmpty(criterion.ExternalLink))
                 {
-                    var subCriteria = achCritDatMan.GetWithParentID(crit.ID);
+                    var subCriteria = petBatLinDatMan.GetWithParentID(criterion.ID);
 
                     var indent = 1;
                     if (subCriteria.Any())
                     {
-                        assign = $"temp{crit.ID}";
+                        assign = $"temp{criterion.ID}";
                         sb.AppendTabbed(1, $"local {assign} = ");
                         indent = 0;
                     }
 
-                    if (crit.ID.StartsWith("C"))
-                        sb.AppendLineTabbed(indent, $"{list}:AddChildExtLinkFull({crit.Name}, \"{crit.ExternalLink}\");");
+                    if (criterion.ID.StartsWith("C"))
+                        sb.AppendLineTabbed(indent, $"{list}:AddChildExtLinkFull({criterion.Name}, \"{criterion.ExternalLink}\");");
                     else
-                    {
-                        //if (crit.CriteriaNumber == 0)
-                        //{
-                        //    string criteriaID = "";
-                        //if (crit.ID.StartsWith("A")) // Achievement, nothing changes below
-                        //    achievementID = crit.ID.Substring(1);
-                        //    sb.AppendLineTabbed(indent, $"{list}:AddChildExtLinkFull(GetAchievementName({criteriaID}), \"{crit.ExternalLink}\");");
-                        //}
-                        //else
-                        sb.AppendLineTabbed(indent, $"{list}:AddChildCritExtLinkFull({achievementID}, {crit.CriteriaNumber}, \"{crit.ExternalLink}\");");
-                    }
+                        sb.AppendLineTabbed(indent, $"{list}:AddChildCritExtLinkFull({achievementID}, {criterion.CriteriaNumber}, \"{criterion.ExternalLink}\");");
 
-                    GetSubCriteria(sb, crit.ID.Substring(1), subCriteria, list: assign);
+                    GetSubCriteria(sb, criterion.ID.Substring(1), subCriteria, list: assign);
                 }
             }
         }

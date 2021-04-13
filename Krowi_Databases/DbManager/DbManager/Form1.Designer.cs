@@ -65,8 +65,11 @@ namespace DbManager
             this.btnAchievementAdd = new System.Windows.Forms.Button();
             this.cbxHasWowheadLink = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnUpdateMapIDs = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.cbxLegacyCategory = new System.Windows.Forms.CheckBox();
             this.cbxCategoryAsParent = new System.Windows.Forms.CheckBox();
+            this.txtMapIDs = new System.Windows.Forms.TextBox();
             this.txtCategoryName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAchievementCategoryMoveLeft = new System.Windows.Forms.Button();
@@ -78,9 +81,7 @@ namespace DbManager
             this.btnAchievementCategoryMoveDown = new System.Windows.Forms.Button();
             this.btnAchievementCategoryRemove = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtMapIDs = new System.Windows.Forms.TextBox();
-            this.btnUpdateMapIDs = new System.Windows.Forms.Button();
+            this.cbxIsActive = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -101,7 +102,7 @@ namespace DbManager
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1418, 843);
+            this.tabControl1.Size = new System.Drawing.Size(1418, 863);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -117,7 +118,7 @@ namespace DbManager
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1410, 817);
+            this.tabPage1.Size = new System.Drawing.Size(1410, 837);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Krowi\'s Achievement Filter";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -128,7 +129,7 @@ namespace DbManager
             this.groupBox6.Controls.Add(this.btnImportWoWPetBattleCriteria);
             this.groupBox6.Controls.Add(this.pgbXuFu);
             this.groupBox6.Controls.Add(this.btnGetXuFuIDs);
-            this.groupBox6.Location = new System.Drawing.Point(759, 565);
+            this.groupBox6.Location = new System.Drawing.Point(759, 594);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(212, 143);
             this.groupBox6.TabIndex = 27;
@@ -181,7 +182,7 @@ namespace DbManager
             this.txtAchCrit.Location = new System.Drawing.Point(977, 6);
             this.txtAchCrit.Multiline = true;
             this.txtAchCrit.Name = "txtAchCrit";
-            this.txtAchCrit.Size = new System.Drawing.Size(425, 803);
+            this.txtAchCrit.Size = new System.Drawing.Size(425, 823);
             this.txtAchCrit.TabIndex = 26;
             // 
             // lsbAchievements
@@ -190,7 +191,7 @@ namespace DbManager
             this.lsbAchievements.FormattingEnabled = true;
             this.lsbAchievements.Location = new System.Drawing.Point(503, 3);
             this.lsbAchievements.Name = "lsbAchievements";
-            this.lsbAchievements.Size = new System.Drawing.Size(250, 811);
+            this.lsbAchievements.Size = new System.Drawing.Size(250, 831);
             this.lsbAchievements.TabIndex = 15;
             this.lsbAchievements.SelectedIndexChanged += new System.EventHandler(this.LsbAchievements_SelectedIndexChanged);
             // 
@@ -200,7 +201,7 @@ namespace DbManager
             this.lsbFunctions.FormattingEnabled = true;
             this.lsbFunctions.Location = new System.Drawing.Point(253, 3);
             this.lsbFunctions.Name = "lsbFunctions";
-            this.lsbFunctions.Size = new System.Drawing.Size(250, 811);
+            this.lsbFunctions.Size = new System.Drawing.Size(250, 831);
             this.lsbFunctions.TabIndex = 2;
             this.lsbFunctions.SelectedIndexChanged += new System.EventHandler(this.LsbFunctions_SelectedIndexChanged);
             // 
@@ -210,7 +211,7 @@ namespace DbManager
             this.tvwAchievementCategories.HideSelection = false;
             this.tvwAchievementCategories.Location = new System.Drawing.Point(3, 3);
             this.tvwAchievementCategories.Name = "tvwAchievementCategories";
-            this.tvwAchievementCategories.Size = new System.Drawing.Size(250, 811);
+            this.tvwAchievementCategories.Size = new System.Drawing.Size(250, 831);
             this.tvwAchievementCategories.TabIndex = 1;
             this.tvwAchievementCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvwAchievementCategories_AfterSelect);
             // 
@@ -218,7 +219,7 @@ namespace DbManager
             // 
             this.groupBox3.Controls.Add(this.btnExportPetBattles);
             this.groupBox3.Controls.Add(this.btnExport);
-            this.groupBox3.Location = new System.Drawing.Point(759, 714);
+            this.groupBox3.Location = new System.Drawing.Point(759, 743);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(212, 86);
             this.groupBox3.TabIndex = 25;
@@ -257,7 +258,7 @@ namespace DbManager
             this.groupBox2.Controls.Add(this.cbxObtainable);
             this.groupBox2.Controls.Add(this.btnAchievementAdd);
             this.groupBox2.Controls.Add(this.cbxHasWowheadLink);
-            this.groupBox2.Location = new System.Drawing.Point(759, 224);
+            this.groupBox2.Location = new System.Drawing.Point(759, 253);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(212, 335);
             this.groupBox2.TabIndex = 24;
@@ -472,6 +473,7 @@ namespace DbManager
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbxIsActive);
             this.groupBox1.Controls.Add(this.btnUpdateMapIDs);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.cbxLegacyCategory);
@@ -489,10 +491,29 @@ namespace DbManager
             this.groupBox1.Controls.Add(this.btnAchievementCategoryRemove);
             this.groupBox1.Location = new System.Drawing.Point(759, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(212, 212);
+            this.groupBox1.Size = new System.Drawing.Size(212, 241);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Category";
+            // 
+            // btnUpdateMapIDs
+            // 
+            this.btnUpdateMapIDs.Location = new System.Drawing.Point(91, 111);
+            this.btnUpdateMapIDs.Name = "btnUpdateMapIDs";
+            this.btnUpdateMapIDs.Size = new System.Drawing.Size(106, 23);
+            this.btnUpdateMapIDs.TabIndex = 29;
+            this.btnUpdateMapIDs.Text = "Update Map IDs";
+            this.btnUpdateMapIDs.UseVisualStyleBackColor = true;
+            this.btnUpdateMapIDs.Click += new System.EventHandler(this.BtnUpdateMapIDs_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 94);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Map IDs";
             // 
             // cbxLegacyCategory
             // 
@@ -514,6 +535,13 @@ namespace DbManager
             this.cbxCategoryAsParent.Text = "Use Selected Category As Parent";
             this.cbxCategoryAsParent.UseVisualStyleBackColor = true;
             // 
+            // txtMapIDs
+            // 
+            this.txtMapIDs.Location = new System.Drawing.Point(97, 91);
+            this.txtMapIDs.Name = "txtMapIDs";
+            this.txtMapIDs.Size = new System.Drawing.Size(100, 20);
+            this.txtMapIDs.TabIndex = 27;
+            // 
             // txtCategoryName
             // 
             this.txtCategoryName.Location = new System.Drawing.Point(97, 39);
@@ -532,7 +560,7 @@ namespace DbManager
             // 
             // btnAchievementCategoryMoveLeft
             // 
-            this.btnAchievementCategoryMoveLeft.Location = new System.Drawing.Point(13, 169);
+            this.btnAchievementCategoryMoveLeft.Location = new System.Drawing.Point(12, 202);
             this.btnAchievementCategoryMoveLeft.Name = "btnAchievementCategoryMoveLeft";
             this.btnAchievementCategoryMoveLeft.Size = new System.Drawing.Size(41, 23);
             this.btnAchievementCategoryMoveLeft.TabIndex = 14;
@@ -549,7 +577,7 @@ namespace DbManager
             // 
             // btnAchievementCategoryMoveUp
             // 
-            this.btnAchievementCategoryMoveUp.Location = new System.Drawing.Point(61, 169);
+            this.btnAchievementCategoryMoveUp.Location = new System.Drawing.Point(60, 202);
             this.btnAchievementCategoryMoveUp.Name = "btnAchievementCategoryMoveUp";
             this.btnAchievementCategoryMoveUp.Size = new System.Drawing.Size(41, 23);
             this.btnAchievementCategoryMoveUp.TabIndex = 12;
@@ -559,7 +587,7 @@ namespace DbManager
             // 
             // btnAchievementCategoryMoveRight
             // 
-            this.btnAchievementCategoryMoveRight.Location = new System.Drawing.Point(156, 169);
+            this.btnAchievementCategoryMoveRight.Location = new System.Drawing.Point(155, 202);
             this.btnAchievementCategoryMoveRight.Name = "btnAchievementCategoryMoveRight";
             this.btnAchievementCategoryMoveRight.Size = new System.Drawing.Size(41, 23);
             this.btnAchievementCategoryMoveRight.TabIndex = 13;
@@ -578,7 +606,7 @@ namespace DbManager
             // 
             // btnAchievementCategoryAdd
             // 
-            this.btnAchievementCategoryAdd.Location = new System.Drawing.Point(13, 140);
+            this.btnAchievementCategoryAdd.Location = new System.Drawing.Point(12, 173);
             this.btnAchievementCategoryAdd.Name = "btnAchievementCategoryAdd";
             this.btnAchievementCategoryAdd.Size = new System.Drawing.Size(89, 23);
             this.btnAchievementCategoryAdd.TabIndex = 7;
@@ -588,7 +616,7 @@ namespace DbManager
             // 
             // btnAchievementCategoryMoveDown
             // 
-            this.btnAchievementCategoryMoveDown.Location = new System.Drawing.Point(108, 169);
+            this.btnAchievementCategoryMoveDown.Location = new System.Drawing.Point(107, 202);
             this.btnAchievementCategoryMoveDown.Name = "btnAchievementCategoryMoveDown";
             this.btnAchievementCategoryMoveDown.Size = new System.Drawing.Size(41, 23);
             this.btnAchievementCategoryMoveDown.TabIndex = 11;
@@ -598,7 +626,7 @@ namespace DbManager
             // 
             // btnAchievementCategoryRemove
             // 
-            this.btnAchievementCategoryRemove.Location = new System.Drawing.Point(108, 140);
+            this.btnAchievementCategoryRemove.Location = new System.Drawing.Point(107, 173);
             this.btnAchievementCategoryRemove.Name = "btnAchievementCategoryRemove";
             this.btnAchievementCategoryRemove.Size = new System.Drawing.Size(89, 23);
             this.btnAchievementCategoryRemove.TabIndex = 8;
@@ -616,37 +644,24 @@ namespace DbManager
             this.tabPage2.Text = "Empty";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // cbxIsActive
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 94);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
-            this.label4.TabIndex = 28;
-            this.label4.Text = "Map IDs";
-            // 
-            // txtMapIDs
-            // 
-            this.txtMapIDs.Location = new System.Drawing.Point(97, 91);
-            this.txtMapIDs.Name = "txtMapIDs";
-            this.txtMapIDs.Size = new System.Drawing.Size(100, 20);
-            this.txtMapIDs.TabIndex = 27;
-            // 
-            // btnUpdateMapIDs
-            // 
-            this.btnUpdateMapIDs.Location = new System.Drawing.Point(91, 111);
-            this.btnUpdateMapIDs.Name = "btnUpdateMapIDs";
-            this.btnUpdateMapIDs.Size = new System.Drawing.Size(106, 23);
-            this.btnUpdateMapIDs.TabIndex = 29;
-            this.btnUpdateMapIDs.Text = "Update Map IDs";
-            this.btnUpdateMapIDs.UseVisualStyleBackColor = true;
-            this.btnUpdateMapIDs.Click += new System.EventHandler(this.BtnUpdateMapIDs_Click);
+            this.cbxIsActive.AutoSize = true;
+            this.cbxIsActive.Checked = true;
+            this.cbxIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxIsActive.Location = new System.Drawing.Point(13, 140);
+            this.cbxIsActive.Name = "cbxIsActive";
+            this.cbxIsActive.Size = new System.Drawing.Size(67, 17);
+            this.cbxIsActive.TabIndex = 30;
+            this.cbxIsActive.Text = "Is Active";
+            this.cbxIsActive.UseVisualStyleBackColor = true;
+            this.cbxIsActive.CheckedChanged += new System.EventHandler(this.cbxIsActive_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1418, 843);
+            this.ClientSize = new System.Drawing.Size(1418, 863);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "DB Manager";
@@ -723,6 +738,7 @@ namespace DbManager
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtMapIDs;
         private System.Windows.Forms.Button btnUpdateMapIDs;
+        private System.Windows.Forms.CheckBox cbxIsActive;
     }
 }
 

@@ -6,19 +6,12 @@ using System.Text;
 
 namespace DbManager.DataManagers
 {
-    public class AchievementCategoryDataManager
+    public class AchievementCategoryDataManager : DataManagerBase
     {
-        private SqliteConnection connection;
-
-        public AchievementCategoryDataManager(SqliteConnection connection)
-        {
-            this.connection = connection;
-        }
+        public AchievementCategoryDataManager(SqliteConnection connection) : base(connection) { }
 
         public List<AchievementCategory> GetAll()
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"WITH CTE_AchievementCategory(ID, ParentID, Location, LocationPath) AS (
                                 SELECT
@@ -36,7 +29,7 @@ namespace DbManager.DataManagers
                                         ON CTEAC.ID = AC.ParentID
                                 )
                                 SELECT
-                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, F.ID, F.Call, CTEAC.LocationPath, ACIL.ID, F.Description, ACIPMIDs.ID
+                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, F.ID, F.Call, CTEAC.LocationPath, ACIL.ID, F.Description, ACIPMIDs.ID, ACI.ID
                                 FROM
                                     CTE_AchievementCategory CTEAC
                                     LEFT JOIN AchievementCategory AC
@@ -49,20 +42,20 @@ namespace DbManager.DataManagers
                                         ON AC.ID = ACIL.ID
 									LEFT JOIN AchievementCategoryIgnoreParentMapIDs ACIPMIDs
 										ON AC.ID = ACIPMIDs.ID
+                                    LEFT JOIN AchievementCategoryInactive ACI
+                                        ON AC.ID = ACI.ID
                                 ORDER BY CTEAC.LocationPath";
 
             var categories = new List<AchievementCategory>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(6), reader.GetString(7), reader.GetString(10)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), parent: reader.IsDBNull(3) ? null : categories.Find(c => c.ID == reader.GetInt32(3)), isLegacy: !reader.IsDBNull(9), ignoreParentMapIDs: !reader.IsDBNull(11)));
+                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), new Function(reader.GetInt32(6), reader.GetString(7), reader.GetString(10)), reader.IsDBNull(5) ? -1 : reader.GetInt32(5), parent: reader.IsDBNull(3) ? null : categories.Find(c => c.ID == reader.GetInt32(3)), isLegacy: !reader.IsDBNull(9), ignoreParentMapIDs: !reader.IsDBNull(11), active: reader.IsDBNull(12)));
 
             return categories;
         }
 
         public List<int> GetMapIDs(AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT UIMapID FROM AchievementCategoryUIMap WHERE AchievementCategoryID == @AchievementCategoryID ORDER BY UIMapID";
             cmd.Parameters.AddWithValue("@AchievementCategoryID", category.ID);
@@ -77,8 +70,6 @@ namespace DbManager.DataManagers
 
         //public List<AchievementCategory> GetWithParent(AchievementCategory parent)
         //{
-        //    _ = connection ?? throw new NullReferenceException(nameof(connection));
-
         //    var cmd = connection.CreateCommand();
         //    if (parent != null)
         //    {
@@ -98,8 +89,6 @@ namespace DbManager.DataManagers
 
         public AchievementCategory GetLast()
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
-
             var cmd = connection.CreateCommand();
             cmd.CommandText = "SELECT AC.ID, Location, Name, F.ID, F.Call, FunctionValue, ParentID, F.Description FROM AchievementCategory AC LEFT JOIN Function F ON AC.FunctionID = F.ID ORDER BY AC.ID DESC LIMIT 1";
 
@@ -112,7 +101,6 @@ namespace DbManager.DataManagers
 
         public void Add(AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
@@ -149,7 +137,6 @@ namespace DbManager.DataManagers
 
         public void UpdateMapIDs(AchievementCategory selectedCategory, List<int> mapIDs)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
             _ = mapIDs ?? throw new ArgumentNullException(nameof(mapIDs));
 
@@ -173,7 +160,6 @@ namespace DbManager.DataManagers
 
         public void UpdateLocations(AchievementCategory selectedCategory, List<AchievementCategory> categories)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
             _ = categories ?? throw new ArgumentNullException(nameof(categories));
 
@@ -192,7 +178,6 @@ namespace DbManager.DataManagers
 
         public void UpdateParent(AchievementCategory category, AchievementCategory parent, int location)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             category.Parent = parent;
@@ -215,7 +200,6 @@ namespace DbManager.DataManagers
 
         public void Remove(AchievementCategory category)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var sb = new StringBuilder();
@@ -232,7 +216,6 @@ namespace DbManager.DataManagers
 
         public void Swap(AchievementCategory category1, AchievementCategory category2)
         {
-            _ = connection ?? throw new NullReferenceException(nameof(connection));
             _ = category1 ?? throw new ArgumentNullException(nameof(category1));
             _ = category2 ?? throw new ArgumentNullException(nameof(category2));
 
@@ -243,6 +226,24 @@ namespace DbManager.DataManagers
             cmd.Parameters.AddWithValue("@ID1", category1.ID);
             cmd.Parameters.AddWithValue("@Location2", category1.Location);
             cmd.Parameters.AddWithValue("@ID2", category2.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public void ChangeActiveState(AchievementCategory category)
+        {
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+
+            var cmd = connection.CreateCommand();
+            if (category.Active)
+            {
+                cmd.CommandText = "DELETE FROM AchievementCategoryInactive WHERE ID = @ID;";
+            }
+            else
+            {
+                cmd.CommandText = "INSERT INTO AchievementCategoryInactive (ID) VALUES (@ID)";
+            }
+            cmd.Parameters.AddWithValue("@ID", category.ID);
 
             cmd.ExecuteNonQuery();
         }

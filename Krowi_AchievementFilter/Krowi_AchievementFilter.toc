@@ -1,6 +1,6 @@
 ## Interface: 90005
 ## Title: Krowi's |cFF1D92C2Achievement Filter|r
-## Version: 18.0
+## Version: 19.0
 ## Author: Krowi
 ## SavedVariables: Options
 ## Notes: Filters your achievements.

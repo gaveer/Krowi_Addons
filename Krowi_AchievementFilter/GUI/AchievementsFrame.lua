@@ -89,18 +89,32 @@ function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achie
 	func(self);
 end
 
+local function Validate(self, achievements, achievement)
+	if self.FilterButton and self.FilterButton:Validate(achievement) > 0 then
+		tinsert(achievements, achievement);
+	end
+end
+
 local function GetFilteredAchievements(self, category)
 	diagnostics.Trace("GetFilteredAchievements");
 
 	local achievements = {};
-	if category.Achievements ~= nil then
-		-- Filter achievements
-		for _, achievement in next, category.Achievements do
-			if self.FilterButton and self.FilterButton:Validate(achievement) > 0 then
-				tinsert(achievements, achievement);
-			end
-		end
 
+	-- Filter achievements
+	if category.Achievements then
+		for _, achievement in next, category.Achievements do
+			Validate(self, achievements, achievement);
+		end
+	end
+
+	-- Filter merged achievements
+	if category.MergedAchievements then
+		for _, achievement in next, category.MergedAchievements do
+			Validate(self, achievements, achievement);
+		end
+	end
+
+	if category.Achievements or category.MergedAchievements then
 		-- Sort achievements
 		if addon.Options.db.Filters.SortBy.Criteria == addon.L["Default"] then
 			-- diagnostics.Debug("Sort By " .. addon.L["Default"]);
@@ -437,7 +451,13 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 		self.FilterButton:SetFilters(achievement);
 	end
 
-	local category = achievement.Category;
+	local category;
+	if addon.Options.db.Filters.MergeSmallCategories then
+		category = achievement:GetCategory(); -- This way we get the parent category
+		-- diagnostics.Debug(category.Name);
+	else
+		category = achievement.Category
+	end
 
 	self.CategoriesFrame:SelectCategory(category);
 
@@ -449,6 +469,8 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	while not shown do
 		for _, button in next, container.buttons do
+			diagnostics.Debug(math.ceil(button:GetTop()));
+			diagnostics.Debug(math.ceil(gui.GetSafeScrollChildBottom(child)));
 			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
 				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
 				shown = button;

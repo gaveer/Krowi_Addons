@@ -16,8 +16,9 @@ namespace DbManager.Objects
         public bool IgnoreParentMapIDs { get; }
         public List<int> MapIDs { get; set; }
         public bool Active { get; set; }
+        public bool CanMergeChildren { get; set; }
 
-        public AchievementCategory(int id, int location, string name, Function function, int functionValue, AchievementCategory parent = null, bool isLegacy = false, bool ignoreParentMapIDs = false, List<int> uiMapID = null, bool active = true)
+        public AchievementCategory(int id, int location, string name, Function function, int functionValue, AchievementCategory parent = null, bool isLegacy = false, bool ignoreParentMapIDs = false, List<int> uiMapID = null, bool active = true, bool canMergeChildren = false)
         {
             ID = id;
             Location = location;
@@ -30,6 +31,7 @@ namespace DbManager.Objects
             IgnoreParentMapIDs = ignoreParentMapIDs;
             MapIDs = uiMapID ?? new List<int>();
             Active = active;
+            CanMergeChildren = canMergeChildren;
         }
 
         public string GetParentNames()
@@ -52,7 +54,7 @@ namespace DbManager.Objects
             if (ID > 0)
             {
                 var parentNames = GetParentNames();
-                return $"{ID} - {Name}{(string.IsNullOrEmpty(parentNames) ? "" : $" - {parentNames}")}{(Active ? "" : " - INACTIVE")}";
+                return $"{ID} - {Name}{(string.IsNullOrEmpty(parentNames) ? "" : $" - {parentNames}")}{(Active ? "" : " - INACTIVE")}{(CanMergeChildren ? " - CAN MERGE" : "")}";
             }
             else
                 return "";

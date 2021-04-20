@@ -70,6 +70,8 @@ namespace DbManager.GUI
                 sb.Append($"{(mapIDs.Any() ? $"{{{string.Join(", ", mapIDs)}}}" : "nil")}"); // MapIDs
                 sb.Append(", ");
                 sb.Append($"{(category.IgnoreParentMapIDs ? "true" : "nil")}"); // IgnoreParentMapIDs
+                sb.Append(", ");
+                sb.Append($"{(category.CanMergeChildren ? "true" : "nil")}"); // IgnoreParentMapIDs
                 sb.AppendLine($")); -- {category.Name}");
                 if (category.Parent != null)
                     sb.AppendLineTabbed(1, $"tmpCategories[{category.Parent.ID}]:AddCategory(tmpCategories[{category.ID}]);");
@@ -86,8 +88,8 @@ namespace DbManager.GUI
                     sb.AppendTabbed(1, $"tmpCategories[{category.ID}]:AddAchievement(InsertAndReturn(achievements, achievement:New(");
                     sb.Append(achievement.ID); // ID
                     sb.Append(", ");
-                    sb.Append($"tmpCategories[{category.ID}]"); // Category
-                    sb.Append(", ");
+                    //sb.Append($"tmpCategories[{category.ID}]"); // Category
+                    //sb.Append(", ");
                     sb.Append(achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}"); // Faction
                     sb.Append(", ");
                     sb.Append(achievement.Covenant == Covenant.NoCovenant ? "nil" : $"covenant.{achievement.Covenant}"); // Covenant

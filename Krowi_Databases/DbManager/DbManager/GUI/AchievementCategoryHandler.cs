@@ -294,5 +294,13 @@ namespace DbManager.GUI
             DataManager.ChangeActiveState(selectedCategory);
             //RefreshTreeView();
         }
+
+        public void ChangeCanMergeState(bool canMerge)
+        {
+            var selectedCategory = GetSelectedAchievementCategory();
+            selectedCategory.CanMergeChildren = canMerge;
+            DataManager.ChangeCanMergeState(selectedCategory);
+            //RefreshTreeView();
+        }
     }
 }

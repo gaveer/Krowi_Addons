@@ -10,7 +10,7 @@ namespace DbManager.GUI
         public AchievementCategoryTreeNode(AchievementCategory achievementCategory)
         {
             AchievementCategory = achievementCategory;
-            Text = $"{achievementCategory.Location} - {achievementCategory.ID} - {achievementCategory.Name}{(achievementCategory.Active ? "" : " - INACTIVE")}";
+            Text = $"{achievementCategory.Location} - {achievementCategory.ID} - {achievementCategory.Name}{(achievementCategory.Active ? "" : " - INACTIVE")}{(achievementCategory.CanMergeChildren ? " - CAN MERGE" : "")}";
             Name = achievementCategory.ID.ToString();
         }
     }

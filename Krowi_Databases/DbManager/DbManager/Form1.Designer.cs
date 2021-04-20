@@ -65,6 +65,7 @@ namespace DbManager
             this.btnAchievementAdd = new System.Windows.Forms.Button();
             this.cbxHasWowheadLink = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbxIsActive = new System.Windows.Forms.CheckBox();
             this.btnUpdateMapIDs = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cbxLegacyCategory = new System.Windows.Forms.CheckBox();
@@ -81,7 +82,7 @@ namespace DbManager
             this.btnAchievementCategoryMoveDown = new System.Windows.Forms.Button();
             this.btnAchievementCategoryRemove = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.cbxIsActive = new System.Windows.Forms.CheckBox();
+            this.cbxCanMergeChildren = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -473,6 +474,7 @@ namespace DbManager
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbxCanMergeChildren);
             this.groupBox1.Controls.Add(this.cbxIsActive);
             this.groupBox1.Controls.Add(this.btnUpdateMapIDs);
             this.groupBox1.Controls.Add(this.label4);
@@ -495,6 +497,19 @@ namespace DbManager
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Category";
+            // 
+            // cbxIsActive
+            // 
+            this.cbxIsActive.AutoSize = true;
+            this.cbxIsActive.Checked = true;
+            this.cbxIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxIsActive.Location = new System.Drawing.Point(13, 140);
+            this.cbxIsActive.Name = "cbxIsActive";
+            this.cbxIsActive.Size = new System.Drawing.Size(67, 17);
+            this.cbxIsActive.TabIndex = 30;
+            this.cbxIsActive.Text = "Is Active";
+            this.cbxIsActive.UseVisualStyleBackColor = true;
+            this.cbxIsActive.CheckedChanged += new System.EventHandler(this.cbxIsActive_CheckedChanged);
             // 
             // btnUpdateMapIDs
             // 
@@ -639,23 +654,21 @@ namespace DbManager
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1410, 817);
+            this.tabPage2.Size = new System.Drawing.Size(1410, 837);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Empty";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // cbxIsActive
+            // cbxCanMergeChildren
             // 
-            this.cbxIsActive.AutoSize = true;
-            this.cbxIsActive.Checked = true;
-            this.cbxIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxIsActive.Location = new System.Drawing.Point(13, 140);
-            this.cbxIsActive.Name = "cbxIsActive";
-            this.cbxIsActive.Size = new System.Drawing.Size(67, 17);
-            this.cbxIsActive.TabIndex = 30;
-            this.cbxIsActive.Text = "Is Active";
-            this.cbxIsActive.UseVisualStyleBackColor = true;
-            this.cbxIsActive.CheckedChanged += new System.EventHandler(this.cbxIsActive_CheckedChanged);
+            this.cbxCanMergeChildren.AutoSize = true;
+            this.cbxCanMergeChildren.Location = new System.Drawing.Point(99, 140);
+            this.cbxCanMergeChildren.Name = "cbxCanMergeChildren";
+            this.cbxCanMergeChildren.Size = new System.Drawing.Size(119, 17);
+            this.cbxCanMergeChildren.TabIndex = 31;
+            this.cbxCanMergeChildren.Text = "Can Merge Children";
+            this.cbxCanMergeChildren.UseVisualStyleBackColor = true;
+            this.cbxCanMergeChildren.CheckedChanged += new System.EventHandler(this.cbxCanMerge_CheckedChanged);
             // 
             // Form1
             // 
@@ -739,6 +752,7 @@ namespace DbManager
         private System.Windows.Forms.TextBox txtMapIDs;
         private System.Windows.Forms.Button btnUpdateMapIDs;
         private System.Windows.Forms.CheckBox cbxIsActive;
+        private System.Windows.Forms.CheckBox cbxCanMergeChildren;
     }
 }
 

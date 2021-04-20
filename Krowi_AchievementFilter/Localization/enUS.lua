@@ -29,6 +29,7 @@ L["Covenant"] = "Covenant";
 L["Select all"] = "Select all";
 L["Reverse Sort"] = "Reverse Sort";
 L["Collapse Series"] = "Collapse Series";
+L["Merge Small Categories"] = "Merge Small Categories";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;

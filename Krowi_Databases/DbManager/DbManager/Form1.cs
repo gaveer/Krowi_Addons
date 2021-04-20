@@ -17,6 +17,7 @@ namespace DbManager
         private ExportHandler exportHandler;
 
         private bool triggerActiveChange;
+        private bool triggerCanMergeChange;
 
         public Form1()
         {
@@ -79,7 +80,11 @@ namespace DbManager
             category.MapIDs = achievementCategoryHandler.DataManager.GetMapIDs(category);
             txtMapIDs.Text = string.Join(", ", category.MapIDs);
             triggerActiveChange = false;
+            triggerCanMergeChange = false;
             cbxIsActive.Checked = category.Active;
+            cbxCanMergeChildren.Checked = category.CanMergeChildren;
+            triggerActiveChange = true;
+            triggerCanMergeChange = true;
         }
 
         private void LsbFunctions_SelectedIndexChanged(object sender, EventArgs e)
@@ -238,6 +243,17 @@ namespace DbManager
             }
 
             achievementCategoryHandler.ChangeActiveState(cbxIsActive.Checked);
+        }
+
+        private void cbxCanMerge_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!triggerCanMergeChange)
+            {
+                triggerCanMergeChange = true;
+                return;
+            }
+
+            achievementCategoryHandler.ChangeCanMergeState(cbxCanMergeChildren.Checked);
         }
     }
 }

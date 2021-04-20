@@ -55,7 +55,31 @@ function filterButton:OnMouseDown()
     -- Reset menu
 	rightClickMenu:Clear();
 
-    -- Filters
+    -- Category Filters
+    rightClickMenu:AddFull({    Text = addon.L["Categories"],
+                                IsTitle = true
+                            });
+
+    rightClickMenu:AddFull({    Text = addon.L["Merge Small Categories"],
+                                Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
+                                    return addon.Options.db.Filters.MergeSmallCategories
+                                end,
+                                Func = function()
+                                    addon.Options.db.Filters.MergeSmallCategories = not addon.Options.db.Filters.MergeSmallCategories;
+                                    self:UpdateAchievementFrame();
+                                end,
+                                IsNotRadio = true,
+                                NotCheckable = false,
+                                KeepShownOnClick = true
+                            });
+
+    rightClickMenu:AddSeparator();
+
+    -- Achievement Filters
+    rightClickMenu:AddFull({    Text = addon.L["Achievements"],
+                                IsTitle = true
+                            });
+
     rightClickMenu:AddFull({    Text = addon.L["Completed"],
                                 Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
                                     return addon.Options.db.Filters.Completion.Completed

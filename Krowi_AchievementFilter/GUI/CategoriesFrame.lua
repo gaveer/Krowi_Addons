@@ -123,34 +123,65 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	func(scrollBar);
 end
 
+local function Validate(self, achievement, numOfAch, numOfCompAch) -- , numOfIncompAch
+	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
+		numOfAch = numOfAch + 1;
+		local _, _, _, completed = GetAchievementInfo(achievement.ID);
+		if completed then
+			numOfCompAch = numOfCompAch + 1;
+		-- else
+		-- 	numOfIncompAch = numOfIncompAch + 1;
+		end
+	end
+
+	return numOfAch, numOfCompAch; -- , numOfIncompAch
+end
+
 local function GetAchievementNumbers(self, category)
 	-- diagnostics.Trace("GetAchievementNumbers"); -- Generates a lot of messages
+
+	category:UnMergeAchievements();
+	category.Merged = nil;
 
 	-- numOfIncompAch is not used right now so we can leave this one out untill needed
 	local numOfAch, numOfCompAch = 0, 0; -- , numOfIncompAch = 0
 
-	if category.Achievements ~= nil then
-		for _, achievement in next, category.Achievements do
-			if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then
-				numOfAch = numOfAch + 1;
-				local _, _, _, completed = GetAchievementInfo(achievement.ID);
-				if completed then
-					numOfCompAch = numOfCompAch + 1;
-				-- else
-				-- 	numOfIncompAch = numOfIncompAch + 1;
-				end
-			end
-		end
-	end
-
 	local showCollapseIcon = false;
-	if category.Children ~= nil then
+	if category.Children then
 		for _, child in next, category.Children do
 			local childNumOfAch, childNumOfCompAch = GetAchievementNumbers(self, child); -- , childNumOfIncompAch
 			numOfAch = numOfAch + childNumOfAch;
 			numOfCompAch = numOfCompAch + childNumOfCompAch;
 			-- numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
 			showCollapseIcon = showCollapseIcon or childNumOfAch > 0;
+		end
+	end
+
+	if category.Achievements then
+		for _, achievement in next, category.Achievements do
+			numOfAch, numOfCompAch = Validate(self, achievement, numOfAch, numOfCompAch); -- , numOfIncompAch
+		end
+	end
+
+	if category.MergedAchievements then
+		for _, achievement in next, category.MergedAchievements do
+			numOfAch, numOfCompAch = Validate(self, achievement, numOfAch, numOfCompAch); -- , numOfIncompAch
+		end
+	end
+
+	if addon.Options.db.Filters.MergeSmallCategories then
+		if category.Parent and category.Parent.CanMergeChildren then
+			if category.Achievements then
+				if numOfAch < 10 then -- Make hardcoded 10 a setting in options
+					if not category.Merged then
+						for _, achievement in next, category.Achievements do
+							category.Parent:MergeAchievement(achievement);
+						end
+						category.Merged = true;
+					end
+					numOfAch, numOfCompAch = 0, 0;
+				end
+			end
 		end
 	end
 
@@ -173,7 +204,9 @@ function categoriesFrame:Update(getAchNums)
 	local displayCategories = {};
 	for _, category in next, self.Categories do
 		if category.NotHidden or category.AlwaysVisible then -- If already visible, keep visible
-			if category.NumOfAch == nil or getAchNums or category.HasFlexibleData then -- Huge increase over performance if we cache the achievement numbers and only update them when needed
+			if (category.NumOfAch == nil or getAchNums or category.HasFlexibleData) and category.Parent == nil then
+				-- Huge increase over performance if we cache the achievement numbers and only update them when needed,
+				-- only for the top level categories since it works recursive
 				if GetAchievementNumbers(self, category) > 0 or category.AlwaysVisible then
 					tinsert(displayCategories, category);
 				end
@@ -324,6 +357,7 @@ local function Select(self, category, collapsed, quick)
 		for _, button in next, container.buttons do
 			if button.Category == category and math.ceil(button:GetBottom()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
 				button:Click(nil, nil, quick);
+				diagnostics.Debug(button.name);
 				shown = button;
 				break;
 			end

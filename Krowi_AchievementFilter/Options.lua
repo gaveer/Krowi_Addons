@@ -44,6 +44,7 @@ local defaults = {
                 Necrolord = false
             },
             CollapseSeries = true,
+            MergeSmallCategories = true,
             SortBy = {
                 Criteria = addon.L["Default"],
                 ReverseSort = false

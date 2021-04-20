@@ -3,7 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.19.0] - 
 ### Added
--TBD
+- Filter to merge small categories into the parent category
+- The Burning Crusade Zones (37 achievements) + zone data except for the shared zone group
+- Wrath of the Lich King Zones (49 achievements) + zone data except for the shared zone group
+
+### Changed
+- Better filtering performance by adding additional checks for getting the number of achievements per category
 
 ## [9.0.5.18.0] - 2021-04-13
 ### Added

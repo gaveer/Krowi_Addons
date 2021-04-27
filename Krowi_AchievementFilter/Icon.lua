@@ -18,8 +18,7 @@ local function CreateIcon()
                 addon.GUI.ToggleAchievementFrameAtTab1();
             elseif button == "RightButton" then
                 diagnostics.Trace("icon.AchievementFilterLDB.OnClick with RightButton");
-                InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
-                InterfaceOptionsFrame_OpenToCategory(AF_NAME);
+                addon.Options.Open();
             end
         end,
         OnTooltipShow = function(tt)

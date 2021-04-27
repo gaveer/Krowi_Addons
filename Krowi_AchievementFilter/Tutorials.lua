@@ -85,6 +85,7 @@ function tutorials.Load()
             image = media .. "Filter",
             text = GetTitle(addon.L["FT_FILTER_TITLE"]) ..
                             core.ReplaceVars{addon.L["FT_FILTER_DESC"],
+                                            mergeSmallCategories = AF_COLOR_YELLOW .. addon.L["Merge Small Categories"] .. AF_COLOR_END,
                                             completed = AF_COLOR_YELLOW .. addon.L["Completed"] .. AF_COLOR_END,
                                             notCompleted = AF_COLOR_YELLOW .. addon.L["Not Completed"] .. AF_COLOR_END,
                                             obtainable = AF_COLOR_YELLOW .. addon.L["Obtainable"] .. AF_COLOR_END,

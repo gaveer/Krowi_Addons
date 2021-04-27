@@ -1,5 +1,6 @@
 ﻿namespace DbManager.Objects
 {
+    // <remarks>Needs to be in sync with the PetFamily table in the database.</remarks>
     public enum PetFamily
     {
         Undefined = 0,

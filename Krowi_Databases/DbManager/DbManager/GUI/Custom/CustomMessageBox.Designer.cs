@@ -1,7 +1,7 @@
 ﻿
-namespace DbManager
+namespace DbManager.GUI.Custom
 {
-    partial class Form2
+    partial class CustomMessageBox
     {
         /// <summary>
         /// Required designer variable.

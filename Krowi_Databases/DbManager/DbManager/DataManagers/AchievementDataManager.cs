@@ -16,17 +16,11 @@ namespace DbManager.DataManagers
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
-                                    A.ID, ACA.Location, ANO.ID, AHNWL.ID, A.Faction, AC.CovenantID
+                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.HasWowheadLink, ACA.Location 
                                 FROM
                                     Achievement A
-                                    LEFT JOIN AchievementNotObtainable ANO
-                                        ON A.ID = ANO.ID
-                                    LEFT JOIN AchievementHasNoWowheadLink AHNWL
-                                        ON A.ID = AHNWL.ID
                                     LEFT JOIN AchievementCategoryAchievement ACA
                                         ON A.ID = ACA.AchievementID
-									LEFT JOIN AchievementCovenant AC
-										ON A.ID = AC.AchievementID
                                 WHERE
                                     ACA.CategoryID = @Category
                                 ORDER BY
@@ -36,10 +30,7 @@ namespace DbManager.DataManagers
             var achievements = new List<Achievement>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                {
-                    Covenant covenant = reader.IsDBNull(5) ? Covenant.NoCovenant : (Covenant)reader.GetInt32(5);
-                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(4), covenant, reader.GetInt32(1), reader.IsDBNull(2), reader.IsDBNull(3)));
-                }
+                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4), reader.GetInt32(5)));
 
             return achievements;
         }
@@ -48,29 +39,20 @@ namespace DbManager.DataManagers
         {
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
-                                    A.ID, ACA.Location, ANO.ID, AHNWL.ID, A.Faction, AC.CovenantID
+                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.HasWowheadLink, ACA.Location 
                                 FROM
                                     Achievement A
-                                    LEFT JOIN AchievementNotObtainable ANO
-                                        ON A.ID = ANO.ID
-                                    LEFT JOIN AchievementHasNoWowheadLink AHNWL
-                                        ON A.ID = AHNWL.ID
                                     LEFT JOIN AchievementCategoryAchievement ACA
                                         ON A.ID = ACA.AchievementID
-									LEFT JOIN AchievementCovenant AC
-										ON A.ID = AC.AchievementID
                                 WHERE
-                                        A.ID = @ID
+                                    A.ID = @ID
                                 LIMIT 1;";
             cmd.Parameters.AddWithValue("@ID", ID);
 
             Achievement achievement = null;
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                {
-                    Covenant covenant = reader.IsDBNull(5) ? Covenant.NoCovenant : (Covenant)reader.GetInt32(5);
-                    achievement = new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(4), covenant, reader.GetInt32(1), reader.IsDBNull(2), reader.IsDBNull(3));
-                }
+                    achievement = new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4), reader.GetInt32(5));
 
             return achievement;
         }
@@ -81,20 +63,18 @@ namespace DbManager.DataManagers
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var sb = new StringBuilder();
-            sb.AppendLine(@"INSERT OR REPLACE INTO Achievement (ID, Faction) VALUES (@ID, @Faction);");
-            if (!achievement.Obtainable)
-                sb.AppendLine(@"INSERT OR REPLACE INTO AchievementNotObtainable (ID) VALUES (@ID);");
-            if (!achievement.HasWowheadLink)
-                sb.AppendLine(@"INSERT OR REPLACE INTO AchievementHasNoWowheadLink (ID) VALUES (@ID);");
-            if (achievement.Covenant != Covenant.NoCovenant)
-                sb.AppendLine(@"INSERT OR REPLACE INTO AchievementCovenant (AchievementID, CovenantID) VALUES (@ID, @Covenant);");
-            sb.AppendLine(@"INSERT OR REPLACE INTO AchievementCategoryAchievement (Location, CategoryID, AchievementID) VALUES (@Location, @CategoryID, @ID);");
+            sb.AppendLine(@"INSERT OR REPLACE INTO Achievement (ID, FactionID, CovenantID, Obtainable, HasWowheadLink)
+                            VALUES (@ID, @FactionID, @CovenantID, @Obtainable, @HasWowheadLink);");
+            sb.AppendLine(@"INSERT OR REPLACE INTO AchievementCategoryAchievement (Location, CategoryID, AchievementID)
+                            VALUES (@Location, @CategoryID, @ID);");
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = sb.ToString();
             cmd.Parameters.AddWithValue("@ID", achievement.ID);
-            cmd.Parameters.AddWithValue("@Faction", (int)achievement.Faction);
-            cmd.Parameters.AddWithValue("@Covenant", (int)achievement.Covenant);
+            cmd.Parameters.AddWithValue("@FactionID", (int)achievement.Faction);
+            cmd.Parameters.AddWithValue("@CovenantID", (int)achievement.Covenant);
+            cmd.Parameters.AddWithValue("@Obtainable", achievement.Obtainable ? 1 : 0);
+            cmd.Parameters.AddWithValue("@HasWowheadLink", achievement.HasWowheadLink ? 1 : 0);
             cmd.Parameters.AddWithValue("@Location", achievement.Location);
             cmd.Parameters.AddWithValue("@CategoryID", category.ID);
 
@@ -105,22 +85,9 @@ namespace DbManager.DataManagers
         {
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
 
-            var isDuplicate = FindDuplicateIDs().Contains(achievement.ID);
-
             var sb = new StringBuilder();
-            if (!isDuplicate)
-            {
-                if (!achievement.Obtainable)
-                    sb.AppendLine(@"DELETE FROM AchievementNotObtainable WHERE ID = @ID;");
-                if (!achievement.HasWowheadLink)
-                    sb.AppendLine(@"DELETE FROM AchievementHasNoWowheadLink WHERE ID = @ID;");
-                if (achievement.Covenant != Covenant.NoCovenant)
-                    sb.AppendLine(@"DELETE FROM AchievementCovenant WHERE AchievementID = @ID;");
-                sb.AppendLine(@"DELETE FROM AchievementCategoryAchievement WHERE AchievementID = @ID;");
-                sb.AppendLine(@"DELETE FROM Achievement WHERE ID = @ID;");
-            }
-            else
-                sb.AppendLine(@"DELETE FROM AchievementCategoryAchievement WHERE AchievementID = @ID AND CategoryID = @CategoryID;");
+            sb.AppendLine(@"DELETE FROM AchievementCategoryAchievement WHERE AchievementID = @ID AND CategoryID = @CategoryID;");
+            sb.AppendLine(@"DELETE FROM Achievement WHERE ID = @ID;");
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = sb.ToString();
@@ -145,26 +112,6 @@ namespace DbManager.DataManagers
 
                     cmd.ExecuteNonQuery();
                 }
-        }
-
-        public List<int> FindDuplicateIDs()
-        {
-            var cmd = connection.CreateCommand();
-            cmd.CommandText = @"SELECT
-                                    AchievementID, COUNT(*) C
-                                FROM
-                                    AchievementCategoryAchievement
-                                GROUP BY
-                                    AchievementID
-                                HAVING
-                                    C > 1";
-
-            var IDs = new List<int>();
-            using (var reader = cmd.ExecuteReader())
-                while (reader.Read())
-                    IDs.Add(reader.GetInt32(0));
-
-            return IDs;
         }
 
         public void Swap(Achievement achievement1, Achievement achievement2, AchievementCategory category)
@@ -194,6 +141,36 @@ namespace DbManager.DataManagers
             cmd.Parameters.AddWithValue("@AchievementID1", achievement1.ID);
             cmd.Parameters.AddWithValue("@Location2", achievement1.Location);
             cmd.Parameters.AddWithValue("@AchievementID2", achievement2.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public void UpdateAGT(Achievement achievement, int category_AGT_ID)
+        {
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"INSERT OR REPLACE INTO Achievement_AGT VALUES (@ID, @Name, @Description, @FactionID, @Category_AGT_ID, @Points, @CovenantID, @HIDE_INCOMPLETE, @TRACKING_FLAG,
+	                                CASE WHEN (SELECT COUNT(*) FROM Achievement_AGT WHERE ID = @ID) > 0 THEN
+		                                (SELECT DateAdded FROM Achievement_AGT WHERE ID = @ID) ELSE DATETIME('now', 'localtime')
+	                                END,
+	                                CASE WHEN ((SELECT Name FROM Achievement_AGT WHERE ID = @ID) = @Name)
+		                                        AND ((SELECT Description FROM Achievement_AGT WHERE ID = @ID) = @Description)
+		                                        AND ((SELECT FactionID FROM Achievement_AGT WHERE ID = @ID) = @FactionID)
+		                                        AND ((SELECT Category_AGT_ID FROM Achievement_AGT WHERE ID = @ID) = @Category_AGT_ID)
+		                                        AND ((SELECT Points FROM Achievement_AGT WHERE ID = @ID) = @Points)
+		                                        AND ((SELECT CovenantID FROM Achievement_AGT WHERE ID = @ID) = @CovenantID)
+		                                        AND ((SELECT HIDE_INCOMPLETE FROM Achievement_AGT WHERE ID = @ID) = @HIDE_INCOMPLETE)
+		                                        AND ((SELECT TRACKING_FLAG FROM Achievement_AGT WHERE ID = @ID) = @TRACKING_FLAG) THEN
+		                                (SELECT DateChanged FROM Achievement_AGT WHERE ID = @ID) ELSE DATETIME('now', 'localtime')
+	                                END);";
+            cmd.Parameters.AddWithValue("@ID", achievement.ID);
+            cmd.Parameters.AddWithValue("@Name", achievement.Name);
+            cmd.Parameters.AddWithValue("@Description", achievement.Description != null ? achievement.Description : DBNull.Value);
+            cmd.Parameters.AddWithValue("@FactionID", (int)achievement.Faction);
+            cmd.Parameters.AddWithValue("@Category_AGT_ID", category_AGT_ID);
+            cmd.Parameters.AddWithValue("@Points", achievement.Points);
+            cmd.Parameters.AddWithValue("@CovenantID", (int)achievement.Covenant);
+            cmd.Parameters.AddWithValue("@HIDE_INCOMPLETE", achievement.Flags.HasFlag(AchievementFlags.HIDE_INCOMPLETE) ? 1 : 0);
+            cmd.Parameters.AddWithValue("@TRACKING_FLAG", achievement.Flags.HasFlag(AchievementFlags.TRACKING_FLAG) ? 1 : 0);
 
             cmd.ExecuteNonQuery();
         }

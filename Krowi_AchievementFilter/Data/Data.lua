@@ -11,6 +11,7 @@ addon.RCMenuExtras = {};
 function data.Load()
     addon.CurrentZoneCategory = addon.ExportedData.Load(addon.Categories, addon.Achievements);
     addon.ExportedPetBattles.Load(addon.RCMenuExtras);
+
     -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(C_Map.GetBestMapForUnit("player"));
 
     -- TEST = {};

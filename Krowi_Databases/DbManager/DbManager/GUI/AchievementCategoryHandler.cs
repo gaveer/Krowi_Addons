@@ -8,21 +8,20 @@ using System.Windows.Forms;
 
 namespace DbManager.GUI
 {
-    public class AchievementCategoryHandler
+    public class AchievementCategoryHandler : IGUIHandler
     {
         private TreeView tvwAchievementCategories;
-        private TextBox txtMapIDs;
+        private AchievementCategoryDataManager dataManager;
         private FunctionHandler functionHandler;
 
-        public AchievementCategoryHandler(SqliteConnection connection, TreeView tvwAchievementCategories, TextBox txtMapIDs, FunctionHandler functionHandler)
+        public AchievementCategoryHandler(TreeView tvwAchievementCategories, AchievementCategoryDataManager dataManager, FunctionHandler functionHandler)
         {
             this.tvwAchievementCategories = tvwAchievementCategories;
-            this.txtMapIDs = txtMapIDs;
-            DataManager = new AchievementCategoryDataManager(connection);
+            this.dataManager = dataManager;
             this.functionHandler = functionHandler;
         }
 
-        public AchievementCategoryDataManager DataManager { get; set; }
+        public IDataManager DataManager => dataManager;
 
         public AchievementCategory GetSelectedAchievementCategory()
         {
@@ -58,7 +57,7 @@ namespace DbManager.GUI
 
             tvwAchievementCategories.Nodes.Clear();
 
-            var categories = DataManager.GetAll();
+            var categories = dataManager.GetAll(true);
 
             foreach (var category in categories)
             {
@@ -80,7 +79,7 @@ namespace DbManager.GUI
             }
         }
 
-        public void Add(bool asParent, string achievementCategoryName, int functionValue, bool isLegacy, string mapIDsString)
+        public void Add(bool asParent, string achievementCategoryName, int functionValue, bool isLegacy)
         {
             var function = functionHandler.GetSelectedFunction();
             if (function == null)
@@ -99,14 +98,9 @@ namespace DbManager.GUI
             int location = asParent ? 1 : selectedCategory.Location + 1;
             AchievementCategory parent = asParent ? selectedCategory : selectedCategory.Parent;
 
-            List<int> mapIDs;
-            if (string.IsNullOrEmpty(mapIDsString))
-                mapIDs = new List<int>();
-            else
-                mapIDs = mapIDsString.Split(',').Select(x => int.Parse(x.Trim())).ToList();
-
-            var category = new AchievementCategory(-1, location, achievementCategoryName, function, functionValue, parent: parent, isLegacy: isLegacy, uiMapID: mapIDs);
-            DataManager.Add(category);
+            achievementCategoryName = string.IsNullOrEmpty(achievementCategoryName) ? function.Description : achievementCategoryName;
+            var category = new AchievementCategory(-1, location, achievementCategoryName, parent, function, functionValue, isLegacy, false, true, false);
+            dataManager.Add(category);
 
             if (!asParent)
             {
@@ -121,13 +115,13 @@ namespace DbManager.GUI
 
                 var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
-                DataManager.UpdateLocations(DataManager.GetLast(), categories);
+                dataManager.UpdateLocations(dataManager.GetLast(), categories);
             }
 
             RefreshTreeView();
 
             // Make sure the last added achievement category is selected
-            category = DataManager.GetLast();
+            category = dataManager.GetLast();
             var selectNode = FindAchievementCategoryNode(tvwAchievementCategories.Nodes, category);
             tvwAchievementCategories.SelectedNode = selectNode;
         }
@@ -141,7 +135,7 @@ namespace DbManager.GUI
                 return;
             }
 
-            DataManager.Remove(selectedCategory);
+            dataManager.Remove(selectedCategory);
 
             var node = tvwAchievementCategories.SelectedNode.Parent;
             TreeNodeCollection nodes = null;
@@ -153,7 +147,7 @@ namespace DbManager.GUI
             tvwAchievementCategories.SelectedNode.Remove();
 
             var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
-            DataManager.UpdateLocations(selectedCategory, categories);
+            dataManager.UpdateLocations(selectedCategory, categories);
 
             RefreshTreeView();
         }
@@ -165,7 +159,7 @@ namespace DbManager.GUI
                 mapIDs = new List<int>();
             else
                 mapIDs = mapIDsString.Split(',').Select(x => int.Parse(x.Trim())).ToList();
-            DataManager.UpdateMapIDs(GetSelectedAchievementCategory(), mapIDs);
+            dataManager.UpdateMapIDs(GetSelectedAchievementCategory(), mapIDs);
         }
 
         public void MoveUp()
@@ -186,7 +180,7 @@ namespace DbManager.GUI
             if (filteredIndex == 0) // Already top element so can't go up
                 return;
 
-            DataManager.Swap(categories[filteredIndex], categories[filteredIndex - 1]);
+            dataManager.Swap(categories[filteredIndex], categories[filteredIndex - 1]);
 
             RefreshTreeView();
         }
@@ -209,7 +203,7 @@ namespace DbManager.GUI
             if (filteredIndex == categories.Count - 1) // Already bottom element so can't go down
                 return;
 
-            DataManager.Swap(categories[filteredIndex], categories[filteredIndex + 1]);
+            dataManager.Swap(categories[filteredIndex], categories[filteredIndex + 1]);
 
             RefreshTreeView();
         }
@@ -222,7 +216,7 @@ namespace DbManager.GUI
 
             var selectedCategory = GetSelectedAchievementCategory();
 
-            DataManager.UpdateParent(selectedCategory, selectedCategory.Parent.Parent, selectedCategory.Parent.Location + 1);
+            dataManager.UpdateParent(selectedCategory, selectedCategory.Parent.Parent, selectedCategory.Parent.Location + 1);
 
             var node = parentNode.Parent;
             TreeNodeCollection nodes = null;
@@ -235,7 +229,7 @@ namespace DbManager.GUI
 
             var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
-            DataManager.UpdateLocations(selectedCategory, categories);
+            dataManager.UpdateLocations(selectedCategory, categories);
 
             var nextNode = (AchievementCategoryTreeNode)tvwAchievementCategories.SelectedNode.NextNode;
             if (nextNode is not null)
@@ -245,12 +239,12 @@ namespace DbManager.GUI
                 if (prevNode?.AchievementCategory is not null)
                 {
                     var categories2 = prevNode.Parent.Nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
-                    DataManager.UpdateLocations(prevNode.AchievementCategory, categories2);
+                    dataManager.UpdateLocations(prevNode.AchievementCategory, categories2);
                 }
                 else // removed item was 1st element so we use next element and adjust from a fictional 1st element
                 {
                     var categories2 = nextNode.Parent.Nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
-                    DataManager.UpdateLocations(new AchievementCategory(-1, -1, "TEMP", null, -1), categories2);
+                    dataManager.UpdateLocations(new AchievementCategory(-1, -1, "TEMP", null, null, -1, false, false, false, false), categories2);
                 }
             }
 
@@ -269,7 +263,7 @@ namespace DbManager.GUI
             if (prevNode.Nodes.Count > 0)
                 location = ((AchievementCategoryTreeNode)prevNode.Nodes[prevNode.Nodes.Count - 1]).AchievementCategory.Location + 1;
 
-            DataManager.UpdateParent(selectedCategory, prevNode.AchievementCategory, location);
+            dataManager.UpdateParent(selectedCategory, prevNode.AchievementCategory, location);
 
             var node = tvwAchievementCategories.SelectedNode.Parent;
             TreeNodeCollection nodes = null;
@@ -282,7 +276,7 @@ namespace DbManager.GUI
 
             var categories = nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
 
-            DataManager.UpdateLocations(prevNode.AchievementCategory, categories);
+            dataManager.UpdateLocations(prevNode.AchievementCategory, categories);
 
             RefreshTreeView();
         }
@@ -291,7 +285,15 @@ namespace DbManager.GUI
         {
             var selectedCategory = GetSelectedAchievementCategory();
             selectedCategory.Active = active;
-            DataManager.ChangeActiveState(selectedCategory);
+            dataManager.ChangeActiveState(selectedCategory);
+            //RefreshTreeView();
+        }
+
+        public void ChangeCanMergeState(bool canMerge)
+        {
+            var selectedCategory = GetSelectedAchievementCategory();
+            selectedCategory.CanMerge = canMerge;
+            dataManager.ChangeCanMergeState(selectedCategory);
             //RefreshTreeView();
         }
     }

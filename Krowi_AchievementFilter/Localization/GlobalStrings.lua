@@ -22,6 +22,10 @@ function globalStrings.Load(L)
     L["Sort By"] = RAID_FRAME_SORT_LABEL;
     L["Default"] = CHAT_DEFAULT;
     L["Name"] = NAME;
+    L["Achievements"] = ACHIEVEMENTS;
+    L["Categories"] = CATEGORIES;
+    L["Help"] = GAMEMENU_HELP;
+    L["Options"] = GAMEOPTIONS_MENU;
 
     -- Options
     L["Info"] = INFO;

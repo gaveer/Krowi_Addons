@@ -84,24 +84,31 @@
     <Compile Include="DataManagers\DataManagerBase.cs" />
     <Compile Include="DataManagers\IDataManager.cs" />
     <Compile Include="DataManagers\PetBattleLinksDataManager.cs" />
+    <Compile Include="DataManagers\UIMapDataManager.cs" />
     <Compile Include="DataManagers\XuFuEncounterDataManager.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Form2.cs">
+    <Compile Include="GUI\Custom\CustomMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="GUI\Custom\CustomMessageBox.Designer.cs">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\AchievementCategoryHandler.cs" />
-    <Compile Include="GUI\AchievementCriteriaHandler.cs" />
+    <Compile Include="GUI\PetBattleLinksHandler.cs" />
     <Compile Include="GUI\AchievementHandler.cs" />
+    <Compile Include="GUI\Custom\TextProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GUI\ExportHandler.cs" />
     <Compile Include="GUI\FunctionHandler.cs" />
     <Compile Include="GUI\IGUIHandler.cs" />
+    <Compile Include="GUI\UIMapHandler.cs" />
     <Compile Include="GUI\XuFuEncounterHandler.cs" />
     <Compile Include="Objects\Achievement.cs" />
     <Compile Include="Objects\AchievementCategory.cs" />
     <Compile Include="GUI\AchievementCategoryTreeNode.cs" />
+    <Compile Include="Objects\AchievementFlags.cs" />
+    <Compile Include="Objects\UIMap.cs" />
     <Compile Include="Objects\PetBattleLink.cs" />
     <Compile Include="Objects\Covenant.cs" />
     <Compile Include="DataManagers\AchievementCategoryDataManager.cs" />
@@ -122,8 +129,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Custom\CustomMessageBox.resx">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

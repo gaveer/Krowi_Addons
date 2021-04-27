@@ -12,8 +12,12 @@ local defaults = {
         ShowMinimapIcon = false,
         EnableDebugInfo = false,
         EnableTraceInfo = false,
-        CategoriesFrameWidthOffset = 25,
-        AchievementFrameHeightOffset = 250,
+        Layout = {
+            CategoriesFrameWidthOffset = 25,
+            AchievementFrameHeightOffset = 250,
+            MergeSmallCategoriesThreshold = 10,
+            MergeSmallCategoriesThresholdChanged = false
+        },
         Minimap = {
             hide = true -- not ShowMinimapIcon
         },
@@ -44,6 +48,7 @@ local defaults = {
                 Necrolord = false
             },
             CollapseSeries = true,
+            MergeSmallCategories = true,
             SortBy = {
                 Criteria = addon.L["Default"],
                 ReverseSort = false
@@ -59,7 +64,7 @@ local defaults = {
 }
 
 local maxNumberOfSearchPreviews = function()
-    return 17 + math.floor(addon.Options.db.AchievementFrameHeightOffset / 29);
+    return 17 + math.floor(addon.Options.db.Layout.AchievementFrameHeightOffset / 29);
 end
 
 local function CreatePanel()
@@ -155,7 +160,7 @@ local function CreatePanel()
                 inline = true,
                 order = 3,
                 args = {
-                    categoriesFrameWidthOffset = {
+                    CategoriesFrameWidthOffset = {
                         name = addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"],
                         desc = core.ReplaceVars{addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"],
                                                 tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
@@ -167,20 +172,20 @@ local function CreatePanel()
                         width = 1.5,
                         order = 1.1,
                         get = function ()
-                            return addon.Options.db.CategoriesFrameWidthOffset;
+                            return addon.Options.db.Layout.CategoriesFrameWidthOffset;
                         end,
                         set = function(_, value)
-                            if addon.Options.db.CategoriesFrameWidthOffset == value then
+                            if addon.Options.db.Layout.CategoriesFrameWidthOffset == value then
                                 return;
                             end;
 
-                            addon.Options.db.CategoriesFrameWidthOffset = value;
-                            addon.Event:SendMessage("UpdateAchievementFrameWidth", addon.Options.db.CategoriesFrameWidthOffset);
+                            addon.Options.db.Layout.CategoriesFrameWidthOffset = value;
+                            addon.Event:SendMessage("UpdateAchievementFrameWidth", addon.Options.db.Layout.CategoriesFrameWidthOffset);
 
-                            diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+                            diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.CategoriesFrameWidthOffset));
                         end
                     },
-                    achievementFrameHeightOffset = {
+                    AchievementFrameHeightOffset = {
                         name = addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"],
                         desc = core.ReplaceVars{addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"],
                                                 tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
@@ -192,24 +197,48 @@ local function CreatePanel()
                         width = 1.5,
                         order = 1.2,
                         get = function ()
-                            return addon.Options.db.AchievementFrameHeightOffset;
+                            return addon.Options.db.Layout.AchievementFrameHeightOffset;
                         end,
                         set = function(_, value)
-                            if addon.Options.db.AchievementFrameHeightOffset == value then
+                            if addon.Options.db.Layout.AchievementFrameHeightOffset == value then
                                 return;
                             end;
 
-                            addon.Options.db.AchievementFrameHeightOffset = value;
+                            addon.Options.db.Layout.AchievementFrameHeightOffset = value;
                             local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Search.args.numberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
                             numberOfSearchPreviews.max = maxNumberOfSearchPreviews();
                             if numberOfSearchPreviews.get() > numberOfSearchPreviews.max then
                                 numberOfSearchPreviews.set(nil, numberOfSearchPreviews.max);
                             end
-                            addon.Event:SendMessage("UpdateAchievementFrameHeight", addon.Options.db.AchievementFrameHeightOffset);
+                            addon.Event:SendMessage("UpdateAchievementFrameHeight", addon.Options.db.Layout.AchievementFrameHeightOffset);
 
-                            diagnostics.Debug(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] .. ": " .. tostring(addon.Options.db.AchievementFrameHeightOffset));
+                            diagnostics.Debug(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.AchievementFrameHeightOffset));
                         end
-                    }
+                    },
+                    MergeSmallCategoriesThreshold = {
+                        name = addon.L["Merge small categories threshold"],
+                        desc = core.ReplaceVars{addon.L["Merge small categories threshold Desc"],
+                                                reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                        type = "range",
+                        min = 1,
+                        max = 50,
+                        step = 1,
+                        width = 1.5,
+                        order = 2.1,
+                        get = function ()
+                            return addon.Options.db.Layout.MergeSmallCategoriesThreshold;
+                        end,
+                        set = function(_, value)
+                            if addon.Options.db.Layout.MergeSmallCategoriesThreshold == value then
+                                return;
+                            end;
+
+                            addon.Options.db.Layout.MergeSmallCategoriesThreshold = value;
+                            addon.Options.db.Layout.MergeSmallCategoriesThresholdChanged = true;
+
+                            diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.MergeSmallCategoriesThreshold));
+                        end
+                    },
                 }
             },
             Search = {
@@ -385,11 +414,17 @@ local function SetFilters()
     addon.Options.db.Filters.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
 end
 
+local function Open()
+    InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
+    InterfaceOptionsFrame_OpenToCategory(AF_NAME);
+end
+
 -- Load the options
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
     addon.Options.SetFilters = SetFilters;
     addon.Options.db = addon.Options.profile;
+    addon.Options.Open = Open;
 
     addon.GUI.ElvUISkin.Load();
 
@@ -398,7 +433,7 @@ function options.Load()
 
     diagnostics.Debug("- Options loaded");
     diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.CategoriesFrameWidthOffset));
+    diagnostics.Debug("     - " .. addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.CategoriesFrameWidthOffset));
     diagnostics.Debug("     - " .. addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
     diagnostics.Debug("     - " .. addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
     diagnostics.Debug("     - " .. addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));

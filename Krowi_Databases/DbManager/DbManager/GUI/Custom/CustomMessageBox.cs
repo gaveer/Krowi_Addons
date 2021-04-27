@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DbManager
+namespace DbManager.GUI.Custom
 {
-    public partial class Form2 : Form
+    public partial class CustomMessageBox : Form
     {
-        public Form2()
+        public CustomMessageBox()
         {
             InitializeComponent();
         }
 
-        public Form2(string message, string button1Text, string button2Text, string button3Text, string button4Text, string button5Text) : this()
+        public CustomMessageBox(string message, string button1Text, string button2Text, string button3Text, string button4Text, string button5Text) : this()
         {
             textBox1.Text = message;
             button1.Text = button1Text;
@@ -27,7 +27,7 @@ namespace DbManager
             button5.Text = button5Text;
         }
 
-        public Form2(string message, List<string> options) : this()
+        public CustomMessageBox(string message, List<string> options) : this()
         {
             textBox1.Text = message;
             textBox1.Enabled = false;

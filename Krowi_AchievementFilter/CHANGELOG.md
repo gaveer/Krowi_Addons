@@ -1,9 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.19.0] - 
+## [9.0.5.19.0] - 2021-04-27
 ### Added
--TBD
+- Filter to merge small categories into the parent category
+- Tutorial (Help) and Options can now be opened from the Filter menu for easy access
+- Classic Zones (97 achievements) + zone data except for the shared zone group
+- The Burning Crusade Zones (44 achievements) + zone data except for the shared zone group
+- Wrath of the Lich King Zones (49 achievements) + zone data except for the shared zone group
+
+### Changed
+- Better filtering performance by adding additional checks for getting the number of achievements per category
+- Moved achievement Crypt Couture from Shadowlands Zones Maldraxxus Exploration to Shadowlands Covenant Sanctums Necrolord
+- Optimized data file sizes
+- Backend database optimized
 
 ## [9.0.5.18.0] - 2021-04-13
 ### Added
@@ -243,7 +253,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.0.5.19.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.5.19.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3290570
 [9.0.5.18.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3275157
 [9.0.5.17.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3264965
 [9.0.5.16.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3259864

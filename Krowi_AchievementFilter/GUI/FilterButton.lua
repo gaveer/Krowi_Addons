@@ -55,7 +55,31 @@ function filterButton:OnMouseDown()
     -- Reset menu
 	rightClickMenu:Clear();
 
-    -- Filters
+    -- Category Filters
+    rightClickMenu:AddFull({    Text = addon.L["Categories"],
+                                IsTitle = true
+                            });
+
+    rightClickMenu:AddFull({    Text = addon.L["Merge Small Categories"],
+                                Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
+                                    return addon.Options.db.Filters.MergeSmallCategories
+                                end,
+                                Func = function()
+                                    addon.Options.db.Filters.MergeSmallCategories = not addon.Options.db.Filters.MergeSmallCategories;
+                                    self:UpdateAchievementFrame();
+                                end,
+                                IsNotRadio = true,
+                                NotCheckable = false,
+                                KeepShownOnClick = true
+                            });
+
+    rightClickMenu:AddSeparator();
+
+    -- Achievement Filters
+    rightClickMenu:AddFull({    Text = addon.L["Achievements"],
+                                IsTitle = true
+                            });
+
     rightClickMenu:AddFull({    Text = addon.L["Completed"],
                                 Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
                                     return addon.Options.db.Filters.Completion.Completed
@@ -250,7 +274,7 @@ function filterButton:OnMouseDown()
                             Func = function()
                                 addon.Options.db.Filters.SortBy.Criteria = addon.L["Default"];
                                 rightClickMenu:SetSelectedName(addon.L["Default"]);
-                                self.AchievementsFrame:Update();
+                                self.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -262,7 +286,7 @@ function filterButton:OnMouseDown()
                             Func = function()
                                 addon.Options.db.Filters.SortBy.Criteria = addon.L["Name"];
                                 rightClickMenu:SetSelectedName(addon.L["Name"]);
-                                self.AchievementsFrame:Update();
+                                self.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -274,7 +298,7 @@ function filterButton:OnMouseDown()
                             end,
                             Func = function()
                                 addon.Options.db.Filters.SortBy.ReverseSort = not addon.Options.db.Filters.SortBy.ReverseSort;
-                                self.AchievementsFrame:Update();
+                                self.AchievementsFrame:ForceUpdate();
                             end,
                             IsNotRadio = true,
                             NotCheckable = false,
@@ -282,6 +306,20 @@ function filterButton:OnMouseDown()
                             IgnoreAsMenuSelection = true
                         });
     rightClickMenu:Add(sortBy);
+
+    rightClickMenu:AddSeparator();
+
+    rightClickMenu:AddFull({    Text = addon.L["Help"],
+                                Func = function()
+                                    addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
+                                    addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                                end
+                            });
+    rightClickMenu:AddFull({    Text = addon.L["Options"],
+                                Func = function()
+                                    addon.Options.Open();
+                                end
+                            });
 
 	rightClickMenu:Toggle(self, 96, 15);
 end

@@ -3,7 +3,44 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.20.0] - 
 ### Added
-- TBD
+- Missing Classic Zones (2 achievement)
+- Missing Classic Zones Eastern Kingdoms (1 achievement)
+- Missing Classic Zones Eastern Kingdoms Eastern Plaguelands Reputation (1 achievement)
+- Missing Classic Zones Eastern Kingdoms Northern Stranglethorn Quests (1 achievement)
+- Missing Classic Zones Kalimdor (1 achievement)
+- Missing Classic Zones Kalimdor Silithus Reputation (1 achievement)
+- Missing Classic Raids Ruins of Ahn'Qiraj Reputation Reputation (1 achievement)
+- Missing The Burning Crusade Zones (1 achievement)
+- Missing The Burning Crusade Zones Zangarmarsh Reputation (3 achievement)
+- Missing The Burning Crusade Zones Nagrand Quests (3 achievement)
+- Missing The Burning Crusade Zones Nagrand Reputation (2 achievement)
+- Missing The Burning Crusade Raids Black Temple (1 achievement)
+- Missing Wrath of the Lich King Zones (1 achievement)
+- Missing Wrath of the Lich King Zones Grizzly Hills PvP (2 achievements)
+- Missing Wrath of the Lich King Zones Zul'Drak Quests (2 achievements)
+- Missing Wrath of the Lich King Zones Sholazar Basin Quests (1 achievement)
+- Missing Wrath of the Lich King Zones Icecrown Reputation (1 achievement)
+- Missing Wrath of the Lich King Dungeons and Raids (1 achievement)
+- Missing Wrath of the Lich King Argent Tournament (35 achievements)
+- Missing Cataclysm Zones (1 achievement)
+- Missing Cataclysm Dungeons and Raids (1 achievement)
+- Missing Mists of Pandaria Zones Pandaria Exploration (1 achievement)
+- Missing Mists of Pandaria Zones Isle of Thunder Exploration (1 achievement)
+- Missing Mists of Pandaria Zones Timeless Isle (1 achievement)
+- Missing Mists of Pandaria Zones, Dungeons and Raids (1 achievement)
+- Missing Mists of Pandaria Pet Battles (3 achievements)
+- Missing Mists of Pandaria Proving Grounds (2 achievements)
+- Missing Warlords of Draenor Zones Draenor Exploration (1 achievement)
+- Missing Warlords of Draenor Dungeons and Raids (1 achievement)
+- Missing Legion Zones Broken Isles Exploration (1 achievement)
+- Missing Legion Class Hall (1 achievement)
+- Missing Battle for Azeroth Zones Kul Tiras & Zandalar Exploration (1 achievement)
+
+### Fixed
+- Issue #37: All Pet Battle links link to the same url
+
+### Removed
+- Shadowlands Torghast (1 achievement, in preperation for 9.1)
 
 ## [9.0.5.19.0] - 2021-04-27
 ### Added

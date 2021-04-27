@@ -75,7 +75,7 @@ namespace DbManager.GUI
                 int location = lsbAchievements.Items.Count > 0 ? ((Achievement)lsbAchievements.SelectedItem).Location + 1 : 1;
                 var category = achievementCategoryHandler.GetSelectedAchievementCategory();
 
-                var achievement = new Achievement(ID, faction, covenant, isObtainable, hasWowheadLink, location);
+                var achievement = new Achievement(ID, faction, covenant, isObtainable, hasWowheadLink, location, null);
                 dataManager.Add(achievement, category);
 
                 // Only insert and update locations if achievement is not added to the end of the list
@@ -180,13 +180,14 @@ namespace DbManager.GUI
                 int.TryParse(matches[7 + offset].Groups[matches[7 + offset].Groups.Count - 1].Value, out int category);
                 int.TryParse(matches[9 + offset].Groups[matches[9 + offset].Groups.Count - 1].Value, out int points);
                 var flags = (AchievementFlags)Enum.Parse(typeof(AchievementFlags), matches[10 + offset].Groups[matches[10 + offset].Groups.Count - 1].Value);
+                int.TryParse(matches[11 + offset].Groups[matches[11 + offset].Groups.Count - 1].Value, out int uiOrder);
                 int.TryParse(matches[16 + offset].Groups[matches[16 + offset].Groups.Count - 1].Value, out int covenantID);
                 var covenant = (Covenant)covenantID;
 
                 if (id == 0)
                     continue;
 
-                dataManager.UpdateAGT(new Achievement(id, name, description, faction, points, covenant, flags), category);
+                dataManager.UpdateAGT(new Achievement(id, name, description, faction, points, covenant, flags), category, uiOrder);
             }
         }
 

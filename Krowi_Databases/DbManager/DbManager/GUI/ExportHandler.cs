@@ -146,16 +146,16 @@ namespace DbManager.GUI
                             if (!string.IsNullOrEmpty(criterion.ExternalLink))
                             {
                                 string externalLink;
-                                if (criteria[0].ExternalLink.Contains("https://www.wow-petguide.com"))
-                                    externalLink = criteria[0].ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
+                                if (criterion.ExternalLink.Contains("https://www.wow-petguide.com"))
+                                    externalLink = criterion.ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
                                 else
-                                    externalLink = $"\"{criteria[0].ExternalLink}";
+                                    externalLink = $"\"{criterion.ExternalLink}";
 
                                 var list = $"rcMenExtras[{achievement.ID}]";
                                 sb.AppendTabbed(1, $"{list} = objects.MenuItem:NewExtLink(addon.L[\"Xu-Fu's Pet Guides\"]");
                                 sb.Append(", ");
                                 sb.Append(externalLink);
-                                sb.AppendLine($"\"); -- {criteria[0].Name}");
+                                sb.AppendLine($"\"); -- {criterion.Name}");
 
                                 var subCriteria = petBatLinDatMan.GetWithParentID(criterion.ID);
                                 GetSubCriteria(sb, criterion.ID.Substring(1), subCriteria, list: list);
@@ -188,10 +188,10 @@ namespace DbManager.GUI
                     }
 
                     string externalLink;
-                    if (criteria[0].ExternalLink.Contains("https://www.wow-petguide.com"))
-                        externalLink = criteria[0].ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
+                    if (criterion.ExternalLink.Contains("https://www.wow-petguide.com"))
+                        externalLink = criterion.ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
                     else
-                        externalLink = $"\"{criteria[0].ExternalLink}";
+                        externalLink = $"\"{criterion.ExternalLink}";
 
                     if (criterion.ID.StartsWith("C"))
                         sb.AppendLineTabbed(indent, $"{list}:AddChildExtLinkFull({criterion.Name}, {externalLink}\");");

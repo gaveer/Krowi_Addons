@@ -16,11 +16,13 @@ namespace DbManager.DataManagers
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
-                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.HasWowheadLink, ACA.Location 
+                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.HasWowheadLink, ACA.Location, AGT.Name
                                 FROM
                                     Achievement A
                                     LEFT JOIN AchievementCategoryAchievement ACA
                                         ON A.ID = ACA.AchievementID
+                                    LEFT JOIN Achievement_AGT AGT
+                                        ON A.ID = AGT.ID
                                 WHERE
                                     ACA.CategoryID = @Category
                                 ORDER BY
@@ -30,7 +32,7 @@ namespace DbManager.DataManagers
             var achievements = new List<Achievement>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4), reader.GetInt32(5)));
+                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4),  reader.GetInt32(5), reader.IsDBNull(6) ? null : reader.GetString(6)));
 
             return achievements;
         }
@@ -39,11 +41,13 @@ namespace DbManager.DataManagers
         {
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
-                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.HasWowheadLink, ACA.Location 
+                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.HasWowheadLink, ACA.Location, AGT.Name
                                 FROM
                                     Achievement A
                                     LEFT JOIN AchievementCategoryAchievement ACA
                                         ON A.ID = ACA.AchievementID
+                                    LEFT JOIN Achievement_AGT AGT
+                                        ON A.ID = AGT.ID
                                 WHERE
                                     A.ID = @ID
                                 LIMIT 1;";
@@ -52,7 +56,7 @@ namespace DbManager.DataManagers
             Achievement achievement = null;
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    achievement = new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4), reader.GetInt32(5));
+                    achievement = new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4), reader.GetInt32(5), reader.IsDBNull(6) ? null : reader.GetString(6));
 
             return achievement;
         }
@@ -145,10 +149,10 @@ namespace DbManager.DataManagers
             cmd.ExecuteNonQuery();
         }
 
-        public void UpdateAGT(Achievement achievement, int category_AGT_ID)
+        public void UpdateAGT(Achievement achievement, int category_AGT_ID, int uiOrder)
         {
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"INSERT OR REPLACE INTO Achievement_AGT VALUES (@ID, @Name, @Description, @FactionID, @Category_AGT_ID, @Points, @CovenantID, @HIDE_INCOMPLETE, @TRACKING_FLAG,
+            cmd.CommandText = @"INSERT OR REPLACE INTO Achievement_AGT VALUES (@ID, @Name, @Description, @FactionID, @Category_AGT_ID, @Points, @UIOrder, @CovenantID, @HIDE_INCOMPLETE, @TRACKING_FLAG,
 	                                CASE WHEN (SELECT COUNT(*) FROM Achievement_AGT WHERE ID = @ID) > 0 THEN
 		                                (SELECT DateAdded FROM Achievement_AGT WHERE ID = @ID) ELSE DATETIME('now', 'localtime')
 	                                END,
@@ -157,6 +161,7 @@ namespace DbManager.DataManagers
 		                                        AND ((SELECT FactionID FROM Achievement_AGT WHERE ID = @ID) = @FactionID)
 		                                        AND ((SELECT Category_AGT_ID FROM Achievement_AGT WHERE ID = @ID) = @Category_AGT_ID)
 		                                        AND ((SELECT Points FROM Achievement_AGT WHERE ID = @ID) = @Points)
+		                                        AND ((SELECT UIOrder FROM Achievement_AGT WHERE ID = @ID) = @UIOrder)
 		                                        AND ((SELECT CovenantID FROM Achievement_AGT WHERE ID = @ID) = @CovenantID)
 		                                        AND ((SELECT HIDE_INCOMPLETE FROM Achievement_AGT WHERE ID = @ID) = @HIDE_INCOMPLETE)
 		                                        AND ((SELECT TRACKING_FLAG FROM Achievement_AGT WHERE ID = @ID) = @TRACKING_FLAG) THEN
@@ -168,6 +173,7 @@ namespace DbManager.DataManagers
             cmd.Parameters.AddWithValue("@FactionID", (int)achievement.Faction);
             cmd.Parameters.AddWithValue("@Category_AGT_ID", category_AGT_ID);
             cmd.Parameters.AddWithValue("@Points", achievement.Points);
+            cmd.Parameters.AddWithValue("@UIOrder", uiOrder);
             cmd.Parameters.AddWithValue("@CovenantID", (int)achievement.Covenant);
             cmd.Parameters.AddWithValue("@HIDE_INCOMPLETE", achievement.Flags.HasFlag(AchievementFlags.HIDE_INCOMPLETE) ? 1 : 0);
             cmd.Parameters.AddWithValue("@TRACKING_FLAG", achievement.Flags.HasFlag(AchievementFlags.TRACKING_FLAG) ? 1 : 0);

@@ -15,7 +15,7 @@ namespace DbManager.Objects
         public bool Obtainable { get; }
         public bool HasWowheadLink { get; }
 
-        public Achievement(int id, Faction faction, Covenant covenant, bool obtainable, bool hasWowheadLink, int location) : this(id, null, null, faction, -1, covenant, AchievementFlags.NO_FLAGS, obtainable, hasWowheadLink, location) { }
+        public Achievement(int id, Faction faction, Covenant covenant, bool obtainable, bool hasWowheadLink, int location, string name) : this(id, name, null, faction, -1, covenant, AchievementFlags.NO_FLAGS, obtainable, hasWowheadLink, location) { }
 
         public Achievement(int id, string name, string description, Faction faction, int points, Covenant covenant, AchievementFlags flags) : this(id, name, description, faction, points, covenant, flags, true, true, -1) { }
 
@@ -35,7 +35,7 @@ namespace DbManager.Objects
 
         public override string ToString()
         {
-            return $"{ID} - {Enum.GetName(typeof(Faction), Faction)}{(Covenant != Covenant.NoCovenant ? $" - {Covenant}" : "")}{(Obtainable ? " - Obtainable" : "")}{(HasWowheadLink ? " - Wowhead" : "")}";
+            return $"{ID} - {Name} - {Enum.GetName(typeof(Faction), Faction)}{(Covenant != Covenant.NoCovenant ? $" - {Covenant}" : "")}{(Obtainable ? " - Obtainable" : "")}{(HasWowheadLink ? " - Wowhead" : "")}";
         }
     }
 }

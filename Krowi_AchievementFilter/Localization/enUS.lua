@@ -13,8 +13,6 @@ L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
 L["Tutorial"] = "Tutorial";
 L["Discord"] = "Discord";
-
--- Tab
 L["T_TAB_TEXT"] = "Achievement Filter";
 
 -- Categories
@@ -136,3 +134,8 @@ L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with
 -- NPC Names
 L["Andurs"] = "Andurs"; -- Wowhead npc=105387
 L["Rydyr"] = "Rydyr"; -- Wowhead npc=105386
+L["Aki the Chosen"] = "Aki the Chosen"; -- Wowhead npc=66741
+L["Burning Pandaren Spirit"] = "Burning Pandaren Spirit"; -- Wowhead npc=68463
+L["Flowing Pandaren Spirit"] = "Flowing Pandaren Spirit"; -- Wowhead npc=68462
+L["Thundering Pandaren Spirit"] = "Thundering Pandaren Spirit"; -- Wowhead npc=68465
+L["Whispering Pandaren Spirit"] = "Whispering Pandaren Spirit"; -- Wowhead npc=68464

@@ -36,7 +36,7 @@ function addon.GetAchievementsInZone(mapID)
 
     local achievements = {};
 	for _, category in next, addon.Categories do
-        addon.Diagnostics.Debug(category.Name);
+        -- addon.Diagnostics.Debug(category.Name);
         -- First check difficulty
         local checkCategory = true;
         if difficulty ~= "" then

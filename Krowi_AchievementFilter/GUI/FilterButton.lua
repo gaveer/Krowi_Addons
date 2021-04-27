@@ -274,7 +274,7 @@ function filterButton:OnMouseDown()
                             Func = function()
                                 addon.Options.db.Filters.SortBy.Criteria = addon.L["Default"];
                                 rightClickMenu:SetSelectedName(addon.L["Default"]);
-                                self.AchievementsFrame:Update();
+                                self.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -286,7 +286,7 @@ function filterButton:OnMouseDown()
                             Func = function()
                                 addon.Options.db.Filters.SortBy.Criteria = addon.L["Name"];
                                 rightClickMenu:SetSelectedName(addon.L["Name"]);
-                                self.AchievementsFrame:Update();
+                                self.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -298,7 +298,7 @@ function filterButton:OnMouseDown()
                             end,
                             Func = function()
                                 addon.Options.db.Filters.SortBy.ReverseSort = not addon.Options.db.Filters.SortBy.ReverseSort;
-                                self.AchievementsFrame:Update();
+                                self.AchievementsFrame:ForceUpdate();
                             end,
                             IsNotRadio = true,
                             NotCheckable = false,

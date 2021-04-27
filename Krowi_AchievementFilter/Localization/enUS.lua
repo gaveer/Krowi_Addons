@@ -46,6 +46,9 @@ L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or s
 L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] = "Achievement window height offset";
 L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"] = "The height that will be added to or subtracted from the default achievement window height.\n\n" ..
                                                 "This value can be changed while the achievement window is open while having the {tabName} tab selected. This will however lag your game.\n\n{reloadRequired}";
+L["Merge small categories threshold"] = "Merge small categories threshold";
+L["Merge small categories threshold Desc"] = "Categories with a number of achievements lower than this number will merge into the parent category.\n\n" ..
+                                                "Only preset categories can merge (mostly child categories from zones).\n\n{reloadRequired}";
 L["O_SEARCH"] = "Search";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] = "Clear search field on Right Click";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"] = "Enable / disable the option to clear the search field when Right Clicking in it";
@@ -108,6 +111,7 @@ L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previo
 L["FT_FILTER_TITLE"] = "Enhanced filtering and sorting";
 L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with only the option to select All, Earned or Incomplete achievements. Here it's enhanced with\n\n" ..
                         "Filtering (multiple filters can be selected at the same time):\n" ..
+                        AF_TAB .. "- {mergeSmallCategories}: Merge categories with less than 10 achievements\n" ..
                         AF_TAB .. "- {completed}: Show completed achievements\n" ..
                         AF_TAB .. "- {notCompleted}: Show not completed achievements\n" ..
                         AF_TAB .. "- {obtainable}: Show obtainable achievements\n" ..

@@ -453,8 +453,8 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	local category;
 	if addon.Options.db.Filters.MergeSmallCategories then
-		category = achievement:GetCategory(); -- This way we get the parent category
-		-- diagnostics.Debug(category.Name);
+		category = achievement:GetMergedCategory(); -- This way we get the parent category
+		diagnostics.Debug(category.Name);
 	else
 		category = achievement.Category
 	end

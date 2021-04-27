@@ -24,14 +24,22 @@ function achievement:New(id, faction, covenant, obtainable, hasWowheadLink) -- C
     return self;
 end
 
-function achievement:GetCategory() -- Gets the achievement's category, used when merging categories is enabled
+function achievement:GetMergedCategory() -- Gets the achievement's category, used when merging categories is enabled
     diagnostics.Trace("achievement:GetCategory");
 
     for _, category in next, addon.Categories do
+        if category.MergedAchievements ~= nil then
+            for _, ach in next, category.MergedAchievements do
+                if ach.ID == self.ID then
+                    -- diagnostics.Debug(category.Name);
+                    return category;
+                end
+            end
+        end
         if category.Achievements ~= nil then
             for _, ach in next, category.Achievements do
                 if ach.ID == self.ID then
-                    diagnostics.Debug(category.Name);
+                    -- diagnostics.Debug(category.Name);
                     return category;
                 end
             end

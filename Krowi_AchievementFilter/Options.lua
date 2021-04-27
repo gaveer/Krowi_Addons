@@ -386,11 +386,17 @@ local function SetFilters()
     addon.Options.db.Filters.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
 end
 
+local function Open()
+    InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
+    InterfaceOptionsFrame_OpenToCategory(AF_NAME);
+end
+
 -- Load the options
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
     addon.Options.SetFilters = SetFilters;
     addon.Options.db = addon.Options.profile;
+    addon.Options.Open = Open;
 
     addon.GUI.ElvUISkin.Load();
 

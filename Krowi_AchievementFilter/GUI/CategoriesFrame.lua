@@ -170,7 +170,7 @@ local function GetAchievementNumbers(self, category)
 	end
 
 	if addon.Options.db.Filters.MergeSmallCategories then
-		if category.Parent and category.Parent.CanMergeChildren then
+		if category.Parent and category.CanMerge then
 			if category.Achievements then
 				if numOfAch < 10 then -- Make hardcoded 10 a setting in options
 					if not category.Merged then

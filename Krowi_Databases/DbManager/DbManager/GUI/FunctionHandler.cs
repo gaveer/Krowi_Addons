@@ -7,43 +7,44 @@ namespace DbManager.GUI
 {
     public class FunctionHandler
     {
-        private readonly ListBox lsbFunctions;
+        private readonly ComboBox comboBox;
+        private readonly FunctionDataManager dataManager;
 
-        public FunctionHandler(SqliteConnection connection, ListBox lsbFunctions)
+        public FunctionHandler(ComboBox comboBox, FunctionDataManager dataManager)
         {
-            this.lsbFunctions = lsbFunctions;
-            DataManager = new FunctionDataManager(connection);
+            this.comboBox = comboBox;
+            this.dataManager = dataManager;
         }
 
-        public IDataManager DataManager { get; }
+        public IDataManager DataManager => dataManager;
 
-        public void RefreshListBox()
+        public void RefreshComboBox()
         {
             // First get the selected function so we can select it again after the refresh
-            var selectedID = lsbFunctions.SelectedItem != null ? ((Function)lsbFunctions.SelectedItem).ID : -1;
+            var selectedID = comboBox.SelectedItem != null ? ((Function)comboBox.SelectedItem).ID : -1;
 
-            lsbFunctions.Items.Clear(); // Clear before adding new functions
+            comboBox.Items.Clear(); // Clear before adding new functions
 
             var functions = ((FunctionDataManager)DataManager).GetAll();
 
-            lsbFunctions.Items.Add(new Function(-1, null, null)); // Empty Function
+            comboBox.Items.Add(new Function(-1, null, null)); // Empty Function
             foreach (var function in functions)
-                lsbFunctions.Items.Add(function);
+                comboBox.Items.Add(function);
 
             // Select the previous selected function again
-            lsbFunctions.SelectedIndex = 0;
+            comboBox.SelectedIndex = 0;
             if (selectedID > 0)
-                foreach (Function item in lsbFunctions.Items)
+                foreach (Function item in comboBox.Items)
                     if (item.ID == selectedID)
                     {
-                        lsbFunctions.SelectedItem = item;
+                        comboBox.SelectedItem = item;
                         break;
                     }
         }
 
         public Function GetSelectedFunction()
         {
-            return (Function)lsbFunctions.SelectedItem;
+            return (Function)comboBox.SelectedItem;
         }
     }
 }

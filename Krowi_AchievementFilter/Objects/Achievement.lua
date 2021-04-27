@@ -7,12 +7,11 @@ local achievement = objects.Achievement;
 
 -- [[ Constructors ]] --
 achievement.__index = achievement;
-function achievement:New(id, --[[category,]] faction, covenant, obtainable, hasWowheadLink) -- Creates a new achievement
+function achievement:New(id, faction, covenant, obtainable, hasWowheadLink) -- Creates a new achievement
     local self = {};
     setmetatable(self, achievement);
 
     self.ID = id or 0;
-    -- self.Category = category;
     self.Faction = faction;
     self.Covenant = covenant;
     if obtainable == false then -- We only want to set it if it's not obtainable, otherwise nil

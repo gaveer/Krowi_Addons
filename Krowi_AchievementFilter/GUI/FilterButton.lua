@@ -307,6 +307,20 @@ function filterButton:OnMouseDown()
                         });
     rightClickMenu:Add(sortBy);
 
+    rightClickMenu:AddSeparator();
+
+    rightClickMenu:AddFull({    Text = addon.L["Help"],
+                                Func = function()
+                                    addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
+                                    addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                                end
+                            });
+    rightClickMenu:AddFull({    Text = addon.L["Options"],
+                                Func = function()
+                                    addon.Options.Open();
+                                end
+                            });
+
 	rightClickMenu:Toggle(self, 96, 15);
 end
 

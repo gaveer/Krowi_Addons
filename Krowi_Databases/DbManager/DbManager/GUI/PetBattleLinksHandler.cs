@@ -1,32 +1,30 @@
 ﻿using DbManager.DataManagers;
-using Microsoft.Data.Sqlite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using DbManager.GUI.Custom;
 using DbManager.Objects;
+using System;
+using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace DbManager.GUI
 {
-    public class AchievementCriteriaHandler
+    public class PetBattleLinksHandler : IGUIHandler
     {
-        private AchievementDataManager achDatMan;
-        private XuFuEncounterDataManager xuFuDatMan;
+        private readonly PetBattleLinksDataManager dataManager;
+        private readonly AchievementDataManager achievementDataManager;
+        private readonly XuFuEncounterDataManager xuFuEncounterDataManager;
 
-        public AchievementCriteriaHandler(SqliteConnection connection, AchievementDataManager achievementDataManager, XuFuEncounterDataManager xuFuEncounterDataManager)
+        public PetBattleLinksHandler(PetBattleLinksDataManager dataManager, AchievementDataManager achievementDataManager, XuFuEncounterDataManager xuFuEncounterDataManager)
         {
-            DataManager = new PetBattleLinksDataManager(connection);
-            achDatMan = achievementDataManager;
-            xuFuDatMan = xuFuEncounterDataManager;
+            this.dataManager = dataManager;
+            this.achievementDataManager = achievementDataManager;
+            this.xuFuEncounterDataManager = xuFuEncounterDataManager;
         }
 
-        public PetBattleLinksDataManager DataManager { get; set; }
+        public IDataManager DataManager => dataManager;
 
-        public void Add(string records)
+        public void ImportFromText(string records)
         {
             if (string.IsNullOrEmpty(records))
                 MessageBox.Show("Nothing to add");
@@ -37,7 +35,7 @@ namespace DbManager.GUI
                 PetBattleLink parent = null;
                 if (!string.IsNullOrEmpty(match.Groups["ParentID"].Value) && match.Groups["ParentID"].Value != "nil")
                 {
-                    parent = DataManager.GetWithID(match.Groups["ParentID"].Value);
+                    parent = dataManager.GetWithID(match.Groups["ParentID"].Value);
                     if (parent == null)
                     {
                         MessageBox.Show($"{match.Groups["ParentID"].Value} not found");
@@ -48,23 +46,23 @@ namespace DbManager.GUI
                 var petBattleLink = new PetBattleLink(match.Groups["ID"].Value, int.Parse(match.Groups["CriteriaNumber"].Value), match.Groups["Name"].Value, parent, null, family);
                 Achievement achievement = null;
                 if (match.Groups["AchievementID"].Value != "nil")
-                    achievement = achDatMan.GetWithID(int.Parse(match.Groups["AchievementID"].Value));
+                    achievement = achievementDataManager.GetWithID(int.Parse(match.Groups["AchievementID"].Value));
 
-                DataManager.Add(petBattleLink, achievement);
+                dataManager.Update(petBattleLink, achievement);
             }
         }
 
         public void SyncExternalLinking(Achievement achievement)
         {
-            var achievementCriterias = DataManager.GetWithAchievementID(achievement.ID);
-            achievementCriterias.AddRange(DataManager.GetWithParentID($"A{achievement.ID}"));
+            var petBattleLinks = dataManager.GetWithAchievementID(achievement.ID);
+            petBattleLinks.AddRange(dataManager.GetWithParentID($"A{achievement.ID}"));
 
-            foreach (var achievementCriteria in achievementCriterias)
+            foreach (var petBattleLink in petBattleLinks)
             {
-                var xuFuEncounters = xuFuDatMan.GetMatches(achievementCriteria);
+                var xuFuEncounters = xuFuEncounterDataManager.GetMatches(petBattleLink);
                 if (xuFuEncounters.Count == 0)
                 {
-                    MessageBox.Show($"No match found (count 0) for {achievementCriteria.Name}");
+                    MessageBox.Show($"No match found (count 0) for {petBattleLink.Name}");
                     continue;
                 }
 
@@ -76,7 +74,7 @@ namespace DbManager.GUI
                     string name = Regex.Match(source, @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?) - Achievement - World of Warcraft\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
                     string description = Regex.Match(source, "<meta name=\"description\" content=\"(?<Description>.*?)\">", RegexOptions.IgnoreCase).Groups["Description"].Value;
 
-                    var msBx = new Form2($"Please select one of the following options for the achievement criteria that best matches this achievement{Environment.NewLine}{Environment.NewLine}{name}{Environment.NewLine}{Environment.NewLine}{description}{Environment.NewLine}{Environment.NewLine}{string.Join(Environment.NewLine, xuFuEncounters)}", xuFuEncounters.Select(x => x.ID.ToString()).ToList());
+                    var msBx = new CustomMessageBox($"Please select one of the following options for the achievement criteria that best matches this achievement{Environment.NewLine}{Environment.NewLine}{name}{Environment.NewLine}{Environment.NewLine}{description}{Environment.NewLine}{Environment.NewLine}{string.Join(Environment.NewLine, xuFuEncounters)}", xuFuEncounters.Select(x => x.ID.ToString()).ToList());
                     msBx.ShowDialog();
 
                     xuFuEncounter = xuFuEncounters.Single(x => x.ID == Convert.ToInt32(msBx.Selection));
@@ -86,11 +84,11 @@ namespace DbManager.GUI
 
                 if (xuFuEncounter == null)
                 {
-                    MessageBox.Show($"No match found (null) for {achievementCriteria.Name}");
+                    MessageBox.Show($"No match found (null) for {petBattleLink.Name}");
                     continue;
                 }
-                achievementCriteria.ExternalLink = $"https://www.wow-petguide.com/Encounter/{xuFuEncounter.ID}";
-                DataManager.UpdateExternalLink(achievementCriteria);
+                petBattleLink.ExternalLink = $"https://www.wow-petguide.com/Encounter/{xuFuEncounter.ID}";
+                dataManager.UpdateExternalLink(petBattleLink);
             }
         }
     }

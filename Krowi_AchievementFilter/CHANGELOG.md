@@ -1,14 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.19.0] - 
+## [9.0.5.19.0] - 2021-04-27
 ### Added
 - Filter to merge small categories into the parent category
-- The Burning Crusade Zones (37 achievements) + zone data except for the shared zone group
+- Tutorial (Help) and Options can now be opened from the Filter menu for easy access
+- Classic Zones (97 achievements) + zone data except for the shared zone group
+- The Burning Crusade Zones (44 achievements) + zone data except for the shared zone group
 - Wrath of the Lich King Zones (49 achievements) + zone data except for the shared zone group
 
 ### Changed
 - Better filtering performance by adding additional checks for getting the number of achievements per category
+- Moved achievement Crypt Couture from Shadowlands Zones Maldraxxus Exploration to Shadowlands Covenant Sanctums Necrolord
+- Optimized data file sizes
+- Backend database optimized
 
 ## [9.0.5.18.0] - 2021-04-13
 ### Added

@@ -35,7 +35,7 @@ namespace DbManager.DataManagers
 
         public Function GetLegacyFunction()
         {
-            if (functions.Count == 0)
+            if (!functions.Any())
                 GetAll();
 
             return functions.Single(x => x.ID == 5);

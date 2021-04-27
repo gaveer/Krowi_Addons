@@ -24,6 +24,8 @@ function globalStrings.Load(L)
     L["Name"] = NAME;
     L["Achievements"] = ACHIEVEMENTS;
     L["Categories"] = CATEGORIES;
+    L["Help"] = GAMEMENU_HELP;
+    L["Options"] = GAMEOPTIONS_MENU;
 
     -- Options
     L["Info"] = INFO;

@@ -253,7 +253,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.0.5.19.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.0.5.19.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3290516
 [9.0.5.18.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3275157
 [9.0.5.17.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3264965
 [9.0.5.16.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3259864

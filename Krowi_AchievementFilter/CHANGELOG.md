@@ -3,10 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.21.0] - 
 ### Added
-- TBD
+- Option to select wether using the Key Binding will keep the last selected category or collapse all categories and select the first category
 
 ### Changed
 - Coming in 9.1 should not add achievements to the Current Zone anymore
+- ElvUI Skins Status options are moved to a seperate tab
 
 ## [9.0.5.20.0] - 2021-05-01
 ### Added

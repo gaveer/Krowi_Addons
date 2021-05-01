@@ -1,4 +1,4 @@
--- [[ Exported at 2021-04-27 22-57-01 ]] --
+-- [[ Exported at 2021-04-30 18-10-43 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -6,7 +6,7 @@
 local _, addon = ...;
 local objects = addon.Objects;
 addon.ExportedPetBattles = {};
-local exportedPetBattles = addon.ExportedPetBattles
+local exportedPetBattles = addon.ExportedPetBattles;
 
 function exportedPetBattles.Load(rcMenExtras)
     for i, _ in next, rcMenExtras do
@@ -44,6 +44,17 @@ function exportedPetBattles.Load(rcMenExtras)
     rcMenExtras[7936]:AddChildExtLinkFull(addon.L["Flowing Pandaren Spirit"], url .. "Encounter/27");
     rcMenExtras[7936]:AddChildExtLinkFull(addon.L["Thundering Pandaren Spirit"], url .. "Encounter/24");
     rcMenExtras[7936]:AddChildExtLinkFull(addon.L["Whispering Pandaren Spirit"], url .. "Encounter/25");
+    rcMenExtras[8080] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/10"); -- Fabled Pandaren Tamer
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Dos-Ryga"], url .. "Encounter/69");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Kafi"], url .. "Encounter/70");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Ti'un the Wanderer"], url .. "Encounter/71");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["No-No"], url .. "Encounter/72");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Gorespine"], url .. "Encounter/73");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Skitterer Xi'a"], url .. "Encounter/74");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Greyhoof"], url .. "Encounter/75");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Lucky Yi"] , url .. "Encounter/76");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Ka'wi the Gorger"], url .. "Encounter/77");
+    rcMenExtras[8080]:AddChildExtLinkFull(addon.L["Nitun"], url .. "Encounter/78");
     rcMenExtras[9069] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/12"); -- An Awfully Big Adventure
     rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 1, url .. "Encounter/112");
     rcMenExtras[9069]:AddChildCritExtLinkFull(9069, 2, url .. "Encounter/92");

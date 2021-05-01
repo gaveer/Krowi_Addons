@@ -79,7 +79,7 @@ function fullSearchResultsFrame:Update(query, results)
 		local index = offset + i;
 		if index <= self.NumResults then
 			local achievementID = savedResults[index].ID;
-			local _, name, _, completed, _, _, _, _, _, icon, _, _, _, _ = GetAchievementInfo(achievementID);
+			local _, name, _, completed, _, _, _, _, _, icon, _, _, _, _ = addon.GetAchievementInfo(achievementID);
 			button.name:SetText(name);
 			button.icon:SetTexture(icon);
 			button.Achievement = savedResults[index];

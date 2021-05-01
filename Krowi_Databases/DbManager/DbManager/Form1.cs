@@ -381,7 +381,7 @@ namespace DbManager
 
         private void BtnAchievementCategoryAdd_Click(object sender, EventArgs e)
         {
-            var functionValue = string.IsNullOrEmpty(txtFunctionValue.Text) ? -1 : Convert.ToInt32(txtFunctionValue.Text);
+            var functionValue = string.IsNullOrEmpty(txtFunctionValue.Text) ? null : txtFunctionValue.Text;
             achievementCategoryHandler.Add(cbxCategoryAsParent.Checked, txtCategoryName.Text, functionValue, cbxLegacyCategory.Checked);
 
             cbxCategoryAsParent.Checked = false;
@@ -504,6 +504,7 @@ namespace DbManager
         private void BtnExport_Click(object sender, EventArgs e)
         {
             exportHandler.ExportAchievementFilter();
+            exportHandler.ExportNextPatch();
         }
 
         private void BtnExportPetBattles_Click(object sender, EventArgs e)

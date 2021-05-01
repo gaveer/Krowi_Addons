@@ -78,3 +78,17 @@ function addon.GetAchievementsInZone(mapID)
 	end
     return achievements;
 end
+
+function addon.GetAchievementInfo(achievementID)
+    local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);
+
+    if id then
+        return id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy;
+    end
+
+    local achievement = addon.CustomAchievements[achievementID];
+
+    if achievement then
+        return achievement[1], achievement[2], achievement[3], false, nil, nil, nil, achievement[4], achievement[5], achievement[6], achievement[7], false, nil, false;
+    end
+end

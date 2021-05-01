@@ -32,7 +32,7 @@ namespace DbManager.DataManagers
             var achievements = new List<Achievement>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4),  reader.GetInt32(5), reader.IsDBNull(6) ? null : reader.GetString(6)));
+                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4), reader.GetInt32(5), reader.IsDBNull(6) ? null : reader.GetString(6)));
 
             return achievements;
         }
@@ -149,19 +149,22 @@ namespace DbManager.DataManagers
             cmd.ExecuteNonQuery();
         }
 
-        public void UpdateAGT(Achievement achievement, int category_AGT_ID, int uiOrder)
+        public void UpdateAGT(Achievement achievement, string rewardText, int category_AGT_ID, int uiOrder, int iconFileID)
         {
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"INSERT OR REPLACE INTO Achievement_AGT VALUES (@ID, @Name, @Description, @FactionID, @Category_AGT_ID, @Points, @UIOrder, @CovenantID, @HIDE_INCOMPLETE, @TRACKING_FLAG,
+            cmd.CommandText = @"INSERT OR REPLACE INTO Achievement_AGT VALUES (@ID, @Name, @Description, @RewardText, @FactionID, @Category_AGT_ID, @Points, @Flags, @UIOrder, @IconFileID, @CovenantID, @HIDE_INCOMPLETE, @TRACKING_FLAG,
 	                                CASE WHEN (SELECT COUNT(*) FROM Achievement_AGT WHERE ID = @ID) > 0 THEN
 		                                (SELECT DateAdded FROM Achievement_AGT WHERE ID = @ID) ELSE DATETIME('now', 'localtime')
 	                                END,
 	                                CASE WHEN ((SELECT Name FROM Achievement_AGT WHERE ID = @ID) = @Name)
 		                                        AND ((SELECT Description FROM Achievement_AGT WHERE ID = @ID) = @Description)
+		                                        AND ((SELECT RewardText FROM Achievement_AGT WHERE ID = @ID) = @RewardText)
 		                                        AND ((SELECT FactionID FROM Achievement_AGT WHERE ID = @ID) = @FactionID)
 		                                        AND ((SELECT Category_AGT_ID FROM Achievement_AGT WHERE ID = @ID) = @Category_AGT_ID)
 		                                        AND ((SELECT Points FROM Achievement_AGT WHERE ID = @ID) = @Points)
+		                                        AND ((SELECT Flags FROM Achievement_AGT WHERE ID = @ID) = @Flags)
 		                                        AND ((SELECT UIOrder FROM Achievement_AGT WHERE ID = @ID) = @UIOrder)
+		                                        AND ((SELECT IconFileID FROM Achievement_AGT WHERE ID = @ID) = @IconFileID)
 		                                        AND ((SELECT CovenantID FROM Achievement_AGT WHERE ID = @ID) = @CovenantID)
 		                                        AND ((SELECT HIDE_INCOMPLETE FROM Achievement_AGT WHERE ID = @ID) = @HIDE_INCOMPLETE)
 		                                        AND ((SELECT TRACKING_FLAG FROM Achievement_AGT WHERE ID = @ID) = @TRACKING_FLAG) THEN
@@ -170,15 +173,40 @@ namespace DbManager.DataManagers
             cmd.Parameters.AddWithValue("@ID", achievement.ID);
             cmd.Parameters.AddWithValue("@Name", achievement.Name);
             cmd.Parameters.AddWithValue("@Description", achievement.Description != null ? achievement.Description : DBNull.Value);
+            cmd.Parameters.AddWithValue("@RewardText", string.IsNullOrEmpty(rewardText) ? DBNull.Value : rewardText);
             cmd.Parameters.AddWithValue("@FactionID", (int)achievement.Faction);
             cmd.Parameters.AddWithValue("@Category_AGT_ID", category_AGT_ID);
             cmd.Parameters.AddWithValue("@Points", achievement.Points);
+            cmd.Parameters.AddWithValue("@Flags", (int)achievement.Flags);
             cmd.Parameters.AddWithValue("@UIOrder", uiOrder);
+            cmd.Parameters.AddWithValue("@IconFileID", iconFileID);
             cmd.Parameters.AddWithValue("@CovenantID", (int)achievement.Covenant);
             cmd.Parameters.AddWithValue("@HIDE_INCOMPLETE", achievement.Flags.HasFlag(AchievementFlags.HIDE_INCOMPLETE) ? 1 : 0);
             cmd.Parameters.AddWithValue("@TRACKING_FLAG", achievement.Flags.HasFlag(AchievementFlags.TRACKING_FLAG) ? 1 : 0);
 
             cmd.ExecuteNonQuery();
         }
+
+        public (int ID, string Name, int Points, string Description, int Flags, int IconFileID, string RewardText) GetWithAGTID(Achievement achievement)
+        {
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+                                    A.ID, A.Name, A.Points, A.Description, A.Flags, A.IconFileID, A.RewardText
+                                FROM
+                                    Achievement_AGT A
+                                WHERE
+                                    A.ID = @ID
+                                LIMIT 1;";
+            cmd.Parameters.AddWithValue("@ID", achievement.ID);
+
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    return (reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.IsDBNull(3) ? "" : reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5), reader.IsDBNull(6) ? "" : reader.GetString(6));
+
+            return (-1, null, -1, null, -1, -1, null);
+        }
+
     }
 }

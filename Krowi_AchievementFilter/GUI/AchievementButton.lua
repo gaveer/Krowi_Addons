@@ -83,7 +83,7 @@ local function OnClickRightButton(self, anchor, offsetX, offsetY)
 	rightClickMenu:Clear();
 
 	-- Always add header
-	local _, name = GetAchievementInfo(achievement.ID);
+	local _, name = addon.GetAchievementInfo(achievement.ID);
 	rightClickMenu:AddFull({Text = name, IsTitle = true});
 
 	-- Debug table

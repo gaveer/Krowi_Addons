@@ -19,6 +19,9 @@ L["T_TAB_TEXT"] = "Achievement Filter";
 L["Current Zone"] = "Current Zone";
 L["Zones"] = "Zones";
 L["Class Hall"] = "Class Hall";
+L["Coming in "] = "Coming in ";
+L["* SPOILER WARNING *"] = "* SPOILER WARNING *";
+L["Coming in Disclaimer"] = "All achievements in this category and children of this category are subject to change and might contain spoilers for the next patch!";
 
 -- Filters
 L["Obtainable"] = "Obtainable";
@@ -139,3 +142,13 @@ L["Burning Pandaren Spirit"] = "Burning Pandaren Spirit"; -- Wowhead npc=68463
 L["Flowing Pandaren Spirit"] = "Flowing Pandaren Spirit"; -- Wowhead npc=68462
 L["Thundering Pandaren Spirit"] = "Thundering Pandaren Spirit"; -- Wowhead npc=68465
 L["Whispering Pandaren Spirit"] = "Whispering Pandaren Spirit"; -- Wowhead npc=68464
+L["Dos-Ryga"] = "Dos-Ryga"; -- Wowhead npc=68564
+L["Kafi"] = "Kafi"; -- Wowhead npc=68563
+L["Ti'un the Wanderer"] = "Ti'un the Wanderer"; -- Wowhead npc=68562
+L["No-No"] = "No-No"; -- Wowhead npc=68559
+L["Gorespine"] = "Gorespine"; -- Wowhead npc=68558
+L["Skitterer Xi'a"] = "Skitterer Xi'a"; -- Wowhead npc=68566
+L["Greyhoof"] = "Greyhoof"; -- Wowhead npc=68560
+L["Lucky Yi"] = "Lucky Yi"; -- Wowhead npc=68561
+L["Ka'wi the Gorger"] = "Ka'wi the Gorger"; -- Wowhead npc=68555
+L["Nitun"] = "Nitun"; -- Wowhead npc=68565

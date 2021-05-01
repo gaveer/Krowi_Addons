@@ -1,4 +1,4 @@
--- [[ Exported at 2021-04-27 22-43-25 ]] --
+-- [[ Exported at 2021-04-30 18-10-42 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -10,7 +10,7 @@ local covenant = objects.Covenant;
 local achievementCategory = objects.AchievementCategory;
 local achievement = objects.Achievement;
 addon.ExportedData = {};
-local exportedData = addon.ExportedData
+local exportedData = addon.ExportedData;
 
 local function InsertAndReturn(table, value)
     tinsert(table, value);
@@ -43,6 +43,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[687]:AddAchievement(InsertAndReturn(achievements, achievement:New(42)));
     tmpCategories[721] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(27).name, {27, 28, 29, 30, 31, 427, 469})); -- Dun Morogh
     tmpCategories[687]:AddCategory(tmpCategories[721]);
+    tmpCategories[721]:AddAchievement(InsertAndReturn(achievements, achievement:New(1186, nil, nil, false)));
     tmpCategories[723] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)), nil, nil, true)); -- Exploration
     tmpCategories[721]:AddCategory(tmpCategories[723]);
     tmpCategories[723]:AddAchievement(InsertAndReturn(achievements, achievement:New(627)));
@@ -206,6 +207,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[745]:AddAchievement(InsertAndReturn(achievements, achievement:New(775)));
     tmpCategories[660] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(17).name, {17})); -- Blasted Lands
     tmpCategories[687]:AddCategory(tmpCategories[660]);
+    tmpCategories[660]:AddAchievement(InsertAndReturn(achievements, achievement:New(9618, nil, nil, false)));
     tmpCategories[662] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[660]:AddCategory(tmpCategories[662]);
     tmpCategories[662]:AddAchievement(InsertAndReturn(achievements, achievement:New(4909)));
@@ -228,6 +230,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[757]:AddAchievement(InsertAndReturn(achievements, achievement:New(842)));
     tmpCategories[752] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1).name, {1, 2, 3, 4, 5, 6, 461})); -- Durotar
     tmpCategories[688]:AddCategory(tmpCategories[752]);
+    tmpCategories[752]:AddAchievement(InsertAndReturn(achievements, achievement:New(1186, nil, nil, false)));
     tmpCategories[753] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)), nil, nil, true)); -- Exploration
     tmpCategories[752]:AddCategory(tmpCategories[753]);
     tmpCategories[753]:AddAchievement(InsertAndReturn(achievements, achievement:New(728)));
@@ -349,6 +352,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[772]:AddAchievement(InsertAndReturn(achievements, achievement:New(853)));
     tmpCategories[717] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(78).name, {78, 79})); -- Un'Goro Crater
     tmpCategories[688]:AddCategory(tmpCategories[717]);
+    tmpCategories[717]:AddAchievement(InsertAndReturn(achievements, achievement:New(3357, faction.Horde)));
     tmpCategories[718] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[717]:AddCategory(tmpCategories[718]);
     tmpCategories[718]:AddAchievement(InsertAndReturn(achievements, achievement:New(4939)));
@@ -357,6 +361,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[773]:AddAchievement(InsertAndReturn(achievements, achievement:New(854)));
     tmpCategories[707] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(81).name, {81, 82})); -- Silithus
     tmpCategories[688]:AddCategory(tmpCategories[707]);
+    tmpCategories[707]:AddAchievement(InsertAndReturn(achievements, achievement:New(416, nil, nil, false)));
     tmpCategories[708] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[707]:AddCategory(tmpCategories[708]);
     tmpCategories[708]:AddAchievement(InsertAndReturn(achievements, achievement:New(4934)));
@@ -368,6 +373,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[783]:AddAchievement(InsertAndReturn(achievements, achievement:New(953, faction.Horde)));
     tmpCategories[719] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(83).name, {83})); -- Winterspring
     tmpCategories[688]:AddCategory(tmpCategories[719]);
+    tmpCategories[719]:AddAchievement(InsertAndReturn(achievements, achievement:New(3356, faction.Alliance)));
     tmpCategories[720] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[719]:AddCategory(tmpCategories[720]);
     tmpCategories[720]:AddAchievement(InsertAndReturn(achievements, achievement:New(4940)));
@@ -414,12 +420,18 @@ function exportedData.Load(categories, achievements)
     tmpCategories[21] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(228)), {242, 243})); -- Blackrock Depths
     tmpCategories[2]:AddCategory(tmpCategories[21]);
     tmpCategories[21]:AddAchievement(InsertAndReturn(achievements, achievement:New(642)));
+    tmpCategories[21]:AddAchievement(InsertAndReturn(achievements, achievement:New(3496)));
     tmpCategories[22] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(229)), {250, 251, 252, 253, 254, 255})); -- Lower Blackrock Spire
     tmpCategories[2]:AddCategory(tmpCategories[22]);
     tmpCategories[22]:AddAchievement(InsertAndReturn(achievements, achievement:New(643)));
+    tmpCategories[797] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(559)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Upper Blackrock Spire (Legacy)
+    tmpCategories[2]:AddCategory(tmpCategories[797]);
+    tmpCategories[797]:AddAchievement(InsertAndReturn(achievements, achievement:New(1307, nil, nil, false)));
+    tmpCategories[797]:AddAchievement(InsertAndReturn(achievements, achievement:New(2188, nil, nil, false)));
     tmpCategories[23] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(230)), {235, 236, 237, 238, 239, 240})); -- Dire Maul
     tmpCategories[2]:AddCategory(tmpCategories[23]);
     tmpCategories[23]:AddAchievement(InsertAndReturn(achievements, achievement:New(644)));
+    tmpCategories[23]:AddAchievement(InsertAndReturn(achievements, achievement:New(5788, nil, nil, false)));
     tmpCategories[25] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(236)), {317, 318})); -- Stratholme
     tmpCategories[2]:AddCategory(tmpCategories[25]);
     tmpCategories[25]:AddAchievement(InsertAndReturn(achievements, achievement:New(646)));
@@ -430,6 +442,10 @@ function exportedData.Load(categories, achievements)
     tmpCategories[7] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(741)), {232})); -- Molten Core
     tmpCategories[3]:AddCategory(tmpCategories[7]);
     tmpCategories[7]:AddAchievement(InsertAndReturn(achievements, achievement:New(686)));
+    tmpCategories[7]:AddAchievement(InsertAndReturn(achievements, achievement:New(11741)));
+    tmpCategories[7]:AddAchievement(InsertAndReturn(achievements, achievement:New(429)));
+    tmpCategories[7]:AddAchievement(InsertAndReturn(achievements, achievement:New(428)));
+    tmpCategories[7]:AddAchievement(InsertAndReturn(achievements, achievement:New(9550, nil, nil, false)));
     tmpCategories[779] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)), nil, nil, true)); -- Reputation
     tmpCategories[7]:AddCategory(tmpCategories[779]);
     tmpCategories[779]:AddAchievement(InsertAndReturn(achievements, achievement:New(955)));
@@ -440,12 +456,16 @@ function exportedData.Load(categories, achievements)
     tmpCategories[27] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(742)), {287, 288, 289, 290})); -- Blackwing Lair
     tmpCategories[3]:AddCategory(tmpCategories[27]);
     tmpCategories[27]:AddAchievement(InsertAndReturn(achievements, achievement:New(685)));
+    tmpCategories[27]:AddAchievement(InsertAndReturn(achievements, achievement:New(11742)));
     tmpCategories[28] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(76)) .. " (" .. (GetCategoryInfo(15234)) .. ")", {337})); -- Zul'Gurub (Legacy)
     tmpCategories[3]:AddCategory(tmpCategories[28]);
     tmpCategories[28]:AddAchievement(InsertAndReturn(achievements, achievement:New(560, nil, nil, false)));
     tmpCategories[28]:AddAchievement(InsertAndReturn(achievements, achievement:New(688, nil, nil, false)));
     tmpCategories[28]:AddAchievement(InsertAndReturn(achievements, achievement:New(880, nil, nil, false)));
     tmpCategories[28]:AddAchievement(InsertAndReturn(achievements, achievement:New(881, nil, nil, false)));
+    tmpCategories[789] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)))); -- Reputation
+    tmpCategories[28]:AddCategory(tmpCategories[789]);
+    tmpCategories[789]:AddAchievement(InsertAndReturn(achievements, achievement:New(957, nil, nil, false)));
     tmpCategories[29] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(743)), {247})); -- Ruins of Ahn'Qiraj
     tmpCategories[3]:AddCategory(tmpCategories[29]);
     tmpCategories[29]:AddAchievement(InsertAndReturn(achievements, achievement:New(689)));
@@ -456,9 +476,21 @@ function exportedData.Load(categories, achievements)
     tmpCategories[3]:AddCategory(tmpCategories[30]);
     tmpCategories[30]:AddAchievement(InsertAndReturn(achievements, achievement:New(687)));
     tmpCategories[30]:AddAchievement(InsertAndReturn(achievements, achievement:New(424)));
+    tmpCategories[30]:AddAchievement(InsertAndReturn(achievements, achievement:New(11743)));
     tmpCategories[780] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)), nil, nil, true)); -- Reputation
     tmpCategories[30]:AddCategory(tmpCategories[780]);
     tmpCategories[780]:AddAchievement(InsertAndReturn(achievements, achievement:New(956)));
+    tmpCategories[796] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(754)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Naxxramas (Legacy)
+    tmpCategories[3]:AddCategory(tmpCategories[796]);
+    tmpCategories[796]:AddAchievement(InsertAndReturn(achievements, achievement:New(11744)));
+    tmpCategories[785] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
+    tmpCategories[1]:AddCategory(tmpCategories[785]);
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6586)));
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6585)));
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6613)));
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6612)));
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6603)));
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6602)));
     tmpCategories[55] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(14865)))); -- The Burning Crusade
     tmpCategories[616] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
     tmpCategories[55]:AddCategory(tmpCategories[616]);
@@ -471,6 +503,11 @@ function exportedData.Load(categories, achievements)
     tmpCategories[616]:AddAchievement(InsertAndReturn(achievements, achievement:New(894)));
     tmpCategories[616]:AddAchievement(InsertAndReturn(achievements, achievement:New(897)));
     tmpCategories[616]:AddAchievement(InsertAndReturn(achievements, achievement:New(902)));
+    tmpCategories[795] = InsertAndReturn(categories, achievementCategory:New(addon.L["Cities"])); -- Cities
+    tmpCategories[616]:AddCategory(tmpCategories[795]);
+    tmpCategories[794] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(111).name)); -- Shattrath City
+    tmpCategories[795]:AddCategory(tmpCategories[794]);
+    tmpCategories[794]:AddAchievement(InsertAndReturn(achievements, achievement:New(1165)));
     tmpCategories[758] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(97).name)); -- Azuremyst Isle
     tmpCategories[616]:AddCategory(tmpCategories[758]);
     tmpCategories[759] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)), nil, nil, true)); -- Exploration
@@ -668,18 +705,23 @@ function exportedData.Load(categories, achievements)
     tmpCategories[73]:AddCategory(tmpCategories[74]);
     tmpCategories[74]:AddAchievement(InsertAndReturn(achievements, achievement:New(690)));
     tmpCategories[74]:AddAchievement(InsertAndReturn(achievements, achievement:New(882)));
+    tmpCategories[74]:AddAchievement(InsertAndReturn(achievements, achievement:New(11746)));
+    tmpCategories[74]:AddAchievement(InsertAndReturn(achievements, achievement:New(2456, nil, nil, false)));
     tmpCategories[647] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)), nil, nil, true)); -- Reputation
     tmpCategories[74]:AddCategory(tmpCategories[647]);
     tmpCategories[647]:AddAchievement(InsertAndReturn(achievements, achievement:New(960)));
     tmpCategories[75] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(746)), {330})); -- Gruul's Lair
     tmpCategories[73]:AddCategory(tmpCategories[75]);
     tmpCategories[75]:AddAchievement(InsertAndReturn(achievements, achievement:New(692)));
+    tmpCategories[75]:AddAchievement(InsertAndReturn(achievements, achievement:New(11746)));
     tmpCategories[76] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(747)), {331})); -- Magtheridon's Lair
     tmpCategories[73]:AddCategory(tmpCategories[76]);
     tmpCategories[76]:AddAchievement(InsertAndReturn(achievements, achievement:New(693)));
+    tmpCategories[76]:AddAchievement(InsertAndReturn(achievements, achievement:New(11746)));
     tmpCategories[77] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(748)), {332})); -- Serpentshrine Cavern
     tmpCategories[73]:AddCategory(tmpCategories[77]);
     tmpCategories[77]:AddAchievement(InsertAndReturn(achievements, achievement:New(694)));
+    tmpCategories[77]:AddAchievement(InsertAndReturn(achievements, achievement:New(11747)));
     tmpCategories[78] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(749)), {334})); -- The Eye
     tmpCategories[73]:AddCategory(tmpCategories[78]);
     tmpCategories[78]:AddAchievement(InsertAndReturn(achievements, achievement:New(696)));
@@ -694,6 +736,9 @@ function exportedData.Load(categories, achievements)
     tmpCategories[73]:AddCategory(tmpCategories[80]);
     tmpCategories[80]:AddAchievement(InsertAndReturn(achievements, achievement:New(697)));
     tmpCategories[80]:AddAchievement(InsertAndReturn(achievements, achievement:New(9016, nil, nil, false)));
+    tmpCategories[80]:AddAchievement(InsertAndReturn(achievements, achievement:New(11748, nil, nil, false)));
+    tmpCategories[80]:AddAchievement(InsertAndReturn(achievements, achievement:New(426)));
+    tmpCategories[80]:AddAchievement(InsertAndReturn(achievements, achievement:New(11869)));
     tmpCategories[645] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)), nil, nil, true)); -- Reputation
     tmpCategories[80]:AddCategory(tmpCategories[645]);
     tmpCategories[645]:AddAchievement(InsertAndReturn(achievements, achievement:New(958)));
@@ -704,6 +749,13 @@ function exportedData.Load(categories, achievements)
     tmpCategories[82] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(752)), {335, 336})); -- Sunwell Plateau
     tmpCategories[73]:AddCategory(tmpCategories[82]);
     tmpCategories[82]:AddAchievement(InsertAndReturn(achievements, achievement:New(698)));
+    tmpCategories[82]:AddAchievement(InsertAndReturn(achievements, achievement:New(11749)));
+    tmpCategories[82]:AddAchievement(InsertAndReturn(achievements, achievement:New(725)));
+    tmpCategories[786] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
+    tmpCategories[55]:AddCategory(tmpCategories[786]);
+    tmpCategories[786]:AddAchievement(InsertAndReturn(achievements, achievement:New(6587)));
+    tmpCategories[786]:AddAchievement(InsertAndReturn(achievements, achievement:New(6614)));
+    tmpCategories[786]:AddAchievement(InsertAndReturn(achievements, achievement:New(6604)));
     tmpCategories[83] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(14866)))); -- Wrath of the Lich King
     tmpCategories[577] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
     tmpCategories[83]:AddCategory(tmpCategories[577]);
@@ -720,6 +772,10 @@ function exportedData.Load(categories, achievements)
     tmpCategories[614] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(125).name, {125, 126})); -- Dalaran
     tmpCategories[577]:AddCategory(tmpCategories[614]);
     tmpCategories[614]:AddAchievement(InsertAndReturn(achievements, achievement:New(1956)));
+    tmpCategories[614]:AddAchievement(InsertAndReturn(achievements, achievement:New(2084)));
+    tmpCategories[614]:AddAchievement(InsertAndReturn(achievements, achievement:New(2076)));
+    tmpCategories[614]:AddAchievement(InsertAndReturn(achievements, achievement:New(2077)));
+    tmpCategories[614]:AddAchievement(InsertAndReturn(achievements, achievement:New(2078)));
     tmpCategories[578] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(114).name, {114})); -- Borean Tundra
     tmpCategories[577]:AddCategory(tmpCategories[578]);
     tmpCategories[586] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
@@ -817,6 +873,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[606]:AddAchievement(InsertAndReturn(achievements, achievement:New(2083)));
     tmpCategories[585] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(118).name, {118, 170})); -- Icecrown
     tmpCategories[577]:AddCategory(tmpCategories[585]);
+    tmpCategories[585]:AddAchievement(InsertAndReturn(achievements, achievement:New(14750, nil, nil, false)));
     tmpCategories[607] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[585]:AddCategory(tmpCategories[607]);
     tmpCategories[607]:AddAchievement(InsertAndReturn(achievements, achievement:New(40)));
@@ -833,6 +890,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[84]:AddAchievement(InsertAndReturn(achievements, achievement:New(1289)));
     tmpCategories[84]:AddAchievement(InsertAndReturn(achievements, achievement:New(1658)));
     tmpCategories[84]:AddAchievement(InsertAndReturn(achievements, achievement:New(2136)));
+    tmpCategories[84]:AddAchievement(InsertAndReturn(achievements, achievement:New(2018, nil, nil, false)));
+    tmpCategories[84]:AddAchievement(InsertAndReturn(achievements, achievement:New(2019, nil, nil, false)));
     tmpCategories[86] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(285)), {133, 134, 135})); -- Utgarde Keep
     tmpCategories[84]:AddCategory(tmpCategories[86]);
     tmpCategories[86]:AddAchievement(InsertAndReturn(achievements, achievement:New(1919)));
@@ -957,6 +1016,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[85]:AddAchievement(InsertAndReturn(achievements, achievement:New(2958, nil, nil, false)));
     tmpCategories[102] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(753)), {156})); -- Vault of Archavon
     tmpCategories[85]:AddCategory(tmpCategories[102]);
+    tmpCategories[102]:AddAchievement(InsertAndReturn(achievements, achievement:New(2081)));
     tmpCategories[103] = InsertAndReturn(categories, achievementCategory:New((GetDifficultyInfo(3)))); -- Vault of Archavon 10
     tmpCategories[102]:AddCategory(tmpCategories[103]);
     tmpCategories[103]:AddAchievement(InsertAndReturn(achievements, achievement:New(4016)));
@@ -973,6 +1033,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[104]:AddAchievement(InsertAndReturn(achievements, achievement:New(4586)));
     tmpCategories[105] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(754)), {162, 163, 164, 165, 166, 167})); -- Naxxramas
     tmpCategories[85]:AddCategory(tmpCategories[105]);
+    tmpCategories[105]:AddAchievement(InsertAndReturn(achievements, achievement:New(11750, nil, nil, false)));
     tmpCategories[106] = InsertAndReturn(categories, achievementCategory:New((GetDifficultyInfo(3)))); -- Naxxramas 10
     tmpCategories[105]:AddCategory(tmpCategories[106]);
     tmpCategories[106]:AddAchievement(InsertAndReturn(achievements, achievement:New(1997)));
@@ -1117,6 +1178,10 @@ function exportedData.Load(categories, achievements)
     tmpCategories[114]:AddAchievement(InsertAndReturn(achievements, achievement:New(12310)));
     tmpCategories[114]:AddAchievement(InsertAndReturn(achievements, achievement:New(12311)));
     tmpCategories[114]:AddAchievement(InsertAndReturn(achievements, achievement:New(12399)));
+    tmpCategories[114]:AddAchievement(InsertAndReturn(achievements, achievement:New(11751)));
+    tmpCategories[114]:AddAchievement(InsertAndReturn(achievements, achievement:New(4626)));
+    tmpCategories[114]:AddAchievement(InsertAndReturn(achievements, achievement:New(3142)));
+    tmpCategories[114]:AddAchievement(InsertAndReturn(achievements, achievement:New(3316)));
     tmpCategories[115] = InsertAndReturn(categories, achievementCategory:New((GetDifficultyInfo(3)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Ulduar 10 (Legacy)
     tmpCategories[114]:AddCategory(tmpCategories[115]);
     tmpCategories[115]:AddAchievement(InsertAndReturn(achievements, achievement:New(3097, nil, nil, false)));
@@ -1187,6 +1252,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[115]:AddAchievement(InsertAndReturn(achievements, achievement:New(2892, nil, nil, false)));
     tmpCategories[115]:AddAchievement(InsertAndReturn(achievements, achievement:New(2894, nil, nil, false)));
     tmpCategories[115]:AddAchievement(InsertAndReturn(achievements, achievement:New(3036, nil, nil, false)));
+    tmpCategories[115]:AddAchievement(InsertAndReturn(achievements, achievement:New(3004, nil, nil, false)));
+    tmpCategories[115]:AddAchievement(InsertAndReturn(achievements, achievement:New(2903, nil, nil, false)));
     tmpCategories[116] = InsertAndReturn(categories, achievementCategory:New((GetDifficultyInfo(4)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Ulduar 25 (Legacy)
     tmpCategories[114]:AddCategory(tmpCategories[116]);
     tmpCategories[116]:AddAchievement(InsertAndReturn(achievements, achievement:New(3098, nil, nil, false)));
@@ -1257,8 +1324,11 @@ function exportedData.Load(categories, achievements)
     tmpCategories[116]:AddAchievement(InsertAndReturn(achievements, achievement:New(2893, nil, nil, false)));
     tmpCategories[116]:AddAchievement(InsertAndReturn(achievements, achievement:New(2895, nil, nil, false)));
     tmpCategories[116]:AddAchievement(InsertAndReturn(achievements, achievement:New(3037, nil, nil, false)));
+    tmpCategories[116]:AddAchievement(InsertAndReturn(achievements, achievement:New(3005, nil, nil, false)));
+    tmpCategories[116]:AddAchievement(InsertAndReturn(achievements, achievement:New(2904, nil, nil, false)));
     tmpCategories[117] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(757)), {172, 173})); -- Trial of the Crusader
     tmpCategories[85]:AddCategory(tmpCategories[117]);
+    tmpCategories[117]:AddAchievement(InsertAndReturn(achievements, achievement:New(11752)));
     tmpCategories[118] = InsertAndReturn(categories, achievementCategory:New((GetDifficultyInfo(3)))); -- Trial of the Crusader 10
     tmpCategories[117]:AddCategory(tmpCategories[118]);
     tmpCategories[118]:AddAchievement(InsertAndReturn(achievements, achievement:New(3797)));
@@ -1303,6 +1373,9 @@ function exportedData.Load(categories, achievements)
     tmpCategories[122]:AddAchievement(InsertAndReturn(achievements, achievement:New(4397)));
     tmpCategories[123] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(758)), {186, 187, 188, 189, 190, 191, 192, 193})); -- Icecrown Citadel
     tmpCategories[85]:AddCategory(tmpCategories[123]);
+    tmpCategories[123]:AddAchievement(InsertAndReturn(achievements, achievement:New(11753)));
+    tmpCategories[123]:AddAchievement(InsertAndReturn(achievements, achievement:New(4625)));
+    tmpCategories[123]:AddAchievement(InsertAndReturn(achievements, achievement:New(4623)));
     tmpCategories[124] = InsertAndReturn(categories, achievementCategory:New((GetDifficultyInfo(3)))); -- Icecrown Citadel 10
     tmpCategories[123]:AddCategory(tmpCategories[124]);
     tmpCategories[124]:AddAchievement(InsertAndReturn(achievements, achievement:New(4534)));
@@ -1370,6 +1443,11 @@ function exportedData.Load(categories, achievements)
     tmpCategories[126]:AddCategory(tmpCategories[128]);
     tmpCategories[128]:AddAchievement(InsertAndReturn(achievements, achievement:New(4815)));
     tmpCategories[128]:AddAchievement(InsertAndReturn(achievements, achievement:New(4816)));
+    tmpCategories[787] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
+    tmpCategories[83]:AddCategory(tmpCategories[787]);
+    tmpCategories[787]:AddAchievement(InsertAndReturn(achievements, achievement:New(6588, nil, nil, false)));
+    tmpCategories[787]:AddAchievement(InsertAndReturn(achievements, achievement:New(6615, nil, nil, false)));
+    tmpCategories[787]:AddAchievement(InsertAndReturn(achievements, achievement:New(6605, nil, nil, false)));
     tmpCategories[781] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(14941)), {118, 170})); -- Argent Tournament
     tmpCategories[83]:AddCategory(tmpCategories[781]);
     tmpCategories[781]:AddAchievement(InsertAndReturn(achievements, achievement:New(2756)));
@@ -1474,6 +1552,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[554] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(249).name, {249})); -- Uldum
     tmpCategories[550]:AddCategory(tmpCategories[554]);
     tmpCategories[554]:AddAchievement(InsertAndReturn(achievements, achievement:New(5767)));
+    tmpCategories[554]:AddAchievement(InsertAndReturn(achievements, achievement:New(4888)));
     tmpCategories[560] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[554]:AddCategory(tmpCategories[560]);
     tmpCategories[560]:AddAchievement(InsertAndReturn(achievements, achievement:New(4872)));
@@ -1583,6 +1662,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[140]:AddAchievement(InsertAndReturn(achievements, achievement:New(5505)));
     tmpCategories[140]:AddAchievement(InsertAndReturn(achievements, achievement:New(631)));
     tmpCategories[140]:AddAchievement(InsertAndReturn(achievements, achievement:New(5093)));
+    tmpCategories[140]:AddAchievement(InsertAndReturn(achievements, achievement:New(4627)));
     tmpCategories[141] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(76)), {337})); -- Zul'Gurub
     tmpCategories[130]:AddCategory(tmpCategories[141]);
     tmpCategories[141]:AddAchievement(InsertAndReturn(achievements, achievement:New(5743)));
@@ -1651,6 +1731,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[148]:AddAchievement(InsertAndReturn(achievements, achievement:New(5121)));
     tmpCategories[148]:AddAchievement(InsertAndReturn(achievements, achievement:New(4850)));
     tmpCategories[148]:AddAchievement(InsertAndReturn(achievements, achievement:New(5313, nil, nil, false)));
+    tmpCategories[148]:AddAchievement(InsertAndReturn(achievements, achievement:New(11754, nil, nil, false)));
     tmpCategories[149] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(74)), {328})); -- Throne of the Four Winds
     tmpCategories[131]:AddCategory(tmpCategories[149]);
     tmpCategories[149]:AddAchievement(InsertAndReturn(achievements, achievement:New(5304)));
@@ -1675,6 +1756,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[150]:AddAchievement(InsertAndReturn(achievements, achievement:New(5804)));
     tmpCategories[150]:AddAchievement(InsertAndReturn(achievements, achievement:New(5803)));
     tmpCategories[150]:AddAchievement(InsertAndReturn(achievements, achievement:New(5802)));
+    tmpCategories[150]:AddAchievement(InsertAndReturn(achievements, achievement:New(11755)));
+    tmpCategories[150]:AddAchievement(InsertAndReturn(achievements, achievement:New(5839)));
     tmpCategories[576] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)), nil, nil, true)); -- Reputation
     tmpCategories[150]:AddCategory(tmpCategories[576]);
     tmpCategories[576]:AddAchievement(InsertAndReturn(achievements, achievement:New(5827)));
@@ -1699,6 +1782,11 @@ function exportedData.Load(categories, achievements)
     tmpCategories[151]:AddAchievement(InsertAndReturn(achievements, achievement:New(6106)));
     tmpCategories[151]:AddAchievement(InsertAndReturn(achievements, achievement:New(6107)));
     tmpCategories[151]:AddAchievement(InsertAndReturn(achievements, achievement:New(6177)));
+    tmpCategories[151]:AddAchievement(InsertAndReturn(achievements, achievement:New(11756)));
+    tmpCategories[151]:AddAchievement(InsertAndReturn(achievements, achievement:New(6181)));
+    tmpCategories[788] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
+    tmpCategories[129]:AddCategory(tmpCategories[788]);
+    tmpCategories[788]:AddAchievement(InsertAndReturn(achievements, achievement:New(7525)));
     tmpCategories[547] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15075)), {244, 245})); -- Tol Barad
     tmpCategories[129]:AddCategory(tmpCategories[547]);
     tmpCategories[547]:AddAchievement(InsertAndReturn(achievements, achievement:New(5489, faction.Alliance)));
@@ -1724,9 +1812,9 @@ function exportedData.Load(categories, achievements)
     tmpCategories[189] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15164)))); -- Mists of Pandaria
     tmpCategories[491] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
     tmpCategories[189]:AddCategory(tmpCategories[491]);
-    tmpCategories[491]:AddAchievement(InsertAndReturn(achievements, achievement:New(6926)));
     tmpCategories[526] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(424).name)); -- Pandaria
     tmpCategories[491]:AddCategory(tmpCategories[526]);
+    tmpCategories[526]:AddAchievement(InsertAndReturn(achievements, achievement:New(6926)));
     tmpCategories[527] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[526]:AddCategory(tmpCategories[527]);
     tmpCategories[527]:AddAchievement(InsertAndReturn(achievements, achievement:New(6541)));
@@ -1823,6 +1911,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[495] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(379).name, {379, 380, 381, 382, 383, 384, 385, 386, 387, 434})); -- Kun-Lai Summit
     tmpCategories[491]:AddCategory(tmpCategories[495]);
     tmpCategories[495]:AddAchievement(InsertAndReturn(achievements, achievement:New(6480)));
+    tmpCategories[495]:AddAchievement(InsertAndReturn(achievements, achievement:New(7386)));
     tmpCategories[510] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[495]:AddCategory(tmpCategories[510]);
     tmpCategories[510]:AddAchievement(InsertAndReturn(achievements, achievement:New(6537, faction.Alliance)));
@@ -1879,12 +1968,23 @@ function exportedData.Load(categories, achievements)
     tmpCategories[501]:AddAchievement(InsertAndReturn(achievements, achievement:New(7322)));
     tmpCategories[501]:AddAchievement(InsertAndReturn(achievements, achievement:New(7323)));
     tmpCategories[501]:AddAchievement(InsertAndReturn(achievements, achievement:New(7324)));
+    tmpCategories[501]:AddAchievement(InsertAndReturn(achievements, achievement:New(7315, nil, nil, false)));
     tmpCategories[536] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)), nil, nil, true)); -- Exploration
     tmpCategories[498]:AddCategory(tmpCategories[536]);
     tmpCategories[536]:AddAchievement(InsertAndReturn(achievements, achievement:New(6979)));
     tmpCategories[537] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)), nil, nil, true)); -- Reputation
     tmpCategories[498]:AddCategory(tmpCategories[537]);
     tmpCategories[537]:AddAchievement(InsertAndReturn(achievements, achievement:New(6546)));
+    tmpCategories[798] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(433).name, {433})); -- The Veiled Stair
+    tmpCategories[491]:AddCategory(tmpCategories[798]);
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(7533, nil, nil, false)));
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(8030, faction.Alliance, nil, false)));
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(8031, faction.Horde, nil, false)));
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(7534, faction.Alliance, nil, false)));
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(8008, faction.Horde, nil, false)));
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(7535, nil, nil, false)));
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(7536, nil, nil, false)));
+    tmpCategories[798]:AddAchievement(InsertAndReturn(achievements, achievement:New(8325, nil, nil, false)));
     tmpCategories[534] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(507).name, {507})); -- Isle of Giants
     tmpCategories[491]:AddCategory(tmpCategories[534]);
     tmpCategories[534]:AddAchievement(InsertAndReturn(achievements, achievement:New(8123)));
@@ -1929,6 +2029,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[530] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(554).name)); -- Timeless Isle
     tmpCategories[491]:AddCategory(tmpCategories[530]);
     tmpCategories[530]:AddAchievement(InsertAndReturn(achievements, achievement:New(8535)));
+    tmpCategories[530]:AddAchievement(InsertAndReturn(achievements, achievement:New(8533, nil, nil, false)));
     tmpCategories[531] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)), nil, nil, true)); -- Exploration
     tmpCategories[530]:AddCategory(tmpCategories[531]);
     tmpCategories[531]:AddAchievement(InsertAndReturn(achievements, achievement:New(8712)));
@@ -1949,6 +2050,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[531]:AddAchievement(InsertAndReturn(achievements, achievement:New(8719)));
     tmpCategories[531]:AddAchievement(InsertAndReturn(achievements, achievement:New(8720)));
     tmpCategories[531]:AddAchievement(InsertAndReturn(achievements, achievement:New(8721)));
+    tmpCategories[531]:AddAchievement(InsertAndReturn(achievements, achievement:New(8728)));
     tmpCategories[535] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)), nil, nil, true)); -- Reputation
     tmpCategories[530]:AddCategory(tmpCategories[535]);
     tmpCategories[535]:AddAchievement(InsertAndReturn(achievements, achievement:New(8715)));
@@ -1957,6 +2059,11 @@ function exportedData.Load(categories, achievements)
     tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(6925)));
     tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(6926)));
     tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(6927)));
+    tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(8903, nil, nil, false)));
+    tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(6920, nil, nil, false)));
+    tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(6374, nil, nil, false)));
+    tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(6375, nil, nil, false)));
+    tmpCategories[190]:AddAchievement(InsertAndReturn(achievements, achievement:New(6378, nil, nil, false)));
     tmpCategories[193] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(313)), {429, 430})); -- Temple of the Jade Serpent
     tmpCategories[190]:AddCategory(tmpCategories[193]);
     tmpCategories[193]:AddAchievement(InsertAndReturn(achievements, achievement:New(6475)));
@@ -2053,6 +2160,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[200]:AddAchievement(InsertAndReturn(achievements, achievement:New(6912, nil, nil, false)));
     tmpCategories[200]:AddAchievement(InsertAndReturn(achievements, achievement:New(6913, nil, nil, false)));
     tmpCategories[200]:AddAchievement(InsertAndReturn(achievements, achievement:New(8437, nil, nil, false)));
+    tmpCategories[200]:AddAchievement(InsertAndReturn(achievements, achievement:New(980)));
     tmpCategories[201] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(246)), {476, 477, 478, 479})); -- Scholomance
     tmpCategories[190]:AddCategory(tmpCategories[201]);
     tmpCategories[201]:AddAchievement(InsertAndReturn(achievements, achievement:New(6531)));
@@ -2110,6 +2218,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[203]:AddAchievement(InsertAndReturn(achievements, achievement:New(6845)));
     tmpCategories[203]:AddAchievement(InsertAndReturn(achievements, achievement:New(8246, nil, nil, false)));
     tmpCategories[203]:AddAchievement(InsertAndReturn(achievements, achievement:New(7486, nil, nil, false)));
+    tmpCategories[203]:AddAchievement(InsertAndReturn(achievements, achievement:New(11757)));
     tmpCategories[204] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(320)), {456})); -- Terrace of Endless Spring
     tmpCategories[191]:AddCategory(tmpCategories[204]);
     tmpCategories[204]:AddAchievement(InsertAndReturn(achievements, achievement:New(6717)));
@@ -2158,6 +2267,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[205]:AddAchievement(InsertAndReturn(achievements, achievement:New(8249, nil, nil, false)));
     tmpCategories[205]:AddAchievement(InsertAndReturn(achievements, achievement:New(8238, nil, nil, false)));
     tmpCategories[205]:AddAchievement(InsertAndReturn(achievements, achievement:New(8260, nil, nil, false)));
+    tmpCategories[205]:AddAchievement(InsertAndReturn(achievements, achievement:New(11758)));
     tmpCategories[206] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(369)), {556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570})); -- Siege of Orgrimmar
     tmpCategories[191]:AddCategory(tmpCategories[206]);
     tmpCategories[206]:AddAchievement(InsertAndReturn(achievements, achievement:New(8536)));
@@ -2198,6 +2308,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[206]:AddAchievement(InsertAndReturn(achievements, achievement:New(8399, nil, nil, false)));
     tmpCategories[206]:AddAchievement(InsertAndReturn(achievements, achievement:New(8400, nil, nil, false)));
     tmpCategories[206]:AddAchievement(InsertAndReturn(achievements, achievement:New(8401, nil, nil, false)));
+    tmpCategories[206]:AddAchievement(InsertAndReturn(achievements, achievement:New(11759)));
     tmpCategories[549] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
     tmpCategories[189]:AddCategory(tmpCategories[549]);
     tmpCategories[549]:AddAchievement(InsertAndReturn(achievements, achievement:New(6616)));
@@ -2210,6 +2321,24 @@ function exportedData.Load(categories, achievements)
     tmpCategories[549]:AddAchievement(InsertAndReturn(achievements, achievement:New(7908)));
     tmpCategories[549]:AddAchievement(InsertAndReturn(achievements, achievement:New(7936)));
     tmpCategories[549]:AddAchievement(InsertAndReturn(achievements, achievement:New(8080)));
+    tmpCategories[790] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Brawler's Guild (Legacy)
+    tmpCategories[189]:AddCategory(tmpCategories[790]);
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7937, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7940, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7941, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8335, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8336, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7946, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8340, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8020, faction.Horde, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7939, faction.Horde, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7942, faction.Horde, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8337, faction.Horde, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8338, faction.Horde, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8022, faction.Horde, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(8343, faction.Horde, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7947, faction.Alliance, nil, false)));
+    tmpCategories[790]:AddAchievement(InsertAndReturn(achievements, achievement:New(7948, faction.Horde, nil, false)));
     tmpCategories[192] = InsertAndReturn(categories, achievementCategory:New(addon.L["Scenarios"])); -- Scenarios
     tmpCategories[189]:AddCategory(tmpCategories[192]);
     tmpCategories[192]:AddAchievement(InsertAndReturn(achievements, achievement:New(6943)));
@@ -2365,6 +2494,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[223]:AddCategory(tmpCategories[449]);
     tmpCategories[486] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(572).name)); -- Draenor
     tmpCategories[449]:AddCategory(tmpCategories[486]);
+    tmpCategories[486]:AddAchievement(InsertAndReturn(achievements, achievement:New(9838)));
+    tmpCategories[486]:AddAchievement(InsertAndReturn(achievements, achievement:New(10053)));
     tmpCategories[487] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[486]:AddCategory(tmpCategories[487]);
     tmpCategories[487]:AddAchievement(InsertAndReturn(achievements, achievement:New(8921, faction.Alliance)));
@@ -2435,6 +2566,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[464]:AddAchievement(InsertAndReturn(achievements, achievement:New(9471, faction.Horde)));
     tmpCategories[452] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(543).name, {543, 544, 545, 546, 547, 548, 549})); -- Gorgrond
     tmpCategories[449]:AddCategory(tmpCategories[452]);
+    tmpCategories[452]:AddAchievement(InsertAndReturn(achievements, achievement:New(9423)));
     tmpCategories[465] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[452]:AddCategory(tmpCategories[465]);
     tmpCategories[465]:AddAchievement(InsertAndReturn(achievements, achievement:New(8923, faction.Alliance)));
@@ -2480,6 +2612,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[472]:AddAchievement(InsertAndReturn(achievements, achievement:New(9476, faction.Alliance)));
     tmpCategories[454] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(542).name, {542})); -- Spires of Arak
     tmpCategories[449]:AddCategory(tmpCategories[454]);
+    tmpCategories[454]:AddAchievement(InsertAndReturn(achievements, achievement:New(9425)));
     tmpCategories[473] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[454]:AddCategory(tmpCategories[473]);
     tmpCategories[473]:AddAchievement(InsertAndReturn(achievements, achievement:New(8925, faction.Alliance)));
@@ -2516,6 +2649,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[480]:AddAchievement(InsertAndReturn(achievements, achievement:New(9472)));
     tmpCategories[456] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(534).name, {534})); -- Tanaan Jungle
     tmpCategories[449]:AddCategory(tmpCategories[456]);
+    tmpCategories[456]:AddAchievement(InsertAndReturn(achievements, achievement:New(10071)));
     tmpCategories[481] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[456]:AddCategory(tmpCategories[481]);
     tmpCategories[481]:AddAchievement(InsertAndReturn(achievements, achievement:New(10067, faction.Alliance)));
@@ -2543,6 +2677,11 @@ function exportedData.Load(categories, achievements)
     tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(9391)));
     tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(9619)));
     tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(9396)));
+    tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(9838)));
+    tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(8895, nil, nil, false)));
+    tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(8897, nil, nil, false)));
+    tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(8898, nil, nil, false)));
+    tmpCategories[224]:AddAchievement(InsertAndReturn(achievements, achievement:New(8899, nil, nil, false)));
     tmpCategories[226] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(385)), {573})); -- Bloodmaul Slag Mines
     tmpCategories[224]:AddCategory(tmpCategories[226]);
     tmpCategories[226]:AddAchievement(InsertAndReturn(achievements, achievement:New(9005)));
@@ -2653,6 +2792,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[225]:AddAchievement(InsertAndReturn(achievements, achievement:New(9619)));
     tmpCategories[225]:AddAchievement(InsertAndReturn(achievements, achievement:New(8985)));
     tmpCategories[225]:AddAchievement(InsertAndReturn(achievements, achievement:New(10149)));
+    tmpCategories[225]:AddAchievement(InsertAndReturn(achievements, achievement:New(9838)));
     tmpCategories[234] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(477)), {610, 611, 612, 613, 614, 615})); -- Highmaul
     tmpCategories[225]:AddCategory(tmpCategories[234]);
     tmpCategories[234]:AddAchievement(InsertAndReturn(achievements, achievement:New(8948)));
@@ -2702,6 +2842,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(8992)));
     tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(9444, nil, nil, false)));
     tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(9443, nil, nil, false)));
+    tmpCategories[235]:AddAchievement(InsertAndReturn(achievements, achievement:New(11740)));
     tmpCategories[236] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(669)), {661, 662, 663, 664, 665, 666, 667, 668, 669, 670})); -- Hellfire Citadel
     tmpCategories[225]:AddCategory(tmpCategories[236]);
     tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10026)));
@@ -2738,6 +2879,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(9680, nil, nil, false)));
     tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10044, nil, nil, false)));
     tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(10045, nil, nil, false)));
+    tmpCategories[236]:AddAchievement(InsertAndReturn(achievements, achievement:New(11631)));
     tmpCategories[548] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
     tmpCategories[223]:AddCategory(tmpCategories[548]);
     tmpCategories[548]:AddAchievement(InsertAndReturn(achievements, achievement:New(9685)));
@@ -2745,6 +2887,27 @@ function exportedData.Load(categories, achievements)
     tmpCategories[548]:AddAchievement(InsertAndReturn(achievements, achievement:New(9463)));
     tmpCategories[548]:AddAchievement(InsertAndReturn(achievements, achievement:New(9724)));
     tmpCategories[548]:AddAchievement(InsertAndReturn(achievements, achievement:New(10052)));
+    tmpCategories[791] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Brawler's Guild (Legacy)
+    tmpCategories[223]:AddCategory(tmpCategories[791]);
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9168, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9169, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9170, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9171, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(8339, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9176, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9172, faction.Horde, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9173, faction.Horde, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9174, faction.Horde, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9175, faction.Horde, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(8342, faction.Horde, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(9177, faction.Horde, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(7949, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(7950, faction.Horde, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(7943, nil, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(7945, nil, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(7944, nil, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(7947, faction.Alliance, nil, false)));
+    tmpCategories[791]:AddAchievement(InsertAndReturn(achievements, achievement:New(7948, faction.Horde, nil, false)));
     tmpCategories[432] = InsertAndReturn(categories, achievementCategory:New(addon.L["Garrison"], {579, 580, 581, 582, 585, 586, 587, 590})); -- Garrison
     tmpCategories[223]:AddCategory(tmpCategories[432]);
     tmpCategories[432]:AddAchievement(InsertAndReturn(achievements, achievement:New(9100, faction.Alliance)));
@@ -2897,7 +3060,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[432]:AddAchievement(InsertAndReturn(achievements, achievement:New(9640, nil, nil, false)));
     tmpCategories[432]:AddAchievement(InsertAndReturn(achievements, achievement:New(9641, nil, nil, false)));
     tmpCategories[432]:AddAchievement(InsertAndReturn(achievements, achievement:New(9642, nil, nil, false)));
-    tmpCategories[432]:AddAchievement(InsertAndReturn(achievements, achievement:New(10021, nil, nil, false)));
+    tmpCategories[432]:AddAchievement(InsertAndReturn(achievements, achievement:New(10021, faction.Alliance, nil, false)));
+    tmpCategories[432]:AddAchievement(InsertAndReturn(achievements, achievement:New(10148, faction.Horde, nil, false)));
     tmpCategories[485] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[432]:AddCategory(tmpCategories[485]);
     tmpCategories[485]:AddAchievement(InsertAndReturn(achievements, achievement:New(9825, faction.Alliance)));
@@ -2907,6 +3071,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[237]:AddCategory(tmpCategories[381]);
     tmpCategories[396] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(619).name)); -- Broken Isles
     tmpCategories[381]:AddCategory(tmpCategories[396]);
+    tmpCategories[396]:AddAchievement(InsertAndReturn(achievements, achievement:New(11160)));
     tmpCategories[397] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[396]:AddCategory(tmpCategories[397]);
     tmpCategories[397]:AddAchievement(InsertAndReturn(achievements, achievement:New(11157)));
@@ -2935,6 +3100,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[414]:AddAchievement(InsertAndReturn(achievements, achievement:New(11941)));
     tmpCategories[382] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(626).name, {627, 628, 629})); -- Dalaran
     tmpCategories[381]:AddCategory(tmpCategories[382]);
+    tmpCategories[382]:AddAchievement(InsertAndReturn(achievements, achievement:New(10770)));
     tmpCategories[383] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[382]:AddCategory(tmpCategories[383]);
     tmpCategories[383]:AddAchievement(InsertAndReturn(achievements, achievement:New(12416)));
@@ -3026,6 +3192,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[415]:AddAchievement(InsertAndReturn(achievements, achievement:New(10778)));
     tmpCategories[394] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(646).name, {646})); -- Broken Shore
     tmpCategories[381]:AddCategory(tmpCategories[394]);
+    tmpCategories[394]:AddAchievement(InsertAndReturn(achievements, achievement:New(11786)));
     tmpCategories[395] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[394]:AddCategory(tmpCategories[395]);
     tmpCategories[395]:AddAchievement(InsertAndReturn(achievements, achievement:New(11607)));
@@ -3074,6 +3241,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[237]:AddCategory(tmpCategories[238]);
     tmpCategories[238]:AddAchievement(InsertAndReturn(achievements, achievement:New(11164)));
     tmpCategories[238]:AddAchievement(InsertAndReturn(achievements, achievement:New(11163)));
+    tmpCategories[238]:AddAchievement(InsertAndReturn(achievements, achievement:New(11181)));
     tmpCategories[240] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(716)), {713})); -- Eye of Azshara
     tmpCategories[238]:AddCategory(tmpCategories[240]);
     tmpCategories[240]:AddAchievement(InsertAndReturn(achievements, achievement:New(10456)));
@@ -3152,6 +3320,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[250]:AddAchievement(InsertAndReturn(achievements, achievement:New(11335)));
     tmpCategories[250]:AddAchievement(InsertAndReturn(achievements, achievement:New(11338)));
     tmpCategories[250]:AddAchievement(InsertAndReturn(achievements, achievement:New(11432)));
+    tmpCategories[250]:AddAchievement(InsertAndReturn(achievements, achievement:New(11431)));
     tmpCategories[250]:AddAchievement(InsertAndReturn(achievements, achievement:New(11433)));
     tmpCategories[250]:AddAchievement(InsertAndReturn(achievements, achievement:New(11929)));
     tmpCategories[250]:AddAchievement(InsertAndReturn(achievements, achievement:New(11429)));
@@ -3224,6 +3393,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[254]:AddAchievement(InsertAndReturn(achievements, achievement:New(10839)));
     tmpCategories[254]:AddAchievement(InsertAndReturn(achievements, achievement:New(11195, nil, nil, false)));
     tmpCategories[254]:AddAchievement(InsertAndReturn(achievements, achievement:New(11192, nil, nil, false)));
+    tmpCategories[254]:AddAchievement(InsertAndReturn(achievements, achievement:New(11628)));
     tmpCategories[255] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(861)), {806, 807, 808})); -- Trial of Valor
     tmpCategories[239]:AddCategory(tmpCategories[255]);
     tmpCategories[255]:AddAchievement(InsertAndReturn(achievements, achievement:New(11337)));
@@ -3237,6 +3407,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[255]:AddAchievement(InsertAndReturn(achievements, achievement:New(11387, nil, nil, false)));
     tmpCategories[255]:AddAchievement(InsertAndReturn(achievements, achievement:New(11581, nil, nil, false)));
     tmpCategories[255]:AddAchievement(InsertAndReturn(achievements, achievement:New(11580, nil, nil, false)));
+    tmpCategories[255]:AddAchievement(InsertAndReturn(achievements, achievement:New(11762)));
     tmpCategories[256] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(875)), {850, 851, 852, 853, 854, 855, 856})); -- Tomb of Sargeras
     tmpCategories[239]:AddCategory(tmpCategories[256]);
     tmpCategories[256]:AddAchievement(InsertAndReturn(achievements, achievement:New(11724)));
@@ -3263,6 +3434,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[256]:AddAchievement(InsertAndReturn(achievements, achievement:New(11790)));
     tmpCategories[256]:AddAchievement(InsertAndReturn(achievements, achievement:New(11874, nil, nil, false)));
     tmpCategories[256]:AddAchievement(InsertAndReturn(achievements, achievement:New(11875, nil, nil, false)));
+    tmpCategories[256]:AddAchievement(InsertAndReturn(achievements, achievement:New(11760)));
     tmpCategories[257] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(946)), {909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920})); -- Antorus, the Burning Throne
     tmpCategories[239]:AddCategory(tmpCategories[257]);
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(11930)));
@@ -3293,6 +3465,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(11991)));
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(12110, nil, nil, false)));
     tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(12111, nil, nil, false)));
+    tmpCategories[257]:AddAchievement(InsertAndReturn(achievements, achievement:New(12020)));
     tmpCategories[430] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
     tmpCategories[237]:AddCategory(tmpCategories[430]);
     tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(11233)));
@@ -3320,6 +3493,15 @@ function exportedData.Load(categories, achievements)
     tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12098)));
     tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12099)));
     tmpCategories[430]:AddAchievement(InsertAndReturn(achievements, achievement:New(12100)));
+    tmpCategories[792] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Brawler's Guild (Legacy)
+    tmpCategories[237]:AddCategory(tmpCategories[792]);
+    tmpCategories[792]:AddAchievement(InsertAndReturn(achievements, achievement:New(11560, faction.Alliance, nil, false)));
+    tmpCategories[792]:AddAchievement(InsertAndReturn(achievements, achievement:New(11561, faction.Horde, nil, false)));
+    tmpCategories[792]:AddAchievement(InsertAndReturn(achievements, achievement:New(11563, faction.Alliance, nil, false)));
+    tmpCategories[792]:AddAchievement(InsertAndReturn(achievements, achievement:New(11564, faction.Horde, nil, false)));
+    tmpCategories[792]:AddAchievement(InsertAndReturn(achievements, achievement:New(11565, faction.Alliance, nil, false)));
+    tmpCategories[792]:AddAchievement(InsertAndReturn(achievements, achievement:New(11566, faction.Horde, nil, false)));
+    tmpCategories[792]:AddAchievement(InsertAndReturn(achievements, achievement:New(11572, nil, nil, false)));
     tmpCategories[429] = InsertAndReturn(categories, achievementCategory:New(addon.L["Class Hall"], {24, 626, 647, 648, 695, 702, 709, 717, 718, 719, 720, 721, 725, 726, 734, 735, 739, 747, 1468})); -- Class Hall
     tmpCategories[237]:AddCategory(tmpCategories[429]);
     tmpCategories[429]:AddAchievement(InsertAndReturn(achievements, achievement:New(10994)));
@@ -3367,6 +3549,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[258]:AddCategory(tmpCategories[259]);
     tmpCategories[271] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(876).name .. " & " .. C_Map.GetMapInfo(875).name)); -- Kul Tiras & Zandalar
     tmpCategories[259]:AddCategory(tmpCategories[271]);
+    tmpCategories[271]:AddAchievement(InsertAndReturn(achievements, achievement:New(14183, nil, nil, false)));
+    tmpCategories[271]:AddAchievement(InsertAndReturn(achievements, achievement:New(12587)));
     tmpCategories[272] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[271]:AddCategory(tmpCategories[272]);
     tmpCategories[272]:AddAchievement(InsertAndReturn(achievements, achievement:New(12582, faction.Alliance)));
@@ -3586,6 +3770,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[306]:AddAchievement(InsertAndReturn(achievements, achievement:New(12949, faction.Horde)));
     tmpCategories[307] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1462).name, {1462})); -- Mechagon Island
     tmpCategories[259]:AddCategory(tmpCategories[307]);
+    tmpCategories[307]:AddAchievement(InsertAndReturn(achievements, achievement:New(13708)));
+    tmpCategories[307]:AddAchievement(InsertAndReturn(achievements, achievement:New(13513)));
     tmpCategories[308] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)), nil, nil, true)); -- Quests
     tmpCategories[307]:AddCategory(tmpCategories[308]);
     tmpCategories[308]:AddAchievement(InsertAndReturn(achievements, achievement:New(13553, faction.Alliance)));
@@ -3704,6 +3890,14 @@ function exportedData.Load(categories, achievements)
     tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(12807)));
     tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(12812)));
     tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(13075)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(13079, nil, nil, false)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(13080, nil, nil, false)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(13448, nil, nil, false)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(13449, nil, nil, false)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(13780, nil, nil, false)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(13781, nil, nil, false)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(14144, nil, nil, false)));
+    tmpCategories[325]:AddAchievement(InsertAndReturn(achievements, achievement:New(14145, nil, nil, false)));
     tmpCategories[327] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1001)), {936})); -- Freelhold
     tmpCategories[325]:AddCategory(tmpCategories[327]);
     tmpCategories[327]:AddAchievement(InsertAndReturn(achievements, achievement:New(12550)));
@@ -3815,6 +4009,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[338]:AddAchievement(InsertAndReturn(achievements, achievement:New(12533)));
     tmpCategories[338]:AddAchievement(InsertAndReturn(achievements, achievement:New(12536, nil, nil, false)));
     tmpCategories[338]:AddAchievement(InsertAndReturn(achievements, achievement:New(12535, nil, nil, false)));
+    tmpCategories[338]:AddAchievement(InsertAndReturn(achievements, achievement:New(12991)));
     tmpCategories[339] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1176)), {1352, 1353, 1354, 1356, 1357, 1358, 1364, 1367})); -- Battle of Dazar'alor
     tmpCategories[326]:AddCategory(tmpCategories[339]);
     tmpCategories[339]:AddAchievement(InsertAndReturn(achievements, achievement:New(13316)));
@@ -3844,6 +4039,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[339]:AddAchievement(InsertAndReturn(achievements, achievement:New(13314)));
     tmpCategories[339]:AddAchievement(InsertAndReturn(achievements, achievement:New(13322, nil, nil, false)));
     tmpCategories[339]:AddAchievement(InsertAndReturn(achievements, achievement:New(13323, nil, nil, false)));
+    tmpCategories[339]:AddAchievement(InsertAndReturn(achievements, achievement:New(13385)));
     tmpCategories[340] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1177)), {1345, 1346})); -- Crucible of Storms
     tmpCategories[326]:AddCategory(tmpCategories[340]);
     tmpCategories[340]:AddAchievement(InsertAndReturn(achievements, achievement:New(13501)));
@@ -3876,6 +4072,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[341]:AddAchievement(InsertAndReturn(achievements, achievement:New(13733)));
     tmpCategories[341]:AddAchievement(InsertAndReturn(achievements, achievement:New(13784, nil, nil, false)));
     tmpCategories[341]:AddAchievement(InsertAndReturn(achievements, achievement:New(13785, nil, nil, false)));
+    tmpCategories[341]:AddAchievement(InsertAndReturn(achievements, achievement:New(13571)));
     tmpCategories[342] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1180)), {1580, 1581, 1582, 1590, 1591, 1592, 1593, 1594, 1595, 1596, 1597})); -- Ny'alotha, the Waking City
     tmpCategories[326]:AddCategory(tmpCategories[342]);
     tmpCategories[342]:AddAchievement(InsertAndReturn(achievements, achievement:New(14019)));
@@ -3908,6 +4105,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[342]:AddAchievement(InsertAndReturn(achievements, achievement:New(14055)));
     tmpCategories[342]:AddAchievement(InsertAndReturn(achievements, achievement:New(14068, nil, nil, false)));
     tmpCategories[342]:AddAchievement(InsertAndReturn(achievements, achievement:New(14069, nil, nil, false)));
+    tmpCategories[342]:AddAchievement(InsertAndReturn(achievements, achievement:New(14058)));
     tmpCategories[343] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
     tmpCategories[258]:AddCategory(tmpCategories[343]);
     tmpCategories[343]:AddAchievement(InsertAndReturn(achievements, achievement:New(12930)));
@@ -3929,6 +4127,20 @@ function exportedData.Load(categories, achievements)
     tmpCategories[343]:AddAchievement(InsertAndReturn(achievements, achievement:New(13625)));
     tmpCategories[343]:AddAchievement(InsertAndReturn(achievements, achievement:New(13626)));
     tmpCategories[343]:AddAchievement(InsertAndReturn(achievements, achievement:New(13695)));
+    tmpCategories[793] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")")); -- Brawler's Guild (Legacy)
+    tmpCategories[258]:AddCategory(tmpCategories[793]);
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(11558, faction.Alliance, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(13186, faction.Alliance, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(13189, faction.Alliance, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(13191, faction.Alliance, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(11559, faction.Horde, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(13188, faction.Horde, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(13190, faction.Horde, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(13192, faction.Horde, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(11567, nil, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(11570, nil, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(13194, nil, nil, false)));
+    tmpCategories[793]:AddAchievement(InsertAndReturn(achievements, achievement:New(11573, nil, nil, false)));
     tmpCategories[425] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15307)))); -- Island Expeditions
     tmpCategories[258]:AddCategory(tmpCategories[425]);
     tmpCategories[425]:AddAchievement(InsertAndReturn(achievements, achievement:New(13142)));
@@ -3951,6 +4163,9 @@ function exportedData.Load(categories, achievements)
     tmpCategories[425]:AddAchievement(InsertAndReturn(achievements, achievement:New(13133, faction.Alliance)));
     tmpCategories[425]:AddAchievement(InsertAndReturn(achievements, achievement:New(13135, faction.Horde)));
     tmpCategories[425]:AddAchievement(InsertAndReturn(achievements, achievement:New(13134)));
+    tmpCategories[425]:AddAchievement(InsertAndReturn(achievements, achievement:New(13701)));
+    tmpCategories[425]:AddAchievement(InsertAndReturn(achievements, achievement:New(13702)));
+    tmpCategories[425]:AddAchievement(InsertAndReturn(achievements, achievement:New(13703)));
     tmpCategories[436] = InsertAndReturn(categories, achievementCategory:New((GetLFGDungeonInfo(1687)), {981})); -- Un'gol Ruins
     tmpCategories[425]:AddCategory(tmpCategories[436]);
     tmpCategories[436]:AddAchievement(InsertAndReturn(achievements, achievement:New(12590)));
@@ -4240,6 +4455,9 @@ function exportedData.Load(categories, achievements)
     tmpCategories[6]:AddCategory(tmpCategories[369]);
     tmpCategories[369]:AddAchievement(InsertAndReturn(achievements, achievement:New(14418)));
     tmpCategories[369]:AddAchievement(InsertAndReturn(achievements, achievement:New(14322)));
+    tmpCategories[369]:AddAchievement(InsertAndReturn(achievements, achievement:New(14938)));
+    tmpCategories[369]:AddAchievement(InsertAndReturn(achievements, achievement:New(14531)));
+    tmpCategories[369]:AddAchievement(InsertAndReturn(achievements, achievement:New(14532)));
     tmpCategories[371] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1182)), {1666, 1667, 1668})); -- The Necrotic Wake
     tmpCategories[369]:AddCategory(tmpCategories[371]);
     tmpCategories[371]:AddAchievement(InsertAndReturn(achievements, achievement:New(14295)));
@@ -4334,6 +4552,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[379]:AddAchievement(InsertAndReturn(achievements, achievement:New(14365)));
     tmpCategories[379]:AddAchievement(InsertAndReturn(achievements, achievement:New(14460)));
     tmpCategories[379]:AddAchievement(InsertAndReturn(achievements, achievement:New(14461)));
+    tmpCategories[379]:AddAchievement(InsertAndReturn(achievements, achievement:New(14614)));
     tmpCategories[380] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
     tmpCategories[6]:AddCategory(tmpCategories[380]);
     tmpCategories[380]:AddAchievement(InsertAndReturn(achievements, achievement:New(14867)));
@@ -4462,7 +4681,93 @@ function exportedData.Load(categories, achievements)
     tmpCategories[420]:AddAchievement(InsertAndReturn(achievements, achievement:New(14764, nil, covenant.Necrolord)));
     tmpCategories[420]:AddAchievement(InsertAndReturn(achievements, achievement:New(14833, nil, covenant.Necrolord)));
     tmpCategories[420]:AddAchievement(InsertAndReturn(achievements, achievement:New(14763, nil, covenant.Necrolord)));
+    tmpCategories[799] = InsertAndReturn(categories, achievementCategory:New(addon.L["Coming in 9.1"])); -- Coming in 9.1
+    local nextPatchCategory = tmpCategories[799];
+    tmpCategories[814] = InsertAndReturn(categories, achievementCategory:New(AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END)); -- * SPOILER WARNING *
+    tmpCategories[799]:AddCategory(tmpCategories[814]);
+    tmpCategories[811] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
+    tmpCategories[814]:AddCategory(tmpCategories[811]);
+    tmpCategories[815] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1543).name, {1543, 1820, 1821, 1822, 1823})); -- The Maw
+    tmpCategories[811]:AddCategory(tmpCategories[815]);
+    tmpCategories[815]:AddAchievement(InsertAndReturn(achievements, achievement:New(15065)));
+    tmpCategories[816] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)))); -- Quests
+    tmpCategories[815]:AddCategory(tmpCategories[816]);
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15000)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15044)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15035)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15043)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15042)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15036)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15034)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15033)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15032)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15001)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15041)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15039)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15037)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(14961)));
+    tmpCategories[816]:AddAchievement(InsertAndReturn(achievements, achievement:New(15064)));
+    tmpCategories[819] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)))); -- Exploration
+    tmpCategories[815]:AddCategory(tmpCategories[819]);
+    tmpCategories[819]:AddAchievement(InsertAndReturn(achievements, achievement:New(15054)));
+    tmpCategories[819]:AddAchievement(InsertAndReturn(achievements, achievement:New(14943)));
+    tmpCategories[812] = InsertAndReturn(categories, achievementCategory:New("Korthia", {1961, 2006, 2007})); -- Korthia
+    tmpCategories[811]:AddCategory(tmpCategories[812]);
+    tmpCategories[817] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)))); -- Quests
+    tmpCategories[812]:AddCategory(tmpCategories[817]);
+    tmpCategories[817]:AddAchievement(InsertAndReturn(achievements, achievement:New(15066)));
+    tmpCategories[817]:AddAchievement(InsertAndReturn(achievements, achievement:New(15055)));
+    tmpCategories[817]:AddAchievement(InsertAndReturn(achievements, achievement:New(15056)));
+    tmpCategories[817]:AddAchievement(InsertAndReturn(achievements, achievement:New(15057)));
+    tmpCategories[818] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)))); -- Exploration
+    tmpCategories[812]:AddCategory(tmpCategories[818]);
+    tmpCategories[818]:AddAchievement(InsertAndReturn(achievements, achievement:New(15053)));
+    tmpCategories[813] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)))); -- Reputation
+    tmpCategories[812]:AddCategory(tmpCategories[813]);
+    tmpCategories[813]:AddAchievement(InsertAndReturn(achievements, achievement:New(15059)));
+    tmpCategories[813]:AddAchievement(InsertAndReturn(achievements, achievement:New(15069)));
+    tmpCategories[801] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15272)))); -- Dungeons
+    tmpCategories[814]:AddCategory(tmpCategories[801]);
+    tmpCategories[801]:AddAchievement(InsertAndReturn(achievements, achievement:New(15073)));
+    tmpCategories[809] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1182)))); -- The Necrotic Wake
+    tmpCategories[801]:AddCategory(tmpCategories[809]);
+    tmpCategories[809]:AddAchievement(InsertAndReturn(achievements, achievement:New(15045)));
+    tmpCategories[808] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1183)))); -- Plaguefall
+    tmpCategories[801]:AddCategory(tmpCategories[808]);
+    tmpCategories[808]:AddAchievement(InsertAndReturn(achievements, achievement:New(15046)));
+    tmpCategories[807] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1184)))); -- Mists of Tirna Scithe
+    tmpCategories[801]:AddCategory(tmpCategories[807]);
+    tmpCategories[807]:AddAchievement(InsertAndReturn(achievements, achievement:New(15047)));
+    tmpCategories[806] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1185)))); -- Halls of Atonement
+    tmpCategories[801]:AddCategory(tmpCategories[806]);
+    tmpCategories[806]:AddAchievement(InsertAndReturn(achievements, achievement:New(15048)));
+    tmpCategories[805] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1186)))); -- Spires of Ascension
+    tmpCategories[801]:AddCategory(tmpCategories[805]);
+    tmpCategories[805]:AddAchievement(InsertAndReturn(achievements, achievement:New(15049)));
+    tmpCategories[804] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1187)))); -- Theater of Pain
+    tmpCategories[801]:AddCategory(tmpCategories[804]);
+    tmpCategories[804]:AddAchievement(InsertAndReturn(achievements, achievement:New(15050)));
+    tmpCategories[803] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1188)))); -- De Other Side
+    tmpCategories[801]:AddCategory(tmpCategories[803]);
+    tmpCategories[803]:AddAchievement(InsertAndReturn(achievements, achievement:New(15051)));
+    tmpCategories[802] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1189)))); -- Sanguine Depths
+    tmpCategories[801]:AddCategory(tmpCategories[802]);
+    tmpCategories[802]:AddAchievement(InsertAndReturn(achievements, achievement:New(15052)));
+    tmpCategories[820] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15271)))); -- Raids
+    tmpCategories[814]:AddCategory(tmpCategories[820]);
+    tmpCategories[821] = InsertAndReturn(categories, achievementCategory:New("Sanctum of Domination", {1998, 1999, 2000, 2001, 2002, 2003, 2004})); -- Sanctum of Domination
+    tmpCategories[820]:AddCategory(tmpCategories[821]);
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15058)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(14998)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15003)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15040)));
+    tmpCategories[800] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
+    tmpCategories[814]:AddCategory(tmpCategories[800]);
+    tmpCategories[800]:AddAchievement(InsertAndReturn(achievements, achievement:New(15004)));
+    tmpCategories[810] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15440)))); -- Torghast
+    tmpCategories[814]:AddCategory(tmpCategories[810]);
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15067)));
 
-    return currentZoneCategory;
+    return currentZoneCategory, nextPatchCategory;
 end
 

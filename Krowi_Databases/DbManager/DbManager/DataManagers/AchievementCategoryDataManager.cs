@@ -57,7 +57,7 @@ namespace DbManager.DataManagers
                 {
                     var parent = reader.IsDBNull(3) ? null : categories.Single(x => x.ID == reader.GetInt32(3));
                     var function = functionDataManager.GetAll().Single(x => x.ID == reader.GetInt32(4));
-                    var functionValue = reader.IsDBNull(5) ? -1 : reader.GetInt32(5);
+                    var functionValue = reader.IsDBNull(5) ? null : reader.GetString(5);
                     categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), parent, function, functionValue, reader.GetBoolean(6), reader.GetBoolean(7), reader.GetBoolean(8), reader.GetBoolean(9)));
                 }
             }
@@ -94,7 +94,7 @@ namespace DbManager.DataManagers
                 {
                     var parent = reader.IsDBNull(3) ? null : categories.Single(x => x.ID == reader.GetInt32(3));
                     var function = functionDataManager.GetAll().Single(x => x.ID == reader.GetInt32(4));
-                    var functionValue = reader.IsDBNull(5) ? -1 : reader.GetInt32(5);
+                    var functionValue = reader.IsDBNull(5) ? null : reader.GetString(5);
                     return new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), parent, function, functionValue, reader.GetBoolean(6), reader.GetBoolean(7), reader.GetBoolean(8), reader.GetBoolean(9));
                 }
 
@@ -112,7 +112,7 @@ namespace DbManager.DataManagers
             cmd.Parameters.AddWithValue("@Name", category.Name);
             cmd.Parameters.AddWithValue("@ParentID", category.Parent == null ? DBNull.Value : category.Parent.ID);
             cmd.Parameters.AddWithValue("@FunctionID", category.Function.ID);
-            cmd.Parameters.AddWithValue("@FunctionValue", category.FunctionValue == -1 ? DBNull.Value : category.FunctionValue);
+            cmd.Parameters.AddWithValue("@FunctionValue", string.IsNullOrEmpty( category.FunctionValue ) ? DBNull.Value : category.FunctionValue);
             cmd.Parameters.AddWithValue("@Legacy", category.Legacy ? 1 : 0);
             cmd.Parameters.AddWithValue("@IgnoreParentMapIDs", category.IgnoreParentMapIDs ? 1 : 0);
             cmd.Parameters.AddWithValue("@Active", category.Active ? 1 : 0);

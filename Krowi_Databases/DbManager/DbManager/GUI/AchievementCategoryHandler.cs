@@ -79,7 +79,7 @@ namespace DbManager.GUI
             }
         }
 
-        public void Add(bool asParent, string achievementCategoryName, int functionValue, bool isLegacy)
+        public void Add(bool asParent, string achievementCategoryName, string functionValue, bool isLegacy)
         {
             var function = functionHandler.GetSelectedFunction();
             if (function == null)
@@ -244,7 +244,7 @@ namespace DbManager.GUI
                 else // removed item was 1st element so we use next element and adjust from a fictional 1st element
                 {
                     var categories2 = nextNode.Parent.Nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
-                    dataManager.UpdateLocations(new AchievementCategory(-1, -1, "TEMP", null, null, -1, false, false, false, false), categories2);
+                    dataManager.UpdateLocations(new AchievementCategory(-1, -1, "TEMP", null, null, null, false, false, false, false), categories2);
                 }
             }
 

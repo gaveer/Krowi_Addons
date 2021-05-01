@@ -1,4 +1,4 @@
--- [[ Exported at 2021-04-30 18-10-42 ]] --
+-- [[ Exported at 2021-05-01 14-07-41 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4687,7 +4687,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[799]:AddCategory(tmpCategories[814]);
     tmpCategories[811] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
     tmpCategories[814]:AddCategory(tmpCategories[811]);
-    tmpCategories[815] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1543).name, {1543, 1820, 1821, 1822, 1823})); -- The Maw
+    tmpCategories[815] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1543).name)); -- The Maw
     tmpCategories[811]:AddCategory(tmpCategories[815]);
     tmpCategories[815]:AddAchievement(InsertAndReturn(achievements, achievement:New(15065)));
     tmpCategories[816] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)))); -- Quests
@@ -4711,7 +4711,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[815]:AddCategory(tmpCategories[819]);
     tmpCategories[819]:AddAchievement(InsertAndReturn(achievements, achievement:New(15054)));
     tmpCategories[819]:AddAchievement(InsertAndReturn(achievements, achievement:New(14943)));
-    tmpCategories[812] = InsertAndReturn(categories, achievementCategory:New("Korthia", {1961, 2006, 2007})); -- Korthia
+    tmpCategories[812] = InsertAndReturn(categories, achievementCategory:New("Korthia", {1961, 2006, 2007, 2008})); -- Korthia
     tmpCategories[811]:AddCategory(tmpCategories[812]);
     tmpCategories[817] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)))); -- Quests
     tmpCategories[812]:AddCategory(tmpCategories[817]);

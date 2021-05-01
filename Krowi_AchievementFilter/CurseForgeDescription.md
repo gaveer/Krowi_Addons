@@ -5,12 +5,14 @@
 <li>Each expansion has its own category: <strong><em>Classic</em></strong>, <strong><em>The Burning Crusade</em></strong>, <strong><em>Wrath of the Lich King</em></strong>, <strong><em>Cataclysm</em></strong>, <strong><em>Mists of Pandaria</em></strong>, <strong><em>Warlords of Dreanor</em></strong>, <strong><em>Legion</em></strong>, <strong><em>Battle for Azeroth</em></strong> and <em><strong>Shadowlands</strong></em>.</li>
 <li>Each expansion is divided in Zones, Dungeons and Raids and Pet Battles where available.</li>
 <li><strong><em>Wrath of the Lich King</em></strong> has separate categories for 10 and 25 man Raids.</li>
+<li><strong><em>Wrath of the Lich King</em></strong> expansion feature: Argent Tournament.</li>
 <li><strong><em>Cataclysm</em></strong> expansion feature: Tol Barad.</li>
-<li><strong><em>Mists of Pandaria</em></strong> expansion feature: Scenarios and Proving Grounds.</li>
-<li><strong><em>Warlords of Dreanor</em></strong> expansion feature: Garrison.</li>
-<li><strong><em>Legion</em></strong> expansion feature: Class Hall.</li>
-<li><strong><em>Battle for Azeroth</em></strong> expansion feature: Island Expeditions, War Effort, Heart of Azeroth and Visions of N'Zoth.</li>
+<li><strong><em>Mists of Pandaria</em></strong> expansion feature: Brawler's Guild, Scenarios, Proving Grounds.</li>
+<li><strong><em>Warlords of Dreanor</em></strong> expansion feature: Brawler's Guild and Garrison.</li>
+<li><strong><em>Legion</em></strong> expansion feature: Brawler's Guild and Class Hall.</li>
+<li><strong><em>Battle for Azeroth</em></strong> expansion feature: Brawler's Guild, Island Expeditions, War Effort, Heart of Azeroth and Visions of N'Zoth.</li>
 <li><strong><em>Shadowlands</em></strong> expansion feature: Torghast and Covenant Sanctums.</li>
+<li><strong><em>Coming in x</em></strong>: New achievements coming in the next patch hidden behind a * SPOLER WARNING *.</li>
 <li>Unobtainable <strong><em>Legacy</em> </strong>categories can be found when the 'Not Obtainable' filter is checked.</li>
 </ul>
 <p><strong>Features</strong></p>
@@ -25,7 +27,6 @@
 </ul>
 <p><strong>Planned in next version</strong></p>
 <ul>
-<li><em><strong>Wrath of the Lich King</strong></em> expansion feature: Argent Tournament.</li>
 </ul>
 <p><strong>Planned in future version</strong></p>
 <ul>

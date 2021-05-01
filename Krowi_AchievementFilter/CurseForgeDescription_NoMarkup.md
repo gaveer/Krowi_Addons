@@ -6,13 +6,16 @@ The Current Zone category show which achievements are related to the current zon
 Each expansion has its own category: Classic, The Burning Crusade, Wrath of the Lich King, Cataclysm, Mists of Pandaria, Warlords of Dreanor, Legion, Battle for Azeroth and Shadowlands.
 Each expansion is divided in Zones, Dungeons and Raids and Pet Battles where available.
 Wrath of the Lich King has separate categories for 10 and 25 man Raids.
+Wrath of the Lich King expansion feature: Argent Tournament.
 Cataclysm expansion feature: Tol Barad.
-Mists of Pandaria expansion feature: Scenarios and Proving Grounds.
-Warlords of Dreanor expansion feature: Garrison.
-Legion expansion feature: Class Hall.
-Battle for Azeroth expansion feature: Island Expeditions, War Effort, Heart of Azeroth and Visions of N'Zoth.
+Mists of Pandaria expansion feature: Brawler's Guild, Scenarios, Proving Grounds.
+Warlords of Dreanor expansion feature: Brawler's Guild and Garrison.
+Legion expansion feature: Brawler's Guild and Class Hall.
+Battle for Azeroth expansion feature: Brawler's Guild, Island Expeditions, War Effort, Heart of Azeroth and Visions of N'Zoth.
 Shadowlands expansion feature: Torghast and Covenant Sanctums.
+Coming in x: New achievements coming in the next patch hidden behind a * SPOLER WARNING *.
 Unobtainable Legacy categories can be found when the 'Not Obtainable' filter is checked.
+
 Features
 
 A new tab with custom categories mentioned above.
@@ -22,9 +25,9 @@ A Right Click Menu for each achievement with a link to Wowhead, IAT (3.18.0+) (i
 A tutorial for first time users with an ingame explanation of the most important features.
 The option to keybind the new tab so it opens in one go. (Game Menu -> Key Bindings -> Addons -> Krowi's Achievement Filter)
 ElvUI skin. (See the ingame options on how to enable each part.)
+
 Planned in next version
 
-Wrath of the Lich King expansion feature: Argent Tournament.
 Planned in future version
 
 Right Click Menu for the default Blizzard tabs with initially only a link to Wowhead.

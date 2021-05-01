@@ -5,14 +5,15 @@ addon.Data = {};
 local data = addon.Data;
 addon.Categories = {};
 addon.CurrentZoneCategory = {};
+addon.NextPatchCategory = {};
 addon.Achievements = {};
 addon.RCMenuExtras = {};
+addon.CustomAchievements = {};
 
 function data.Load()
-    addon.CurrentZoneCategory = addon.ExportedData.Load(addon.Categories, addon.Achievements);
+    addon.CurrentZoneCategory, addon.NextPatchCategory = addon.ExportedData.Load(addon.Categories, addon.Achievements);
     addon.ExportedPetBattles.Load(addon.RCMenuExtras);
-
-    -- addon.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(C_Map.GetBestMapForUnit("player"));
+    addon.NextPatch.Load(addon.CustomAchievements);
 
     -- TEST = {};
     -- data.PrintCriteria(8518, nil, 0);
@@ -30,7 +31,7 @@ function data.GetCurrentZoneAchievements()
 end
 
 -- function data.PrintCriteria(achievementID, parentCriteriaID, criteriaNumber)
---     local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);
+--     local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = addon.GetAchievementInfo(achievementID);
 
 --     local record = "A" .. tostring(id) .. "\t" .. tostring(achievementID) .. "\t" .. tostring(criteriaNumber) .. "\t" .. name .. "\t" .. tostring(parentCriteriaID) .. "\t" .. 0;
 --     tinsert(TEST, record);
@@ -63,7 +64,7 @@ end
 --             family = "Undead";
 --         end
 --         local criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString, criteriaID = GetAchievementCriteriaInfo(achievementID, i);
---         if GetAchievementInfo(assetID) ~= nil then -- Means the assetID was not an achievementID but something else like a quest
+--         if addon.GetAchievementInfo(assetID) ~= nil then -- Means the assetID was not an achievementID but something else like a quest
 --             data.PrintCriteria(assetID, "A" .. tostring(id), i);
 --         else
 --             local record = tostring(criteriaID) .. "\t" .. tostring(nil) .. "\t" .. tostring(i) .. "\t" .. criteriaString .. "\t" .. "A" .. tostring(id) .. "\t" .. family;

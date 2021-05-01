@@ -126,7 +126,7 @@ end
 local function Validate(self, achievement, numOfAch, numOfCompAch) -- , numOfIncompAch
 	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
 		numOfAch = numOfAch + 1;
-		local _, _, _, completed = GetAchievementInfo(achievement.ID);
+		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
 		if completed then
 			numOfCompAch = numOfCompAch + 1;
 		-- else
@@ -289,11 +289,17 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	-- For the tooltip
 	local numOfAch, numOfCompAch = category.NumOfAch, category.NumOfCompAch;
 	button.name = category.Name;
-	button.text = nil;
-	button.numAchievements = numOfAch;
-	button.numCompleted = numOfCompAch;
-	button.numCompletedText = numOfCompAch .. "/" .. numOfAch;
-	button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
+	if category == addon.NextPatchCategory then
+		button.text = AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END;
+		button.showTooltipFunc = AchievementFrameCategory_FeatOfStrengthTooltip;
+	else
+		button.text = nil;
+		diagnostics.Debug(button.text);
+		button.numAchievements = numOfAch;
+		button.numCompleted = numOfCompAch;
+		button.numCompletedText = numOfCompAch .. "/" .. numOfAch;
+		button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
+	end
 end
 
 function categoriesFrame:SelectButton(button, quick)

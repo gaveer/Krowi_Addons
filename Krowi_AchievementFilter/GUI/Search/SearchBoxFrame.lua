@@ -95,7 +95,7 @@ local function GetSearchResults(text)
 
     for _, achievement in next, addon.Achievements do
         local achievementID = achievement.ID;
-        local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = GetAchievementInfo(achievementID);
+        local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = addon.GetAchievementInfo(achievementID);
         if string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower()) then
 			tinsert(results, achievement);
 			-- addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
@@ -174,7 +174,7 @@ function searchBoxFrame:ShowSearchPreviewResults()
 	for i = 1, #buttons do
 		if i <= numResults and i <= numButtons then
 			local achievementID = results[i].ID;
-			local _, name, _, _, _, _, _, _, _, icon, _, _, _, _ = GetAchievementInfo(achievementID);
+			local _, name, _, _, _, _, _, _, _, icon, _, _, _, _ = addon.GetAchievementInfo(achievementID);
 			buttons[i].Name:SetText(name);
 			buttons[i].Icon:SetTexture(icon);
 			-- buttons[i].AchievementID = achievementID;

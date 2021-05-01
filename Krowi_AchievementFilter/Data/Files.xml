@@ -3,5 +3,6 @@
     <Script file="Data\Data.lua" />
     <Script file="Data\ExportedData.lua" />
     <Script file="Data\ExportedPetBattles.lua" />
+    <Script file="Data\ExportedNextPatch.lua" />
     
 </Ui>

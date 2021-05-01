@@ -327,7 +327,7 @@ end
 function filterButton:Validate(achievement, ignoreCollapseSeries)
     -- diagnostics.Trace("filterButton:Validate " .. tostring(achievement.ID)); -- Generates a lot of messages
 
-	local _, _, _, completed = GetAchievementInfo(achievement.ID);
+	local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
 	if not addon.Options.db.Filters.Completion.Completed and completed then
 		return -1;
 	end
@@ -371,7 +371,7 @@ function filterButton:Validate(achievement, ignoreCollapseSeries)
         end
         local prevID = GetPreviousAchievement(achievement.ID);
         if prevID ~= nil then
-            local _, _, _, prevCompleted = GetAchievementInfo(prevID);
+            local _, _, _, prevCompleted = addon.GetAchievementInfo(prevID);
             if not prevCompleted then
                 return -13;
             end

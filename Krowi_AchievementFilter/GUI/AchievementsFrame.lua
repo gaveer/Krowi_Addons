@@ -128,8 +128,8 @@ local function GetFilteredAchievements(self, category)
 		elseif addon.Options.db.Filters.SortBy.Criteria == addon.L["Name"] then
 			-- diagnostics.Debug("Sort By " .. addon.L["Name"]);
 			table.sort(achievements, function(a, b)
-				local _, nameA = GetAchievementInfo(a.ID);
-				local _, nameB = GetAchievementInfo(b.ID);
+				local _, nameA = addon.GetAchievementInfo(a.ID);
+				local _, nameB = addon.GetAchievementInfo(b.ID);
 				local compare = nameA:lower() < nameB:lower();
 				if addon.Options.db.Filters.SortBy.ReverseSort then
 					compare = not compare;
@@ -162,6 +162,13 @@ function achievementsFrame:Update()
 		cachedAchievements = GetFilteredAchievements(self, cachedCategory);
 	end
 	local numButtons = #buttons;
+
+	if cachedCategory == addon.NextPatchCategory then
+		self.Text:SetText(AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END);
+		self.Text:Show();
+	else
+		self.Text:Hide();
+	end
 
 	-- local selection = self.SelectedAchievement;
 	if self.SelectedAchievement then
@@ -315,8 +322,9 @@ function achievementsFrame:AdjustSelection()
 end
 
 function achievementsFrame:DisplayAchievement(button, achievement, index, selection, renderOffScreen)
-	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievement.ID);
+	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = addon.GetAchievementInfo(achievement.ID);
 	-- diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
+	diagnostics.DebugTable({addon.GetAchievementInfo(achievement.ID)});
 
 	if not id then
 		button:Hide();

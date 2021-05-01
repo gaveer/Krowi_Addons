@@ -75,16 +75,16 @@ namespace DbManager
             this.rdbAlliance = new System.Windows.Forms.RadioButton();
             this.rdbNoFaction = new System.Windows.Forms.RadioButton();
             this.gbxImportExport = new System.Windows.Forms.GroupBox();
+            this.btnExportPetBattles = new System.Windows.Forms.Button();
+            this.btnUpdateAchievement_AGT = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnUpdateUIMap = new System.Windows.Forms.Button();
             this.btnUpdateXuFuEncounter = new System.Windows.Forms.Button();
-            this.btnExportPetBattles = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.lsbAchievements = new System.Windows.Forms.ListBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tvwAchievementCategories = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnUpdateAchievement_AGT = new System.Windows.Forms.Button();
             this.pgbUpdateXuFuEncounter = new DbManager.GUI.Custom.TextProgressBar();
             this.pgbUpdateAchievement_AGT = new DbManager.GUI.Custom.TextProgressBar();
             this.pgbUpdateUIMap = new DbManager.GUI.Custom.TextProgressBar();
@@ -132,7 +132,7 @@ namespace DbManager
             this.pnlGroupBoxes.Controls.Add(this.gbxAchievement);
             this.pnlGroupBoxes.Controls.Add(this.gbxImportExport);
             this.pnlGroupBoxes.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlGroupBoxes.Location = new System.Drawing.Point(509, 3);
+            this.pnlGroupBoxes.Location = new System.Drawing.Point(609, 3);
             this.pnlGroupBoxes.Name = "pnlGroupBoxes";
             this.pnlGroupBoxes.Size = new System.Drawing.Size(209, 914);
             this.pnlGroupBoxes.TabIndex = 28;
@@ -604,6 +604,35 @@ namespace DbManager
             this.gbxImportExport.TabStop = false;
             this.gbxImportExport.Text = "Import / Export";
             // 
+            // btnExportPetBattles
+            // 
+            this.btnExportPetBattles.Location = new System.Drawing.Point(6, 48);
+            this.btnExportPetBattles.Name = "btnExportPetBattles";
+            this.btnExportPetBattles.Size = new System.Drawing.Size(188, 23);
+            this.btnExportPetBattles.TabIndex = 1;
+            this.btnExportPetBattles.Text = "Export Pet Battles to Lua";
+            this.btnExportPetBattles.Click += new System.EventHandler(this.BtnExportPetBattles_Click);
+            // 
+            // btnUpdateAchievement_AGT
+            // 
+            this.btnUpdateAchievement_AGT.Location = new System.Drawing.Point(6, 77);
+            this.btnUpdateAchievement_AGT.Name = "btnUpdateAchievement_AGT";
+            this.btnUpdateAchievement_AGT.Size = new System.Drawing.Size(188, 23);
+            this.btnUpdateAchievement_AGT.TabIndex = 31;
+            this.btnUpdateAchievement_AGT.Text = "Update Achievement (AGT)";
+            this.btnUpdateAchievement_AGT.UseVisualStyleBackColor = true;
+            this.btnUpdateAchievement_AGT.Click += new System.EventHandler(this.BtnUpdateAchievement_AGT_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(6, 19);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(188, 23);
+            this.btnExport.TabIndex = 0;
+            this.btnExport.Text = "Export to Lua";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
+            // 
             // btnUpdateUIMap
             // 
             this.btnUpdateUIMap.Location = new System.Drawing.Point(6, 106);
@@ -624,28 +653,9 @@ namespace DbManager
             this.btnUpdateXuFuEncounter.UseVisualStyleBackColor = true;
             this.btnUpdateXuFuEncounter.Click += new System.EventHandler(this.BtnUpdateXuFuEncounter_Click);
             // 
-            // btnExportPetBattles
-            // 
-            this.btnExportPetBattles.Location = new System.Drawing.Point(6, 48);
-            this.btnExportPetBattles.Name = "btnExportPetBattles";
-            this.btnExportPetBattles.Size = new System.Drawing.Size(188, 23);
-            this.btnExportPetBattles.TabIndex = 1;
-            this.btnExportPetBattles.Text = "Export Pet Battles to Lua";
-            this.btnExportPetBattles.Click += new System.EventHandler(this.BtnExportPetBattles_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(6, 19);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(188, 23);
-            this.btnExport.TabIndex = 0;
-            this.btnExport.Text = "Export to Lua";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
-            // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(506, 3);
+            this.splitter2.Location = new System.Drawing.Point(606, 3);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(3, 914);
             this.splitter2.TabIndex = 29;
@@ -657,7 +667,7 @@ namespace DbManager
             this.lsbAchievements.FormattingEnabled = true;
             this.lsbAchievements.Location = new System.Drawing.Point(256, 3);
             this.lsbAchievements.Name = "lsbAchievements";
-            this.lsbAchievements.Size = new System.Drawing.Size(250, 914);
+            this.lsbAchievements.Size = new System.Drawing.Size(350, 914);
             this.lsbAchievements.TabIndex = 3;
             this.lsbAchievements.SelectedIndexChanged += new System.EventHandler(this.LsbAchievements_SelectedIndexChanged);
             // 
@@ -688,16 +698,6 @@ namespace DbManager
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Empty";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateAchievement_AGT
-            // 
-            this.btnUpdateAchievement_AGT.Location = new System.Drawing.Point(6, 77);
-            this.btnUpdateAchievement_AGT.Name = "btnUpdateAchievement_AGT";
-            this.btnUpdateAchievement_AGT.Size = new System.Drawing.Size(188, 23);
-            this.btnUpdateAchievement_AGT.TabIndex = 31;
-            this.btnUpdateAchievement_AGT.Text = "Update Achievement (AGT)";
-            this.btnUpdateAchievement_AGT.UseVisualStyleBackColor = true;
-            this.btnUpdateAchievement_AGT.Click += new System.EventHandler(this.BtnUpdateAchievement_AGT_Click);
             // 
             // pgbUpdateXuFuEncounter
             // 

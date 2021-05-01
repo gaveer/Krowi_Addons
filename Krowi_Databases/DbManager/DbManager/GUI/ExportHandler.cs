@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DbManager.GUI
 {
@@ -38,7 +39,7 @@ namespace DbManager.GUI
             sb.AppendLine("local achievementCategory = objects.AchievementCategory;");
             sb.AppendLine("local achievement = objects.Achievement;");
             sb.AppendLine("addon.ExportedData = {};");
-            sb.AppendLine("local exportedData = addon.ExportedData");
+            sb.AppendLine("local exportedData = addon.ExportedData;");
             sb.AppendLine("");
             sb.AppendLine("local function InsertAndReturn(table, value)");
             sb.AppendLineTabbed(1, "tinsert(table, value);");
@@ -64,7 +65,7 @@ namespace DbManager.GUI
                 var mapIDs = achCatDatMan.GetMapIDs(category);
 
                 var appendString = $"tmpCategories[{category.ID}] = InsertAndReturn(categories, achievementCategory:New("; // New
-                appendString += category.Function.Call.Replace("id", category.FunctionValue.ToString()); // Category name
+                appendString += category.Function.Call.Replace("%value%", category.FunctionValue); // Category name
                 appendString += $"{(category.Legacy ? $" .. \" (\" .. {funDatMan.GetLegacyFunction().Call} .. \")\"" : "")}"; // Legacy if applicable
                 appendString += ", ";
                 appendString += $"{(mapIDs.Any() ? $"{{{string.Join(", ", mapIDs)}}}" : "nil")}"; // MapIDs
@@ -82,6 +83,10 @@ namespace DbManager.GUI
                     sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}].AlwaysVisible = true;");
                     sb.AppendLineTabbed(1, $"tmpCategories[{category.ID}].HasFlexibleData = true;");
                     sb.AppendLineTabbed(1, $"local currentZoneCategory = tmpCategories[{category.ID}];");
+                }
+                if (category.Function.Description == "Coming in ")
+                {
+                    sb.AppendLineTabbed(1, $"local nextPatchCategory = tmpCategories[{category.ID}];");
                 }
 
                 var achievements = achDatMan.GetWithCategory(category);
@@ -104,11 +109,63 @@ namespace DbManager.GUI
             }
 
             sb.AppendLine("");
-            sb.AppendLineTabbed(1, "return currentZoneCategory;");
+            sb.AppendLineTabbed(1, "return currentZoneCategory, nextPatchCategory;");
             sb.AppendLine("end");
 
             using var file = new StreamWriter(@"../../../../../Krowi_AchievementFilter/Data/ExportedData.lua");
             file.WriteLine(sb.ToString());
+        }
+
+        public void ExportNextPatch()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"-- [[ Exported at {DateTime.Now:yyyy-MM-dd HH-mm-ss} ]] --");
+            sb.AppendLine($"-- [[ This code is automatically generated as an export from ]] --");
+            sb.AppendLine($"-- [[ an SQLite database and is not meant for manual edit. ]] --");
+            sb.AppendLine("");
+            sb.AppendLine("-- [[ Namespaces ]] --");
+            sb.AppendLine("local _, addon = ...;");
+            sb.AppendLine("addon.NextPatch = {};");
+            sb.AppendLine("local nextPatch = addon.NextPatch;");
+            sb.AppendLine("");
+            sb.AppendLine("function nextPatch.Load(achievements)");
+            sb.AppendLineTabbed(1, "for i, _ in next, achievements do");
+            sb.AppendLineTabbed(2, "achievements[i] = nil;");
+            sb.AppendLineTabbed(1, "end");
+            sb.AppendLine("");
+
+            var categories = achCatDatMan.GetAll();
+            var category = categories.Single(x => x.ID == 799);
+
+            ExportNextPatchAchievements(sb, category);
+
+            sb.AppendLine("end");
+
+            using var file = new StreamWriter(@"../../../../../Krowi_AchievementFilter/Data/ExportedNextPatch.lua");
+            file.WriteLine(sb.ToString());
+        }
+
+        private void ExportNextPatchAchievements(StringBuilder sb, AchievementCategory category)
+        {
+            foreach (var subCategory in category.Children)
+            {
+                ExportNextPatchAchievements(sb, subCategory);
+
+                var achievements = achDatMan.GetWithCategory(subCategory);
+                foreach (var achievement in achievements)
+                {
+                    var achievementAGT = achDatMan.GetWithAGTID(achievement);
+                    var name = Regex.Replace(achievementAGT.Name, "^\"", "");
+                    name = Regex.Replace(name, "\"$", "");
+                    var description = Regex.Replace(achievementAGT.Description, "^\"", "");
+                    description = Regex.Replace(description, "\"$", "");
+                    description = Regex.Replace(description, "(\"){2,}", "\\\"");
+                    var rewardText = Regex.Replace(achievementAGT.RewardText, "^\"", "");
+                    rewardText = Regex.Replace(rewardText, "\"$", "");
+                    var line = $"addon.CustomAchievements[{achievementAGT.ID}] = {{{achievementAGT.ID}, \"{name}\", {achievementAGT.Points}, \"{description}\", {achievementAGT.Flags}, {achievementAGT.IconFileID}, \"{rewardText}\"}};";
+                    sb.AppendLineTabbed(1, line);
+                }
+            }
         }
 
         public void ExportPetBattles()
@@ -122,7 +179,7 @@ namespace DbManager.GUI
             sb.AppendLine("local _, addon = ...;");
             sb.AppendLine("local objects = addon.Objects;");
             sb.AppendLine("addon.ExportedPetBattles = {};");
-            sb.AppendLine("local exportedPetBattles = addon.ExportedPetBattles");
+            sb.AppendLine("local exportedPetBattles = addon.ExportedPetBattles;");
             sb.AppendLine("");
             sb.AppendLine("function exportedPetBattles.Load(rcMenExtras)");
             sb.AppendLineTabbed(1, "for i, _ in next, rcMenExtras do");
@@ -146,16 +203,16 @@ namespace DbManager.GUI
                             if (!string.IsNullOrEmpty(criterion.ExternalLink))
                             {
                                 string externalLink;
-                                if (criteria[0].ExternalLink.Contains("https://www.wow-petguide.com"))
-                                    externalLink = criteria[0].ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
+                                if (criterion.ExternalLink.Contains("https://www.wow-petguide.com"))
+                                    externalLink = criterion.ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
                                 else
-                                    externalLink = $"\"{criteria[0].ExternalLink}";
+                                    externalLink = $"\"{criterion.ExternalLink}";
 
                                 var list = $"rcMenExtras[{achievement.ID}]";
                                 sb.AppendTabbed(1, $"{list} = objects.MenuItem:NewExtLink(addon.L[\"Xu-Fu's Pet Guides\"]");
                                 sb.Append(", ");
                                 sb.Append(externalLink);
-                                sb.AppendLine($"\"); -- {criteria[0].Name}");
+                                sb.AppendLine($"\"); -- {criterion.Name}");
 
                                 var subCriteria = petBatLinDatMan.GetWithParentID(criterion.ID);
                                 GetSubCriteria(sb, criterion.ID.Substring(1), subCriteria, list: list);
@@ -188,10 +245,10 @@ namespace DbManager.GUI
                     }
 
                     string externalLink;
-                    if (criteria[0].ExternalLink.Contains("https://www.wow-petguide.com"))
-                        externalLink = criteria[0].ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
+                    if (criterion.ExternalLink.Contains("https://www.wow-petguide.com"))
+                        externalLink = criterion.ExternalLink.Replace("https://www.wow-petguide.com/", "url .. \"");
                     else
-                        externalLink = $"\"{criteria[0].ExternalLink}";
+                        externalLink = $"\"{criterion.ExternalLink}";
 
                     if (criterion.ID.StartsWith("C"))
                         sb.AppendLineTabbed(indent, $"{list}:AddChildExtLinkFull({criterion.Name}, {externalLink}\");");

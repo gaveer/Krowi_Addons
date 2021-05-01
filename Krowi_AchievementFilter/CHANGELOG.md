@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - TBD
 
+### Changed
+- Coming in 9.1 should not add achievements to the Current Zone anymore
+
 ## [9.0.5.20.0] - 2021-05-01
 ### Added
 - Classic Pet Battles (6 achievements)

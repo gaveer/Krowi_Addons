@@ -18,7 +18,6 @@ All notable changes to this project will be documented in this file.
 - Battle for Azeroth Brawler's Guild (6 achievements)
 - Coming in 9.1 (40 achievements)
 - Coming in 9.1 category has a * SPOILER WARNING *
-
 - Missing Classic Zones (2 achievements)
 - Missing Classic Zones Eastern Kingdoms (1 achievement)
 - Missing Classic Zones Eastern Kingdoms Dun Morogh (1 achievement)

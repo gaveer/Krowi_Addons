@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.20.0] - 
+## [9.0.5.20.0] - 2021-05-01
 ### Added
 - Classic Pet Battles (6 achievements)
 - Classic Dungeons Upper Blackrock Spire (Legacy) (2 achievements)

@@ -1,4 +1,4 @@
--- [[ Exported at 2021-04-30 18-10-43 ]] --
+-- [[ Exported at 2021-05-01 14-13-47 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -46,10 +46,6 @@ function nextPatch.Load(achievements)
     addon.CustomAchievements[15051] = {15051, "Keystone Hero: De Other Side", 0, "Complete De Other Side at Mythic Level 20 or higher, within the time limit.", 2048, 3601561, "Reward: Teleport to De Other Side"};
     addon.CustomAchievements[15052] = {15052, "Keystone Hero: Sanguine Depths", 0, "Complete Sanguine Depths at Mythic Level 20 or higher, within the time limit.", 2048, 3601540, "Reward: Teleport to Sanguine Depths"};
     addon.CustomAchievements[15073] = {15073, "Shadowlands Keystone Explorer: Season Two", 0, "Attain a Mythic+ Rating of at least X during Shadowlands Season Two.", 133120, 618860, ""};
-    addon.CustomAchievements[15058] = {15058, "I Used to Bullseye Deeprun Rats Back Home", 10, "Score a goal and then defeat the Remnant of Ner'zhul on Normal Raid difficulty or higher.", 0, 618973, ""};
-    addon.CustomAchievements[14998] = {14998, "Name A Better Duo, I'll Wait", 10, "Defeat The Tarragrue after entering the mists and reuniting Moriaz with Buttons in the Sanctum of Domination on Normal difficulty or higher.", 0, 135451, ""};
-    addon.CustomAchievements[15003] = {15003, "To the Nines", 10, "Defeat The Nine after forming a Shard of Destiny from 9 or more Fragments of Destiny in the Sanctum of Domination on Normal difficulty or higher.", 0, 1029742, ""};
-    addon.CustomAchievements[15040] = {15040, "Retrograde Fate", 10, "Defeat Fatescribe Roh-Kalo after surviving Realign Fate while moving rings counterclockwise only in the Sanctum of Domination on Normal difficulty or higher.", 0, 4067928, ""};
     addon.CustomAchievements[15058] = {15058, "I Used to Bullseye Deeprun Rats Back Home", 10, "Score a goal and then defeat the Remnant of Ner'zhul on Normal Raid difficulty or higher.", 0, 618973, ""};
     addon.CustomAchievements[14998] = {14998, "Name A Better Duo, I'll Wait", 10, "Defeat The Tarragrue after entering the mists and reuniting Moriaz with Buttons in the Sanctum of Domination on Normal difficulty or higher.", 0, 135451, ""};
     addon.CustomAchievements[15003] = {15003, "To the Nines", 10, "Defeat The Nine after forming a Shard of Destiny from 9 or more Fragments of Destiny in the Sanctum of Domination on Normal difficulty or higher.", 0, 1029742, ""};

@@ -4,11 +4,14 @@ All notable changes to this project will be documented in this file.
 ## [9.0.5.21.0] - 
 ### Added
 - Option to select wether using the Key Binding will keep the last selected category or collapse all categories and select the first category
+- Tooltip shows the chain if an achievement is part of it with additional options
 - Search by achievement ID by starting the search query with '#'
 
 ### Changed
 - Coming in 9.1 should not add achievements to the Current Zone anymore
 - ElvUI Skins Status options are moved to a seperate tab
+- Layout options are moved to a seperate tab
+- Renamed 'Collapse Series' to 'Collapse Chain'
 
 ## [9.0.5.20.0] - 2021-05-01
 ### Added

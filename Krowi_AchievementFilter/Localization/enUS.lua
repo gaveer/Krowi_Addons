@@ -29,8 +29,11 @@ L["Not Obtainable"] = "Not Obtainable";
 L["Covenant"] = "Covenant";
 L["Select all"] = "Select all";
 L["Reverse Sort"] = "Reverse Sort";
-L["Collapse Series"] = "Collapse Series";
+L["Collapse Chain"] = "Collapse Chain";
 L["Merge Small Categories"] = "Merge Small Categories";
+
+-- Tooltips
+L["Part of a chain"] = "Part of a chain";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
@@ -42,7 +45,13 @@ L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
 L["O_ResetViewOnOpen"] = "Reset view on open";
 L["O_ResetViewOnOpen_Desc"] = "Collapse all categories and select the first category or\nKeep the last selected category when last closed";
-L["O_LAYOUT"] = "Layout";
+L["Layout"] = "Layout";
+L["Window"] = "Window";
+L["Tooltip"] = "Tooltip";
+L["ShowPartOfAChain"] = "Show {partOfAChain}";
+L["ShowPartOfAChain_Desc"] = "Show / hide {partOfAChain}";
+L["ShowPartOfAChainCurrentCharacterIcons"] = "Show current character icons";
+L["ShowPartOfAChainCurrentCharacterIcons_Desc"] = "Show /hide current character icons";
 L["O_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
 L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width.\n\n" ..
                                             "This value can be changed while the achievement window is open while having the {tabName} tab selected. This will however lag your game.\n\n{reloadRequired}";
@@ -130,7 +139,7 @@ L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with
                         AF_TAB .. AF_TAB .. "- {venthyr}: Show achievements only {venthyr_wc} can earn\n" ..
                         AF_TAB .. AF_TAB .. "- {nightfae}: Show achievements only {nightfae_wc} can earn\n" ..
                         AF_TAB .. AF_TAB .. "- {necrolord}: Show achievements only {necrolord_wc} can earn\n" ..
-                        AF_TAB .. "- {collapseseries}: Show only the last completed and first not completed achievement in a series\n\n" ..
+                        AF_TAB .. "- {collapseChain}: Show only the last completed and first not completed achievement in a chain\n\n" ..
                         "Sorting:\n" ..
                         AF_TAB .. "- {noSorting}: No sorting applied\n" ..
                         AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..

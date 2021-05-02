@@ -108,8 +108,8 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	diagnostics.Trace("categoriesFrame.Show_Hide");
 
 	local db = addon.Options.db;
-	categoriesWidth = categoriesWidth + db.Layout.CategoriesFrameWidthOffset;
-	watermarkWidthOffset = watermarkWidthOffset + db.Layout.CategoriesFrameWidthOffset;
+	categoriesWidth = categoriesWidth + db.Window.CategoriesFrameWidthOffset;
+	watermarkWidthOffset = watermarkWidthOffset + db.Window.CategoriesFrameWidthOffset;
 
 	frame:SetWidth(categoriesWidth);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
@@ -172,7 +172,7 @@ local function GetAchievementNumbers(self, category)
 	if addon.Options.db.Filters.MergeSmallCategories then
 		if category.Parent and category.CanMerge then
 			if category.Achievements then
-				if numOfAch < addon.Options.db.Layout.MergeSmallCategoriesThreshold then
+				if numOfAch < addon.Options.db.Window.MergeSmallCategoriesThreshold then
 					if not category.Merged then
 						for _, achievement in next, category.Achievements do
 							category.Parent:MergeAchievement(achievement);
@@ -197,8 +197,8 @@ end
 function categoriesFrame:Update(getAchNums)
 	diagnostics.Trace("categoriesFrame:Update");
 
-	if addon.Options.db.Layout.MergeSmallCategoriesThresholdChanged then
-		addon.Options.db.Layout.MergeSmallCategoriesThresholdChanged = false;
+	if addon.Options.db.Window.MergeSmallCategoriesThresholdChanged then
+		addon.Options.db.Window.MergeSmallCategoriesThresholdChanged = false;
 		getAchNums = true;
 	end
 

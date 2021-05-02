@@ -46,7 +46,7 @@ function loadHelper:OnEvent(event, arg1)
             local gui = addon.GUI;
             local tutorials = addon.Tutorials;
 
-            gui.SetAchievementFrameHeight(addon.Options.db.Layout.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
+            gui.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
 
             gui.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
             gui.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));

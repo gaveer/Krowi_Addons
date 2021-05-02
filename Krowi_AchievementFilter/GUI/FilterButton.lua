@@ -250,7 +250,7 @@ function filterButton:OnMouseDown()
                         });
     rightClickMenu:Add(covenant);
 
-    rightClickMenu:AddFull({    Text = addon.L["Collapse Series"],
+    rightClickMenu:AddFull({    Text = addon.L["Collapse Chain"],
                                 Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
                                     return addon.Options.db.Filters.CollapseSeries
                                 end,

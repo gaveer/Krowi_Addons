@@ -5,6 +5,8 @@ local gui = addon.GUI;
 gui.AchievementButton = {};
 local achievementButton = gui.AchievementButton;
 
+local OnEnter, OnLeave;
+
 function achievementButton.PostLoadButtons(achievementsFrame)
 	diagnostics.Trace("achievementButton.PostLoadButtons");
 
@@ -25,11 +27,130 @@ function achievementButton.PostLoadButtons(achievementsFrame)
 			local _, fontHeight = button.description:GetFont();
 			achievementsFrame.UIFontHeight = fontHeight;
 		end
+
+		-- Change tooltip behaviour
+		button:HookScript("OnEnter", OnEnter);
+		button:HookScript("OnLeave", OnLeave);
+		button.shield:EnableMouse(false);
+	end
+end
+
+-- [[ OnEnter ]] --
+local AddBlizzardDefault, AddPartOfAChain;
+function OnEnter(self)
+	diagnostics.Trace("OnEnter");
+
+	GameTooltip:SetOwner(self, "ANCHOR_NONE");
+	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT");
+
+	AddBlizzardDefault(self);
+	AddPartOfAChain(self);
+
+	-- AchievementFrameAchievements_CheckGuildMembersTooltip(self.shield); -- Guild can be ignored for now
+
+	GameTooltip:Show();
+end
+
+function AddBlizzardDefault(self)
+	diagnostics.Trace("AddBlizzardDefault");
+
+	if ( self.accountWide ) then
+		if ( self.completed ) then
+			GameTooltip:AddLine(ACCOUNT_WIDE_ACHIEVEMENT_COMPLETED);
+		else
+			GameTooltip:AddLine(ACCOUNT_WIDE_ACHIEVEMENT);
+		end
+		GameTooltip:Show();
+		return;
+	end
+	if ( self.shield.earnedBy ) then
+		GameTooltip:AddLine(format(ACHIEVEMENT_EARNED_BY,self.shield.earnedBy));
+		local me = UnitName("player")
+		if ( not self.shield.wasEarnedByMe ) then
+			GameTooltip:AddLine(format(ACHIEVEMENT_NOT_COMPLETED_BY, me));
+		elseif ( me ~= self.shield.earnedBy ) then
+			GameTooltip:AddLine(format(ACHIEVEMENT_COMPLETED_BY, me));
+		end
+		GameTooltip:Show();
+		return;
+	end
+end
+
+function AddPartOfAChain(self)
+	if not self.Achievement or not self.Achievement.ID or (not GetNextAchievement(self.Achievement.ID) and not GetPreviousAchievement(self.Achievement.ID)) or not addon.Options.db.Tooltip.ShowPartOfAChain then
+		return;
+	end
+
+	if (GameTooltip:NumLines() > 0) then
+		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+	end
+	GameTooltip:AddLine(addon.L["Part of a chain"]); -- Header
+	local id;
+	local tmpID = self.Achievement.ID;
+	while tmpID do -- Find first achievement in a chain
+		id = tmpID;
+		tmpID = GetPreviousAchievement(id);
+	end
+	while id do
+		local _, name, _, completed, _, _, _, _, _, _, _, _, wasEarnedByMe = addon.GetAchievementInfo(id);
+		local r, g, b;
+		if id == self.Achievement.ID then
+			if completed then
+				r, g, b = 0.75, 1, 0.75;
+			else
+				r, g, b = 0.9, 0.9, 0.9;
+			end
+		elseif completed then
+			r, g, b = 0.25, 0.75, 0.25;
+		else
+			r, g, b = 0.6, 0.6, 0.6;
+		end
+		GameTooltip:AddLine(name, r, g, b); -- Achievement name
+		local tooltipTextureInfo;
+		if addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons then
+			if wasEarnedByMe then
+				GameTooltip:AddTexture(136814); -- Check texture
+			elseif self.Achievement.NotObtainable then
+				GameTooltip:AddTexture(136813); -- Fail texture
+			else
+				GameTooltip:AddTexture(136815); -- Dash texture
+			end
+			tooltipTextureInfo = {margin = { right = 24}};
+		end
+		if completed then
+			GameTooltip:AddTexture(136814, tooltipTextureInfo); -- Check texture
+		elseif self.Achievement.NotObtainable then
+			GameTooltip:AddTexture(136813, tooltipTextureInfo); -- Fail texture
+		else
+			GameTooltip:AddTexture(136815, tooltipTextureInfo); -- Dash texture
+		end
+		id = GetNextAchievement(id);
+	end
+end
+
+-- [[ OnLeave ]] --
+function OnLeave(self)
+	diagnostics.Trace("OnLeave");
+
+	AchievementMeta_OnLeave(self);
+end
+
+-- [[ OnClick ]] --
+local OnClickLeftButton, OnClickRightButton;
+function achievementButton.OnClick(self, button, achievementsFrame, ignoreModifiers, anchor, offsetX, offsetY) -- ignoreModifiers, anchor, offsetX, offsetY are used for in code calls
+	diagnostics.Trace("achievementButton.OnClick");
+
+	if button == "LeftButton" then
+		diagnostics.Debug("LeftButton");
+		OnClickLeftButton(self, ignoreModifiers, achievementsFrame);
+	elseif button == "RightButton" then
+		diagnostics.Debug("RightButton");
+		OnClickRightButton(self, anchor, offsetX, offsetY);
 	end
 end
 
 -- [[ OnClickLeftButton ]] --
-local function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
+function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
 	diagnostics.Trace("OnClickLeftButton");
 
 	if IsModifiedClick() and not ignoreModifiers then
@@ -74,7 +195,7 @@ end
 local rightClickMenu = LibStub("KrowiMenu-1.0");
 local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
-local function OnClickRightButton(self, anchor, offsetX, offsetY)
+function OnClickRightButton(self, anchor, offsetX, offsetY)
 	diagnostics.Trace("OnClickRightButton");
 
 	local achievement = self.Achievement;
@@ -109,16 +230,4 @@ local function OnClickRightButton(self, anchor, offsetX, offsetY)
 	end
 
 	rightClickMenu:Open(anchor, offsetX, offsetY);
-end
-
-function achievementButton.OnClick(self, button, achievementsFrame, ignoreModifiers, anchor, offsetX, offsetY) -- ignoreModifiers, anchor, offsetX, offsetY are used for in code calls
-	diagnostics.Trace("achievementButton.OnClick");
-
-	if button == "LeftButton" then
-		diagnostics.Debug("LeftButton");
-		OnClickLeftButton(self, ignoreModifiers, achievementsFrame);
-	elseif button == "RightButton" then
-		diagnostics.Debug("RightButton");
-		OnClickRightButton(self, anchor, offsetX, offsetY);
-	end
 end

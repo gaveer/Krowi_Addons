@@ -13,11 +13,15 @@ local defaults = {
         ResetViewOnOpen = false,
         EnableDebugInfo = false,
         EnableTraceInfo = false,
-        Layout = {
+        Window = {
             CategoriesFrameWidthOffset = 25,
             AchievementFrameHeightOffset = 250,
             MergeSmallCategoriesThreshold = 10,
             MergeSmallCategoriesThresholdChanged = false
+        },
+        Tooltip = {
+            ShowPartOfAChain = true,
+            ShowPartOfAChainCurrentCharacterIcons = false
         },
         Minimap = {
             hide = true -- not ShowMinimapIcon
@@ -65,7 +69,7 @@ local defaults = {
 }
 
 local maxNumberOfSearchPreviews = function()
-    return 17 + math.floor(addon.Options.db.Layout.AchievementFrameHeightOffset / 29);
+    return 17 + math.floor(addon.Options.db.Window.AchievementFrameHeightOffset / 29);
 end
 
 local function CreatePanel()
@@ -182,98 +186,11 @@ local function CreatePanel()
                             }
                         }
                     },
-                    Layout = {
-                        name = addon.L["O_LAYOUT"],
-                        type = "group",
-                        inline = true,
-                        order = 4,
-                        args = {
-                            CategoriesFrameWidthOffset = {
-                                name = addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"],
-                                desc = core.ReplaceVars{addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"],
-                                                        tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
-                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
-                                type = "range",
-                                min = 0,
-                                max = 250,
-                                step = 1,
-                                width = 1.5,
-                                order = 1.1,
-                                get = function ()
-                                    return addon.Options.db.Layout.CategoriesFrameWidthOffset;
-                                end,
-                                set = function(_, value)
-                                    if addon.Options.db.Layout.CategoriesFrameWidthOffset == value then
-                                        return;
-                                    end;
-        
-                                    addon.Options.db.Layout.CategoriesFrameWidthOffset = value;
-                                    addon.Event:SendMessage("UpdateAchievementFrameWidth", addon.Options.db.Layout.CategoriesFrameWidthOffset);
-        
-                                    diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.CategoriesFrameWidthOffset));
-                                end
-                            },
-                            AchievementFrameHeightOffset = {
-                                name = addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"],
-                                desc = core.ReplaceVars{addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"],
-                                                        tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
-                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
-                                type = "range",
-                                min = 0,
-                                max = 500,
-                                step = 1,
-                                width = 1.5,
-                                order = 1.2,
-                                get = function ()
-                                    return addon.Options.db.Layout.AchievementFrameHeightOffset;
-                                end,
-                                set = function(_, value)
-                                    if addon.Options.db.Layout.AchievementFrameHeightOffset == value then
-                                        return;
-                                    end;
-        
-                                    addon.Options.db.Layout.AchievementFrameHeightOffset = value;
-                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Search.args.numberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
-                                    numberOfSearchPreviews.max = maxNumberOfSearchPreviews();
-                                    if numberOfSearchPreviews.get() > numberOfSearchPreviews.max then
-                                        numberOfSearchPreviews.set(nil, numberOfSearchPreviews.max);
-                                    end
-                                    addon.Event:SendMessage("UpdateAchievementFrameHeight", addon.Options.db.Layout.AchievementFrameHeightOffset);
-        
-                                    diagnostics.Debug(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.AchievementFrameHeightOffset));
-                                end
-                            },
-                            MergeSmallCategoriesThreshold = {
-                                name = addon.L["Merge small categories threshold"],
-                                desc = core.ReplaceVars{addon.L["Merge small categories threshold Desc"],
-                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
-                                type = "range",
-                                min = 1,
-                                max = 50,
-                                step = 1,
-                                width = 1.5,
-                                order = 2.1,
-                                get = function ()
-                                    return addon.Options.db.Layout.MergeSmallCategoriesThreshold;
-                                end,
-                                set = function(_, value)
-                                    if addon.Options.db.Layout.MergeSmallCategoriesThreshold == value then
-                                        return;
-                                    end;
-        
-                                    addon.Options.db.Layout.MergeSmallCategoriesThreshold = value;
-                                    addon.Options.db.Layout.MergeSmallCategoriesThresholdChanged = true;
-        
-                                    diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.MergeSmallCategoriesThreshold));
-                                end
-                            },
-                        }
-                    },
                     Search = {
                         name = addon.L["O_SEARCH"],
                         type = "group",
                         inline = true,
-                        order = 5,
+                        order = 4,
                         args = {
                             clearOnRightClick = {
                                 name = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"],
@@ -337,7 +254,7 @@ local function CreatePanel()
                         name = addon.L["O_DEBUG"],
                         type = "group",
                         inline = true,
-                        order = 6,
+                        order = 5,
                         args = {
                             enableDebugInfo = {
                                 name = addon.L["O_ENABLE_DEBUG_INFO"],
@@ -369,11 +286,140 @@ local function CreatePanel()
                     }
                 }
             },
+            Layout = {
+                name = addon.L["Layout"],
+                type = "group",
+                order = 2,
+                args = {
+                    Window = {
+                        name = addon.L["Window"],
+                        type = "group",
+                        inline = true,
+                        order = 1,
+                        args = {
+                            CategoriesFrameWidthOffset = {
+                                name = addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"],
+                                desc = core.ReplaceVars{addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"],
+                                                        tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
+                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                                type = "range",
+                                min = 0,
+                                max = 250,
+                                step = 1,
+                                width = 1.5,
+                                order = 1.1,
+                                get = function ()
+                                    return addon.Options.db.Window.CategoriesFrameWidthOffset;
+                                end,
+                                set = function(_, value)
+                                    if addon.Options.db.Window.CategoriesFrameWidthOffset == value then
+                                        return;
+                                    end;
+        
+                                    addon.Options.db.Window.CategoriesFrameWidthOffset = value;
+                                    addon.Event:SendMessage("UpdateAchievementFrameWidth", addon.Options.db.Window.CategoriesFrameWidthOffset);
+        
+                                    diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
+                                end
+                            },
+                            AchievementFrameHeightOffset = {
+                                name = addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"],
+                                desc = core.ReplaceVars{addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"],
+                                                        tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
+                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                                type = "range",
+                                min = 0,
+                                max = 500,
+                                step = 1,
+                                width = 1.5,
+                                order = 1.2,
+                                get = function ()
+                                    return addon.Options.db.Window.AchievementFrameHeightOffset;
+                                end,
+                                set = function(_, value)
+                                    if addon.Options.db.Window.AchievementFrameHeightOffset == value then
+                                        return;
+                                    end;
+        
+                                    addon.Options.db.Window.AchievementFrameHeightOffset = value;
+                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Search.args.numberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
+                                    numberOfSearchPreviews.max = maxNumberOfSearchPreviews();
+                                    if numberOfSearchPreviews.get() > numberOfSearchPreviews.max then
+                                        numberOfSearchPreviews.set(nil, numberOfSearchPreviews.max);
+                                    end
+                                    addon.Event:SendMessage("UpdateAchievementFrameHeight", addon.Options.db.Window.AchievementFrameHeightOffset);
+        
+                                    diagnostics.Debug(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.AchievementFrameHeightOffset));
+                                end
+                            },
+                            MergeSmallCategoriesThreshold = {
+                                name = addon.L["Merge small categories threshold"],
+                                desc = core.ReplaceVars{addon.L["Merge small categories threshold Desc"],
+                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                                type = "range",
+                                min = 1,
+                                max = 50,
+                                step = 1,
+                                width = 1.5,
+                                order = 2.1,
+                                get = function ()
+                                    return addon.Options.db.Window.MergeSmallCategoriesThreshold;
+                                end,
+                                set = function(_, value)
+                                    if addon.Options.db.Window.MergeSmallCategoriesThreshold == value then
+                                        return;
+                                    end;
+        
+                                    addon.Options.db.Window.MergeSmallCategoriesThreshold = value;
+                                    addon.Options.db.Window.MergeSmallCategoriesThresholdChanged = true;
+        
+                                    diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.MergeSmallCategoriesThreshold));
+                                end
+                            },
+                        }
+                    },
+                    Tooltip = {
+                        name = addon.L["Tooltip"],
+                        type = "group",
+                        inline = true,
+                        order = 2,
+                        args = {
+                            ShowPartOfAChain = {
+                                name = core.ReplaceVars{addon.L["ShowPartOfAChain"],
+                                                        partOfAChain = addon.L["Part of a chain"]},
+                                desc = core.ReplaceVars{addon.L["ShowPartOfAChain_Desc"],
+                                                        partOfAChain = addon.L["Part of a chain"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 1,
+                                get = function () return addon.Options.db.Tooltip.ShowPartOfAChain; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.ShowPartOfAChain = not addon.Options.db.Tooltip.ShowPartOfAChain;
+
+                                    diagnostics.Debug(addon.L["ShowPartOfAChain"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowPartOfAChain));
+                                end
+                            },
+                            ShowPartOfAChainCurrentCharacterIcons = {
+                                name = addon.L["ShowPartOfAChainCurrentCharacterIcons"],
+                                desc = addon.L["ShowPartOfAChainCurrentCharacterIcons_Desc"],
+                                type = "toggle",
+                                width = "full",
+                                order = 2,
+                                get = function () return addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons = not addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons;
+
+                                    diagnostics.Debug(addon.L["ShowPartOfAChainCurrentCharacterIcons"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons));
+                                end
+                            }
+                        }
+                    }
+                }
+            },
             Style = {
                 name = addon.L["O_STYLE"],
                 type = "group",
-                -- inline = true,
-                order = 2,
+                order = 3,
                 args = {
                     description = {
                         name = addon.L["O_STYLE_DESC"],
@@ -463,7 +509,7 @@ function options.Load()
 
     diagnostics.Debug("- Options loaded");
     diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Layout.CategoriesFrameWidthOffset));
+    diagnostics.Debug("     - " .. addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
     diagnostics.Debug("     - " .. addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
     diagnostics.Debug("     - " .. addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
     diagnostics.Debug("     - " .. addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));

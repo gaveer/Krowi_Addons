@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [9.0.5.21.0] - 
 ### Added
 - Option to select wether using the Key Binding will keep the last selected category or collapse all categories and select the first category
+- Search by achievement ID by starting the search query with '#'
 
 ### Changed
 - Coming in 9.1 should not add achievements to the Current Zone anymore

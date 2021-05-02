@@ -107,7 +107,8 @@ L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is pos
                                 "Additionally, there are a couple of new options:\n" ..
                                 AF_TAB .. "- {clearOnRightClick}\n" ..
                                 AF_TAB .. "- {minCharToSearch}\n" ..
-                                AF_TAB .. "- {numSearchPreviews}\n\n" ..
+                                AF_TAB .. "- {numSearchPreviews}\n" ..
+                                AF_TAB .. "- Search by achievement ID by starting the search query with '#'\n\n" ..
                                 "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
 L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
 L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";

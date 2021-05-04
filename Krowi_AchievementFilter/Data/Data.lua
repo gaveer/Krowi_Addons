@@ -16,7 +16,7 @@ function data.Load()
     addon.NextPatch.Load(addon.CustomAchievements);
 
     -- TEST = {};
-    -- data.PrintCriteria(8518, nil, 0);
+    -- data.PrintCriteria(14879, nil, 0);
 end
 
 local cachedZone;

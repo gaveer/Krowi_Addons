@@ -294,7 +294,6 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 		button.showTooltipFunc = AchievementFrameCategory_FeatOfStrengthTooltip;
 	else
 		button.text = nil;
-		diagnostics.Debug(button.text);
 		button.numAchievements = numOfAch;
 		button.numCompleted = numOfCompAch;
 		button.numCompletedText = numOfCompAch .. "/" .. numOfAch;

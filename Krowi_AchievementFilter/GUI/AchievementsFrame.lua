@@ -304,10 +304,10 @@ function achievementsFrame:AdjustSelection()
 		AchievementFrameAchievements_FindSelection();
 	else
 		local newHeight;
-		if ( selectedButton:GetTop() > self.Container:GetTop() ) then
+		if selectedButton:GetTop() > self.Container:GetTop() then
 			newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetTop() - selectedButton:GetTop();
-		elseif ( selectedButton:GetBottom() < self.Container:GetBottom() ) then
-			if ( selectedButton:GetHeight() > self.Container:GetHeight() ) then
+		elseif selectedButton:GetBottom() < self.Container:GetBottom() then
+			if selectedButton:GetHeight() > self.Container:GetHeight() then
 				newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetTop() - selectedButton:GetTop();
 			else
 				newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetBottom() - selectedButton:GetBottom();
@@ -324,7 +324,6 @@ end
 function achievementsFrame:DisplayAchievement(button, achievement, index, selection, renderOffScreen)
 	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = addon.GetAchievementInfo(achievement.ID);
 	-- diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
-	diagnostics.DebugTable({addon.GetAchievementInfo(achievement.ID)});
 
 	if not id then
 		button:Hide();

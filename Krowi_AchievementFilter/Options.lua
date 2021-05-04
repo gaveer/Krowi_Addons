@@ -21,7 +21,8 @@ local defaults = {
         },
         Tooltip = {
             ShowPartOfAChain = true,
-            ShowPartOfAChainCurrentCharacterIcons = false
+            ShowRequiredFor = true,
+            ShowCurrentCharacterIcons = false
         },
         Minimap = {
             hide = true -- not ShowMinimapIcon
@@ -256,7 +257,7 @@ local function CreatePanel()
                         inline = true,
                         order = 5,
                         args = {
-                            enableDebugInfo = {
+                            EnableDebugInfo = {
                                 name = addon.L["O_ENABLE_DEBUG_INFO"],
                                 desc = addon.L["O_ENABLE_DEBUG_INFO_DESC"],
                                 type = "toggle",
@@ -269,7 +270,7 @@ local function CreatePanel()
                                     diagnostics.Debug(addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
                                 end
                             },
-                            enableTraceInfo = {
+                            EnableTraceInfo = {
                                 name = addon.L["O_ENABLE_TRACE_INFO"],
                                 desc = addon.L["O_ENABLE_TRACE_INFO_DESC"],
                                 type = "toggle",
@@ -281,7 +282,45 @@ local function CreatePanel()
         
                                     diagnostics.Debug(addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
                                 end
-                            }
+                            },
+                            -- tutorial = {
+                            --     name = "ExportTest",
+                            --     type = "execute",
+                            --     order = 3.1,
+                            --     func = function()
+                            --         TEST = {};
+                            --         TEST2 = {};
+                            --         TEST3 = {};
+                            --         TEST4 = {};
+                            --         local nils, i = 0, 1;
+                            --         while nils < 500 do
+                            --             local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(i);
+                            --             if id then
+                            --                 tinsert(TEST, id);
+                            --                 if not isGuild then
+                            --                     tinsert(TEST2, id);
+                            --                 end
+                            --                 local numCriteria = GetAchievementNumCriteria(id);
+                            --                 if numCriteria > 0 then
+                            --                     tinsert(TEST3, id);
+                            --                 end
+                            --                 if not isGuild and numCriteria > 0 then
+                            --                     tinsert(TEST4, id);
+                            --                 end
+                            --                 -- for j = 1, numCriteria do
+                            --                 --     local criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString, criteriaID, eligible = GetAchievementCriteriaInfo(id, j);
+                            --                 --     if criteriaType == 8 then
+                            --                 --         tinsert(TEST, {criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString, criteriaID, eligible});
+                            --                 --     end
+                            --                 -- end
+                            --                 nils = 0;
+                            --             else
+                            --                 nils = nils + 1;
+                            --             end
+                            --             i = i + 1;
+                            --         end
+                            --     end
+                            -- },
                         }
                     }
                 }
@@ -399,17 +438,34 @@ local function CreatePanel()
                                     diagnostics.Debug(addon.L["ShowPartOfAChain"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowPartOfAChain));
                                 end
                             },
-                            ShowPartOfAChainCurrentCharacterIcons = {
-                                name = addon.L["ShowPartOfAChainCurrentCharacterIcons"],
-                                desc = addon.L["ShowPartOfAChainCurrentCharacterIcons_Desc"],
+                            ShowRequiredFor = {
+                                name = core.ReplaceVars{addon.L["ShowRequiredFor"],
+                                                        requiredFor = addon.L["Required for"]},
+                                desc = core.ReplaceVars{addon.L["ShowRequiredFor_Desc"],
+                                                        requiredFor = addon.L["Required for"]},
                                 type = "toggle",
                                 width = "full",
-                                order = 2,
-                                get = function () return addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons; end,
+                                order = 1,
+                                get = function () return addon.Options.db.Tooltip.ShowRequiredFor; end,
                                 set = function()
-                                    addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons = not addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons;
+                                    addon.Options.db.Tooltip.ShowRequiredFor = not addon.Options.db.Tooltip.ShowRequiredFor;
 
-                                    diagnostics.Debug(addon.L["ShowPartOfAChainCurrentCharacterIcons"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons));
+                                    diagnostics.Debug(addon.L["ShowRequiredFor"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowRequiredFor));
+                                end
+                            },
+                            ShowCurrentCharacterIcons = {
+                                name = addon.L["ShowCurrentCharacterIcons"],
+                                desc = core.ReplaceVars{addon.L["ShowCurrentCharacterIcons_Desc"],
+                                                        partOfAChain = addon.L["Part of a chain"],
+                                                        requiredFor = addon.L["Required for"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 3,
+                                get = function () return addon.Options.db.Tooltip.ShowCurrentCharacterIcons; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.ShowCurrentCharacterIcons = not addon.Options.db.Tooltip.ShowCurrentCharacterIcons;
+
+                                    diagnostics.Debug(addon.L["ShowCurrentCharacterIcons"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowCurrentCharacterIcons));
                                 end
                             }
                         }

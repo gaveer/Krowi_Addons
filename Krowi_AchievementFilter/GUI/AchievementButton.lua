@@ -36,7 +36,7 @@ function achievementButton.PostLoadButtons(achievementsFrame)
 end
 
 -- [[ OnEnter ]] --
-local AddBlizzardDefault, AddPartOfAChain;
+local AddBlizzardDefault, AddPartOfAChain, AddRequiredFor;
 function OnEnter(self)
 	diagnostics.Trace("OnEnter");
 
@@ -45,10 +45,53 @@ function OnEnter(self)
 
 	AddBlizzardDefault(self);
 	AddPartOfAChain(self);
+	AddRequiredFor(self);
+
+	-- testing
+	-- local crits = GetAchievementNumCriteria(self.Achievement.ID);
+	-- for i = 1, crits do
+	-- 	diagnostics.DebugTable({GetAchievementCriteriaInfo(self.Achievement.ID, i)});
+	-- end
+	-- end testing
 
 	-- AchievementFrameAchievements_CheckGuildMembersTooltip(self.shield); -- Guild can be ignored for now
 
 	GameTooltip:Show();
+end
+
+local function AddAchievementLine(self, id)
+	local _, name, _, completed, _, _, _, _, _, _, _, _, wasEarnedByMe = addon.GetAchievementInfo(id);
+	local r, g, b;
+	if id == self.Achievement.ID then
+		if completed then
+			r, g, b = 0.75, 1, 0.75;
+		else
+			r, g, b = 0.9, 0.9, 0.9;
+		end
+	elseif completed then
+		r, g, b = 0.25, 0.75, 0.25;
+	else
+		r, g, b = 0.6, 0.6, 0.6;
+	end
+	GameTooltip:AddLine(name, r, g, b); -- Achievement name
+	local tooltipTextureInfo;
+	if addon.Options.db.Tooltip.ShowCurrentCharacterIcons then
+		if wasEarnedByMe then
+			GameTooltip:AddTexture(136814); -- Check texture
+		elseif self.Achievement.NotObtainable then
+			GameTooltip:AddTexture(136813); -- Fail texture
+		else
+			GameTooltip:AddTexture(136815); -- Dash texture
+		end
+		tooltipTextureInfo = {margin = { right = 24}};
+	end
+	if completed then
+		GameTooltip:AddTexture(136814, tooltipTextureInfo); -- Check texture
+	elseif self.Achievement.NotObtainable then
+		GameTooltip:AddTexture(136813, tooltipTextureInfo); -- Fail texture
+	else
+		GameTooltip:AddTexture(136815, tooltipTextureInfo); -- Dash texture
+	end
 end
 
 function AddBlizzardDefault(self)
@@ -85,6 +128,7 @@ function AddPartOfAChain(self)
 		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
 	end
 	GameTooltip:AddLine(addon.L["Part of a chain"]); -- Header
+	self.Achievement:ClearPartOfAChainIDs();
 	local id;
 	local tmpID = self.Achievement.ID;
 	while tmpID do -- Find first achievement in a chain
@@ -92,39 +136,60 @@ function AddPartOfAChain(self)
 		tmpID = GetPreviousAchievement(id);
 	end
 	while id do
-		local _, name, _, completed, _, _, _, _, _, _, _, _, wasEarnedByMe = addon.GetAchievementInfo(id);
-		local r, g, b;
-		if id == self.Achievement.ID then
-			if completed then
-				r, g, b = 0.75, 1, 0.75;
-			else
-				r, g, b = 0.9, 0.9, 0.9;
-			end
-		elseif completed then
-			r, g, b = 0.25, 0.75, 0.25;
-		else
-			r, g, b = 0.6, 0.6, 0.6;
-		end
-		GameTooltip:AddLine(name, r, g, b); -- Achievement name
-		local tooltipTextureInfo;
-		if addon.Options.db.Tooltip.ShowPartOfAChainCurrentCharacterIcons then
-			if wasEarnedByMe then
-				GameTooltip:AddTexture(136814); -- Check texture
-			elseif self.Achievement.NotObtainable then
-				GameTooltip:AddTexture(136813); -- Fail texture
-			else
-				GameTooltip:AddTexture(136815); -- Dash texture
-			end
-			tooltipTextureInfo = {margin = { right = 24}};
-		end
-		if completed then
-			GameTooltip:AddTexture(136814, tooltipTextureInfo); -- Check texture
-		elseif self.Achievement.NotObtainable then
-			GameTooltip:AddTexture(136813, tooltipTextureInfo); -- Fail texture
-		else
-			GameTooltip:AddTexture(136815, tooltipTextureInfo); -- Dash texture
-		end
+		AddAchievementLine(self, id);
+		self.Achievement:AddPartOfAChainID(id);
 		id = GetNextAchievement(id);
+	end
+end
+
+local criteriaCache = {};
+local criteriaCacheIsEmpty = true;
+function AddRequiredFor(self)
+	if not addon.Options.db.Tooltip.ShowRequiredFor then
+		return;
+	end
+
+	if criteriaCacheIsEmpty then -- Build cache the first time
+		local nils, i = 0, 1;
+		while nils < 500 do -- Biggest gap is 209 in 9.0.5 as of 2021-05-03
+			local id = addon.GetAchievementInfo(i);
+			if id then
+				local numCriteria = GetAchievementNumCriteria(id);
+				if numCriteria > 0 then
+					for j = 1, numCriteria do
+						local _, criteriaType, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(id, j);
+						if criteriaType == 8 then
+							tinsert(criteriaCache, {AchievementID = assetID, RequiredForID = id});
+						end
+					end
+				end
+				nils = 0;
+			else
+				nils = nils + 1;
+			end
+			i = i + 1;
+		end
+		criteriaCacheIsEmpty = nil;
+	end
+
+	local ids = {};
+	for _, criteria in next, criteriaCache do
+		if criteria.AchievementID == self.Achievement.ID then
+			-- local id = addon.GetAchievementInfo(criteria.RequiredForID);
+			tinsert(ids, criteria.RequiredForID);
+		end
+	end
+
+	if #ids > 0 then
+		if (GameTooltip:NumLines() > 0) then
+			GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		end
+		GameTooltip:AddLine(addon.L["Required for"]); -- Header
+		self.Achievement:ClearRequiredForIDs();
+		for _, id in next, ids do
+			AddAchievementLine(self, id);
+			self.Achievement:AddRequiredForID(id);
+		end
 	end
 end
 
@@ -145,7 +210,7 @@ function achievementButton.OnClick(self, button, achievementsFrame, ignoreModifi
 		OnClickLeftButton(self, ignoreModifiers, achievementsFrame);
 	elseif button == "RightButton" then
 		diagnostics.Debug("RightButton");
-		OnClickRightButton(self, anchor, offsetX, offsetY);
+		OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame);
 	end
 end
 
@@ -195,7 +260,21 @@ end
 local rightClickMenu = LibStub("KrowiMenu-1.0");
 local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
-function OnClickRightButton(self, anchor, offsetX, offsetY)
+local function AddGoToLine(goTo, id, achievement, achievementsFrame)
+	if id == achievement.ID then
+		return;
+	end
+
+	local _, name = addon.GetAchievementInfo(id);
+	goTo:AddChildFull({ Text = name,
+						Func = function()
+							achievementsFrame:SelectAchievementFromID(id, nil, true);
+							rightClickMenu:Close();
+						end
+					});
+end
+
+function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
 	diagnostics.Trace("OnClickRightButton");
 
 	local achievement = self.Achievement;
@@ -216,12 +295,38 @@ function OnClickRightButton(self, anchor, offsetX, offsetY)
 	if not achievement.HasNoWowheadLink then
 		local externalLink = "https://www.wowhead.com/achievement=" .. achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
 		diagnostics.Debug(externalLink);
-		rightClickMenu:AddFull({Text = "Wowhead", Func = function() popupDialog.ShowExternalLink(externalLink); end});
+		rightClickMenu:AddFull({Text = addon.L["Wowhead"], Func = function() popupDialog.ShowExternalLink(externalLink); end});
 	end
 
 	-- IAT Link
 	if addon.IsIATLoaded() and IAT_HasAchievement(achievement.ID) then -- and achievement.HasIATLink
-		rightClickMenu:AddFull({Text = "IAT Tactics", Func = function() IAT_DisplayAchievement(achievement.ID); end});
+		rightClickMenu:AddFull({Text = addon.L["IAT Tactics"], Func = function() IAT_DisplayAchievement(achievement.ID); end});
+	end
+
+	-- Go to
+	local partOfAChainIDs = achievement:GetPartOfAChainIDs();
+	local requiredForIDs = achievement:GetRequiredForIDs();
+	if partOfAChainIDs or requiredForIDs then -- Others can be added here later
+		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
+
+		if partOfAChainIDs then
+			goTo:AddChildFull({ Text = addon.L["Part of a chain"], IsTitle = true});
+			for _, id in next, partOfAChainIDs do
+				AddGoToLine(goTo, id, achievement, achievementsFrame);
+			end
+		end
+
+		if requiredForIDs then -- Add individual Go to parts
+			if partOfAChainIDs then
+				goTo:AddSeparator();
+			end
+			goTo:AddChildFull({ Text = addon.L["Required for"], IsTitle = true});
+			for _, id in next, requiredForIDs do
+				AddGoToLine(goTo, id, achievement, achievementsFrame);
+			end
+		end
+
+		rightClickMenu:Add(goTo); -- Add Go to menu to the right click menu
 	end
 
 	-- Extra menu defined at the achievement self including pet battles

@@ -48,3 +48,33 @@ function achievement:GetMergedCategory() -- Gets the achievement's category, use
 
     error("The achievement with ID " .. self.ID .. " has no category."); -- Should in theory never happen, means there is a problem with the database
 end
+
+function achievement:AddRequiredForID(id)
+    if self.RequiredForIDs == nil then
+        self.RequiredForIDs = {}; -- By creating the required for IDs table here we reduce memory usage because not every achievement has required for IDs
+    end
+    tinsert(self.RequiredForIDs, id);
+end
+
+function achievement:ClearRequiredForIDs()
+    self.RequiredForIDs = nil;
+end
+
+function achievement:GetRequiredForIDs()
+    return self.RequiredForIDs;
+end
+
+function achievement:AddPartOfAChainID(id)
+    if self.PartOfAChainIDs == nil then
+        self.PartOfAChainIDs = {}; -- By creating the part of a chain IDs table here we reduce memory usage because not every achievement has part of a chain IDs
+    end
+    tinsert(self.PartOfAChainIDs, id);
+end
+
+function achievement:ClearPartOfAChainIDs()
+    self.PartOfAChainIDs = nil;
+end
+
+function achievement:GetPartOfAChainIDs()
+    return self.PartOfAChainIDs;
+end

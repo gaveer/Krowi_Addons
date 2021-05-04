@@ -9,6 +9,8 @@ addon.GlobalStrings.Load(L);
 L["Wowhead"] = "Wowhead";
 L["Xu-Fu's Pet Guides"] = "Xu-Fu's Pet Guides";
 L["Instance Achievement Tracker"] = "Instance Achievement Tracker";
+L["IAT Tactics"] = "IAT Tactics";
+L["Go to"] = "Go to";
 L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
 L["Tutorial"] = "Tutorial";
@@ -34,6 +36,7 @@ L["Merge Small Categories"] = "Merge Small Categories";
 
 -- Tooltips
 L["Part of a chain"] = "Part of a chain";
+L["Required for"] = "Required for";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
@@ -49,9 +52,11 @@ L["Layout"] = "Layout";
 L["Window"] = "Window";
 L["Tooltip"] = "Tooltip";
 L["ShowPartOfAChain"] = "Show {partOfAChain}";
-L["ShowPartOfAChain_Desc"] = "Show / hide {partOfAChain}";
-L["ShowPartOfAChainCurrentCharacterIcons"] = "Show current character icons";
-L["ShowPartOfAChainCurrentCharacterIcons_Desc"] = "Show /hide current character icons";
+L["ShowPartOfAChain_Desc"] = "Show / hide {partOfAChain}.\n\nWhen checked, the chain the achievment is part of will be visible in the tooltip.";
+L["ShowRequiredFor"] = "Show {requiredFor}";
+L["ShowRequiredFor_Desc"] = "Show / hide {requiredFor}.\n\nWhen checked, the achievement that requires the selected achievement to be completed will be visible in the tooltip.";
+L["ShowCurrentCharacterIcons"] = "Show current character icons";
+L["ShowCurrentCharacterIcons_Desc"] = "Show / hide current character icons.\n\nWhen checked, a second icon will appear in front of {partOfAChain} and {requiredFor} achievements that indicates the current character's progress.";
 L["O_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
 L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width.\n\n" ..
                                             "This value can be changed while the achievement window is open while having the {tabName} tab selected. This will however lag your game.\n\n{reloadRequired}";

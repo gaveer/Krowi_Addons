@@ -162,7 +162,7 @@ namespace DbManager.GUI
                     description = Regex.Replace(description, "(\"){2,}", "\\\"");
                     var rewardText = Regex.Replace(achievementAGT.RewardText, "^\"", "");
                     rewardText = Regex.Replace(rewardText, "\"$", "");
-                    var line = $"addon.CustomAchievements[{achievementAGT.ID}] = {{{achievementAGT.ID}, \"{name}\", {achievementAGT.Points}, \"{description}\", {achievementAGT.Flags}, {achievementAGT.IconFileID}, \"{rewardText}\"}};";
+                    var line = $"addon.NextPatchAchievements[{achievementAGT.ID}] = {{{achievementAGT.ID}, \"{name}\", {achievementAGT.Points}, \"{description}\", {achievementAGT.Flags}, {achievementAGT.IconFileID}, \"{rewardText}\"}};";
                     sb.AppendLineTabbed(1, line);
                 }
             }

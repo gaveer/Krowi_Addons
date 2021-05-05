@@ -79,16 +79,18 @@ function addon.GetAchievementsInZone(mapID)
     return achievements;
 end
 
-function addon.GetAchievementInfo(achievementID)
+function addon.GetAchievementInfo(achievementID, excludeNextPatch)
     local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);
-
     if id then
         return id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy;
     end
 
-    local achievement = addon.CustomAchievements[achievementID];
-
-    if achievement then
-        return achievement[1], achievement[2], achievement[3], false, nil, nil, nil, achievement[4], achievement[5], achievement[6], achievement[7], false, nil, false;
+    if not excludeNextPatch then
+        local achievement = addon.NextPatchAchievements[achievementID];
+        if achievement then
+            return achievement[1], achievement[2], achievement[3], false, nil, nil, nil, achievement[4], achievement[5], achievement[6], achievement[7], false, nil, false;
+        end
     end
+
+    return nil; -- Achievement info not found, default function also returns nil when not found
 end

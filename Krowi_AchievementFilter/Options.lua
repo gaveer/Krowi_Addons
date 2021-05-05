@@ -30,7 +30,8 @@ local defaults = {
         SearchBox = {
             MinimumCharactersToSearch = 3,
             NumberOfSearchPreviews = 5,
-            ClearOnRightClick = true
+            ClearOnRightClick = true,
+            ExcludeNextPatch = true
         },
         Filters = {
             Completion = {
@@ -198,12 +199,28 @@ local function CreatePanel()
                                 desc = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"],
                                 type = "toggle",
                                 width = "full",
-                                order = 1,
+                                order = 1.1,
                                 get = function () return addon.Options.db.SearchBox.ClearOnRightClick; end,
                                 set = function()
                                     addon.Options.db.SearchBox.ClearOnRightClick = not addon.Options.db.SearchBox.ClearOnRightClick;
         
                                     diagnostics.Debug(addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] .. ": " .. tostring(addon.Options.db.SearchBox.ClearOnRightClick));
+                                end
+                            },
+                            ExcludeNextPatch = {
+                                name = addon.L["Exclude Next Patch"],
+                                desc = core.ReplaceVars{addon.L["Exclude Next Patch Desc"],
+                                                        spoilerWarning = AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END},
+                                type = "toggle",
+                                width = "full",
+                                order = 1.2,
+                                confirm = function() return addon.Options.db.SearchBox.ExcludeNextPatch; end,
+                                confirmText = AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Exclude Next Patch Confirm"] .. "\n\n" .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END,
+                                get = function () return addon.Options.db.SearchBox.ExcludeNextPatch; end,
+                                set = function()
+                                    addon.Options.db.SearchBox.ExcludeNextPatch = not addon.Options.db.SearchBox.ExcludeNextPatch;
+        
+                                    diagnostics.Debug(addon.L["Exclude Next Patch"] .. ": " .. tostring(addon.Options.db.SearchBox.ExcludeNextPatch));
                                 end
                             },
                             minimumCharactersToSearch = {

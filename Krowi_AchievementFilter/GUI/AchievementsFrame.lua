@@ -54,23 +54,7 @@ function achievementsFrame:New()
 		frame:ForceUpdate();
 	end); -- Issue #3: Fix
 
-	if Overachiever then
-		Overachiever.UI_HookAchButtons(frame.Container.buttons, frame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
-	end
-
 	return frame;
-end
-
-function KrowiAF_AchievementsFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementsFrame_Template
-	local addonName = ...;
-	diagnostics.Trace("KrowiAF_AchievementsFrame_OnEvent - " .. event .. " - " .. addonName);
-
-	if event == "ADDON_LOADED" then
-		if addonName and addonName == "Overachiever" then
-			Overachiever.UI_HookAchButtons(self.Container.buttons, self.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
-            diagnostics.Debug("Overachiever compatibility enabled");
-		end
-	end
 end
 
 function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template

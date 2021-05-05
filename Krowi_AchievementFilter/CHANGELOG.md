@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Option to select wether using the Key Binding will keep the last selected category or collapse all categories and select the first category
 - Tooltip shows the chain if an achievement is part of it with additional options
+- Tooltip shows the achievement the highlighted achievement requires to be completed with additional options
+- Tooltip shows not only an account wide but also a character specific icon for the Part of a chain and Required for sections with additional options
 - Search by achievement ID by starting the search query with '#'
+- Option to exclude Coming in 9.1 from search results (default exclude)
 
 ### Changed
 - Coming in 9.1 should not add achievements to the Current Zone anymore

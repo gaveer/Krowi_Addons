@@ -69,6 +69,9 @@ L["Merge small categories threshold Desc"] = "Categories with a number of achiev
 L["O_SEARCH"] = "Search";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] = "Clear search field on Right Click";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"] = "Enable / disable the option to clear the search field when Right Clicking in it";
+L["Exclude Next Patch"] = "Exclude Next Patch";
+L["Exclude Next Patch Desc"] = "Exclude / include Next Patch achievements from / in the search results.\n\n{spoilerWarning}";
+L["Exclude Next Patch Confirm"] = "Including Next Patch achievements will show achievements that are subject to change and might contain spoilers for the next patch!";
 L["O_MIN_CHAR_TO_SEARCH"] = "Minimum characters to search";
 L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to start searching for achievements matching the query.\n" ..
                                     "The smaller the number, the greater the impact on the game.";

@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Tooltip shows the chain if an achievement is part of it with additional options
 - Tooltip shows the achievement the highlighted achievement requires to be completed with additional options
 - Tooltip shows not only an account wide but also a character specific icon for the Part of a chain and Required for sections with additional options
+- Tooltips refresh when scrolling (improvement over default Blizzard)
 - Search by achievement ID by starting the search query with '#'
 - Option to exclude Coming in 9.1 from search results (default exclude)
 

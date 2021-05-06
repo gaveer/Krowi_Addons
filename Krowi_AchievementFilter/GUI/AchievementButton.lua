@@ -5,7 +5,7 @@ local gui = addon.GUI;
 gui.AchievementButton = {};
 local achievementButton = gui.AchievementButton;
 
-local OnEnter, OnLeave;
+local OnEnter, OnLeave, ShowTooltip;
 
 function achievementButton.PostLoadButtons(achievementsFrame)
 	diagnostics.Trace("achievementButton.PostLoadButtons");
@@ -29,23 +29,35 @@ function achievementButton.PostLoadButtons(achievementsFrame)
 		end
 
 		-- Change tooltip behaviour
-		button:HookScript("OnEnter", OnEnter);
-		button:HookScript("OnLeave", OnLeave);
+		button:HookScript("OnEnter", function(self)
+			OnEnter(self, achievementsFrame);
+		end);
+		button:HookScript("OnLeave", function(self)
+			OnLeave(self, achievementsFrame);
+		end);
 		button.shield:EnableMouse(false);
+		button.ShowTooltip = ShowTooltip;
 	end
 end
 
 -- [[ OnEnter ]] --
 local AddBlizzardDefault, AddPartOfAChain, AddRequiredFor;
-function OnEnter(self)
+function OnEnter(self, achievementsFrame)
 	diagnostics.Trace("OnEnter");
 
-	GameTooltip:SetOwner(self, "ANCHOR_NONE");
-	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT");
+	achievementsFrame.SetHighlightedButton(self);
+	ShowTooltip(self);
+end
 
-	AddBlizzardDefault(self);
-	AddPartOfAChain(self);
-	AddRequiredFor(self);
+function ShowTooltip(button)
+	diagnostics.Trace("ShowTooltip");
+
+	GameTooltip:SetOwner(button, "ANCHOR_NONE");
+	GameTooltip:SetPoint("TOPLEFT", button, "TOPRIGHT");
+
+	AddBlizzardDefault(button);
+	AddPartOfAChain(button);
+	AddRequiredFor(button);
 
 	-- testing
 	-- local crits = GetAchievementNumCriteria(self.Achievement.ID);
@@ -128,7 +140,6 @@ function AddPartOfAChain(self)
 		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
 	end
 	GameTooltip:AddLine(addon.L["Part of a chain"]); -- Header
-	self.Achievement:ClearPartOfAChainIDs();
 	local id;
 	local tmpID = self.Achievement.ID;
 	while tmpID do -- Find first achievement in a chain
@@ -185,7 +196,6 @@ function AddRequiredFor(self)
 			GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
 		end
 		GameTooltip:AddLine(addon.L["Required for"]); -- Header
-		self.Achievement:ClearRequiredForIDs();
 		for _, id in next, ids do
 			AddAchievementLine(self, id);
 			self.Achievement:AddRequiredForID(id);
@@ -194,10 +204,15 @@ function AddRequiredFor(self)
 end
 
 -- [[ OnLeave ]] --
-function OnLeave(self)
+function OnLeave(self, achievementsFrame)
 	diagnostics.Trace("OnLeave");
 
+	achievementsFrame.ClearHighlightedButton();
+
 	AchievementMeta_OnLeave(self);
+
+	self.Achievement:ClearPartOfAChainIDs();
+	self.Achievement:ClearRequiredForIDs();
 end
 
 -- [[ OnClick ]] --
@@ -266,11 +281,17 @@ local function AddGoToLine(goTo, id, achievement, achievementsFrame)
 	end
 
 	local _, name = addon.GetAchievementInfo(id);
+	local disabled = nil;
+	if not addon.GetAchievement(id) then -- Catch missing achievements from the addon to prevent errors
+		name = name .. " (" .. addon.L["Missing"] .. ")";
+		disabled = true;
+	end
 	goTo:AddChildFull({ Text = name,
 						Func = function()
 							achievementsFrame:SelectAchievementFromID(id, nil, true);
 							rightClickMenu:Close();
-						end
+						end,
+						Disabled = disabled
 					});
 end
 

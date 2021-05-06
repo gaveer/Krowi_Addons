@@ -127,6 +127,7 @@ local function GetFilteredAchievements(self, category)
 end
 
 local cachedCategory, cachedAchievements; -- Caching this speeds up the scrolling of achievements when the selected category isn't changed
+local highlightedButton;
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
@@ -183,6 +184,11 @@ function achievementsFrame:Update()
 	-- else
 	if not self.SelectedAchievement then
 		HybridScrollFrame_CollapseButton(scrollFrame);
+	end
+
+	-- Make sure the correct tooltip is shown
+	if highlightedButton then
+		highlightedButton:ShowTooltip();
 	end
 end
 
@@ -429,9 +435,21 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 	return id;
 end
 
+function achievementsFrame.SetHighlightedButton(button)
+	highlightedButton = button;
+end
+
+function achievementsFrame.ClearHighlightedButton()
+	highlightedButton = nil;
+end
+
 -- [[ API ]] --
 function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
 	diagnostics.Trace("achievementsFrame:SelectAchievement");
+
+	if not achievement then
+		return;
+	end
 
 	if mouseButton == nil then
 		mouseButton = "LeftButton";
@@ -490,6 +508,5 @@ function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifi
 	diagnostics.Trace("achievementsFrame:SelectAchievementFromID");
 
 	local achievement = addon.GetAchievement(id);
-	diagnostics.Debug(achievement.ID);
 	self:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end

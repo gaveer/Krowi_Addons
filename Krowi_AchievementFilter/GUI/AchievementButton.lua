@@ -136,16 +136,19 @@ function AddPartOfAChain(self)
 		return;
 	end
 
-	if (GameTooltip:NumLines() > 0) then
-		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
-	end
-	GameTooltip:AddLine(addon.L["Part of a chain"]); -- Header
 	local id;
 	local tmpID = self.Achievement.ID;
 	while tmpID do -- Find first achievement in a chain
 		id = tmpID;
 		tmpID = GetPreviousAchievement(id);
 	end
+
+	if (GameTooltip:NumLines() > 0) then
+		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+	end
+	GameTooltip:AddLine(addon.L["Part of a chain"]); -- Header
+
+	self.Achievement:ClearPartOfAChainIDs(); -- Make sure it's empty before adding new stuff
 	while id do
 		AddAchievementLine(self, id);
 		self.Achievement:AddPartOfAChainID(id);
@@ -196,6 +199,8 @@ function AddRequiredFor(self)
 			GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
 		end
 		GameTooltip:AddLine(addon.L["Required for"]); -- Header
+
+		self.Achievement:ClearRequiredForIDs(); -- Make sure it's empty before adding new stuff
 		for _, id in next, ids do
 			AddAchievementLine(self, id);
 			self.Achievement:AddRequiredForID(id);
@@ -210,9 +215,6 @@ function OnLeave(self, achievementsFrame)
 	achievementsFrame.ClearHighlightedButton();
 
 	AchievementMeta_OnLeave(self);
-
-	self.Achievement:ClearPartOfAChainIDs();
-	self.Achievement:ClearRequiredForIDs();
 end
 
 -- [[ OnClick ]] --

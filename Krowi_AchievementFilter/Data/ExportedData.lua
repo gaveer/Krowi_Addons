@@ -1,4 +1,4 @@
--- [[ Exported at 2021-05-05 23-54-10 ]] --
+-- [[ Exported at 2021-05-07 23-45-40 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4711,6 +4711,9 @@ function exportedData.Load(categories, achievements)
     tmpCategories[815]:AddCategory(tmpCategories[819]);
     tmpCategories[819]:AddAchievement(InsertAndReturn(achievements, achievement:New(15054)));
     tmpCategories[819]:AddAchievement(InsertAndReturn(achievements, achievement:New(14943)));
+    tmpCategories[822] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)))); -- Reputation
+    tmpCategories[815]:AddCategory(tmpCategories[822]);
+    tmpCategories[822]:AddAchievement(InsertAndReturn(achievements, achievement:New(15059)));
     tmpCategories[812] = InsertAndReturn(categories, achievementCategory:New("Korthia", {1961, 2006, 2007, 2008})); -- Korthia
     tmpCategories[811]:AddCategory(tmpCategories[812]);
     tmpCategories[817] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15447)))); -- Quests
@@ -4724,7 +4727,6 @@ function exportedData.Load(categories, achievements)
     tmpCategories[818]:AddAchievement(InsertAndReturn(achievements, achievement:New(15053)));
     tmpCategories[813] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)))); -- Reputation
     tmpCategories[812]:AddCategory(tmpCategories[813]);
-    tmpCategories[813]:AddAchievement(InsertAndReturn(achievements, achievement:New(15059)));
     tmpCategories[813]:AddAchievement(InsertAndReturn(achievements, achievement:New(15069)));
     tmpCategories[801] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15272)))); -- Dungeons
     tmpCategories[814]:AddCategory(tmpCategories[801]);

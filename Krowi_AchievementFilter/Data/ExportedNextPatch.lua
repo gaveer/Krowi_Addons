@@ -1,4 +1,4 @@
--- [[ Exported at 2021-05-05 23-54-11 ]] --
+-- [[ Exported at 2021-05-07 23-45-40 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -29,13 +29,13 @@ function nextPatch.Load(achievements)
     addon.NextPatchAchievements[15064] = {15064, "Breaking the Chains", 10, "Complete the achievements listed below.", 0, 3743311, "Mount Reward: Bracelet of Salarangor"};
     addon.NextPatchAchievements[15054] = {15054, "Minions of the Cold Dark", 15, "Defeat all of the Tormentors of Torghast special encounters in The Maw.", 0, 136122, ""};
     addon.NextPatchAchievements[14943] = {14943, "Guarmageddon", 10, "Defeat Ylva, the Mate of Guarm in the Maw while having five stacks of Blood of the Pack active.", 0, 1530369, ""};
+    addon.NextPatchAchievements[15059] = {15059, "Death's Advance", 5, "Earn Exalted status with Death's Advance.", 0, 4083292, ""};
     addon.NextPatchAchievements[15065] = {15065, "Eye Wish You Were Here", 10, "Use the Scavenged S.E.L.F.I.E. Camera to take a picture of the Eye of the Jailer and the entire raid after it has cast Immediate Extermination, then defeat the Eye of the Jailer.", 0, 1109100, ""};
     addon.NextPatchAchievements[15066] = {15066, "Reliquary Restoration", 10, "Collect all of the Archivist's relics in Korthia.", 128, 4076799, ""};
     addon.NextPatchAchievements[15055] = {15055, "Friend of Ooz", 5, "Complete the \"Oozing with Character\" daily quest, with Ooz, 10 times.", 128, 3459153, ""};
     addon.NextPatchAchievements[15056] = {15056, "Friend of Bloop", 5, "Complete the \"Oozing with Character\" daily quest, with Bloop, 10 times.", 128, 651086, ""};
     addon.NextPatchAchievements[15057] = {15057, "Friend of Plaguey", 5, "Complete the \"Oozing with Character\" daily quest, with Plaguey, 10 times.", 128, 3459799, ""};
     addon.NextPatchAchievements[15053] = {15053, "Explore Korthia", 10, "Explore Korthia, revealing the covered areas of the world map.", 0, 3257863, ""};
-    addon.NextPatchAchievements[15059] = {15059, "Death's Advance", 5, "Earn Exalted status with Death's Advance.", 0, 4083292, ""};
     addon.NextPatchAchievements[15069] = {15069, "The Archivist's Codex", 5, "Earn Exalted status with The Archivist's Codex.", 0, 2178528, ""};
     addon.NextPatchAchievements[15045] = {15045, "Keystone Hero: The Necrotic Wake", 0, "Complete The Necrotic Wake at Mythic Level 20 or higher, within the time limit.", 2048, 3601560, "Reward: Teleport to The Necrotic Wake"};
     addon.NextPatchAchievements[15046] = {15046, "Keystone Hero: Plaguefall", 0, "Complete Plaguefall at Mythic Level 20 or higher, within the time limit.", 2048, 3601535, "Reward: Teleport to Plaguefall"};

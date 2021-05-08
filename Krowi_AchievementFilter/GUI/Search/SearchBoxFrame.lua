@@ -94,12 +94,20 @@ local function GetSearchResults(text)
 	local results = {};
 
     for _, achievement in next, addon.Achievements do
-        local achievementID = achievement.ID;
-        local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = addon.GetAchievementInfo(achievementID);
-        if string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower()) then
-			tinsert(results, achievement);
-			-- addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
-        end
+		if string.match(text:lower(), "^#") then
+			if string.match(tostring(achievement.ID):lower(), string.sub(text, 2):lower()) then
+				if not (addon.Options.db.SearchBox.ExcludeNextPatch and addon.NextPatchAchievements[achievement.ID]) then
+					tinsert(results, achievement);
+				end
+			end
+		else
+			local achievementID = achievement.ID;
+			local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = addon.GetAchievementInfo(achievementID, addon.Options.db.SearchBox.ExcludeNextPatch);
+			if name and (string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower())) then
+				tinsert(results, achievement);
+				-- addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
+			end
+		end
     end
 
     return results;

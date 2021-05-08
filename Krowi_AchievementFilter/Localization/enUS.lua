@@ -9,6 +9,8 @@ addon.GlobalStrings.Load(L);
 L["Wowhead"] = "Wowhead";
 L["Xu-Fu's Pet Guides"] = "Xu-Fu's Pet Guides";
 L["Instance Achievement Tracker"] = "Instance Achievement Tracker";
+L["IAT Tactics"] = "IAT Tactics";
+L["Go to"] = "Go to";
 L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
 L["Tutorial"] = "Tutorial";
@@ -29,8 +31,12 @@ L["Not Obtainable"] = "Not Obtainable";
 L["Covenant"] = "Covenant";
 L["Select all"] = "Select all";
 L["Reverse Sort"] = "Reverse Sort";
-L["Collapse Series"] = "Collapse Series";
+L["Collapse Chain"] = "Collapse Chain";
 L["Merge Small Categories"] = "Merge Small Categories";
+
+-- Tooltips
+L["Part of a chain"] = "Part of a chain";
+L["Required for"] = "Required for";
 
 -- Options
 L["O_REQUIRES_RELOAD"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
@@ -40,7 +46,17 @@ L["O_TUTORIAL_DESC"] = "Open the tutorials from the start";
 L["O_DISCORD_DESC"] = "Open a popup dialog with a link to the Krowi's Addons Discord server. Here you can post comments, reports, remarks, ideas or anything else related.";
 L["O_SHOW_MINIMAP_ICON"] = "Show minimap icon";
 L["O_SHOW_MINIMAP_ICON_DESC"] = "Show / hide the minimap icon";
-L["O_LAYOUT"] = "Layout";
+L["O_ResetViewOnOpen"] = "Reset view on open";
+L["O_ResetViewOnOpen_Desc"] = "Collapse all categories and select the first category or\nKeep the last selected category when last closed";
+L["Layout"] = "Layout";
+L["Window"] = "Window";
+L["Tooltip"] = "Tooltip";
+L["ShowPartOfAChain"] = "Show {partOfAChain}";
+L["ShowPartOfAChain_Desc"] = "Show / hide {partOfAChain}.\n\nWhen checked, the chain the achievment is part of will be visible in the tooltip.";
+L["ShowRequiredFor"] = "Show {requiredFor}";
+L["ShowRequiredFor_Desc"] = "Show / hide {requiredFor}.\n\nWhen checked, the achievement that requires the selected achievement to be completed will be visible in the tooltip.";
+L["ShowCurrentCharacterIcons"] = "Show current character icons";
+L["ShowCurrentCharacterIcons_Desc"] = "Show / hide current character icons.\n\nWhen checked, a second icon will appear in front of {partOfAChain} and {requiredFor} achievements that indicates the current character's progress.";
 L["O_CATEGORIESFRAME_WIDTH_OFFSET"] = "Categories width offset";
 L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"] = "The width that will be added to or subtracted from the default categories width.\n\n" ..
                                             "This value can be changed while the achievement window is open while having the {tabName} tab selected. This will however lag your game.\n\n{reloadRequired}";
@@ -53,6 +69,9 @@ L["Merge small categories threshold Desc"] = "Categories with a number of achiev
 L["O_SEARCH"] = "Search";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] = "Clear search field on Right Click";
 L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"] = "Enable / disable the option to clear the search field when Right Clicking in it";
+L["Exclude Next Patch"] = "Exclude Next Patch";
+L["Exclude Next Patch Desc"] = "Exclude / include Next Patch achievements from / in the search results.\n\n{spoilerWarning}";
+L["Exclude Next Patch Confirm"] = "Including Next Patch achievements will show achievements that are subject to change and might contain spoilers for the next patch!";
 L["O_MIN_CHAR_TO_SEARCH"] = "Minimum characters to search";
 L["O_MIN_CHAR_TO_SEARCH_DESC"] = "The number of characters needed in order to start searching for achievements matching the query.\n" ..
                                     "The smaller the number, the greater the impact on the game.";
@@ -105,7 +124,8 @@ L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is pos
                                 "Additionally, there are a couple of new options:\n" ..
                                 AF_TAB .. "- {clearOnRightClick}\n" ..
                                 AF_TAB .. "- {minCharToSearch}\n" ..
-                                AF_TAB .. "- {numSearchPreviews}\n\n" ..
+                                AF_TAB .. "- {numSearchPreviews}\n" ..
+                                AF_TAB .. "- Search by achievement ID by starting the search query with '#'\n\n" ..
                                 "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
 L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
 L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";
@@ -127,7 +147,7 @@ L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with
                         AF_TAB .. AF_TAB .. "- {venthyr}: Show achievements only {venthyr_wc} can earn\n" ..
                         AF_TAB .. AF_TAB .. "- {nightfae}: Show achievements only {nightfae_wc} can earn\n" ..
                         AF_TAB .. AF_TAB .. "- {necrolord}: Show achievements only {necrolord_wc} can earn\n" ..
-                        AF_TAB .. "- {collapseseries}: Show only the last completed and first not completed achievement in a series\n\n" ..
+                        AF_TAB .. "- {collapseChain}: Show only the last completed and first not completed achievement in a chain\n\n" ..
                         "Sorting:\n" ..
                         AF_TAB .. "- {noSorting}: No sorting applied\n" ..
                         AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..

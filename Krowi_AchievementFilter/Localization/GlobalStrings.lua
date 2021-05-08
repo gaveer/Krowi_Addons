@@ -27,6 +27,9 @@ function globalStrings.Load(L)
     L["Categories"] = CATEGORIES;
     L["Help"] = GAMEMENU_HELP;
     L["Options"] = GAMEOPTIONS_MENU;
+    L["General"] = GENERAL;
+    L["Key Binding"] = KEY_BINDING;
+    L["Missing"] = ADDON_MISSING;
 
     -- Options
     L["Info"] = INFO;

@@ -54,23 +54,7 @@ function achievementsFrame:New()
 		frame:ForceUpdate();
 	end); -- Issue #3: Fix
 
-	if Overachiever then
-		Overachiever.UI_HookAchButtons(frame.Container.buttons, frame.Container.ScrollBar); -- Issue #4: Fix - loaded before our addon
-	end
-
 	return frame;
-end
-
-function KrowiAF_AchievementsFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementsFrame_Template
-	local addonName = ...;
-	diagnostics.Trace("KrowiAF_AchievementsFrame_OnEvent - " .. event .. " - " .. addonName);
-
-	if event == "ADDON_LOADED" then
-		if addonName and addonName == "Overachiever" then
-			Overachiever.UI_HookAchButtons(self.Container.buttons, self.Container.ScrollBar); -- Issue #4: Fix - loaded after our addon
-            diagnostics.Debug("Overachiever compatibility enabled");
-		end
-	end
 end
 
 function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
@@ -143,6 +127,7 @@ local function GetFilteredAchievements(self, category)
 end
 
 local cachedCategory, cachedAchievements; -- Caching this speeds up the scrolling of achievements when the selected category isn't changed
+local highlightedButton;
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
@@ -199,6 +184,11 @@ function achievementsFrame:Update()
 	-- else
 	if not self.SelectedAchievement then
 		HybridScrollFrame_CollapseButton(scrollFrame);
+	end
+
+	-- Make sure the correct tooltip is shown
+	if highlightedButton then
+		highlightedButton:ShowTooltip();
 	end
 end
 
@@ -304,10 +294,10 @@ function achievementsFrame:AdjustSelection()
 		AchievementFrameAchievements_FindSelection();
 	else
 		local newHeight;
-		if ( selectedButton:GetTop() > self.Container:GetTop() ) then
+		if selectedButton:GetTop() > self.Container:GetTop() then
 			newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetTop() - selectedButton:GetTop();
-		elseif ( selectedButton:GetBottom() < self.Container:GetBottom() ) then
-			if ( selectedButton:GetHeight() > self.Container:GetHeight() ) then
+		elseif selectedButton:GetBottom() < self.Container:GetBottom() then
+			if selectedButton:GetHeight() > self.Container:GetHeight() then
 				newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetTop() - selectedButton:GetTop();
 			else
 				newHeight = self.Container.ScrollBar:GetValue() + self.Container:GetBottom() - selectedButton:GetBottom();
@@ -324,7 +314,6 @@ end
 function achievementsFrame:DisplayAchievement(button, achievement, index, selection, renderOffScreen)
 	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = addon.GetAchievementInfo(achievement.ID);
 	-- diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
-	diagnostics.DebugTable({addon.GetAchievementInfo(achievement.ID)});
 
 	if not id then
 		button:Hide();
@@ -446,9 +435,21 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 	return id;
 end
 
+function achievementsFrame.SetHighlightedButton(button)
+	highlightedButton = button;
+end
+
+function achievementsFrame.ClearHighlightedButton()
+	highlightedButton = nil;
+end
+
 -- [[ API ]] --
 function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
 	diagnostics.Trace("achievementsFrame:SelectAchievement");
+
+	if not achievement then
+		return;
+	end
 
 	if mouseButton == nil then
 		mouseButton = "LeftButton";
@@ -507,6 +508,5 @@ function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifi
 	diagnostics.Trace("achievementsFrame:SelectAchievementFromID");
 
 	local achievement = addon.GetAchievement(id);
-	diagnostics.Debug(achievement.ID);
 	self:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end

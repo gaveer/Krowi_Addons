@@ -154,7 +154,6 @@
 			</Layer>
 		</Layers>
 		<Scripts>
-        	<OnEvent function="KrowiAF_AchievementsFrame_OnEvent"/>
 			<OnShow function="KrowiAF_AchievementsFrame_OnShow"/>
 		</Scripts>
 		<Frames>

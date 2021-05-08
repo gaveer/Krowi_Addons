@@ -71,7 +71,7 @@ function category:AddAchievement(achievement) -- Adds an achievement to the achi
 end
 
 function category:GetTree()
-    diagnostics.Trace("category:GetTree");
+    -- diagnostics.Trace("category:GetTree");
 
 	local categories = {};
     tinsert(categories, 1, self);

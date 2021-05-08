@@ -137,7 +137,9 @@ function gui.ToggleAchievementFrameAtTab1(forceOpen) -- Issue #26 Broken, Fix
         AchievementFrame_SetTabs();
         AchievementFrame_HideSearchPreview();
         frames["TabButton1"]:Select();
-        gui.ResetView();
+        if addon.Options.db.ResetViewOnOpen or forceOpen then
+            gui.ResetView();
+        end
 	end
 end
 

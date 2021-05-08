@@ -8,15 +8,15 @@ addon.CurrentZoneCategory = {};
 addon.NextPatchCategory = {};
 addon.Achievements = {};
 addon.RCMenuExtras = {};
-addon.CustomAchievements = {};
+addon.NextPatchAchievements = {};
 
 function data.Load()
     addon.CurrentZoneCategory, addon.NextPatchCategory = addon.ExportedData.Load(addon.Categories, addon.Achievements);
     addon.ExportedPetBattles.Load(addon.RCMenuExtras);
-    addon.NextPatch.Load(addon.CustomAchievements);
+    addon.NextPatch.Load(addon.NextPatchAchievements);
 
     -- TEST = {};
-    -- data.PrintCriteria(8518, nil, 0);
+    -- data.PrintCriteria(14879, nil, 0);
 end
 
 local cachedZone;

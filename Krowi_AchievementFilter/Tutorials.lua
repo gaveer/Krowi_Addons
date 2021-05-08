@@ -105,7 +105,7 @@ function tutorials.Load()
                                             nightfae_wc = addon.L["Night Fae"],
                                             necrolord = AF_COLOR_YELLOW .. addon.L["Necrolord"] .. AF_COLOR_END,
                                             necrolord_wc = addon.L["Necrolord"],
-                                            collapseseries = AF_COLOR_YELLOW .. addon.L["Collapse Series"] .. AF_COLOR_END,
+                                            collapseChain = AF_COLOR_YELLOW .. addon.L["Collapse Chain"] .. AF_COLOR_END,
                                             noSorting = AF_COLOR_YELLOW .. addon.L["Default"] .. AF_COLOR_END,
                                             sortByName = AF_COLOR_YELLOW .. addon.L["Name"] .. AF_COLOR_END,
                                             reverseSort = AF_COLOR_YELLOW .. addon.L["Reverse Sort"] .. AF_COLOR_END},

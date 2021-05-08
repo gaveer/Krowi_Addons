@@ -1,6 +1,23 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.0.5.21.0] - 2021-05-08
+### Added
+- Option to select wether using the Key Binding will keep the last selected category or collapse all categories and select the first category
+- Tooltip shows the chain if an achievement is part of it with additional options
+- Tooltip shows the achievement the highlighted achievement requires to be completed with additional options
+- Tooltip shows not only an account wide but also a character specific icon for the Part of a chain and Required for sections with additional options
+- Tooltips refresh when scrolling (improvement over default Blizzard)
+- Right Click Menu has a Go To item so you can easily go to related achievements
+- Search by achievement ID by starting the search query with '#'
+- Option to exclude Coming in 9.1 from search results (default exclude)
+
+### Changed
+- Coming in 9.1 should not add achievements to the Current Zone anymore
+- ElvUI Skins Status options are moved to a seperate tab
+- Layout options are moved to a seperate tab
+- Renamed 'Collapse Series' to 'Collapse Chain'
+
 ## [9.0.5.20.0] - 2021-05-01
 ### Added
 - Classic Pet Battles (6 achievements)
@@ -372,6 +389,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
+[9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611
 [9.0.5.20.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3294651
 [9.0.5.19.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3290570
 [9.0.5.18.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3275157

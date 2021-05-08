@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.0.5.22.0] - 
+### Added
+- TBD
+
 ## [9.0.5.21.0] - 2021-05-08
 ### Added
 - Option to select wether using the Key Binding will keep the last selected category or collapse all categories and select the first category
@@ -389,6 +393,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
+[9.0.5.22.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
 [9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611
 [9.0.5.20.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3294651
 [9.0.5.19.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3290570

@@ -51,9 +51,9 @@ function loadHelper:OnEvent(event, arg1)
             gui.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
             gui.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
             gui.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrames("CategoriesFrame", "AchievementsFrame")));
-            gui.AddFrame("FullSearchResultsFrame", gui.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
-            gui.AddFrame("SearchPreviewFrame", gui.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
-            gui.AddFrame("SearchBoxFrame", gui.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));
+            gui.AddFrame("FullSearchResultsFrame", gui.Search.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
+            gui.AddFrame("SearchPreviewFrame", gui.Search.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
+            gui.AddFrame("SearchBoxFrame", gui.Search.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));
             gui.AddFrame("TabButton1", gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], gui.GetFrames("CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame")));
 
             gui.ResetAchievementFrameHeight();

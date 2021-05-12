@@ -155,6 +155,7 @@
 		</Layers>
 		<Scripts>
 			<OnShow function="KrowiAF_AchievementsFrame_OnShow"/>
+			<OnHide function="KrowiAF_AchievementsFrame_OnHide"/>
 		</Scripts>
 		<Frames>
 			<ScrollFrame name="$parentContainer" parentKey="Container" inherits="HybridScrollFrameTemplate">

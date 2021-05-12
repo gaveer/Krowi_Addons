@@ -6,7 +6,7 @@ local diagnostics = addon.Diagnostics;
 addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
 local tutorials = addon.Tutorials; -- Local tutorial object
 
-tutorials.FeaturesTutorialPages = 6;
+tutorials.FeaturesTutorialPages = 7;
 tutorials.FeaturesTutorial = "Krowi_AchievementFilter_FeaturesTutorial";
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
@@ -113,6 +113,25 @@ function tutorials.Load()
             shineAll = 7,
             shineHeight = addon.Options.db.ElvUISkin.Tutorials and 8 or nil,
             shineWidth = addon.Options.db.ElvUISkin.Tutorials and 10 or nil,
+        },
+        {   -- 7
+            imageHeight = 256,
+            image = media .. "Tooltip",
+            text = GetTitle(addon.L["FT_TOOLTIP_TITLE"]) ..
+                            core.ReplaceVars{addon.L["FT_TOOLTIP_DESC"],
+                            partOfAChain = AF_COLOR_YELLOW .. addon.L["Part of a chain"] .. AF_COLOR_END,
+                            requiredFor = AF_COLOR_YELLOW .. addon.L["Required for"] .. AF_COLOR_END,
+                            ready = "|T136814:0|t",
+                            waiting = "|T136815:0|t",
+                            notready = "|T136813:0|t",
+                            green = AF_COLOR_DARKGREEN .. addon.L["FT_TOOLTIP_GREEN"] .. AF_COLOR_END,
+                            grey = AF_COLOR_GREY60 .. addon.L["FT_TOOLTIP_GREY"] .. AF_COLOR_END,
+                            light = AF_COLOR_YELLOW .. addon.L["FT_TOOLTIP_LIGHTER"] .. AF_COLOR_END .. " " .. AF_COLOR_LIGHTGREEN .. addon.L["FT_TOOLTIP_GREEN"] .. AF_COLOR_END .. " " .. AF_COLOR_YELLOW .. addon.L["FT_TOOLTIP_OR"] .. AF_COLOR_END .. " " .. AF_COLOR_GREY90 .. addon.L["FT_TOOLTIP_GREY"] .. AF_COLOR_END,
+                            goTo = addon.L["Go to"]},
+            -- shineTop = addon.Options.db.ElvUISkin.Tutorials and 9 or 8,
+            -- shineBottom = addon.Options.db.ElvUISkin.Tutorials and -10 or -1,
+            -- shineLeft = addon.Options.db.ElvUISkin.Tutorials and -11 or -12,
+            -- shineRight = addon.Options.db.ElvUISkin.Tutorials and 11 or 13,
         },
         onShow = function(self, i)
             local gui = addon.GUI;

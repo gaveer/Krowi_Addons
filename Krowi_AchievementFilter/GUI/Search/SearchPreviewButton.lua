@@ -1,35 +1,35 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
-local gui = addon.GUI;
-gui.SearchPreviewButton = {};
-local searchPreviewButton = gui.SearchPreviewButton;
+local search = addon.GUI.Search;
+search.SearchPreviewButton = {};
+local searchPreviewButton = search.SearchPreviewButton;
 
+local OnEnter, OnClick, OnClick_ShowFullSearchResults;
 function searchPreviewButton.PostLoadButtons(searchPreviewFrame, fullSearchResultsFrame, achievementsFrame)
 	diagnostics.Trace("searchPreviewButton.PostLoadButtons");
 
     for _, button in next, searchPreviewFrame.Buttons do
         button.Enter = function(self)
-            searchPreviewButton.OnEnter(self, searchPreviewFrame);
+            OnEnter(self, searchPreviewFrame);
         end;
         button:SetScript("OnEnter", button.Enter);
 		button:SetScript("OnClick", function(self, button, down)
-			searchPreviewButton.OnClick(self, searchPreviewFrame, searchPreviewFrame.SearchBoxFrame, achievementsFrame);
+			OnClick(self, searchPreviewFrame, searchPreviewFrame.SearchBoxFrame, achievementsFrame);
 		end);
     end
     local button = searchPreviewFrame.ShowFullSearchResultsButton;
     button.Enter = function(self)
-        searchPreviewButton.OnEnter(self, searchPreviewFrame);
+        OnEnter(self, searchPreviewFrame);
     end;
     button:SetScript("OnEnter", button.Enter);
     button:SetScript("OnClick", function(self, button, down)
-        searchPreviewButton.OnClick_ShowFullSearchResults(self, fullSearchResultsFrame, searchPreviewFrame, searchPreviewFrame.SearchBoxFrame);
+        OnClick_ShowFullSearchResults(fullSearchResultsFrame, searchPreviewFrame, searchPreviewFrame.SearchBoxFrame);
     end);
 end
 
-
-function searchPreviewButton.OnEnter(self, searchPreviewFrame)
-    diagnostics.Trace("searchPreviewButton.OnEnter");
+function OnEnter(self, searchPreviewFrame)
+    diagnostics.Trace("OnEnter");
 
     local buttons = searchPreviewFrame.Buttons;
     for _, button in next, buttons do
@@ -43,8 +43,8 @@ function searchPreviewButton.OnEnter(self, searchPreviewFrame)
     self.IsSelected = true;
 end
 
-function searchPreviewButton.OnClick(self, searchPreviewFrame, searchBoxFrame, achievementsFrame)
-    diagnostics.Trace("searchPreviewButton.OnClick");
+function OnClick(self, searchPreviewFrame, searchBoxFrame, achievementsFrame)
+    diagnostics.Trace("OnClick");
 
     if self.Achievement then
         achievementsFrame:SelectAchievement(self.Achievement, nil, true);
@@ -54,8 +54,8 @@ function searchPreviewButton.OnClick(self, searchPreviewFrame, searchBoxFrame, a
 	end
 end
 
-function searchPreviewButton.OnClick_ShowFullSearchResults(self, fullSearchResultsFrame, searchPreviewFrame, searchBoxFrame)
-    diagnostics.Trace("searchPreviewButton.OnClick_ShowFullSearchResults");
+function OnClick_ShowFullSearchResults(fullSearchResultsFrame, searchPreviewFrame, searchBoxFrame)
+    diagnostics.Trace("OnClick_ShowFullSearchResults");
 
     fullSearchResultsFrame:Update(searchBoxFrame:GetText(), searchBoxFrame.Results);
 	if #searchBoxFrame.Results == 0 then

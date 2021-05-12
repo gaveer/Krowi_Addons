@@ -1,4 +1,4 @@
--- [[ Exported at 2021-05-08 14-02-03 ]] --
+-- [[ Exported at 2021-05-08 14-52-48 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4725,12 +4725,15 @@ function exportedData.Load(categories, achievements)
     tmpCategories[818] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(97)))); -- Exploration
     tmpCategories[812]:AddCategory(tmpCategories[818]);
     tmpCategories[818]:AddAchievement(InsertAndReturn(achievements, achievement:New(15053)));
+    tmpCategories[818]:AddAchievement(InsertAndReturn(achievements, achievement:New(15099)));
     tmpCategories[813] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15273)))); -- Reputation
     tmpCategories[812]:AddCategory(tmpCategories[813]);
     tmpCategories[813]:AddAchievement(InsertAndReturn(achievements, achievement:New(15069)));
     tmpCategories[801] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15272)))); -- Dungeons
     tmpCategories[814]:AddCategory(tmpCategories[801]);
     tmpCategories[801]:AddAchievement(InsertAndReturn(achievements, achievement:New(15073)));
+    tmpCategories[801]:AddAchievement(InsertAndReturn(achievements, achievement:New(15077)));
+    tmpCategories[801]:AddAchievement(InsertAndReturn(achievements, achievement:New(15078)));
     tmpCategories[809] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1182)))); -- The Necrotic Wake
     tmpCategories[801]:AddCategory(tmpCategories[809]);
     tmpCategories[809]:AddAchievement(InsertAndReturn(achievements, achievement:New(15045)));
@@ -4769,6 +4772,23 @@ function exportedData.Load(categories, achievements)
     tmpCategories[810] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15440)))); -- Torghast
     tmpCategories[814]:AddCategory(tmpCategories[810]);
     tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15067)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15075)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15076)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15091)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15089)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15081)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15082)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15084)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15083)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15087)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15088)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15080)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15079)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15092)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15093)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15094)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15095)));
+    tmpCategories[810]:AddAchievement(InsertAndReturn(achievements, achievement:New(15096)));
 
     return currentZoneCategory, nextPatchCategory;
 end

@@ -3,7 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.22.0] - 
 ### Added
-- TBD
+- New Coming in 9.1 (20 achievements)
+
+### Changed
+- Cleaned up the Search code
+- Cleaned up the AchievementButton code
+
+### Fixed
+- Tooltip should not dissapear anymore when hovering over achievement criteria
+- Clicking on an achievement in a meta achievement will now select the achievement in the new tab
 
 ## [9.0.5.21.0] - 2021-05-08
 ### Added

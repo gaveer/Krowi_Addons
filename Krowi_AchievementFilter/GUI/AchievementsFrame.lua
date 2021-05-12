@@ -48,7 +48,7 @@ function achievementsFrame:New()
 	end
 
 	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementButton_Template", 0, -2);
-	gui.AchievementButton.PostLoadButtons(frame);
+	gui.AchievementButton:PostLoadButtons(frame);
 
 	hooksecurefunc("AchievementFrameAchievements_ForceUpdate", function()
 		frame:ForceUpdate();
@@ -60,7 +60,22 @@ end
 function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
 	diagnostics.Trace("KrowiAF_AchievementsFrame_OnShow");
 
+	AchievementButton_ResetMetas(true);
+	AchievementButton_ResetMetas(false);
+	AchievementButton_ResetCriteria(true);
+	AchievementButton_ResetCriteria(false);
 	self:Update();
+end
+
+function KrowiAF_AchievementsFrame_OnHide(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
+	diagnostics.Trace("KrowiAF_AchievementsFrame_OnHide");
+
+	if self.Container.buttons[1] then -- Calling this on a single button hides them all
+		self.Container.buttons[1].ResetMetas(true);
+		self.Container.buttons[1].ResetMetas(false);
+		self.Container.buttons[1].ResetCriteria(true);
+		self.Container.buttons[1].ResetCriteria(false);
+	end
 end
 
 function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achievementsButtonOffset)
@@ -188,7 +203,7 @@ function achievementsFrame:Update()
 
 	-- Make sure the correct tooltip is shown
 	if highlightedButton then
-		highlightedButton:ShowTooltip();
+		highlightedButton.ShowTooltip();
 	end
 end
 
@@ -291,7 +306,8 @@ function achievementsFrame:AdjustSelection()
 	end
 
 	if not selectedButton then
-		AchievementFrameAchievements_FindSelection();
+		-- AchievementFrameAchievements_FindSelection();
+		self:FindSelection();
 	else
 		local newHeight;
 		if selectedButton:GetTop() > self.Container:GetTop() then
@@ -313,7 +329,7 @@ end
 
 function achievementsFrame:DisplayAchievement(button, achievement, index, selection, renderOffScreen)
 	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = addon.GetAchievementInfo(achievement.ID);
-	-- diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id));
+	-- diagnostics.Trace("achievementsFrame.DisplayAchievement for achievement " .. tostring(id) .. "-" .. name .. "-" .. tostring(earnedBy));
 
 	if not id then
 		button:Hide();
@@ -413,7 +429,9 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 		-- self.SelectedAchievement = achievement;
 		button.selected = true;
 		button.highlight:Show();
-		local height = AchievementButton_DisplayObjectives(button, button.id, button.completed, renderOffScreen);
+		-- local height = AchievementButton_DisplayObjectives(button, button.id, button.completed, renderOffScreen);
+		local height = button:DisplayObjectives(renderOffScreen);
+
 		if height == ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT then
 			button:Collapse();
 		else

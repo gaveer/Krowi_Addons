@@ -153,6 +153,26 @@ L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with
                         AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..
                         AF_TAB .. "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
                         "More filter and sorting options will be added in later versions. Requests possible.";
+L["FT_TOOLTIP_TITLE"] = "Tooltip";
+L["FT_TOOLTIP_DESC"] = "To make it more clear for the user how achievements relate to each other, several new sections are added to it.\n\n" ..
+                        "Features:\n" ..
+                        AF_TAB .. "- {partOfAChain}: Shows the list of achievements the hovered achievement is part of\n" ..
+                        AF_TAB .. "- {requiredFor}: Shows a list of achievements that require the hovered achievement to be completed in order to earn it\n\n" ..
+                        "Icons:\n" ..
+                        AF_TAB .. "- {ready}: The achievement is completed\n" ..
+                        AF_TAB .. "- {waiting}: The achievement is not completed\n" ..
+                        AF_TAB .. "- {notready}: The achievement is not possible to obtain anymore\n\n" ..
+                        "Optionally, two icons can be displayed per line. The first icon is the default one, the second one is for the current character.\n\n" ..
+                        "Colors:\n" ..
+                        AF_TAB .. "- {green}: The achievement is completed\n" ..
+                        AF_TAB .. "- {grey}: The achievement is not completed\n" ..
+                        AF_TAB .. "- {light}: The hovered achievement\n\n" ..
+                        "The information provided by these is also added in the Right Click Menu (part 3 of this tutorial). " ..
+                        "A new {goTo} line and menu is added to eligible achievements which will take you to the related achievement when clicked.";
+L["FT_TOOLTIP_GREEN"] = "Green";
+L["FT_TOOLTIP_GREY"] = "Grey";
+L["FT_TOOLTIP_LIGHTER"] = "Lighter";
+L["FT_TOOLTIP_OR"] = "or";
 
 -- NPC Names
 L["Andurs"] = "Andurs"; -- Wowhead npc=105387

@@ -2,9 +2,9 @@
 local _, addon = ...;
 local core = addon.Core;
 local diagnostics = addon.Diagnostics;
-local gui = addon.GUI;
-gui.FullSearchResultsFrame = {};
-local fullSearchResultsFrame = gui.FullSearchResultsFrame;
+local search = addon.GUI.Search;
+search.FullSearchResultsFrame = {};
+local fullSearchResultsFrame = search.FullSearchResultsFrame;
 
 local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
@@ -36,7 +36,7 @@ function fullSearchResultsFrame:New(achievementsFrame)
     end
 
     HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_FullSearchResultButton_Template", 0, 0);
-	gui.FullSearchResult.PostLoadButtons(frame, achievementsFrame);
+	search.FullSearchResult.PostLoadButtons(frame, achievementsFrame);
 
 	return frame;
 end

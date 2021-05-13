@@ -107,7 +107,7 @@ local function CreatePanel()
                             },
                             tutorial = {
                                 name = addon.L["Tutorial"],
-                                desc = addon.L["O_TUTORIAL_DESC"],
+                                desc = addon.L["Tutorial Desc"],
                                 type = "execute",
                                 order = 1.3,
                                 func = function()
@@ -132,7 +132,7 @@ local function CreatePanel()
                             },
                             discord = {
                                 name = addon.L["Discord"],
-                                desc = addon.L["O_DISCORD_DESC"],
+                                desc = addon.L["Discord Desc"],
                                 type = "execute",
                                 order = 2.3,
                                 func = function()
@@ -149,8 +149,8 @@ local function CreatePanel()
                         order = 2,
                         args = {
                             showMinimapIcon = {
-                                name = addon.L["O_SHOW_MINIMAP_ICON"],
-                                desc = addon.L["O_SHOW_MINIMAP_ICON_DESC"],
+                                name = addon.L["Show minimap icon"],
+                                desc = addon.L["Show minimap icon Desc"],
                                 type = "toggle",
                                 width = "full",
                                 order = 1,
@@ -162,7 +162,7 @@ local function CreatePanel()
                                     else
                                         addon.Icon:Hide("Krowi_AchievementFilterLDB");
                                     end
-                                    diagnostics.Debug(addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
+                                    diagnostics.Debug(addon.L["Show minimap icon"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
                                 end
                             }
                         }
@@ -174,8 +174,8 @@ local function CreatePanel()
                         order = 3,
                         args = {
                             ResetViewOnOpen = {
-                                name = addon.L["O_ResetViewOnOpen"],
-                                desc = addon.L["O_ResetViewOnOpen_Desc"],
+                                name = addon.L["Reset view on open"],
+                                desc = addon.L["Reset view on open Desc"],
                                 type = "toggle",
                                 width = "full",
                                 order = 1,
@@ -183,20 +183,20 @@ local function CreatePanel()
                                 set = function()
                                     addon.Options.db.ResetViewOnOpen = not addon.Options.db.ResetViewOnOpen;
 
-                                    diagnostics.Debug(addon.L["O_ResetViewOnOpen"] .. ": " .. tostring(addon.Options.db.ResetViewOnOpen));
+                                    diagnostics.Debug(addon.L["Reset view on open"] .. ": " .. tostring(addon.Options.db.ResetViewOnOpen));
                                 end
                             }
                         }
                     },
                     Search = {
-                        name = addon.L["O_SEARCH"],
+                        name = addon.L["Search"],
                         type = "group",
                         inline = true,
                         order = 4,
                         args = {
                             clearOnRightClick = {
-                                name = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"],
-                                desc = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK_DESC"],
+                                name = addon.L["Clear search field on Right Click"],
+                                desc = addon.L["Clear search field on Right Click Desc"],
                                 type = "toggle",
                                 width = "full",
                                 order = 1.1,
@@ -204,7 +204,7 @@ local function CreatePanel()
                                 set = function()
                                     addon.Options.db.SearchBox.ClearOnRightClick = not addon.Options.db.SearchBox.ClearOnRightClick;
         
-                                    diagnostics.Debug(addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"] .. ": " .. tostring(addon.Options.db.SearchBox.ClearOnRightClick));
+                                    diagnostics.Debug(addon.L["Clear search field on Right Click"] .. ": " .. tostring(addon.Options.db.SearchBox.ClearOnRightClick));
                                 end
                             },
                             ExcludeNextPatch = {
@@ -224,8 +224,8 @@ local function CreatePanel()
                                 end
                             },
                             minimumCharactersToSearch = {
-                                name = addon.L["O_MIN_CHAR_TO_SEARCH"],
-                                desc = addon.L["O_MIN_CHAR_TO_SEARCH_DESC"],
+                                name = addon.L["Minimum characters to search"],
+                                desc = addon.L["Minimum characters to search Desc"],
                                 type = "range",
                                 min = 1,
                                 max = 10,
@@ -242,13 +242,13 @@ local function CreatePanel()
         
                                     addon.Options.db.SearchBox.MinimumCharactersToSearch = value;
         
-                                    diagnostics.Debug(addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
+                                    diagnostics.Debug(addon.L["Minimum characters to search"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
                                 end
                             },
                             numberOfSearchPreviews = {
-                                name = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
-                                desc = core.ReplaceVars{addon.L["O_NUM_OF_SEARCH_PREVIEWS_DESC"],
-                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                                name = addon.L["Number of search previews"],
+                                desc = core.ReplaceVars{addon.L["Number of search previews Desc"],
+                                                        reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 1,
                                 max = maxNumberOfSearchPreviews(),
@@ -263,20 +263,20 @@ local function CreatePanel()
         
                                     addon.Options.db.SearchBox.NumberOfSearchPreviews = value;
         
-                                    diagnostics.Debug(addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
+                                    diagnostics.Debug(addon.L["Number of search previews"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
                                 end
                             }
                         }
                     },
                     Debug = {
-                        name = addon.L["O_DEBUG"],
+                        name = addon.L["Debug"],
                         type = "group",
                         inline = true,
                         order = 5,
                         args = {
                             EnableDebugInfo = {
-                                name = addon.L["O_ENABLE_DEBUG_INFO"],
-                                desc = addon.L["O_ENABLE_DEBUG_INFO_DESC"],
+                                name = addon.L["Enable debug info"],
+                                desc = addon.L["Enable debug info Desc"],
                                 type = "toggle",
                                 width = "full",
                                 order = 1.1,
@@ -284,12 +284,12 @@ local function CreatePanel()
                                 set = function()
                                     addon.Options.db.EnableDebugInfo = not addon.Options.db.EnableDebugInfo;
         
-                                    diagnostics.Debug(addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
+                                    diagnostics.Debug(addon.L["Enable debug info"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
                                 end
                             },
                             EnableTraceInfo = {
-                                name = addon.L["O_ENABLE_TRACE_INFO"],
-                                desc = addon.L["O_ENABLE_TRACE_INFO_DESC"],
+                                name = addon.L["Enable trace info"],
+                                desc = addon.L["Enable trace info Desc"],
                                 type = "toggle",
                                 width = "full",
                                 order = 2.1,
@@ -297,7 +297,7 @@ local function CreatePanel()
                                 set = function()
                                     addon.Options.db.EnableTraceInfo = not addon.Options.db.EnableTraceInfo;
         
-                                    diagnostics.Debug(addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
+                                    diagnostics.Debug(addon.L["Enable trace info"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
                                 end
                             },
                             -- tutorial = {
@@ -354,10 +354,10 @@ local function CreatePanel()
                         order = 1,
                         args = {
                             CategoriesFrameWidthOffset = {
-                                name = addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"],
-                                desc = core.ReplaceVars{addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET_DESC"],
+                                name = addon.L["Categories width offset"],
+                                desc = core.ReplaceVars{addon.L["Categories width offset Desc"],
                                                         tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
-                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                                                        reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,
                                 max = 250,
@@ -375,14 +375,14 @@ local function CreatePanel()
                                     addon.Options.db.Window.CategoriesFrameWidthOffset = value;
                                     addon.Event:SendMessage("UpdateAchievementFrameWidth", addon.Options.db.Window.CategoriesFrameWidthOffset);
         
-                                    diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
+                                    diagnostics.Debug(addon.L["Categories width offset"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
                                 end
                             },
                             AchievementFrameHeightOffset = {
-                                name = addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"],
-                                desc = core.ReplaceVars{addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET_DESC"],
+                                name = addon.L["Achievement window height offset"],
+                                desc = core.ReplaceVars{addon.L["Achievement window height offset Desc"],
                                                         tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
-                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                                                        reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,
                                 max = 500,
@@ -405,13 +405,13 @@ local function CreatePanel()
                                     end
                                     addon.Event:SendMessage("UpdateAchievementFrameHeight", addon.Options.db.Window.AchievementFrameHeightOffset);
         
-                                    diagnostics.Debug(addon.L["O_ACHIEVEMENTFRAME_HEIGHT_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.AchievementFrameHeightOffset));
+                                    diagnostics.Debug(addon.L["Achievement window height offset"] .. ": " .. tostring(addon.Options.db.Window.AchievementFrameHeightOffset));
                                 end
                             },
                             MergeSmallCategoriesThreshold = {
                                 name = addon.L["Merge small categories threshold"],
                                 desc = core.ReplaceVars{addon.L["Merge small categories threshold Desc"],
-                                                        reloadRequired = addon.L["O_REQUIRES_RELOAD"]},
+                                                        reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 1,
                                 max = 50,
@@ -429,7 +429,7 @@ local function CreatePanel()
                                     addon.Options.db.Window.MergeSmallCategoriesThreshold = value;
                                     addon.Options.db.Window.MergeSmallCategoriesThresholdChanged = true;
         
-                                    diagnostics.Debug(addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.MergeSmallCategoriesThreshold));
+                                    diagnostics.Debug(addon.L["Categories width offset"] .. ": " .. tostring(addon.Options.db.Window.MergeSmallCategoriesThreshold));
                                 end
                             },
                         }
@@ -441,9 +441,9 @@ local function CreatePanel()
                         order = 2,
                         args = {
                             ShowPartOfAChain = {
-                                name = core.ReplaceVars{addon.L["ShowPartOfAChain"],
+                                name = core.ReplaceVars{addon.L["Show Part of a Chain"],
                                                         partOfAChain = addon.L["Part of a chain"]},
-                                desc = core.ReplaceVars{addon.L["ShowPartOfAChain_Desc"],
+                                desc = core.ReplaceVars{addon.L["Show Part of a Chain Desc"],
                                                         partOfAChain = addon.L["Part of a chain"]},
                                 type = "toggle",
                                 width = "full",
@@ -452,13 +452,13 @@ local function CreatePanel()
                                 set = function()
                                     addon.Options.db.Tooltip.ShowPartOfAChain = not addon.Options.db.Tooltip.ShowPartOfAChain;
 
-                                    diagnostics.Debug(addon.L["ShowPartOfAChain"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowPartOfAChain));
+                                    diagnostics.Debug(addon.L["Show Part of a Chain"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowPartOfAChain));
                                 end
                             },
                             ShowRequiredFor = {
-                                name = core.ReplaceVars{addon.L["ShowRequiredFor"],
+                                name = core.ReplaceVars{addon.L["Show Required for"],
                                                         requiredFor = addon.L["Required for"]},
-                                desc = core.ReplaceVars{addon.L["ShowRequiredFor_Desc"],
+                                desc = core.ReplaceVars{addon.L["Show Required for Desc"],
                                                         requiredFor = addon.L["Required for"]},
                                 type = "toggle",
                                 width = "full",
@@ -467,12 +467,12 @@ local function CreatePanel()
                                 set = function()
                                     addon.Options.db.Tooltip.ShowRequiredFor = not addon.Options.db.Tooltip.ShowRequiredFor;
 
-                                    diagnostics.Debug(addon.L["ShowRequiredFor"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowRequiredFor));
+                                    diagnostics.Debug(addon.L["Show Required for"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowRequiredFor));
                                 end
                             },
                             ShowCurrentCharacterIcons = {
-                                name = addon.L["ShowCurrentCharacterIcons"],
-                                desc = core.ReplaceVars{addon.L["ShowCurrentCharacterIcons_Desc"],
+                                name = addon.L["Show current character icons"],
+                                desc = core.ReplaceVars{addon.L["Show current character icons Desc"],
                                                         partOfAChain = addon.L["Part of a chain"],
                                                         requiredFor = addon.L["Required for"]},
                                 type = "toggle",
@@ -482,7 +482,7 @@ local function CreatePanel()
                                 set = function()
                                     addon.Options.db.Tooltip.ShowCurrentCharacterIcons = not addon.Options.db.Tooltip.ShowCurrentCharacterIcons;
 
-                                    diagnostics.Debug(addon.L["ShowCurrentCharacterIcons"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowCurrentCharacterIcons));
+                                    diagnostics.Debug(addon.L["Show current character icons"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowCurrentCharacterIcons));
                                 end
                             }
                         }
@@ -490,19 +490,19 @@ local function CreatePanel()
                 }
             },
             Style = {
-                name = addon.L["O_STYLE"],
+                name = addon.L["ElvUI Skins Status"],
                 type = "group",
                 order = 3,
                 args = {
                     description = {
-                        name = addon.L["O_STYLE_DESC"],
+                        name = addon.L["ElvUI Skins Status Desc"],
                         type = "description",
                         width = "full",
                         order = 1.1
                     },
                     skinAchievement = {
-                        name = addon.L["O_SKIN_ACHIEVEMENT"],
-                        desc = addon.L["O_SKIN_ACHIEVEMENT_DESC"],
+                        name = addon.L["Skin Achievements"],
+                        desc = addon.L["Skin Achievements Desc"],
                         descStyle = "inline",
                         disabled = true,
                         type = "toggle",
@@ -511,8 +511,8 @@ local function CreatePanel()
                         get = function () return addon.Options.db.ElvUISkin.Achievements; end
                     },
                     skinMiscFrames = {
-                        name = addon.L["O_SKIN_MISC_FRAMES"],
-                        desc = addon.L["O_SKIN_MISC_FRAMES_DESC"],
+                        name = addon.L["Skin Misc Frames"],
+                        desc = addon.L["Skin Misc Frames Desc"],
                         descStyle = "inline",
                         disabled = true,
                         type = "toggle",
@@ -521,8 +521,8 @@ local function CreatePanel()
                         get = function () return addon.Options.db.ElvUISkin.MiscFrames; end
                     },
                     skinAce3 = {
-                        name = addon.L["O_SKIN_OPTIONS"],
-                        desc = addon.L["O_SKIN_OPTIONS_DESC"],
+                        name = addon.L["Skin Ace3"],
+                        desc = addon.L["Skin Ace3 Desc"],
                         descStyle = "inline",
                         disabled = true,
                         type = "toggle",
@@ -531,8 +531,8 @@ local function CreatePanel()
                         get = function () return addon.Options.db.ElvUISkin.Options; end
                     },
                     skinTutorials = {
-                        name = addon.L["O_SKIN_TUTORIALS"],
-                        desc = addon.L["O_SKIN_TUTORIALS_DESC"],
+                        name = addon.L["Skin Tutorials"],
+                        desc = addon.L["Skin Tutorials Desc"],
                         descStyle = "inline",
                         disabled = true,
                         type = "toggle",
@@ -581,10 +581,10 @@ function options.Load()
     CreatePanel();
 
     diagnostics.Debug("- Options loaded");
-    diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. addon.L["O_CATEGORIESFRAME_WIDTH_OFFSET"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
-    diagnostics.Debug("     - " .. addon.L["O_MIN_CHAR_TO_SEARCH"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
-    diagnostics.Debug("     - " .. addon.L["O_NUM_OF_SEARCH_PREVIEWS"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
-    diagnostics.Debug("     - " .. addon.L["O_ENABLE_DEBUG_INFO"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
-    diagnostics.Debug("     - " .. addon.L["O_ENABLE_TRACE_INFO"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
+    diagnostics.Debug("     - " .. addon.L["Show minimap icon"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
+    diagnostics.Debug("     - " .. addon.L["Categories width offset"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
+    diagnostics.Debug("     - " .. addon.L["Minimum characters to search"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
+    diagnostics.Debug("     - " .. addon.L["Number of search previews"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
+    diagnostics.Debug("     - " .. addon.L["Enable debug info"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
+    diagnostics.Debug("     - " .. addon.L["Enable trace info"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
 end

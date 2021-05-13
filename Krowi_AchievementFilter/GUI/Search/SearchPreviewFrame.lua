@@ -2,9 +2,9 @@
 local _, addon = ...;
 local core = addon.Core;
 local diagnostics = addon.Diagnostics;
-local gui = addon.GUI;
-gui.SearchPreviewFrame = {};
-local searchPreviewFrame = gui.SearchPreviewFrame;
+local search = addon.GUI.Search;
+search.SearchPreviewFrame = {};
+local searchPreviewFrame = search.SearchPreviewFrame;
 
 local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
@@ -34,7 +34,7 @@ function searchPreviewFrame:New(fullSearchResultsFrame, achievementsFrame)
         button:SetPoint("TOPLEFT", frame.Buttons[i - 1], "BOTTOMLEFT");
         tinsert(frame.Buttons, button);
     end
-    gui.SearchPreviewButton.PostLoadButtons(frame, fullSearchResultsFrame, achievementsFrame);
+    search.SearchPreviewButton.PostLoadButtons(frame, fullSearchResultsFrame, achievementsFrame);
 
     -- Anchor the ShowFullSearchResultsButton to the last SearchPreviewButton
     frame.ShowFullSearchResultsButton:SetPoint("LEFT", frame.Buttons[1]);

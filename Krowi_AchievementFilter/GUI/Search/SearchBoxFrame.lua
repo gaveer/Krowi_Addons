@@ -2,9 +2,9 @@
 local _, addon = ...;
 local core = addon.Core;
 local diagnostics = addon.Diagnostics;
-local gui = addon.GUI;
-gui.SearchBoxFrame = {};
-local searchBoxFrame = gui.SearchBoxFrame;
+local search = addon.GUI.Search;
+search.SearchBoxFrame = {};
+local searchBoxFrame = search.SearchBoxFrame;
 
 local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 

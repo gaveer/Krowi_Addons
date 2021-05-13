@@ -6,7 +6,7 @@ local diagnostics = addon.Diagnostics;
 addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
 local tutorials = addon.Tutorials; -- Local tutorial object
 
-tutorials.FeaturesTutorialPages = 6;
+tutorials.FeaturesTutorialPages = 7;
 tutorials.FeaturesTutorial = "Krowi_AchievementFilter_FeaturesTutorial";
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
@@ -50,6 +50,9 @@ function tutorials.Load()
             text = GetTitle(addon.L["FT_RIGHTCLICKMENU_TITLE"]) ..
                             core.ReplaceVars{addon.L["FT_RIGHTCLICKMENU_DESC"],
                                             wowhead = AF_COLOR_YELLOW .. addon.L["Wowhead"] .. AF_COLOR_END,
+                                            goTo = AF_COLOR_YELLOW .. addon.L["Go to"] .. AF_COLOR_END,
+                                            partOfAChain = AF_COLOR_YELLOW .. addon.L["Part of a chain"] .. AF_COLOR_END,
+                                            require = AF_COLOR_YELLOW .. addon.L["FT_RIGHTCLICKMENU_REQUIRE"] .. AF_COLOR_END,
                                             xuFuPetGuides = AF_COLOR_YELLOW .. addon.L["Xu-Fu's Pet Guides"] .. AF_COLOR_END,
                                             IAT = AF_COLOR_YELLOW .. addon.L["Instance Achievement Tracker"] .. AF_COLOR_END,
                                             installed = (addon.IsIATLoaded() and (AF_COLOR_GREEN .. addon.L["Installed"]:lower() .. AF_COLOR_END) or
@@ -62,9 +65,9 @@ function tutorials.Load()
             image = media .. "SearchPreview",
             text = GetTitle(addon.L["FT_SEARCHPREVIEW_TITLE"]) ..
                             core.ReplaceVars{addon.L["FT_SEARCHPREVIEW_DESC"],
-                                            clearOnRightClick = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"],
-                                            minCharToSearch = addon.L["O_MIN_CHAR_TO_SEARCH"],
-                                            numSearchPreviews = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
+                                            clearOnRightClick = addon.L["Clear search field on Right Click"],
+                                            minCharToSearch = addon.L["Minimum characters to search"],
+                                            numSearchPreviews = addon.L["Number of search previews"],
                                             addonName = AF_NAME},
             shineTop = addon.Options.db.ElvUISkin.Tutorials and 10 or 30,
             shineLeft = addon.Options.db.ElvUISkin.Tutorials and -10 or -11,
@@ -113,6 +116,25 @@ function tutorials.Load()
             shineAll = 7,
             shineHeight = addon.Options.db.ElvUISkin.Tutorials and 8 or nil,
             shineWidth = addon.Options.db.ElvUISkin.Tutorials and 10 or nil,
+        },
+        {   -- 7
+            imageHeight = 256,
+            image = media .. "Tooltip",
+            text = GetTitle(addon.L["FT_TOOLTIP_TITLE"]) ..
+                            core.ReplaceVars{addon.L["FT_TOOLTIP_DESC"],
+                            partOfAChain = AF_COLOR_YELLOW .. addon.L["Part of a chain"] .. AF_COLOR_END,
+                            requiredFor = AF_COLOR_YELLOW .. addon.L["Required for"] .. AF_COLOR_END,
+                            ready = "|T136814:0|t",
+                            waiting = "|T136815:0|t",
+                            notready = "|T136813:0|t",
+                            green = AF_COLOR_DARKGREEN .. addon.L["FT_TOOLTIP_GREEN"] .. AF_COLOR_END,
+                            grey = AF_COLOR_GREY60 .. addon.L["FT_TOOLTIP_GREY"] .. AF_COLOR_END,
+                            light = AF_COLOR_YELLOW .. addon.L["FT_TOOLTIP_LIGHTER"] .. AF_COLOR_END .. " " .. AF_COLOR_LIGHTGREEN .. addon.L["FT_TOOLTIP_GREEN"] .. AF_COLOR_END .. " " .. AF_COLOR_YELLOW .. addon.L["FT_TOOLTIP_OR"] .. AF_COLOR_END .. " " .. AF_COLOR_GREY90 .. addon.L["FT_TOOLTIP_GREY"] .. AF_COLOR_END,
+                            goTo = addon.L["Go to"]},
+            -- shineTop = addon.Options.db.ElvUISkin.Tutorials and 9 or 8,
+            -- shineBottom = addon.Options.db.ElvUISkin.Tutorials and -10 or -1,
+            -- shineLeft = addon.Options.db.ElvUISkin.Tutorials and -11 or -12,
+            -- shineRight = addon.Options.db.ElvUISkin.Tutorials and 11 or 13,
         },
         onShow = function(self, i)
             local gui = addon.GUI;

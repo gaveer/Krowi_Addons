@@ -50,6 +50,9 @@ function tutorials.Load()
             text = GetTitle(addon.L["FT_RIGHTCLICKMENU_TITLE"]) ..
                             core.ReplaceVars{addon.L["FT_RIGHTCLICKMENU_DESC"],
                                             wowhead = AF_COLOR_YELLOW .. addon.L["Wowhead"] .. AF_COLOR_END,
+                                            goTo = AF_COLOR_YELLOW .. addon.L["Go to"] .. AF_COLOR_END,
+                                            partOfAChain = AF_COLOR_YELLOW .. addon.L["Part of a chain"] .. AF_COLOR_END,
+                                            require = AF_COLOR_YELLOW .. addon.L["FT_RIGHTCLICKMENU_REQUIRE"] .. AF_COLOR_END,
                                             xuFuPetGuides = AF_COLOR_YELLOW .. addon.L["Xu-Fu's Pet Guides"] .. AF_COLOR_END,
                                             IAT = AF_COLOR_YELLOW .. addon.L["Instance Achievement Tracker"] .. AF_COLOR_END,
                                             installed = (addon.IsIATLoaded() and (AF_COLOR_GREEN .. addon.L["Installed"]:lower() .. AF_COLOR_END) or
@@ -62,9 +65,9 @@ function tutorials.Load()
             image = media .. "SearchPreview",
             text = GetTitle(addon.L["FT_SEARCHPREVIEW_TITLE"]) ..
                             core.ReplaceVars{addon.L["FT_SEARCHPREVIEW_DESC"],
-                                            clearOnRightClick = addon.L["O_CLEAR_SEARCH_ON_RIGHT_CLICK"],
-                                            minCharToSearch = addon.L["O_MIN_CHAR_TO_SEARCH"],
-                                            numSearchPreviews = addon.L["O_NUM_OF_SEARCH_PREVIEWS"],
+                                            clearOnRightClick = addon.L["Clear search field on Right Click"],
+                                            minCharToSearch = addon.L["Minimum characters to search"],
+                                            numSearchPreviews = addon.L["Number of search previews"],
                                             addonName = AF_NAME},
             shineTop = addon.Options.db.ElvUISkin.Tutorials and 10 or 30,
             shineLeft = addon.Options.db.ElvUISkin.Tutorials and -10 or -11,

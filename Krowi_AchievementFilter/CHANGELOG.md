@@ -3,11 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [9.0.5.22.0] - 
 ### Added
-- New Coming in 9.1 (20 achievements)
+- New Coming in 9.1 (25 achievements)
 
 ### Changed
 - Cleaned up the Search code
 - Cleaned up the AchievementButton code
+- Somewhat cleaned up the Localization
 
 ### Fixed
 - Tooltip should not dissapear anymore when hovering over achievement criteria

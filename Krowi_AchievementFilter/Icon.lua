@@ -39,5 +39,5 @@ function icon.Load()
     db.Minimap.hide = not db.ShowMinimapIcon;
     icon:Register("Krowi_AchievementFilterLDB", icon.AchievementFilterLDB, db.Minimap);
     diagnostics.Debug("- Icon loaded");
-    diagnostics.Debug("     - " .. addon.L["O_SHOW_MINIMAP_ICON"] .. ": " .. tostring(not db.Minimap.hide));
+    diagnostics.Debug("     - " .. addon.L["Show minimap icon"] .. ": " .. tostring(not db.Minimap.hide));
 end

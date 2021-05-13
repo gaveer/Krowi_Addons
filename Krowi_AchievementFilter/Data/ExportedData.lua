@@ -1,4 +1,4 @@
--- [[ Exported at 2021-05-08 14-52-48 ]] --
+-- [[ Exported at 2021-05-13 18-41-25 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4687,6 +4687,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[799]:AddCategory(tmpCategories[814]);
     tmpCategories[811] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
     tmpCategories[814]:AddCategory(tmpCategories[811]);
+    tmpCategories[811]:AddAchievement(InsertAndReturn(achievements, achievement:New(15107)));
     tmpCategories[815] = InsertAndReturn(categories, achievementCategory:New(C_Map.GetMapInfo(1543).name)); -- The Maw
     tmpCategories[811]:AddCategory(tmpCategories[815]);
     tmpCategories[815]:AddAchievement(InsertAndReturn(achievements, achievement:New(15065)));
@@ -4758,6 +4759,10 @@ function exportedData.Load(categories, achievements)
     tmpCategories[802] = InsertAndReturn(categories, achievementCategory:New((EJ_GetInstanceInfo(1189)))); -- Sanguine Depths
     tmpCategories[801]:AddCategory(tmpCategories[802]);
     tmpCategories[802]:AddAchievement(InsertAndReturn(achievements, achievement:New(15052)));
+    tmpCategories[823] = InsertAndReturn(categories, achievementCategory:New("Tazavesh, the Veiled Market")); -- Tazavesh, the Veiled Market
+    tmpCategories[801]:AddCategory(tmpCategories[823]);
+    tmpCategories[823]:AddAchievement(InsertAndReturn(achievements, achievement:New(15106)));
+    tmpCategories[823]:AddAchievement(InsertAndReturn(achievements, achievement:New(15109)));
     tmpCategories[820] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15271)))); -- Raids
     tmpCategories[814]:AddCategory(tmpCategories[820]);
     tmpCategories[821] = InsertAndReturn(categories, achievementCategory:New("Sanctum of Domination", {1998, 1999, 2000, 2001, 2002, 2003, 2004})); -- Sanctum of Domination
@@ -4766,6 +4771,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(14998)));
     tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15003)));
     tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15040)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15105)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15108)));
     tmpCategories[800] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
     tmpCategories[814]:AddCategory(tmpCategories[800]);
     tmpCategories[800]:AddAchievement(InsertAndReturn(achievements, achievement:New(15004)));

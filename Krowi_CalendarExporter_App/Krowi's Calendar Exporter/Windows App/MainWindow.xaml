@@ -1,0 +1,92 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Windows_App" xmlns:Controls="clr-namespace:Windows_App.Controls" x:Class="Windows_App.MainWindow" mc:Ignorable="d" Title="MainWindow" Height="585" Width="800">
+    <Window.Resources>
+        <CroppedBitmap x:Key="CalendarWeekdayBackground1" Source="/Media/Calendar Header.png" SourceRect="0,0,90,29" />
+        <CroppedBitmap x:Key="CalendarWeekdayBackground2" Source="/Media/Calendar Header.png" SourceRect="90,0,90,29" />
+    </Window.Resources>
+    <Grid x:Name="calendarGrid" ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition Width="90" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+        </Grid.RowDefinitions>
+
+        <!--#endregion-->
+
+        <!--#endregion-->
+        <!--#region Header-->
+        <Image x:Name="CalendarWeekday1Background" Grid.Column="0" Grid.Row="0" Source="{StaticResource CalendarWeekdayBackground1}" Stretch="Fill" />
+        <Image x:Name="CalendarWeekday2Background" Grid.Column="1" Grid.Row="0" Source="{StaticResource CalendarWeekdayBackground2}" Stretch="Fill" />
+        <Image x:Name="CalendarWeekday3Background" Grid.Column="2" Grid.Row="0" Source="{StaticResource CalendarWeekdayBackground1}" Stretch="Fill" />
+        <Image x:Name="CalendarWeekday4Background" Grid.Column="3" Grid.Row="0" Source="{StaticResource CalendarWeekdayBackground2}" Stretch="Fill" />
+        <Image x:Name="CalendarWeekday5Background" Grid.Column="4" Grid.Row="0" Source="{StaticResource CalendarWeekdayBackground1}" Stretch="Fill" />
+        <Image x:Name="CalendarWeekday6Background" Grid.Column="5" Grid.Row="0" Source="{StaticResource CalendarWeekdayBackground2}" Stretch="Fill" />
+        <Image x:Name="CalendarWeekday7Background" Grid.Column="6" Grid.Row="0" Source="{StaticResource CalendarWeekdayBackground1}" Stretch="Fill" />
+        <Label x:Name="CalendarWeekday1Name" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFF9A" Content="{Binding Monday, FallbackValue=Monday, Mode=OneWay}" />
+        <Label x:Name="CalendarWeekday2Name" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFF9A" Content="{Binding Tuesday, FallbackValue=Tuesday, Mode=OneWay}" />
+        <Label x:Name="CalendarWeekday3Name" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFF9A" Content="{Binding Wednesday, FallbackValue=Wednesday, Mode=OneWay}" />
+        <Label x:Name="CalendarWeekday4Name" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFF9A" Content="{Binding Thursday, FallbackValue=Thursday, Mode=OneWay}" />
+        <Label x:Name="CalendarWeekday5Name" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFF9A" Content="{Binding Friday, FallbackValue=Friday, Mode=OneWay}" />
+        <Label x:Name="CalendarWeekday6Name" Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFF9A" Content="{Binding Saturday, FallbackValue=Saturday, Mode=OneWay}" />
+        <Label x:Name="CalendarWeekday7Name" Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FFFF9A" Content="{Binding Sunday, FallbackValue=Sunday, Mode=OneWay}" />
+
+        <!--#region Center-->
+        <Controls:CalendarDay x:Name="CalendarDay1" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay2" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay3" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay4" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay5" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay6" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay7" Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay8" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay9" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay10" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay11" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay12" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay13" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay14" Grid.Column="6" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay15" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay16" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay17" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay18" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay19" Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay20" Grid.Column="5" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay21" Grid.Column="6" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay22" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay23" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay24" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay25" Grid.Column="3" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay26" Grid.Column="4" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay27" Grid.Column="5" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay28" Grid.Column="6" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay29" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay30" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay31" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay32" Grid.Column="3" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay33" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay34" Grid.Column="5" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay35" Grid.Column="6" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay36" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay37" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay38" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay39" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay40" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay41" Grid.Column="5" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Controls:CalendarDay x:Name="CalendarDay42" Grid.Column="6" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Grid>
+</Window>

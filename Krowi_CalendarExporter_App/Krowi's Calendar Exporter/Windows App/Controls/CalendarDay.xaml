@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="Windows_App.Controls.CalendarDay" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Windows_App.Controls" mc:Ignorable="d" d:DesignHeight="90" d:DesignWidth="90">
+    <UserControl.Resources>
+        <CroppedBitmap x:Key="CalendarDayBackgroundImage" Source="../Media/Calendar Day.png" />
+    </UserControl.Resources>
+    <Grid>
+        <Image x:Name="Background" />
+        <Label FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Content="{Binding Path=DayNumber}" />
+    </Grid>
+</UserControl>

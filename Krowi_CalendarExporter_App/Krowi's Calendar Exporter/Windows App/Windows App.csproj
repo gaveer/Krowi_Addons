@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>Windows_App</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Media\Calendar Day.png" />
+    <None Remove="Media\Calendar Header.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Krowi's Calendar Exporter Core\Krowi's Calendar Exporter Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Media\Calendar Day.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\Calendar Header.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

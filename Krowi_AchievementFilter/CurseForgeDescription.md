@@ -19,14 +19,18 @@
 <ul>
 <li>A <em><strong>new tab</strong></em> with custom categories mentioned above.</li>
 <li>Enhanced <strong><em>searching</em></strong>, <strong><em>filtering</em></strong>, <strong><em>sorting</em></strong> and <strong><em>tracking</em></strong> of achievements.</li>
+<li>Enhanced <strong><em>tooltip</em></strong> to show more about the achievement and related achievements.</li>
 <li>Achievements are sorted in a way so they make more sense and are easier to find.</li>
-<li>A <strong><em>Right Click Menu</em></strong> for each achievement with a link to Wowhead, IAT (3.18.0+) (if tactics are available) and wow-petguide.com (Xu-Fu's Pet Guides).</li>
+<li>A <strong><em>Right Click Menu</em></strong> for each achievement with a link to Wowhead, IAT (3.18.0+) (if tactics are available), Go to (related achievements) and wow-petguide.com (Xu-Fu's Pet Guides).</li>
 <li>A <em><strong>tutorial</strong> </em>for first time users with an ingame explanation of the most important features.</li>
 <li>The option to <strong><em>keybind</em></strong> the new tab so it opens in one go. (Game Menu -&gt; Key Bindings -&gt; Addons -&gt; Krowi's Achievement Filter)</li>
 <li><strong><em>ElvUI skin</em></strong>. (See the ingame options on how to enable each part.)</li>
+<li>Coming in 9.1 section. This section is guarded with spoiler warnings and will be removed once 9.1 is live.</li>
+<li>Clicking achievements in meta achievements select the achievement in the new tab.</li>
 </ul>
 <p><strong>Planned in next version</strong></p>
 <ul>
+<li>Probably 9.1 full release.</li>
 </ul>
 <p><strong>Planned in future version</strong></p>
 <ul>

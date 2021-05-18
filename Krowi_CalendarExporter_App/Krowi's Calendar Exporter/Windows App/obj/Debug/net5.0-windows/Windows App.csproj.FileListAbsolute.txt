@@ -26,3 +26,5 @@ E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi'
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarDay.g.cs
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarDay.baml
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarHeader.g.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarHeader.baml

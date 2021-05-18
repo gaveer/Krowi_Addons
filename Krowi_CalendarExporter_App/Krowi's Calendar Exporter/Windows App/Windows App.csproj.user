@@ -10,9 +10,15 @@
     <Compile Update="Controls\CalendarDay.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\CalendarHeader.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\CalendarDay.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\CalendarHeader.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

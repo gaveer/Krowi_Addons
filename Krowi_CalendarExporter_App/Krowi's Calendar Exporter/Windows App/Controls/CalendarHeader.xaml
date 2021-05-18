@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="Windows_App.Controls.CalendarHeader" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Windows_App.Controls" mc:Ignorable="d" d:DesignHeight="29" d:DesignWidth="90">
+    <UserControl.Resources>
+        <CroppedBitmap x:Key="BackgroundImage" Source="../Media/CalendarBackground.png" SourceRect="0, 180, 90, 29"/>
+    </UserControl.Resources>
+    <Grid>
+        <Image Source="{DynamicResource BackgroundImage}" Stretch="Fill" />
+        <Label FontWeight="Bold" Foreground="#FFFF9A" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=DayName, RelativeSource={RelativeSource AncestorType=UserControl}, FallbackValue=DayName}" />
+    </Grid>
+</UserControl>

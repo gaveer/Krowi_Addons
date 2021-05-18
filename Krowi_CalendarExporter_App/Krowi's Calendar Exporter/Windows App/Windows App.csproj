@@ -8,8 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Media\Calendar Day.png" />
-    <None Remove="Media\Calendar Header.png" />
+    <None Remove="Media\calendarbackground.png" />
+    <None Remove="Media\calendarshadows.png" />
+    <None Remove="Media\SidebarHeader.png" />
+    <None Remove="Media\ui-common-mousehilight.png" />
+    <None Remove="Media\ui-spellbookicon-nextpage-down-highlight.png" />
+    <None Remove="Media\ui-spellbookicon-nextpage-down.png" />
+    <None Remove="Media\ui-spellbookicon-nextpage-up-highlight.png" />
+    <None Remove="Media\ui-spellbookicon-nextpage-up.png" />
+    <None Remove="Media\ui-spellbookicon-prevpage-down-highlight.png" />
+    <None Remove="Media\ui-spellbookicon-prevpage-down.png" />
+    <None Remove="Media\ui-spellbookicon-prevpage-up-highlight.png" />
+    <None Remove="Media\ui-spellbookicon-prevpage-up.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,10 +27,40 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Media\Calendar Day.png">
+    <Resource Include="Media\CalendarBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Media\Calendar Header.png">
+    <Resource Include="Media\CalendarShadows.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\SidebarHeader.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-common-mousehilight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-nextpage-down-highlight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-nextpage-down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-nextpage-up-highlight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-nextpage-up.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-prevpage-down-highlight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-prevpage-down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-prevpage-up-highlight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\ui-spellbookicon-prevpage-up.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

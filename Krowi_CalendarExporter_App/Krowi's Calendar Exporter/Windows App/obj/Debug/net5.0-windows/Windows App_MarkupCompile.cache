@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\App.xaml
-21083821130
+3-2033179330
 
-5-2062724332
+9595376607
 194-1898572393
-Controls\CalendarDay.xaml;MainWindow.xaml;
+Controls\CalendarDay.xaml;Controls\CalendarHeader.xaml;MainWindow.xaml;
 
 False
 

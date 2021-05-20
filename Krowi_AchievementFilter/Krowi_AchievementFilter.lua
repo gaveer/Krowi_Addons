@@ -64,7 +64,6 @@ function loadHelper:OnEvent(event, arg1)
             gui.ElvUISkin.Apply(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
 
             addon.Diagnostics.Debug("- GUI loaded");
-
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
             addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
         end

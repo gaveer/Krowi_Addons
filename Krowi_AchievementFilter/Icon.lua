@@ -25,8 +25,8 @@ local function CreateIcon()
             tt:ClearLines();
             tt:AddDoubleLine(AF_NAME, AF_BUILD_VERSION);
             tt:AddLine(" "); -- Empty line
-            tt:AddLine(addon.L["I_LEFT_CLICK"]);
-            tt:AddLine(addon.L["I_RIGHT_CLICK"]);
+            tt:AddLine(addon.L["Left click"] .. " " .. string.format(addon.AddonBlue, addon.L["I_LEFT_CLICK"]));
+            tt:AddLine(addon.L["Right click"] .. " "  .. string.format(addon.AddonBlue, addon.L["I_RIGHT_CLICK"]));
         end,
     });
 end

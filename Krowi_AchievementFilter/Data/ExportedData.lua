@@ -4683,7 +4683,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[420]:AddAchievement(InsertAndReturn(achievements, achievement:New(14763, nil, covenant.Necrolord)));
     tmpCategories[799] = InsertAndReturn(categories, achievementCategory:New(addon.L["Coming in 9.1"])); -- Coming in 9.1
     local nextPatchCategory = tmpCategories[799];
-    tmpCategories[814] = InsertAndReturn(categories, achievementCategory:New(AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END)); -- * SPOILER WARNING *
+    tmpCategories[814] = InsertAndReturn(categories, achievementCategory:New(string.format(addon.Orange, addon.L["* SPOILER WARNING *"]))); -- * SPOILER WARNING *
     tmpCategories[799]:AddCategory(tmpCategories[814]);
     tmpCategories[811] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
     tmpCategories[814]:AddCategory(tmpCategories[811]);

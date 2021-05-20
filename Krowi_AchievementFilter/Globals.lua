@@ -1,23 +1,115 @@
 local addonName, addon = ...;
 
-AF_COLOR_ADDON = "|cFF1D92C2";
-AF_COLOR_RED = "|cFFFF0000";
-AF_COLOR_ORANGE = "|cFFFF7700";
-AF_COLOR_YELLOW = "|cFFFFD100";
-AF_COLOR_GREEN = "|cFF00FF00";
-AF_COLOR_END = "|r";
-
-AF_COLOR_LIGHTGREEN = "|cFFBFFFBF";
-AF_COLOR_DARKGREEN = "|cFF40BF40";
-AF_COLOR_GREY90 = "|cFFE6E6E6";
-AF_COLOR_GREY60 = "|cFF999999";
-
 AF_TAB = "|T:1:8|t";
 
 AF_NAME = GetAddOnMetadata(addonName, "Title");
 AF_BUILD = GetBuildInfo();
 AF_VERSION = GetAddOnMetadata(addonName, "Version");
 AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
+
+function addon.RGBPrct2HEX(r, g, b, a)
+    if type(r) == "table" then
+        a = r.A;
+        b = r.B;
+        g = r.G;
+        r = r.R;
+    end
+    if a == nil then
+        a = g;
+    end
+    if a == nil then
+        a = 1;
+    end
+
+    local argb = {a, r, g, b};
+
+    local hexadecimal = "";
+    for _, value in next, argb do
+		local hex = string.format("%x", value * 255);
+
+		if(string.len(hex) == 1)then
+			hex = '0' .. hex;
+		end
+
+		hexadecimal = hexadecimal .. hex;
+	end
+
+	return hexadecimal;
+end
+
+addon.AddonBlue = "|cFF1D92C2%s|r";
+
+addon.GreenRGB = {
+    R = QuestDifficultyColors["standard"].r,
+    G = QuestDifficultyColors["standard"].g,
+    B = QuestDifficultyColors["standard"].b
+}
+addon.GreenRGB.Hex = addon.RGBPrct2HEX(addon.GreenRGB);
+addon.Green = "|c" .. addon.GreenRGB.Hex .. "%s|r";
+
+addon.LightGreenRGB = {
+    R = QuestDifficultyHighlightColors["standard"].r,
+    G = QuestDifficultyHighlightColors["standard"].g,
+    B = QuestDifficultyHighlightColors["standard"].b
+}
+addon.LightGreenRGB.Hex = addon.RGBPrct2HEX(addon.LightGreenRGB);
+addon.LightGreen = "|c" .. addon.LightGreenRGB.Hex .. "%s|r";
+
+addon.GreyRGB = {
+    R = QuestDifficultyColors["trivial"].r,
+    G = QuestDifficultyColors["trivial"].g,
+    B = QuestDifficultyColors["trivial"].b
+}
+addon.GreyRGB.Hex = addon.RGBPrct2HEX(addon.GreyRGB);
+addon.Grey = "|c" .. addon.GreyRGB.Hex .. "%s|r";
+
+addon.LightGreyRGB = {
+    R = QuestDifficultyHighlightColors["trivial"].r,
+    G = QuestDifficultyHighlightColors["trivial"].g,
+    B = QuestDifficultyHighlightColors["trivial"].b
+}
+addon.LightGreyRGB.Hex = addon.RGBPrct2HEX(addon.LightGreyRGB);
+addon.LightGrey = "|c" .. addon.LightGreyRGB.Hex .. "%s|r";
+
+addon.RedRGB = {
+    R = QuestDifficultyColors["impossible"].r,
+    G = QuestDifficultyColors["impossible"].g,
+    B = QuestDifficultyColors["impossible"].b
+}
+addon.RedRGB.Hex = addon.RGBPrct2HEX(addon.RedRGB);
+addon.Red = "|c" .. addon.RedRGB.Hex .. "%s|r";
+
+addon.LightRedRGB = {
+    R = QuestDifficultyHighlightColors["impossible"].r,
+    G = QuestDifficultyHighlightColors["impossible"].g,
+    B = QuestDifficultyHighlightColors["impossible"].b
+}
+addon.LightRedRGB.Hex = addon.RGBPrct2HEX(addon.LightRedRGB);
+addon.LightRed = "|c" .. addon.LightRedRGB.Hex .. "%s|r";
+
+addon.OrangeRGB = {
+    R = QuestDifficultyColors["verydifficult"].r,
+    G = QuestDifficultyColors["verydifficult"].g,
+    B = QuestDifficultyColors["verydifficult"].b
+}
+addon.OrangeRGB.Hex = addon.RGBPrct2HEX(addon.OrangeRGB);
+addon.Orange = "|c" .. addon.OrangeRGB.Hex .. "%s|r";
+
+addon.LightOrangeRGB = {
+    R = QuestDifficultyHighlightColors["verydifficult"].r,
+    G = QuestDifficultyHighlightColors["verydifficult"].g,
+    B = QuestDifficultyHighlightColors["verydifficult"].b
+}
+addon.LightOrangeRGB.Hex = addon.RGBPrct2HEX(addon.LightOrangeRGB);
+addon.LightOrange = "|c" .. addon.LightOrangeRGB.Hex .. "%s|r";
+
+addon.YellowRGB = {
+    R = GetFontInfo(GameFontNormal).color.r,
+    G = GetFontInfo(GameFontNormal).color.g,
+    B = GetFontInfo(GameFontNormal).color.b
+}
+addon.YellowRGB.Hex = addon.RGBPrct2HEX(addon.YellowRGB);
+addon.Yellow = "|c" .. addon.YellowRGB.Hex .. "%s|r";
 
 function addon.GetAchievement(id)
     addon.Diagnostics.Trace("addon.GetAchievement");

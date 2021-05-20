@@ -37,7 +37,7 @@ L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
 
 -- Options
-L["Requires a reload"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
+L["Requires a reload"] = string.format(addon.Orange, "Requires a reload to take full effect.");
 
 -- Options General Info
 L["Build"] = "Build";
@@ -90,8 +90,15 @@ L["Merge small categories threshold"] = "Merge small categories threshold";
 L["Merge small categories threshold Desc"] = "Categories with a number of achievements lower than this number will merge into the parent category.\n\n" ..
                                                 "Only preset categories can merge (mostly child categories from zones).\n\n{reloadRequired}";
 
+-- Options Layout Right Click Menu
+L["Right Click Menu"] = "Right Click Menu";
+L["Show Right Click Menu"] = "Show {rightClickMenu} button";
+L["Show Right Click Menu Desc"] = "Show / hide {rightClickMenu} button on each achievement.\n\nThis serves as an alternative for right clicking the achievement.\n\n{reloadRequired}";
+
 -- Options Layout Tooltip
 L["Tooltip"] = "Tooltip";
+L["Show Not Obtainable"] = "Show {notObtainable}";
+L["Show Not Obtainable Desc"] = "Show / hide {notObtainable}.\n\nWhen checked, show not obtainable achievements in red on the progress bar.";
 L["Show Part of a Chain"] = "Show {partOfAChain}";
 L["Show Part of a Chain Desc"] = "Show / hide {partOfAChain}.\n\nWhen checked, the chain the achievment is part of will be visible in the tooltip.";
 L["Show Required for"] = "Show {requiredFor}";
@@ -116,8 +123,11 @@ L["Skin Tutorials Desc"] = "Applies the ElvUI skin to the Tutorials.\n-> Blizzar
 L["BINDING_NAME_AF_OPEN_TAB1"] = "Toggle Achievement Window";
 
 -- Icon
-L["I_LEFT_CLICK"] = "Left-click " .. AF_COLOR_ADDON .. "to open the Achievement window." .. AF_COLOR_END;
-L["I_RIGHT_CLICK"] = "Right-click " .. AF_COLOR_ADDON .. "for Options." .. AF_COLOR_END;
+L["Left click"] = "Left click";
+L["Right click"] = "Right click";
+
+L["I_LEFT_CLICK"] = "to open the Achievement window.";
+L["I_RIGHT_CLICK"] = "for Options.";
 
 -- Tutorials
 -- Features tutorial
@@ -129,6 +139,7 @@ L["FT_GROUPING_DESC"] = "Instead of grouping achievements by type and then by ex
                         "and then by type.";
 L["FT_RIGHTCLICKMENU_TITLE"] = "Right-click menu";
 L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click menu.\n\n" ..
+                                "A button can be shown on each achievement that opens the Right Click Menu. This can be enabled in the options. (Disabled by default.)\n\n" ..
                                 "Features:\n" ..
                                 AF_TAB .. "- Link to {wowhead}\n" ..
                                 AF_TAB .. "- {goTo} shortcut to achievements that are {partOfAChain} or that {require} this achievment to be completed\n" ..
@@ -183,11 +194,13 @@ L["FT_TOOLTIP_DESC"] = "To make it more clear for the user how achievements rela
                         "Colors:\n" ..
                         AF_TAB .. "- {green}: The achievement is completed\n" ..
                         AF_TAB .. "- {grey}: The achievement is not completed\n" ..
+                        AF_TAB .. "- {red}: The achievement is not possible to obtain anymore\n" ..
                         AF_TAB .. "- {light}: The hovered achievement\n\n" ..
                         "The information provided by these is also added in the Right Click Menu (part 3 of this tutorial). " ..
                         "A new {goTo} line and menu is added to eligible achievements which will take you to the related achievement when clicked.";
 L["FT_TOOLTIP_GREEN"] = "Green";
 L["FT_TOOLTIP_GREY"] = "Grey";
+L["FT_TOOLTIP_RED"] = "Red";
 L["FT_TOOLTIP_LIGHTER"] = "Lighter";
 L["FT_TOOLTIP_OR"] = "or";
 

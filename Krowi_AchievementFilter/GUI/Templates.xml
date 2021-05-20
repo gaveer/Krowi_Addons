@@ -512,7 +512,7 @@
 	<DropDownToggleButton name="KrowiAF_FilterButton_Template" inherits="UIMenuButtonStretchTemplate" text="FILTER" virtual="true">
 		<Size x="116" y="22"/>
         <Anchors>
-          <Anchor point="TOPLEFT" x="142" y="10"/>
+        	<Anchor point="TOPLEFT" x="142" y="10"/>
         </Anchors>
 		<Layers>
 			<Layer level="ARTWORK">
@@ -526,4 +526,31 @@
 		</Layers>
 	</DropDownToggleButton>
 
+	<!-- <Frame name="testBar" inherits="KrowiProgressBar_Template">
+		<Size x="100" y="15"/>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+	</Frame> -->
+
+	<!-- <Button name="KrowiAF_TestButton" inherits="MagicButtonTemplate" text="test">
+		<Anchors>
+			<Anchor point="CENTER" x="100" y="50"/>
+		</Anchors>
+		<Size x="135" y="22"/>
+		<Scripts>
+			<OnClick>
+				local progressBarFactory = LibStub("KrowiProgressBar-1.0");
+				local progressBar = progressBarFactory:New(UIParent);
+				progressBar:SetWidth(448);
+				progressBar:UpdateTextures();
+				progressBar:SetPoint("CENTER");
+				progressBar:Show();
+				progressBar.Text:SetText("text");
+				progressBar:SetMinMaxValues(0, 100);
+				progressBar:SetValues(10, 20, 30, 40);
+				progressBar:Show();
+			</OnClick>
+		</Scripts>
+	</Button> -->
 </Ui>

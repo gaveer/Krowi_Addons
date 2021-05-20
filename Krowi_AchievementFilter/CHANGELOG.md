@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.0.5.23.0] - 
+### Added
+- Achievements in the Current Zone category now always have a Go To item so you can easily go to the achievement in the categories tree
+- Button to each achievement to show the Right Click Menu (disabled by default)
+- Categories tooltip can now show the number of not obtainable achievements and also adds a red part to the progress bar
+
+### Changed
+- Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections
+- Colors in the tooltip for the Part of a chain and Required for sections are now based on the quest difficulty colors
+
 ## [9.0.5.22.0] - 2021-05-13
 ### Added
 - New Coming in 9.1 (25 achievements)
@@ -403,6 +413,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
+[9.0.5.23.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
 [9.0.5.22.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3308327
 [9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611
 [9.0.5.20.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3294651

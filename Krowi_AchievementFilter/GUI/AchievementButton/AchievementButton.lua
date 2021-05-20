@@ -22,6 +22,24 @@ function achievementButton:PostLoadButtons(achievementsFrame)
 			achievementsFrame.UIFontHeight = fontHeight;
 		end
 
+		if addon.Options.db.RightClickMenu.ShowButtonOnAchievement then
+			local rightClickMenuButton = CreateFrame("Button", "$parentRightClickMenuButton", button);
+			rightClickMenuButton:SetWidth(15);
+			rightClickMenuButton:SetHeight(15);
+			rightClickMenuButton:SetPoint("TOPLEFT", 72, -9);
+			rightClickMenuButton:SetNormalTexture("Interface/Buttons/QuestTrackerButtons");
+			rightClickMenuButton:SetPushedTexture("Interface/Buttons/QuestTrackerButtons");
+			rightClickMenuButton:SetHighlightTexture("Interface/Buttons/QuestTrackerButtons", "ADD");
+			rightClickMenuButton:GetNormalTexture():SetTexCoord(0.40625, 0.53125, 0.25, 0.5);
+			rightClickMenuButton:GetPushedTexture():SetTexCoord(0.40625, 0.53125, 0, 0.25);
+			rightClickMenuButton:GetHighlightTexture():SetTexCoord(0, 0.265625, 0, 0.53125);
+			rightClickMenuButton:SetScript("OnClick", function()
+				OnClick(button, "RightButton", achievementsFrame, nil, rightClickMenuButton);
+			end);
+			button.plusMinus:ClearAllPoints();
+			button.plusMinus:SetPoint("TOPLEFT", rightClickMenuButton, "BOTTOMLEFT", 0, -3);
+		end
+
 		-- Change display behaviour
 		button.DisplayObjectives = function(button, renderOffScreen)
 			return self.Display.DisplayObjectives(button, renderOffScreen, achievementsFrame);
@@ -120,11 +138,7 @@ end
 local rightClickMenu = LibStub("KrowiMenu-1.0");
 local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
-local function AddGoToLine(goTo, id, achievement, achievementsFrame)
-	if id == achievement.ID then
-		return;
-	end
-
+local function AddGoToLine(goTo, id, achievementsFrame)
 	local _, name = addon.GetAchievementInfo(id);
 	local disabled = nil;
 	if not addon.GetAchievement(id) then -- Catch missing achievements from the addon to prevent errors
@@ -172,24 +186,42 @@ function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
 	-- Go to
 	local partOfAChainIDs = achievement:GetPartOfAChainIDs();
 	local requiredForIDs = achievement:GetRequiredForIDs();
-	if partOfAChainIDs or requiredForIDs then -- Others can be added here later
+	if partOfAChainIDs or requiredForIDs or achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then -- Others can be added here later
 		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
+		local addSeparator = nil;
 
 		if partOfAChainIDs then
-			goTo:AddChildFull({ Text = addon.L["Part of a chain"], IsTitle = true});
+			goTo:AddChildFull({Text = addon.L["Part of a chain"], IsTitle = true});
 			for _, id in next, partOfAChainIDs do
-				AddGoToLine(goTo, id, achievement, achievementsFrame);
+				if id ~= achievement.ID then
+					AddGoToLine(goTo, id, achievementsFrame);
+				end
 			end
+			addSeparator = true;
 		end
 
 		if requiredForIDs then -- Add individual Go to parts
-			if partOfAChainIDs then
+			if addSeparator then
 				goTo:AddSeparator();
+				addSeparator = nil;
 			end
-			goTo:AddChildFull({ Text = addon.L["Required for"], IsTitle = true});
+			goTo:AddChildFull({Text = addon.L["Required for"], IsTitle = true});
 			for _, id in next, requiredForIDs do
-				AddGoToLine(goTo, id, achievement, achievementsFrame);
+				if id ~= achievement.ID then
+					AddGoToLine(goTo, id, achievementsFrame);
+				end
 			end
+			addSeparator = true;
+		end
+
+		if achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then
+			if addSeparator then
+				goTo:AddSeparator();
+				addSeparator = nil;
+			end
+			goTo:AddChildFull({Text = achievement.Category:GetPath(), IsTitle = true});
+			AddGoToLine(goTo, achievement.ID, achievementsFrame);
+			addSeparator = true;
 		end
 
 		rightClickMenu:Add(goTo); -- Add Go to menu to the right click menu

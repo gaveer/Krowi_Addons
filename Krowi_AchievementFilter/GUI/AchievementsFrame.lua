@@ -164,7 +164,7 @@ function achievementsFrame:Update()
 	local numButtons = #buttons;
 
 	if cachedCategory == addon.NextPatchCategory then
-		self.Text:SetText(AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END);
+		self.Text:SetText(string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]));
 		self.Text:Show();
 	else
 		self.Text:Hide();

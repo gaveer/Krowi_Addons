@@ -23,21 +23,25 @@ end
 
 local function AddAchievementLine(self, id)
 	local _, name, _, completed, _, _, _, _, _, _, _, _, wasEarnedByMe = addon.GetAchievementInfo(id);
-	local r, g, b;
+	local color;
 	if id == self.Achievement.ID then
-		if completed then
-			r, g, b = 0.75, 1, 0.75;
+		if completed then -- add self.Achievement.NotObtainable here
+			color = addon.LightGreenRGB;
+		elseif self.Achievement.NotObtainable then
+			color = addon.LightRedRGB;
 		else
-			r, g, b = 0.9, 0.9, 0.9;
+			color = addon.LightGreyRGB;
 		end
 	elseif completed then
-		r, g, b = 0.25, 0.75, 0.25;
+		color = addon.GreenRGB;
+	elseif self.Achievement.NotObtainable then
+		color = addon.RedRGB;
 	else
-		r, g, b = 0.6, 0.6, 0.6;
+		color = addon.GreyRGB;
 	end
-	GameTooltip:AddLine(name, r, g, b); -- Achievement name
+	GameTooltip:AddLine(name, color.R, color.G, color.B); -- Achievement name
 	local tooltipTextureInfo;
-	if addon.Options.db.Tooltip.ShowCurrentCharacterIcons then
+	if addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons then
 		if wasEarnedByMe then
 			GameTooltip:AddTexture(136814); -- interface/raidframe/readycheck-ready.blp
 		elseif self.Achievement.NotObtainable then
@@ -84,7 +88,7 @@ end
 function AddPartOfAChain(self)
 	diagnostics.Trace("AddPartOfAChain");
 
-	if not self.Achievement or not self.Achievement.ID or (not GetNextAchievement(self.Achievement.ID) and not GetPreviousAchievement(self.Achievement.ID)) or not addon.Options.db.Tooltip.ShowPartOfAChain then
+	if not self.Achievement or not self.Achievement.ID or (not GetNextAchievement(self.Achievement.ID) and not GetPreviousAchievement(self.Achievement.ID)) or not addon.Options.db.Tooltip.Achievements.ShowPartOfAChain then
 		return;
 	end
 
@@ -113,7 +117,7 @@ local criteriaCacheIsEmpty = true;
 function AddRequiredFor(self)
 	diagnostics.Trace("AddRequiredFor");
 
-	if not addon.Options.db.Tooltip.ShowRequiredFor then
+	if not addon.Options.db.Tooltip.Achievements.ShowRequiredFor then
 		return;
 	end
 

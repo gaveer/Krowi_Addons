@@ -25,8 +25,8 @@ local function CreateIcon()
             tt:ClearLines();
             tt:AddDoubleLine(AF_NAME, AF_BUILD_VERSION);
             tt:AddLine(" "); -- Empty line
-            tt:AddLine(addon.L["Left click"] .. " " .. string.format(addon.AddonBlue, addon.L["I_LEFT_CLICK"]));
-            tt:AddLine(addon.L["Right click"] .. " "  .. string.format(addon.AddonBlue, addon.L["I_RIGHT_CLICK"]));
+            tt:AddLine(addon.L["Left click"] .. " " .. string.format(addon.AddonBlue, addon.L["Icon Left click"]));
+            tt:AddLine(addon.L["Right click"] .. " "  .. string.format(addon.AddonBlue, addon.L["Icon Right click"]));
         end,
     });
 end
@@ -38,6 +38,5 @@ function icon.Load()
     local db = addon.Options.db;
     db.Minimap.hide = not db.ShowMinimapIcon;
     icon:Register("Krowi_AchievementFilterLDB", icon.AchievementFilterLDB, db.Minimap);
-    diagnostics.Debug("- Icon loaded");
-    diagnostics.Debug("     - " .. addon.L["Show minimap icon"] .. ": " .. tostring(not db.Minimap.hide));
+    diagnostics.Debug("Icon loaded");
 end

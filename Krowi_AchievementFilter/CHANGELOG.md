@@ -6,10 +6,15 @@ All notable changes to this project will be documented in this file.
 - Achievements in the Current Zone category now always have a Go To item so you can easily go to the achievement in the categories tree
 - Button to each achievement to show the Right Click Menu (disabled by default)
 - Categories tooltip can now show the number of not obtainable achievements and also adds a red part to the progress bar
+- New Coming in 9.1 (24 achievements)
 
 ### Changed
 - Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections
 - Colors in the tooltip for the Part of a chain and Required for sections are now based on the quest difficulty colors
+
+### Fixed
+- Taming Eastern Kingdoms now only shows for Alliance players
+- Taming Kalimdor now only shows for Horde players
 
 ## [9.0.5.22.0] - 2021-05-13
 ### Added

@@ -108,8 +108,8 @@ L["Show current character icons Desc"] = "Show / hide current character icons.\n
 
 -- Options ElvUI Skins Status
 L["ElvUI Skins Status"] = "ElvUI Skins Status";
-L["ElvUI Skins Status Desc"] = "Each of the options below are controlled by ElvUI and are just informational.\n" ..
-                    "To change these, go to Game Menu -> ElvUI -> Skins and check the desired options. See each option below for what to check.";
+L["ElvUI Skins Status Desc"] = "Each of the options below are controlled by ElvUI and are just informational.\n\n" ..
+                    "To change these, go to Game Menu -> ElvUI -> Skins and check the desired options. See each option below for what to check.\n ";
 L["Skin Achievements"] = "Skin Achievements";
 L["Skin Achievements Desc"] = "Applies the ElvUI skin to the Achievements Window.\n-> Blizzard + Achievements";
 L["Skin Misc Frames"] = "Skin Misc Frames";
@@ -126,8 +126,8 @@ L["BINDING_NAME_AF_OPEN_TAB1"] = "Toggle Achievement Window";
 L["Left click"] = "Left click";
 L["Right click"] = "Right click";
 
-L["I_LEFT_CLICK"] = "to open the Achievement window.";
-L["I_RIGHT_CLICK"] = "for Options.";
+L["Icon Left click"] = "to open the Achievement window.";
+L["Icon Right click"] = "for Options.";
 
 -- Tutorials
 -- Features tutorial

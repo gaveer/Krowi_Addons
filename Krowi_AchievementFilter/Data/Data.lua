@@ -11,10 +11,11 @@ addon.RCMenuExtras = {};
 addon.NextPatchAchievements = {};
 
 function data.Load()
-    addon.CurrentZoneCategory, addon.NextPatchCategory = addon.ExportedData.Load(addon.Categories, addon.Achievements);
-    addon.ExportedPetBattles.Load(addon.RCMenuExtras);
-    addon.NextPatch.Load(addon.NextPatchAchievements);
+    addon.CurrentZoneCategory, addon.NextPatchCategory = data.ExportedData.Load(addon.Categories, addon.Achievements);
+    data.ExportedPetBattles.Load(addon.RCMenuExtras);
+    data.NextPatch.Load(addon.NextPatchAchievements);
 
+    addon.Diagnostics.Debug("Expansion data loaded");
     -- TEST = {};
     -- data.PrintCriteria(14879, nil, 0);
 end

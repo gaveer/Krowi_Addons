@@ -119,9 +119,33 @@ local function CreatePanel()
                                 type = "execute",
                                 order = 1.3,
                                 func = function()
-                                    InterfaceOptionsFrame:Hide();
-                                    addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
-                                    addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                                    -- InterfaceOptionsFrame:Hide();
+                                    -- addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
+                                    -- addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+
+                                    local menu = LibStub("KrowiMenu-1.0");
+                                    local tutorial = addon.Tutorials.GetTutorial(addon.Tutorials.FeaturesTutorial);
+
+                                    -- Reset menu
+                                    menu:Clear();
+
+                                    menu:AddFull({Text = addon.L["View Tutorial"], IsTitle = true});
+                                    menu:AddFull({  Text = addon.L["From the start"],
+                                                    Func = function()
+                                                        InterfaceOptionsFrame:Hide();
+                                                        addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
+                                                        addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                                                    end
+                                                });
+                                    menu:AddFull({  Text = tutorial[1].subTitle,
+                                                    Func = function()
+                                                        InterfaceOptionsFrame:Hide();
+                                                        addon.Tutorials.FeaturesTutorial:ShowPage(2, 2); -- does not work
+
+                                                    end
+                                                });
+                                                
+                                    menu:Open();
                                 end
                             },
                             author = {
@@ -555,6 +579,7 @@ local function CreatePanel()
                         name = addon.L["ElvUI Skins Status Desc"],
                         type = "description",
                         width = "full",
+                        fontSize = "medium",
                         order = 1.1
                     },
                     skinAchievement = {
@@ -629,19 +654,14 @@ end
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
     addon.Options.SetFilters = SetFilters;
-    addon.Options.db = addon.Options.profile;
     addon.Options.Open = Open;
+    addon.Options.db = addon.Options.profile;
 
     addon.GUI.ElvUISkin.Load();
 
     -- TODO: add something to check if the options panel closes that we prompt for a reload
     CreatePanel();
 
-    diagnostics.Debug("- Options loaded");
-    diagnostics.Debug("     - " .. addon.L["Show minimap icon"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. addon.L["Categories width offset"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
-    diagnostics.Debug("     - " .. addon.L["Minimum characters to search"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
-    diagnostics.Debug("     - " .. addon.L["Number of search previews"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
-    diagnostics.Debug("     - " .. addon.L["Enable debug info"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
-    diagnostics.Debug("     - " .. addon.L["Enable trace info"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
+    diagnostics.Debug("Options loaded");
+    diagnostics.DebugTable(addon.Options.db, 1);
 end

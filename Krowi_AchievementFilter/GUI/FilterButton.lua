@@ -45,7 +45,7 @@ function filterButton:UpdateAchievementFrame()
     self.AchievementsFrame:ForceUpdate(true); -- Issue #27: Fix
 end
 
-local rightClickMenu = LibStub("KrowiMenu-1.0");
+local menu = LibStub("KrowiMenu-1.0");
 function filterButton:OnMouseDown()
     diagnostics.Trace("filterButton:OnMouseDown");
 
@@ -53,81 +53,81 @@ function filterButton:OnMouseDown()
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 
     -- Reset menu
-	rightClickMenu:Clear();
+	menu:Clear();
 
     -- Category Filters
-    rightClickMenu:AddFull({    Text = addon.L["Categories"],
-                                IsTitle = true
-                            });
+    menu:AddFull({  Text = addon.L["Categories"],
+                    IsTitle = true
+                });
 
-    rightClickMenu:AddFull({    Text = addon.L["Merge Small Categories"],
-                                Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
-                                    return addon.Options.db.Filters.MergeSmallCategories
-                                end,
-                                Func = function()
-                                    addon.Options.db.Filters.MergeSmallCategories = not addon.Options.db.Filters.MergeSmallCategories;
-                                    self:UpdateAchievementFrame();
-                                end,
-                                IsNotRadio = true,
-                                NotCheckable = false,
-                                KeepShownOnClick = true
-                            });
+    menu:AddFull({  Text = addon.L["Merge Small Categories"],
+                    Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
+                        return addon.Options.db.Filters.MergeSmallCategories
+                    end,
+                    Func = function()
+                        addon.Options.db.Filters.MergeSmallCategories = not addon.Options.db.Filters.MergeSmallCategories;
+                        self:UpdateAchievementFrame();
+                    end,
+                    IsNotRadio = true,
+                    NotCheckable = false,
+                    KeepShownOnClick = true
+                });
 
-    rightClickMenu:AddSeparator();
+    menu:AddSeparator();
 
     -- Achievement Filters
-    rightClickMenu:AddFull({    Text = addon.L["Achievements"],
-                                IsTitle = true
-                            });
+    menu:AddFull({  Text = addon.L["Achievements"],
+                    IsTitle = true
+                });
 
-    rightClickMenu:AddFull({    Text = addon.L["Completed"],
-                                Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
-                                    return addon.Options.db.Filters.Completion.Completed
-                                end,
-                                Func = function()
-                                    addon.Options.db.Filters.Completion.Completed = not addon.Options.db.Filters.Completion.Completed;
-                                    self:UpdateAchievementFrame();
-                                end,
-                                IsNotRadio = true,
-                                NotCheckable = false,
-                                KeepShownOnClick = true
-                            });
-    rightClickMenu:AddFull({    Text = addon.L["Not Completed"],
-                                Checked = function() -- Same
-                                    return addon.Options.db.Filters.Completion.NotCompleted
-                                end,
-                                Func = function()
-                                    addon.Options.db.Filters.Completion.NotCompleted = not addon.Options.db.Filters.Completion.NotCompleted;
-                                    self:UpdateAchievementFrame();
-                                end,
-                                IsNotRadio = true,
-                                NotCheckable = false,
-                                KeepShownOnClick = true
-                            });
-    rightClickMenu:AddFull({    Text = addon.L["Obtainable"],
-                                Checked = function() -- Same
-                                    return addon.Options.db.Filters.Obtainability.Obtainable
-                                end,
-                                Func = function()
-                                    addon.Options.db.Filters.Obtainability.Obtainable = not addon.Options.db.Filters.Obtainability.Obtainable;
-                                    self:UpdateAchievementFrame();
-                                end,
-                                IsNotRadio = true,
-                                NotCheckable = false,
-                                KeepShownOnClick = true
-                            });
-    rightClickMenu:AddFull({    Text = addon.L["Not Obtainable"],
-                                Checked = function() -- Same
-                                    return addon.Options.db.Filters.Obtainability.NotObtainable;
-                                end,
-                                Func = function()
-                                    addon.Options.db.Filters.Obtainability.NotObtainable = not addon.Options.db.Filters.Obtainability.NotObtainable;
-                                    self:UpdateAchievementFrame();
-                                end,
-                                IsNotRadio = true,
-                                NotCheckable = false,
-                                KeepShownOnClick = true
-                            });
+    menu:AddFull({  Text = addon.L["Completed"],
+                    Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
+                        return addon.Options.db.Filters.Completion.Completed
+                    end,
+                    Func = function()
+                        addon.Options.db.Filters.Completion.Completed = not addon.Options.db.Filters.Completion.Completed;
+                        self:UpdateAchievementFrame();
+                    end,
+                    IsNotRadio = true,
+                    NotCheckable = false,
+                    KeepShownOnClick = true
+                });
+    menu:AddFull({  Text = addon.L["Not Completed"],
+                    Checked = function() -- Same
+                        return addon.Options.db.Filters.Completion.NotCompleted
+                    end,
+                    Func = function()
+                        addon.Options.db.Filters.Completion.NotCompleted = not addon.Options.db.Filters.Completion.NotCompleted;
+                        self:UpdateAchievementFrame();
+                    end,
+                    IsNotRadio = true,
+                    NotCheckable = false,
+                    KeepShownOnClick = true
+                });
+    menu:AddFull({  Text = addon.L["Obtainable"],
+                    Checked = function() -- Same
+                        return addon.Options.db.Filters.Obtainability.Obtainable
+                    end,
+                    Func = function()
+                        addon.Options.db.Filters.Obtainability.Obtainable = not addon.Options.db.Filters.Obtainability.Obtainable;
+                        self:UpdateAchievementFrame();
+                    end,
+                    IsNotRadio = true,
+                    NotCheckable = false,
+                    KeepShownOnClick = true
+                });
+    menu:AddFull({  Text = addon.L["Not Obtainable"],
+                    Checked = function() -- Same
+                        return addon.Options.db.Filters.Obtainability.NotObtainable;
+                    end,
+                    Func = function()
+                        addon.Options.db.Filters.Obtainability.NotObtainable = not addon.Options.db.Filters.Obtainability.NotObtainable;
+                        self:UpdateAchievementFrame();
+                    end,
+                    IsNotRadio = true,
+                    NotCheckable = false,
+                    KeepShownOnClick = true
+                });
 
     local faction = addon.Objects.MenuItem:New({Text = addon.L["Faction"]});
     faction:AddChildFull({  Text = addon.L["Neutral"],
@@ -176,7 +176,7 @@ function filterButton:OnMouseDown()
                             end
                         });
 
-    rightClickMenu:Add(faction);
+    menu:Add(faction);
 
     local covenant = addon.Objects.MenuItem:New({Text = addon.L["Covenant"]});
     covenant:AddChildFull({ Text = addon.L["Neutral"],
@@ -248,22 +248,22 @@ function filterButton:OnMouseDown()
                                 self:UpdateAchievementFrame();
                             end
                         });
-    rightClickMenu:Add(covenant);
+    menu:Add(covenant);
 
-    rightClickMenu:AddFull({    Text = addon.L["Collapse Chain"],
-                                Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
-                                    return addon.Options.db.Filters.CollapseSeries
-                                end,
-                                Func = function()
-                                    addon.Options.db.Filters.CollapseSeries = not addon.Options.db.Filters.CollapseSeries;
-                                    self:UpdateAchievementFrame();
-                                end,
-                                IsNotRadio = true,
-                                NotCheckable = false,
-                                KeepShownOnClick = true
-                            });
+    menu:AddFull({  Text = addon.L["Collapse Chain"],
+                    Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
+                        return addon.Options.db.Filters.CollapseSeries
+                    end,
+                    Func = function()
+                        addon.Options.db.Filters.CollapseSeries = not addon.Options.db.Filters.CollapseSeries;
+                        self:UpdateAchievementFrame();
+                    end,
+                    IsNotRadio = true,
+                    NotCheckable = false,
+                    KeepShownOnClick = true
+                });
 
-    rightClickMenu:AddSeparator();
+    menu:AddSeparator();
 
     -- Sort By
     local sortBy = addon.Objects.MenuItem:New({Text = addon.L["Sort By"]});
@@ -273,7 +273,7 @@ function filterButton:OnMouseDown()
                             end,
                             Func = function()
                                 addon.Options.db.Filters.SortBy.Criteria = addon.L["Default"];
-                                rightClickMenu:SetSelectedName(addon.L["Default"]);
+                                menu:SetSelectedName(addon.L["Default"]);
                                 self.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
@@ -285,7 +285,7 @@ function filterButton:OnMouseDown()
                             end,
                             Func = function()
                                 addon.Options.db.Filters.SortBy.Criteria = addon.L["Name"];
-                                rightClickMenu:SetSelectedName(addon.L["Name"]);
+                                menu:SetSelectedName(addon.L["Name"]);
                                 self.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
@@ -305,23 +305,23 @@ function filterButton:OnMouseDown()
                             KeepShownOnClick = true,
                             IgnoreAsMenuSelection = true
                         });
-    rightClickMenu:Add(sortBy);
+    menu:Add(sortBy);
 
-    rightClickMenu:AddSeparator();
+    menu:AddSeparator();
 
-    rightClickMenu:AddFull({    Text = addon.L["Help"],
-                                Func = function()
-                                    addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
-                                    addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
-                                end
-                            });
-    rightClickMenu:AddFull({    Text = addon.L["Options"],
-                                Func = function()
-                                    addon.Options.Open();
-                                end
-                            });
+    menu:AddFull({  Text = addon.L["Help"],
+                    Func = function()
+                        addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
+                        addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                    end
+                });
+    menu:AddFull({  Text = addon.L["Options"],
+                    Func = function()
+                        addon.Options.Open();
+                    end
+                });
 
-	rightClickMenu:Toggle(self, 96, 15);
+	menu:Toggle(self, 96, 15);
 end
 
 function filterButton:Validate(achievement, ignoreCollapseSeries)

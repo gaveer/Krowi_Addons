@@ -1,4 +1,4 @@
--- [[ Exported at 2021-05-13 18-41-25 ]] --
+-- [[ Exported at 2021-05-21 18-56-52 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -9,8 +9,9 @@ local faction = objects.Faction;
 local covenant = objects.Covenant;
 local achievementCategory = objects.AchievementCategory;
 local achievement = objects.Achievement;
-addon.ExportedData = {};
-local exportedData = addon.ExportedData;
+local data = addon.Data;
+data.ExportedData = {};
+local exportedData = data.ExportedData;
 
 local function InsertAndReturn(table, value)
     tinsert(table, value);
@@ -489,8 +490,8 @@ function exportedData.Load(categories, achievements)
     tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6585)));
     tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6613)));
     tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6612)));
-    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6603)));
-    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6602)));
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6603, faction.Alliance)));
+    tmpCategories[785]:AddAchievement(InsertAndReturn(achievements, achievement:New(6602, faction.Horde)));
     tmpCategories[55] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(14865)))); -- The Burning Crusade
     tmpCategories[616] = InsertAndReturn(categories, achievementCategory:New(addon.L["Zones"])); -- Zones
     tmpCategories[55]:AddCategory(tmpCategories[616]);
@@ -4569,7 +4570,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[380]:AddAchievement(InsertAndReturn(achievements, achievement:New(14877)));
     tmpCategories[380]:AddAchievement(InsertAndReturn(achievements, achievement:New(14879)));
     tmpCategories[380]:AddAchievement(InsertAndReturn(achievements, achievement:New(14881)));
-    tmpCategories[424] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15440)), {1618, 1619, 1620, 1621, 1623, 1624, 1627, 1628, 1629, 1630, 1631, 1632, 1635, 1636, 1641, 1645, 1656, 1705, 1712, 1716, 1720, 1721, 1736, 1749, 1751, 1752, 1753, 1754, 1756, 1757, 1758, 1759, 1760, 1761, 1762, 1763, 1764, 1765, 1766, 1767, 1768, 1769, 1770, 1771, 1772, 1773, 1774, 1776, 1777, 1778, 1779, 1780, 1781, 1782, 1783, 1784, 1785, 1786, 1787, 1788, 1789, 1791, 1792, 1793, 1794, 1795, 1796, 1797, 1798, 1799, 1800, 1801, 1802, 1803, 1804, 1805, 1806, 1807, 1808, 1809, 1810, 1811, 1812, 1833, 1834, 1835, 1836, 1837, 1838, 1839, 1840, 1841, 1842, 1843, 1844, 1845, 1846, 1847, 1848, 1849, 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1864, 1865, 1867, 1868, 1869, 1870, 1871, 1872, 1873, 1874, 1875, 1876, 1877, 1878, 1879, 1880, 1881, 1882, 1883, 1884, 1885, 1886, 1887, 1888, 1889, 1890, 1891, 1892, 1893, 1894, 1895, 1896, 1897, 1898, 1899, 1900, 1901, 1902, 1903, 1904, 1905, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914, 1920, 1921})); -- Torghast
+    tmpCategories[424] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15440)), {1618, 1619, 1620, 1621, 1623, 1624, 1627, 1628, 1629, 1630, 1631, 1632, 1635, 1636, 1641, 1645, 1656, 1705, 1712, 1716, 1720, 1721, 1736, 1749, 1751, 1752, 1753, 1754, 1756, 1757, 1758, 1759, 1760, 1761, 1762, 1763, 1764, 1765, 1766, 1767, 1768, 1769, 1770, 1771, 1772, 1773, 1774, 1776, 1777, 1778, 1779, 1780, 1781, 1782, 1783, 1784, 1785, 1786, 1787, 1788, 1789, 1791, 1792, 1793, 1794, 1795, 1796, 1797, 1798, 1799, 1800, 1801, 1802, 1803, 1804, 1805, 1806, 1807, 1808, 1809, 1810, 1811, 1812, 1833, 1834, 1835, 1836, 1837, 1838, 1839, 1840, 1841, 1842, 1843, 1844, 1845, 1846, 1847, 1848, 1849, 1850, 1851, 1852, 1853, 1854, 1855, 1856, 1857, 1858, 1859, 1860, 1861, 1862, 1863, 1864, 1865, 1867, 1868, 1869, 1870, 1871, 1872, 1873, 1874, 1875, 1876, 1877, 1878, 1879, 1880, 1881, 1882, 1883, 1884, 1885, 1886, 1887, 1888, 1889, 1890, 1891, 1892, 1893, 1894, 1895, 1896, 1897, 1898, 1899, 1900, 1901, 1902, 1903, 1904, 1905, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914, 1920, 1921, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1974, 1975, 1976, 1977, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 2009, 2010, 2011, 2012})); -- Torghast
     tmpCategories[6]:AddCategory(tmpCategories[424]);
     tmpCategories[424]:AddAchievement(InsertAndReturn(achievements, achievement:New(14463)));
     tmpCategories[424]:AddAchievement(InsertAndReturn(achievements, achievement:New(14473)));
@@ -4765,6 +4766,7 @@ function exportedData.Load(categories, achievements)
     tmpCategories[823]:AddAchievement(InsertAndReturn(achievements, achievement:New(15109)));
     tmpCategories[820] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15271)))); -- Raids
     tmpCategories[814]:AddCategory(tmpCategories[820]);
+    tmpCategories[820]:AddAchievement(InsertAndReturn(achievements, achievement:New(15130)));
     tmpCategories[821] = InsertAndReturn(categories, achievementCategory:New("Sanctum of Domination", {1998, 1999, 2000, 2001, 2002, 2003, 2004})); -- Sanctum of Domination
     tmpCategories[820]:AddCategory(tmpCategories[821]);
     tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15058)));
@@ -4773,6 +4775,29 @@ function exportedData.Load(categories, achievements)
     tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15040)));
     tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15105)));
     tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15108)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15122)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15123)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15124)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15125)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15131)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15132)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15133)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15126)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15127)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15128)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15112)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15113)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15114)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15115)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15116)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15117)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15118)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15119)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15120)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15121)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15134)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15135)));
+    tmpCategories[821]:AddAchievement(InsertAndReturn(achievements, achievement:New(15110)));
     tmpCategories[800] = InsertAndReturn(categories, achievementCategory:New((GetCategoryInfo(15117)))); -- Pet Battles
     tmpCategories[814]:AddCategory(tmpCategories[800]);
     tmpCategories[800]:AddAchievement(InsertAndReturn(achievements, achievement:New(15004)));

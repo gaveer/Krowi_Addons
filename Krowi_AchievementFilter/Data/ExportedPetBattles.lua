@@ -1,12 +1,13 @@
--- [[ Exported at 2021-05-08 14-02-05 ]] --
+-- [[ Exported at 2021-05-21 18-56-53 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
 -- [[ Namespaces ]] --
 local _, addon = ...;
 local objects = addon.Objects;
-addon.ExportedPetBattles = {};
-local exportedPetBattles = addon.ExportedPetBattles;
+local data = addon.Data;
+data.ExportedPetBattles = {};
+local exportedPetBattles = data.ExportedPetBattles;
 
 function exportedPetBattles.Load(rcMenExtras)
     for i, _ in next, rcMenExtras do

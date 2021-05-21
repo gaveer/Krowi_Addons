@@ -169,6 +169,9 @@ local function UpdateFrame(frame, i)
 	end
 	
 	-- Text
+	if data.subTitle then
+		data.text = data.subTitle .. "\n\n" .. data.text;
+	end
 	frame.text:SetPoint('TOP', frame, 0, -((data.image and 26 + data.imageY + data.imageHeight or 60) + data.textY))
 	frame.text:SetWidth(data.width - (2 * data.textX))
 	frame.text:SetText(data.text)
@@ -415,6 +418,11 @@ function lib:TriggerTutorial(index, maxAdvance)
 			UpdateFrame(frame, (maxAdvance == true or not sv) and index or last + (maxAdvance or 1))
 		end
 	end
+end
+
+function lib:ShowPage(index, maxAdvance)
+	self:ResetTutorial();
+	self:TriggerTutorial(index, maxAdvance);
 end
 
 function lib:ResetTutorial()

@@ -7,6 +7,12 @@ AF_BUILD = GetBuildInfo();
 AF_VERSION = GetAddOnMetadata(addonName, "Version");
 AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
 
+function addon.RemoveColor(text)
+    text = string.gsub(text, "|c[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]", "");
+    text = string.gsub(text, "|r", "");
+    return text;
+end
+
 function addon.RGBPrct2HEX(r, g, b, a)
     if type(r) == "table" then
         a = r.A;
@@ -110,6 +116,14 @@ addon.YellowRGB = {
 }
 addon.YellowRGB.Hex = addon.RGBPrct2HEX(addon.YellowRGB);
 addon.Yellow = "|c" .. addon.YellowRGB.Hex .. "%s|r";
+
+addon.WhiteRGB = {
+    R = GetFontInfo(GameFontHighlight).color.r,
+    G = GetFontInfo(GameFontHighlight).color.g,
+    B = GetFontInfo(GameFontHighlight).color.b
+}
+addon.WhiteRGB.Hex = addon.RGBPrct2HEX(addon.WhiteRGB);
+addon.White = "|c" .. addon.WhiteRGB.Hex .. "%s|r";
 
 function addon.GetAchievement(id)
     addon.Diagnostics.Trace("addon.GetAchievement");

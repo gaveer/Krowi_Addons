@@ -309,12 +309,26 @@ function filterButton:OnMouseDown()
 
     menu:AddSeparator();
 
-    menu:AddFull({  Text = addon.L["Help"],
-                    Func = function()
-                        addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
-                        addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
-                    end
-                });
+    local help = addon.Objects.MenuItem:New({   Text = addon.L["Help"],
+                                                Func = function()
+                                                    menu:Close();
+                                                    addon.Tutorials.FeaturesTutorial:Reset();
+                                                    addon.Tutorials.FeaturesTutorial:ShowTutorial();
+                                                end});
+
+    local pages = addon.Tutorials.FeaturesTutorial.Pages;
+
+    help:AddChildFull({Text = addon.L["View Tutorial"], IsTitle = true});
+    for i, _ in next, pages do
+        help:AddChildFull({ Text = (pages[i].IsViewed and "" or "|T132049:0|t") .. string.format(addon.White, addon.RemoveColor(pages[i].SubTitle)),
+                            Func = function()
+                                menu:Close();
+                                addon.Tutorials.FeaturesTutorial:ShowTutorial(i, i, i, true);
+                            end
+                        });
+    end
+    menu:Add(help);
+
     menu:AddFull({  Text = addon.L["Options"],
                     Func = function()
                         addon.Options.Open();

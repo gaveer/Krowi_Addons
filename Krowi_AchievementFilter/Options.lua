@@ -120,11 +120,11 @@ local function CreatePanel()
                                 order = 1.3,
                                 func = function()
                                     -- InterfaceOptionsFrame:Hide();
-                                    -- addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
-                                    -- addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                                    -- addon.Tutorials.FeaturesTutorial:Reset();
+                                    -- addon.Tutorials.FeaturesTutorial:ShowTutorial();
 
                                     local menu = LibStub("KrowiMenu-1.0");
-                                    local tutorial = addon.Tutorials.GetTutorial(addon.Tutorials.FeaturesTutorial);
+                                    local pages = addon.Tutorials.FeaturesTutorial.Pages;
 
                                     -- Reset menu
                                     menu:Clear();
@@ -133,18 +133,20 @@ local function CreatePanel()
                                     menu:AddFull({  Text = addon.L["From the start"],
                                                     Func = function()
                                                         InterfaceOptionsFrame:Hide();
-                                                        addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
-                                                        addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                                                        addon.Tutorials.FeaturesTutorial:Reset();
+                                                        addon.Tutorials.FeaturesTutorial:ShowTutorial();
                                                     end
                                                 });
-                                    menu:AddFull({  Text = tutorial[1].subTitle,
-                                                    Func = function()
-                                                        InterfaceOptionsFrame:Hide();
-                                                        addon.Tutorials.FeaturesTutorial:ShowPage(2, 2); -- does not work
+                                    for i, _ in next, pages do
+                                        menu:AddFull({  Text = (pages[i].IsViewed and "" or "|T132049:0|t") .. string.format(addon.White, addon.RemoveColor(pages[i].SubTitle)),
+                                                        Func = function()
+                                                            InterfaceOptionsFrame:Hide();
+                                                            diagnostics.Debug("Showing tutorial for " .. tostring(i));
+                                                            addon.Tutorials.FeaturesTutorial:ShowTutorial(i, i, i, true);
+                                                        end
+                                                    });
+                                    end
 
-                                                    end
-                                                });
-                                                
                                     menu:Open();
                                 end
                             },

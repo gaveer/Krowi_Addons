@@ -447,7 +447,7 @@ function lib:IsTutorialOpen()
 	return lib.frames[self]:IsShown();
 end
 
-function lib:CloseButtonHook(func)
+function lib:SetCloseButtonHook(func)
 	if lib.frames[self] then
 		lib.frames[self]:SetScript("OnHide", function(self)
 			FrameOnHide(self);

@@ -1,6 +1,6 @@
 --[[
 	Krowi's Progress Bar License
-		Copyright ©2020-2020 The contents of this library, excluding third-party resources, are
+		Copyright ©2020-2021 The contents of this library, excluding third-party resources, are
 		copyrighted to their authors with all rights reserved.
 
 		This library is free to use and the authors hereby grants you the following rights:
@@ -71,9 +71,16 @@ local function Resize(self)
 	end
 end
 
+local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
+
 lib.__index = lib; -- Used to support OOP like code
 function lib:New(parent)
-	local frame = CreateFrame("Frame", "KrowiProgressBar", parent, "KrowiProgressBar_Template");
+	-- Increment ID
+	numFrames = numFrames + 1;
+
+	local frame = CreateFrame("Frame", "KrowiProgressBar" .. numFrames, parent, "KrowiProgressBar_Template");
+	setmetatable(frame, setmetatable(lib, getmetatable(frame)));
+
 	frame:SetScript("OnSizeChanged", function()
 		Resize(frame);
 	end);
@@ -82,7 +89,6 @@ function lib:New(parent)
 			self.CustomHeight = height;
 		end
 	end);
-	setmetatable(frame, setmetatable(lib, getmetatable(frame)));
 
 	borderLeftRightWidth = frame.BorderLeftMiddle:GetWidth();
 	borderTopBottomHeight = frame.BorderMiddleTop:GetHeight();

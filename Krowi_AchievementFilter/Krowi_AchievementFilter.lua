@@ -36,10 +36,12 @@ function loadHelper:OnEvent(event, arg1)
         if arg1 == "Krowi_AchievementFilter" then -- This always needs to load
             addon.Diagnostics.Load();
             addon.Options.Load();
+
+            addon.Data.SavedData.Load();
+
             addon.Icon.Load();
             addon.Tutorials.Load();
 
-            addon.Data.SavedData.Load();
 
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             addon.Data.Load();

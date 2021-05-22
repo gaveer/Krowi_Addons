@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections
 - Colors in the tooltip for the Part of a chain and Required for sections are now based on the quest difficulty colors
+- Full rewrite of the 3rd party tutorial library to further tailor it to my own needs
 
 ### Fixed
 - Taming Eastern Kingdoms now only shows for Alliance players

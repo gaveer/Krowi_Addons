@@ -19,64 +19,66 @@
 ]]
 
 --[[
+	API Information
 
-Required Tutorial Arguments
----------------------------
-	SavedVariables ..... The table that is used in the .toc file for the SavedVariables
-	Key ................ The variable name that will be used to save the last viewed page index
+	Tutorial Arguments
+	---------------------------
+		SavedVariables ..... The table that is used in the .toc file for the SavedVariables
+		Key ................ The variable name that will be used to save the last viewed page index
+		Icon ............... [Optional] Path to image (tga or blp). Default is '?'-mark.
+		Font ............... [Optional] Font name to be used. Default is default game font (GameFontHighlight).
 
-Optional Tutorial Arguments
----------------------------
-	Icon ............... Path to image (tga or blp). Default is '?'-mark.
-	Font ............... Font name to be used. Default is default game font (GameFontHighlight).
+	Tutorial Functions
+	------------------
+		New ................ Creates a new tutorial frame.
+		SetPages ........... Sets the pages the tutorial contains.
+		AddPage ............ Adds a single page to the tutorial.
+		Reset .............. Resets the tutorial so when it opens it will be on the first page.
+		ShowTutorial ....... Shows the tutorial on the set page.
+		SetFrameTitle ...... [Optional] Sets the title at the top of the tutorial window. Will be overwritten if a page has a 'Title' defined.
+		SetFrameWidth ...... [Optional] Sets the internal frame width (without borders). Default is 512 + 20. Allows for 512 wide images to have some space between image and borders.
+							            Will be overwritten if a page has a 'Width' defined.
+		SetCloseButtonHook . [Optional] Hooks a function to the closing of the tutorial.
+		SetImageSize ....... [Optional] Set the image size for all pages.
+		SetImageMargin ..... [Optional] Set the image margins for all pages.
+		SetTextSize ........ [Optional] Set the text size for all pages.
+		SetTextMargin ...... [Optional] Set the text margins for all pages.
 
-Tutorial Functions
-------------------
-	New ................ Creates a new tutorial frame.
-	SetFrameTitle ...... Sets the title at the top of the tutorial window. Will be overwritten if a page has a 'Title' defined.
-	SetFrameWidth ...... Sets the internal frame width (without borders). Default is 512 + 20. Allows for 512 wide images to have some space between image and borders.
-					 	 Will be overwritten if a page has a 'Width' defined.
-	SetPages ........... Sets the pages the tutorial contains.
-	AddPage ............ Adds a single page to the tutorial.
-	SetCloseButtonHook . Hooks a function to the closing of the tutorial.
-	Reset .............. Resets the tutorial so when it opens it will be on the first page.
-	ShowTutorial ....... Shows the tutorial on the set page.
+	Page Arguments (All these arguments can also be declared on Tutorial level)
+	--------------
+		Point .............. [Optional] Used in Tutorial:SetPoint. Default is "CENTER".
+		RelativeFrame ...... [Optional] Used in Tutorial:SetPoint. Default is "UIParent".
+		RelativePoint ...... [Optional] Used in Tutorial:SetPoint. Default is "CENTER".
+		OffsetX ............ [Optional] Used in Tutorial:SetPoint. Default is 0.
+		OffsetY ............ [Optional] Used in Tutorial:SetPoint. Default is 0.
+		Title .............. [Optional] Overwrites SetFrameTitle for the specific page. Default is 'Tutorial'.
+		Width .............. [Optional] Overwrites SetFrameWidth for the specific page.
+		Image .............. [Optional] Image path (tga or blp). Default is none.
+		ImageSize .......... [Optional] {Width, Height} of the image. Default is {0, 0}.
+		ImageTexCoord ...... [Optional] {Left, Right, Top, Bottom}. See https://wowpedia.fandom.com/wiki/API_Texture_SetTexCoord. Default is {0, 1, 0, 1}.
+		ImageMargin ........ [Optional] {Left, Top, Right, Bottom} margins of the image. Default is {0, 0, 0, 0}.
+		Text ............... [Optional] Text string. Dsiplayed under Image if provided.
+		TextSize ........... [Optional] {Width, Height} of the text area. Auto Width/Height if default. Default is {0, 0}.
+		TextMargin ......... [Optional] {Left, Top, Right, Bottom} margins of the text area. Default is {0, 0, 0, 0}.
+		Shine .............. [Optional] The frame to anchor the flashing "look at me!" glow.
+		ShineAll ........... [Optional] Set ShineTop, ShineBottom, ShineLeft, ShineRight to the same value, can be overwritten by the invidual arguments or ShineWidth and ShineHeight.
+		ShineWidth ......... [Optional] Set ShineLeft, ShineRight to the same value, can be overwritten by the invidual arguments.
+		ShineHeight ........ [Optional] Set ShineTop, ShineBottom to the same value, can be overwritten by the invidual arguments.
+		ShineTop ........... [Optional] Top offset.
+		ShineBottom ........ [Optional] Bottom offset.
+		ShineLeft .......... [Optional] Left offset.
+		ShineRight ......... [Optional] Right offset.
 
-Frame Arguments
-------------------
- title .......... Title relative to frame (replace General value).
- width .......... Width relative to frame (replace General value).
-Note: All other arguments can be used as a general!
- image .......... [optional] Image path (tga or blp).
- imageHeight .... Default is 128. Default image size is 256x128.
- ImageX ......... Default is 0 (center). Left/Right position relative to center.
- ImageY ......... Default is 20 (top margin).
- text ........... Text string.
- textHeight ..... Default is 0 (auto height).
- TextX .......... Default is 25. Left and Right margin.
- TextY .......... Default is 20 (top margin).
- editbox ........ [optional] Edit box text string (directing value). Edit box is out of content flow.
- editboxWidth ... Default is 400.
- editboxLeft, editboxBottom
- button ......... [optional] Button text string (directing value). Button is out of content flow.
- buttonWidth .... Default is 100.
- buttonClick .... Function with button's click action.
- buttonLeft, buttonBottom
- shine .......... [optional] The frame to anchor the flashing "look at me!" glow.
- shineAll ....... [optional] Set shineTop, shineBottom, shineLeft, shineRight to the same value, can be overwritten by the invidual arguments or shineWidth and shineHeight
- shineWidth ..... [optional] Set shineLeft, shineRight to the same value, can be overwritten by the invidual arguments
- shineHeight .... [optional] Set shineTop, shineBottom to the same value, can be overwritten by the invidual arguments
- shineTop, shineBottom, shineLeft, shineRight
- point .......... Default is "CENTER".
- anchor ......... Default is "UIParent".
- relPoint ....... Default is "CENTER".
- x, y ........... Default is 0, 0.
+	Not Used Right Now
+	------------------
+		editbox ............ [Optional] Edit box text string (directing value). Edit box is out of content flow.
+		editboxWidth ....... [Optional] Default is 400.
+		editboxLeft, editboxBottom
+		button ............. [optional] Button text string (directing value). Button is out of content flow.
+		buttonWidth ........ Default is 100.
+		buttonClick ........ Function with button's click action.
+		buttonLeft, buttonBottom
 --]]
-
--- Lua API
-local floor = math.floor
-local fmod = math.fmod
-local round = function(n) return floor(n + 0.5) end
 
 local lib = LibStub:NewLibrary('KrowiTutorials-1.0', 1)
 
@@ -93,25 +95,332 @@ local default = {
 	RelativePoint = "CENTER",
 	OffsetX = 0,
 	OffsetY = 0,
-	Width = 512 + 20,
+	Width = 512,
 	Title = "Tutorial",
-	FixedImageOffsetTop = 26,
-	ImageX = 0,
-	ImageY = 20,
-	ImageHeight = 0,
-	FixedTextOffsetTop = 26 + 34,
-	TextX = 25,
-	TextY = 20,
-	TextHeight = 0,
-	FixedFrameHeightFromImage1 = 90,
-	FixedFrameHeightFromImage2 = 26 + 30,
-	FixedFrameHeightFromText1 = 18,
-	FixedFrameHeightFromText2 = 0,
+	ImageSize = {
+		Width = 0,
+		Height = 0
+	},
+	ImageTexCoord = {0, 1, 0, 1},
+	ImageMargin = { -- These are the offsets for the frame
+		Left = 7,
+		Top = 26,
+		Right = 9,
+		Bottom = 28},
+	TextSize = {
+		Width = 0,
+		Height = 0
+	},
+	TextMargin = {
+		Left = 0,
+		Top = 0,
+		Right = 0,
+		Bottom = 0},
+	Layout = "VERTICAL",
 }
 
+-- [[ INTERNAL API ]] --
 
--- [[ New Code by Krowi ]] --
-local NewButton, FrameOnHide, ApplyElvUISkin;
+local function Copy_Table(src, dest)
+	for index, value in pairs(src) do
+		if type(value) == "table" then
+			dest[index] = {}
+			Copy_Table(value, dest[index])
+		else
+			dest[index] = value
+		end
+	end
+end
+
+local function UpdateFrame(frame, i)
+	local page = frame.Pages[i];
+
+	if not page then
+		return;
+	end
+
+	-- Set values
+	local layout = page.Layout or (frame.Layout or default.Layout);
+	local point = page.Point or (frame.Point or default.Point);
+	local relativeFrame = page.RelativeFrame or (frame.RelativeFrame or default.RelativeFrame);
+	local relativePoint = page.RelativePoint or (frame.RelativePoint or default.RelativePoint);
+	local offsetX = page.OffsetX or (frame.OffsetX or default.OffsetX);
+	local offsetY = page.OffsetY or (frame.OffsetY or default.OffsetY);
+	local width = page.Width or (frame.Width or default.Width);
+	local title = page.Title or (frame.Title or default.Title);
+	local imageSize = page.ImageSize or (frame.ImageSize or default.ImageSize);
+	local imageTexCoord = {};
+	Copy_Table(page.ImageTexCoord or (frame.ImageTexCoord or default.ImageTexCoord), imageTexCoord);
+	local imageMargin = {};
+	Copy_Table(page.ImageMargin or (frame.ImageMargin or {Left = 0, Top = 0, Right = 0, Bottom = 0}), imageMargin);
+	imageMargin.Left = imageMargin.Left + default.ImageMargin.Left;
+	imageMargin.Top = imageMargin.Top + default.ImageMargin.Top;
+	imageMargin.Right = imageMargin.Right + default.ImageMargin.Right;
+	imageMargin.Bottom = imageMargin.Bottom + default.ImageMargin.Bottom;
+	local textSize = page.TextSize or (frame.TextSize or default.TextSize);
+	local textMargin = {};
+	Copy_Table(page.TextMargin or (frame.TextMargin or default.TextMargin), textMargin);
+	textMargin.Left = textMargin.Left + (page.Image and 0 or imageMargin.Left);
+	textMargin.Top = textMargin.Top + (page.Image and 0 or imageMargin.Top);
+	textMargin.Right = textMargin.Right + (page.Image and 0 or imageMargin.Right);
+	textMargin.Bottom = textMargin.Bottom + (page.Image and 0 or imageMargin.Bottom);
+
+	-- Callbacks
+	if page.OnShow then
+		page:OnShow();
+	end
+	if page.OnHide then
+		page:OnHide();
+	end
+
+	-- Frame
+	frame:ClearAllPoints();
+	frame:SetPoint(point, relativeFrame, relativePoint, offsetX, offsetY);
+
+	-- Title
+	frame.TitleText:SetPoint('TOP', 0, -5);
+	frame.TitleText:SetText(title);
+
+	-- Image
+	for _, p in next, frame.Pages do
+		if p.ImageTex then
+			p.ImageTex:Hide();
+		end
+	end
+	if page.Image then
+		if page.ImageTex then
+			page.ImageTex:Show();
+		else
+			local image = frame:CreateTexture(); -- Implicitly calls Show
+			image:SetPoint("TOPLEFT", frame, imageMargin.Left, -imageMargin.Top);
+			image:SetWidth(imageSize.Width);
+			image:SetTexture(page.Image);
+			image:SetTexCoord(imageTexCoord[1], imageTexCoord[2], imageTexCoord[3], imageTexCoord[4]);
+			page.ImageTex = image;
+		end
+	end
+	local fullImageWidth = page.Image and imageMargin.Left + imageSize.Width + imageMargin.Right or 0;
+	local fullImageHeight = page.Image and imageMargin.Top + imageSize.Height + imageMargin.Bottom or 0;
+	print("fullImageWidth " .. tostring(fullImageWidth))
+
+	-- Text
+	local text = page.Text;
+	if page.SubTitle then
+		text = page.SubTitle .. "\n\n" .. text;
+	end
+	local textRelativePoint = page.Image and (layout == "HORIZONTAL" and "TOPRIGHT" or "BOTTOMLEFT") or "TOPLEFT";
+	local textRelativeFrame = page.Image and page.ImageTex or frame;
+	local textOffsetX = (layout == "HORIZONTAL" and imageMargin.Right - default.ImageMargin.Right or 0) + textMargin.Left;
+	local textOffsetY = textMargin.Top + (page.Image and imageMargin.Bottom - default.ImageMargin.Bottom or 0);
+	frame.Text:SetPoint("TOPLEFT", textRelativeFrame, textRelativePoint, textOffsetX, -textOffsetY);
+	frame.Text:SetWidth(layout == "HORIZONTAL" and textSize.Width or width - textMargin.Left - textMargin.Right);
+	-- print(textSize.Width)
+	-- print(imageSize.Width)
+	-- print(width - textMargin.Left - textMargin.Right)
+	print("textSize.Width " .. tostring(textSize.Width))
+	print("imageSize.Width " .. tostring(imageSize.Width))
+	print("width " .. tostring(width))
+	print("textMargin.Left " .. tostring(textMargin.Left))
+	print("textMargin.Right " .. tostring(textMargin.Right))
+	frame.Text:SetText(text);
+	local fullTextWidth = text and textMargin.Left + max(textSize.Width, frame.Text:GetWidth()) + textMargin.Right or 0;
+	fullTextWidth = fullTextWidth + (layout == "HORIZONTAL" and default.ImageMargin.Right or 0);
+	local fullTextHeight = text and textMargin.Top + max(textSize.Height, frame.Text:GetHeight()) + textMargin.Bottom or 0;
+	print("fullTextWidth " .. tostring(fullTextWidth))
+
+	-- EditBox
+	-- if data.editbox then
+	-- 	frame.editbox:ClearFocus()
+	-- 	frame.editbox:SetWidth(data.editboxWidth)
+	-- 	frame.editbox:SetPoint('BOTTOMLEFT', 14 + data.TextX + (data.editboxLeft or 0), 28 + 18 + (data.editboxBottom or 0))
+	-- 	frame.editbox:SetText(data.editbox)
+	-- 	frame.editbox:Show()
+	-- else
+	-- 	frame.editbox:Hide()
+	-- end
+
+	-- Button
+	-- if data.button then
+	-- 	frame.button:SetWidth(data.buttonWidth)
+	-- 	frame.button:SetPoint('BOTTOMLEFT', 8 + data.TextX + (data.buttonLeft or 0), 28 + 18 + (data.buttonBottom or 0))
+	-- 	frame.button:SetText(data.button)
+	-- 	frame.button:SetScript('OnClick', data.buttonClick)
+	-- 	frame.button:Show()
+	-- else
+	-- 	frame.button:Hide()
+	-- end
+
+	-- Shine
+	if page.Shine then
+		frame.Shine:SetParent(page.Shine);
+		local shineTop, shineBottom, shineLeft, shineRight = 0, 0, 0, 0;
+
+		-- First set All so more specific ones can overwrite
+		page.ShineAll = type(page.ShineAll) == "function" and page.ShineAll() or page.ShineAll;
+		if page.ShineAll then
+			shineTop = page.ShineAll;
+			shineBottom = -page.ShineAll;
+			shineLeft = -page.ShineAll;
+			shineRight = page.ShineAll;
+		end
+
+		-- Second set Height and Width so more specific ones can overwrite
+		page.ShineHeight = type(page.ShineHeight) == "function" and page.ShineHeight() or page.ShineHeight;
+		if page.ShineHeight then
+			shineTop = page.ShineHeight;
+			shineBottom = -page.ShineHeight;
+		end
+
+		page.ShineWidth = type(page.ShineWidth) == "function" and page.ShineWidth() or page.ShineWidth;
+		if page.ShineWidth then
+			shineLeft = -page.ShineWidth;
+			shineRight = page.ShineWidth;
+		end
+
+		-- Lastly set Top, Bottom, Left, Right since these are the most specific ones
+		page.ShineTop = type(page.ShineTop) == "function" and page.ShineTop() or page.ShineTop;
+		if page.ShineTop then
+			shineTop = page.ShineTop;
+		end
+
+		page.ShineBottom = type(page.ShineBottom) == "function" and page.ShineBottom() or page.ShineBottom;
+		if page.ShineBottom then
+			shineBottom = page.ShineBottom;
+		end
+
+		page.ShineLeft = type(page.ShineLeft) == "function" and page.ShineLeft() or page.ShineLeft;
+		if page.ShineLeft then
+			shineLeft = page.ShineLeft;
+		end
+
+		page.ShineRight = type(page.ShineRight) == "function" and page.ShineRight() or page.ShineRight;
+		if page.ShineRight then
+			shineRight = page.ShineRight;
+		end
+
+		frame.Shine:SetPoint('BOTTOMRIGHT', shineRight, shineBottom);
+		frame.Shine:SetPoint('TOPLEFT', shineLeft, shineTop);
+		frame.Shine:Show();
+		frame.Flash:Play();
+	else
+		frame.Flash:Stop();
+		frame.Shine:Hide();
+	end
+
+	-- Buttons
+	if i == frame.MinPage then
+		frame.Prev:Disable();
+	else
+		frame.Prev:Enable();
+	end
+	frame.PageNum:SetText(("%d/%d"):format(i, frame.MaxPage))
+	if i < frame.MaxPage then
+		frame.Next:Enable();
+	else
+		frame.Next:Disable();
+	end
+
+	-- Frame
+	frame:SetWidth(layout == "HORIZONTAL" and fullImageWidth + fullTextWidth or max(fullImageWidth, fullTextWidth));
+	frame:SetHeight(layout == "HORIZONTAL" and max(fullImageHeight, fullTextHeight) or fullImageHeight + fullTextHeight);
+	frame.ShownIndex = i;
+	frame:Show();
+
+	frame.SavedVariables[frame.Key].PageViewed[i] = true;
+	page.IsViewed = true;
+end
+
+local function NewButton(frame, name, texName, direction)
+	local button = CreateFrame("Button", nil, frame);
+	button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight");
+	local buttonTex = "Interface\\Buttons\\UI-SpellbookIcon-%sPage-%s";
+	button:SetDisabledTexture(buttonTex:format(texName, "Disabled"));
+	button:SetPushedTexture(buttonTex:format(texName, "Down"));
+	button:SetNormalTexture(buttonTex:format(texName, "Up"));
+	button:SetPoint("BOTTOM" .. ((direction == -1) and "LEFT" or "RIGHT"), -(30 * direction), 2);
+	button:SetSize(26, 26);
+	button:SetScript("OnClick", function()
+		UpdateFrame(frame, frame.ShownIndex + direction);
+	end)
+
+	local text = button:CreateFontString(nil, nil, "GameFontHighlightSmall");
+	text:SetText(name);
+	text:SetPoint("LEFT", -(13 + text:GetStringWidth() / 2) * direction, 0);
+
+	return button;
+end
+
+local function FrameOnHide(self)
+	self.Flash:Stop()
+	self.Shine:Hide()
+end
+
+local function ApplyElvUISkin(frame)
+	if ElvUI == nil then
+		return;
+	end
+
+	local engine = unpack(ElvUI);
+	local blizzardSkins = engine.private.skins.blizzard;
+	local tutorials = blizzardSkins.enable and blizzardSkins.tutorials;
+
+	if not tutorials then
+		return;
+	end
+
+	local skins = engine:GetModule("Skins");
+
+	frame:StripTextures();
+	frame:CreateBackdrop("Transparent");
+
+	skins:HandleCloseButton(frame.CloseButton);
+	skins:HandleNextPrevButton(frame.Prev, "left");
+	skins:HandleNextPrevButton(frame.Next, "right");
+end
+
+local function FixSizeTable(size)
+	if size then
+		local newSize = {};
+		newSize.Width = size.Width or size[1];
+		newSize.Height = size.Height or size[2];
+		return newSize;
+	end
+end
+
+local function FixMarginTable(margin)
+	if margin == nil then
+		return;
+	end
+
+	local newMargin = {};
+	if type(margin) == "table" then
+		newMargin.Left = margin.Left or margin[1];
+		newMargin.Top = margin.Top or margin[2];
+		newMargin.Right = margin.Right or (margin[3] or margin[1] + 2);
+		newMargin.Bottom = margin.Bottom or (margin[4] or margin[2]);
+	elseif type(margin) == "number" then
+		newMargin.Left = margin;
+		newMargin.Top = margin;
+		newMargin.Right = margin;
+		newMargin.Bottom = margin;
+	else
+		return;
+	end
+
+	return newMargin;
+end
+
+local function FindFirstNotViewed(self)
+	for i = 1, #self.Pages, 1 do
+		if not self.SavedVariables[self.Key].PageViewed[i] then
+			return i;
+		end
+	end
+
+	return i;
+end
+
+-- [[ EXTERNAL API ]] --
 
 local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
 
@@ -215,6 +524,10 @@ function lib:SetPages(pages)
 
 	for i, _ in next, pages do
 		pages[i].IsViewed = self.SavedVariables[self.Key].PageViewed[i];
+		pages[i].ImageMargin = FixMarginTable(pages[i].ImageMargin);
+		pages[i].ImageSize = FixSizeTable(pages[i].ImageSize);
+		pages[i].TextMargin = FixMarginTable(pages[i].TextMargin);
+		pages[i].TextSize = FixSizeTable(pages[i].TextSize);
 	end
 end
 
@@ -225,237 +538,26 @@ function lib:AddPage(page)
 
 	tinsert(self.Pages, page);
 	page.IsViewed = self.SavedVariables[self.Key].PageViewed[#self.Pages];
+	page.ImageMargin = FixMarginTable(page.ImageMargin);
+	page.ImageSize = FixSizeTable(page.ImageSize);
+	page.TextMargin = FixMarginTable(page.TextMargin);
+	page.TextSize = FixSizeTable(page.TextSize);
 end
 
-local UpdateFrame;
-function NewButton(frame, name, texName, direction)
-	local button = CreateFrame("Button", nil, frame);
-	button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight");
-	local buttonTex = "Interface\\Buttons\\UI-SpellbookIcon-%sPage-%s";
-	button:SetDisabledTexture(buttonTex:format(texName, "Disabled"));
-	button:SetPushedTexture(buttonTex:format(texName, "Down"));
-	button:SetNormalTexture(buttonTex:format(texName, "Up"));
-	button:SetPoint("BOTTOM" .. ((direction == -1) and "LEFT" or "RIGHT"), -(30 * direction), 2);
-	button:SetSize(26, 26);
-	button:SetScript("OnClick", function()
-		UpdateFrame(frame, frame.ShownIndex + direction);
-	end)
-
-	local text = button:CreateFontString(nil, nil, "GameFontHighlightSmall");
-	text:SetText(name);
-	text:SetPoint("LEFT", -(13 + text:GetStringWidth() / 2) * direction, 0);
-
-	return button;
+function lib:SetImageMargin(margin)
+	self.ImageMargin = FixMarginTable(margin);
 end
 
-function FrameOnHide(self)
-	self.Flash:Stop()
-	self.Shine:Hide()
+function lib:SetImageSize(size)
+	self.ImageSize = FixSizeTable(size);
 end
 
-function ApplyElvUISkin(frame)
-    if ElvUI == nil then
-		return;
-	end
-
-    local engine = unpack(ElvUI);
-    local blizzardSkins = engine.private.skins.blizzard;
-    local tutorials = blizzardSkins.enable and blizzardSkins.tutorials;
-
-	if not tutorials then
-		return;
-	end
-
-    local skins = engine:GetModule("Skins");
-
-	frame:StripTextures();
-	frame:CreateBackdrop("Transparent");
-
-	skins:HandleCloseButton(frame.CloseButton);
-	skins:HandleNextPrevButton(frame.Prev, "left");
-	skins:HandleNextPrevButton(frame.Next, "right");
+function lib:SetTextMargin(margin)
+	self.TextMargin = FixMarginTable(margin);
 end
 
-function UpdateFrame(frame, i, ignoreSavedVariables)
-	local page = frame.Pages[i];
-
-	if not page then
-		return;
-	end
-
-	-- Set values
-	local point = page.Point or (frame.Point or default.Point);
-	local relativeFrame = page.RelativeFrame or (frame.RelativeFrame or default.RelativeFrame);
-	local relativePoint = page.RelativePoint or (frame.RelativePoint or default.RelativePoint);
-	local offsetX = page.OffsetX or (frame.OffsetX or default.OffsetX);
-	local offsetY = page.OffsetY or (frame.OffsetY or default.OffsetY);
-	local width = page.Width or (frame.Width or default.Width);
-	local title = page.Title or (frame.Title or default.Title);
-	local imageX = page.ImageX or (frame.ImageX or default.ImageX);
-	local imageY = page.ImageY or (frame.ImageY or default.ImageY);
-	local imageHeight = page.ImageHeight or (frame.ImageHeight or default.ImageHeight);
-	local textX = page.TextX or (frame.TextX or default.TextX);
-	local textY = page.TextY or (frame.TextY or default.TextY);
-	local textHeight = page.TextHeight or (frame.TextHeight or default.TextHeight);
-
-	-- Callbacks
-	if page.OnShow then
-		page:OnShow();
-	end
-	if page.OnHide then
-		page:OnHide();
-	end
-
-	-- Frame
-	frame:ClearAllPoints();
-	print(frame.Width);
-	frame:SetPoint(point, relativeFrame, relativePoint, offsetX, offsetY);
-	frame:SetWidth(width + 16);
-
-	-- Title
-	frame.TitleText:SetPoint('TOP', 0, -5);
-	frame.TitleText:SetText(title);
-
-	-- Image
-	local frameHeight = default.FixedFrameHeightFromImage1;
-	for _, p in next, frame.Pages do
-		if p.ImageTex then
-			p.ImageTex:Hide();
-		end
-	end
-	if page.Image then
-		if page.ImageTex then
-			page.ImageTex:Show();
-		else
-			local image = frame:CreateTexture(); -- Implicitly calls Show
-			image:SetPoint('TOP', frame, imageX - 1, -(default.FixedImageOffsetTop + imageY));
-			image:SetTexture(page.Image);
-			page.ImageTex = image;
-		end
-		frameHeight = default.FixedFrameHeightFromImage2 + imageY + imageHeight;
-	end
-
-	-- Text
-	local text = page.Text;
-	if page.SubTitle then
-		text = page.SubTitle .. "\n\n" .. text;
-	end
-	frame.Text:SetPoint('TOP', frame, 0, -((page.Image and default.FixedImageOffsetTop + imageY + imageHeight or default.FixedTextOffsetTop) + textY));
-	frame.Text:SetWidth(width - (2 * textX));
-	frame.Text:SetText(text);
-	if text then
-		textHeight = max(textHeight, round(frame.Text:GetHeight()));
-		textHeight = textHeight - fmod(textHeight, 2);
-		frameHeight = frameHeight + default.FixedFrameHeightFromText1 + textY + textHeight;
-	else
-		frameHeight = frameHeight + default.FixedFrameHeightFromText2;
-	end
-
-	-- EditBox
-	-- if data.editbox then
-	-- 	frame.editbox:ClearFocus()
-	-- 	frame.editbox:SetWidth(data.editboxWidth)
-	-- 	frame.editbox:SetPoint('BOTTOMLEFT', 14 + data.TextX + (data.editboxLeft or 0), 28 + 18 + (data.editboxBottom or 0))
-	-- 	frame.editbox:SetText(data.editbox)
-	-- 	frame.editbox:Show()
-	-- else
-	-- 	frame.editbox:Hide()
-	-- end
-
-	-- Button
-	-- if data.button then
-	-- 	frame.button:SetWidth(data.buttonWidth)
-	-- 	frame.button:SetPoint('BOTTOMLEFT', 8 + data.TextX + (data.buttonLeft or 0), 28 + 18 + (data.buttonBottom or 0))
-	-- 	frame.button:SetText(data.button)
-	-- 	frame.button:SetScript('OnClick', data.buttonClick)
-	-- 	frame.button:Show()
-	-- else
-	-- 	frame.button:Hide()
-	-- end
-
-	-- Shine
-	if page.shine then
-		frame.Shine:SetParent(page.shine)
-		local shineTop, shineBottom, shineLeft, shineRight = 0, 0, 0, 0;
-
-		page.shineAll = type(page.shineAll) == "function" and page.shineAll() or page.shineAll;
-		if page.shineAll then
-			shineTop = page.shineAll;
-			shineBottom = -page.shineAll;
-			shineLeft = -page.shineAll;
-			shineRight = page.shineAll;
-		end
-
-		page.shineHeight = type(page.shineHeight) == "function" and page.shineHeight() or page.shineHeight;
-		if page.shineHeight then
-			shineTop = page.shineHeight;
-			shineBottom = -page.shineHeight;
-		end
-
-		page.shineWidth = type(page.shineWidth) == "function" and page.shineWidth() or page.shineWidth;
-		if page.shineWidth then
-			shineLeft = -page.shineWidth;
-			shineRight = page.shineWidth;
-		end
-
-		page.shineTop = type(page.shineTop) == "function" and page.shineTop() or page.shineTop;
-		if page.shineTop then
-			shineTop = page.shineTop;
-		end
-
-		page.shineBottom = type(page.shineBottom) == "function" and page.shineBottom() or page.shineBottom;
-		if page.shineBottom then
-			shineBottom = page.shineBottom;
-		end
-
-		page.shineLeft = type(page.shineLeft) == "function" and page.shineLeft() or page.shineLeft;
-		if page.shineLeft then
-			shineLeft = page.shineLeft;
-		end
-
-		page.shineRight = type(page.shineRight) == "function" and page.shineRight() or page.shineRight;
-		if page.shineRight then
-			shineRight = page.shineRight;
-		end
-
-		-- print(shineRight)
-		-- print(shineLeft)
-		-- print(shineTop)
-		-- print(shineBottom)
-
-		frame.Shine:SetPoint('BOTTOMRIGHT', shineRight, shineBottom)
-		frame.Shine:SetPoint('TOPLEFT', shineLeft, shineTop)
-		frame.Shine:Show()
-		frame.Flash:Play()
-	else
-		frame.Flash:Stop()
-		frame.Shine:Hide()
-	end
-
-	-- Buttons
-	if i == frame.MinPage then
-		frame.Prev:Disable();
-	else
-		frame.Prev:Enable();
-	end
-	frame.PageNum:SetText(("%d/%d"):format(i, frame.MaxPage))
-	if i < frame.MaxPage then
-		frame.Next:Enable();
-	else
-		frame.Next:Disable();
-	end
-
-	-- Frame
-	frame:SetHeight(frameHeight);
-	frame.ShownIndex = i;
-	frame:Show();
-
-	-- Save
-	-- if not ignoreSavedVariables then
-	-- 	frame.SavedVariables[frame.Key] = max(i, frame.SavedVariables[frame.Key]);
-	-- end
-	frame.SavedVariables[frame.Key].PageViewed[i] = true;
-	page.IsViewed = true;
+function lib:SetTextSize(size)
+	self.TextSize = FixSizeTable(size);
 end
 
 function lib:SetCloseButtonHook(func)
@@ -468,40 +570,24 @@ function lib:SetCloseButtonHook(func)
 end
 
 function lib:Reset()
-	-- self.SavedVariables[self.Key] = 0;
 	self.SavedVariables[self.Key].PageViewed = {};
 	self:Hide()
 end
 
-local FindFirstNotViewed;
 local locked; -- Used to prevent multiple trigers if ShowTutorial is hooked in other places
-function lib:ShowTutorial(index, minPage, maxPage, ignoreSavedVariables)
+function lib:ShowTutorial(index, minPage, maxPage)
 	if locked then
 		return;
 	end
 
 	locked = true;
 
-	-- local last = self.SavedVariables[self.Key] or 0;
-	-- index = index or last + 1;
 	local firstNotViewed = FindFirstNotViewed(self);
-	print(index);
-	print(firstNotViewed);
 	index = index or firstNotViewed;
 
 	self.MinPage = minPage or 1;
 	self.MaxPage = maxPage or #self.Pages;
-	UpdateFrame(self, index, ignoreSavedVariables);
+	UpdateFrame(self, index);
 
 	locked = nil;
-end
-
-function FindFirstNotViewed(self)
-	for i = 1, #self.Pages, 1 do
-		if not self.SavedVariables[self.Key].PageViewed[i] then
-			return i;
-		end
-	end
-
-	return i;
 end

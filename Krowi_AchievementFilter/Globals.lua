@@ -8,8 +8,8 @@ AF_VERSION = GetAddOnMetadata(addonName, "Version");
 AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
 
 function addon.RemoveColor(text)
-    text = string.gsub(text, "|c[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]", "");
-    text = string.gsub(text, "|r", "");
+    text = string.gsub(text or "", "|c[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]", "");
+    text = string.gsub(text or "", "|r", "");
     return text;
 end
 

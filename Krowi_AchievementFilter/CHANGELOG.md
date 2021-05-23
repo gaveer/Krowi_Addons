@@ -7,11 +7,14 @@ All notable changes to this project will be documented in this file.
 - Button to each achievement to show the Right Click Menu (disabled by default)
 - Categories tooltip can now show the number of not obtainable achievements and also adds a red part to the progress bar
 - New Coming in 9.1 (24 achievements)
+- Tutorial button in Options and Help under Filters now has a second menu with links directly to each tutorial page
+- This second menu for tutorial pages now shows an exclamation mark if the page was not viewed before
 
 ### Changed
 - Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections
 - Colors in the tooltip for the Part of a chain and Required for sections are now based on the quest difficulty colors
 - Full rewrite of the 3rd party tutorial library to further tailor it to my own needs
+- Tutorial progress has been reset since a new way of tracking what is viewed is used
 
 ### Fixed
 - Taming Eastern Kingdoms now only shows for Alliance players

@@ -131,12 +131,28 @@ L["Icon Right click"] = "for Options.";
 
 -- Tutorials
 -- Features tutorial
-L["FT_TABBUTTON_TITLE"] = "New achievements tab";
-L["FT_TABBUTTON_DESC"] = "A new achievements tab is added to the achievement window to offer a new way of displaying achievements but in a familiar fashion.";
-L["FT_GROUPING_TITLE"] = "New but familiar";
-L["FT_GROUPING_DESC"] = "Instead of grouping achievements by type and then by expansion like the default tabs do, " ..
-                        "here achievements are first grouped by expansion, then by region like different zones, dungeons, raids, ... " ..
-                        "and then by type.";
+L["New achievement window tab"] = "New achievement window tab";
+L["New achievement window tab Desc"] = "A new tab is added to the achievement window to offer a new way of displaying achievements " ..
+                                        "in a familiar fashion without interfering with the default tabs.";
+
+L["Categories per expansion"] = "Categories per expansion";
+L["Categories per expansion Desc"] = "Achievements are put in categories per expansion compared to the default. " ..
+                                    "The hierarchy is as follow:\n\n" ..
+                                    AF_TAB .. "- {expansion}\n" ..
+                                    AF_TAB .. AF_TAB .. "- {zones}\n" ..
+                                    AF_TAB .. AF_TAB .. AF_TAB .. "- {quests}\n" ..
+                                    AF_TAB .. AF_TAB .. AF_TAB .. "- {exploration}\n" ..
+                                    AF_TAB .. AF_TAB .. AF_TAB .. "- {pvp}\n" ..
+                                    AF_TAB .. AF_TAB .. AF_TAB .. "- {reputation}\n" ..
+                                    AF_TAB .. AF_TAB .. "- {dungeons}\n" ..
+                                    AF_TAB .. AF_TAB .. "- {raids}\n" ..
+                                    AF_TAB .. AF_TAB .. "- {petBattles}\n" ..
+                                    AF_TAB .. AF_TAB .. "- {expansionFeatures}\n\n" ..
+                                    "Special categories:\n" ..
+                                    AF_TAB .. "- {currentZone}: Shows the achievements linked to the current zone you're in\n" ..
+                                    AF_TAB .. "- {comingIn}: {spoiler}\n" ..
+                                    AF_TAB .. AF_TAB .. "Achievements that might be added in the next patch (subject to change)";
+
 L["FT_RIGHTCLICKMENU_TITLE"] = "Right-click menu";
 L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click menu.\n\n" ..
                                 "A button can be shown on each achievement that opens the Right Click Menu. This can be enabled in the options. (Disabled by default.)\n\n" ..

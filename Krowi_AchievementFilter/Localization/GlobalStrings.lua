@@ -5,6 +5,15 @@ local globalStrings = addon.GlobalStrings;
 
 function globalStrings.Load(L)
     -- Categories
+    L["Expansion"] = EXPANSION_FILTER_TEXT;
+    L["Classic"] = EXPANSION_NAME0;
+    L["The Burning Crusade"] = EXPANSION_NAME1;
+    L["Wrath of the Lich King"] = EXPANSION_NAME2;
+    L["Mists of Pandaria"] = EXPANSION_NAME3;
+    L["Warlords of Draenor"] = EXPANSION_NAME4;
+    L["Legion"] = EXPANSION_NAME5;
+    L["Battle for Azeroth"] = EXPANSION_NAME6;
+    L["Shadowlands"] = EXPANSION_NAME7;
     L["Scenarios"] = SCENARIOS;
     L["Garrison"] = GARRISON_LOCATION_TOOLTIP;
     L["Cities"] = BUG_CATEGORY4;

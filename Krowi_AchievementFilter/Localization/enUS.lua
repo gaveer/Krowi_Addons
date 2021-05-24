@@ -125,6 +125,9 @@ L["Skin Tutorials Desc"] = "Applies the ElvUI skin to the Tutorials.\n-> Blizzar
 L["Skin Ace3"] = "Skin Ace3";
 L["Skin Ace3 Desc"] = "Applies the ElvUI skin to the Options.\n-> Ace3";
 
+-- Options Donations
+L["Donations"] = "Donations";
+
 -- Keybindings
 L["BINDING_NAME_AF_OPEN_TAB1"] = "Toggle Achievement Window";
 
@@ -215,22 +218,35 @@ L["Enhanced filtering and sorting Desc"] = "Filtering and sorting of achievement
                                             AF_TAB .. "- {options}: Open the addon options (Game Menu -> Interface -> AddOns -> {addonName})\n\n" ..
                                             "More filters and sorting options can be requested on {discord} or {curseForge} (links in the options).";
 
-L["Enhanced tooltip"] = "Enhanced tooltip";
-L["Enhanced tooltip Desc"] = "Each tooltip has additional information on how achievements relate to each other (if they do). Several new sections are added to it.\n\n" ..
-                                "Features:\n" ..
-                                AF_TAB .. "- {partOfAChain}: Shows the list of achievements the hovered achievement is part of ({partOfAChainEnabled})\n" ..
-                                AF_TAB .. "- {requiredFor}: Shows a list of achievements that require the hovered achievement to be completed in order to earn it ({requiredForEnabled})\n\n" ..
-                                "Icons:\n" ..
-                                AF_TAB .. "- {ready}: The achievement is completed\n" ..
-                                AF_TAB .. "- {waiting}: The achievement is not completed\n" ..
-                                AF_TAB .. "- {notready}: The achievement is not possible to obtain anymore\n\n" ..
-                                "Optionally, two icons can be displayed per line. The first icon is the default one, the second one is for the current character. ({currentCharacterIconEnabled})\n\n" ..
-                                "Colors:\n" ..
-                                AF_TAB .. "- {green}: The achievement is completed\n" ..
-                                AF_TAB .. "- {grey}: The achievement is not completed\n" ..
-                                AF_TAB .. "- {red}: The achievement is not possible to obtain anymore\n" ..
-                                AF_TAB .. "- Lighter {lightGreen}, {lightGrey} or {lightRed}: The hovered achievement";
+L["Enhanced tooltip"] = "Enhanced tooltip"; -- Used for categories and achievements
+L["Enhanced tooltip Categories Desc"] = "Each tooltip has additional information on how many achievements are (not) obtainable and (not) completed.\n\n" ..
+                                        "The numbers in the progress bar are in the following format:\n" ..
+                                        AF_TAB .. "OC (+NONC) / T\n" ..
+                                        AF_TAB .. AF_TAB .. "- {oc}: The (not) obtainable completed achievements\n" ..
+                                        AF_TAB .. AF_TAB .. "- {nonc}: The not obtainable not completed achievements\n" ..
+                                        AF_TAB .. AF_TAB .. "- T: Total number of achievements\n\n" ..
+                                        "Colors:\n" ..
+                                        AF_TAB .. "- {green}: The (not) obtainable completed achievements\n" ..
+                                        AF_TAB .. "- {red}: The not obtainable not completed achievements\n" ..
+                                        AF_TAB .. "- Empty: The obtainable not completed achievements\n\n" ..
+                                        "The {red} part of the progress bar and number in brackets can either be disbled in options ({showNotObtainable}) or by unchecking the {notObtainable} filter.";
+L["Enhanced tooltip Achievements Desc"] = "Each tooltip has additional information on how achievements relate to each other (if they do). Several new sections are added to it.\n\n" ..
+                                            "Features:\n" ..
+                                            AF_TAB .. "- {partOfAChain}: Shows the list of achievements the hovered achievement is part of ({partOfAChainEnabled})\n" ..
+                                            AF_TAB .. "- {requiredFor}: Shows a list of achievements that require the hovered achievement to be completed in order to earn it ({requiredForEnabled})\n\n" ..
+                                            "Icons:\n" ..
+                                            AF_TAB .. "- {ready}: The achievement is completed\n" ..
+                                            AF_TAB .. "- {waiting}: The achievement is not completed\n" ..
+                                            AF_TAB .. "- {notready}: The achievement is not possible to obtain anymore\n\n" ..
+                                            "Optionally, two icons can be displayed per line. The first icon is the default one, the second one is for the current character. ({currentCharacterIconEnabled})\n\n" ..
+                                            "Colors:\n" ..
+                                            AF_TAB .. "- {green}: The achievement is completed\n" ..
+                                            AF_TAB .. "- {grey}: The achievement is not completed\n" ..
+                                            AF_TAB .. "- {red}: The achievement is not possible to obtain anymore\n" ..
+                                            AF_TAB .. "- Lighter {lightGreen}, {lightGrey} or {lightRed}: The hovered achievement";
 
+L["OC"] = "OC";
+L["NONC"] = "NONC";
 L["Green"] = "Green";
 L["Grey"] = "Grey";
 L["Red"] = "Red";

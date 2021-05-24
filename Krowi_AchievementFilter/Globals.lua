@@ -205,3 +205,21 @@ function addon.GetAchievementInfo(achievementID, excludeNextPatch)
 
     return nil; -- Achievement info not found, default function also returns nil when not found
 end
+
+addon.Donations = {
+    {Name = "Bur", Realm = "Frostmane EU", Class = "DRUID"},
+    {Name = "Second Person", Realm = nil, Class = nil},
+}
+
+function addon.GetDonationsAsString()
+    local text = "";
+    for _, donation in next, addon.Donations do
+        local _, _, _, argbHex = GetClassColor(donation.Class);
+        text = text .. "|c" .. argbHex .. donation.Name .. "|r";
+        if donation.Realm then
+            text = text .. " - " .. donation.Realm;
+        end
+        text = text .. "\n";
+    end
+    return text;
+end

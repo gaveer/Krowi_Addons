@@ -652,6 +652,20 @@ local function CreatePanel()
                     }
                 }
             },
+            Donations = {
+                name = addon.L["Donations"],
+                type = "group",
+                order = 4,
+                args = {
+                    Names = {
+                        name = addon.GetDonationsAsString(),
+                        type = "description",
+                        width = "full",
+                        fontSize = "medium",
+                        order = 1.1
+                    },
+                }
+            }
         }
     }
 

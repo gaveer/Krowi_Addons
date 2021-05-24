@@ -24,7 +24,7 @@ function tutorials.Load()
         ShineBottom = SavedData.ElvUISkin.Tutorials and -6 or -21,
         ShineLeft = SavedData.ElvUISkin.Tutorials and 1 or 2,
         ShineRight = SavedData.ElvUISkin.Tutorials and 0 or -2,
-        OnShow = function (self)
+        OnShow = function(self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             self.Shine = tabButton1;
         end
@@ -55,7 +55,7 @@ function tutorials.Load()
         ShineTop = SavedData.ElvUISkin.Tutorials and 7 or nil,
         ShineLeft = SavedData.ElvUISkin.Tutorials and -10 or nil,
         ShineRight = SavedData.ElvUISkin.Tutorials and 8 or nil,
-        OnShow = function (self)
+        OnShow = function(self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             categoriesFrame:SelectCategory(addon.GetAchievement(14281).Category);
             self.Shine = categoriesFrame;
@@ -68,7 +68,6 @@ function tutorials.Load()
         SubTitle = string.format(addon.Yellow, addon.L["Right Click Menu"]),
         Text = core.ReplaceVars{addon.L["Right Click Menu Desc"],
                                 rightClickMenu = addon.L["Right Click Menu"],
-                                enabled = (addon.Options.db.RightClickMenu.ShowButtonOnAchievement and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 wowhead = string.format(addon.Yellow, addon.L["Wowhead"]),
                                 goTo = string.format(addon.Yellow, addon.L["Go to"]),
                                 partOfAChain = string.format(addon.Yellow, addon.L["Part of a chain"]),
@@ -77,11 +76,17 @@ function tutorials.Load()
                                 xuFuPetGuides = string.format(addon.Yellow, addon.L["Xu-Fu's Pet Guides"]),
                                 petBattles = (GetCategoryInfo(15117)),
                                 IAT = string.format(addon.Yellow, addon.L["Instance Achievement Tracker"]),
-                                installed = (addon.IsIATLoaded() and (string.format(addon.Green, addon.L["Installed"]:lower())) or (string.format(addon.Red, addon.L["Not installed"]:lower()))),
                                 addonName = AF_NAME},
         ShineHeight = SavedData.ElvUISkin.MiscFrames and 9 or 6,
         ShineWidth = SavedData.ElvUISkin.MiscFrames and 10 or 7,
-        OnShow = function (self)
+        OnShow = function(self)
+            if self.OriginalText == nil then
+                self.OriginalText = self.Text;
+            end
+            self.Text = core.ReplaceVars{self.OriginalText,
+                                            enabled = (addon.Options.db.RightClickMenu.ShowButtonOnAchievement and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
+                                            installed = (addon.IsIATLoaded() and (string.format(addon.Green, addon.L["Installed"]:lower())) or (string.format(addon.Red, addon.L["Not installed"]:lower())))};
+
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             local achievementsButtons = achievementsFrame.Container.buttons;
             achievementsFrame:SelectAchievementFromID(4632);
@@ -103,19 +108,24 @@ function tutorials.Load()
         SubTitle = string.format(addon.Yellow, addon.L["Quick Search"]),
         Text = core.ReplaceVars{addon.L["Quick Search Desc"],
                                 clearOnRightClick = addon.L["Clear search field on Right Click"],
-                                clearOnRightClickEnabled = (addon.Options.db.SearchBox.ClearOnRightClick and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 excludeNextPatch = addon.L["Exclude Next Patch"],
-                                excludeNextPatchEnabled = (addon.Options.db.SearchBox.ExcludeNextPatch and (string.format(addon.Green, addon.L["Exclude"]:lower())) or (string.format(addon.Red, addon.L["Include"]:lower()))),
                                 minCharToSearch = addon.L["Minimum characters to search"],
-                                minCharToSearchNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.MinimumCharactersToSearch),
                                 numSearchPreviews = addon.L["Number of search previews"],
-                                numSearchPreviewsNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.NumberOfSearchPreviews),
                                 addonName = AF_NAME},
         TextSize = {355, 0},
         ShineTop = SavedData.ElvUISkin.Tutorials and 10 or 30,
         ShineLeft = SavedData.ElvUISkin.Tutorials and -10 or -11,
         ShineRight = 11,
-        OnShow = function (self)
+        OnShow = function(self)
+            if self.OriginalText == nil then
+                self.OriginalText = self.Text;
+            end
+            self.Text = core.ReplaceVars{self.OriginalText,
+                                            clearOnRightClickEnabled = (addon.Options.db.SearchBox.ClearOnRightClick and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
+                                            excludeNextPatchEnabled = (addon.Options.db.SearchBox.ExcludeNextPatch and (string.format(addon.Green, addon.L["Exclude"]:lower())) or (string.format(addon.Red, addon.L["Include"]:lower()))),
+                                            minCharToSearchNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.MinimumCharactersToSearch),
+                                            numSearchPreviewsNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.NumberOfSearchPreviews)};
+
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             searchBoxFrame:SetText("myt");
             searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
@@ -146,7 +156,7 @@ function tutorials.Load()
         ShineBottom = SavedData.ElvUISkin.Tutorials and -10 or -1,
         ShineLeft = SavedData.ElvUISkin.Tutorials and -11 or -12,
         ShineRight = SavedData.ElvUISkin.Tutorials and 11 or 13,
-        OnShow = function (self)
+        OnShow = function(self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             searchBoxFrame:SetText("myt");
             searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
@@ -164,7 +174,6 @@ function tutorials.Load()
         SubTitle = string.format(addon.Yellow, addon.L["Enhanced filtering and sorting"]),
         Text = core.ReplaceVars{addon.L["Enhanced filtering and sorting Desc"],
                                 mergeSmallCategories = string.format(addon.Yellow, addon.L["Merge Small Categories"]),
-                                mergeSmallCategoriesNumber = string.format(addon.Yellow, addon.Options.db.Window.MergeSmallCategoriesThreshold),
                                 completed = string.format(addon.Yellow, addon.L["Completed"]),
                                 notCompleted = string.format(addon.Yellow, addon.L["Not Completed"]),
                                 obtainable = string.format(addon.Yellow, addon.L["Obtainable"]),
@@ -197,38 +206,63 @@ function tutorials.Load()
         ShineAll = 7,
         ShineHeight = SavedData.ElvUISkin.Tutorials and 8 or nil,
         ShineWidth = SavedData.ElvUISkin.Tutorials and 10 or nil,
-        OnShow = function (self)
+        OnShow = function(self)
+            if self.OriginalText == nil then
+                self.OriginalText = self.Text;
+            end
+            self.Text = core.ReplaceVars{self.OriginalText,
+                                            mergeSmallCategoriesNumber = string.format(addon.Yellow, addon.Options.db.Window.MergeSmallCategoriesThreshold)};
+
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             self.Shine = filterButton;
             print(filterButton:GetTop());
         end
     }));
     tinsert(pages, page:New({ -- 7
+        Image = media .. "TooltipCategories",
+        ImageSize = {507, 154},
+        ImageTexCoord = {0, 507/512, 0, 154/256},
+        SubTitle = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Categories"] .. ")"),
+        Text = core.ReplaceVars{addon.L["Enhanced tooltip Categories Desc"],
+                                oc = string.format(addon.Green, addon.L["OC"]),
+                                nonc = string.format(addon.Red, addon.L["NONC"]),
+                                green = string.format(addon.Green, addon.L["Green"]),
+                                red = string.format(addon.Red, addon.L["Red"]),
+                                notObtainable = string.format(addon.Yellow, addon.L["Not Obtainable"])},
+        OnShow = function(self)
+            if self.OriginalText == nil then
+                self.OriginalText = self.Text;
+            end
+            self.Text = core.ReplaceVars{self.OriginalText,
+                                            showNotObtainable = (addon.Options.db.Tooltip.Categories.ShowNotObtainable and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower())))};
+        end
+    }));
+    tinsert(pages, page:New({ -- 8
         Image = media .. "TooltipAchievements",
         ImageSize = {1017, 287},
         ImageTexCoord = {0, 1017/1024, 0, 287/512},
         SubTitle = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Achievements"] .. ")"),
-        Text = core.ReplaceVars{addon.L["Enhanced tooltip Desc"],
+        Text = core.ReplaceVars{addon.L["Enhanced tooltip Achievements Desc"],
                                 partOfAChain = string.format(addon.Yellow, addon.L["Part of a chain"]),
-                                partOfAChainEnabled = (addon.Options.db.Tooltip.Achievements.ShowPartOfAChain and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 requiredFor = string.format(addon.Yellow, addon.L["Required for"]),
-                                requiredForEnabled = (addon.Options.db.Tooltip.Achievements.ShowRequiredFor and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 ready = "|T136814:0|t",
                                 waiting = "|T136815:0|t",
                                 notready = "|T136813:0|t",
-                                currentCharacterIconEnabled = (addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 green = string.format(addon.Green, addon.L["Green"]),
                                 grey = string.format(addon.Grey, addon.L["Grey"]),
                                 red = string.format(addon.Red, addon.L["Red"]),
                                 lightGreen = string.format(addon.LightGreen, addon.L["Green"]),
                                 lightGrey = string.format(addon.LightGrey, addon.L["Grey"]),
                                 lightRed = string.format(addon.LightRed, addon.L["Red"])},
-        -- ShineTop = SavedData.ElvUISkin.Tutorials and 9 or 8,
-        -- ShineBottom = SavedData.ElvUISkin.Tutorials and -10 or -1,
-        -- ShineLeft = SavedData.ElvUISkin.Tutorials and -11 or -12,
-        -- ShineRight = SavedData.ElvUISkin.Tutorials and 11 or 13,
-        -- OnShow = function (self)
-        -- end
+        OnShow = function(self)
+            if self.OriginalText == nil then
+                self.OriginalText = self.Text;
+            end
+            self.Text = core.ReplaceVars{self.OriginalText,
+                                            partOfAChainEnabled = (addon.Options.db.Tooltip.Achievements.ShowPartOfAChain and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
+                                            requiredForEnabled = (addon.Options.db.Tooltip.Achievements.ShowRequiredFor and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
+                                            currentCharacterIconEnabled = (addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower())))};
+        end
     }));
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");

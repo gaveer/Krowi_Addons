@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 - New Coming in 9.1 (24 achievements)
 - Tutorial button in Options and Help under Filters now has a second menu with links directly to each tutorial page
 - This second menu for tutorial pages now shows an exclamation mark if the page was not viewed before
+- Tutorial page for Categories tooltip
+- Donation from Bur - Frostmane EU
 
 ### Changed
 - Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections
@@ -21,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - Taming Eastern Kingdoms now only shows for Alliance players
 - Taming Kalimdor now only shows for Horde players
 - Special case when turning off ElvUI might cause an error
+- Issue #42: When achievements with same objective types are shown in default and new tab, both objectives would stay hidden
 
 ## [9.0.5.22.0] - 2021-05-13
 ### Added

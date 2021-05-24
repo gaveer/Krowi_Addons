@@ -76,7 +76,7 @@ function KrowiAF_AchievementsFrame_OnHide(self) -- Used in Templates - KrowiAF_A
 		self.Container.buttons[1].ResetCriteria(true);
 		self.Container.buttons[1].ResetCriteria(false);
 	end
-	AchievementFrameAchievements_ForceUpdate(); -- Issue #42: Fix
+	AchievementFrameAchievements_ForceUpdate(); -- Issue #42: Fixx
 end
 
 function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achievementsButtonOffset)

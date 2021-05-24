@@ -64,7 +64,7 @@ function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_A
 	AchievementButton_ResetMetas(false);
 	AchievementButton_ResetCriteria(true);
 	AchievementButton_ResetCriteria(false);
-	self:Update();
+	self:ForceUpdate(); -- Issue #42: Fix
 end
 
 function KrowiAF_AchievementsFrame_OnHide(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
@@ -76,6 +76,7 @@ function KrowiAF_AchievementsFrame_OnHide(self) -- Used in Templates - KrowiAF_A
 		self.Container.buttons[1].ResetCriteria(true);
 		self.Container.buttons[1].ResetCriteria(false);
 	end
+	AchievementFrameAchievements_ForceUpdate(); -- Issue #42: Fix
 end
 
 function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achievementsButtonOffset)
@@ -496,8 +497,8 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	while not shown do
 		for _, button in next, container.buttons do
-			diagnostics.Debug(math.ceil(button:GetTop()));
-			diagnostics.Debug(math.ceil(gui.GetSafeScrollChildBottom(child)));
+			-- diagnostics.Debug(math.ceil(button:GetTop()));
+			-- diagnostics.Debug(math.ceil(gui.GetSafeScrollChildBottom(child)));
 			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
 				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
 				shown = button;

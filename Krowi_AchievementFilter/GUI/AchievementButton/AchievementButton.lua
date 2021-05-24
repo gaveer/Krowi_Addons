@@ -33,9 +33,11 @@ function achievementButton:PostLoadButtons(achievementsFrame)
 			rightClickMenuButton:GetNormalTexture():SetTexCoord(0.40625, 0.53125, 0.25, 0.5);
 			rightClickMenuButton:GetPushedTexture():SetTexCoord(0.40625, 0.53125, 0, 0.25);
 			rightClickMenuButton:GetHighlightTexture():SetTexCoord(0, 0.265625, 0, 0.53125);
-			rightClickMenuButton:SetScript("OnClick", function()
+			rightClickMenuButton.Click = function()
 				OnClick(button, "RightButton", achievementsFrame, nil, rightClickMenuButton);
-			end);
+			end;
+			rightClickMenuButton:SetScript("OnClick", rightClickMenuButton.Click);
+			button.RightClickMenuButton = rightClickMenuButton;
 			button.plusMinus:ClearAllPoints();
 			button.plusMinus:SetPoint("TOPLEFT", rightClickMenuButton, "BOTTOMLEFT", 0, -3);
 		end
@@ -48,12 +50,14 @@ function achievementButton:PostLoadButtons(achievementsFrame)
 		button.ResetCriteria = self.Display.ResetCriteria;
 
 		-- Change tooltip behaviour
-		button:HookScript("OnEnter", function(self)
+		button.Enter = function(self)
 			OnEnter(self, achievementsFrame);
-		end);
-		button:HookScript("OnLeave", function(self)
+		end;
+		button:HookScript("OnEnter", button.Enter);
+		button.Leave = function(self)
 			OnLeave(self, achievementsFrame);
-		end);
+		end;
+		button:HookScript("OnLeave", button.Leave);
 		button.shield:EnableMouse(false);
 		button.ShowTooltip = function()
 			self.Tooltip.ShowTooltip(button);

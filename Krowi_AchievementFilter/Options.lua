@@ -68,12 +68,6 @@ local defaults = {
                 Criteria = addon.L["Default"],
                 ReverseSort = false
             }
-        },
-        ElvUISkin = {
-            Achievements = false,
-            MiscFrames = false,
-            Options = false,
-            Tutorials = false
         }
     }
 }
@@ -99,30 +93,26 @@ local function CreatePanel()
                         inline = true,
                         order = 1,
                         args = {
-                            version = {
+                            Version = {
                                 name = string.format(addon.Yellow, addon.L["Version"] .. ": ") .. AF_VERSION,
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 1.1,
                             },
-                            build = {
+                            Build = {
                                 name = string.format(addon.Yellow, addon.L["Build"] .. ": ") .. AF_BUILD,
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 1.2,
                             },
-                            tutorial = {
+                            Tutorial = {
                                 name = addon.L["Tutorial"],
                                 desc = addon.L["Tutorial Desc"],
                                 type = "execute",
                                 order = 1.3,
                                 func = function()
-                                    -- InterfaceOptionsFrame:Hide();
-                                    -- addon.Tutorials.FeaturesTutorial:Reset();
-                                    -- addon.Tutorials.FeaturesTutorial:ShowTutorial();
-
                                     local menu = LibStub("KrowiMenu-1.0");
                                     local pages = addon.Tutorials.FeaturesTutorial.Pages;
 
@@ -150,21 +140,21 @@ local function CreatePanel()
                                     menu:Open();
                                 end
                             },
-                            author = {
+                            Author = {
                                 name = string.format(addon.Yellow, addon.L["Author"] .. ": ") .. "Krowi",
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 2.1,
                             },
-                            blank = {
+                            blank22 = {
                                 name = "",
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 2.2,
                             },
-                            discord = {
+                            Discord = {
                                 name = addon.L["Discord"],
                                 desc = addon.L["Discord Desc"],
                                 type = "execute",
@@ -172,6 +162,32 @@ local function CreatePanel()
                                 func = function()
                                     InterfaceOptionsFrame:Hide();
                                     popupDialog.ShowExternalLink("https://discord.gg/XGkergM2");
+                                end
+                            },
+                            blank31 = {
+                                name = "",
+                                type = "description",
+                                width = "normal",
+                                fontSize = "medium",
+                                order = 3.1,
+                            },
+                            blank32 = {
+                                name = "",
+                                type = "description",
+                                width = "normal",
+                                fontSize = "medium",
+                                order = 3.2,
+                            },
+                            CurseForge = {
+                                name = addon.L["CurseForge"],
+                                desc = core.ReplaceVars{addon.L["CurseForge Desc"],
+                                                        addonName = AF_NAME,
+                                                        curseForge = addon.L["CurseForge"]},
+                                type = "execute",
+                                order = 3.3,
+                                func = function()
+                                    InterfaceOptionsFrame:Hide();
+                                    popupDialog.ShowExternalLink("https://www.curseforge.com/wow/addons/krowi-achievement-filter");
                                 end
                             }
                         }
@@ -592,7 +608,7 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 2.1,
-                        get = function () return addon.Options.db.ElvUISkin.Achievements; end
+                        get = function () return SavedData.ElvUISkin.Achievements; end
                     },
                     skinMiscFrames = {
                         name = addon.L["Skin Misc Frames"],
@@ -602,17 +618,17 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 3.1,
-                        get = function () return addon.Options.db.ElvUISkin.MiscFrames; end
+                        get = function () return SavedData.ElvUISkin.MiscFrames; end
                     },
-                    skinAce3 = {
-                        name = addon.L["Skin Ace3"],
-                        desc = addon.L["Skin Ace3 Desc"],
+                    skinTooltip = {
+                        name = addon.L["Skin Tooltip"],
+                        desc = addon.L["Skin Tooltip Desc"],
                         descStyle = "inline",
                         disabled = true,
                         type = "toggle",
                         width = "full",
                         order = 4.1,
-                        get = function () return addon.Options.db.ElvUISkin.Options; end
+                        get = function () return SavedData.ElvUISkin.Tooltip; end
                     },
                     skinTutorials = {
                         name = addon.L["Skin Tutorials"],
@@ -622,7 +638,17 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 5.1,
-                        get = function () return addon.Options.db.ElvUISkin.Tutorials; end
+                        get = function () return SavedData.ElvUISkin.Tutorials; end
+                    },
+                    skinAce3 = {
+                        name = addon.L["Skin Ace3"],
+                        desc = addon.L["Skin Ace3 Desc"],
+                        descStyle = "inline",
+                        disabled = true,
+                        type = "toggle",
+                        width = "full",
+                        order = 6.1,
+                        get = function () return SavedData.ElvUISkin.Options; end
                     }
                 }
             },
@@ -658,8 +684,6 @@ function options.Load()
     addon.Options.SetFilters = SetFilters;
     addon.Options.Open = Open;
     addon.Options.db = addon.Options.profile;
-
-    addon.GUI.ElvUISkin.Load();
 
     -- TODO: add something to check if the options panel closes that we prompt for a reload
     CreatePanel();

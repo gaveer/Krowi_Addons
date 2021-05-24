@@ -252,7 +252,9 @@ end
 
 local progressBar = LibStub("KrowiProgressBar-1.0");
 local function StatusBarTooltip(self)
-	GameTooltip_SetDefaultAnchor(GameTooltip, self);
+	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
+	GameTooltip:SetOwner(self, "ANCHOR_NONE");
+	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
 	GameTooltip:SetMinimumWidth(128, true);
 	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
 	local numOfNotObtAch = 0;

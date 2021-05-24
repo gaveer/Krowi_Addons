@@ -16,13 +16,14 @@ function tutorials.Load()
     local page = LibStub("KrowiTutorialsPage-1.0");
     tinsert(pages, page:New({ -- 1
         Image = media .. "TabButton",
-        ImageSize = {512, 128},
+        ImageSize = {614, 158},
+        ImageTexCoord = {0, 614/1024, 0, 158/256},
         SubTitle = string.format(addon.Yellow, addon.L["New achievement window tab"]),
         Text = addon.L["New achievement window tab Desc"],
-        ShineTop = addon.Options.db.ElvUISkin.Tutorials and 7 or 12,
-        ShineBottom = addon.Options.db.ElvUISkin.Tutorials and -6 or -21,
-        ShineLeft = addon.Options.db.ElvUISkin.Tutorials and 1 or 2,
-        ShineRight = addon.Options.db.ElvUISkin.Tutorials and 0 or -2,
+        ShineTop = SavedData.ElvUISkin.Tutorials and 7 or 12,
+        ShineBottom = SavedData.ElvUISkin.Tutorials and -6 or -21,
+        ShineLeft = SavedData.ElvUISkin.Tutorials and 1 or 2,
+        ShineRight = SavedData.ElvUISkin.Tutorials and 0 or -2,
         OnShow = function (self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             self.Shine = tabButton1;
@@ -31,8 +32,8 @@ function tutorials.Load()
     tinsert(pages, page:New({ -- 2
         Layout = "HORIZONTAL",
         Image = media .. "Categories",
-        ImageSize = {365, 512},
-        ImageTexCoord = {0, 365/512, 0, 1},
+        ImageSize = {361, 512},
+        ImageTexCoord = {0, 361/512, 0, 1},
         SubTitle = string.format(addon.Yellow, addon.L["Categories per expansion"]),
         Text = core.ReplaceVars{addon.L["Categories per expansion Desc"],
                                 expansion = addon.L["Expansion"],
@@ -48,13 +49,12 @@ function tutorials.Load()
                                 spoiler = string.format(addon.Orange, addon.L["* SPOILER WARNING *"]),
                                 currentZone = string.format(addon.Yellow, addon.L["Current Zone"]),
                                 comingIn = string.format(addon.Yellow, addon.L["Coming in "])},
-        TextSize = {256, 0},
-        TextMargin = {10, 0, 10, 20},
+        TextSize = {361, 0},
         ShineHeight = 6,
         ShineWidth = 7,
-        ShineTop = addon.Options.db.ElvUISkin.Tutorials and 7 or nil,
-        ShineLeft = addon.Options.db.ElvUISkin.Tutorials and -10 or nil,
-        ShineRight = addon.Options.db.ElvUISkin.Tutorials and 8 or nil,
+        ShineTop = SavedData.ElvUISkin.Tutorials and 7 or nil,
+        ShineLeft = SavedData.ElvUISkin.Tutorials and -10 or nil,
+        ShineRight = SavedData.ElvUISkin.Tutorials and 8 or nil,
         OnShow = function (self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             categoriesFrame:SelectCategory(addon.GetAchievement(14281).Category);
@@ -62,37 +62,58 @@ function tutorials.Load()
         end
     }));
     tinsert(pages, page:New({ -- 3
-        Image = media .. "RightClick",
-        ImageSize = {512, 256},
-        SubTitle = string.format(addon.Yellow, addon.L["FT_RIGHTCLICKMENU_TITLE"]),
-        Text = core.ReplaceVars{addon.L["FT_RIGHTCLICKMENU_DESC"],
+        Image = media .. "RightClickMenu",
+        ImageSize = {754, 286},
+        ImageTexCoord = {0, 754/1024, 0, 286/512},
+        SubTitle = string.format(addon.Yellow, addon.L["Right Click Menu"]),
+        Text = core.ReplaceVars{addon.L["Right Click Menu Desc"],
+                                rightClickMenu = addon.L["Right Click Menu"],
+                                enabled = (addon.Options.db.RightClickMenu.ShowButtonOnAchievement and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 wowhead = string.format(addon.Yellow, addon.L["Wowhead"]),
                                 goTo = string.format(addon.Yellow, addon.L["Go to"]),
                                 partOfAChain = string.format(addon.Yellow, addon.L["Part of a chain"]),
-                                require = string.format(addon.Yellow, addon.L["FT_RIGHTCLICKMENU_REQUIRE"]),
+                                require = string.format(addon.Yellow, addon.L["Required for"]),
+                                currentZone = addon.L["Current Zone"],
                                 xuFuPetGuides = string.format(addon.Yellow, addon.L["Xu-Fu's Pet Guides"]),
+                                petBattles = (GetCategoryInfo(15117)),
                                 IAT = string.format(addon.Yellow, addon.L["Instance Achievement Tracker"]),
-                                installed = (addon.IsIATLoaded() and (string.format(addon.Green, addon.L["Installed"]:lower())) or (string.format(addon.Red, addon.L["Not installed"]:lower())))},
-        ShineHeight = addon.Options.db.ElvUISkin.MiscFrames and 9 or 6,
-        ShineWidth = addon.Options.db.ElvUISkin.MiscFrames and 10 or 7,
+                                installed = (addon.IsIATLoaded() and (string.format(addon.Green, addon.L["Installed"]:lower())) or (string.format(addon.Red, addon.L["Not installed"]:lower()))),
+                                addonName = AF_NAME},
+        ShineHeight = SavedData.ElvUISkin.MiscFrames and 9 or 6,
+        ShineWidth = SavedData.ElvUISkin.MiscFrames and 10 or 7,
         OnShow = function (self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             local achievementsButtons = achievementsFrame.Container.buttons;
-            achievementsFrame:SelectAchievementFromID(1283, "RightButton", true, achievementsButtons[1], 88, 34);
+            achievementsFrame:SelectAchievementFromID(4632);
+            achievementsButtons[3]:Enter(achievementsFrame); -- Gets the required information to show the Go to line
+            achievementsButtons[3]:Leave(achievementsFrame);
+            if achievementsButtons[3].RightClickMenuButton then
+                achievementsButtons[3].RightClickMenuButton:Click();
+            else
+                achievementsButtons[3]:Click("RightButton", nil, true, achievementsButtons[3], 88, 88);
+            end
             self.Shine = DropDownList1;
         end
     }));
     tinsert(pages, page:New({ -- 4
-        Image = media .. "SearchPreview",
-        ImageSize = {512, 256},
-        SubTitle = string.format(addon.Yellow, addon.L["FT_SEARCHPREVIEW_TITLE"]),
-        Text = core.ReplaceVars{addon.L["FT_SEARCHPREVIEW_DESC"],
+        Layout = "HORIZONTAL",
+        Image = media .. "QuickSearch",
+        ImageSize = {355, 324},
+        ImageTexCoord = {0, 355/512, 0, 324/512},
+        SubTitle = string.format(addon.Yellow, addon.L["Quick Search"]),
+        Text = core.ReplaceVars{addon.L["Quick Search Desc"],
                                 clearOnRightClick = addon.L["Clear search field on Right Click"],
+                                clearOnRightClickEnabled = (addon.Options.db.SearchBox.ClearOnRightClick and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
+                                excludeNextPatch = addon.L["Exclude Next Patch"],
+                                excludeNextPatchEnabled = (addon.Options.db.SearchBox.ExcludeNextPatch and (string.format(addon.Green, addon.L["Exclude"]:lower())) or (string.format(addon.Red, addon.L["Include"]:lower()))),
                                 minCharToSearch = addon.L["Minimum characters to search"],
+                                minCharToSearchNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.MinimumCharactersToSearch),
                                 numSearchPreviews = addon.L["Number of search previews"],
+                                numSearchPreviewsNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.NumberOfSearchPreviews),
                                 addonName = AF_NAME},
-        ShineTop = addon.Options.db.ElvUISkin.Tutorials and 10 or 30,
-        ShineLeft = addon.Options.db.ElvUISkin.Tutorials and -10 or -11,
+        TextSize = {355, 0},
+        ShineTop = SavedData.ElvUISkin.Tutorials and 10 or 30,
+        ShineLeft = SavedData.ElvUISkin.Tutorials and -10 or -11,
         ShineRight = 11,
         OnShow = function (self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
@@ -115,13 +136,16 @@ function tutorials.Load()
     }));
     tinsert(pages, page:New({ -- 5
         Image = media .. "FullSearch",
-        ImageSize = {512, 256},
-        SubTitle = string.format(addon.Yellow, addon.L["FT_FULLSEARCH_TITLE"]),
-        Text = addon.L["FT_FULLSEARCH_DESC"],
-        ShineTop = addon.Options.db.ElvUISkin.Tutorials and 9 or 8,
-        ShineBottom = addon.Options.db.ElvUISkin.Tutorials and -10 or -1,
-        ShineLeft = addon.Options.db.ElvUISkin.Tutorials and -11 or -12,
-        ShineRight = addon.Options.db.ElvUISkin.Tutorials and 11 or 13,
+        ImageSize = {826, 512},
+        ImageTexCoord = {0, 826/1024, 0, 512/512},
+        SubTitle = string.format(addon.Yellow, addon.L["Full Search"]),
+        Text = core.ReplaceVars{addon.L["Full Search Desc"],
+                                quickSearch = addon.L["Quick Search"],
+                                showAllResults = string.gsub(addon.L["Show All %d Results"], "%%d", "X")},
+        ShineTop = SavedData.ElvUISkin.Tutorials and 9 or 8,
+        ShineBottom = SavedData.ElvUISkin.Tutorials and -10 or -1,
+        ShineLeft = SavedData.ElvUISkin.Tutorials and -11 or -12,
+        ShineRight = SavedData.ElvUISkin.Tutorials and 11 or 13,
         OnShow = function (self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             searchBoxFrame:SetText("myt");
@@ -133,11 +157,14 @@ function tutorials.Load()
         end
     }));
     tinsert(pages, page:New({ -- 6
-        Image = media .. "Filter",
-        ImageSize = {512, 256},
-        SubTitle = string.format(addon.Yellow, addon.L["FT_FILTER_TITLE"]),
-        Text = core.ReplaceVars{addon.L["FT_FILTER_DESC"],
+        Layout = "HORIZONTAL",
+        Image = media .. "FilteringSorting",
+        ImageSize = {588, 453},
+        ImageTexCoord = {0, 588/1024, 0, 453/512},
+        SubTitle = string.format(addon.Yellow, addon.L["Enhanced filtering and sorting"]),
+        Text = core.ReplaceVars{addon.L["Enhanced filtering and sorting Desc"],
                                 mergeSmallCategories = string.format(addon.Yellow, addon.L["Merge Small Categories"]),
+                                mergeSmallCategoriesNumber = string.format(addon.Yellow, addon.Options.db.Window.MergeSmallCategoriesThreshold),
                                 completed = string.format(addon.Yellow, addon.L["Completed"]),
                                 notCompleted = string.format(addon.Yellow, addon.L["Not Completed"]),
                                 obtainable = string.format(addon.Yellow, addon.L["Obtainable"]),
@@ -160,10 +187,16 @@ function tutorials.Load()
                                 collapseChain = string.format(addon.Yellow, addon.L["Collapse Chain"]),
                                 noSorting = string.format(addon.Yellow, addon.L["Default"]),
                                 sortByName = string.format(addon.Yellow, addon.L["Name"]),
-                                reverseSort = string.format(addon.Yellow, addon.L["Reverse Sort"])},
+                                reverseSort = string.format(addon.Yellow, addon.L["Reverse Sort"]),
+                                help = string.format(addon.Yellow, addon.L["Help"]),
+                                options = string.format(addon.Yellow, addon.L["Options"]),
+                                addonName = AF_NAME,
+                                discord = addon.L["Discord"],
+                                curseForge = addon.L["CurseForge"]},
+        TextSize = {588, 0},
         ShineAll = 7,
-        ShineHeight = addon.Options.db.ElvUISkin.Tutorials and 8 or nil,
-        ShineWidth = addon.Options.db.ElvUISkin.Tutorials and 10 or nil,
+        ShineHeight = SavedData.ElvUISkin.Tutorials and 8 or nil,
+        ShineWidth = SavedData.ElvUISkin.Tutorials and 10 or nil,
         OnShow = function (self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             self.Shine = filterButton;
@@ -171,24 +204,29 @@ function tutorials.Load()
         end
     }));
     tinsert(pages, page:New({ -- 7
-        Image = media .. "Tooltip",
-        ImageSize = {512, 256},
-        SubTitle = string.format(addon.Yellow, addon.L["FT_TOOLTIP_TITLE"] .. " (" .. addon.L["Achievements"] .. ")"),
-        Text = core.ReplaceVars{addon.L["FT_TOOLTIP_DESC"],
+        Image = media .. "TooltipAchievements",
+        ImageSize = {1017, 287},
+        ImageTexCoord = {0, 1017/1024, 0, 287/512},
+        SubTitle = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Achievements"] .. ")"),
+        Text = core.ReplaceVars{addon.L["Enhanced tooltip Desc"],
                                 partOfAChain = string.format(addon.Yellow, addon.L["Part of a chain"]),
+                                partOfAChainEnabled = (addon.Options.db.Tooltip.Achievements.ShowPartOfAChain and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 requiredFor = string.format(addon.Yellow, addon.L["Required for"]),
+                                requiredForEnabled = (addon.Options.db.Tooltip.Achievements.ShowRequiredFor and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                 ready = "|T136814:0|t",
                                 waiting = "|T136815:0|t",
                                 notready = "|T136813:0|t",
-                                green = string.format(addon.Green, addon.L["FT_TOOLTIP_GREEN"]),
-                                grey = string.format(addon.Grey, addon.L["FT_TOOLTIP_GREY"]),
-                                red = string.format(addon.Red, addon.L["FT_TOOLTIP_RED"]),
-                                light = string.format(addon.Yellow, addon.L["FT_TOOLTIP_LIGHTER"]) .. " " .. string.format(addon.LightGreen, addon.L["FT_TOOLTIP_GREEN"]) .. ", " .. string.format(addon.LightGrey, addon.L["FT_TOOLTIP_GREY"]) .. " " .. string.format(addon.Yellow, addon.L["FT_TOOLTIP_OR"]) .. " " .. string.format(addon.LightRed, addon.L["FT_TOOLTIP_RED"]),
-                                goTo = addon.L["Go to"]},
-        -- ShineTop = addon.Options.db.ElvUISkin.Tutorials and 9 or 8,
-        -- ShineBottom = addon.Options.db.ElvUISkin.Tutorials and -10 or -1,
-        -- ShineLeft = addon.Options.db.ElvUISkin.Tutorials and -11 or -12,
-        -- ShineRight = addon.Options.db.ElvUISkin.Tutorials and 11 or 13,
+                                currentCharacterIconEnabled = (addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
+                                green = string.format(addon.Green, addon.L["Green"]),
+                                grey = string.format(addon.Grey, addon.L["Grey"]),
+                                red = string.format(addon.Red, addon.L["Red"]),
+                                lightGreen = string.format(addon.LightGreen, addon.L["Green"]),
+                                lightGrey = string.format(addon.LightGrey, addon.L["Grey"]),
+                                lightRed = string.format(addon.LightRed, addon.L["Red"])},
+        -- ShineTop = SavedData.ElvUISkin.Tutorials and 9 or 8,
+        -- ShineBottom = SavedData.ElvUISkin.Tutorials and -10 or -1,
+        -- ShineLeft = SavedData.ElvUISkin.Tutorials and -11 or -12,
+        -- ShineRight = SavedData.ElvUISkin.Tutorials and 11 or 13,
         -- OnShow = function (self)
         -- end
     }));
@@ -198,7 +236,7 @@ function tutorials.Load()
     tutorials.FeaturesTutorial:SetFrameWidth(512);
     tutorials.FeaturesTutorial:SetPages(pages);
     tutorials.FeaturesTutorial:SetImageMargin(10);
-    tutorials.FeaturesTutorial:SetTextMargin({10, 10, 10, 20});
+    tutorials.FeaturesTutorial:SetTextMargin({10, 0, 10, 20});
 
     tutorials.FeaturesTutorial:SetCloseButtonHook(function()
         diagnostics.Trace("tutorials.SetCloseButtonHook");

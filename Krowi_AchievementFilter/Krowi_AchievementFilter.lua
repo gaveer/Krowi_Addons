@@ -39,6 +39,7 @@ function loadHelper:OnEvent(event, arg1)
 
             addon.Data.SavedData.Load();
 
+            addon.GUI.ElvUISkin.Load();
             addon.Icon.Load();
             addon.Tutorials.Load();
 

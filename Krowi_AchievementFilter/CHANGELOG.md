@@ -15,10 +15,12 @@ All notable changes to this project will be documented in this file.
 - Colors in the tooltip for the Part of a chain and Required for sections are now based on the quest difficulty colors
 - Full rewrite of the 3rd party tutorial library to further tailor it to my own needs
 - Tutorial progress has been reset since a new way of tracking what is viewed is used
+- Categories tooltip is now shown on the right side of the category similar to achievements
 
 ### Fixed
 - Taming Eastern Kingdoms now only shows for Alliance players
 - Taming Kalimdor now only shows for Horde players
+- Special case when turning off ElvUI might cause an error
 
 ## [9.0.5.22.0] - 2021-05-13
 ### Added

@@ -24,12 +24,15 @@ function savedData.Load()
     diagnostics.Debug("Current Version: " .. SavedData["Version"]);
 
     Resolve(LoadSolutions(), prevBuild, currBuild, prevVersion, currVersion);
+
+    diagnostics.Debug("SavedData loaded");
 end
 
-local FixFeaturesTutorialProgress;
+local FixFeaturesTutorialProgress, FixElvUISkin;
 function LoadSolutions()
     local solutions = {
         FixFeaturesTutorialProgress, -- 1
+        FixElvUISkin, -- 2
     };
 
     return solutions;
@@ -52,8 +55,17 @@ function FixFeaturesTutorialProgress(prevBuild, currBuild, prevVersion, currVers
         return;
     end
 
-    -- SavedData["FeaturesTutorial"] = addon.Options.db.FeaturesTutorial;
     addon.Options.db.FeaturesTutorial = nil;
 
-    diagnostics.Debug("Moved Features Tutorial Progress from previous version to new location");
+    diagnostics.Debug("Cleared Features Tutorial Progress from previous version");
+end
+
+function FixElvUISkin(prevBuild, currBuild, prevVersion, currVersion)
+    if prevBuild ~= nil and currBuild ~= nil then
+        return;
+    end
+
+    addon.Options.db.ElvUISkin = nil;
+
+    diagnostics.Debug("Cleared ElvUISkin from previous version");
 end

@@ -141,7 +141,7 @@ local function CreatePanel()
                                 end
                             },
                             Author = {
-                                name = string.format(addon.Yellow, addon.L["Author"] .. ": ") .. "Krowi",
+                                name = string.format(addon.Yellow, addon.L["Author"] .. ": ") .. "Krowi-Frostmane EU",
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",

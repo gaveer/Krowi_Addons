@@ -209,7 +209,7 @@ end
 
 addon.Donations = {
     {Name = "Bur", Realm = "Frostmane EU", Class = "DRUID"},
-    {Name = "Ta", Realm = "Der Rat von Dalaran", Class = "SHAMAN"},
+    {Name = "Ta", Realm = "Der Rat von Dalaran EU", Class = "SHAMAN"},
 }
 
 function addon.GetDonationsAsString()

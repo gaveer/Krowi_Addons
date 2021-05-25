@@ -154,8 +154,9 @@ function achievementsFrame:Update()
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
 	if cachedCategory == addon.CurrentZoneCategory then
-		updateAchievements = updateAchievements or addon.Data.GetCurrentZoneAchievements();
+		updateAchievements = addon.Data.GetCurrentZoneAchievements() or updateAchievements;
 	end
+
 	if updateAchievements then
 		cachedAchievements = GetFilteredAchievements(self, cachedCategory);
 	end

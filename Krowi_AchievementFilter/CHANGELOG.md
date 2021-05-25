@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - Taming Kalimdor now only shows for Horde players
 - Special case when turning off ElvUI might cause an error
 - Issue #42: When achievements with same objective types are shown in default and new tab, both objectives would stay hidden
+- Issue #43: Go to in Current Zone and searching does not properly work when Merge Small Categories is checked
 
 ## [9.0.5.22.0] - 2021-05-13
 ### Added

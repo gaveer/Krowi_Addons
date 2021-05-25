@@ -171,9 +171,9 @@ function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
 	rightClickMenu:AddFull({Text = name, IsTitle = true});
 
 	-- Debug table
-	if diagnostics.DebugEnabled() then
-		rightClickMenu:AddFull({Text = "Debug Table", Func = function() diagnostics.DebugTable(self); end});
-	end
+	-- if diagnostics.DebugEnabled() then
+	-- 	rightClickMenu:AddFull({Text = "Debug Table", Func = function() end});
+	-- end
 
 	-- Wowhead link
 	if not achievement.HasNoWowheadLink then

@@ -130,6 +130,7 @@ function addon.GetAchievement(id)
 
 	for _, achievement in next, addon.Achievements do
 		if achievement.ID == id then
+            addon.Diagnostics.Debug(achievement);
 			return achievement;
 		end
 	end

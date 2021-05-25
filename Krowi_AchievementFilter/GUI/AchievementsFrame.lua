@@ -147,19 +147,16 @@ local highlightedButton;
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
-	local categoryChanged = cachedCategory ~= self.CategoriesFrame.SelectedCategory;
+	local updateAchievements = cachedCategory ~= self.CategoriesFrame.SelectedCategory;
 	cachedCategory = self.CategoriesFrame.SelectedCategory;
 	local scrollFrame = self.Container;
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
-	local zoneChanged;
-	if self.CategoriesFrame.SelectedCategory.HasFlexibleData then
-		-- if cachedCategory == addon.CurrentZoneCategory then
-			zoneChanged = addon.Data.GetCurrentZoneAchievements();
-		-- end
+	if cachedCategory == addon.CurrentZoneCategory then
+		updateAchievements = updateAchievements or addon.Data.GetCurrentZoneAchievements();
 	end
-	if categoryChanged or zoneChanged then
+	if updateAchievements then
 		cachedAchievements = GetFilteredAchievements(self, cachedCategory);
 	end
 	local numButtons = #buttons;
@@ -467,6 +464,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 	diagnostics.Trace("achievementsFrame:SelectAchievement");
 
 	if not achievement then
+		diagnostics.Debug("No achievement provided");
 		return;
 	end
 

@@ -29,7 +29,12 @@ local defaults = {
             Achievements = {
                 ShowPartOfAChain = true,
                 ShowRequiredFor = true,
-                ShowCurrentCharacterIcons = false
+                ShowCurrentCharacterIcons = false,
+                ObjectivesProgress = {
+                    Show = true,
+                    ShowWhenAchievementCompleted = true,
+                    SecondColumnThreshold = 25
+                }
             }
         },
         Minimap = {
@@ -517,7 +522,7 @@ local function CreatePanel()
                             Categories = {
                                 name = addon.L["Categories"],
                                 type = "header",
-                                order = 1
+                                order = 1.1
                             },
                             ShowNotObtainable = {
                                 name = core.ReplaceVars{addon.L["Show Not Obtainable"],
@@ -526,7 +531,7 @@ local function CreatePanel()
                                                         notObtainable = addon.L["Not Obtainable"]},
                                 type = "toggle",
                                 width = "full",
-                                order = 2,
+                                order = 2.1,
                                 get = function () return addon.Options.db.Tooltip.Categories.ShowNotObtainable; end,
                                 set = function()
                                     addon.Options.db.Tooltip.Categories.ShowNotObtainable = not addon.Options.db.Tooltip.Categories.ShowNotObtainable;
@@ -537,7 +542,7 @@ local function CreatePanel()
                             Achievements = {
                                 name = addon.L["Achievements"],
                                 type = "header",
-                                order = 3
+                                order = 3.1
                             },
                             ShowPartOfAChain = {
                                 name = core.ReplaceVars{addon.L["Show Part of a Chain"],
@@ -545,8 +550,8 @@ local function CreatePanel()
                                 desc = core.ReplaceVars{addon.L["Show Part of a Chain Desc"],
                                                         partOfAChain = addon.L["Part of a chain"]},
                                 type = "toggle",
-                                width = "full",
-                                order = 4,
+                                width = 1.5,
+                                order = 4.1,
                                 get = function () return addon.Options.db.Tooltip.Achievements.ShowPartOfAChain; end,
                                 set = function()
                                     addon.Options.db.Tooltip.Achievements.ShowPartOfAChain = not addon.Options.db.Tooltip.Achievements.ShowPartOfAChain;
@@ -560,8 +565,8 @@ local function CreatePanel()
                                 desc = core.ReplaceVars{addon.L["Show Required for Desc"],
                                                         requiredFor = addon.L["Required for"]},
                                 type = "toggle",
-                                width = "full",
-                                order = 5,
+                                width = 1.5,
+                                order = 4.2,
                                 get = function () return addon.Options.db.Tooltip.Achievements.ShowRequiredFor; end,
                                 set = function()
                                     addon.Options.db.Tooltip.Achievements.ShowRequiredFor = not addon.Options.db.Tooltip.Achievements.ShowRequiredFor;
@@ -576,14 +581,66 @@ local function CreatePanel()
                                                         requiredFor = addon.L["Required for"]},
                                 type = "toggle",
                                 width = "full",
-                                order = 6,
+                                order = 5.1,
                                 get = function () return addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons; end,
                                 set = function()
                                     addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons = not addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons;
 
                                     diagnostics.Debug(addon.L["Show current character icons"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons));
                                 end
-                            }
+                            },
+                            ObjectivesProgressShow = {
+                                name = core.ReplaceVars{addon.L["Show Objectives progress"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                desc = core.ReplaceVars{addon.L["Show Objectives progress Desc"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 6.1,
+                                get = function () return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show;
+
+                                    diagnostics.Debug(addon.L["Show Objectives progress"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show));
+                                end
+                            },
+                            ObjectivesProgressShowWhenAchievementCompleted = {
+                                name = core.ReplaceVars{addon.L["Show Objectives progress when achievement completed"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                desc = core.ReplaceVars{addon.L["Show Objectives progress when achievement completed Desc"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 7.1,
+                                get = function () return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted;
+
+                                    diagnostics.Debug(addon.L["Show Objectives progress"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted));
+                                end
+                            },
+                            ObjectivesProgressSecondColumnThreshold = {
+                                name = addon.L["Objectives progress second column threshold"],
+                                desc = addon.L["Objectives progress second column threshold Desc"],
+                                type = "range",
+                                min = 0,
+                                max = 100,
+                                step = 1,
+                                width = 1.5,
+                                order = 8.1,
+                                get = function ()
+                                    return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold;
+                                end,
+                                set = function(_, value)
+                                    if addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold == value then
+                                        return;
+                                    end;
+        
+                                    addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold = value;
+        
+                                    diagnostics.Debug(addon.L["Objectives progress second column threshold"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold));
+                                end
+                            },
                         }
                     }
                 }

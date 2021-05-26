@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Tutorial page for Categories tooltip
 - Donation from Bur - Frostmane EU
 - Donation from Ta - Der Rat von Dalaran EU
+- Achievements tooltip can now show the objectives progress
 
 ### Changed
 - Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections

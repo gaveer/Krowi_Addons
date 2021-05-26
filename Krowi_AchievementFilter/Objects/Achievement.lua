@@ -27,22 +27,21 @@ end
 function achievement:GetMergedCategory() -- Gets the achievement's category, used when merging categories is enabled
     diagnostics.Trace("achievement:GetCategory");
 
-    for _, category in next, addon.Categories do
-        if category ~= addon.CurrentZoneCategory then -- Issue #43: Fix
-            if category.MergedAchievements ~= nil then
-                for _, ach in next, category.MergedAchievements do
-                    if ach.ID == self.ID then
-                        -- diagnostics.Debug(category.Name);
-                        return category;
-                    end
+    local categories = self.Category:GetTree(); -- Issue #43: Fix
+    for _, category in next, categories do
+        if category.MergedAchievements ~= nil then
+            for _, ach in next, category.MergedAchievements do
+                if ach.ID == self.ID then
+                    -- diagnostics.Debug(category.Name);
+                    return category;
                 end
             end
-            if category.Achievements ~= nil then -- exclude current zone here but in a proper way
-                for _, ach in next, category.Achievements do
-                    if ach.ID == self.ID then
-                        -- diagnostics.Debug(category.Name);
-                        return category;
-                    end
+        end
+        if category.Achievements ~= nil then
+            for _, ach in next, category.Achievements do
+                if ach.ID == self.ID then
+                    -- diagnostics.Debug(category.Name);
+                    return category;
                 end
             end
         end

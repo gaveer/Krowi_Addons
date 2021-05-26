@@ -5,7 +5,7 @@ local achievementButton = addon.GUI.AchievementButton;
 achievementButton.Tooltip = {};
 local tooltip = achievementButton.Tooltip;
 
-local AddBlizzardDefault, AddPartOfAChain, AddRequiredFor;
+local AddBlizzardDefault, AddPartOfAChain, AddRequiredFor, AddObjectives;
 function tooltip.ShowTooltip(button)
 	diagnostics.Trace("ShowTooltip");
 
@@ -15,49 +15,40 @@ function tooltip.ShowTooltip(button)
 	AddBlizzardDefault(button);
 	AddPartOfAChain(button);
 	AddRequiredFor(button);
+	AddObjectives(button);
 
 	-- AchievementFrameAchievements_CheckGuildMembersTooltip(self.shield); -- Guild can be ignored for now
 
 	GameTooltip:Show();
 end
 
-local function AddAchievementLine(self, id)
-	local _, name, _, completed, _, _, _, _, _, _, _, _, wasEarnedByMe = addon.GetAchievementInfo(id);
-	local color;
-	if id == self.Achievement.ID then
-		if completed then -- add self.Achievement.NotObtainable here
-			color = addon.LightGreenRGB;
-		elseif self.Achievement.NotObtainable then
-			color = addon.LightRedRGB;
-		else
-			color = addon.LightGreyRGB;
-		end
-	elseif completed then
-		color = addon.GreenRGB;
-	elseif self.Achievement.NotObtainable then
-		color = addon.RedRGB;
+local function AddAchievementLine(currentAchievement, otherAchievementID)
+	local _, name, _, completed, _, _, _, _, _, _, _, _, wasEarnedByMe = addon.GetAchievementInfo(otherAchievementID);
+	local icon, currentCharacterIcon, color = nil, "", nil;
+
+	if completed then
+		icon = "|T136814:0|t";
+		color = otherAchievementID == currentAchievement.ID and addon.LightGreenRGB or addon.GreenRGB;
+	elseif currentAchievement.NotObtainable then
+		icon = "|T136813:0|t";
+		color = otherAchievementID == currentAchievement.ID and addon.LightRedRGB or addon.RedRGB;
 	else
-		color = addon.GreyRGB;
+		icon = "|T136815:0|t";
+		color = otherAchievementID == currentAchievement.ID and addon.LightGreyRGB or addon.GreyRGB;
 	end
-	GameTooltip:AddLine(name, color.R, color.G, color.B); -- Achievement name
-	local tooltipTextureInfo;
+
 	if addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons then
 		if wasEarnedByMe then
-			GameTooltip:AddTexture(136814); -- interface/raidframe/readycheck-ready.blp
-		elseif self.Achievement.NotObtainable then
-			GameTooltip:AddTexture(136813); -- interface/raidframe/readycheck-notready.blp
+			currentCharacterIcon = "|T136814:0|t";
+		elseif currentAchievement.NotObtainable then
+			currentCharacterIcon = "|T136813:0|t";
 		else
-			GameTooltip:AddTexture(136815); -- interface/raidframe/readycheck-waiting.blp
+			currentCharacterIcon = "|T136815:0|t";
 		end
-		tooltipTextureInfo = {margin = { right = 24}};
+		currentCharacterIcon = currentCharacterIcon .. AF_TAB;
 	end
-	if completed then
-		GameTooltip:AddTexture(136814, tooltipTextureInfo); -- interface/raidframe/readycheck-ready.blp
-	elseif self.Achievement.NotObtainable then
-		GameTooltip:AddTexture(136813, tooltipTextureInfo); -- interface/raidframe/readycheck-notready.blp
-	else
-		GameTooltip:AddTexture(136815, tooltipTextureInfo); -- interface/raidframe/readycheck-waiting.blp
-	end
+
+	GameTooltip:AddLine(icon .. AF_TAB .. currentCharacterIcon .. name, color.R, color.G, color.B); -- Achievement name
 end
 
 function AddBlizzardDefault(self)
@@ -106,7 +97,7 @@ function AddPartOfAChain(self)
 
 	self.Achievement:ClearPartOfAChainIDs(); -- Make sure it's empty before adding new stuff
 	while id do
-		AddAchievementLine(self, id);
+		AddAchievementLine(self.Achievement, id);
 		self.Achievement:AddPartOfAChainID(id);
 		id = GetNextAchievement(id);
 	end
@@ -160,8 +151,72 @@ function AddRequiredFor(self)
 
 		self.Achievement:ClearRequiredForIDs(); -- Make sure it's empty before adding new stuff
 		for _, id in next, ids do
-			AddAchievementLine(self, id);
+			AddAchievementLine(self.Achievement, id);
 			self.Achievement:AddRequiredForID(id);
+		end
+	end
+end
+
+local function GetCriteriaTextAndColor(achievementID, criteriaIndex)
+	local criteriaString, _, completed, quantity, reqQuantity, _, _, _, _, _, _ = GetAchievementCriteriaInfo(achievementID, criteriaIndex);
+	local icon, color;
+	if completed then
+		icon = "|T136814:0|t";
+		color = addon.GreenRGB;
+	else
+		icon = "|T136815:0|t";
+		color = addon.GreyRGB;
+	end
+	local text = criteriaString;
+	if not completed then
+		text = text .. " (" .. tostring(quantity) .. "/" .. tostring(reqQuantity) .. ")";
+	end
+	text = icon .. AF_TAB .. text;
+
+	return text, color;
+end
+
+local function AddCriteriaLine(achievementID, criteriaIndex)
+	local text, color = GetCriteriaTextAndColor(achievementID, criteriaIndex);
+	GameTooltip:AddLine(text, color.R, color.G, color.B);
+end
+
+local function AddDoubleCriteriaLine(achievementID, criteriaIndex1, criteriaIndex2)
+	local texts = {"", ""};
+	local colors = {addon.WhiteRGB, addon.WhiteRGB};
+	for i, criteriaIndex in next, {criteriaIndex1, criteriaIndex2} do
+		texts[i], colors[i] = GetCriteriaTextAndColor(achievementID, criteriaIndex);
+	end
+	GameTooltip:AddDoubleLine(texts[1], texts[2], colors[1].R, colors[1].G, colors[1].B, colors[2].R, colors[2].G, colors[2].B);
+end
+
+function AddObjectives(self)
+	diagnostics.Trace("AddObjectives");
+
+	if not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show or self.Achievement.NotObtainable then
+		return;
+	end
+
+	if self.completed and not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted then
+		return;
+	end
+
+	local id = self.Achievement.ID;
+	local numCriteria = GetAchievementNumCriteria(id);
+	if numCriteria > 0 then
+		if (GameTooltip:NumLines() > 0) then
+			GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		end
+		GameTooltip:AddLine(addon.L["Objectives progress"]); -- Header
+
+		if numCriteria < addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold then
+			for i = 1, numCriteria do
+				AddCriteriaLine(id, i);
+			end
+		else
+			for i = 1, numCriteria, 2 do
+				AddDoubleCriteriaLine(id, i, i + 1 <= numCriteria and i + 1 or nil);
+			end
 		end
 	end
 end

@@ -37,6 +37,7 @@ L["Merge Small Categories"] = "Merge Small Categories";
 -- Tooltips
 L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
+L["Objectives progress"] = "Objectives progress";
 
 -- Options
 L["Requires a reload"] = string.format(addon.Orange, "Requires a reload to take full effect.");
@@ -109,6 +110,12 @@ L["Show Required for"] = "Show {requiredFor}";
 L["Show Required for Desc"] = "Show / hide {requiredFor}.\n\nWhen checked, the achievement that requires the selected achievement to be completed will be visible in the tooltip.";
 L["Show current character icons"] = "Show current character icons";
 L["Show current character icons Desc"] = "Show / hide current character icons.\n\nWhen checked, a second icon will appear in front of {partOfAChain} and {requiredFor} achievements that indicates the current character's progress.";
+L["Show Objectives progress"] = "Show {objectivesProgress}";
+L["Show Objectives progress Desc"] = "Show / hide {objectivesProgress}.\n\nWhen checked, the {objectivesProgress} of the achievements will be visible in the tooltip.";
+L["Show Objectives progress when achievement completed"] = "Show {objectivesProgress} when achievement completed";
+L["Show Objectives progress when achievement completed Desc"] = "Show / hide {objectivesProgress} when achievement is completed.\n\nWhen checked, the {objectivesProgress} of the achievements will be visible in the tooltip regardless if the achievement is completed or not.";
+L["Objectives progress second column threshold"] = "Objectives progress second column threshold";
+L["Objectives progress second column threshold Desc"] = "Achievements with more objectives than this number will be visible in two columns instead of one.";
 
 -- Options ElvUI Skins Status
 L["ElvUI Skins Status"] = "ElvUI Skins Status";

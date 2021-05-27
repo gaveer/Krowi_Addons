@@ -43,7 +43,6 @@ function loadHelper:OnEvent(event, arg1)
             addon.Icon.Load();
             addon.Tutorials.Load();
 
-
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             addon.Data.Load();
 

@@ -13,6 +13,8 @@ L["IAT Tactics"] = "IAT Tactics";
 L["Go to"] = "Go to";
 L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
+L["Include"] = "Include";
+L["Exclude"] = "Exclude";
 L["T_TAB_TEXT"] = "Achievement Filter";
 
 -- Categories
@@ -35,9 +37,10 @@ L["Merge Small Categories"] = "Merge Small Categories";
 -- Tooltips
 L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
+L["Objectives progress"] = "Objectives progress";
 
 -- Options
-L["Requires a reload"] = AF_COLOR_ORANGE .. "Requires a reload to take full effect." .. AF_COLOR_END;
+L["Requires a reload"] = string.format(addon.Orange, "Requires a reload to take full effect.");
 
 -- Options General Info
 L["Build"] = "Build";
@@ -46,6 +49,8 @@ L["Tutorial"] = "Tutorial";
 L["Tutorial Desc"] = "Open the tutorials from the start";
 L["Discord"] = "Discord";
 L["Discord Desc"] = "Open a popup dialog with a link to the Krowi's Addons Discord server. Here you can post comments, reports, remarks, ideas or anything else related.";
+L["CurseForge"] = "CurseForge";
+L["CurseForge Desc"] = "Open a popup dialog with a link to the {addonName} {curseForge} page.";
 
 -- Options General Icon
 L["Show minimap icon"] = "Show minimap icon";
@@ -90,106 +95,172 @@ L["Merge small categories threshold"] = "Merge small categories threshold";
 L["Merge small categories threshold Desc"] = "Categories with a number of achievements lower than this number will merge into the parent category.\n\n" ..
                                                 "Only preset categories can merge (mostly child categories from zones).\n\n{reloadRequired}";
 
+-- Options Layout Right Click Menu
+L["Right Click Menu"] = "Right Click Menu";
+L["Show Right Click Menu"] = "Show {rightClickMenu} button";
+L["Show Right Click Menu Desc"] = "Show / hide {rightClickMenu} button on each achievement.\n\nThis serves as an alternative for right clicking the achievement.\n\n{reloadRequired}";
+
 -- Options Layout Tooltip
 L["Tooltip"] = "Tooltip";
+L["Show Not Obtainable"] = "Show {notObtainable}";
+L["Show Not Obtainable Desc"] = "Show / hide {notObtainable}.\n\nWhen checked, show not obtainable achievements in red on the progress bar.";
 L["Show Part of a Chain"] = "Show {partOfAChain}";
 L["Show Part of a Chain Desc"] = "Show / hide {partOfAChain}.\n\nWhen checked, the chain the achievment is part of will be visible in the tooltip.";
 L["Show Required for"] = "Show {requiredFor}";
 L["Show Required for Desc"] = "Show / hide {requiredFor}.\n\nWhen checked, the achievement that requires the selected achievement to be completed will be visible in the tooltip.";
 L["Show current character icons"] = "Show current character icons";
 L["Show current character icons Desc"] = "Show / hide current character icons.\n\nWhen checked, a second icon will appear in front of {partOfAChain} and {requiredFor} achievements that indicates the current character's progress.";
+L["Show Objectives progress"] = "Show {objectivesProgress}";
+L["Show Objectives progress Desc"] = "Show / hide {objectivesProgress}.\n\nWhen checked, the {objectivesProgress} of the achievements will be visible in the tooltip.";
+L["Show Objectives progress when achievement completed"] = "Show {objectivesProgress} when achievement completed";
+L["Show Objectives progress when achievement completed Desc"] = "Show / hide {objectivesProgress} when achievement is completed.\n\nWhen checked, the {objectivesProgress} of the achievements will be visible in the tooltip regardless if the achievement is completed or not.";
+L["Objectives progress second column threshold"] = "Objectives progress second column threshold";
+L["Objectives progress second column threshold Desc"] = "Achievements with more objectives than this number will be visible in two columns instead of one.";
 
 -- Options ElvUI Skins Status
 L["ElvUI Skins Status"] = "ElvUI Skins Status";
-L["ElvUI Skins Status Desc"] = "Each of the options below are controlled by ElvUI and are just informational.\n" ..
-                    "To change these, go to Game Menu -> ElvUI -> Skins and check the desired options. See each option below for what to check.";
+L["ElvUI Skins Status Desc"] = "Each of the options below are controlled by ElvUI and are just informational.\n\n" ..
+                    "To change these, go to Game Menu -> ElvUI -> Skins and check the desired options. See each option below for what to check.\n ";
 L["Skin Achievements"] = "Skin Achievements";
 L["Skin Achievements Desc"] = "Applies the ElvUI skin to the Achievements Window.\n-> Blizzard + Achievements";
 L["Skin Misc Frames"] = "Skin Misc Frames";
 L["Skin Misc Frames Desc"] = "Applies the ElvUI skin to the Filter Menu, Right Click Menu and Popup Dialog.\n-> Blizzard + Misc Frames";
-L["Skin Ace3"] = "Skin Ace3";
-L["Skin Ace3 Desc"] = "Applies the ElvUI skin to the Options.\n-> Ace3";
+L["Skin Tooltip"] = "Skin Tooltip";
+L["Skin Tooltip Desc"] = "Applies the ElvUI skin to the Tooltip.\n-> Blizzard + Tooltip";
 L["Skin Tutorials"] = "Skin Tutorials";
 L["Skin Tutorials Desc"] = "Applies the ElvUI skin to the Tutorials.\n-> Blizzard + Tutorials";
+L["Skin Ace3"] = "Skin Ace3";
+L["Skin Ace3 Desc"] = "Applies the ElvUI skin to the Options.\n-> Ace3";
+
+-- Options Donations
+L["Credits"] = "Credits";
+L["Special thanks"] = "Special thanks";
+L["Special thanks Desc"] = "Special thanks to {bur} ";
+L["Donations"] = "Donations";
 
 -- Keybindings
 L["BINDING_NAME_AF_OPEN_TAB1"] = "Toggle Achievement Window";
 
 -- Icon
-L["I_LEFT_CLICK"] = "Left-click " .. AF_COLOR_ADDON .. "to open the Achievement window." .. AF_COLOR_END;
-L["I_RIGHT_CLICK"] = "Right-click " .. AF_COLOR_ADDON .. "for Options." .. AF_COLOR_END;
+L["Left click"] = "Left click";
+L["Right click"] = "Right click";
+
+L["Icon Left click"] = "to open the Achievement window.";
+L["Icon Right click"] = "for Options.";
 
 -- Tutorials
 -- Features tutorial
-L["FT_TABBUTTON_TITLE"] = "New achievements tab";
-L["FT_TABBUTTON_DESC"] = "A new achievements tab is added to the achievement window to offer a new way of displaying achievements but in a familiar fashion.";
-L["FT_GROUPING_TITLE"] = "New but familiar";
-L["FT_GROUPING_DESC"] = "Instead of grouping achievements by type and then by expansion like the default tabs do, " ..
-                        "here achievements are first grouped by expansion, then by region like different zones, dungeons, raids, ... " ..
-                        "and then by type.";
-L["FT_RIGHTCLICKMENU_TITLE"] = "Right-click menu";
-L["FT_RIGHTCLICKMENU_DESC"] = "Each achievement in the new tab has a right click menu.\n\n" ..
+L["New achievement window tab"] = "New achievement window tab";
+L["New achievement window tab Desc"] = "A new tab is added to the achievement window to offer a new way of displaying achievements " ..
+                                        "in a familiar fashion without interfering with the default tabs.";
+
+L["Categories per expansion"] = "Categories per expansion";
+L["Categories per expansion Desc"] = "Achievements are put in categories per expansion compared to the default. " ..
+                                        "The hierarchy is as follow:\n\n" ..
+                                        AF_TAB .. "- {expansion}\n" ..
+                                        AF_TAB .. AF_TAB .. "- {zones}\n" ..
+                                        AF_TAB .. AF_TAB .. AF_TAB .. "- {quests}\n" ..
+                                        AF_TAB .. AF_TAB .. AF_TAB .. "- {exploration}\n" ..
+                                        AF_TAB .. AF_TAB .. AF_TAB .. "- {pvp}\n" ..
+                                        AF_TAB .. AF_TAB .. AF_TAB .. "- {reputation}\n" ..
+                                        AF_TAB .. AF_TAB .. "- {dungeons}\n" ..
+                                        AF_TAB .. AF_TAB .. "- {raids}\n" ..
+                                        AF_TAB .. AF_TAB .. "- {petBattles}\n" ..
+                                        AF_TAB .. AF_TAB .. "- {expansionFeatures}\n\n" ..
+                                        "Special categories:\n" ..
+                                        AF_TAB .. "- {currentZone}: Shows the achievements linked to the current zone you're in\n" ..
+                                        AF_TAB .. "- {comingIn}: {spoiler}\n" ..
+                                        AF_TAB .. AF_TAB .. "Achievements that might be added in the next patch (subject to change)";
+
+-- L["Right Click Menu"] = "Right Click Menu"; -- See at Options Layout Right Click Menu
+L["Right Click Menu Desc"] = "Each achievement in the new tab has a {rightClickMenu}.\n\n" ..
                                 "Features:\n" ..
                                 AF_TAB .. "- Link to {wowhead}\n" ..
-                                AF_TAB .. "- {goTo} shortcut to achievements that are {partOfAChain} or that {require} this achievment to be completed\n" ..
-                                AF_TAB .. "- Link to {xuFuPetGuides} if the achievement is related to Pet Battles and {xuFuPetGuides} has relevant information about it\n" ..
-                                AF_TAB .. "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})";
-L["FT_RIGHTCLICKMENU_REQUIRE"] = "Require";
-L["FT_SEARCHPREVIEW_TITLE"] = "Searching";
-L["FT_SEARCHPREVIEW_DESC"] = "Like the default UI, searching achievements is possible in a similar way but it will only search achievements in this tab.\n\n" ..
-                                "Features:\n" ..
-                                AF_TAB .. "- Search by achievement ID by starting the search query with '#'\n\n" ..
+                                AF_TAB .. "- {goTo} shortcut to achievements that are {partOfAChain} or that are {require} this achievment to be completed. " ..
+                                "Achievements in the {currentZone} category have a shortcut to their proper location in the categories tree.\n" ..
+                                AF_TAB .. "- Link to {xuFuPetGuides} if the achievement is related to {petBattles} and {xuFuPetGuides} has relevant information about it\n" ..
+                                AF_TAB .. "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})\n\n" ..
                                 "Options:\n" ..
-                                AF_TAB .. "- {clearOnRightClick}\n" ..
-                                AF_TAB .. "- {minCharToSearch}\n" ..
-                                AF_TAB .. "- {numSearchPreviews}\n\n" ..
+                                AF_TAB .. "- A button can be shown on each achievement that opens the {rightClickMenu}. (Button is {enabled})\n\n" ..
                                 "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
-L["FT_FULLSEARCH_TITLE"] = "Viewing all search results";
-L["FT_FULLSEARCH_DESC"] = "By selecting \"Show All X Results\" (see image previous page) you're able to view all search results.";
-L["FT_FILTER_TITLE"] = "Enhanced filtering and sorting";
-L["FT_FILTER_DESC"] = "The default filtering of achievements is quite basic with only the option to select All, Earned or Incomplete achievements. Here it's enhanced with\n\n" ..
-                        "Filtering (multiple filters can be selected at the same time):\n" ..
-                        AF_TAB .. "- {mergeSmallCategories}: Merge categories with less than 10 achievements\n" ..
-                        AF_TAB .. "- {completed}: Show completed achievements\n" ..
-                        AF_TAB .. "- {notCompleted}: Show not completed achievements\n" ..
-                        AF_TAB .. "- {obtainable}: Show obtainable achievements\n" ..
-                        AF_TAB .. "- {notObtainable}: Show not obtainable achievements\n" ..
-                        AF_TAB .. "- {faction}\n" ..
-                        AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that both {alliance_wc} and {horde_wc} can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {alliance}: Show achievements only {alliance_wc} can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {horde}: Show achievements only {horde_wc} can earn\n" ..
-                        AF_TAB .. "- {covenant}\n" ..
-                        AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that all covenants can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {kyrian}: Show achievements only {kyrian_wc} can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {venthyr}: Show achievements only {venthyr_wc} can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {nightfae}: Show achievements only {nightfae_wc} can earn\n" ..
-                        AF_TAB .. AF_TAB .. "- {necrolord}: Show achievements only {necrolord_wc} can earn\n" ..
-                        AF_TAB .. "- {collapseChain}: Show only the last completed and first not completed achievement in a chain\n\n" ..
-                        "Sorting:\n" ..
-                        AF_TAB .. "- {noSorting}: No sorting applied\n" ..
-                        AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..
-                        AF_TAB .. "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
-                        "More filter and sorting options will be added in later versions. Requests possible.";
-L["FT_TOOLTIP_TITLE"] = "Tooltip";
-L["FT_TOOLTIP_DESC"] = "To make it more clear for the user how achievements relate to each other, several new sections are added to it.\n\n" ..
-                        "Features:\n" ..
-                        AF_TAB .. "- {partOfAChain}: Shows the list of achievements the hovered achievement is part of\n" ..
-                        AF_TAB .. "- {requiredFor}: Shows a list of achievements that require the hovered achievement to be completed in order to earn it\n\n" ..
-                        "Icons:\n" ..
-                        AF_TAB .. "- {ready}: The achievement is completed\n" ..
-                        AF_TAB .. "- {waiting}: The achievement is not completed\n" ..
-                        AF_TAB .. "- {notready}: The achievement is not possible to obtain anymore\n\n" ..
-                        "Optionally, two icons can be displayed per line. The first icon is the default one, the second one is for the current character.\n\n" ..
-                        "Colors:\n" ..
-                        AF_TAB .. "- {green}: The achievement is completed\n" ..
-                        AF_TAB .. "- {grey}: The achievement is not completed\n" ..
-                        AF_TAB .. "- {light}: The hovered achievement\n\n" ..
-                        "The information provided by these is also added in the Right Click Menu (part 3 of this tutorial). " ..
-                        "A new {goTo} line and menu is added to eligible achievements which will take you to the related achievement when clicked.";
-L["FT_TOOLTIP_GREEN"] = "Green";
-L["FT_TOOLTIP_GREY"] = "Grey";
-L["FT_TOOLTIP_LIGHTER"] = "Lighter";
-L["FT_TOOLTIP_OR"] = "or";
+
+L["Quick Search"] = "Quick Search";
+L["Quick Search Desc"] = "Searches for achievements in the new tab.\n\n" ..
+                            "Features:\n" ..
+                            AF_TAB .. "- Search by achievement title and description\n" ..
+                            AF_TAB .. "- Search by achievement ID by starting the search query with '#'\n\n" ..
+                            "Options:\n" ..
+                            AF_TAB .. "- {clearOnRightClick} ({clearOnRightClickEnabled})\n" ..
+                            AF_TAB .. "- {excludeNextPatch} ({excludeNextPatchEnabled} next patch achievements)\n" ..
+                            AF_TAB .. "- {minCharToSearch} ({minCharToSearchNumber})\n" ..
+                            AF_TAB .. "- {numSearchPreviews} ({numSearchPreviewsNumber})\n\n" ..
+                            "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
+
+L["Full Search"] = "Full Search";
+L["Full Search Desc"] = "By selecting \"{showAllResults}\" (see {quickSearch}) you're able to view all search results.";
+
+L["Enhanced filtering and sorting"] = "Enhanced filtering and sorting";
+L["Enhanced filtering and sorting Desc"] = "Filtering and sorting of achievements is enhanced with following features.\n\n" ..
+                                            "Filtering (multiple filters can be selected at the same time):\n" ..
+                                            AF_TAB .. "- {mergeSmallCategories}: Merge categories if allowed with less than {mergeSmallCategoriesNumber} achievements\n" ..
+                                            AF_TAB .. "- {completed}: Show completed achievements\n" ..
+                                            AF_TAB .. "- {notCompleted}: Show not completed achievements\n" ..
+                                            AF_TAB .. "- {obtainable}: Show obtainable achievements\n" ..
+                                            AF_TAB .. "- {notObtainable}: Show not obtainable achievements\n" ..
+                                            AF_TAB .. "- {faction}\n" ..
+                                            AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that both {alliance_wc} and {horde_wc} can earn\n" ..
+                                            AF_TAB .. AF_TAB .. "- {alliance}: Show achievements only {alliance_wc} can earn\n" ..
+                                            AF_TAB .. AF_TAB .. "- {horde}: Show achievements only {horde_wc} can earn\n" ..
+                                            AF_TAB .. "- {covenant}\n" ..
+                                            AF_TAB .. AF_TAB .. "- {neutral}: Show achievements that all covenants can earn\n" ..
+                                            AF_TAB .. AF_TAB .. "- {kyrian}: Show achievements only {kyrian_wc} can earn\n" ..
+                                            AF_TAB .. AF_TAB .. "- {venthyr}: Show achievements only {venthyr_wc} can earn\n" ..
+                                            AF_TAB .. AF_TAB .. "- {nightfae}: Show achievements only {nightfae_wc} can earn\n" ..
+                                            AF_TAB .. AF_TAB .. "- {necrolord}: Show achievements only {necrolord_wc} can earn\n" ..
+                                            AF_TAB .. "- {collapseChain}: Show only the last completed and first not completed achievement in a chain\n\n" ..
+                                            "Sorting:\n" ..
+                                            AF_TAB .. "- {noSorting}: No sorting applied\n" ..
+                                            AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..
+                                            AF_TAB .. "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
+                                            "Other:\n" ..
+                                            AF_TAB .. "- {help}: Start the tutorial from the start and reset what you've viewed\n" ..
+                                            AF_TAB .. AF_TAB .. "- Shows the specific tutorial page without resetting what you've viewed\n" ..
+                                            AF_TAB .. "- {options}: Open the addon options (Game Menu -> Interface -> AddOns -> {addonName})\n\n" ..
+                                            "More filters and sorting options can be requested on {discord} or {curseForge} (links in the options).";
+
+L["Enhanced tooltip"] = "Enhanced tooltip"; -- Used for categories and achievements
+L["Enhanced tooltip Categories Desc"] = "Each tooltip has additional information on how many achievements are (not) obtainable and (not) completed.\n\n" ..
+                                        "The numbers in the progress bar are in the following format:\n" ..
+                                        AF_TAB .. "OC (+NONC) / T\n" ..
+                                        AF_TAB .. AF_TAB .. "- {oc}: The (not) obtainable completed achievements\n" ..
+                                        AF_TAB .. AF_TAB .. "- {nonc}: The not obtainable not completed achievements\n" ..
+                                        AF_TAB .. AF_TAB .. "- T: Total number of achievements\n\n" ..
+                                        "Colors:\n" ..
+                                        AF_TAB .. "- {green}: The (not) obtainable completed achievements\n" ..
+                                        AF_TAB .. "- {red}: The not obtainable not completed achievements\n" ..
+                                        AF_TAB .. "- Empty: The obtainable not completed achievements\n\n" ..
+                                        "The {red} part of the progress bar and number in brackets can either be disbled in options ({showNotObtainable}) or by unchecking the {notObtainable} filter.";
+L["Enhanced tooltip Achievements Desc"] = "Each tooltip has additional information on how achievements relate to each other (if they do). Several new sections are added to it.\n\n" ..
+                                            "Features:\n" ..
+                                            AF_TAB .. "- {partOfAChain}: Shows the list of achievements the hovered achievement is part of (1) ({partOfAChainEnabled})\n" ..
+                                            AF_TAB .. "- {requiredFor}: Shows a list of achievements that require the hovered achievement to be completed in order to earn it (1) ({requiredForEnabled})\n" ..
+                                            AF_TAB .. "- {objectivesProgress}: Shows the list of objectives with progress ({objectivesProgressEnabled})\n\n" ..
+                                            "Icons:\n" ..
+                                            AF_TAB .. "- {ready}: The achievement is completed\n" ..
+                                            AF_TAB .. "- {waiting}: The achievement is not completed\n" ..
+                                            AF_TAB .. "- {notready}: The achievement is not possible to obtain anymore\n\n" ..
+                                            "(1) Optionally, two icons can be displayed per line. The first icon is the default one, the second one is for the current character. ({currentCharacterIconEnabled})\n\n" ..
+                                            "Colors:\n" ..
+                                            AF_TAB .. "- {green}: The achievement/objective is completed\n" ..
+                                            AF_TAB .. "- {grey}: The achievement/objective is not completed\n" ..
+                                            AF_TAB .. "- {red}: The achievement is not possible to obtain anymore\n" ..
+                                            AF_TAB .. "- Lighter {lightGreen}, {lightGrey} or {lightRed}: The hovered achievement";
+
+L["OC"] = "OC";
+L["NONC"] = "NONC";
+L["Green"] = "Green";
+L["Grey"] = "Grey";
+L["Red"] = "Red";
 
 -- NPC Names
 L["Andurs"] = "Andurs"; -- Wowhead npc=105387

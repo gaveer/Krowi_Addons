@@ -1,6 +1,34 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.0.5.23.0] - 2021-05-27
+### Added
+- Achievements in the Current Zone category now always have a Go To item so you can easily go to the achievement in the categories tree
+- Button to each achievement to show the Right Click Menu (disabled by default)
+- Categories tooltip can now show the number of not obtainable achievements and also adds a red part to the progress bar
+- New Coming in 9.1 (24 achievements)
+- Tutorial button in Options and Help under Filters now has a second menu with links directly to each tutorial page
+- This second menu for tutorial pages now shows an exclamation mark if the page was not viewed before
+- Tutorial page for Categories tooltip
+- Credits with special thanks and donations
+- Donation from Bur - Frostmane EU
+- Donation from Ta - Der Rat von Dalaran EU
+- Achievements tooltip can now show the objectives progress (some wierd texts might exist)
+
+### Changed
+- Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections
+- Colors in the tooltip for the Part of a chain and Required for sections are now based on the quest difficulty colors
+- Full rewrite of the 3rd party tutorial library to further tailor it to my own needs
+- Tutorial progress has been reset since a new way of tracking what is viewed is used
+- Categories tooltip is now shown on the right side of the category similar to achievements
+
+### Fixed
+- Taming Eastern Kingdoms now only shows for Alliance players
+- Taming Kalimdor now only shows for Horde players
+- Special case when turning off ElvUI might cause an error
+- Issue #42: When achievements with same objective types are shown in default and new tab, both objectives would stay hidden
+- Issue #43: Go to in Current Zone and searching does not properly work when Merge Small Categories is checked
+
 ## [9.0.5.22.0] - 2021-05-13
 ### Added
 - New Coming in 9.1 (25 achievements)
@@ -403,6 +431,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
+[9.0.5.23.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3326868
 [9.0.5.22.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3308327
 [9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611
 [9.0.5.20.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3294651

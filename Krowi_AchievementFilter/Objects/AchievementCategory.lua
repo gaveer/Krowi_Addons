@@ -84,3 +84,13 @@ function category:GetTree()
 
     return categories;
 end
+
+function category:GetPath()
+    local categoriesTree = self:GetTree();
+    local path = categoriesTree[1].Name;
+    for j = 2, #categoriesTree do
+        path = path .. " > " .. categoriesTree[j].Name;
+    end
+
+    return path;
+end

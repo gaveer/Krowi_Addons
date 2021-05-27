@@ -1,0 +1,30 @@
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Windows App.exe
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Windows App.deps.json
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Windows App.runtimeconfig.json
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Windows App.runtimeconfig.dev.json
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Windows App.dll
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\ref\Windows App.dll
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Windows App.pdb
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Krowi's Calendar Exporter Core.dll
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\bin\Debug\net5.0-windows\Krowi's Calendar Exporter Core.pdb
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.csprojAssemblyReference.cache
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\MainWindow.g.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\App.g.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App_MarkupCompile.cache
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App_MarkupCompile.lref
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\MainWindow.baml
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.g.resources
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.GeneratedMSBuildEditorConfig.editorconfig
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.AssemblyInfoInputs.cache
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.AssemblyInfo.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.csproj.CoreCompileInputs.cache
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.csproj.CopyComplete
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.dll
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\ref\Windows App.dll
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.pdb
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Windows App.genruntimeconfig.cache
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarDay.g.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarDay.baml
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarHeader.g.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\Controls\CalendarHeader.baml

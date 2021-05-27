@@ -64,7 +64,7 @@ function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_A
 	AchievementButton_ResetMetas(false);
 	AchievementButton_ResetCriteria(true);
 	AchievementButton_ResetCriteria(false);
-	self:Update();
+	self:ForceUpdate(); -- Issue #42: Fix
 end
 
 function KrowiAF_AchievementsFrame_OnHide(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
@@ -76,6 +76,7 @@ function KrowiAF_AchievementsFrame_OnHide(self) -- Used in Templates - KrowiAF_A
 		self.Container.buttons[1].ResetCriteria(true);
 		self.Container.buttons[1].ResetCriteria(false);
 	end
+	AchievementFrameAchievements_ForceUpdate(); -- Issue #42: Fix
 end
 
 function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achievementsButtonOffset)
@@ -146,25 +147,23 @@ local highlightedButton;
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
-	local categoryChanged = cachedCategory ~= self.CategoriesFrame.SelectedCategory;
+	local updateAchievements = cachedCategory ~= self.CategoriesFrame.SelectedCategory;
 	cachedCategory = self.CategoriesFrame.SelectedCategory;
 	local scrollFrame = self.Container;
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
-	local zoneChanged;
-	if self.CategoriesFrame.SelectedCategory.HasFlexibleData then
-		-- if cachedCategory == addon.CurrentZoneCategory then
-			zoneChanged = addon.Data.GetCurrentZoneAchievements();
-		-- end
+	if cachedCategory == addon.CurrentZoneCategory then
+		updateAchievements = addon.Data.GetCurrentZoneAchievements() or updateAchievements;
 	end
-	if categoryChanged or zoneChanged then
+
+	if updateAchievements then
 		cachedAchievements = GetFilteredAchievements(self, cachedCategory);
 	end
 	local numButtons = #buttons;
 
 	if cachedCategory == addon.NextPatchCategory then
-		self.Text:SetText(AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END);
+		self.Text:SetText(string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]));
 		self.Text:Show();
 	else
 		self.Text:Hide();
@@ -466,6 +465,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 	diagnostics.Trace("achievementsFrame:SelectAchievement");
 
 	if not achievement then
+		diagnostics.Debug("No achievement provided");
 		return;
 	end
 
@@ -496,8 +496,8 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	while not shown do
 		for _, button in next, container.buttons do
-			diagnostics.Debug(math.ceil(button:GetTop()));
-			diagnostics.Debug(math.ceil(gui.GetSafeScrollChildBottom(child)));
+			-- diagnostics.Debug(math.ceil(button:GetTop()));
+			-- diagnostics.Debug(math.ceil(gui.GetSafeScrollChildBottom(child)));
 			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
 				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
 				shown = button;

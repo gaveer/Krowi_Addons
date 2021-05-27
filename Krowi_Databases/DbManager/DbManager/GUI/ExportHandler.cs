@@ -38,8 +38,9 @@ namespace DbManager.GUI
             sb.AppendLine("local covenant = objects.Covenant;");
             sb.AppendLine("local achievementCategory = objects.AchievementCategory;");
             sb.AppendLine("local achievement = objects.Achievement;");
-            sb.AppendLine("addon.ExportedData = {};");
-            sb.AppendLine("local exportedData = addon.ExportedData;");
+            sb.AppendLine("local data = addon.Data;");
+            sb.AppendLine("data.ExportedData = {};");
+            sb.AppendLine("local exportedData = data.ExportedData;");
             sb.AppendLine("");
             sb.AppendLine("local function InsertAndReturn(table, value)");
             sb.AppendLineTabbed(1, "tinsert(table, value);");
@@ -125,8 +126,9 @@ namespace DbManager.GUI
             sb.AppendLine("");
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
-            sb.AppendLine("addon.NextPatch = {};");
-            sb.AppendLine("local nextPatch = addon.NextPatch;");
+            sb.AppendLine("local data = addon.Data;");
+            sb.AppendLine("data.NextPatch = {};");
+            sb.AppendLine("local nextPatch = data.NextPatch;");
             sb.AppendLine("");
             sb.AppendLine("function nextPatch.Load(achievements)");
             sb.AppendLineTabbed(1, "for i, _ in next, achievements do");
@@ -178,8 +180,9 @@ namespace DbManager.GUI
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
             sb.AppendLine("local objects = addon.Objects;");
-            sb.AppendLine("addon.ExportedPetBattles = {};");
-            sb.AppendLine("local exportedPetBattles = addon.ExportedPetBattles;");
+            sb.AppendLine("local data = addon.Data;");
+            sb.AppendLine("data.ExportedPetBattles = {};");
+            sb.AppendLine("local exportedPetBattles = data.ExportedPetBattles;");
             sb.AppendLine("");
             sb.AppendLine("function exportedPetBattles.Load(rcMenExtras)");
             sb.AppendLineTabbed(1, "for i, _ in next, rcMenExtras do");

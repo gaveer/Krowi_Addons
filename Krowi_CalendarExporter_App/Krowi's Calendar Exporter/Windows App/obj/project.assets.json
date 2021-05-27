@@ -1,0 +1,93 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0-windows7.0": {
+      "Krowi's Calendar Exporter Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Krowi's Calendar Exporter Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Krowi's Calendar Exporter Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Krowi's Calendar Exporter Core/1.0.0": {
+      "type": "project",
+      "path": "../Krowi's Calendar Exporter Core/Krowi's Calendar Exporter Core.csproj",
+      "msbuildProject": "../Krowi's Calendar Exporter Core/Krowi's Calendar Exporter Core.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0-windows7.0": [
+      "Krowi's Calendar Exporter Core >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Frederik\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\World of Warcraft\\_retail_\\Interface\\AddOns\\Krowi_CalendarExporter_App\\Krowi's Calendar Exporter\\Windows App\\Windows App.csproj",
+      "projectName": "Windows App",
+      "projectPath": "E:\\World of Warcraft\\_retail_\\Interface\\AddOns\\Krowi_CalendarExporter_App\\Krowi's Calendar Exporter\\Windows App\\Windows App.csproj",
+      "packagesPath": "C:\\Users\\Frederik\\.nuget\\packages\\",
+      "outputPath": "E:\\World of Warcraft\\_retail_\\Interface\\AddOns\\Krowi_CalendarExporter_App\\Krowi's Calendar Exporter\\Windows App\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Frederik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0-windows7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
+          "projectReferences": {
+            "E:\\World of Warcraft\\_retail_\\Interface\\AddOns\\Krowi_CalendarExporter_App\\Krowi's Calendar Exporter\\Krowi's Calendar Exporter Core\\Krowi's Calendar Exporter Core.csproj": {
+              "projectPath": "E:\\World of Warcraft\\_retail_\\Interface\\AddOns\\Krowi_CalendarExporter_App\\Krowi's Calendar Exporter\\Krowi's Calendar Exporter Core\\Krowi's Calendar Exporter Core.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0-windows7.0": {
+        "targetAlias": "net5.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

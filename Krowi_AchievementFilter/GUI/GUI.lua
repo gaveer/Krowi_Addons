@@ -4,6 +4,23 @@ local diagnostics = addon.Diagnostics;
 addon.GUI = {};
 local gui = addon.GUI;
 
+function gui:Load()
+
+    self.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
+
+    self.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
+    self.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
+    self.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrames("CategoriesFrame", "AchievementsFrame")));
+    self.AddFrame("FullSearchResultsFrame", gui.Search.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
+    self.AddFrame("SearchPreviewFrame", gui.Search.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
+    self.AddFrame("SearchBoxFrame", gui.Search.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));
+    self.AddFrame("TabButton1", gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], gui.GetFrames("CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame")));
+
+    self.ResetAchievementFrameHeight();
+
+    diagnostics.Debug("GUI loaded");
+end
+
 -- [[ Frames ]] --
 local frames = {};
 

@@ -1,0 +1,20 @@
+﻿Windows App
+1.0.0.0
+
+winexe
+C#
+.cs
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\obj\Debug\net5.0-windows\
+Windows_App
+none
+false
+TRACE;DEBUG;NET;NET5_0;NETCOREAPP
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_CalendarExporter_App\Krowi's Calendar Exporter\Windows App\App.xaml
+3-2033179330
+
+1130165096
+194-1898572393
+Controls\CalendarDay.xaml;Controls\CalendarHeader.xaml;MainWindow.xaml;
+
+True
+

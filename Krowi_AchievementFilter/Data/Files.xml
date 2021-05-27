@@ -4,5 +4,6 @@
     <Script file="Data\ExportedData.lua" />
     <Script file="Data\ExportedPetBattles.lua" />
     <Script file="Data\ExportedNextPatch.lua" />
+    <Script file="Data\SavedData.lua" />
     
 </Ui>

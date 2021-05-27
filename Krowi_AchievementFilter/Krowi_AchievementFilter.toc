@@ -1,8 +1,8 @@
 ## Interface: 90005
 ## Title: Krowi's |cFF1D92C2Achievement Filter|r
-## Version: 22.0
+## Version: 23.0
 ## Author: Krowi
-## SavedVariables: Options
+## SavedVariables: Options, SavedData
 ## Notes: Filters your achievements.
 
 Core/Files.xml

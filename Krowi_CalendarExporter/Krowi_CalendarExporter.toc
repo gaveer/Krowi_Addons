@@ -1,0 +1,8 @@
+## Interface: 90005
+## Title: Krowi's |cFF1D92C2Calendar Exporter|r
+## Version: 0.1
+## Author: Krowi
+## SavedVariables: Export
+## Notes: Exports the ingame calendar.
+
+Krowi_CalendarExporter.lua

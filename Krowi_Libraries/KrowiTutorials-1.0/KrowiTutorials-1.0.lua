@@ -103,10 +103,13 @@ local default = {
 --[[ Internal API ]]--
 
 local function UpdateFrame(frame, i)
+	print("update frame")
 	local data = frame.data[i]
 	if not data then
 		return
 	end
+
+	print(data.subTitle);
 
 	if not data.image and not data.textY then
 		data.textY = 0
@@ -169,6 +172,10 @@ local function UpdateFrame(frame, i)
 	end
 	
 	-- Text
+	print(data.subTitle);
+	if data.subTitle then
+		data.text = data.subTitle .. "\n\n" .. data.text;
+	end
 	frame.text:SetPoint('TOP', frame, 0, -((data.image and 26 + data.imageY + data.imageHeight or 60) + data.textY))
 	frame.text:SetWidth(data.width - (2 * data.textX))
 	frame.text:SetText(data.text)
@@ -440,7 +447,7 @@ function lib:IsTutorialOpen()
 	return lib.frames[self]:IsShown();
 end
 
-function lib:CloseButtonHook(func)
+function lib:SetCloseButtonHook(func)
 	if lib.frames[self] then
 		lib.frames[self]:SetScript("OnHide", function(self)
 			FrameOnHide(self);

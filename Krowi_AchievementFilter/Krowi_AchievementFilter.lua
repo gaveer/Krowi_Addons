@@ -36,35 +36,22 @@ function loadHelper:OnEvent(event, arg1)
         if arg1 == "Krowi_AchievementFilter" then -- This always needs to load
             addon.Diagnostics.Load();
             addon.Options.Load();
+
+            addon.Data.SavedData.Load();
+
+            addon.GUI.ElvUISkin.Load();
             addon.Icon.Load();
             addon.Tutorials.Load();
 
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             addon.Data.Load();
-            addon.Diagnostics.Debug("- Expansion data loaded");
 
-            local gui = addon.GUI;
-            local tutorials = addon.Tutorials;
+            addon.GUI:Load();
 
-            gui.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
+            addon.Tutorials.SetFrames(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
+            addon.Tutorials.HookTrigger(addon.GUI.GetFrame("TabButton1"));
 
-            gui.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
-            gui.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
-            gui.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrames("CategoriesFrame", "AchievementsFrame")));
-            gui.AddFrame("FullSearchResultsFrame", gui.Search.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
-            gui.AddFrame("SearchPreviewFrame", gui.Search.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
-            gui.AddFrame("SearchBoxFrame", gui.Search.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));
-            gui.AddFrame("TabButton1", gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], gui.GetFrames("CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame")));
-
-            gui.ResetAchievementFrameHeight();
-
-            tutorials.SetFrames(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
-            tutorials.HookTrigger(gui.GetFrame("TabButton1"));
-
-            gui.ElvUISkin.Apply(gui.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
-
-            addon.Diagnostics.Debug("- GUI loaded");
-
+            addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
             addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
         end

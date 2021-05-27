@@ -27,7 +27,8 @@ end
 function achievement:GetMergedCategory() -- Gets the achievement's category, used when merging categories is enabled
     diagnostics.Trace("achievement:GetCategory");
 
-    for _, category in next, addon.Categories do
+    local categories = self.Category:GetTree(); -- Issue #43: Fix
+    for _, category in next, categories do
         if category.MergedAchievements ~= nil then
             for _, ach in next, category.MergedAchievements do
                 if ach.ID == self.ID then

@@ -123,7 +123,7 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	func(scrollBar);
 end
 
-local function Validate(self, achievement, numOfAch, numOfCompAch) -- , numOfIncompAch
+local function Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
 	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
 		numOfAch = numOfAch + 1;
 		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
@@ -131,10 +131,12 @@ local function Validate(self, achievement, numOfAch, numOfCompAch) -- , numOfInc
 			numOfCompAch = numOfCompAch + 1;
 		-- else
 		-- 	numOfIncompAch = numOfIncompAch + 1;
+		elseif achievement.NotObtainable then
+			numOfNotObtAch = numOfNotObtAch + 1;
 		end
 	end
 
-	return numOfAch, numOfCompAch; -- , numOfIncompAch
+	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
 end
 
 local function GetAchievementNumbers(self, category)
@@ -144,14 +146,15 @@ local function GetAchievementNumbers(self, category)
 	category.Merged = nil;
 
 	-- numOfIncompAch is not used right now so we can leave this one out untill needed
-	local numOfAch, numOfCompAch = 0, 0; -- , numOfIncompAch = 0
+	local numOfAch, numOfCompAch, numOfNotObtAch = 0, 0, 0; -- , numOfIncompAch = 0
 
 	local showCollapseIcon = false;
 	if category.Children then
 		for _, child in next, category.Children do
-			local childNumOfAch, childNumOfCompAch = GetAchievementNumbers(self, child); -- , childNumOfIncompAch
+			local childNumOfAch, childNumOfCompAch, childNumOfNotObtAch = GetAchievementNumbers(self, child); -- , childNumOfIncompAch
 			numOfAch = numOfAch + childNumOfAch;
 			numOfCompAch = numOfCompAch + childNumOfCompAch;
+			numOfNotObtAch = numOfNotObtAch + childNumOfNotObtAch;
 			-- numOfIncompAch = numOfIncompAch + childNumOfIncompAch;
 			showCollapseIcon = showCollapseIcon or childNumOfAch > 0;
 		end
@@ -159,13 +162,13 @@ local function GetAchievementNumbers(self, category)
 
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
-			numOfAch, numOfCompAch = Validate(self, achievement, numOfAch, numOfCompAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
-			numOfAch, numOfCompAch = Validate(self, achievement, numOfAch, numOfCompAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
@@ -179,7 +182,7 @@ local function GetAchievementNumbers(self, category)
 						end
 						category.Merged = true;
 					end
-					numOfAch, numOfCompAch = 0, 0;
+					numOfAch, numOfCompAch, numOfNotObtAch = 0, 0, 0;
 				end
 			end
 		end
@@ -188,10 +191,11 @@ local function GetAchievementNumbers(self, category)
 	-- Caching the data in the category increases memory usage but improves performance which is more important here
 	category.NumOfAch = numOfAch;
 	category.NumOfCompAch = numOfCompAch;
+	category.NumOfNotObtAch = numOfNotObtAch;
 	-- category.NumOfIncompAch = numOfIncompAch;
 	category.ShowCollapseIcon = showCollapseIcon;
 
-	return numOfAch, numOfCompAch; -- , numOfIncompAch
+	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
 end
 
 function categoriesFrame:Update(getAchNums)
@@ -246,6 +250,21 @@ function categoriesFrame:Update(getAchNums)
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
+local progressBar = LibStub("KrowiProgressBar-1.0");
+local function StatusBarTooltip(self)
+	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
+	GameTooltip:SetOwner(self, "ANCHOR_NONE");
+	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
+	GameTooltip:SetMinimumWidth(128, true);
+	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
+	local numOfNotObtAch = 0;
+	if addon.Options.db.Tooltip.Categories.ShowNotObtainable then
+		numOfNotObtAch = self.numOfNotObtAch;
+	end
+	progressBar:ShowProgressBar(GameTooltip, 0, self.numAchievements, self.numCompleted, numOfNotObtAch, 0, 0, addon.GreenRGB, addon.RedRGB, nil, nil, self.numCompletedText);
+	GameTooltip:Show();
+end
+
 function categoriesFrame:DisplayButton(button, category, baseWidth)
 	-- local name = "";
 	-- if category then
@@ -287,17 +306,22 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	button.Category = category;
 
 	-- For the tooltip
-	local numOfAch, numOfCompAch = category.NumOfAch, category.NumOfCompAch;
+	local numOfAch, numOfCompAch, numOfNotObtAch = category.NumOfAch, category.NumOfCompAch, category.NumOfNotObtAch;
 	button.name = category.Name;
 	if category == addon.NextPatchCategory then
-		button.text = AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END;
+		button.text = string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]);
 		button.showTooltipFunc = AchievementFrameCategory_FeatOfStrengthTooltip;
 	else
 		button.text = nil;
 		button.numAchievements = numOfAch;
 		button.numCompleted = numOfCompAch;
-		button.numCompletedText = numOfCompAch .. "/" .. numOfAch;
-		button.showTooltipFunc = AchievementFrameCategory_StatusBarTooltip;
+		button.numOfNotObtAch = numOfNotObtAch
+		local numOfNotObtAchText = "";
+		if numOfNotObtAch > 0 and addon.Options.db.Tooltip.Categories.ShowNotObtainable then
+			numOfNotObtAchText = " (+" .. numOfNotObtAch .. ")";
+		end
+		button.numCompletedText = numOfCompAch .. numOfNotObtAchText .. " / " .. numOfAch;
+		button.showTooltipFunc = StatusBarTooltip;
 	end
 end
 

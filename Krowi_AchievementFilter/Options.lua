@@ -19,10 +19,23 @@ local defaults = {
             MergeSmallCategoriesThreshold = 10,
             MergeSmallCategoriesThresholdChanged = false
         },
+        RightClickMenu = {
+            ShowButtonOnAchievement = false
+        },
         Tooltip = {
-            ShowPartOfAChain = true,
-            ShowRequiredFor = true,
-            ShowCurrentCharacterIcons = false
+            Categories = {
+                ShowNotObtainable = true
+            },
+            Achievements = {
+                ShowPartOfAChain = true,
+                ShowRequiredFor = true,
+                ShowCurrentCharacterIcons = false,
+                ObjectivesProgress = {
+                    Show = true,
+                    ShowWhenAchievementCompleted = true,
+                    SecondColumnThreshold = 25
+                }
+            }
         },
         Minimap = {
             hide = true -- not ShowMinimapIcon
@@ -60,12 +73,6 @@ local defaults = {
                 Criteria = addon.L["Default"],
                 ReverseSort = false
             }
-        },
-        ElvUISkin = {
-            Achievements = false,
-            MiscFrames = false,
-            Options = false,
-            Tutorials = false
         }
     }
 }
@@ -91,46 +98,68 @@ local function CreatePanel()
                         inline = true,
                         order = 1,
                         args = {
-                            version = {
-                                name = AF_COLOR_YELLOW .. addon.L["Version"] .. ": " .. AF_COLOR_END .. AF_VERSION,
+                            Version = {
+                                name = string.format(addon.Yellow, addon.L["Version"] .. ": ") .. AF_VERSION,
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 1.1,
                             },
-                            build = {
-                                name = AF_COLOR_YELLOW .. addon.L["Build"] .. ": " .. AF_COLOR_END .. AF_BUILD,
+                            Build = {
+                                name = string.format(addon.Yellow, addon.L["Build"] .. ": ") .. AF_BUILD,
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 1.2,
                             },
-                            tutorial = {
+                            Tutorial = {
                                 name = addon.L["Tutorial"],
                                 desc = addon.L["Tutorial Desc"],
                                 type = "execute",
                                 order = 1.3,
                                 func = function()
-                                    InterfaceOptionsFrame:Hide();
-                                    addon.Tutorials.ResetTutorial(addon.Tutorials.FeaturesTutorial);
-                                    addon.Tutorials.TriggerTutorial(addon.Tutorials.FeaturesTutorial, addon.Tutorials.FeaturesTutorialPages);
+                                    local menu = LibStub("KrowiMenu-1.0");
+                                    local pages = addon.Tutorials.FeaturesTutorial.Pages;
+
+                                    -- Reset menu
+                                    menu:Clear();
+
+                                    menu:AddFull({Text = addon.L["View Tutorial"], IsTitle = true});
+                                    menu:AddFull({  Text = addon.L["From the start"],
+                                                    Func = function()
+                                                        InterfaceOptionsFrame:Hide();
+                                                        addon.Tutorials.FeaturesTutorial:Reset();
+                                                        addon.Tutorials.FeaturesTutorial:ShowTutorial();
+                                                    end
+                                                });
+                                    for i, _ in next, pages do
+                                        menu:AddFull({  Text = (pages[i].IsViewed and "" or "|T132049:0|t") .. string.format(addon.White, addon.RemoveColor(pages[i].SubTitle)),
+                                                        Func = function()
+                                                            InterfaceOptionsFrame:Hide();
+                                                            diagnostics.Debug("Showing tutorial for " .. tostring(i));
+                                                            addon.Tutorials.FeaturesTutorial:ShowTutorial(i, i, i, true);
+                                                        end
+                                                    });
+                                    end
+
+                                    menu:Open();
                                 end
                             },
-                            author = {
-                                name = AF_COLOR_YELLOW .. addon.L["Author"] .. ": " .. AF_COLOR_END .. "Krowi",
+                            Author = {
+                                name = string.format(addon.Yellow, addon.L["Author"] .. ": ") .. "Krowi-Frostmane EU",
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 2.1,
                             },
-                            blank = {
+                            blank22 = {
                                 name = "",
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 2.2,
                             },
-                            discord = {
+                            Discord = {
                                 name = addon.L["Discord"],
                                 desc = addon.L["Discord Desc"],
                                 type = "execute",
@@ -138,6 +167,32 @@ local function CreatePanel()
                                 func = function()
                                     InterfaceOptionsFrame:Hide();
                                     popupDialog.ShowExternalLink("https://discord.gg/XGkergM2");
+                                end
+                            },
+                            blank31 = {
+                                name = "",
+                                type = "description",
+                                width = "normal",
+                                fontSize = "medium",
+                                order = 3.1,
+                            },
+                            blank32 = {
+                                name = "",
+                                type = "description",
+                                width = "normal",
+                                fontSize = "medium",
+                                order = 3.2,
+                            },
+                            CurseForge = {
+                                name = addon.L["CurseForge"],
+                                desc = core.ReplaceVars{addon.L["CurseForge Desc"],
+                                                        addonName = AF_NAME,
+                                                        curseForge = addon.L["CurseForge"]},
+                                type = "execute",
+                                order = 3.3,
+                                func = function()
+                                    InterfaceOptionsFrame:Hide();
+                                    popupDialog.ShowExternalLink("https://www.curseforge.com/wow/addons/krowi-achievement-filter");
                                 end
                             }
                         }
@@ -210,12 +265,12 @@ local function CreatePanel()
                             ExcludeNextPatch = {
                                 name = addon.L["Exclude Next Patch"],
                                 desc = core.ReplaceVars{addon.L["Exclude Next Patch Desc"],
-                                                        spoilerWarning = AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END},
+                                                        spoilerWarning = string.format(addon.Orange, addon.L["* SPOILER WARNING *"])},
                                 type = "toggle",
                                 width = "full",
                                 order = 1.2,
                                 confirm = function() return addon.Options.db.SearchBox.ExcludeNextPatch; end,
-                                confirmText = AF_COLOR_ORANGE .. addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Exclude Next Patch Confirm"] .. "\n\n" .. addon.L["* SPOILER WARNING *"] .. AF_COLOR_END,
+                                confirmText = string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Exclude Next Patch Confirm"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]),
                                 get = function () return addon.Options.db.SearchBox.ExcludeNextPatch; end,
                                 set = function()
                                     addon.Options.db.SearchBox.ExcludeNextPatch = not addon.Options.db.SearchBox.ExcludeNextPatch;
@@ -245,7 +300,7 @@ local function CreatePanel()
                                     diagnostics.Debug(addon.L["Minimum characters to search"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
                                 end
                             },
-                            numberOfSearchPreviews = {
+                            NumberOfSearchPreviews = {
                                 name = addon.L["Number of search previews"],
                                 desc = core.ReplaceVars{addon.L["Number of search previews Desc"],
                                                         reloadRequired = addon.L["Requires a reload"]},
@@ -356,7 +411,7 @@ local function CreatePanel()
                             CategoriesFrameWidthOffset = {
                                 name = addon.L["Categories width offset"],
                                 desc = core.ReplaceVars{addon.L["Categories width offset Desc"],
-                                                        tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
+                                                        tabName = string.format(addon.Yellow, addon.L["T_TAB_TEXT"]),
                                                         reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,
@@ -381,7 +436,7 @@ local function CreatePanel()
                             AchievementFrameHeightOffset = {
                                 name = addon.L["Achievement window height offset"],
                                 desc = core.ReplaceVars{addon.L["Achievement window height offset Desc"],
-                                                        tabName = AF_COLOR_YELLOW .. addon.L["T_TAB_TEXT"] .. AF_COLOR_END,
+                                                        tabName = string.format(addon.Yellow, addon.L["T_TAB_TEXT"]),
                                                         reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,
@@ -398,7 +453,7 @@ local function CreatePanel()
                                     end;
         
                                     addon.Options.db.Window.AchievementFrameHeightOffset = value;
-                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Search.args.numberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
+                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.General.args.Search.args.NumberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
                                     numberOfSearchPreviews.max = maxNumberOfSearchPreviews();
                                     if numberOfSearchPreviews.get() > numberOfSearchPreviews.max then
                                         numberOfSearchPreviews.set(nil, numberOfSearchPreviews.max);
@@ -434,25 +489,74 @@ local function CreatePanel()
                             },
                         }
                     },
-                    Tooltip = {
-                        name = addon.L["Tooltip"],
+                    RightClickMenu = {
+                        name = addon.L["Right Click Menu"],
                         type = "group",
                         inline = true,
                         order = 2,
                         args = {
+                            ShowRightClickMenuButtonOnAchievement = {
+                                name = core.ReplaceVars{addon.L["Show Right Click Menu"],
+                                                        rightClickMenu = addon.L["Right Click Menu"]},
+                                desc = core.ReplaceVars{addon.L["Show Right Click Menu Desc"],
+                                                        rightClickMenu = addon.L["Right Click Menu"],
+                                                        reloadRequired = addon.L["Requires a reload"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 1,
+                                get = function () return addon.Options.db.RightClickMenu.ShowButtonOnAchievement; end,
+                                set = function()
+                                    addon.Options.db.RightClickMenu.ShowButtonOnAchievement = not addon.Options.db.RightClickMenu.ShowButtonOnAchievement;
+
+                                    diagnostics.Debug(addon.L["Show Right Click Menu"] .. ": " .. tostring(addon.Options.db.RightClickMenu.ShowButtonOnAchievement));
+                                end
+                            }
+                        }
+                    },
+                    Tooltip = {
+                        name = addon.L["Tooltip"],
+                        type = "group",
+                        inline = true,
+                        order = 3,
+                        args = {
+                            Categories = {
+                                name = addon.L["Categories"],
+                                type = "header",
+                                order = 1.1
+                            },
+                            ShowNotObtainable = {
+                                name = core.ReplaceVars{addon.L["Show Not Obtainable"],
+                                                        notObtainable = addon.L["Not Obtainable"]},
+                                desc = core.ReplaceVars{addon.L["Show Not Obtainable Desc"],
+                                                        notObtainable = addon.L["Not Obtainable"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 2.1,
+                                get = function () return addon.Options.db.Tooltip.Categories.ShowNotObtainable; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.Categories.ShowNotObtainable = not addon.Options.db.Tooltip.Categories.ShowNotObtainable;
+
+                                    diagnostics.Debug(addon.L["Show Not Obtainable"] .. ": " .. tostring(addon.Options.db.Tooltip.Categories.ShowNotObtainable));
+                                end
+                            },
+                            Achievements = {
+                                name = addon.L["Achievements"],
+                                type = "header",
+                                order = 3.1
+                            },
                             ShowPartOfAChain = {
                                 name = core.ReplaceVars{addon.L["Show Part of a Chain"],
                                                         partOfAChain = addon.L["Part of a chain"]},
                                 desc = core.ReplaceVars{addon.L["Show Part of a Chain Desc"],
                                                         partOfAChain = addon.L["Part of a chain"]},
                                 type = "toggle",
-                                width = "full",
-                                order = 1,
-                                get = function () return addon.Options.db.Tooltip.ShowPartOfAChain; end,
+                                width = 1.5,
+                                order = 4.1,
+                                get = function () return addon.Options.db.Tooltip.Achievements.ShowPartOfAChain; end,
                                 set = function()
-                                    addon.Options.db.Tooltip.ShowPartOfAChain = not addon.Options.db.Tooltip.ShowPartOfAChain;
+                                    addon.Options.db.Tooltip.Achievements.ShowPartOfAChain = not addon.Options.db.Tooltip.Achievements.ShowPartOfAChain;
 
-                                    diagnostics.Debug(addon.L["Show Part of a Chain"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowPartOfAChain));
+                                    diagnostics.Debug(addon.L["Show Part of a Chain"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ShowPartOfAChain));
                                 end
                             },
                             ShowRequiredFor = {
@@ -461,13 +565,13 @@ local function CreatePanel()
                                 desc = core.ReplaceVars{addon.L["Show Required for Desc"],
                                                         requiredFor = addon.L["Required for"]},
                                 type = "toggle",
-                                width = "full",
-                                order = 1,
-                                get = function () return addon.Options.db.Tooltip.ShowRequiredFor; end,
+                                width = 1.5,
+                                order = 4.2,
+                                get = function () return addon.Options.db.Tooltip.Achievements.ShowRequiredFor; end,
                                 set = function()
-                                    addon.Options.db.Tooltip.ShowRequiredFor = not addon.Options.db.Tooltip.ShowRequiredFor;
+                                    addon.Options.db.Tooltip.Achievements.ShowRequiredFor = not addon.Options.db.Tooltip.Achievements.ShowRequiredFor;
 
-                                    diagnostics.Debug(addon.L["Show Required for"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowRequiredFor));
+                                    diagnostics.Debug(addon.L["Show Required for"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ShowRequiredFor));
                                 end
                             },
                             ShowCurrentCharacterIcons = {
@@ -477,14 +581,68 @@ local function CreatePanel()
                                                         requiredFor = addon.L["Required for"]},
                                 type = "toggle",
                                 width = "full",
-                                order = 3,
-                                get = function () return addon.Options.db.Tooltip.ShowCurrentCharacterIcons; end,
+                                order = 5.1,
+                                get = function () return addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons; end,
                                 set = function()
-                                    addon.Options.db.Tooltip.ShowCurrentCharacterIcons = not addon.Options.db.Tooltip.ShowCurrentCharacterIcons;
+                                    addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons = not addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons;
 
-                                    diagnostics.Debug(addon.L["Show current character icons"] .. ": " .. tostring(addon.Options.db.Tooltip.ShowCurrentCharacterIcons));
+                                    diagnostics.Debug(addon.L["Show current character icons"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons));
                                 end
-                            }
+                            },
+                            ObjectivesProgressShow = {
+                                name = core.ReplaceVars{addon.L["Show Objectives progress"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                desc = core.ReplaceVars{addon.L["Show Objectives progress Desc"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 6.1,
+                                get = function () return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show;
+                                    local objectivesProgressShowWhenAchievementCompleted = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Layout.args.Tooltip.args.ObjectivesProgressShowWhenAchievementCompleted; -- cmd and KROWIAF-0.0 are just to make the function work
+                                    objectivesProgressShowWhenAchievementCompleted.disabled = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show;
+                                    
+                                    diagnostics.Debug(addon.L["Show Objectives progress"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show));
+                                end
+                            },
+                            ObjectivesProgressShowWhenAchievementCompleted = {
+                                name = core.ReplaceVars{addon.L["Show Objectives progress when achievement completed"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                desc = core.ReplaceVars{addon.L["Show Objectives progress when achievement completed Desc"],
+                                                        objectivesProgress = addon.L["Objectives progress"]},
+                                type = "toggle",
+                                width = "full",
+                                order = 7.1,
+                                get = function () return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted; end,
+                                set = function()
+                                    addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted;
+
+                                    diagnostics.Debug(addon.L["Show Objectives progress"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.ShowWhenAchievementCompleted));
+                                end
+                            },
+                            ObjectivesProgressSecondColumnThreshold = {
+                                name = addon.L["Objectives progress second column threshold"],
+                                desc = addon.L["Objectives progress second column threshold Desc"],
+                                type = "range",
+                                min = 0,
+                                max = 100,
+                                step = 1,
+                                width = 1.5,
+                                order = 8.1,
+                                get = function ()
+                                    return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold;
+                                end,
+                                set = function(_, value)
+                                    if addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold == value then
+                                        return;
+                                    end;
+        
+                                    addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold = value;
+        
+                                    diagnostics.Debug(addon.L["Objectives progress second column threshold"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.SecondColumnThreshold));
+                                end
+                            },
                         }
                     }
                 }
@@ -498,6 +656,7 @@ local function CreatePanel()
                         name = addon.L["ElvUI Skins Status Desc"],
                         type = "description",
                         width = "full",
+                        fontSize = "medium",
                         order = 1.1
                     },
                     skinAchievement = {
@@ -508,7 +667,7 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 2.1,
-                        get = function () return addon.Options.db.ElvUISkin.Achievements; end
+                        get = function () return SavedData.ElvUISkin.Achievements; end
                     },
                     skinMiscFrames = {
                         name = addon.L["Skin Misc Frames"],
@@ -518,17 +677,17 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 3.1,
-                        get = function () return addon.Options.db.ElvUISkin.MiscFrames; end
+                        get = function () return SavedData.ElvUISkin.MiscFrames; end
                     },
-                    skinAce3 = {
-                        name = addon.L["Skin Ace3"],
-                        desc = addon.L["Skin Ace3 Desc"],
+                    skinTooltip = {
+                        name = addon.L["Skin Tooltip"],
+                        desc = addon.L["Skin Tooltip Desc"],
                         descStyle = "inline",
                         disabled = true,
                         type = "toggle",
                         width = "full",
                         order = 4.1,
-                        get = function () return addon.Options.db.ElvUISkin.Options; end
+                        get = function () return SavedData.ElvUISkin.Tooltip; end
                     },
                     skinTutorials = {
                         name = addon.L["Skin Tutorials"],
@@ -538,10 +697,53 @@ local function CreatePanel()
                         type = "toggle",
                         width = "full",
                         order = 5.1,
-                        get = function () return addon.Options.db.ElvUISkin.Tutorials; end
+                        get = function () return SavedData.ElvUISkin.Tutorials; end
+                    },
+                    skinAce3 = {
+                        name = addon.L["Skin Ace3"],
+                        desc = addon.L["Skin Ace3 Desc"],
+                        descStyle = "inline",
+                        disabled = true,
+                        type = "toggle",
+                        width = "full",
+                        order = 6.1,
+                        get = function () return SavedData.ElvUISkin.Options; end
                     }
                 }
             },
+            Credits = {
+                name = addon.L["Credits"],
+                type = "group",
+                order = 4,
+                args = {
+                    SpecialThanks = {
+                        name = addon.L["Special thanks"],
+                        type = "group",
+                        inline = true,
+                        order = 1,
+                        args = {
+                            Names = {
+                                name = addon.GetSpecialThanksAsString(),
+                                type = "description",
+                                fontSize = "medium"
+                            }
+                        }
+                    },
+                    Donations = {
+                        name = addon.L["Donations"],
+                        type = "group",
+                        inline = true,
+                        order = 2,
+                        args = {
+                            Names = {
+                                name = addon.GetDonationsAsString(),
+                                type = "description",
+                                fontSize = "medium"
+                            }
+                        }
+                    },
+                }
+            }
         }
     }
 
@@ -572,19 +774,12 @@ end
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
     addon.Options.SetFilters = SetFilters;
-    addon.Options.db = addon.Options.profile;
     addon.Options.Open = Open;
-
-    addon.GUI.ElvUISkin.Load();
+    addon.Options.db = addon.Options.profile;
 
     -- TODO: add something to check if the options panel closes that we prompt for a reload
     CreatePanel();
 
-    diagnostics.Debug("- Options loaded");
-    diagnostics.Debug("     - " .. addon.L["Show minimap icon"] .. ": " .. tostring(addon.Options.db.ShowMinimapIcon));
-    diagnostics.Debug("     - " .. addon.L["Categories width offset"] .. ": " .. tostring(addon.Options.db.Window.CategoriesFrameWidthOffset));
-    diagnostics.Debug("     - " .. addon.L["Minimum characters to search"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
-    diagnostics.Debug("     - " .. addon.L["Number of search previews"] .. ": " .. tostring(addon.Options.db.SearchBox.NumberOfSearchPreviews));
-    diagnostics.Debug("     - " .. addon.L["Enable debug info"] .. ": " .. tostring(addon.Options.db.EnableDebugInfo));
-    diagnostics.Debug("     - " .. addon.L["Enable trace info"] .. ": " .. tostring(addon.Options.db.EnableTraceInfo));
+    diagnostics.Debug("Options loaded");
+    diagnostics.DebugTable(addon.Options.db, 1);
 end

@@ -125,6 +125,10 @@ addon.WhiteRGB = {
 addon.WhiteRGB.Hex = addon.RGBPrct2HEX(addon.WhiteRGB);
 addon.White = "|c" .. addon.WhiteRGB.Hex .. "%s|r";
 
+-- addon.DruidRGB = {};
+-- addon.DruidRGB.R, addon.DruidRGB.G, addon.DruidRGB.B, addon.DruidRGB.Hex = GetClassColor("DRUID");
+-- addon.Druid = "|c" .. addon.DruidRGB.Hex .. "%s|r";
+
 function addon.GetAchievement(id)
     addon.Diagnostics.Trace("addon.GetAchievement");
 
@@ -219,6 +223,31 @@ function addon.GetDonationsAsString()
         text = text .. "|c" .. argbHex .. donation.Name .. "|r";
         if donation.Realm then
             text = text .. " - " .. donation.Realm;
+        end
+        text = text .. "\n";
+    end
+    return text;
+end
+
+addon.SpecialThanks = {
+    {Name = "Bur", Realm = "Frostmane EU", Class = "DRUID", Text = "Continuous support and helpful input and answers on questions that make this addon better; It wouldn't be as good without you :)"},
+}
+
+function addon.GetSpecialThanksAsString()
+    local text;
+    for _, specialThanks in next, addon.SpecialThanks do
+        if text then
+            text = text .. "\n"
+        else
+            text = "";
+        end
+        local _, _, _, argbHex = GetClassColor(specialThanks.Class);
+        text = text .. "|c" .. argbHex .. specialThanks.Name .. "|r";
+        if specialThanks.Realm then
+            text = text .. " - " .. specialThanks.Realm;
+        end
+        if specialThanks.Text then
+            text = text .. " - " .. specialThanks.Text;
         end
         text = text .. "\n";
     end

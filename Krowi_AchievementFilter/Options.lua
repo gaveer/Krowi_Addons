@@ -300,7 +300,7 @@ local function CreatePanel()
                                     diagnostics.Debug(addon.L["Minimum characters to search"] .. ": " .. tostring(addon.Options.db.SearchBox.MinimumCharactersToSearch));
                                 end
                             },
-                            numberOfSearchPreviews = {
+                            NumberOfSearchPreviews = {
                                 name = addon.L["Number of search previews"],
                                 desc = core.ReplaceVars{addon.L["Number of search previews Desc"],
                                                         reloadRequired = addon.L["Requires a reload"]},
@@ -453,7 +453,7 @@ local function CreatePanel()
                                     end;
         
                                     addon.Options.db.Window.AchievementFrameHeightOffset = value;
-                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Search.args.numberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
+                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.General.args.Search.args.NumberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
                                     numberOfSearchPreviews.max = maxNumberOfSearchPreviews();
                                     if numberOfSearchPreviews.get() > numberOfSearchPreviews.max then
                                         numberOfSearchPreviews.set(nil, numberOfSearchPreviews.max);
@@ -600,7 +600,9 @@ local function CreatePanel()
                                 get = function () return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show; end,
                                 set = function()
                                     addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show;
-
+                                    local objectivesProgressShowWhenAchievementCompleted = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Layout.args.Tooltip.args.ObjectivesProgressShowWhenAchievementCompleted; -- cmd and KROWIAF-0.0 are just to make the function work
+                                    objectivesProgressShowWhenAchievementCompleted.disabled = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show;
+                                    
                                     diagnostics.Debug(addon.L["Show Objectives progress"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show));
                                 end
                             },
@@ -709,17 +711,36 @@ local function CreatePanel()
                     }
                 }
             },
-            Donations = {
-                name = addon.L["Donations"],
+            Credits = {
+                name = addon.L["Credits"],
                 type = "group",
                 order = 4,
                 args = {
-                    Names = {
-                        name = addon.GetDonationsAsString(),
-                        type = "description",
-                        width = "full",
-                        fontSize = "medium",
-                        order = 1.1
+                    SpecialThanks = {
+                        name = addon.L["Special thanks"],
+                        type = "group",
+                        inline = true,
+                        order = 1,
+                        args = {
+                            Names = {
+                                name = addon.GetSpecialThanksAsString(),
+                                type = "description",
+                                fontSize = "medium"
+                            }
+                        }
+                    },
+                    Donations = {
+                        name = addon.L["Donations"],
+                        type = "group",
+                        inline = true,
+                        order = 2,
+                        args = {
+                            Names = {
+                                name = addon.GetDonationsAsString(),
+                                type = "description",
+                                fontSize = "medium"
+                            }
+                        }
                     },
                 }
             }

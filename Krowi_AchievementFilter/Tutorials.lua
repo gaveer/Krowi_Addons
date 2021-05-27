@@ -239,12 +239,13 @@ function tutorials.Load()
     }));
     tinsert(pages, page:New({ -- 8
         Image = media .. "TooltipAchievements",
-        ImageSize = {1017, 287},
-        ImageTexCoord = {0, 1017/1024, 0, 287/512},
+        ImageSize = {1018, 383},
+        ImageTexCoord = {0, 1018/1024, 0, 383/512},
         SubTitle = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Achievements"] .. ")"),
         Text = core.ReplaceVars{addon.L["Enhanced tooltip Achievements Desc"],
                                 partOfAChain = string.format(addon.Yellow, addon.L["Part of a chain"]),
                                 requiredFor = string.format(addon.Yellow, addon.L["Required for"]),
+                                objectivesProgress = string.format(addon.Yellow, addon.L["Objectives progress"]),
                                 ready = "|T136814:0|t",
                                 waiting = "|T136815:0|t",
                                 notready = "|T136813:0|t",
@@ -261,6 +262,7 @@ function tutorials.Load()
             self.Text = core.ReplaceVars{self.OriginalText,
                                             partOfAChainEnabled = (addon.Options.db.Tooltip.Achievements.ShowPartOfAChain and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                             requiredForEnabled = (addon.Options.db.Tooltip.Achievements.ShowRequiredFor and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
+                                            objectivesProgressEnabled = (addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                             currentCharacterIconEnabled = (addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower())))};
         end
     }));

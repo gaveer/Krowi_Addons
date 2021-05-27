@@ -10,9 +10,10 @@ All notable changes to this project will be documented in this file.
 - Tutorial button in Options and Help under Filters now has a second menu with links directly to each tutorial page
 - This second menu for tutorial pages now shows an exclamation mark if the page was not viewed before
 - Tutorial page for Categories tooltip
+- Credits with special thanks and donations
 - Donation from Bur - Frostmane EU
 - Donation from Ta - Der Rat von Dalaran EU
-- Achievements tooltip can now show the objectives progress
+- Achievements tooltip can now show the objectives progress (some wierd texts might exist)
 
 ### Changed
 - Unobtainable achievements now show as red in the tooltip for Part of a chain and Required for sections

@@ -5,37 +5,35 @@ namespace DbManager.Objects
 {
     public class AchievementCategory : IComparable<AchievementCategory>, IEquatable<AchievementCategory>
     {
-        public int ID { get; }
-        public int Location { get; set; }
-        public string Name { get; }
-        public AchievementCategory Parent { get; set; }
-        public Function Function { get; }
-        public string FunctionValue { get; }
-        public bool Legacy { get; }
-        public List<Achievement> Achievements { get; }
-        public bool IgnoreParentMapIDs { get; }
-        public List<int> MapIDs { get; set; }
-        public bool Active { get; set; }
-        public bool CanMerge { get; set; }
-        public List<AchievementCategory> Children { get; }
+        public int ID { get; set; } = -1;
+        public int Location { get; set; } = -1;
+        public string Name { get; set; } = "";
+        public AchievementCategory Parent { get; set; } = null;
+        public Function Function { get; set; } = null;
+        public string FunctionValue { get; set; } = "";
+        public bool Legacy { get; set; } = false;
+        public bool Active { get; set; } = true;
+        public bool CanMerge { get; set; } = false;
+        public List<Achievement> Achievements { get; set; } = new List<Achievement>();
+        public List<AchievementCategory> Children { get; set; } = new List<AchievementCategory>();
 
-        public AchievementCategory(int id, int location, string name, AchievementCategory parent, Function function, string functionValue, bool legacy, bool ignoreParentMapIDs, bool active, bool canMerge, List<int> uiMapID = null)
-        {
-            ID = id;
-            Location = location;
-            Name = name;
-            Parent = parent;
-            Function = function;
-            FunctionValue = functionValue;
-            Legacy = legacy;
-            Achievements = new List<Achievement>();
-            IgnoreParentMapIDs = ignoreParentMapIDs;
-            MapIDs = uiMapID ?? new List<int>();
-            Active = active;
-            CanMerge = canMerge;
-            Children = new List<AchievementCategory>();
-            parent?.Children.Add(this);
-        }
+        public AchievementCategory() { }
+
+        //public AchievementCategory(int id, int location, string name, AchievementCategory parent, Function function, string functionValue, bool legacy, bool ignoreParentMapIDs, bool active, bool canMerge)
+        //{
+        //    ID = id;
+        //    Location = location;
+        //    Name = name;
+        //    Parent = parent;
+        //    Function = function;
+        //    FunctionValue = functionValue;
+        //    Legacy = legacy;
+        //    Active = active;
+        //    CanMerge = canMerge;
+        //    Achievements = new List<Achievement>();
+        //    Children = new List<AchievementCategory>();
+        //    parent?.Children.Add(this);
+        //}
 
         public override string ToString()
         {

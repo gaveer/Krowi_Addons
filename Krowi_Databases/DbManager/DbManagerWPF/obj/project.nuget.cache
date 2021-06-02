@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "/HkhaMxCavAFKcXD0mOyyhKO7hvv39N/0wy1g2XhgyB7DeK8u9ZIHl89xIulQw7JvUNHEOjBC66tnz0euGiYEg==",
+  "success": true,
+  "projectFilePath": "E:\\World of Warcraft\\_retail_\\Interface\\AddOns\\Krowi_Databases\\DbManager\\DbManagerWPF\\DbManagerWPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Frederik\\.nuget\\packages\\microsoft.data.sqlite\\5.0.6\\microsoft.data.sqlite.5.0.6.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.6\\microsoft.data.sqlite.core.5.0.6.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.31\\microsoft.xaml.behaviors.wpf.1.1.31.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.4\\sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}

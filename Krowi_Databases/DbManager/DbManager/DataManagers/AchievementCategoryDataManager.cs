@@ -10,9 +10,7 @@ namespace DbManager.DataManagers
     public class AchievementCategoryDataManager : DataManagerBase
     {
         private readonly FunctionDataManager functionDataManager;
-        private readonly List<AchievementCategory> categories = new List<AchievementCategory>();
-
-        public AchievementCategoryDataManager(SqliteConnection connection) : base(connection) { }
+        private readonly List<AchievementCategory> categories = new();
 
         public AchievementCategoryDataManager(SqliteConnection connection, FunctionDataManager functionDataManager) : base(connection)
         {
@@ -42,7 +40,7 @@ namespace DbManager.DataManagers
                                         ON CTEAC.ID = AC.ParentID
                                 )
                                 SELECT
-                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, AC.Legacy, AC.IgnoreParentMapIDs, AC.Active, AC.CanMerge,
+                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, AC.Legacy, AC.Active, AC.CanMerge,
                                     CTEAC.LocationPath
                                 FROM
                                     CTE_AchievementCategory CTEAC
@@ -55,35 +53,31 @@ namespace DbManager.DataManagers
                 categories.Clear();
                 while (reader.Read())
                 {
-                    var parent = reader.IsDBNull(3) ? null : categories.Single(x => x.ID == reader.GetInt32(3));
-                    var function = functionDataManager.GetAll().Single(x => x.ID == reader.GetInt32(4));
-                    var functionValue = reader.IsDBNull(5) ? null : reader.GetString(5);
-                    categories.Add(new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), parent, function, functionValue, reader.GetBoolean(6), reader.GetBoolean(7), reader.GetBoolean(8), reader.GetBoolean(9)));
+                    var category = new AchievementCategory()
+                    {
+                        ID = reader.GetInt32(0),
+                        Location = reader.GetInt32(1),
+                        Name = reader.GetString(2),
+                        Parent = reader.IsDBNull(3) ? null : categories.Single(x => x.ID == reader.GetInt32(3)),
+                        Function = functionDataManager.GetAll().Single(x => x.ID == reader.GetInt32(4)),
+                        FunctionValue = reader.IsDBNull(5) ? null : reader.GetString(5),
+                        Legacy = reader.GetBoolean(6),
+                        Active = reader.GetBoolean(7),
+                        CanMerge = reader.GetBoolean(8)
+                    };
+                    categories.Add(category);
+                    category.Parent.Children.Add(category);
                 }
             }
 
             return categories;
         }
 
-        public List<int> GetMapIDs(AchievementCategory category)
-        {
-            var cmd = connection.CreateCommand();
-            cmd.CommandText = "SELECT UIMapID FROM AchievementCategoryUIMap WHERE AchievementCategoryID == @AchievementCategoryID ORDER BY UIMapID";
-            cmd.Parameters.AddWithValue("@AchievementCategoryID", category.ID);
-
-            var mapIDs = new List<int>();
-            using (var reader = cmd.ExecuteReader())
-                while (reader.Read())
-                    mapIDs.Add(reader.GetInt32(0));
-
-            return mapIDs;
-        }
-
         public AchievementCategory GetLast()
         {
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
-                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, AC.Legacy, AC.IgnoreParentMapIDs, AC.Active, AC.CanMerge
+                                    AC.ID, AC.Location, AC.Name, AC.ParentID, AC.FunctionID, AC.FunctionValue, AC.Legacy, AC.Active, AC.CanMerge
                                 FROM
                                     AchievementCategory AC
                                 ORDER BY AC.ID DESC
@@ -92,10 +86,18 @@ namespace DbManager.DataManagers
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
                 {
-                    var parent = reader.IsDBNull(3) ? null : categories.Single(x => x.ID == reader.GetInt32(3));
-                    var function = functionDataManager.GetAll().Single(x => x.ID == reader.GetInt32(4));
-                    var functionValue = reader.IsDBNull(5) ? null : reader.GetString(5);
-                    return new AchievementCategory(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), parent, function, functionValue, reader.GetBoolean(6), reader.GetBoolean(7), reader.GetBoolean(8), reader.GetBoolean(9));
+                    return new AchievementCategory()
+                    {
+                        ID = reader.GetInt32(0),
+                        Location = reader.GetInt32(1),
+                        Name = reader.GetString(2),
+                        Parent = reader.IsDBNull(3) ? null : categories.Single(x => x.ID == reader.GetInt32(3)),
+                        Function = functionDataManager.GetAll().Single(x => x.ID == reader.GetInt32(4)),
+                        FunctionValue = reader.IsDBNull(5) ? null : reader.GetString(5),
+                        Legacy = reader.GetBoolean(6),
+                        Active = reader.GetBoolean(7),
+                        CanMerge = reader.GetBoolean(8)
+                    };
                 }
 
             return null;
@@ -106,43 +108,42 @@ namespace DbManager.DataManagers
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO AchievementCategory (Location, Name, ParentID, FunctionID, FunctionValue, Legacy, IgnoreParentMapIDs, Active, CanMerge)
-                                VALUES (@Location, @Name, @ParentID, @FunctionID, @FunctionValue, @Legacy, @IgnoreParentMapIDs, @Active, @CanMerge)";
+            cmd.CommandText = @"INSERT INTO AchievementCategory (Location, Name, ParentID, FunctionID, FunctionValue, Legacy, Active, CanMerge)
+                                VALUES (@Location, @Name, @ParentID, @FunctionID, @FunctionValue, @Legacy, @Active, @CanMerge)";
             cmd.Parameters.AddWithValue("@Location", category.Location);
             cmd.Parameters.AddWithValue("@Name", category.Name);
             cmd.Parameters.AddWithValue("@ParentID", category.Parent == null ? DBNull.Value : category.Parent.ID);
             cmd.Parameters.AddWithValue("@FunctionID", category.Function.ID);
-            cmd.Parameters.AddWithValue("@FunctionValue", string.IsNullOrEmpty( category.FunctionValue ) ? DBNull.Value : category.FunctionValue);
+            cmd.Parameters.AddWithValue("@FunctionValue", string.IsNullOrEmpty(category.FunctionValue) ? DBNull.Value : category.FunctionValue);
             cmd.Parameters.AddWithValue("@Legacy", category.Legacy ? 1 : 0);
-            cmd.Parameters.AddWithValue("@IgnoreParentMapIDs", category.IgnoreParentMapIDs ? 1 : 0);
             cmd.Parameters.AddWithValue("@Active", category.Active ? 1 : 0);
             cmd.Parameters.AddWithValue("@CanMerge", category.CanMerge ? 1 : 0);
 
             cmd.ExecuteNonQuery();
         }
 
-        public void UpdateMapIDs(AchievementCategory selectedCategory, List<int> mapIDs)
-        {
-            _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
-            _ = mapIDs ?? throw new ArgumentNullException(nameof(mapIDs));
+        //public void UpdateMapIDs(AchievementCategory selectedCategory, List<int> mapIDs)
+        //{
+        //    _ = selectedCategory ?? throw new ArgumentNullException(nameof(selectedCategory));
+        //    _ = mapIDs ?? throw new ArgumentNullException(nameof(mapIDs));
 
-            var cmd = connection.CreateCommand();
+        //    var cmd = connection.CreateCommand();
 
-            cmd.CommandText = "DELETE FROM AchievementCategoryUIMap WHERE AchievementCategoryID = @AchievementCategoryID";
-            cmd.Parameters.AddWithValue("@AchievementCategoryID", selectedCategory.ID);
+        //    cmd.CommandText = "DELETE FROM AchievementCategoryUIMap WHERE AchievementCategoryID = @AchievementCategoryID";
+        //    cmd.Parameters.AddWithValue("@AchievementCategoryID", selectedCategory.ID);
 
-            cmd.ExecuteNonQuery();
+        //    cmd.ExecuteNonQuery();
 
-            foreach (var mapID in mapIDs)
-            {
-                cmd.CommandText = "INSERT INTO AchievementCategoryUIMap (AchievementCategoryID, UIMapID) VALUES(@AchievementCategoryID, @UIMapID)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@AchievementCategoryID", selectedCategory.ID);
-                cmd.Parameters.AddWithValue("@UIMapID", mapID);
+        //    foreach (var mapID in mapIDs)
+        //    {
+        //        cmd.CommandText = "INSERT INTO AchievementCategoryUIMap (AchievementCategoryID, UIMapID) VALUES(@AchievementCategoryID, @UIMapID)";
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("@AchievementCategoryID", selectedCategory.ID);
+        //        cmd.Parameters.AddWithValue("@UIMapID", mapID);
 
-                cmd.ExecuteNonQuery();
-            }
-        }
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //}
 
         public void UpdateLocations(AchievementCategory selectedCategory, List<AchievementCategory> categories)
         {

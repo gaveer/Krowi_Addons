@@ -61,6 +61,26 @@ namespace DbManager.DataManagers
             return achievement;
         }
 
+        public List<Achievement> GetAll()
+        {
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.HasWowheadLink, AGT.Name
+                                FROM
+                                    Achievement A
+                                    LEFT JOIN Achievement_AGT AGT
+                                        ON A.ID = AGT.ID
+                                ORDER BY
+                                    A.ID;";
+
+            var achievements = new List<Achievement>();
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    achievements.Add(new Achievement(reader.GetInt32(0), (Faction)reader.GetInt32(1), (Covenant)reader.GetInt32(2), reader.GetBoolean(3), reader.GetBoolean(4), 0, reader.IsDBNull(5) ? null : reader.GetString(5)));
+
+            return achievements;
+        }
+
         public void Add(Achievement achievement, AchievementCategory category)
         {
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));

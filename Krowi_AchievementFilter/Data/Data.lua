@@ -9,13 +9,21 @@ addon.NextPatchCategory = {};
 addon.Achievements = {};
 addon.RCMenuExtras = {};
 addon.NextPatchAchievements = {};
+addon.Maps = {};
 
 function data.Load()
-    addon.CurrentZoneCategory, addon.NextPatchCategory = data.ExportedData.Load(addon.Categories, addon.Achievements);
+    data.ExportedAchievements.Load(addon.Achievements);
+    addon.CurrentZoneCategory, addon.NextPatchCategory = data.ExportedCategories.Load(addon.Categories, addon.Achievements);
     data.ExportedPetBattles.Load(addon.RCMenuExtras);
     data.NextPatch.Load(addon.NextPatchAchievements);
+    -- data.Maps.Load(addon.Maps, addon.Achievements);
+
+    -- Get rid of the following namespaces since it's not needed anymore after loading the data and free up memory on the next garbage collection
+    data.ExportedAchievements = nil;
+    data.ExportedCategories = nil;
 
     addon.Diagnostics.Debug("Expansion data loaded");
+
     -- TEST = {};
     -- data.PrintCriteria(14879, nil, 0);
 end

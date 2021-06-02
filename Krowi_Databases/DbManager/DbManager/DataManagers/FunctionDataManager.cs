@@ -7,7 +7,7 @@ namespace DbManager.DataManagers
 {
     public class FunctionDataManager : DataManagerBase
     {
-        private readonly List<Function> functions = new List<Function>();
+        private readonly List<Function> functions = new();
 
         public FunctionDataManager(SqliteConnection connection) : base(connection) { }
 
@@ -27,7 +27,12 @@ namespace DbManager.DataManagers
             {
                 functions.Clear();
                 while (reader.Read())
-                    functions.Add(new Function(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
+                    functions.Add(new Function()
+                    {
+                        ID = reader.GetInt32(0),
+                        Call = reader.GetString(1),
+                        Description = reader.GetString(2)
+                    });
             }
 
             return functions;

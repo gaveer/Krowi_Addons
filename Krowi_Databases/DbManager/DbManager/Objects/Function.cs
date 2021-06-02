@@ -2,23 +2,15 @@
 {
     public class Function
     {
-        public int ID { get; }
-        public string Call { get; }
-        public string Description { get; }
+        public int ID { get; set; } = -1;
+        public string Call { get; set; } = "";
+        public string Description { get; set; } = "";
 
-        public Function(int id, string call, string description)
-        {
-            ID = id;
-            Call = call;
-            Description = description;
-        }
+        public Function() { }
 
         public override string ToString()
         {
-            if (ID > 0)
-                return $"{Description}";
-            else
-                return "";
+            return $"{Description}";
         }
     }
 }

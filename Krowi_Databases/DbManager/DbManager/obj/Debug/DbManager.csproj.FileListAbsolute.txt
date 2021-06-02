@@ -19,12 +19,12 @@ E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManag
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\bin\Debug\System.Memory.xml
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\bin\Debug\System.Numerics.Vectors.xml
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.csprojAssemblyReference.cache
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.Form1.resources
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.GUI.Custom.CustomMessageBox.resources
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.Properties.Resources.resources
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.csproj.GenerateResource.cache
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.csproj.CoreCompileInputs.cache
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.csproj.CopyComplete
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.exe
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.pdb
-E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.csprojAssemblyReference.cache
-E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManager\obj\Debug\DbManager.GUI.Custom.CustomMessageBox.resources

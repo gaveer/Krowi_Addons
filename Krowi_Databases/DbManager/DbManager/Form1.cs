@@ -257,8 +257,7 @@ namespace DbManager
             uiMapDataManager = new UIMapDataManager(connection);
             uiMapHandler = new UIMapHandler(btnUpdateUIMap, pgbUpdateUIMap, uiMapDataManager);
 
-            exportHandler = new ExportHandler((AchievementDataManager)achievementHandler.DataManager, (AchievementCategoryDataManager)achievementCategoryHandler.DataManager, (FunctionDataManager)functionHandler.DataManager, (PetBattleLinksDataManager)petBattleLinksHandler.DataManager);
-
+            exportHandler = new ExportHandler((AchievementDataManager)achievementHandler.DataManager, (AchievementCategoryDataManager)achievementCategoryHandler.DataManager, (FunctionDataManager)functionHandler.DataManager, (PetBattleLinksDataManager)petBattleLinksHandler.DataManager, (UIMapDataManager)uiMapHandler.DataManager);
 
             achievementCategoryHandler.RefreshTreeView();
             functionHandler.RefreshComboBox();
@@ -306,8 +305,8 @@ namespace DbManager
             achievementHandler.RefreshListBox();
 
             var category = achievementCategoryHandler.GetSelectedAchievementCategory();
-            category.MapIDs = ((AchievementCategoryDataManager)achievementCategoryHandler.DataManager).GetMapIDs(category);
-            txtMapIDs.Text = string.Join(", ", category.MapIDs);
+            //category.MapIDs = ((AchievementCategoryDataManager)achievementCategoryHandler.DataManager).GetMapIDs(category);
+            //txtMapIDs.Text = string.Join(", ", category.MapIDs);
             triggerActiveChange = false;
             triggerCanMergeChange = false;
             cbxIsActive.Checked = category.Active;
@@ -503,7 +502,10 @@ namespace DbManager
 
         private void BtnExport_Click(object sender, EventArgs e)
         {
-            exportHandler.ExportAchievementFilter();
+            exportHandler.ExportAchievements();
+            exportHandler.ExportCategories();
+            exportHandler.ExportMaps();
+            //exportHandler.ExportAchievementFilter();
             exportHandler.ExportNextPatch();
         }
 

@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 - TBD
 
+### Fixed
+- Northrend Explorer now shows for both factions
+- Guardian of Cenarius now shows for both factions
+
 ## [9.0.5.23.0] - 2021-05-27
 ### Added
 - Achievements in the Current Zone category now always have a Go To item so you can easily go to the achievement in the categories tree

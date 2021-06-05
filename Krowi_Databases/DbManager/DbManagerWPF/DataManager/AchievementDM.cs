@@ -2,20 +2,26 @@
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DbManagerWPF.DataManager
 {
-    public class AchievementDM : DataManagerBase
+    public class AchievementDM : DataManagerBase, IAchievementDM
     {
-        public AchievementDM(SqliteConnection connection) : base(connection) { }
+        private readonly IUIMapDM uiMapDM;
 
-        public List<Achievement> GetWithCategory(Category category)
+        public AchievementDM(SqliteConnection connection, IUIMapDM uiMapDM) : base(connection)
+        {
+            this.uiMapDM = uiMapDM;
+        }
+
+        public IEnumerable<Achievement> GetWithCategory(Category category)
         {
             _ = category ?? throw new ArgumentNullException(nameof(category));
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"SELECT
-                                    A.ID, A.FactionID, A.CovenantID, A.Obtainable, A.WowheadLink, CA.Location, AGT.Name
+                                    A.ID, CA.Location, AGT.Name, A.FactionID, A.CovenantID, A.Points, A.Obtainable, A.WowheadLink
                                 FROM
                                     Achievement A
                                     LEFT JOIN CategoryAchievement CA
@@ -31,18 +37,220 @@ namespace DbManagerWPF.DataManager
             var achievements = new List<Achievement>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    achievements.Add(new Achievement()
+                    achievements.Add(new Achievement(uiMapDM)
                     {
                         ID = reader.GetInt32(0),
-                        Faction = (Faction)reader.GetInt32(1),
-                        Covenant = (Covenant)reader.GetInt32(2),
-                        Obtainable = reader.GetBoolean(3),
-                        WowheadLink = reader.GetBoolean(4),
-                        Location = reader.GetInt32(5),
-                        Name = reader.IsDBNull(6) ? null : reader.GetString(6)
+                        Location = reader.GetInt32(1),
+                        Name = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        Faction = (Faction)reader.GetInt32(3),
+                        Covenant = (Covenant)reader.GetInt32(4),
+                        Points = reader.GetInt32(5),
+                        Obtainable = reader.GetBoolean(6),
+                        WowheadLink = reader.GetBoolean(7)
                     });
 
             return achievements;
+        }
+
+        public void Add(int ID, int location, Faction faction, Covenant covenant, int points, bool obtainable, bool wowheadLink, Category category)
+        {
+            if (ID <= 0) throw new ArgumentOutOfRangeException(nameof(ID));
+            if (location <= 0) throw new ArgumentOutOfRangeException(nameof(location));
+            if (points <= 0) throw new ArgumentOutOfRangeException(nameof(points));
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+
+            var sb = new StringBuilder();
+            sb.AppendLine(@"INSERT OR IGNORE INTO Achievement (ID, FactionID, CovenantID, Points, Obtainable, WowheadLink)
+                            VALUES (@ID, @FactionID, @CovenantID, @Points, @Obtainable, @HasWowheadLink);");
+            sb.AppendLine(@"INSERT OR IGNORE INTO CategoryAchievement (Location, CategoryID, AchievementID)
+                            VALUES (@Location, @CategoryID, @ID);");
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = sb.ToString();
+            cmd.Parameters.AddWithValue("@ID", ID);
+            cmd.Parameters.AddWithValue("@FactionID", (int)faction);
+            cmd.Parameters.AddWithValue("@CovenantID", (int)covenant);
+            cmd.Parameters.AddWithValue("@Points", points);
+            cmd.Parameters.AddWithValue("@Obtainable", obtainable ? 1 : 0);
+            cmd.Parameters.AddWithValue("@HasWowheadLink", wowheadLink ? 1 : 0);
+            cmd.Parameters.AddWithValue("@Location", location);
+            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public Faction GetFaction(int achievementID)
+        {
+            if (achievementID <= 0) throw new ArgumentOutOfRangeException(nameof(achievementID));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT FactionID FROM Achievement_AGT WHERE ID = @ID;";
+            cmd.Parameters.AddWithValue("@ID", achievementID);
+
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    return (Faction)reader.GetInt32(0);
+
+            return Faction.Unknown;
+        }
+
+        public Covenant GetCovenant(int achievementID)
+        {
+            if (achievementID <= 0) throw new ArgumentOutOfRangeException(nameof(achievementID));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT CovenantID FROM Achievement_AGT WHERE ID = @ID;";
+            cmd.Parameters.AddWithValue("@ID", achievementID);
+
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    return (Covenant)reader.GetInt32(0);
+
+            return Covenant.Unknown;
+        }
+
+        public int GetPoints(int achievementID)
+        {
+            if (achievementID <= 0) throw new ArgumentOutOfRangeException(nameof(achievementID));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT Points FROM Achievement_AGT WHERE ID = @ID;";
+            cmd.Parameters.AddWithValue("@ID", achievementID);
+
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    return reader.GetInt32(0);
+
+            return -1;
+        }
+
+        public void IncreaseLocations(Category category, IEnumerable<Achievement> achievements, int firstLocation)
+        {
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+            _ = achievements ?? throw new ArgumentNullException(nameof(achievements));
+            if (firstLocation <= 0) throw new ArgumentOutOfRangeException(nameof(firstLocation));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = "UPDATE CategoryAchievement SET Location = Location + 1 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID";
+            foreach (var achievement in achievements)
+            {
+                if (achievement.Location >= firstLocation)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+                    cmd.Parameters.AddWithValue("@AchievementID", achievement.ID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DecreaseLocations(Category category, IEnumerable<Achievement> achievements, int firstLocation)
+        {
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+            _ = achievements ?? throw new ArgumentNullException(nameof(achievements));
+            if (firstLocation <= 0) throw new ArgumentOutOfRangeException(nameof(firstLocation));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = "UPDATE CategoryAchievement SET Location = Location - 1 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID";
+            foreach (var achievement in achievements)
+            {
+                if (achievement.Location >= firstLocation)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+                    cmd.Parameters.AddWithValue("@AchievementID", achievement.ID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Swap(Category category, Achievement achievement1, Achievement achievement2)
+        {
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+            _ = achievement1 ?? throw new ArgumentNullException(nameof(achievement1));
+            _ = achievement2 ?? throw new ArgumentNullException(nameof(achievement2));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"UPDATE CategoryAchievement SET Location = @Location1 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID1;
+                                UPDATE CategoryAchievement SET Location = @Location2 WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID2;";
+            cmd.Parameters.AddWithValue("@Location1", achievement2.Location);
+            cmd.Parameters.AddWithValue("@AchievementID1", achievement1.ID);
+            cmd.Parameters.AddWithValue("@Location2", achievement1.Location);
+            cmd.Parameters.AddWithValue("@AchievementID2", achievement2.ID);
+            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public void Update(Achievement achievement, int ID, Faction faction, Covenant covenant, int points, bool obtainable, bool wowheadLink)
+        {
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+            if (ID <= 0) throw new ArgumentOutOfRangeException(nameof(ID));
+            if (points <= 0) throw new ArgumentOutOfRangeException(nameof(points));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"UPDATE Achievement SET ID = @NewID, FactionID = @FactionID, CovenantID = @CovenantID, Points = @Points, Obtainable = @Obtainable, WowheadLink = @WowheadLink
+                                WHERE ID = @ID";
+            cmd.Parameters.AddWithValue("@NewID", ID);
+            cmd.Parameters.AddWithValue("@FactionID", (int)faction);
+            cmd.Parameters.AddWithValue("@CovenantID", (int)covenant);
+            cmd.Parameters.AddWithValue("@Points", points);
+            cmd.Parameters.AddWithValue("@Obtainable", obtainable ? 1 : 0);
+            cmd.Parameters.AddWithValue("@WowheadLink", wowheadLink ? 1 : 0);
+            cmd.Parameters.AddWithValue("@ID", achievement.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public void Remove(Achievement achievement)
+        {
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"DELETE FROM CategoryAchievement WHERE AchievementID = @ID";
+            cmd.Parameters.AddWithValue("@ID", achievement.ID);
+
+            cmd.ExecuteNonQuery();
+
+            try // Lazy code, needs proper check later
+            {
+                cmd.CommandText = @"DELETE FROM Achievement WHERE ID = @ID";
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+        }
+
+        public void SetNewLocation(Category category, Achievement achievement, int location)
+        {
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = "UPDATE CategoryAchievement SET Location = @Location WHERE CategoryID = @CategoryID AND AchievementID = @AchievementID";
+
+            cmd.Parameters.AddWithValue("@Location", location);
+            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+            cmd.Parameters.AddWithValue("@AchievementID", achievement.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public void SetNewParentAndLocation(Category oldParent, Achievement achievement, Category newParent, int location)
+        {
+            _ = oldParent ?? throw new ArgumentNullException(nameof(oldParent));
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+            _ = newParent ?? throw new ArgumentNullException(nameof(newParent));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = "UPDATE CategoryAchievement SET Location = @Location, CategoryID = @NewCategoryID WHERE CategoryID = @OldCategoryID AND AchievementID = @AchievementID";
+
+            cmd.Parameters.AddWithValue("@Location", location);
+            cmd.Parameters.AddWithValue("@NewCategoryID", newParent.ID);
+            cmd.Parameters.AddWithValue("@OldCategoryID", oldParent.ID);
+            cmd.Parameters.AddWithValue("@AchievementID", achievement.ID);
+
+            cmd.ExecuteNonQuery();
         }
     }
 }

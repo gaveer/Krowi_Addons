@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DbManagerWPF.Model
 {
@@ -16,6 +12,21 @@ namespace DbManagerWPF.Model
                     return category;
 
                 var found = category.Children.Find(ID);
+                if (found != null)
+                    return found;
+            }
+
+            return null;
+        }
+
+        public static UIMap Find(this IEnumerable<UIMap> uiMaps, int ID)
+        {
+            foreach (var uiMap in uiMaps)
+            {
+                if (uiMap.ID == ID)
+                    return uiMap;
+
+                var found = uiMap.Children.Find(ID);
                 if (found != null)
                     return found;
             }

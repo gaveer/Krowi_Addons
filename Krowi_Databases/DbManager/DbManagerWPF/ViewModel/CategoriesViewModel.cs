@@ -1,7 +1,5 @@
-﻿using DbManagerWPF.DataManager;
-using DbManagerWPF.Model;
+﻿using DbManagerWPF.Model;
 using DbManagerWPF.View;
-using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,7 +17,7 @@ namespace DbManagerWPF.ViewModel
         private Category _SelectedCategory;
         public Category SelectedCategory { get { return _SelectedCategory; } set { _SelectedCategory = value; NotifyPropertyChanged(); } }
 
-        public TreeViewSelectionBehavior.IsChildOfPredicate HierarchyPredicate
+        public TreeViewSelectionBehavior.IsChildOfPredicate CategoryHierarchyPredicate
         {
             get
             {
@@ -47,7 +45,8 @@ namespace DbManagerWPF.ViewModel
             IsActiveEdit = SelectedCategory.IsActive;
             CanMergeEdit = SelectedCategory.CanMerge;
 
-            SetAchievements(SelectedCategory);
+            RefreshAchievementsView(SelectedCategory);
+            RefreshCategoryUIMapView(SelectedCategory);
         }, () => true);
 
         public string CategoryNameNew { get; set; }
@@ -62,7 +61,7 @@ namespace DbManagerWPF.ViewModel
 
         public bool IsLegacyNew { get; set; }
 
-        public bool IsActiveNew { get; set; }
+        public bool IsActiveNew { get; set; } = true;
 
         public bool CanMergeNew { get; set; }
 
@@ -93,12 +92,7 @@ namespace DbManagerWPF.ViewModel
             if (SelectedCategory == null)
                 return false;
 
-            List<Category> categories;
-            if (SelectedCategory.Parent != null)
-                categories = SelectedCategory.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            List<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory).ToList();
             var selectedIndex = categories.FindIndex(x => x == SelectedCategory);
 
             if (selectedIndex <= 0)
@@ -112,12 +106,7 @@ namespace DbManagerWPF.ViewModel
             if (SelectedCategory == null)
                 return false;
 
-            List<Category> categories;
-            if (SelectedCategory.Parent != null)
-                categories = SelectedCategory.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            List<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory).ToList();
             var selectedIndex = categories.FindIndex(x => x == SelectedCategory);
 
             if (selectedIndex >= categories.Count - 1)
@@ -131,12 +120,7 @@ namespace DbManagerWPF.ViewModel
             if (SelectedCategory == null)
                 return false;
 
-            List<Category> categories;
-            if (SelectedCategory.Parent != null)
-                categories = SelectedCategory.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            List<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory).ToList();
             var selectedIndex = categories.FindIndex(x => x == SelectedCategory);
 
             if (selectedIndex <= 0)
@@ -152,13 +136,8 @@ namespace DbManagerWPF.ViewModel
         public ICommand ValidateCategoryLocationsCommand => new CommandHandler(() => ValidateCategoryLocations(new List<Category>(Categories), 0), () => true);
         #endregion
 
-        private FunctionDM functionDM;
-        private CategoryDM categoryDM;
-
-        public void LoadCategoriesViewModel(SqliteConnection connection)
+        public void LoadCategoriesViewModel()
         {
-            functionDM = new FunctionDM(connection);
-            categoryDM = new CategoryDM(connection, functionDM);
             Functions = new ObservableCollection<Function>(functionDM.GetAll());
             RefreshCategoriesView();
         }
@@ -166,6 +145,22 @@ namespace DbManagerWPF.ViewModel
         private void RefreshCategoriesView()
         {
             Categories = new ObservableCollection<Category>(categoryDM.GetAll(true));
+        }
+
+        private IEnumerable<Category> GetCategoryParentChildrenSafe(Category category)
+        {
+            if (category.Parent != null)
+                return category.Parent.Children;
+
+            return Categories;
+        }
+
+        private IEnumerable<Category> GetParentChildrenSafe(Category parent)
+        {
+            if (parent != null)
+                return parent.Children;
+
+            return Categories;
         }
 
         private void AddNewCategory()
@@ -194,12 +189,7 @@ namespace DbManagerWPF.ViewModel
             categoryDM.Add(location, CategoryNameNew.Trim(), parent, SelectedFunctionNew, FunctionValueNew, IsLegacyNew, IsActiveNew, CanMergeNew);
 
             // Update locations
-            List<Category> categories;
-            if (parent != null)
-                categories = parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            IEnumerable<Category> categories = GetParentChildrenSafe(parent);
             categoryDM.IncreaseLocations(categories, location);
 
             // Refresh view and select the new category
@@ -207,17 +197,21 @@ namespace DbManagerWPF.ViewModel
             var category = categoryDM.GetLast();
             category = Categories.Find(category.ID);
             SelectedCategory = category;
+
+            // Clear input fields
+            CategoryNameNew = null;
+            SelectedFunctionNew = null;
+            FunctionValueNew = null;
+            SelectedCategoryAsParent = false;
+            IsLegacyNew = false;
+            IsActiveNew = true;
+            CanMergeNew = false;
         }
 
         private void MoveCategoryLeft()
         {
             // Update new locations
-            List<Category> categories;
-            if (SelectedCategory.Parent.Parent != null)
-                categories = SelectedCategory.Parent.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            IEnumerable<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory.Parent);
             categoryDM.IncreaseLocations(categories, SelectedCategory.Parent.Location + 1);
 
             // Set new
@@ -235,12 +229,7 @@ namespace DbManagerWPF.ViewModel
 
         private void MoveCategoryUp()
         {
-            List<Category> categories;
-            if (SelectedCategory.Parent != null)
-                categories = SelectedCategory.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            List<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory).ToList();
             var selectedIndex = categories.FindIndex(x => x == SelectedCategory);
 
             categoryDM.Swap(categories[selectedIndex - 1], categories[selectedIndex]);
@@ -253,15 +242,10 @@ namespace DbManagerWPF.ViewModel
 
         private void MoveCategoryDown()
         {
-            List<Category> categories;
-            if (SelectedCategory.Parent != null)
-                categories = SelectedCategory.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            List<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory).ToList();
             var selectedIndex = categories.FindIndex(x => x == SelectedCategory);
 
-            categoryDM.Swap(categories[selectedIndex + 1], categories[selectedIndex]);
+            categoryDM.Swap(categories[selectedIndex], categories[selectedIndex + 1]);
 
             // Refresh view and select the previous category
             var selectedCategory = SelectedCategory;
@@ -271,12 +255,7 @@ namespace DbManagerWPF.ViewModel
 
         private void MoveCategoryRight()
         {
-            List<Category> categories;
-            if (SelectedCategory.Parent != null)
-                categories = SelectedCategory.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            List<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory).ToList();
             var selectedIndex = categories.FindIndex(x => x == SelectedCategory);
 
             var location = categories[selectedIndex - 1].Children.Any() ? categories[selectedIndex - 1].Children.Last().Location + 1 : 1;
@@ -293,7 +272,7 @@ namespace DbManagerWPF.ViewModel
 
         private void UpdateCategory()
         {
-            // Add new to database
+            // Update in database
             if (SelectedCategory == null)
             {
                 MessageBox.Show("Please select a category.", "No category selected", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -335,7 +314,7 @@ namespace DbManagerWPF.ViewModel
                 return;
             }
 
-            if (SelectedCategory.Achievements.Any())
+            if (SelectedCategory.GetAchievements().Any())
             {
                 MessageBox.Show("Please remove achievements first.", "Remove achievements", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -344,12 +323,7 @@ namespace DbManagerWPF.ViewModel
             categoryDM.Remove(SelectedCategory);
 
             // Update locations
-            List<Category> categories;
-            if (SelectedCategory.Parent != null)
-                categories = SelectedCategory.Parent.Children;
-            else
-                categories = new List<Category>(Categories);
-
+            IEnumerable<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory.Parent);
             categoryDM.DecreaseLocations(categories, SelectedCategory.Location + 1);
 
             // Refresh view and select the parent category

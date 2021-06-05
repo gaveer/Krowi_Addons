@@ -8,16 +8,19 @@ namespace DbManagerWPF.DataManager
 {
     public class CategoryDM : DataManagerBase
     {
-
         private readonly FunctionDM functionDM;
+        private readonly IAchievementDM achievementDM;
+        private readonly IUIMapDM uiMapDM;
         private readonly List<Category> categories = new();
 
-        public CategoryDM(SqliteConnection connection, FunctionDM functionDM) : base(connection)
+        public CategoryDM(SqliteConnection connection, FunctionDM functionDM, IAchievementDM achievementDM, IUIMapDM uiMapDM) : base(connection)
         {
             this.functionDM = functionDM;
+            this.achievementDM = achievementDM;
+            this.uiMapDM = uiMapDM;
         }
 
-        public List<Category> GetAll(bool refresh = false)
+        public IEnumerable<Category> GetAll(bool refresh = false)
         {
             if (!refresh)
                 if (categories.Any())
@@ -54,7 +57,7 @@ namespace DbManagerWPF.DataManager
                 categories.Clear();
                 while (reader.Read())
                 {
-                    var category = new Category()
+                    var category = new Category(achievementDM, uiMapDM)
                     {
                         ID = reader.GetInt32(0),
                         Location = reader.GetInt32(1),
@@ -98,7 +101,7 @@ namespace DbManagerWPF.DataManager
             cmd.ExecuteNonQuery();
         }
 
-        public void IncreaseLocations(List<Category> categories, int firstLocation)
+        public void IncreaseLocations(IEnumerable<Category> categories, int firstLocation)
         {
             _ = categories ?? throw new ArgumentNullException(nameof(categories));
             if (firstLocation <= 0) throw new ArgumentOutOfRangeException(nameof(firstLocation));
@@ -116,7 +119,7 @@ namespace DbManagerWPF.DataManager
             }
         }
 
-        public void DecreaseLocations(List<Category> categories, int firstLocation)
+        public void DecreaseLocations(IEnumerable<Category> categories, int firstLocation)
         {
             _ = categories ?? throw new ArgumentNullException(nameof(categories));
             if (firstLocation <= 0) throw new ArgumentOutOfRangeException(nameof(firstLocation));
@@ -143,7 +146,7 @@ namespace DbManagerWPF.DataManager
             {
                 while (reader.Read())
                 {
-                    return new Category()
+                    return new Category(achievementDM, uiMapDM)
                     {
                         ID = reader.GetInt32(0),
                         Location = reader.GetInt32(1),

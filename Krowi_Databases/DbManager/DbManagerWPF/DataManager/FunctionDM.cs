@@ -11,7 +11,7 @@ namespace DbManagerWPF.DataManager
 
         public FunctionDM(SqliteConnection connection) : base(connection) { }
 
-        public List<Function> GetAll(bool refresh = false)
+        public IEnumerable<Function> GetAll(bool refresh = false)
         {
             if (!refresh)
                 if (functions.Any())

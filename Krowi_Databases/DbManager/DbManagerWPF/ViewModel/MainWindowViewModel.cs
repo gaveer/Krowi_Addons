@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using DbManagerWPF.DataManager;
+using Microsoft.Data.Sqlite;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -6,6 +7,11 @@ namespace DbManagerWPF.ViewModel
 {
     public partial class MainWindowViewModel : INotifyPropertyChanged
     {
+        private FunctionDM functionDM;
+        private AchievementDM achievementDM;
+        private CategoryDM categoryDM;
+        private UIMapDM uiMapDM;
+
         public MainWindowViewModel()
         {
             var connStrBuilder = new SqliteConnectionStringBuilder();
@@ -13,8 +19,13 @@ namespace DbManagerWPF.ViewModel
             var connection = new SqliteConnection(connStrBuilder.ConnectionString);
             connection.Open();
 
-            LoadCategoriesViewModel(connection);
-            LoadAchievementsViewModel(connection);
+            functionDM = new FunctionDM(connection);
+            uiMapDM = new UIMapDM(connection);
+            achievementDM = new AchievementDM(connection, uiMapDM);
+            categoryDM = new CategoryDM(connection, functionDM, achievementDM, uiMapDM);
+
+            LoadCategoriesViewModel();
+            LoadUIMapViewModel();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

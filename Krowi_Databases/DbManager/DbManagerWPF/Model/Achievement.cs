@@ -1,53 +1,140 @@
-﻿using System;
+﻿using DbManagerWPF.DataManager;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DbManagerWPF.Model
 {
     public class Achievement : IComparable<Achievement>, IEquatable<Achievement>
     {
+        private readonly IUIMapDM uiMapDM;
+        private List<UIMap> uiMaps = new();
+
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Faction Faction { get; set; }
-        public int Points { get; set; }
-        public Covenant Covenant { get; set; }
-        //public AchievementFlags Flags { get; }
         public int Location { get; set; }
+        public string Name { get; set; }
+        //public string Description { get; set; }
+        public Faction Faction { get; set; }
+        public Covenant Covenant { get; set; }
+        public int Points { get; set; }
+        //public AchievementFlags Flags { get; }
         public bool Obtainable { get; set; }
         public bool WowheadLink { get; set; }
 
-        //public Achievement(int id, Faction faction, Covenant covenant, bool obtainable, bool hasWowheadLink, int location, string name) : this(id, name, null, faction, -1, covenant, AchievementFlags.NO_FLAGS, obtainable, hasWowheadLink, location) { }
+        public Achievement(IUIMapDM uiMapDM)
+        {
+            this.uiMapDM = uiMapDM;
+        }
 
-        //public Achievement(int id, string name, string description, Faction faction, int points, Covenant covenant, AchievementFlags flags) : this(id, name, description, faction, points, covenant, flags, true, true, -1) { }
+        public IEnumerable<UIMap> GetUIMaps(bool refresh = false)
+        {
+            if (!refresh)
+                if (uiMaps.Any())
+                    return uiMaps;
 
-        //public Achievement(int id, string name, string description, Faction faction, int points, Covenant covenant, AchievementFlags flags, bool obtainable, bool hasWowheadLink, int location)
-        //{
-        //    ID = id;
-        //    Name = name;
-        //    Description = description;
-        //    Faction = faction;
-        //    Points = points;
-        //    Covenant = covenant;
-        //    Flags = flags;
-        //    Obtainable = obtainable;
-        //    HasWowheadLink = hasWowheadLink;
-        //    Location = location;
-        //}
+            uiMaps.Clear();
 
-        public Achievement() { }
+            var foundUIMaps = uiMapDM.GetWithAchievement(this);
+            foreach (var uiMap in foundUIMaps)
+                uiMaps.Add(uiMapDM.GetAll().Find(uiMap.ID));
+
+            return uiMaps;
+        }
+
+        public void SetUIMaps(IEnumerable<UIMap> uiMaps)
+        {
+            this.uiMaps = uiMaps.ToList();
+        }
 
         public override string ToString()
         {
-            return $"{Location} - {Name} ({ID}) - {Enum.GetName(typeof(Faction), Faction)}{(Covenant != Covenant.NoCovenant ? $" - {Covenant}" : "")}{(Obtainable ? " - Obtainable" : "")}{(WowheadLink ? " - Wowhead" : "")}";
+            var faction = "";
+            switch (Faction)
+            {
+                case Faction.Alliance:
+                case Faction.Horde:
+                    faction = $" - {Faction}";
+                    break;
+            }
+
+            var covenant = "";
+            switch (Covenant)
+            {
+                case Covenant.Kyrian:
+                case Covenant.Venthyr:
+                case Covenant.NightFae:
+                case Covenant.Necrolord:
+                    covenant = $" - {Covenant}";
+                    break;
+            }
+
+            return $"{Location} - {Name} ({ID}) - (P-{Points}){faction}{covenant}{(Obtainable ? "" : " - NOT OBTAINABLE")}{(WowheadLink ? "" : " - NO WOWHEAD LINK")}";
         }
 
+        #region IComparable
         public int CompareTo(Achievement other)
         {
-            return ID.CompareTo(other);
-        }
+            if (other is null)
+                return 1; // All instances are greater than null
 
+            return ID.CompareTo(other.ID);
+        }
+        #endregion
+
+        #region IEquatable
         public bool Equals(Achievement other)
         {
             return ID == other?.ID;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (obj is not Achievement other)
+                return false;
+
+            return Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return ID.GetHashCode();
+        }
+
+        public static bool operator ==(Achievement left, Achievement right)
+        {
+            if (left is null)
+                return right is null;
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Achievement left, Achievement right)
+        {
+            return !(left == right);
+        }
+
+        public static bool operator <(Achievement left, Achievement right)
+        {
+            return left is null ? right is not null : left.CompareTo(right) < 0;
+        }
+
+        public static bool operator <=(Achievement left, Achievement right)
+        {
+            return left is null || left.CompareTo(right) <= 0;
+        }
+
+        public static bool operator >(Achievement left, Achievement right)
+        {
+            return left is not null && left.CompareTo(right) > 0;
+        }
+
+        public static bool operator >=(Achievement left, Achievement right)
+        {
+            return left is null ? right is null : left.CompareTo(right) >= 0;
+        }
+        #endregion
     }
 }

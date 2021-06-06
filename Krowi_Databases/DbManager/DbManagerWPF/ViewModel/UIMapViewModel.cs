@@ -1,13 +1,6 @@
-﻿using DbManagerWPF.DataManager;
-using DbManagerWPF.Model;
+﻿using DbManagerWPF.Model;
 using DbManagerWPF.View;
-using Microsoft.Data.Sqlite;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -45,7 +38,7 @@ namespace DbManagerWPF.ViewModel
         public ICommand SelectedUIMapChangedCommand => new CommandHandler(() => { }, () => true);
 
         public ICommand MoveUIMapCommand => new CommandHandler(() => MoveUIMap(), () => SelectedUIMap != null || uiMapToMove != null);
-        public ICommand PruneCategoriesCommand => new CommandHandler(() => PruneCategories(), () => true);
+        //public ICommand PruneCategoriesCommand => new CommandHandler(() => PruneCategories(), () => true);
 
         public ICommand AddUIMapToCategoryCommand => new CommandHandler(() => AddUIMapToCategory(), () => SelectedCategory != null && SelectedUIMap != null);
         public ICommand RemoveUIMapFromCategoryCommand => new CommandHandler(() => RemoveUIMapFromCategory(), () => SelectedCategory != null && SelectedCategoryUIMap != null);
@@ -89,10 +82,10 @@ namespace DbManagerWPF.ViewModel
                 CategoryUIMaps = new ObservableCollection<UIMap>(category.GetUIMaps(refresh));
         }
 
-        private void RefreshAchievementUIMapView(Achievement achievement)
+        private void RefreshAchievementUIMapView(Achievement achievement, bool refresh = false)
         {
             if (achievement != null)
-                AchievementUIMaps = new ObservableCollection<UIMap>(achievement.GetUIMaps());
+                AchievementUIMaps = new ObservableCollection<UIMap>(achievement.GetUIMaps(refresh));
         }
 
         public void MoveUIMap()
@@ -132,34 +125,45 @@ namespace DbManagerWPF.ViewModel
             }
         }
 
-        public void PruneCategories()
-        {
-            foreach (var category in Categories)
-                PruneCategory(category);
+        //public void PruneCategories()
+        //{
+        //    foreach (var category in Categories)
+        //        if (!PruneCategory(category))
+        //            break;
 
-            RefreshCategoriesView();
-        }
+        //    RefreshCategoriesView();
+        //}
 
-        private void PruneCategory(Category category)
-        {
-            var uiMaps = category.GetUIMaps();
+        //private bool PruneCategory(Category category)
+        //{
+        //    var uiMaps = category.GetUIMaps();
 
-            if (uiMaps.Any())
-                foreach (var uiMap in uiMaps)
-                    foreach (var child in uiMap.Children)
-                        RemoveCategoryUIMapChildren(category, child);
+        //    if (uiMaps.Any())
+        //        foreach (var uiMap in uiMaps)
+        //            foreach (var child in uiMap.Children)
+        //                if (!RemoveCategoryUIMapChildren(category, child))
+        //                    return false;
 
-            foreach (var child in category.Children)
-                PruneCategory(child);
-        }
+        //    foreach (var child in category.Children)
+        //        if (!PruneCategory(child))
+        //            return false;
 
-        private void RemoveCategoryUIMapChildren(Category category, UIMap uiMap)
-        {
-            foreach (var child in uiMap.Children)
-                RemoveCategoryUIMapChildren(category, child);
+        //    return true;
+        //}
 
-            uiMapDM.RemoveFromCategory(category, uiMap);
-        }
+        //private bool RemoveCategoryUIMapChildren(Category category, UIMap uiMap)
+        //{
+        //    foreach (var child in uiMap.Children)
+        //        RemoveCategoryUIMapChildren(category, child);
+
+        //    var result = MessageBox.Show($"Remove UIMap '{uiMap}' from '{category}'?", "Prune Category UIMap", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        //    if (result == MessageBoxResult.Yes)
+        //        uiMapDM.RemoveFromCategory(category, uiMap);
+        //    else if (result == MessageBoxResult.Cancel)
+        //        return false;
+
+        //    return true;
+        //}
 
         public void AddUIMapToCategory()
         {
@@ -177,12 +181,16 @@ namespace DbManagerWPF.ViewModel
 
         public void AddUIMapToAchievement()
         {
+            uiMapDM.AddToAchievement(SelectedAchievement, SelectedUIMap);
 
+            RefreshAchievementUIMapView(SelectedAchievement, true);
         }
 
         public void RemoveUIMapFromAchievement()
         {
+            uiMapDM.RemoveFromAchievement(SelectedAchievement, SelectedCategoryUIMap);
 
+            RefreshAchievementUIMapView(SelectedAchievement, true);
         }
     }
 }

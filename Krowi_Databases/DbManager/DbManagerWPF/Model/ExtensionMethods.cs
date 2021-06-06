@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace DbManagerWPF.Model
 {
@@ -32,6 +33,22 @@ namespace DbManagerWPF.Model
             }
 
             return null;
+        }
+
+        public static StringBuilder AppendLineTabbed(this StringBuilder stringBuilder, int numberOfTabs, string text)
+        {
+            for (int i = 0; i < numberOfTabs; i++)
+                stringBuilder.Append("    ");
+            stringBuilder.AppendLine(text);
+            return stringBuilder;
+        }
+
+        public static StringBuilder AppendTabbed(this StringBuilder stringBuilder, int numberOfTabs, string text)
+        {
+            for (int i = 0; i < numberOfTabs; i++)
+                stringBuilder.Append("    ");
+            stringBuilder.Append(text);
+            return stringBuilder;
         }
     }
 }

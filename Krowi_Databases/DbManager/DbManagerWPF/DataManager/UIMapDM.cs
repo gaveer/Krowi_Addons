@@ -193,6 +193,19 @@ namespace DbManagerWPF.DataManager
             return uiMaps;
         }
 
+        public void AddToCategory(Category category, UIMap uiMap)
+        {
+            _ = category ?? throw new ArgumentNullException(nameof(category));
+            _ = uiMap ?? throw new ArgumentNullException(nameof(uiMap));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"INSERT INTO CategoryUIMap (CategoryID, UIMapID) VALUES (@CategoryID, @UIMapID)";
+            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+            cmd.Parameters.AddWithValue("@UIMapID", uiMap.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
         public void RemoveFromCategory(Category category, UIMap uiMap)
         {
             _ = category ?? throw new ArgumentNullException(nameof(category));
@@ -206,17 +219,31 @@ namespace DbManagerWPF.DataManager
             cmd.ExecuteNonQuery();
         }
 
-        public void AddToCategory(Category category, UIMap uiMap)
+        public void AddToAchievement(Achievement achievement, UIMap uiMap)
         {
-            _ = category ?? throw new ArgumentNullException(nameof(category));
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
             _ = uiMap ?? throw new ArgumentNullException(nameof(uiMap));
 
             var cmd = connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO CategoryUIMap (CategoryID, UIMapID) VALUES (@CategoryID, @UIMapID)";
-            cmd.Parameters.AddWithValue("@CategoryID", category.ID);
+            cmd.CommandText = @"INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES (@AchievementID, @UIMapID)";
+            cmd.Parameters.AddWithValue("@AchievementID", achievement.ID);
             cmd.Parameters.AddWithValue("@UIMapID", uiMap.ID);
 
             cmd.ExecuteNonQuery();
         }
+
+        public void RemoveFromAchievement(Achievement achievement, UIMap uiMap)
+        {
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+            _ = uiMap ?? throw new ArgumentNullException(nameof(uiMap));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"DELETE FROM AchievementUIMap WHERE AchievementID = @AchievementID AND UIMapID = @UIMapID";
+            cmd.Parameters.AddWithValue("@AchievementID", achievement.ID);
+            cmd.Parameters.AddWithValue("@UIMapID", uiMap.ID);
+
+            cmd.ExecuteNonQuery();
+        }
+
     }
 }

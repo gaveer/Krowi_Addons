@@ -2,6 +2,7 @@
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DbManagerWPF.DataManager
@@ -9,10 +10,46 @@ namespace DbManagerWPF.DataManager
     public class AchievementDM : DataManagerBase, IAchievementDM
     {
         private readonly IUIMapDM uiMapDM;
+        private readonly List<Achievement> achievements = new();
 
         public AchievementDM(SqliteConnection connection, IUIMapDM uiMapDM) : base(connection)
         {
             this.uiMapDM = uiMapDM;
+        }
+
+        public IEnumerable<Achievement> GetAll(bool refresh = false)
+        {
+            if (!refresh)
+                if (achievements.Any())
+                    return achievements;
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+	                                A.ID, AGT.Name, A.FactionID, A.CovenantID, A.Points, A.Obtainable, A.WowheadLink
+                                FROM
+	                                Achievement A
+	                                LEFT JOIN Achievement_AGT AGT
+		                                ON A.ID = AGT.ID
+                                ORDER BY
+	                                A.ID ASC;";
+
+            using (var reader = cmd.ExecuteReader())
+            {
+                achievements.Clear();
+                while (reader.Read())
+                    achievements.Add(new Achievement(uiMapDM)
+                    {
+                        ID = reader.GetInt32(0),
+                        Name = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        Faction = (Faction)reader.GetInt32(2),
+                        Covenant = (Covenant)reader.GetInt32(3),
+                        Points = reader.GetInt32(4),
+                        Obtainable = reader.GetBoolean(5),
+                        WowheadLink = reader.GetBoolean(6)
+                    });
+            }
+
+            return achievements;
         }
 
         public IEnumerable<Achievement> GetWithCategory(Category category)

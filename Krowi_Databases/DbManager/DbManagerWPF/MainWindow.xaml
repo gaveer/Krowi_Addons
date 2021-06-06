@@ -303,24 +303,7 @@
                 </B:Interaction.Triggers>
             </TreeView>
         </GroupBox>
-        <GroupBox Header="UI Maps" Margin="0,3,3,3" Grid.Column="3">
-            <TreeView ItemsSource="{Binding UIMaps}" BorderThickness="0">
-                <B:Interaction.Behaviors>
-                    <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}" ExpandSelected="True" SelectedItem="{Binding SelectedUIMap}" />
-                </B:Interaction.Behaviors>
-                <B:Interaction.Triggers>
-                    <B:EventTrigger EventName="SelectedItemChanged">
-                        <B:InvokeCommandAction Command="{Binding SelectedUIMapChangedCommand}" CommandParameter="argument" />
-                    </B:EventTrigger>
-                </B:Interaction.Triggers>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <Label Content="{Binding}" Margin="0" Padding="0" />
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </GroupBox>
-        <Grid Grid.Column="4">
+        <Grid Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -338,7 +321,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Button Content="Move" Command="{Binding MoveUIMapCommand}" Margin="3" />
-                    <Button Content="Prune Categories" Command="{Binding PruneCategoriesCommand}" Margin="3" Grid.Row="1" Grid.ColumnSpan="2" />
+                    <!--<Button Content="Prune Categories" Command="{Binding PruneCategoriesCommand}" Margin="3" Grid.Row="1" Grid.ColumnSpan="2" />-->
                 </Grid>
             </GroupBox>
             <GroupBox Header="Selected Category UI Maps" Grid.Row="1" Margin="0,0,3,3">
@@ -405,6 +388,42 @@
                             </TreeView.ItemTemplate>
                         </TreeView>
                     </GroupBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="UI Maps" Margin="0,0,3,3" Grid.Row="3">
+                <TreeView ItemsSource="{Binding UIMaps}" BorderThickness="0">
+                    <B:Interaction.Behaviors>
+                        <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}" ExpandSelected="True" SelectedItem="{Binding SelectedUIMap}" />
+                    </B:Interaction.Behaviors>
+                    <B:Interaction.Triggers>
+                        <B:EventTrigger EventName="SelectedItemChanged">
+                            <B:InvokeCommandAction Command="{Binding SelectedUIMapChangedCommand}" CommandParameter="argument" />
+                        </B:EventTrigger>
+                    </B:Interaction.Triggers>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <Label Content="{Binding}" Margin="0" Padding="0" />
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Export">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="1. Achievements" Command="{Binding ExportAchievementsCommand}" Margin="3" />
                 </Grid>
             </GroupBox>
         </Grid>

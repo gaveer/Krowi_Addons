@@ -118,6 +118,8 @@ namespace DbManagerWPF.ViewModel
 
                 // Refresh view and select the previous achievement
                 RefreshUIMapView();
+                RefreshCategoryUIMapView(SelectedCategory, true);
+                RefreshAchievementUIMapView(SelectedAchievement, true);
                 SelectedUIMap = UIMaps.Find(uiMapToMove.ID);
 
                 uiMapToMove = null;

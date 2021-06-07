@@ -323,7 +323,7 @@ namespace DbManagerWPF.ViewModel
             categoryDM.Remove(SelectedCategory);
 
             // Update locations
-            IEnumerable<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory.Parent);
+            IEnumerable<Category> categories = GetCategoryParentChildrenSafe(SelectedCategory);
             categoryDM.DecreaseLocations(categories, SelectedCategory.Location + 1);
 
             // Refresh view and select the parent category

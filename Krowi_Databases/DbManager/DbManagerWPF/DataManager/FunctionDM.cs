@@ -45,5 +45,37 @@ namespace DbManagerWPF.DataManager
 
             return functions.Single(x => x.ID == 5);
         }
+
+        public Function GetCurrentZoneFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 21);
+        }
+
+        public Function GetComingInFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 23);
+        }
+
+        public Function Get10PlayerFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 6);
+        }
+
+        public Function Get25PlayerFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 7);
+        }
     }
 }

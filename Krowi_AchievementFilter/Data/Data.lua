@@ -16,7 +16,7 @@ function data.Load()
     addon.CurrentZoneCategory, addon.NextPatchCategory = data.ExportedCategories.Load(addon.Categories, addon.Achievements);
     data.ExportedPetBattles.Load(addon.RCMenuExtras);
     data.NextPatch.Load(addon.NextPatchAchievements);
-    -- data.Maps.Load(addon.Maps, addon.Achievements);
+    data.ExportedMaps.Load(addon.Maps, addon.Achievements);
 
     -- Get rid of the following namespaces since it's not needed anymore after loading the data and free up memory on the next garbage collection
     data.ExportedAchievements = nil;

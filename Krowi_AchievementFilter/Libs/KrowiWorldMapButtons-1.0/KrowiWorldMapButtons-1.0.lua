@@ -1,5 +1,5 @@
-<!-- 
-	Krowi's Tutorials License
+--[[
+	Krowi's World Map Buttons License
 		Copyright ©2020-2021 The contents of this library, excluding third-party resources, are
 		copyrighted to their authors with all rights reserved.
 
@@ -16,11 +16,21 @@
 
 		All rights not explicitly addressed in this license are reserved by
 		the copyright holders.
- -->
+]]
 
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
-..\FrameXML\UI.xsd">
+local lib = LibStub:NewLibrary('KrowiWorldMapButtons-1.0', 1);
 
-	<Script file="KrowiTutorials-1.0.lua"/>
-	
-</Ui>
+if not lib then
+	return;
+end
+
+local buttons;
+
+function lib:Add(templateName, templateType)
+	if buttons == nil then
+		buttons = {};
+	end
+
+	tinsert(buttons, button);
+end
+

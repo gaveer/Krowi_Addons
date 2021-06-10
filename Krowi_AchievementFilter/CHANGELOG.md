@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 ### Added
 - TBD
 
+### Changed
+- Backend data structure completely rewritten in preperation for new features
+
 ### Fixed
 - Northrend Explorer now shows for both factions
 - Guardian of Cenarius now shows for both factions
+- Page 6's text of the tutorials could be outside the frame with certain text fonts
 
 ## [9.0.5.23.0] - 2021-05-27
 ### Added

@@ -28,30 +28,30 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
             sb.AppendLine("local objects = addon.Objects;");
-            sb.AppendLine("local faction = objects.Faction;");
-            sb.AppendLine("local covenant = objects.Covenant;");
-            sb.AppendLine("local achievement = objects.Achievement;");
+            sb.AppendLine("local fac = objects.Faction;");
+            sb.AppendLine("local cov = objects.Covenant;");
+            sb.AppendLine("local ach = objects.Achievement;");
             sb.AppendLine("local data = addon.Data;");
             sb.AppendLine("data.ExportedAchievements = {};");
             sb.AppendLine("local exportedAchievements = data.ExportedAchievements;");
             sb.AppendLine("");
-            sb.AppendLine("function exportedAchievements.Load(achievements)");
-            sb.AppendLineTabbed(1, "for i, _ in next, achievements do");
-            sb.AppendLineTabbed(2, "achievements[i] = nil;");
+            sb.AppendLine("function exportedAchievements.Load(a)");
+            sb.AppendLineTabbed(1, "for i, _ in next, a do");
+            sb.AppendLineTabbed(2, "a[i] = nil;");
             sb.AppendLineTabbed(1, "end");
             sb.AppendLine("");
 
             var achievements = achievementDM.GetAll();
             foreach (var achievement in achievements)
             {
-                var appendString = $"achievements[{achievement.ID}] = achievement:New(";
+                var appendString = $"a[{achievement.ID}] = ach:New(";
                 appendString += achievement.ID; // ID
                 appendString += ", ";
                 appendString += achievement.Points; // Points
                 appendString += ", ";
-                appendString += achievement.Faction == Faction.NoFaction ? "nil" : $"faction.{achievement.Faction}"; // Faction
+                appendString += achievement.Faction == Faction.NoFaction ? "nil" : $"fac.{achievement.Faction}"; // Faction
                 appendString += ", ";
-                appendString += achievement.Covenant == Covenant.NoCovenant ? "nil" : $"covenant.{achievement.Covenant}"; // Covenant
+                appendString += achievement.Covenant == Covenant.NoCovenant ? "nil" : $"cov.{achievement.Covenant}"; // Covenant
                 appendString += ", ";
                 appendString += achievement.Obtainable ? "nil" : "false"; // Obtainable
                 appendString += ", ";

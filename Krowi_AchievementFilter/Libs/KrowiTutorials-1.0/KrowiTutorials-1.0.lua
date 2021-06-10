@@ -80,7 +80,7 @@
 		buttonLeft, buttonBottom
 --]]
 
-local lib = LibStub:NewLibrary('KrowiTutorials-1.0', 1)
+local lib = LibStub:NewLibrary('KrowiTutorials-1.0', 1);
 
 if not lib then
 	return;
@@ -202,7 +202,6 @@ local function UpdateFrame(frame, i)
 	end
 	local fullImageWidth = page.Image and imageMargin.Left + imageSize.Width + imageMargin.Right or 0;
 	local fullImageHeight = page.Image and imageMargin.Top + imageSize.Height + imageMargin.Bottom or 0;
-	-- print("fullImageWidth " .. tostring(fullImageWidth))
 
 	-- Text
 	local text = page.Text;
@@ -216,19 +215,11 @@ local function UpdateFrame(frame, i)
 	local textWidth = textSize.Width ~= 0 and textSize.Width or max(imageSize.Width, width);
 	frame.Text:SetPoint("TOPLEFT", textRelativeFrame, textRelativePoint, textOffsetX, -textOffsetY);
 	frame.Text:SetWidth(layout == "HORIZONTAL" and textSize.Width or textWidth - textMargin.Left - textMargin.Right);
-	-- print(textSize.Width)
-	-- print(imageSize.Width)
-	-- print(width - textMargin.Left - textMargin.Right)
-	-- print("textSize.Width " .. tostring(textSize.Width))
-	-- print("imageSize.Width " .. tostring(imageSize.Width))
-	-- print("width " .. tostring(width))
-	-- print("textMargin.Left " .. tostring(textMargin.Left))
-	-- print("textMargin.Right " .. tostring(textMargin.Right))
 	frame.Text:SetText(text);
 	local fullTextWidth = text and textMargin.Left + max(textSize.Width, frame.Text:GetWidth()) + textMargin.Right or 0;
 	fullTextWidth = fullTextWidth + (layout == "HORIZONTAL" and default.ImageMargin.Right or 0);
 	local fullTextHeight = text and textMargin.Top + max(textSize.Height, frame.Text:GetHeight()) + textMargin.Bottom or 0;
-	-- print("fullTextWidth " .. tostring(fullTextWidth))
+	fullTextHeight = fullTextHeight + (layout == "HORIZONTAL" and imageMargin.Top + imageMargin.Bottom or 0); -- imageMargin.Top + imageMargin.Bottom needed as frame offsets
 
 	-- EditBox
 	-- if data.editbox then

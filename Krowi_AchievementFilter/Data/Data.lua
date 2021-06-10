@@ -21,6 +21,7 @@ function data.Load()
     -- Get rid of the following namespaces since it's not needed anymore after loading the data and free up memory on the next garbage collection
     data.ExportedAchievements = nil;
     data.ExportedCategories = nil;
+    data.ExportedMaps = nil;
 
     addon.Diagnostics.Debug("Expansion data loaded");
 

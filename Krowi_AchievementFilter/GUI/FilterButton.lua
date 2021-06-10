@@ -32,9 +32,6 @@ function filterButton:New(categoriesFrame, achievementsFrame)
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, button:GetName());
     button:Hide();
 
-    -- Set localization for texts already translated by Blizzard
-
-
     return button;
 end
 

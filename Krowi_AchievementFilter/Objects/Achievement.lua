@@ -51,32 +51,77 @@ function achievement:GetMergedCategory() -- Gets the achievement's category, use
     error("The achievement with ID " .. self.ID .. " has no category."); -- Should in theory never happen, means there is a problem with the database
 end
 
-function achievement:AddRequiredForID(id)
-    if self.RequiredForIDs == nil then
-        self.RequiredForIDs = {}; -- By creating the required for IDs table here we reduce memory usage because not every achievement has required for IDs
-    end
-    tinsert(self.RequiredForIDs, id);
-end
-
-function achievement:ClearRequiredForIDs()
-    self.RequiredForIDs = nil;
-end
-
+local criteriaCache;
 function achievement:GetRequiredForIDs()
+    if criteriaCache == nil then -- Build cache the first time
+        criteriaCache = {};
+		local nils, i = 0, 1;
+		while nils < 500 do -- Biggest gap is 209 in 9.0.5 as of 2021-05-03
+			local id = addon.GetAchievementInfo(i);
+			if id then
+				local numCriteria = GetAchievementNumCriteria(id);
+				if numCriteria > 0 then
+					for j = 1, numCriteria do
+						local _, criteriaType, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(id, j);
+						if criteriaType == 8 then
+							tinsert(criteriaCache, {AchievementID = assetID, RequiredForID = id});
+						end
+					end
+				end
+				nils = 0;
+			else
+				nils = nils + 1;
+			end
+			i = i + 1;
+		end
+	end
+
+    if self.RequiredForIDs then -- Return cached list
+        return self.RequiredForIDs;
+    end
+
+    local ids = {};
+	for _, criteria in next, criteriaCache do
+		if criteria.AchievementID == self.ID then
+			tinsert(ids, criteria.RequiredForID);
+		end
+	end
+
+    if #ids == 0 then
+        return;
+    end
+
+    self.RequiredForIDs = {}; -- By creating the required for IDs table here we reduce memory usage because not every achievement has required for IDs
+
+    for _, id in next, ids do
+        tinsert(self.RequiredForIDs, id);
+    end
+
     return self.RequiredForIDs;
 end
 
-function achievement:AddPartOfAChainID(id)
-    if self.PartOfAChainIDs == nil then
-        self.PartOfAChainIDs = {}; -- By creating the part of a chain IDs table here we reduce memory usage because not every achievement has part of a chain IDs
-    end
-    tinsert(self.PartOfAChainIDs, id);
-end
-
-function achievement:ClearPartOfAChainIDs()
-    self.PartOfAChainIDs = nil;
-end
-
 function achievement:GetPartOfAChainIDs()
+    if self.PartOfAChainIDs then -- Return cached list
+        return self.PartOfAChainIDs;
+    end
+
+	if not GetNextAchievement(self.ID) and not GetPreviousAchievement(self.ID) then
+		return;
+	end
+
+	local id;
+	local tmpID = self.ID;
+	while tmpID do -- Find first achievement in a chain
+		id = tmpID;
+		tmpID = GetPreviousAchievement(id);
+	end
+
+    self.PartOfAChainIDs = {}; -- By creating the part of a chain IDs table here we reduce memory usage because not every achievement has part of a chain IDs
+
+	while id do
+		tinsert(self.PartOfAChainIDs, id);
+		id = GetNextAchievement(id);
+	end
+
     return self.PartOfAChainIDs;
 end

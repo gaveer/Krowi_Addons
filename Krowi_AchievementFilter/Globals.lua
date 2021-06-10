@@ -7,6 +7,7 @@ AF_BUILD = GetBuildInfo();
 AF_VERSION = GetAddOnMetadata(addonName, "Version");
 AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
 
+-- [[ Colors ]] --
 function addon.RemoveColor(text)
     text = string.gsub(text or "", "|c[0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f]", "");
     text = string.gsub(text or "", "|r", "");
@@ -129,96 +130,7 @@ addon.White = "|c" .. addon.WhiteRGB.Hex .. "%s|r";
 -- addon.DruidRGB.R, addon.DruidRGB.G, addon.DruidRGB.B, addon.DruidRGB.Hex = GetClassColor("DRUID");
 -- addon.Druid = "|c" .. addon.DruidRGB.Hex .. "%s|r";
 
-function addon.GetAchievement(id)
-    addon.Diagnostics.Trace("addon.GetAchievement");
-
-	for _, achievement in next, addon.Achievements do
-		if achievement.ID == id then
-            addon.Diagnostics.Debug(achievement);
-			return achievement;
-		end
-	end
-end
-
-function addon.GetAchievementsInZone(mapID)
-    addon.Diagnostics.Trace("addon.GetAchievementsInZone");
-
-    -- Differentiate between 10 and 25 man raids and Normal and Heroic raids
-    local player10 = GetDifficultyInfo(3); -- 10 player
-    local player10Hc = GetDifficultyInfo(5); -- 10 player
-    local player25 = GetDifficultyInfo(4); -- 25 player
-    local player25Hc = GetDifficultyInfo(6); -- 25 player
-    local _, _, _, difficulty = GetInstanceInfo();
-
-    local achievements;
-    if addon.Maps[mapID] == nil then
-        return {};
-    else
-        achievements = addon.Maps[mapID].Achievements or {};
-    end
-    
-	-- for _, category in next, addon.Categories do
-        -- addon.Diagnostics.Debug(category.Name);
-        -- First check difficulty
-        -- local checkCategory = true;
-        if difficulty ~= "" then
-            if difficulty == player10 or difficulty == player10Hc then
-                -- checkCategory = not string.find(category.Name, player25);
-                tinsert(achievements, addon.Maps[mapID].Achievements10);
-            elseif difficulty == player25 or difficulty == player25Hc then
-                -- checkCategory = not string.find(category.Name, player10);
-                tinsert(achievements, addon.Maps[mapID].Achievements25);
-            end
-        end
-
-        -- if checkCategory then
-        --     -- Get map IDs
-        --     local mapIDs = {};
-        --     if category.IgnoreParentMapIDs then
-        --         mapIDs = category.MapIDs;
-        --     else
-        --         local categoryTree = category:GetTree();
-        --         for _, cat in next, categoryTree do
-        --             if cat.MapIDs ~= nil and not cat.IgnoreParentMapIDs then
-        --                 for _, catMapID in next, cat.MapIDs do
-        --                     tinsert(mapIDs, catMapID);
-        --                 end
-        --             end
-        --         end
-        --     end
-
-        --     -- Get achievements
-        --     for _, catMapID in next, mapIDs do
-        --         if catMapID == mapID then
-        --             if category.Achievements ~= nil then
-        --                 for _, achievement in next, category.Achievements do
-        --                     tinsert(achievements, achievement);
-        --                 end
-        --             end
-        --             break;
-        --         end
-        --     end
-        -- end
-	-- end
-    return achievements;
-end
-
-function addon.GetAchievementInfo(achievementID, excludeNextPatch)
-    local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);
-    if id then
-        return id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy;
-    end
-
-    if not excludeNextPatch then
-        local achievement = addon.NextPatchAchievements[achievementID];
-        if achievement then
-            return achievement[1], achievement[2], achievement[3], false, nil, nil, nil, achievement[4], achievement[5], achievement[6], achievement[7], false, nil, false;
-        end
-    end
-
-    return nil; -- Achievement info not found, default function also returns nil when not found
-end
-
+-- [[ Credits ]] --
 addon.Donations = {
     {Name = "Bur", Realm = "Frostmane EU", Class = "DRUID"},
     {Name = "Ta", Realm = "Der Rat von Dalaran EU", Class = "SHAMAN"},

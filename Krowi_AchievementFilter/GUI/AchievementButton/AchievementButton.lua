@@ -142,9 +142,23 @@ end
 local rightClickMenu = LibStub("KrowiMenu-1.0");
 local popupDialog = LibStub("KrowiPopopDialog-1.0");
 
+local function AddWowheadLink(achievement)
+	if not achievement.HasNoWowheadLink then
+		local externalLink = "https://www.wowhead.com/achievement=" .. achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
+		diagnostics.Debug(externalLink);
+		rightClickMenu:AddFull({Text = addon.L["Wowhead"], Func = function() popupDialog.ShowExternalLink(externalLink); end});
+	end
+end
+
+local function AddIATLink(achievement)
+	if addon.IsIATLoaded() and IAT_HasAchievement(achievement.ID) then -- and achievement.HasIATLink
+		rightClickMenu:AddFull({Text = addon.L["IAT Tactics"], Func = function() IAT_DisplayAchievement(achievement.ID); end});
+	end
+end
+
 local function AddGoToLine(goTo, id, achievementsFrame)
 	local _, name = addon.GetAchievementInfo(id);
-	local disabled = nil;
+	local disabled;
 	if not addon.GetAchievement(id) then -- Catch missing achievements from the addon to prevent errors
 		name = name .. " (" .. addon.L["Missing"] .. ")";
 		disabled = true;
@@ -158,38 +172,9 @@ local function AddGoToLine(goTo, id, achievementsFrame)
 					});
 end
 
-function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
-	diagnostics.Trace("OnClickRightButton");
-
-	local achievement = self.Achievement;
-
-	-- Reset menu
-	rightClickMenu:Clear();
-
-	-- Always add header
-	local _, name = addon.GetAchievementInfo(achievement.ID);
-	rightClickMenu:AddFull({Text = name, IsTitle = true});
-
-	-- Debug table
-	-- if diagnostics.DebugEnabled() then
-	-- 	rightClickMenu:AddFull({Text = "Debug Table", Func = function() end});
-	-- end
-
-	-- Wowhead link
-	if not achievement.HasNoWowheadLink then
-		local externalLink = "https://www.wowhead.com/achievement=" .. achievement.ID; -- .. "#comments"; -- make go to comments optional in settings
-		diagnostics.Debug(externalLink);
-		rightClickMenu:AddFull({Text = addon.L["Wowhead"], Func = function() popupDialog.ShowExternalLink(externalLink); end});
-	end
-
-	-- IAT Link
-	if addon.IsIATLoaded() and IAT_HasAchievement(achievement.ID) then -- and achievement.HasIATLink
-		rightClickMenu:AddFull({Text = addon.L["IAT Tactics"], Func = function() IAT_DisplayAchievement(achievement.ID); end});
-	end
-
-	-- Go to
-	local partOfAChainIDs = achievement:GetPartOfAChainIDs();
-	local requiredForIDs = achievement:GetRequiredForIDs();
+local function AddGoTo(achievementsFrame, achievement)
+	local partOfAChainIDs = achievement:GetPartOfAChainIDs(); -- Chance to optimize here since tooltip also gets this
+	local requiredForIDs = achievement:GetRequiredForIDs(); -- Chance to optimize here since tooltip also gets this
 	if partOfAChainIDs or requiredForIDs or achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then -- Others can be added here later
 		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
 		local addSeparator = nil;
@@ -230,6 +215,23 @@ function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
 
 		rightClickMenu:Add(goTo); -- Add Go to menu to the right click menu
 	end
+end
+
+function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
+	diagnostics.Trace("OnClickRightButton");
+
+	local achievement = self.Achievement;
+
+	-- Reset menu
+	rightClickMenu:Clear();
+
+	-- Always add header
+	local _, name = addon.GetAchievementInfo(achievement.ID);
+	rightClickMenu:AddFull({Text = name, IsTitle = true});
+
+	AddWowheadLink(achievement);
+	AddIATLink(achievement);
+	AddGoTo(achievementsFrame, achievement);
 
 	-- Extra menu defined at the achievement self including pet battles
 	if addon.RCMenuExtras[achievement.ID] ~= nil then

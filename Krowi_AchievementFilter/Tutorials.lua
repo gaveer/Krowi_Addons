@@ -13,8 +13,7 @@ local tabButton1, categoriesFrame, achievementsFrame, filterButton, searchBoxFra
 function tutorials.Load()
     diagnostics.Trace("tutorials.Load");
 
-    local page = LibStub("KrowiTutorialsPage-1.0");
-    tinsert(pages, page:New({ -- 1
+    tinsert(pages, { -- 1
         Image = media .. "TabButton",
         ImageSize = {614, 158},
         ImageTexCoord = {0, 614/1024, 0, 158/256},
@@ -28,8 +27,8 @@ function tutorials.Load()
             addon.GUI.ToggleAchievementFrameAtTab1(true);
             self.Shine = tabButton1;
         end
-    }));
-    tinsert(pages, page:New({ -- 2
+    });
+    tinsert(pages, { -- 2
         Layout = "HORIZONTAL",
         Image = media .. "Categories",
         ImageSize = {361, 512},
@@ -60,8 +59,8 @@ function tutorials.Load()
             categoriesFrame:SelectCategory(addon.GetAchievement(14281).Category);
             self.Shine = categoriesFrame;
         end
-    }));
-    tinsert(pages, page:New({ -- 3
+    });
+    tinsert(pages, { -- 3
         Image = media .. "RightClickMenu",
         ImageSize = {754, 286},
         ImageTexCoord = {0, 754/1024, 0, 286/512},
@@ -99,8 +98,8 @@ function tutorials.Load()
             end
             self.Shine = DropDownList1;
         end
-    }));
-    tinsert(pages, page:New({ -- 4
+    });
+    tinsert(pages, { -- 4
         Layout = "HORIZONTAL",
         Image = media .. "QuickSearch",
         ImageSize = {355, 324},
@@ -143,8 +142,8 @@ function tutorials.Load()
             self.ShineBottom = bottom - searchPreviewFrame:GetBottom() - 10;
             self.Shine = searchPreviewFrame;
         end
-    }));
-    tinsert(pages, page:New({ -- 5
+    });
+    tinsert(pages, { -- 5
         Image = media .. "FullSearch",
         ImageSize = {826, 512},
         ImageTexCoord = {0, 826/1024, 0, 512/512},
@@ -165,8 +164,8 @@ function tutorials.Load()
             searchBoxFrame:OnTextChanged();
             self.Shine = fullSearchResultsFrame;
         end
-    }));
-    tinsert(pages, page:New({ -- 6
+    });
+    tinsert(pages, { -- 6
         Layout = "HORIZONTAL",
         Image = media .. "FilteringSorting",
         ImageSize = {588, 453},
@@ -217,8 +216,8 @@ function tutorials.Load()
             self.Shine = filterButton;
             print(filterButton:GetTop());
         end
-    }));
-    tinsert(pages, page:New({ -- 7
+    });
+    tinsert(pages, { -- 7
         Image = media .. "TooltipCategories",
         ImageSize = {507, 154},
         ImageTexCoord = {0, 507/512, 0, 154/256},
@@ -236,8 +235,8 @@ function tutorials.Load()
             self.Text = core.ReplaceVars{self.OriginalText,
                                             showNotObtainable = (addon.Options.db.Tooltip.Categories.ShowNotObtainable and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower())))};
         end
-    }));
-    tinsert(pages, page:New({ -- 8
+    });
+    tinsert(pages, { -- 8
         Image = media .. "TooltipAchievements",
         ImageSize = {1018, 383},
         ImageTexCoord = {0, 1018/1024, 0, 383/512},
@@ -265,7 +264,7 @@ function tutorials.Load()
                                             objectivesProgressEnabled = (addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                             currentCharacterIconEnabled = (addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower())))};
         end
-    }));
+    });
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");
     tutorials.FeaturesTutorial:SetFrameTitle(AF_NAME .. " - " .. AF_BUILD_VERSION);

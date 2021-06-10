@@ -54,24 +54,22 @@ end
 function AddBlizzardDefault(self)
 	diagnostics.Trace("AddBlizzardDefault");
 
-	if ( self.accountWide ) then
-		if ( self.completed ) then
+	if self.accountWide then
+		if self.completed then
 			GameTooltip:AddLine(ACCOUNT_WIDE_ACHIEVEMENT_COMPLETED);
 		else
 			GameTooltip:AddLine(ACCOUNT_WIDE_ACHIEVEMENT);
 		end
-		GameTooltip:Show();
 		return;
 	end
-	if ( self.shield.earnedBy ) then
-		GameTooltip:AddLine(format(ACHIEVEMENT_EARNED_BY,self.shield.earnedBy));
+	if self.shield.earnedBy then
+		GameTooltip:AddLine(format(ACHIEVEMENT_EARNED_BY, self.shield.earnedBy));
 		local me = UnitName("player")
-		if ( not self.shield.wasEarnedByMe ) then
+		if not self.shield.wasEarnedByMe then
 			GameTooltip:AddLine(format(ACHIEVEMENT_NOT_COMPLETED_BY, me));
-		elseif ( me ~= self.shield.earnedBy ) then
+		elseif me ~= self.shield.earnedBy then
 			GameTooltip:AddLine(format(ACHIEVEMENT_COMPLETED_BY, me));
 		end
-		GameTooltip:Show();
 		return;
 	end
 end
@@ -79,15 +77,13 @@ end
 function AddPartOfAChain(self)
 	diagnostics.Trace("AddPartOfAChain");
 
-	if not self.Achievement or not self.Achievement.ID or (not GetNextAchievement(self.Achievement.ID) and not GetPreviousAchievement(self.Achievement.ID)) or not addon.Options.db.Tooltip.Achievements.ShowPartOfAChain then
+	if not addon.Options.db.Tooltip.Achievements.ShowPartOfAChain then
 		return;
 	end
 
-	local id;
-	local tmpID = self.Achievement.ID;
-	while tmpID do -- Find first achievement in a chain
-		id = tmpID;
-		tmpID = GetPreviousAchievement(id);
+	local partOfAChainIDs = self.Achievement:GetPartOfAChainIDs();
+	if partOfAChainIDs == nil then
+		return;
 	end
 
 	if (GameTooltip:NumLines() > 0) then
@@ -95,16 +91,12 @@ function AddPartOfAChain(self)
 	end
 	GameTooltip:AddLine(addon.L["Part of a chain"]); -- Header
 
-	self.Achievement:ClearPartOfAChainIDs(); -- Make sure it's empty before adding new stuff
-	while id do
+	for _, id in next, partOfAChainIDs do
 		AddAchievementLine(self.Achievement, id);
-		self.Achievement:AddPartOfAChainID(id);
 		id = GetNextAchievement(id);
 	end
 end
 
-local criteriaCache = {};
-local criteriaCacheIsEmpty = true;
 function AddRequiredFor(self)
 	diagnostics.Trace("AddRequiredFor");
 
@@ -112,48 +104,18 @@ function AddRequiredFor(self)
 		return;
 	end
 
-	if criteriaCacheIsEmpty then -- Build cache the first time
-		local nils, i = 0, 1;
-		while nils < 500 do -- Biggest gap is 209 in 9.0.5 as of 2021-05-03
-			local id = addon.GetAchievementInfo(i);
-			if id then
-				local numCriteria = GetAchievementNumCriteria(id);
-				if numCriteria > 0 then
-					for j = 1, numCriteria do
-						local _, criteriaType, _, _, _, _, _, assetID = GetAchievementCriteriaInfo(id, j);
-						if criteriaType == 8 then
-							tinsert(criteriaCache, {AchievementID = assetID, RequiredForID = id});
-						end
-					end
-				end
-				nils = 0;
-			else
-				nils = nils + 1;
-			end
-			i = i + 1;
-		end
-		criteriaCacheIsEmpty = nil;
+	local requiredForIDs = self.Achievement:GetRequiredForIDs();
+	if requiredForIDs == nil then
+		return;
 	end
 
-	local ids = {};
-	for _, criteria in next, criteriaCache do
-		if criteria.AchievementID == self.Achievement.ID then
-			-- local id = addon.GetAchievementInfo(criteria.RequiredForID);
-			tinsert(ids, criteria.RequiredForID);
-		end
+	if (GameTooltip:NumLines() > 0) then
+		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
 	end
+	GameTooltip:AddLine(addon.L["Required for"]); -- Header
 
-	if #ids > 0 then
-		if (GameTooltip:NumLines() > 0) then
-			GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
-		end
-		GameTooltip:AddLine(addon.L["Required for"]); -- Header
-
-		self.Achievement:ClearRequiredForIDs(); -- Make sure it's empty before adding new stuff
-		for _, id in next, ids do
-			AddAchievementLine(self.Achievement, id);
-			self.Achievement:AddRequiredForID(id);
-		end
+	for _, id in next, requiredForIDs do
+		AddAchievementLine(self.Achievement, id);
 	end
 end
 
@@ -204,7 +166,7 @@ function AddObjectives(self)
 	local id = self.Achievement.ID;
 	local numCriteria = GetAchievementNumCriteria(id);
 	if numCriteria > 0 then
-		if (GameTooltip:NumLines() > 0) then
+		if GameTooltip:NumLines() > 0 then
 			GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
 		end
 		GameTooltip:AddLine(addon.L["Objectives progress"]); -- Header

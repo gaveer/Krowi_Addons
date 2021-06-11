@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file.
 - Northrend Explorer now shows for both factions
 - Guardian of Cenarius now shows for both factions
 - Page 6's text of the tutorials could be outside the frame with certain text fonts
+- Northrend Safari, Northrend Tamer and Taming Northrend are now obtainable
+- Discord link replaced with one that does not expire
 
 ## [9.0.5.23.0] - 2021-05-27
 ### Added

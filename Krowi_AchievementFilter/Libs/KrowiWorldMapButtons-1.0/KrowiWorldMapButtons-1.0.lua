@@ -26,11 +26,74 @@ end
 
 local buttons;
 
+local function SetPoints()
+	local xOffset = 4;
+	for _, button in next, buttons do
+		if button:IsShown() then
+			button:SetPoint("TOPRIGHT", button.relativeFrame, -xOffset, -2);
+			xOffset = xOffset + 32;
+		end
+	end
+end
+
+local hookedDefaultButtons;
+local function HookDefaultButtons()
+	local refresh = WorldMapFrame.RefreshOverlayFrames;
+	WorldMapFrame.RefreshOverlayFrames = function()
+		refresh(WorldMapFrame);
+		SetPoints(); -- At this point we know which ones are shown
+	end
+
+	for _, f in next, WorldMapFrame.overlayFrames do
+        if WorldMapTrackingOptionsButtonMixin and f.OnLoad == WorldMapTrackingOptionsButtonMixin.OnLoad then
+			f.KrowiWorldMapButtonsIndex = #buttons;
+			tinsert(buttons, f);
+        end
+        if WorldMapTrackingPinButtonMixin and f.OnLoad == WorldMapTrackingPinButtonMixin.OnLoad then
+			f.KrowiWorldMapButtonsIndex = #buttons;
+			tinsert(buttons, f);
+        end
+    end
+
+	hookedDefaultButtons = true;
+end
+
+
+local hookedHandyNotesButtons;
+local function HookHandyNotesButtons()
+    for _, f in next, WorldMapFrame.overlayFrames do
+        if HandyNotes_ShadowlandsWorldMapOptionsButtonMixin and f.OnLoad == HandyNotes_ShadowlandsWorldMapOptionsButtonMixin.OnLoad then
+			f.KrowiWorldMapButtonsIndex = #buttons;
+			tinsert(buttons, f);
+        end
+        if HandyNotes_VisionsOfNZothWorldMapOptionsButtonMixin and f.OnLoad == HandyNotes_VisionsOfNZothWorldMapOptionsButtonMixin.OnLoad then
+			f.KrowiWorldMapButtonsIndex = #buttons;
+			tinsert(buttons, f);
+        end
+    end
+
+	hookedHandyNotesButtons = true;
+end
+
 function lib:Add(templateName, templateType)
 	if buttons == nil then
 		buttons = {};
 	end
 
-	tinsert(buttons, button);
-end
+	if not hookedDefaultButtons then
+		HookDefaultButtons();
+	end
 
+	if not hookedHandyNotesButtons then
+		HookHandyNotesButtons();
+	end
+
+	local xOffset = 4 + #buttons * 32;
+	print(xOffset);
+
+	local button = WorldMapFrame:AddOverlayFrame(templateName, templateType, "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
+
+	tinsert(buttons, button);
+
+	return button;
+end

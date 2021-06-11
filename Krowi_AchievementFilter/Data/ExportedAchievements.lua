@@ -1,4 +1,4 @@
--- [[ Exported at 2021-06-09 13-51-41 ]] --
+-- [[ Exported at 2021-06-11 09-05-09 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -1017,17 +1017,17 @@ function exportedAchievements.Load(a)
     a[6585] = ach:New(6585, 5); -- Kalimdor Safari
     a[6586] = ach:New(6586, 5); -- Eastern Kingdoms Safari
     a[6587] = ach:New(6587, 5); -- Outland Safari
-    a[6588] = ach:New(6588, 5, nil, nil, false); -- Northrend Safari
+    a[6588] = ach:New(6588, 5); -- Northrend Safari
     a[6589] = ach:New(6589, 5); -- Pandaria Safari
     a[6602] = ach:New(6602, 5, fac.Horde); -- Taming Kalimdor
     a[6603] = ach:New(6603, 5, fac.Alliance); -- Taming Eastern Kingdoms
     a[6604] = ach:New(6604, 5); -- Taming Outland
-    a[6605] = ach:New(6605, 5, nil, nil, false); -- Taming Northrend
+    a[6605] = ach:New(6605, 5); -- Taming Northrend
     a[6606] = ach:New(6606, 5); -- Taming Pandaria
     a[6612] = ach:New(6612, 5); -- Kalimdor Tamer
     a[6613] = ach:New(6613, 5); -- Eastern Kingdoms Tamer
     a[6614] = ach:New(6614, 5); -- Outland Tamer
-    a[6615] = ach:New(6615, 5, nil, nil, false); -- Northrend Tamer
+    a[6615] = ach:New(6615, 5); -- Northrend Tamer
     a[6616] = ach:New(6616, 5); -- Pandaria Tamer
     a[6671] = ach:New(6671, 10); -- Seeds of Doubt
     a[6674] = ach:New(6674, 10); -- "Anything You Can Do, I Can Do Better..."

@@ -166,7 +166,7 @@ local function CreatePanel()
                                 order = 2.3,
                                 func = function()
                                     InterfaceOptionsFrame:Hide();
-                                    popupDialog.ShowExternalLink("https://discord.gg/XGkergM2");
+                                    popupDialog.ShowExternalLink("https://discord.gg/DCxq5rRNW5");
                                 end
                             },
                             blank31 = {

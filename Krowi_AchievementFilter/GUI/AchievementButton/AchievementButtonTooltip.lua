@@ -87,7 +87,8 @@ function AddPartOfAChain(self)
 	end
 
 	if (GameTooltip:NumLines() > 0) then
-		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		-- GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		GameTooltip_AddBlankLineToTooltip(GameTooltip);
 	end
 	GameTooltip:AddLine(addon.L["Part of a chain"]); -- Header
 
@@ -110,7 +111,8 @@ function AddRequiredFor(self)
 	end
 
 	if (GameTooltip:NumLines() > 0) then
-		GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		-- GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		GameTooltip_AddBlankLineToTooltip(GameTooltip);
 	end
 	GameTooltip:AddLine(addon.L["Required for"]); -- Header
 
@@ -167,7 +169,8 @@ function AddObjectives(self)
 	local numCriteria = GetAchievementNumCriteria(id);
 	if numCriteria > 0 then
 		if GameTooltip:NumLines() > 0 then
-			GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+			-- GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+			GameTooltip_AddBlankLineToTooltip(GameTooltip);
 		end
 		GameTooltip:AddLine(addon.L["Objectives progress"]); -- Header
 

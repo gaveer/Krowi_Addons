@@ -546,11 +546,12 @@
 				</Texture>
 			</Layer>
 			<Layer level="ARTWORK">
-				<Texture parentKey="Icon" file="Interface\AchievementFrame\UI-Achievement-TinyShield">
+				<Texture parentKey="Icon" file="Interface\AchievementFrame\UI-Achievement-Progressive-Shield-NoPoints">
 					<Size x="20" y="20"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" x="6" y="-6"/>
 					</Anchors>
+					<TexCoords left="0.0625" right="0.59375" top="0.09375" bottom="0.625"/>
 				</Texture>
 			</Layer>
 			<Layer level="OVERLAY">

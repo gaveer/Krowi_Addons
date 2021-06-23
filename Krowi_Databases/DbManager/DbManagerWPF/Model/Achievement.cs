@@ -13,11 +13,11 @@ namespace DbManagerWPF.Model
         public int ID { get; set; }
         public int Location { get; set; }
         public string Name { get; set; }
-        //public string Description { get; set; }
+        public string Description { get; set; }
         public Faction Faction { get; set; }
         public Covenant Covenant { get; set; }
         public int Points { get; set; }
-        //public AchievementFlags Flags { get; }
+        public AchievementFlags Flags { get; set; }
         public bool Obtainable { get; set; }
         public bool WowheadLink { get; set; }
 

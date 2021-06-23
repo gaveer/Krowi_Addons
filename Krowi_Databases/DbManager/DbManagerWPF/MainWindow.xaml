@@ -412,9 +412,25 @@
         <Grid Grid.Column="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <GroupBox Header="Export">
+            <GroupBox Header="Import">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Achievements" Command="{Binding ImportAchievementsCommand}" Margin="3" />
+                    <ProgressBar Grid.Row="1" Margin="3" Height="20" Value="{Binding ImportAchievementsValue}" Maximum="{Binding ImportAchievementsMax}" />
+                    <TextBlock Grid.Row="1" Text="{Binding ImportAchievementsText, FallbackValue=TEXT}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Export">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

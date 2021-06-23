@@ -41,7 +41,7 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLineTabbed(1, "end");
             sb.AppendLine("");
 
-            var achievements = achievementDM.GetAll();
+            var achievements = achievementDM.GetAll(true);
             foreach (var achievement in achievements)
             {
                 var appendString = $"a[{achievement.ID}] = ach:New(";
@@ -100,7 +100,7 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("");
             sb.AppendLineTabbed(1, "local tmp = {};");
 
-            var categories = categoryDM.GetAll();
+            var categories = categoryDM.GetAll(true);
             foreach (var category in categories)
                 ExportCategory(sb, category);
 
@@ -143,7 +143,6 @@ namespace DbManagerWPF.ViewModel
             foreach (var child in category.Children)
                 ExportCategory(sb, child);
         }
-
 
         private void ExportMaps()
         {

@@ -49,21 +49,27 @@ namespace DbManagerWPF.ViewModel
             RefreshCategoryUIMapView(SelectedCategory);
         }, () => true);
 
-        public string CategoryNameNew { get; set; }
+        private string _CategoryNameNew;
+        public string CategoryNameNew { get { return _CategoryNameNew; } set { _CategoryNameNew = value; NotifyPropertyChanged(); } }
 
         public ObservableCollection<Function> Functions { get; set; }
 
-        public Function SelectedFunctionNew { get; set; }
+        private Function _SelectedFunctionNew;
+        public Function SelectedFunctionNew { get { return _SelectedFunctionNew; } set { _SelectedFunctionNew = value; NotifyPropertyChanged(); } }
 
-        public string FunctionValueNew { get; set; }
+        private string _FunctionValueNew;
+        public string FunctionValueNew { get { return _FunctionValueNew; } set { _FunctionValueNew = value; NotifyPropertyChanged(); } }
 
         public bool SelectedCategoryAsParent { get; set; }
 
-        public bool IsLegacyNew { get; set; }
+        private bool _IsLegacyNew;
+        public bool IsLegacyNew { get { return _IsLegacyNew; } set { _IsLegacyNew = value; NotifyPropertyChanged(); } }
 
-        public bool IsActiveNew { get; set; } = true;
+        private bool _IsActiveNew = true;
+        public bool IsActiveNew { get { return _IsActiveNew; } set { _IsActiveNew = value; NotifyPropertyChanged(); } }
 
-        public bool CanMergeNew { get; set; }
+        private bool _CanMergeNew;
+        public bool CanMergeNew { get { return _CanMergeNew; } set { _CanMergeNew = value; NotifyPropertyChanged(); } }
 
         public ICommand AddNewCategoryCommand => new CommandHandler(() => AddNewCategory(), () => true);
 

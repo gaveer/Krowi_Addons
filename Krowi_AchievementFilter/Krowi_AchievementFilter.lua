@@ -101,8 +101,6 @@ function loadHelper:OnEvent(event, arg1)
             addon.GUI.WorldMapButton.Load("TemplateName (need to write)", "BUTTON");
             addon.Icon.Load();
             addon.Tutorials.Load();
-
-
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             addon.Data.Load();
 
@@ -124,7 +122,6 @@ function loadHelper:OnEvent(event, arg1)
                 print(mapID);
             end);
         end
-
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

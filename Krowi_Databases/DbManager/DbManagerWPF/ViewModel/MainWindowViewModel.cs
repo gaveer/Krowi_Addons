@@ -26,6 +26,7 @@ namespace DbManagerWPF.ViewModel
 
             LoadCategoriesViewModel();
             LoadUIMapViewModel();
+            LoadImportViewModel();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

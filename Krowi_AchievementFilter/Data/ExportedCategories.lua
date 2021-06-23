@@ -1,4 +1,4 @@
--- [[ Exported at 2021-06-13 09-49-27 ]] --
+-- [[ Exported at 2021-06-23 14-08-03 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4311,7 +4311,6 @@ function exportedCategories.Load(c, a)
     tmp[344] = IaR(c, cat:New(addon.L["Zones"])); -- Zones
     AddC(tmp[6], tmp[344]);
     AddA(tmp[344], a[14280]); -- Loremaster of Shadowlands
-    AddA(tmp[344], a[14790]); -- Covenant Campaign
     AddA(tmp[344], a[14758]); -- The World Beyond
     AddA(tmp[344], a[14825]); -- Explorer of the Shadowlands
     AddA(tmp[344], a[14731]); -- To All the Squirrels I've Loved and Lost
@@ -4319,6 +4318,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[344], a[14516]); -- Impressing Zo'Sorg
     AddA(tmp[344], a[14519]); -- Covenant Combat
     AddA(tmp[344], a[14315]); -- Shadowlands Diplomat
+    AddA(tmp[344], a[15107]); -- Conquering Korthia
+    AddA(tmp[344], a[15064]); -- Breaking the Chains
     tmp[345] = IaR(c, cat:New(C_Map.GetMapInfo(1533).name)); -- Bastion
     AddC(tmp[344], tmp[345]);
     tmp[346] = IaR(c, cat:New((GetCategoryInfo(15447)), true)); -- Quests
@@ -4431,6 +4432,20 @@ function exportedCategories.Load(c, a)
     tmp[366] = IaR(c, cat:New((GetCategoryInfo(15447)), true)); -- Quests
     AddC(tmp[365], tmp[366]);
     AddA(tmp[366], a[14334]); -- Into the Maw
+    AddA(tmp[366], a[14961]); -- Chains of Domination
+    AddA(tmp[366], a[15000]); -- United Front
+    AddA(tmp[366], a[15001]); -- Jailer's Personal Stash
+    AddA(tmp[366], a[15037]); -- This Army
+    AddA(tmp[366], a[15039]); -- Up For Grabs
+    AddA(tmp[366], a[15041]); -- The Zovaal Shuffle
+    AddA(tmp[366], a[15043]); -- Hoarder of Torghast
+    AddA(tmp[366], a[15042]); -- Tea for the Troubled
+    AddA(tmp[366], a[15044]); -- Krrprripripkraak's Heroes
+    AddA(tmp[366], a[15035]); -- On the Offensive
+    AddA(tmp[366], a[15036]); -- Rooting Out the Evil
+    AddA(tmp[366], a[15034]); -- Wings Against the Flames
+    AddA(tmp[366], a[15033]); -- Taking the Tremaculum
+    AddA(tmp[366], a[15032]); -- Breaking Their Hold
     tmp[367] = IaR(c, cat:New((GetCategoryInfo(97)), true)); -- Exploration
     AddC(tmp[365], tmp[367]);
     AddA(tmp[367], a[14663]); -- Explore The Maw
@@ -4447,9 +4462,27 @@ function exportedCategories.Load(c, a)
     AddA(tmp[367], a[14761]); -- Deciphering Death's Intentions
     AddA(tmp[367], a[14894]); -- "To 'Ghast, Two Curios"
     AddA(tmp[367], a[14895]); -- 'Ghast Five
+    AddA(tmp[367], a[15054]); -- Minions of the Cold Dark
+    AddA(tmp[367], a[14943]); -- Guarmageddon
     tmp[368] = IaR(c, cat:New((GetCategoryInfo(15273)), true)); -- Reputation
     AddC(tmp[365], tmp[368]);
     AddA(tmp[368], a[14656]); -- Trading Partners
+    AddA(tmp[368], a[15059]); -- Death's Advance
+    tmp[812] = IaR(c, cat:New("Korthia")); -- Korthia
+    AddC(tmp[344], tmp[812]);
+    tmp[817] = IaR(c, cat:New((GetCategoryInfo(15447)), true)); -- Quests
+    AddC(tmp[812], tmp[817]);
+    AddA(tmp[817], a[15066]); -- Reliquary Restoration
+    AddA(tmp[817], a[15055]); -- Friend of Ooz
+    AddA(tmp[817], a[15056]); -- Friend of Bloop
+    AddA(tmp[817], a[15057]); -- Friend of Plaguey
+    tmp[818] = IaR(c, cat:New((GetCategoryInfo(97)), true)); -- Exploration
+    AddC(tmp[812], tmp[818]);
+    AddA(tmp[818], a[15053]); -- Explore Korthia
+    AddA(tmp[818], a[15099]); -- Treasures of Korthia
+    tmp[813] = IaR(c, cat:New((GetCategoryInfo(15273)), true)); -- Reputation
+    AddC(tmp[812], tmp[813]);
+    AddA(tmp[813], a[15069]); -- The Archivists' Codex
     tmp[369] = IaR(c, cat:New((GetCategoryInfo(15272)))); -- Dungeons
     AddC(tmp[6], tmp[369]);
     AddA(tmp[369], a[14418]); -- Shadowlands Dungeon Hero
@@ -4457,6 +4490,9 @@ function exportedCategories.Load(c, a)
     AddA(tmp[369], a[14938]); -- Shadowlands Keystone Explorer: Season One
     AddA(tmp[369], a[14531]); -- Shadowlands Keystone Conqueror: Season One
     AddA(tmp[369], a[14532]); -- Shadowlands Keystone Master: Season One
+    AddA(tmp[369], a[15073]); -- Shadowlands Keystone Explorer: Season Two
+    AddA(tmp[369], a[15077]); -- Shadowlands Keystone Conqueror: Season Two
+    AddA(tmp[369], a[15078]); -- Shadowlands Keystone Master: Season Two
     tmp[371] = IaR(c, cat:New((EJ_GetInstanceInfo(1182)))); -- The Necrotic Wake
     AddC(tmp[369], tmp[371]);
     AddA(tmp[371], a[14295]); -- Bountiful Harvest
@@ -4465,6 +4501,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[371], a[14366]); -- The Necrotic Wake
     AddA(tmp[371], a[14367]); -- Heroic: The Necrotic Wake
     AddA(tmp[371], a[14368]); -- Mythic: The Necrotic Wake
+    AddA(tmp[371], a[15045]); -- Keystone Hero: The Necrotic Wake
     tmp[372] = IaR(c, cat:New((EJ_GetInstanceInfo(1183)))); -- Plaguefall
     AddC(tmp[369], tmp[372]);
     AddA(tmp[372], a[14292]); -- Riding with my Slimes
@@ -4473,6 +4510,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[372], a[14369]); -- Plaguefall
     AddA(tmp[372], a[14414]); -- Heroic: Plaguefall
     AddA(tmp[372], a[14415]); -- Mythic: Plaguefall
+    AddA(tmp[372], a[15046]); -- Keystone Hero: Plaguefall
     tmp[373] = IaR(c, cat:New((EJ_GetInstanceInfo(1184)))); -- Mists of Tirna Scithe
     AddC(tmp[369], tmp[373]);
     AddA(tmp[373], a[14503]); -- Hooked On Hydroponics
@@ -4481,6 +4519,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[373], a[14371]); -- Mists of Tirna Scithe
     AddA(tmp[373], a[14412]); -- Heroic: Mists of Tirna Scithe
     AddA(tmp[373], a[14413]); -- Mythic: Mists of Tirna Scithe
+    AddA(tmp[373], a[15047]); -- Keystone Hero: Mists of Tirna Scithe
     tmp[374] = IaR(c, cat:New((EJ_GetInstanceInfo(1185)))); -- Halls of Atonement
     AddC(tmp[369], tmp[374]);
     AddA(tmp[374], a[14567]); -- Picking Up the Pieces
@@ -4489,6 +4528,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[374], a[14370]); -- Halls of Atonement
     AddA(tmp[374], a[14410]); -- Heroic: Halls of Atonement
     AddA(tmp[374], a[14411]); -- Mythic: Halls of Atonement
+    AddA(tmp[374], a[15048]); -- Keystone Hero: Halls of Atonement
     tmp[375] = IaR(c, cat:New((EJ_GetInstanceInfo(1186)))); -- Spires of Ascension
     AddC(tmp[369], tmp[375]);
     AddA(tmp[375], a[14331]); -- Goliath Offline
@@ -4497,6 +4537,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[375], a[14326]); -- Spires of Ascension
     AddA(tmp[375], a[14324]); -- Heroic: Spires of Ascension
     AddA(tmp[375], a[14325]); -- Mythic: Spires of Ascension
+    AddA(tmp[375], a[15049]); -- Keystone Hero: Spires of Ascension
     tmp[376] = IaR(c, cat:New((EJ_GetInstanceInfo(1187)))); -- Theater of Pain
     AddC(tmp[369], tmp[376]);
     AddA(tmp[376], a[14297]); -- Three Choose One
@@ -4505,6 +4546,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[376], a[14372]); -- Theater of Pain
     AddA(tmp[376], a[14416]); -- Heroic: Theater of Pain
     AddA(tmp[376], a[14417]); -- Mythic: Theater of Pain
+    AddA(tmp[376], a[15050]); -- Keystone Hero: Theater of Pain
     tmp[377] = IaR(c, cat:New((EJ_GetInstanceInfo(1188)))); -- De Other Side
     AddC(tmp[369], tmp[377]);
     AddA(tmp[377], a[14354]); -- Highly Communicable
@@ -4513,6 +4555,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[377], a[14373]); -- De Other Side
     AddA(tmp[377], a[14408]); -- Heroic: De Other Side
     AddA(tmp[377], a[14409]); -- Mythic: De Other Side
+    AddA(tmp[377], a[15051]); -- Keystone Hero: De Other Side
     tmp[378] = IaR(c, cat:New((EJ_GetInstanceInfo(1189)))); -- Sanguine Depths
     AddC(tmp[369], tmp[378]);
     AddA(tmp[378], a[14286]); -- Residue Evil
@@ -4521,9 +4564,19 @@ function exportedCategories.Load(c, a)
     AddA(tmp[378], a[14197]); -- Sanguine Depths
     AddA(tmp[378], a[14198]); -- Heroic: Sanguine Depths
     AddA(tmp[378], a[14199]); -- Mythic: Sanguine Depths
+    AddA(tmp[378], a[15052]); -- Keystone Hero: Sanguine Depths
+    tmp[823] = IaR(c, cat:New("Tazavesh, the Veiled Market")); -- Tazavesh, the Veiled Market
+    AddC(tmp[369], tmp[823]);
+    AddA(tmp[823], a[15109]); -- Will it Blend?
+    AddA(tmp[823], a[15106]); -- Quality Control
+    AddA(tmp[823], a[15179]); -- This is Fine
+    AddA(tmp[823], a[15190]); -- Mischief!
+    AddA(tmp[823], a[15178]); -- Fake It 'Til You Make It
+    AddA(tmp[823], a[15177]); -- "Tazavesh, the Veiled Market"
     tmp[370] = IaR(c, cat:New((GetCategoryInfo(15271)))); -- Raids
     AddC(tmp[6], tmp[370]);
     AddA(tmp[370], a[14355]); -- Glory of the Nathria Raider
+    AddA(tmp[370], a[15130]); -- Glory of the Dominant Raider
     tmp[379] = IaR(c, cat:New((EJ_GetInstanceInfo(1190)))); -- Castle Nathria
     AddC(tmp[370], tmp[379]);
     AddA(tmp[379], a[14293]); -- Blind as a Bat
@@ -4552,6 +4605,39 @@ function exportedCategories.Load(c, a)
     AddA(tmp[379], a[14460]); -- Ahead of the Curve: Sire Denathrius
     AddA(tmp[379], a[14461]); -- Cutting Edge: Sire Denathrius
     AddA(tmp[379], a[14614]); -- Castle Vain
+    tmp[821] = IaR(c, cat:New("Sanctum of Domination")); -- Sanctum of Domination
+    AddC(tmp[370], tmp[821]);
+    AddA(tmp[821], a[14998]); -- "Name A Better Duo, I'll Wait"
+    AddA(tmp[821], a[15065]); -- Eye Wish You Were Here
+    AddA(tmp[821], a[15003]); -- To the Nines
+    AddA(tmp[821], a[15058]); -- I Used to Bullseye Deeprun Rats Back Home
+    AddA(tmp[821], a[15105]); -- Tormentor's Tango
+    AddA(tmp[821], a[15131]); -- Whack-A-Soul
+    AddA(tmp[821], a[15132]); -- Knowledge is Power
+    AddA(tmp[821], a[15040]); -- Flawless Fate
+    AddA(tmp[821], a[15108]); -- Together Forever
+    AddA(tmp[821], a[15133]); -- This World is a Prism
+    AddA(tmp[821], a[15122]); -- The Jailer's Vanguard
+    AddA(tmp[821], a[15123]); -- The Dark Bastille
+    AddA(tmp[821], a[15124]); -- Shackles of Fate
+    AddA(tmp[821], a[15125]); -- The Reckoning
+    AddA(tmp[821], a[15126]); -- Sanctum of Domination
+    AddA(tmp[821], a[15127]); -- Heroic: Sanctum of Domination
+    AddA(tmp[821], a[15128]); -- Mythic: Sanctum of Domination
+    AddA(tmp[821], a[15112]); -- Mythic: The Tarragrue
+    AddA(tmp[821], a[15113]); -- Mythic: The Eye of the Jailer
+    AddA(tmp[821], a[15114]); -- Mythic: The Nine
+    AddA(tmp[821], a[15115]); -- Mythic: Remnant of Ner'zhul
+    AddA(tmp[821], a[15116]); -- Mythic: Soulrender Dormazain
+    AddA(tmp[821], a[15117]); -- Mythic: Painsmith Raznal
+    AddA(tmp[821], a[15118]); -- Mythic: Guardian of the First Ones
+    AddA(tmp[821], a[15119]); -- Mythic: Fatescribe Roh-Kalo
+    AddA(tmp[821], a[15120]); -- Mythic: Kel'Thuzad
+    AddA(tmp[821], a[15121]); -- Mythic: Sylvanas Windrunner
+    AddA(tmp[821], a[15134]); -- Ahead of the Curve: Sylvanas Windrunner
+    AddA(tmp[821], a[15135]); -- Cutting Edge: Sylvanas Windrunner
+    AddA(tmp[821], a[15110]); -- Dominating the Catwalk
+    AddA(tmp[821], a[15191]); -- "Rae'shalare, Death's Whisper"
     tmp[380] = IaR(c, cat:New((GetCategoryInfo(15117)))); -- Pet Battles
     AddC(tmp[6], tmp[380]);
     AddA(tmp[380], a[14867]); -- Shadowlands Safari
@@ -4568,17 +4654,14 @@ function exportedCategories.Load(c, a)
     AddA(tmp[380], a[14877]); -- Unholy Undead
     AddA(tmp[380], a[14879]); -- Family Exorcist
     AddA(tmp[380], a[14881]); -- Abhorrent Adversaries of the Afterlife
+    AddA(tmp[380], a[15004]); -- A Sly Fox
     tmp[424] = IaR(c, cat:New((GetCategoryInfo(15440)))); -- Torghast
     AddC(tmp[6], tmp[424]);
-    AddA(tmp[424], a[14463]); -- Skoldus Hall
-    AddA(tmp[424], a[14473]); -- Fracture Chambers
-    AddA(tmp[424], a[14478]); -- The Soulforges
-    AddA(tmp[424], a[14483]); -- Coldheart Interstitia
-    AddA(tmp[424], a[14488]); -- Mort'regar
-    AddA(tmp[424], a[14493]); -- The Upper Reaches
     AddA(tmp[424], a[14808]); -- Touring Torghast
     AddA(tmp[424], a[14809]); -- Traversing Torghast
     AddA(tmp[424], a[14810]); -- Terror of Torghast
+    AddA(tmp[424], a[15091]); -- A Taste of Perfection
+    AddA(tmp[424], a[15089]); -- Flawless Master
     AddA(tmp[424], a[14499]); -- Phanciful
     AddA(tmp[424], a[14500]); -- Phantastic
     AddA(tmp[424], a[14501]); -- Phanatical
@@ -4599,9 +4682,44 @@ function exportedCategories.Load(c, a)
     AddA(tmp[424], a[14759]); -- It's Coming Back to Me...
     AddA(tmp[424], a[14760]); -- Recollection Collection
     AddA(tmp[424], a[14795]); -- Clearing the Fog
+    AddA(tmp[424], a[15067]); -- Adamant Vaults
+    AddA(tmp[424], a[15075]); -- Infiltrators
+    AddA(tmp[424], a[15076]); -- The Box of Many Things
+    AddA(tmp[424], a[15080]); -- So Blessed
+    AddA(tmp[424], a[15079]); -- "Many, Many Things"
+    AddA(tmp[424], a[15093]); -- Avenge Me!
+    AddA(tmp[424], a[15095]); -- No Doubt
+    AddA(tmp[424], a[15094]); -- Rampage
+    AddA(tmp[424], a[15096]); -- Crowd Pleaser
+    AddA(tmp[424], a[15092]); -- Master of Torment
+    tmp[843] = IaR(c, cat:New((select(2, addon.GetAchievementInfo(14463))), true)); -- Skoldus Hall
+    AddC(tmp[424], tmp[843]);
+    AddA(tmp[843], a[14463]); -- Skoldus Hall
+    AddA(tmp[843], a[15081]); -- Flawless: Skoldus Hall
+    tmp[844] = IaR(c, cat:New((select(2, addon.GetAchievementInfo(14473))), true)); -- Fracture Chambers
+    AddC(tmp[424], tmp[844]);
+    AddA(tmp[844], a[14473]); -- Fracture Chambers
+    AddA(tmp[844], a[15082]); -- Flawless: Fracture Chambers
+    tmp[845] = IaR(c, cat:New((select(2, addon.GetAchievementInfo(14478))), true)); -- The Soulforges
+    AddC(tmp[424], tmp[845]);
+    AddA(tmp[845], a[14478]); -- The Soulforges
+    AddA(tmp[845], a[15084]); -- Flawless: The Soulforges
+    tmp[846] = IaR(c, cat:New((select(2, addon.GetAchievementInfo(14483))), true)); -- Coldheart Interstitia
+    AddC(tmp[424], tmp[846]);
+    AddA(tmp[846], a[14483]); -- Coldheart Interstitia
+    AddA(tmp[846], a[15083]); -- Flawless: Coldheart Interstitia
+    tmp[847] = IaR(c, cat:New((select(2, addon.GetAchievementInfo(14488))), true)); -- Mort'regar
+    AddC(tmp[424], tmp[847]);
+    AddA(tmp[847], a[14488]); -- Mort'regar
+    AddA(tmp[847], a[15087]); -- Flawless: Mort'regar
+    tmp[848] = IaR(c, cat:New((select(2, addon.GetAchievementInfo(14493))), true)); -- The Upper Reaches
+    AddC(tmp[424], tmp[848]);
+    AddA(tmp[848], a[14493]); -- The Upper Reaches
+    AddA(tmp[848], a[15088]); -- Flawless: The Upper Reaches
     tmp[419] = IaR(c, cat:New((GetCategoryInfo(15441)))); -- Covenant Sanctums
     AddC(tmp[6], tmp[419]);
     AddA(tmp[419], a[14627]); -- Choosing Your Purpose
+    AddA(tmp[419], a[14790]); -- Covenant Campaign
     AddA(tmp[419], a[14834]); -- Bound with Purpose
     AddA(tmp[419], a[14835]); -- A Resolute Bond
     AddA(tmp[419], a[14836]); -- Unwavering Bond
@@ -4680,145 +4798,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[420], a[14764]); -- The Great Luckydo
     AddA(tmp[420], a[14833]); -- Fashion Abomination
     AddA(tmp[420], a[14763]); -- Crypt Couture
-    tmp[799] = IaR(c, cat:New(addon.L["Coming in 9.1"])); -- Coming in 9.1
-    local nextPatchCategory = tmp[799];
-    tmp[814] = IaR(c, cat:New(string.format(addon.Orange, addon.L["* SPOILER WARNING *"]))); -- * SPOILER WARNING *
-    AddC(tmp[799], tmp[814]);
-    tmp[811] = IaR(c, cat:New(addon.L["Zones"])); -- Zones
-    AddC(tmp[814], tmp[811]);
-    AddA(tmp[811], a[15107]); -- Conquering Korthia
-    tmp[815] = IaR(c, cat:New(C_Map.GetMapInfo(1543).name)); -- The Maw
-    AddC(tmp[811], tmp[815]);
-    AddA(tmp[815], a[15065]); -- Eye Wish You Were Here
-    tmp[816] = IaR(c, cat:New((GetCategoryInfo(15447)))); -- Quests
-    AddC(tmp[815], tmp[816]);
-    AddA(tmp[816], a[15000]); -- United Front
-    AddA(tmp[816], a[15044]); -- Krrprripripkraak's Heroes
-    AddA(tmp[816], a[15035]); -- On the Offensive
-    AddA(tmp[816], a[15043]); -- Hoarder of Torghast
-    AddA(tmp[816], a[15042]); -- Tea for the Troubled
-    AddA(tmp[816], a[15036]); -- Rooting Out the Evil
-    AddA(tmp[816], a[15034]); -- Wings Against the Flames
-    AddA(tmp[816], a[15033]); -- Taking the Tremaculum
-    AddA(tmp[816], a[15032]); -- Breaking Their Hold
-    AddA(tmp[816], a[15001]); -- Jailer's Personal Stash
-    AddA(tmp[816], a[15041]); -- The Zovaal Shuffle
-    AddA(tmp[816], a[15039]); -- Up For Grabs
-    AddA(tmp[816], a[15037]); -- This Army
-    AddA(tmp[816], a[14961]); -- Chains of Domination
-    AddA(tmp[816], a[15064]); -- Breaking the Chains
-    tmp[819] = IaR(c, cat:New((GetCategoryInfo(97)))); -- Exploration
-    AddC(tmp[815], tmp[819]);
-    AddA(tmp[819], a[15054]); -- Minions of the Cold Dark
-    AddA(tmp[819], a[14943]); -- Guarmageddon
-    tmp[822] = IaR(c, cat:New((GetCategoryInfo(15273)))); -- Reputation
-    AddC(tmp[815], tmp[822]);
-    AddA(tmp[822], a[15059]); -- Death's Advance
-    tmp[812] = IaR(c, cat:New("Korthia")); -- Korthia
-    AddC(tmp[811], tmp[812]);
-    tmp[817] = IaR(c, cat:New((GetCategoryInfo(15447)))); -- Quests
-    AddC(tmp[812], tmp[817]);
-    AddA(tmp[817], a[15066]); -- Reliquary Restoration
-    AddA(tmp[817], a[15055]); -- Friend of Ooz
-    AddA(tmp[817], a[15056]); -- Friend of Bloop
-    AddA(tmp[817], a[15057]); -- Friend of Plaguey
-    tmp[818] = IaR(c, cat:New((GetCategoryInfo(97)))); -- Exploration
-    AddC(tmp[812], tmp[818]);
-    AddA(tmp[818], a[15053]); -- Explore Korthia
-    AddA(tmp[818], a[15099]); -- Treasures of Korthia
-    tmp[813] = IaR(c, cat:New((GetCategoryInfo(15273)))); -- Reputation
-    AddC(tmp[812], tmp[813]);
-    AddA(tmp[813], a[15069]); -- The Archivist's Codex
-    tmp[801] = IaR(c, cat:New((GetCategoryInfo(15272)))); -- Dungeons
-    AddC(tmp[814], tmp[801]);
-    AddA(tmp[801], a[15073]); -- Shadowlands Keystone Explorer: Season Two
-    AddA(tmp[801], a[15077]); -- Shadowlands Keystone Conqueror: Season Two
-    AddA(tmp[801], a[15078]); -- Shadowlands Keystone Master: Season Two
-    tmp[809] = IaR(c, cat:New((EJ_GetInstanceInfo(1182)))); -- The Necrotic Wake
-    AddC(tmp[801], tmp[809]);
-    AddA(tmp[809], a[15045]); -- Keystone Hero: The Necrotic Wake
-    tmp[808] = IaR(c, cat:New((EJ_GetInstanceInfo(1183)))); -- Plaguefall
-    AddC(tmp[801], tmp[808]);
-    AddA(tmp[808], a[15046]); -- Keystone Hero: Plaguefall
-    tmp[807] = IaR(c, cat:New((EJ_GetInstanceInfo(1184)))); -- Mists of Tirna Scithe
-    AddC(tmp[801], tmp[807]);
-    AddA(tmp[807], a[15047]); -- Keystone Hero: Mists of Tirna Scithe
-    tmp[806] = IaR(c, cat:New((EJ_GetInstanceInfo(1185)))); -- Halls of Atonement
-    AddC(tmp[801], tmp[806]);
-    AddA(tmp[806], a[15048]); -- Keystone Hero: Halls of Atonement
-    tmp[805] = IaR(c, cat:New((EJ_GetInstanceInfo(1186)))); -- Spires of Ascension
-    AddC(tmp[801], tmp[805]);
-    AddA(tmp[805], a[15049]); -- Keystone Hero: Spires of Ascension
-    tmp[804] = IaR(c, cat:New((EJ_GetInstanceInfo(1187)))); -- Theater of Pain
-    AddC(tmp[801], tmp[804]);
-    AddA(tmp[804], a[15050]); -- Keystone Hero: Theater of Pain
-    tmp[803] = IaR(c, cat:New((EJ_GetInstanceInfo(1188)))); -- De Other Side
-    AddC(tmp[801], tmp[803]);
-    AddA(tmp[803], a[15051]); -- Keystone Hero: De Other Side
-    tmp[802] = IaR(c, cat:New((EJ_GetInstanceInfo(1189)))); -- Sanguine Depths
-    AddC(tmp[801], tmp[802]);
-    AddA(tmp[802], a[15052]); -- Keystone Hero: Sanguine Depths
-    tmp[823] = IaR(c, cat:New("Tazavesh, the Veiled Market")); -- Tazavesh, the Veiled Market
-    AddC(tmp[801], tmp[823]);
-    AddA(tmp[823], a[15106]); -- Quality Control
-    AddA(tmp[823], a[15109]); -- Will it Blend?
-    tmp[820] = IaR(c, cat:New((GetCategoryInfo(15271)))); -- Raids
-    AddC(tmp[814], tmp[820]);
-    AddA(tmp[820], a[15130]); -- Glory of the Dominant Raider
-    tmp[821] = IaR(c, cat:New("Sanctum of Domination")); -- Sanctum of Domination
-    AddC(tmp[820], tmp[821]);
-    AddA(tmp[821], a[15058]); -- I Used to Bullseye Deeprun Rats Back Home
-    AddA(tmp[821], a[14998]); -- "Name A Better Duo, I'll Wait"
-    AddA(tmp[821], a[15003]); -- To the Nines
-    AddA(tmp[821], a[15040]); -- Retrograde Fate
-    AddA(tmp[821], a[15105]); -- Tormentor's Tango
-    AddA(tmp[821], a[15108]); -- Together Forever
-    AddA(tmp[821], a[15122]); -- The Jailer's Vanguard
-    AddA(tmp[821], a[15123]); -- The Dark Bastille
-    AddA(tmp[821], a[15124]); -- Shackles of Fate
-    AddA(tmp[821], a[15125]); -- The Reckoning
-    AddA(tmp[821], a[15131]); -- Painsmith Raznal PH Achievement
-    AddA(tmp[821], a[15132]); -- Guardian of the First Ones PH Achievement
-    AddA(tmp[821], a[15133]); -- Sylvanas Windrunner PH Achievement
-    AddA(tmp[821], a[15126]); -- Sanctum of Domination
-    AddA(tmp[821], a[15127]); -- Heroic: Sanctum of Domination
-    AddA(tmp[821], a[15128]); -- Mythic: Sanctum of Domination
-    AddA(tmp[821], a[15112]); -- Mythic: The Tarragrue
-    AddA(tmp[821], a[15113]); -- Mythic: The Eye of the Jailer
-    AddA(tmp[821], a[15114]); -- Mythic: The Nine
-    AddA(tmp[821], a[15115]); -- Mythic: Remnant of Ner'zhul
-    AddA(tmp[821], a[15116]); -- Mythic: Soulrender Dormazain
-    AddA(tmp[821], a[15117]); -- Mythic: Painsmith Raznal
-    AddA(tmp[821], a[15118]); -- Mythic: Guardian of the First Ones
-    AddA(tmp[821], a[15119]); -- Mythic: Fatescribe Roh-Kalo
-    AddA(tmp[821], a[15120]); -- Mythic: Kel'Thuzad
-    AddA(tmp[821], a[15121]); -- Mythic: Sylvanas Windrunner
-    AddA(tmp[821], a[15134]); -- Ahead of the Curve: Sylvanas Windrunner
-    AddA(tmp[821], a[15135]); -- Cutting Edge: Sylvanas Windrunner
-    AddA(tmp[821], a[15110]); -- Dominating the Catwalk
-    tmp[800] = IaR(c, cat:New((GetCategoryInfo(15117)))); -- Pet Battles
-    AddC(tmp[814], tmp[800]);
-    AddA(tmp[800], a[15004]); -- A Sly Fox
-    tmp[810] = IaR(c, cat:New((GetCategoryInfo(15440)))); -- Torghast
-    AddC(tmp[814], tmp[810]);
-    AddA(tmp[810], a[15067]); -- Adamant Vaults
-    AddA(tmp[810], a[15075]); -- Infiltrators
-    AddA(tmp[810], a[15076]); -- The Box of Many Things
-    AddA(tmp[810], a[15091]); -- A Taste of Perfection
-    AddA(tmp[810], a[15089]); -- Flawless Master
-    AddA(tmp[810], a[15081]); -- Flawless: Skoldus Hall
-    AddA(tmp[810], a[15082]); -- Flawless: Fracture Chambers
-    AddA(tmp[810], a[15084]); -- Flawless: The Soulforges
-    AddA(tmp[810], a[15083]); -- Flawless: Coldheart Interstitia
-    AddA(tmp[810], a[15087]); -- Flawless: Mort'regar
-    AddA(tmp[810], a[15088]); -- Flawless: Upper Reaches
-    AddA(tmp[810], a[15080]); -- So Blessed
-    AddA(tmp[810], a[15079]); -- "Many, Many Things"
-    AddA(tmp[810], a[15092]); -- Master of Torment
-    AddA(tmp[810], a[15093]); -- Avenge Me!
-    AddA(tmp[810], a[15094]); -- Rampage
-    AddA(tmp[810], a[15095]); -- No Doubt
-    AddA(tmp[810], a[15096]); -- Crowd Pleaser
 
     return currentZoneCategory, nextPatchCategory;
 end

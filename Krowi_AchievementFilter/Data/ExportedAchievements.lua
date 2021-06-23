@@ -1,4 +1,4 @@
--- [[ Exported at 2021-06-13 09-49-26 ]] --
+-- [[ Exported at 2021-06-23 14-08-02 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3287,7 +3287,7 @@ function exportedAchievements.Load(a)
     a[15036] = ach:New(15036, 10); -- Rooting Out the Evil
     a[15037] = ach:New(15037, 5); -- This Army
     a[15039] = ach:New(15039, 5); -- Up For Grabs
-    a[15040] = ach:New(15040, 10); -- Retrograde Fate
+    a[15040] = ach:New(15040, 10); -- Flawless Fate
     a[15041] = ach:New(15041, 5); -- The Zovaal Shuffle
     a[15042] = ach:New(15042, 5); -- Tea for the Troubled
     a[15043] = ach:New(15043, 0); -- Hoarder of Torghast
@@ -3311,7 +3311,7 @@ function exportedAchievements.Load(a)
     a[15065] = ach:New(15065, 10); -- Eye Wish You Were Here
     a[15066] = ach:New(15066, 10); -- Reliquary Restoration
     a[15067] = ach:New(15067, 10); -- Adamant Vaults
-    a[15069] = ach:New(15069, 5); -- The Archivist's Codex
+    a[15069] = ach:New(15069, 5); -- The Archivists' Codex
     a[15073] = ach:New(15073, 0); -- Shadowlands Keystone Explorer: Season Two
     a[15075] = ach:New(15075, 10); -- Infiltrators
     a[15076] = ach:New(15076, 5); -- The Box of Many Things
@@ -3324,7 +3324,7 @@ function exportedAchievements.Load(a)
     a[15083] = ach:New(15083, 10); -- Flawless: Coldheart Interstitia
     a[15084] = ach:New(15084, 10); -- Flawless: The Soulforges
     a[15087] = ach:New(15087, 10); -- Flawless: Mort'regar
-    a[15088] = ach:New(15088, 10); -- Flawless: Upper Reaches
+    a[15088] = ach:New(15088, 10); -- Flawless: The Upper Reaches
     a[15089] = ach:New(15089, 20); -- Flawless Master
     a[15091] = ach:New(15091, 10); -- A Taste of Perfection
     a[15092] = ach:New(15092, 20); -- Master of Torment
@@ -3357,10 +3357,15 @@ function exportedAchievements.Load(a)
     a[15127] = ach:New(15127, 10); -- Heroic: Sanctum of Domination
     a[15128] = ach:New(15128, 10); -- Mythic: Sanctum of Domination
     a[15130] = ach:New(15130, 25); -- Glory of the Dominant Raider
-    a[15131] = ach:New(15131, 10); -- Painsmith Raznal PH Achievement
-    a[15132] = ach:New(15132, 10); -- Guardian of the First Ones PH Achievement
-    a[15133] = ach:New(15133, 10); -- Sylvanas Windrunner PH Achievement
+    a[15131] = ach:New(15131, 10); -- Whack-A-Soul
+    a[15132] = ach:New(15132, 10); -- Knowledge is Power
+    a[15133] = ach:New(15133, 10); -- This World is a Prism
     a[15134] = ach:New(15134, 0); -- Ahead of the Curve: Sylvanas Windrunner
     a[15135] = ach:New(15135, 0); -- Cutting Edge: Sylvanas Windrunner
+    a[15177] = ach:New(15177, 10); -- "Tazavesh, the Veiled Market"
+    a[15178] = ach:New(15178, 10); -- Fake It 'Til You Make It
+    a[15179] = ach:New(15179, 10); -- This is Fine
+    a[15190] = ach:New(15190, 10); -- Mischief!
+    a[15191] = ach:New(15191, 0); -- "Rae'shalare, Death's Whisper"
 end
 

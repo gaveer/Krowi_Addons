@@ -202,7 +202,7 @@ namespace DbManagerWPF.ViewModel
                 return;
             }
 
-            int location = SelectedAchievement?.Location ?? 1;
+            int location = SelectedAchievement?.Location + 1 ?? 1;
 
             var faction = Faction.Unknown;
             if (FactionDefaultNew)

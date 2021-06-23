@@ -263,6 +263,7 @@ local function CreatePanel()
                                 end
                             },
                             ExcludeNextPatch = {
+                                hidden = true,
                                 name = addon.L["Exclude Next Patch"],
                                 desc = core.ReplaceVars{addon.L["Exclude Next Patch Desc"],
                                                         spoilerWarning = string.format(addon.Orange, addon.L["* SPOILER WARNING *"])},

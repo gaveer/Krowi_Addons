@@ -28,11 +28,12 @@ function savedData.Load()
     diagnostics.Debug("SavedData loaded");
 end
 
-local FixFeaturesTutorialProgress, FixElvUISkin;
+local FixFeaturesTutorialProgress, FixElvUISkin, FixFilters;
 function LoadSolutions()
     local solutions = {
         FixFeaturesTutorialProgress, -- 1
         FixElvUISkin, -- 2
+        FixFilters, -- 3
     };
 
     return solutions;
@@ -51,7 +52,8 @@ function Resolve(solutions, prevBuild, currBuild, prevVersion, currVersion)
 end
 
 function FixFeaturesTutorialProgress(prevBuild, currBuild, prevVersion, currVersion)
-    if prevBuild ~= nil and currBuild ~= nil then
+    if SavedData.FeaturesTutorial then
+        diagnostics.Debug("Features Tutorial Progress already cleared from previous version");
         return;
     end
 
@@ -61,11 +63,23 @@ function FixFeaturesTutorialProgress(prevBuild, currBuild, prevVersion, currVers
 end
 
 function FixElvUISkin(prevBuild, currBuild, prevVersion, currVersion)
-    if prevBuild ~= nil and currBuild ~= nil then
+    if SavedData.ElvUISkin then
+        diagnostics.Debug("ElvUISkin already cleared from previous version");
         return;
     end
 
     addon.Options.db.ElvUISkin = nil;
 
     diagnostics.Debug("Cleared ElvUISkin from previous version");
+end
+
+function FixFilters(prevBuild, currBuild, prevVersion, currVersion)
+    if Filters then
+        diagnostics.Debug("Filter settings already cleared from previous location");
+        return;
+    end
+
+    addon.Options.db.Filters = nil;
+
+    diagnostics.Debug("Clear filter settings from previous location");
 end

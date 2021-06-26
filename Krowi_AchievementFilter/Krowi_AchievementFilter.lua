@@ -114,7 +114,7 @@ function loadHelper:OnEvent(event, arg1)
             addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
         end
     elseif event == "PLAYER_LOGIN" then
-        addon.Options.SetFilters();
+        -- addon.GUI.FilterButton:ResetFilters();
 
         if addon.Diagnostics.DebugEnabled() then
             hooksecurefunc(WorldMapFrame, "OnMapChanged", function()

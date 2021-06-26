@@ -2,7 +2,7 @@
 ## Title: Krowi's |cFF1D92C2Achievement Filter|r
 ## Version: 24.0
 ## Author: Krowi
-## SavedVariables: Options, SavedData
+## SavedVariables: Options, SavedData, Filters
 ## Notes: Filters your achievements.
 
 Core/Files.xml

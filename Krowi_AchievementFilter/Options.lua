@@ -45,34 +45,6 @@ local defaults = {
             NumberOfSearchPreviews = 5,
             ClearOnRightClick = true,
             ExcludeNextPatch = true
-        },
-        Filters = {
-            Completion = {
-                Completed = true,
-                NotCompleted = true
-            },
-            Obtainability = {
-                Obtainable = true,
-                NotObtainable = false
-            },
-            Faction = {
-                Neutral = true,
-                Alliance = false,
-                Horde = false
-            },
-            Covenant = {
-                Neutral = true,
-                Kyrian = false,
-                Venthyr = false,
-                NightFae = false,
-                Necrolord = false
-            },
-            CollapseSeries = true,
-            MergeSmallCategories = true,
-            SortBy = {
-                Criteria = addon.L["Default"],
-                ReverseSort = false
-            }
         }
     }
 }
@@ -752,20 +724,6 @@ local function CreatePanel()
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(AF_NAME, nil, nil);
 end
 
-local function SetFilters()
-    -- Always reset faction filter
-    addon.Options.db.Filters.Faction.Neutral = true;
-    addon.Options.db.Filters.Faction.Alliance = addon.Faction.IsAlliance;
-    addon.Options.db.Filters.Faction.Horde = addon.Faction.IsHorde;
-
-    -- Always reset covenant filter
-    for covenant, _ in next, addon.Options.db.Filters.Covenant do
-        addon.Options.db.Filters.Covenant[covenant] = false;
-    end
-    addon.Options.db.Filters.Covenant.Neutral = true;
-    addon.Options.db.Filters.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
-end
-
 local function Open()
     InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
     InterfaceOptionsFrame_OpenToCategory(AF_NAME);
@@ -774,7 +732,6 @@ end
 -- Load the options
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
-    addon.Options.SetFilters = SetFilters;
     addon.Options.Open = Open;
     addon.Options.db = addon.Options.profile;
 

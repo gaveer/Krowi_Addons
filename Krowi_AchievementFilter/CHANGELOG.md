@@ -4,11 +4,13 @@ All notable changes to this project will be documented in this file.
 ## [9.1.0.24.0] - 
 ### Added
 - More zone data for multi-zone achievements for Shadowlands
+- Current Zone category now has a seperate filter in preparation for the World Map Button coming in a later version
 
 ### Changed
 - Backend data structure completely rewritten in preperation for new features
 - Coming in 9.1 merged into the other categories
 - Moved Covenant Campaign achievement from Shadowlands - Zones to Shadowlands - Covenant Sanctum
+- Filter settings stored in new location (reset of saved settings unfortunatly)
 
 ### Fixed
 - Northrend Explorer now shows for both factions

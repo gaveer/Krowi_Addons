@@ -11,6 +11,7 @@ namespace DbManagerWPF.ViewModel
         private AchievementDM achievementDM;
         private CategoryDM categoryDM;
         private UIMapDM uiMapDM;
+        private PetBattleLinksDM petBattleLinksDM;
 
         public MainWindowViewModel()
         {
@@ -23,6 +24,7 @@ namespace DbManagerWPF.ViewModel
             uiMapDM = new UIMapDM(connection);
             achievementDM = new AchievementDM(connection, uiMapDM);
             categoryDM = new CategoryDM(connection, functionDM, achievementDM, uiMapDM);
+            petBattleLinksDM = new PetBattleLinksDM(connection);
 
             LoadCategoriesViewModel();
             LoadUIMapViewModel();

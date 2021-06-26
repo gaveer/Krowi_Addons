@@ -327,5 +327,26 @@ namespace DbManagerWPF.DataManager
 
             cmd.ExecuteNonQuery();
         }
+
+        public (int ID, string Name, int Points, string Description, int Flags, int IconFileID, string RewardText) GetWithAGTID(Achievement achievement)
+        {
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+                                    A.ID, A.Name, A.Points, A.Description, A.Flags, A.IconFileID, A.RewardText
+                                FROM
+                                    Achievement_AGT A
+                                WHERE
+                                    A.ID = @ID
+                                LIMIT 1;";
+            cmd.Parameters.AddWithValue("@ID", achievement.ID);
+
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    return (reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), reader.IsDBNull(3) ? "" : reader.GetString(3), reader.GetInt32(4), reader.GetInt32(5), reader.IsDBNull(6) ? "" : reader.GetString(6));
+
+            return (-1, null, -1, null, -1, -1, null);
+        }
     }
 }

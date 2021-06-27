@@ -107,6 +107,12 @@ function lib:Toggle(anchor, offsetX, offsetY)
 	end
 end
 
+function lib:Close()
+	if DropDownList1:IsShown() then
+		DropDownList1:Hide();
+	end
+end
+
 function lib:SetSelectedName(name)
 	menuFrame.selectedName2 = name; -- Using another property we ommit the visual bugs the other property causes (buttons not selecting correctly on partial redraw)
 	menuFrame.selectedName = nil; -- When we'd use this one, Blizzard code would overwrite info.checked with 1, not looking at the function anymore until the menu is full closed and opened again

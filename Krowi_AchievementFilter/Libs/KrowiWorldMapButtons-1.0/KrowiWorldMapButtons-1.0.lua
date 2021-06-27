@@ -58,7 +58,6 @@ local function HookDefaultButtons()
 	hookedDefaultButtons = true;
 end
 
-
 -- local hookedHandyNotesButtons;
 -- local function HookHandyNotesButtons()
 --     for _, f in next, WorldMapFrame.overlayFrames do

@@ -18,16 +18,16 @@
         the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary("KrowiMenu-1.0", 1);
+local lib = LibStub:NewLibrary("Krowi_Menu-1.0", 1);
 
 if not lib then
 	return;
 end
 
-local menuItem = LibStub("KrowiMenuItem-1.0");
+local menuItem = LibStub("Krowi_MenuItem-1.0");
 
 -- [[ Other ]] --
-local menuFrame = CreateFrame("Frame", "KrowiMenu", nil, "UIDropDownMenuTemplate");
+local menuFrame = CreateFrame("Frame", "Krowi_Menu", nil, "UIDropDownMenuTemplate");
 local menu = {};
 
 local function Convert(srcItem)

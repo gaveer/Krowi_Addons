@@ -80,7 +80,7 @@
 		buttonLeft, buttonBottom
 --]]
 
-local lib = LibStub:NewLibrary('KrowiTutorials-1.0', 1);
+local lib = LibStub:NewLibrary('Krowi_Tutorials-1.0', 1);
 
 if not lib then
 	return;
@@ -423,7 +423,7 @@ function lib:New(savedVariables, key, icon, font)
 	numFrames = numFrames + 1;
 
 	-- Create frame
-	local frame = CreateFrame("Frame", "KrowiTutorial" .. numFrames, UIParent, "ButtonFrameTemplate");
+	local frame = CreateFrame("Frame", "Krowi_Tutorial" .. numFrames, UIParent, "ButtonFrameTemplate");
 	setmetatable(frame, setmetatable(lib, getmetatable(frame)));
 
 	-- Set portrait and background

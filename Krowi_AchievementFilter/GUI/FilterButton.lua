@@ -103,7 +103,7 @@ function filterButton:UpdateAchievementFrame()
     self.AchievementsFrame:ForceUpdate(true); -- Issue #27: Fix
 end
 
-local menu = LibStub("KrowiMenu-1.0");
+local menu = LibStub("Krowi_Menu-1.0");
 function filterButton:OnMouseDown()
     diagnostics.Trace("filterButton:OnMouseDown");
 

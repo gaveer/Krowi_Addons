@@ -3,7 +3,7 @@ local _, addon = ...;
 local core = addon.Core;
 local diagnostics = addon.Diagnostics;
 
-addon.Tutorials = LibStub("KrowiTutorials-1.0"); -- Global tutorial object
+addon.Tutorials = LibStub("Krowi_Tutorials-1.0"); -- Global tutorial object
 local tutorials = addon.Tutorials; -- Local tutorial object
 
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";

@@ -18,13 +18,13 @@
         the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary("KrowiMenuItem-1.0", 1);
+local lib = LibStub:NewLibrary("Krowi_MenuItem-1.0", 1);
 
 if not lib then
 	return;
 end
 
-local popupDialog = LibStub("KrowiPopopDialog-1.0");
+local popupDialog = LibStub("Krowi_PopopDialog-1.0");
 
 -- [[ Constructors ]] --
 lib.__index = lib;

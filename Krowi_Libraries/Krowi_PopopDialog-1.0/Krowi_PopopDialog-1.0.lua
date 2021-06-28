@@ -18,7 +18,7 @@
 		the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary("KrowiPopopDialog-1.0", 1);
+local lib = LibStub:NewLibrary("Krowi_PopopDialog-1.0", 1);
 
 if not lib then
 	return;

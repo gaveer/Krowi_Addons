@@ -18,7 +18,7 @@
 		the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary("KrowiProgressBar-1.0", 1);
+local lib = LibStub:NewLibrary("Krowi_ProgressBar-1.0", 1);
 
 if not lib then
 	return;
@@ -78,7 +78,7 @@ function lib:New(parent)
 	-- Increment ID
 	numFrames = numFrames + 1;
 
-	local frame = CreateFrame("Frame", "KrowiProgressBar" .. numFrames, parent, "KrowiProgressBar_Template");
+	local frame = CreateFrame("Frame", "Krowi_ProgressBar" .. numFrames, parent, "Krowi_ProgressBar_Template");
 	setmetatable(frame, setmetatable(lib, getmetatable(frame)));
 
 	frame:SetScript("OnSizeChanged", function()

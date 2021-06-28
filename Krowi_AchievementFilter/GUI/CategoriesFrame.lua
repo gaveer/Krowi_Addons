@@ -250,7 +250,7 @@ function categoriesFrame:Update(getAchNums)
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
-local progressBar = LibStub("KrowiProgressBar-1.0");
+local progressBar = LibStub("Krowi_ProgressBar-1.0");
 local function StatusBarTooltip(self)
 	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
 	GameTooltip:SetOwner(self, "ANCHOR_NONE");

@@ -5,7 +5,7 @@ local diagnostics = addon.Diagnostics;
 addon.Options = {}; -- Will be overwritten in Load (intended)
 local options = addon.Options;
 
-local popupDialog = LibStub("KrowiPopopDialog-1.0");
+local popupDialog = LibStub("Krowi_PopopDialog-1.0");
 
 local defaults = {
     profile = {
@@ -90,7 +90,7 @@ local function CreatePanel()
                                 type = "execute",
                                 order = 1.3,
                                 func = function()
-                                    local menu = LibStub("KrowiMenu-1.0");
+                                    local menu = LibStub("Krowi_Menu-1.0");
                                     local pages = addon.Tutorials.FeaturesTutorial.Pages;
 
                                     -- Reset menu

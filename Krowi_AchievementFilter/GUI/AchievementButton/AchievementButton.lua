@@ -139,8 +139,8 @@ function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
 end
 
 -- [[ OnClickRightButton ]] --
-local rightClickMenu = LibStub("KrowiMenu-1.0");
-local popupDialog = LibStub("KrowiPopopDialog-1.0");
+local rightClickMenu = LibStub("Krowi_Menu-1.0");
+local popupDialog = LibStub("Krowi_PopopDialog-1.0");
 
 local function AddWowheadLink(achievement)
 	if not achievement.HasNoWowheadLink then

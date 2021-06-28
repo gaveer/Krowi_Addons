@@ -6,7 +6,7 @@ local gui = addon.GUI;
 gui.WorldMapButton = {};
 local worldMapButton = gui.WorldMapButton;
 
-addon.WorldMapButtons = LibStub("KrowiWorldMapButtons-1.0"); -- Global world map buttons object
+addon.WorldMapButtons = LibStub("Krowi_WorldMapButtons-1.0"); -- Global world map buttons object
 
 function worldMapButton.Load()
     addon.WorldMapButtons:Add("KrowiAF_WorldMapAchievementButtonTemplate", "BUTTON");

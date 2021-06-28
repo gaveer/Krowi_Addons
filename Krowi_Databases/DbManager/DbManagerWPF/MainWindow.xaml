@@ -421,18 +421,22 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
                     <Button Content="Achievements" Command="{Binding ImportAchievementsCommand}" Margin="3" />
-                    <ProgressBar Grid.Row="1" Margin="3" Height="20" Value="{Binding ImportAchievementsValue}" Maximum="{Binding ImportAchievementsMax}" />
-                    <TextBlock Grid.Row="1" Text="{Binding ImportAchievementsText, FallbackValue=TEXT}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button Grid.Row="1" Content="UIMaps" Command="{Binding ImportUIMapsCommand}" Margin="3" />
+                    <Button Grid.Row="2" Content="XuFu Encounters" Command="{Binding ImportXuFuEncountersCommand}" Margin="3" />
+                    <ProgressBar Grid.Row="3" Margin="3" Height="20" Value="{Binding ImportValue}" Maximum="{Binding ImportMax}" />
+                    <TextBlock Grid.Row="3" Text="{Binding ImportText, FallbackValue=TEXT}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Grid>
             </GroupBox>
             <GroupBox Grid.Row="1" Header="Export">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -447,6 +451,7 @@
                     <Button Grid.Row="2" Content="3. Categories" Command="{Binding ExportCategoriesCommand}" Margin="3" />
                     <Button Grid.Row="3" Content="4. Maps" Command="{Binding ExportMapsCommand}" Margin="3" />
                     <Button Grid.Row="4" Content="5. Pet Battles" Command="{Binding ExportPetBattlesCommand}" Margin="3" />
+                    <Button Grid.Row="5" Content="Export All" Command="{Binding ExportAllCommand}" Margin="3" />
                 </Grid>
             </GroupBox>
         </Grid>

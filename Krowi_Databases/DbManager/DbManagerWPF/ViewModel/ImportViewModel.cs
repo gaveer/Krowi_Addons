@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -15,18 +16,27 @@ namespace DbManagerWPF.ViewModel
     {
         #region Properties
         public ICommand ImportAchievementsCommand => new CommandHandler(() => ImportAchievements(), () => !backgroundWorker.IsBusy);
+        public ICommand ImportUIMapsCommand => new CommandHandler(() => ImportUIMaps(), () => !backgroundWorker.IsBusy);
+        public ICommand ImportXuFuEncountersCommand => new CommandHandler(() => ImportXuFuEncounters(), () => !backgroundWorker.IsBusy);
 
-        private string _ImportAchievementsText;
-        public string ImportAchievementsText { get { return _ImportAchievementsText; } set { _ImportAchievementsText = value; NotifyPropertyChanged(); } }
+        private string _ImportText;
+        public string ImportText { get { return _ImportText; } set { _ImportText = value; NotifyPropertyChanged(); } }
 
-        private int _ImportAchievementsValue;
-        public int ImportAchievementsValue { get { return _ImportAchievementsValue; } set { _ImportAchievementsValue = value; NotifyPropertyChanged(); } }
+        private int _ImportValue;
+        public int ImportValue { get { return _ImportValue; } set { _ImportValue = value; NotifyPropertyChanged(); } }
 
-        private int _ImportAchievementsMax;
-        public int ImportAchievementsMax { get { return _ImportAchievementsMax; } set { _ImportAchievementsMax = value; NotifyPropertyChanged(); } }
+        private int _ImportMax;
+        public int ImportMax { get { return _ImportMax; } set { _ImportMax = value; NotifyPropertyChanged(); } }
         #endregion
 
         private BackgroundWorker backgroundWorker;
+
+        private enum ImportTask
+        {
+            Achievements,
+            UIMaps,
+            XuFuEncounters
+        }
 
         public void LoadImportViewModel()
         {
@@ -38,8 +48,8 @@ namespace DbManagerWPF.ViewModel
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
 
-            ImportAchievementsValue = 0;
-            ImportAchievementsMax = 1;
+            ImportValue = 0;
+            ImportMax = 1;
         }
 
         private void ImportAchievements()
@@ -51,12 +61,46 @@ namespace DbManagerWPF.ViewModel
             };
 
             if (fileDialog.ShowDialog() == true)
-                backgroundWorker.RunWorkerAsync(fileDialog);
+                backgroundWorker.RunWorkerAsync((ImportTask.Achievements, fileDialog));
+        }
+
+        private void ImportUIMaps()
+        {
+            OpenFileDialog fileDialog = new()
+            {
+                InitialDirectory = @"C:\Users\Frederik\Downloads",
+                Filter = "csv files (*.csv)|*.csv|All files (*.*)|*.*"
+            };
+
+            if (fileDialog.ShowDialog() == true)
+                backgroundWorker.RunWorkerAsync((ImportTask.UIMaps, fileDialog));
+        }
+
+        private void ImportXuFuEncounters()
+        {
+            backgroundWorker.RunWorkerAsync((ImportTask.XuFuEncounters, new OpenFileDialog()));
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var fileDialog = (OpenFileDialog)e.Argument;
+            var arguments = ((ImportTask Task, OpenFileDialog FileDialog))e.Argument;
+
+            switch (arguments.Task)
+            {
+                case ImportTask.Achievements:
+                    ImportAchievements_DoWork(arguments.FileDialog);
+                    break;
+                case ImportTask.UIMaps:
+                    ImportUIMaps_DoWork(arguments.FileDialog);
+                    break;
+                case ImportTask.XuFuEncounters:
+                    ImportXuFuEncounters_DoWork();
+                    break;
+            }
+        }
+
+        private void ImportAchievements_DoWork(OpenFileDialog fileDialog)
+        {
             var fileStream = fileDialog.OpenFile();
             using StreamReader reader = new StreamReader(fileStream);
             reader.ReadLine(); // Skip 1st line (header)
@@ -116,11 +160,110 @@ namespace DbManagerWPF.ViewModel
             }
         }
 
+        private void ImportUIMaps_DoWork(OpenFileDialog fileDialog)
+        {
+            var fileStream = fileDialog.OpenFile();
+            using StreamReader reader = new StreamReader(fileStream);
+            reader.ReadLine(); // Skip 1st line (header)
+            var fileContent = reader.ReadToEnd();
+            Regex.Replace(fileContent, "'", "''");
+            var matches = Regex.Matches(fileContent, @"(?:(?:""|)(?<OriginalName>.*?)(?:""|)),(?<ID>\d*),.*?,.*?,.*?,.*?,.*?,.*?,.*?,.*?,.*?,.*?,.*?\n");
+            for (int i = 0; i < matches.Count; i++)
+            {
+                backgroundWorker.ReportProgress(i + 1, matches.Count);
+                int.TryParse(matches[i].Groups["ID"].Value, out int id);
+                _ = id == 0 ? throw new IndexOutOfRangeException($"'{matches[i].Groups["ID"].Value}' is not a valid ID") : "";
+                uiMapDM.UpdateAGT(id, matches[i].Groups["OriginalName"].Value);
+            }
+        }
+
+        private void ImportXuFuEncounters_DoWork()
+        {
+            WebClient webClient = new WebClient();
+
+            // Get max id as this is variable
+            var j = 10000;
+            var prevID = 0;
+            var lower = prevID;
+            var upper = j;
+            while (prevID != j)
+            {
+                backgroundWorker.ReportProgress(0, j);
+                prevID = j;
+                int checkFails = 0;
+                for (int i = j; i < j + 5; i++)
+                {
+                    if (GetXuFuEncounter(webClient, i) == null)
+                        checkFails += 1;
+                    else
+                        break;
+                }
+
+                if (checkFails >= 5)
+                {
+                    upper = j;
+                    j = lower + (j - lower) / 2;
+                }
+                else
+                {
+                    lower = j;
+                    j += (upper - j) / 2;
+                }
+            }
+
+            // Get all id's and add/update to database
+            var addedCounter = 0;
+            for (int i = 1; i <= j; i++)
+            {
+                backgroundWorker.ReportProgress(i, j);
+
+                // Get info from webpage
+                var xuFuEncounter = GetXuFuEncounter(webClient, i);
+                if (xuFuEncounter == null)
+                    continue;
+
+                xuFuEncounterDM.UpdateAGT(xuFuEncounter);
+                addedCounter++;
+            }
+        }
+
+        private XuFuEncounter GetXuFuEncounter(WebClient webClient, int id)
+        {
+            string source = webClient.DownloadString($"https://en.wow-petguide.com//Encounter/{id}");
+            source = WebUtility.HtmlDecode(source);
+            string name = Regex.Match(source, @"\<title\b[^>]*\>\s*Xu-Fu Strategy vs\. (?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
+            string sourceFamily = Regex.Match(source, "<link rel=\"alternate\" hreflang=\"en\" href=\"https://www.wow-petguide.com/Strategy/.*?/(?<Alternate>.*?)\">", RegexOptions.IgnoreCase).Groups["Alternate"].Value;
+            string name2 = Regex.Match(source, @"""activebutton.*?>(?<Name>.*?)<", RegexOptions.IgnoreCase).Groups["Name"].Value;
+            string section = null;
+            var sections = Regex.Matches(source, "highlight\".*?>(?<Highlight>.*?)<");
+            foreach (Match item in sections)
+                section += $"{item.Groups["Highlight"].Value}; ";
+            section?.Trim();
+            //bool ignore = Regex.Match(source, "highlight\" href=\"/Section/35/Falcosaur_Team_Rumble").Success;
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(name2) || string.IsNullOrEmpty(section) /*|| ignore*/) // Skip if the page is no encounter
+                return null;
+
+            // Process webpage info
+            //sourceFamily = sourceFamily.Substring(Math.Min(name.Length + 1, sourceFamily.Length)).Replace("_", " ").Trim();
+            sourceFamily = sourceFamily.Split('-').Last();
+
+            Enum.TryParse(sourceFamily, out PetFamily family);
+
+            return new XuFuEncounter()
+            {
+                ID = id,
+                Name = name2.Trim(),
+                Family = family,
+                Section = section.Trim()
+            };
+        }
+
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            ImportAchievementsMax = (int)e.UserState;
-            ImportAchievementsValue = e.ProgressPercentage;
-            ImportAchievementsText = $"{ImportAchievementsValue} / {ImportAchievementsMax}";
+            ImportMax = (int)e.UserState;
+            ImportValue = e.ProgressPercentage;
+            ImportText = $"{ImportValue} / {ImportMax}";
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

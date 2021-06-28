@@ -21,6 +21,8 @@ namespace DbManagerWPF.ViewModel
         public ICommand ExportMapsCommand => new CommandHandler(() => ExportMaps(), () => true);
 
         public ICommand ExportPetBattlesCommand => new CommandHandler(() => ExportPetBattles(), () => true);
+
+        public ICommand ExportAllCommand => new CommandHandler(() => ExportAll(), () => true);
         #endregion
 
         #region ExportAchievements
@@ -429,6 +431,15 @@ namespace DbManagerWPF.ViewModel
             }
         }
         #endregion
+
+        private void ExportAll()
+        {
+            ExportAchievements();
+            ExportNextPatchAchievements();
+            ExportCategories();
+            ExportMaps();
+            ExportPetBattles();
+        }
 
         private string TrimNils(string input)
         {

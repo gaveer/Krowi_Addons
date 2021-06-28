@@ -3,8 +3,6 @@ using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DbManagerWPF.DataManager
 {
@@ -245,5 +243,27 @@ namespace DbManagerWPF.DataManager
             cmd.ExecuteNonQuery();
         }
 
+        public void UpdateAGT(int id, string originalName)
+        {
+            _ = id <= 0 ? throw new ArgumentException("Should be greater than 0", nameof(id)) : "";
+            _ = originalName ?? throw new ArgumentNullException(nameof(originalName));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"INSERT OR REPLACE INTO UIMap_AGT VALUES (@ID, @OriginalName,
+	                                CASE WHEN (SELECT COUNT(*) FROM UIMap_AGT WHERE ID = @ID) > 0 THEN
+		                                (SELECT DateAdded FROM UIMap_AGT WHERE ID = @ID) ELSE DATETIME('now', 'localtime')
+	                                END,
+	                                CASE WHEN (SELECT OriginalName FROM UIMap_AGT WHERE ID = @ID) = @OriginalName THEN
+		                                (SELECT DateChanged FROM UIMap_AGT WHERE ID = @ID) ELSE DATETIME('now', 'localtime')
+	                                END,
+	                                CASE WHEN (SELECT OriginalName FROM UIMap_AGT WHERE ID = @ID) != @OriginalName THEN
+		                                (SELECT OriginalName FROM UIMap_AGT WHERE ID = @ID) ELSE (SELECT OldOriginalName FROM UIMap_AGT WHERE ID = @ID)
+	                                END,
+	                                (SELECT Name FROM UIMap_AGT WHERE ID = @ID), (SELECT Comment FROM UIMap_AGT WHERE ID = @ID), (SELECT ParentID FROM UIMap_AGT WHERE ID = @ID));";
+            cmd.Parameters.AddWithValue("@ID", id);
+            cmd.Parameters.AddWithValue("@OriginalName", originalName);
+
+            cmd.ExecuteNonQuery();
+        }
     }
 }

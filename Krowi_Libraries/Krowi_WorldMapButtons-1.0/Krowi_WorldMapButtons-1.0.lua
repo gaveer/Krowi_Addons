@@ -18,7 +18,7 @@
 		the copyright holders.
 ]]
 
-local lib = LibStub:NewLibrary('KrowiWorldMapButtons-1.0', 1);
+local lib = LibStub:NewLibrary('Krowi_WorldMapButtons-1.0', 1);
 
 if not lib then
 	return;

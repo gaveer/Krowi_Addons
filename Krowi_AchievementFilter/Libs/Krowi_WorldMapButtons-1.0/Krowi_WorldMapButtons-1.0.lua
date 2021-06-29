@@ -38,11 +38,9 @@ end
 
 local hookedDefaultButtons;
 local function HookDefaultButtons()
-	local refresh = WorldMapFrame.RefreshOverlayFrames;
-	WorldMapFrame.RefreshOverlayFrames = function()
-		refresh(WorldMapFrame);
-		SetPoints(); -- At this point we know which ones are shown
-	end
+	hooksecurefunc(WorldMapFrame, "RefreshOverlayFrames", function()
+		SetPoints();
+	end);
 
 	for _, f in next, WorldMapFrame.overlayFrames do
         if WorldMapTrackingOptionsButtonMixin and f.OnLoad == WorldMapTrackingOptionsButtonMixin.OnLoad then
@@ -88,7 +86,6 @@ function lib:Add(templateName, templateType)
 	-- end
 
 	local xOffset = 4 + #buttons * 32;
-	-- print(xOffset);
 
 	local button = WorldMapFrame:AddOverlayFrame(templateName, templateType, "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -xOffset, -2);
 

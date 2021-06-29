@@ -98,7 +98,7 @@ function loadHelper:OnEvent(event, arg1)
             addon.Data.SavedData.Load();
 
             addon.GUI.ElvUISkin.Load();
-            addon.GUI.WorldMapButton.Load("TemplateName (need to write)", "BUTTON");
+            -- addon.GUI.WorldMapButton.Load();
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load

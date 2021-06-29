@@ -535,6 +535,30 @@ function filterButton:OnMouseDown()
                             NotCheckable = false,
                             KeepShownOnClick = true
                         });
+    sortBy:AddChildFull({   Text = addon.L["Completion"],
+                            Checked = function() -- Same
+                                return self.Filters.db.SortBy.Criteria == addon.L["Completion"]
+                            end,
+                            Func = function()
+                                self.Filters.db.SortBy.Criteria = addon.L["Completion"];
+                                menu:SetSelectedName(addon.L["Completion"]);
+                                self.AchievementsFrame:ForceUpdate();
+                            end,
+                            NotCheckable = false,
+                            KeepShownOnClick = true
+                        });
+    sortBy:AddChildFull({   Text = addon.L["ID"],
+                            Checked = function() -- Same
+                                return self.Filters.db.SortBy.Criteria == addon.L["ID"]
+                            end,
+                            Func = function()
+                                self.Filters.db.SortBy.Criteria = addon.L["ID"];
+                                menu:SetSelectedName(addon.L["ID"]);
+                                self.AchievementsFrame:ForceUpdate();
+                            end,
+                            NotCheckable = false,
+                            KeepShownOnClick = true
+                        });
     sortBy:AddSeparator();
     sortBy:AddChildFull({   Text = addon.L["Reverse Sort"],
                             Checked = function() -- Same

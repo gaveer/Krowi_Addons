@@ -105,6 +105,7 @@ local function GetFilteredAchievements(self, category)
 	diagnostics.Trace("GetFilteredAchievements");
 
 	local achievements = {};
+	local indexes = {};
 
 	local validate = Validate;
 	if category == addon.CurrentZoneCategory then
@@ -115,6 +116,7 @@ local function GetFilteredAchievements(self, category)
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
 			validate(self, achievements, achievement);
+			indexes[achievement] = #achievements;
 		end
 	end
 
@@ -122,21 +124,13 @@ local function GetFilteredAchievements(self, category)
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
 			validate(self, achievements, achievement);
+			indexes[achievement] = #achievements;
 		end
 	end
 
 	if category.Achievements or category.MergedAchievements then
 		-- Sort achievements
-		if self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Default"] then
-			-- diagnostics.Debug("Sort By " .. addon.L["Default"]);
-			if self.FilterButton.Filters.db.SortBy.ReverseSort then
-				local tmpTbl = {};
-				for i = #achievements, 1, -1 do
-					tinsert(tmpTbl, achievements[i]);
-				end
-				achievements = tmpTbl;
-			end
-		elseif self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Name"] then
+		if self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Name"] then
 			-- diagnostics.Debug("Sort By " .. addon.L["Name"]);
 			table.sort(achievements, function(a, b)
 				local _, nameA = addon.GetAchievementInfo(a.ID);
@@ -147,6 +141,48 @@ local function GetFilteredAchievements(self, category)
 				end
 				return compare;
 			end);
+		elseif self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Completion"] then
+			-- diagnostics.Debug("Sort By " .. addon.L["Completion"]);
+			table.sort(achievements, function(a, b)
+				local completedA = false;
+				if a then
+					_, _, _, completedA = addon.GetAchievementInfo(a.ID);
+				end
+				local completedB = false;
+				if b then
+					_, _, _, completedB = addon.GetAchievementInfo(b.ID);
+				end
+				local compare = completedA;
+				if self.FilterButton.Filters.db.SortBy.ReverseSort then
+					if completedA == completedB then
+						compare = indexes[a] > indexes[b];
+					end
+					compare = not compare;
+				else
+					if completedA == completedB then
+						compare = indexes[a] < indexes[b];
+					end
+				end
+				return compare;
+			end);
+		elseif self.FilterButton.Filters.db.SortBy.Criteria == addon.L["ID"] then
+			-- diagnostics.Debug("Sort By " .. addon.L["ID"]);
+			table.sort(achievements, function(a, b)
+				local compare = a.ID < b.ID;
+				if self.FilterButton.Filters.db.SortBy.ReverseSort then
+					compare = not compare;
+				end
+				return compare;
+			end);
+		else -- self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Default"]
+			-- diagnostics.Debug("Sort By " .. addon.L["Default"]);
+			if self.FilterButton.Filters.db.SortBy.ReverseSort then
+				local tmpTbl = {};
+				for i = #achievements, 1, -1 do
+					tinsert(tmpTbl, achievements[i]);
+				end
+				achievements = tmpTbl;
+			end
 		end
 	end
 

@@ -5,12 +5,14 @@ All notable changes to this project will be documented in this file.
 ### Added
 - More zone data for multi-zone achievements for Shadowlands
 - Current Zone category now has a seperate filter in preparation for the World Map Button coming in a later version
+- Sort By Completion and Sort By ID
 
 ### Changed
 - Backend data structure completely rewritten in preperation for new features
 - Coming in 9.1 merged into the other categories
 - Moved Covenant Campaign achievement from Shadowlands - Zones to Shadowlands - Covenant Sanctum
 - Filter settings stored in new location (reset of saved settings unfortunatly)
+- Torghast wings are split into separate categories but can merged into the main one 
 
 ### Fixed
 - Northrend Explorer now shows for both factions

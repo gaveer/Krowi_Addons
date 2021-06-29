@@ -33,6 +33,8 @@ L["Select all"] = "Select all";
 L["Reverse Sort"] = "Reverse Sort";
 L["Collapse Chain"] = "Collapse Chain";
 L["Merge Small Categories"] = "Merge Small Categories";
+L["Completion"] = "Completion";
+L["ID"] = "ID";
 
 -- Tooltips
 L["Part of a chain"] = "Part of a chain";

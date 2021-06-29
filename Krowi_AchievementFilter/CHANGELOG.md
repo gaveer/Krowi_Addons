@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.24.0] - 
+## [9.1.0.24.0] - 2021-06-29
 ### Added
 - More zone data for multi-zone achievements for Shadowlands
 - Current Zone category now has a seperate filter in preparation for the World Map Button coming in a later version
@@ -451,7 +451,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.1.0.24.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.1.0.24.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3369293
 [9.0.5.23.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3326868
 [9.0.5.22.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3308327
 [9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611

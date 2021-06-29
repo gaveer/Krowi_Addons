@@ -21,6 +21,64 @@ function addon.GetActiveCovenant()
     return C_Covenants.GetActiveCovenantID() + 1; -- 1 offset since Covenant Enum is 1 based (lua) and Covenant Database Table 0 based
 end
 
+-- [[ Achievements ]] --
+function addon.GetAchievement(id)
+    addon.Diagnostics.Trace("addon.GetAchievement");
+
+	for _, achievement in next, addon.Achievements do
+		if achievement.ID == id then
+            addon.Diagnostics.Debug(achievement);
+			return achievement;
+		end
+	end
+end
+
+function addon.GetAchievementsInZone(mapID)
+    addon.Diagnostics.Trace("addon.GetAchievementsInZone");
+
+    -- Differentiate between 10 and 25 man raids and Normal and Heroic raids
+    local player10 = GetDifficultyInfo(3); -- 10 player
+    local player10Hc = GetDifficultyInfo(5); -- 10 player
+    local player25 = GetDifficultyInfo(4); -- 25 player
+    local player25Hc = GetDifficultyInfo(6); -- 25 player
+    local _, _, _, difficulty = GetInstanceInfo();
+
+    local achievements;
+    if addon.Maps[mapID] == nil then
+        return {};
+    else
+        achievements = addon.Maps[mapID].Achievements or {};
+    end
+
+    if difficulty ~= "" then
+        if difficulty == player10 or difficulty == player10Hc then
+            -- checkCategory = not string.find(category.Name, player25);
+            tinsert(achievements, addon.Maps[mapID].Achievements10);
+        elseif difficulty == player25 or difficulty == player25Hc then
+            -- checkCategory = not string.find(category.Name, player10);
+            tinsert(achievements, addon.Maps[mapID].Achievements25);
+        end
+    end
+
+    return achievements;
+end
+
+function addon.GetAchievementInfo(achievementID, excludeNextPatch)
+    local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);
+    if id then
+        return id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy;
+    end
+
+    if not excludeNextPatch then
+        local achievement = addon.NextPatchAchievements[achievementID];
+        if achievement then
+            return achievement[1], achievement[2], achievement[3], false, nil, nil, nil, achievement[4], achievement[5], achievement[6], achievement[7], false, nil, false;
+        end
+    end
+
+    return nil; -- Achievement info not found, default function also returns nil when not found
+end
+
 -- [[ IAT integration ]] --
 function addon.IsIATLoaded()
     return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
@@ -40,9 +98,9 @@ function loadHelper:OnEvent(event, arg1)
             addon.Data.SavedData.Load();
 
             addon.GUI.ElvUISkin.Load();
+            -- addon.GUI.WorldMapButton.Load();
             addon.Icon.Load();
             addon.Tutorials.Load();
-
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             addon.Data.Load();
 
@@ -56,7 +114,7 @@ function loadHelper:OnEvent(event, arg1)
             addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
         end
     elseif event == "PLAYER_LOGIN" then
-        addon.Options.SetFilters();
+        -- addon.GUI.FilterButton:ResetFilters();
 
         if addon.Diagnostics.DebugEnabled() then
             hooksecurefunc(WorldMapFrame, "OnMapChanged", function()

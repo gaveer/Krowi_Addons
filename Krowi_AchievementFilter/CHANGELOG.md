@@ -1,9 +1,25 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.0.5.24.0] - 
+## [9.1.0.24.0] - 2021-06-29
 ### Added
-- TBD
+- More zone data for multi-zone achievements for Shadowlands
+- Current Zone category now has a seperate filter in preparation for the World Map Button coming in a later version
+- Sort By Completion and Sort By ID
+
+### Changed
+- Backend data structure completely rewritten in preperation for new features
+- Coming in 9.1 merged into the other categories
+- Moved Covenant Campaign achievement from Shadowlands - Zones to Shadowlands - Covenant Sanctum
+- Filter settings stored in new location (reset of saved settings unfortunatly)
+- Torghast wings are split into separate categories but can merged into the main one 
+
+### Fixed
+- Northrend Explorer now shows for both factions
+- Guardian of Cenarius now shows for both factions
+- Page 6's text of the tutorials could be outside the frame with certain text fonts
+- Northrend Safari, Northrend Tamer and Taming Northrend are now obtainable
+- Discord link replaced with one that does not expire
 
 ## [9.0.5.23.0] - 2021-05-27
 ### Added
@@ -435,7 +451,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.0.5.24.0]: https://github.com/TheKrowi/Krowi_Addons/tree/master/Krowi_AchievementFilter
+[9.1.0.24.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3369293
 [9.0.5.23.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3326868
 [9.0.5.22.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3308327
 [9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611

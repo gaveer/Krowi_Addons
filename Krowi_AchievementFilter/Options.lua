@@ -5,7 +5,7 @@ local diagnostics = addon.Diagnostics;
 addon.Options = {}; -- Will be overwritten in Load (intended)
 local options = addon.Options;
 
-local popupDialog = LibStub("KrowiPopopDialog-1.0");
+local popupDialog = LibStub("Krowi_PopopDialog-1.0");
 
 local defaults = {
     profile = {
@@ -45,34 +45,6 @@ local defaults = {
             NumberOfSearchPreviews = 5,
             ClearOnRightClick = true,
             ExcludeNextPatch = true
-        },
-        Filters = {
-            Completion = {
-                Completed = true,
-                NotCompleted = true
-            },
-            Obtainability = {
-                Obtainable = true,
-                NotObtainable = false
-            },
-            Faction = {
-                Neutral = true,
-                Alliance = false,
-                Horde = false
-            },
-            Covenant = {
-                Neutral = true,
-                Kyrian = false,
-                Venthyr = false,
-                NightFae = false,
-                Necrolord = false
-            },
-            CollapseSeries = true,
-            MergeSmallCategories = true,
-            SortBy = {
-                Criteria = addon.L["Default"],
-                ReverseSort = false
-            }
         }
     }
 }
@@ -118,7 +90,7 @@ local function CreatePanel()
                                 type = "execute",
                                 order = 1.3,
                                 func = function()
-                                    local menu = LibStub("KrowiMenu-1.0");
+                                    local menu = LibStub("Krowi_Menu-1.0");
                                     local pages = addon.Tutorials.FeaturesTutorial.Pages;
 
                                     -- Reset menu
@@ -166,7 +138,7 @@ local function CreatePanel()
                                 order = 2.3,
                                 func = function()
                                     InterfaceOptionsFrame:Hide();
-                                    popupDialog.ShowExternalLink("https://discord.gg/XGkergM2");
+                                    popupDialog.ShowExternalLink("https://discord.gg/DCxq5rRNW5");
                                 end
                             },
                             blank31 = {
@@ -263,6 +235,7 @@ local function CreatePanel()
                                 end
                             },
                             ExcludeNextPatch = {
+                                hidden = true,
                                 name = addon.L["Exclude Next Patch"],
                                 desc = core.ReplaceVars{addon.L["Exclude Next Patch Desc"],
                                                         spoilerWarning = string.format(addon.Orange, addon.L["* SPOILER WARNING *"])},
@@ -751,20 +724,6 @@ local function CreatePanel()
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(AF_NAME, nil, nil);
 end
 
-local function SetFilters()
-    -- Always reset faction filter
-    addon.Options.db.Filters.Faction.Neutral = true;
-    addon.Options.db.Filters.Faction.Alliance = addon.Faction.IsAlliance;
-    addon.Options.db.Filters.Faction.Horde = addon.Faction.IsHorde;
-
-    -- Always reset covenant filter
-    for covenant, _ in next, addon.Options.db.Filters.Covenant do
-        addon.Options.db.Filters.Covenant[covenant] = false;
-    end
-    addon.Options.db.Filters.Covenant.Neutral = true;
-    addon.Options.db.Filters.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
-end
-
 local function Open()
     InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
     InterfaceOptionsFrame_OpenToCategory(AF_NAME);
@@ -773,7 +732,6 @@ end
 -- Load the options
 function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
-    addon.Options.SetFilters = SetFilters;
     addon.Options.Open = Open;
     addon.Options.db = addon.Options.profile;
 

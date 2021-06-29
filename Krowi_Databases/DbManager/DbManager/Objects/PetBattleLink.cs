@@ -16,8 +16,8 @@
         public int CriteriaNumber { get; set; }
         public string Name { get; set; }
         public PetBattleLink Parent { get; set; }
-        public string ExternalLink { get; set; }
         public PetFamily Family { get; set; }
+        public string ExternalLink { get; set; }
 
         public override string ToString()
         {

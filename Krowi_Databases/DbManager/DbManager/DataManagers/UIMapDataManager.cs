@@ -1,12 +1,56 @@
 ﻿using DbManager.Objects;
 using Microsoft.Data.Sqlite;
 using System;
+using System.Collections.Generic;
 
 namespace DbManager.DataManagers
 {
     public class UIMapDataManager : DataManagerBase
     {
         public UIMapDataManager(SqliteConnection connection) : base(connection) { }
+
+        public List<UIMap> GetAll()
+        {
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+                                    MAP.ID, MAP.OriginalName, MAP.Name
+                                FROM
+                                    UIMap_AGT MAP
+                                ORDER BY
+                                    MAP.ID;";
+
+            var uiMaps = new List<UIMap>();
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    uiMaps.Add(new UIMap(reader.GetInt32(0), reader.IsDBNull(1) ? null : reader.GetString(1), reader.IsDBNull(2) ? null : reader.GetString(2)));
+
+            return uiMaps;
+        }
+
+        public List<UIMap> GetWithAchievement(Achievement achievement)
+        {
+            _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+	                                MAP.ID, MAP.OriginalName, MAP.Name
+                                FROM
+	                                UIMap_AGT MAP
+	                                LEFT JOIN UIMapAchievement MAPA
+		                                ON MAP.ID == MAPA.UIMapID
+                                WHERE
+                                    MAPA.AchievementID = @AchievementID
+                                ORDER BY
+	                                MAP.ID;";
+            cmd.Parameters.AddWithValue("@AchievementID", achievement.ID);
+
+            var uiMaps = new List<UIMap>();
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    uiMaps.Add(new UIMap(reader.GetInt32(0), reader.IsDBNull(1) ? null : reader.GetString(1), reader.IsDBNull(2) ? null : reader.GetString(2)));
+
+            return uiMaps;
+        }
 
         public void Update(UIMap uiMap)
         {

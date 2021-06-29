@@ -36,6 +36,11 @@
 <ul>
 <li><strong><em>Right Click Menu</em></strong> for the default Blizzard tabs with initially only a link to Wowhead.</li>
 </ul>
+<p><strong>Suggestions for future versions</strong></p>
+<ul>
+<li>Custom filters the player can add.</li>
+<li>Exclude achievements.</li>
+</ul>
 <p>More features are planned in the future and can be requested via the issues system or discord.</p>
-<p>Feel free to join discord and say hi: https://discord.gg/eht7Xqn7.</p>
+<p>Feel free to join discord and say hi: <a href="https://discord.gg/DCxq5rRNW5">https://discord.gg/eht7Xqn7</a>.</p>
 <p>Creating and maintaining addons takes a lot of time. If you can miss something, feel free to drop a donation!<br /><span style="font-size: 10px;"><em>(Button on the right)</em></span></p>

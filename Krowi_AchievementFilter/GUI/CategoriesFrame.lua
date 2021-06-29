@@ -172,7 +172,7 @@ local function GetAchievementNumbers(self, category)
 		end
 	end
 
-	if addon.Options.db.Filters.MergeSmallCategories then
+	if self.FilterButton.Filters.db.MergeSmallCategories then
 		if category.Parent and category.CanMerge then
 			if category.Achievements then
 				if numOfAch < addon.Options.db.Window.MergeSmallCategoriesThreshold then
@@ -250,7 +250,7 @@ function categoriesFrame:Update(getAchNums)
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
-local progressBar = LibStub("KrowiProgressBar-1.0");
+local progressBar = LibStub("Krowi_ProgressBar-1.0");
 local function StatusBarTooltip(self)
 	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
 	GameTooltip:SetOwner(self, "ANCHOR_NONE");

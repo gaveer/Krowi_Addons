@@ -95,47 +95,94 @@ local function Validate(self, achievements, achievement)
 	end
 end
 
+local function ValidateCurrentZone(self, achievements, achievement)
+	if self.FilterButton and self.FilterButton:ValidateCurrentZone(achievement) > 0 then
+		tinsert(achievements, achievement);
+	end
+end
+
 local function GetFilteredAchievements(self, category)
 	diagnostics.Trace("GetFilteredAchievements");
 
 	local achievements = {};
+	local indexes = {};
+
+	local validate = Validate;
+	if category == addon.CurrentZoneCategory then
+		validate = ValidateCurrentZone;
+	end
 
 	-- Filter achievements
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
-			Validate(self, achievements, achievement);
+			validate(self, achievements, achievement);
+			indexes[achievement] = #achievements;
 		end
 	end
 
 	-- Filter merged achievements
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
-			Validate(self, achievements, achievement);
+			validate(self, achievements, achievement);
+			indexes[achievement] = #achievements;
 		end
 	end
 
 	if category.Achievements or category.MergedAchievements then
 		-- Sort achievements
-		if addon.Options.db.Filters.SortBy.Criteria == addon.L["Default"] then
+		if self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Name"] then
+			-- diagnostics.Debug("Sort By " .. addon.L["Name"]);
+			table.sort(achievements, function(a, b)
+				local _, nameA = addon.GetAchievementInfo(a.ID);
+				local _, nameB = addon.GetAchievementInfo(b.ID);
+				local compare = nameA:lower() < nameB:lower();
+				if self.FilterButton.Filters.db.SortBy.ReverseSort then
+					compare = not compare;
+				end
+				return compare;
+			end);
+		elseif self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Completion"] then
+			-- diagnostics.Debug("Sort By " .. addon.L["Completion"]);
+			table.sort(achievements, function(a, b)
+				local completedA = false;
+				if a then
+					_, _, _, completedA = addon.GetAchievementInfo(a.ID);
+				end
+				local completedB = false;
+				if b then
+					_, _, _, completedB = addon.GetAchievementInfo(b.ID);
+				end
+				local compare = completedA;
+				if self.FilterButton.Filters.db.SortBy.ReverseSort then
+					if completedA == completedB then
+						compare = indexes[a] > indexes[b];
+					end
+					compare = not compare;
+				else
+					if completedA == completedB then
+						compare = indexes[a] < indexes[b];
+					end
+				end
+				return compare;
+			end);
+		elseif self.FilterButton.Filters.db.SortBy.Criteria == addon.L["ID"] then
+			-- diagnostics.Debug("Sort By " .. addon.L["ID"]);
+			table.sort(achievements, function(a, b)
+				local compare = a.ID < b.ID;
+				if self.FilterButton.Filters.db.SortBy.ReverseSort then
+					compare = not compare;
+				end
+				return compare;
+			end);
+		else -- self.FilterButton.Filters.db.SortBy.Criteria == addon.L["Default"]
 			-- diagnostics.Debug("Sort By " .. addon.L["Default"]);
-			if addon.Options.db.Filters.SortBy.ReverseSort then
+			if self.FilterButton.Filters.db.SortBy.ReverseSort then
 				local tmpTbl = {};
 				for i = #achievements, 1, -1 do
 					tinsert(tmpTbl, achievements[i]);
 				end
 				achievements = tmpTbl;
 			end
-		elseif addon.Options.db.Filters.SortBy.Criteria == addon.L["Name"] then
-			-- diagnostics.Debug("Sort By " .. addon.L["Name"]);
-			table.sort(achievements, function(a, b)
-				local _, nameA = addon.GetAchievementInfo(a.ID);
-				local _, nameB = addon.GetAchievementInfo(b.ID);
-				local compare = nameA:lower() < nameB:lower();
-				if addon.Options.db.Filters.SortBy.ReverseSort then
-					compare = not compare;
-				end
-				return compare;
-			end);
 		end
 	end
 
@@ -479,7 +526,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 	end
 
 	local category;
-	if addon.Options.db.Filters.MergeSmallCategories then
+	if self.FilterButton.Filters.db.MergeSmallCategories then
 		category = achievement:GetMergedCategory(); -- This way we get the parent category
 		diagnostics.Debug(category.Name);
 	else

@@ -27,7 +27,7 @@ namespace DbManager.GUI
 
             var functions = ((FunctionDataManager)DataManager).GetAll();
 
-            comboBox.Items.Add(new Function(-1, null, null)); // Empty Function
+            comboBox.Items.Add(new Function()); // Empty Function
             foreach (var function in functions)
                 comboBox.Items.Add(function);
 

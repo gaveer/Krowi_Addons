@@ -1,6 +1,6 @@
 ﻿namespace DbManager.Objects
 {
-    // <remarks>Needs to be in sync with the Faction table in the database.</remarks>
+    // <remarks>Needs to be in sync with the Covenant table in the database.</remarks>
     public enum Covenant
     {
         NoCovenant = 0,

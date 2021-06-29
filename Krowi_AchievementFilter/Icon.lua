@@ -24,7 +24,8 @@ local function CreateIcon()
         OnTooltipShow = function(tt)
             tt:ClearLines();
             tt:AddDoubleLine(AF_NAME, AF_BUILD_VERSION);
-            tt:AddLine(" "); -- Empty line
+            -- tt:AddLine(" "); -- Empty line
+		    GameTooltip_AddBlankLineToTooltip(tt);
             tt:AddLine(addon.L["Left click"] .. " " .. string.format(addon.AddonBlue, addon.L["Icon Left click"]));
             tt:AddLine(addon.L["Right click"] .. " "  .. string.format(addon.AddonBlue, addon.L["Icon Right click"]));
         end,

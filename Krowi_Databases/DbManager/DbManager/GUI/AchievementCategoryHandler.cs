@@ -99,7 +99,15 @@ namespace DbManager.GUI
             AchievementCategory parent = asParent ? selectedCategory : selectedCategory.Parent;
 
             achievementCategoryName = string.IsNullOrEmpty(achievementCategoryName) ? function.Description : achievementCategoryName;
-            var category = new AchievementCategory(-1, location, achievementCategoryName, parent, function, functionValue, isLegacy, false, true, false);
+            var category = new AchievementCategory()
+            {
+                Location = location,
+                Name = achievementCategoryName,
+                Parent = parent,
+                Function = function,
+                FunctionValue = functionValue,
+                Legacy = isLegacy
+            };
             dataManager.Add(category);
 
             if (!asParent)
@@ -154,12 +162,12 @@ namespace DbManager.GUI
 
         public void UpdateMapIDs(string mapIDsString)
         {
-            List<int> mapIDs;
-            if (string.IsNullOrEmpty(mapIDsString))
-                mapIDs = new List<int>();
-            else
-                mapIDs = mapIDsString.Split(',').Select(x => int.Parse(x.Trim())).ToList();
-            dataManager.UpdateMapIDs(GetSelectedAchievementCategory(), mapIDs);
+            //List<int> mapIDs;
+            //if (string.IsNullOrEmpty(mapIDsString))
+            //    mapIDs = new List<int>();
+            //else
+            //    mapIDs = mapIDsString.Split(',').Select(x => int.Parse(x.Trim())).ToList();
+            //dataManager.UpdateMapIDs(GetSelectedAchievementCategory(), mapIDs);
         }
 
         public void MoveUp()
@@ -244,7 +252,7 @@ namespace DbManager.GUI
                 else // removed item was 1st element so we use next element and adjust from a fictional 1st element
                 {
                     var categories2 = nextNode.Parent.Nodes.Cast<AchievementCategoryTreeNode>().Select(x => x.AchievementCategory).ToList();
-                    dataManager.UpdateLocations(new AchievementCategory(-1, -1, "TEMP", null, null, null, false, false, false, false), categories2);
+                    dataManager.UpdateLocations(new AchievementCategory(), categories2);
                 }
             }
 

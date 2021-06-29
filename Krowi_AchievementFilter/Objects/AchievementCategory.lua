@@ -7,13 +7,11 @@ local category = objects.AchievementCategory; -- Locally we can use just categor
 
 -- [[ Constructors ]] --
 category.__index = category;
-function category:New(name, mapIDs, ignoreParentMapIDs, canMerge) -- Creates a new achievement category
+function category:New(name, canMerge) -- Creates a new achievement category
     local self = {};
     setmetatable(self, category);
 
     self.Name = name or "Unknown";
-    self.MapIDs = mapIDs or {};
-    self.IgnoreParentMapIDs = ignoreParentMapIDs;
     self.CanMerge = canMerge;
     self.Level = 0;
     self.NotHidden = true;
@@ -32,22 +30,6 @@ function category:AddCategory(cat) -- Adds a child achievement category to the a
     cat.NotHidden = nil; -- Has parent so initially we are hidden
     return cat;
 end
-
--- local function RemoveCategory(self, cat)
---     for i, cat2 in next, self.Children do
---         if cat.Name == cat2.Name then
---             tremove(self.Children, i);
---             return;
---         end
---     end
--- end
-
--- function category:RemoveCategory(cat)
---     RemoveCategory(self, cat);
---     if #self.Children == 0 then
---         self.Children = nil;
---     end
--- end
 
 function category:MergeAchievement(achievement)
     if self.MergedAchievements == nil then

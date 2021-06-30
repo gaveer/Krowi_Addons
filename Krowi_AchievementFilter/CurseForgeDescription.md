@@ -1,4 +1,4 @@
-<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3000 achievements are added so far.</p>
+<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3350 achievements are added so far.</p>
 <p><strong>Categories</strong></p>
 <ul>
 <li>The <em><strong>Current Zone</strong></em> category show which achievements are related to the current zone you're in. (This is still being approved on.)</li>
@@ -12,7 +12,7 @@
 <li><strong><em>Legion</em></strong> expansion feature: Brawler's Guild and Class Hall.</li>
 <li><strong><em>Battle for Azeroth</em></strong> expansion feature: Brawler's Guild, Island Expeditions, War Effort, Heart of Azeroth and Visions of N'Zoth.</li>
 <li><strong><em>Shadowlands</em></strong> expansion feature: Torghast and Covenant Sanctums.</li>
-<li><strong><em>Coming in x</em></strong>: New achievements coming in the next patch hidden behind a * SPOLER WARNING *.</li>
+<li><del><strong><em>Coming in x</em></strong>: New achievements coming in the next patch hidden behind a * SPOLER WARNING *</del></li>
 <li>Unobtainable <strong><em>Legacy</em> </strong>categories can be found when the 'Not Obtainable' filter is checked.</li>
 </ul>
 <p><strong>Features</strong></p>
@@ -25,12 +25,12 @@
 <li>A <em><strong>tutorial</strong> </em>for first time users with an ingame explanation of the most important features.</li>
 <li>The option to <strong><em>keybind</em></strong> the new tab so it opens in one go. (Game Menu -&gt; Key Bindings -&gt; Addons -&gt; Krowi's Achievement Filter)</li>
 <li><strong><em>ElvUI skin</em></strong>. (See the ingame options on how to enable each part.)</li>
-<li>Coming in 9.1 section. This section is guarded with spoiler warnings and will be removed once 9.1 is live.</li>
+<li><del>Coming in 9.1 section. This section is guarded with spoiler warnings and will be removed once 9.1 is live.</del></li>
 <li>Clicking achievements in meta achievements select the achievement in the new tab.</li>
 </ul>
 <p><strong>Planned in next version</strong></p>
 <ul>
-<li>Probably 9.1 full release.</li>
+<li>Worldmap button. This is similar to the Current Zone category but will show achievements for the zone you're viewing.</li>
 </ul>
 <p><strong>Planned in future version</strong></p>
 <ul>
@@ -42,5 +42,5 @@
 <li>Exclude achievements.</li>
 </ul>
 <p>More features are planned in the future and can be requested via the issues system or discord.</p>
-<p>Feel free to join discord and say hi: <a href="https://discord.gg/DCxq5rRNW5">https://discord.gg/eht7Xqn7</a>.</p>
+<p>Feel free to join discord and say hi: <a href="https://discord.gg/DCxq5rRNW5">https://discord.gg/DCxq5rRNW5</a>.</p>
 <p>Creating and maintaining addons takes a lot of time. If you can miss something, feel free to drop a donation!<br /><span style="font-size: 10px;"><em>(Button on the right)</em></span></p>

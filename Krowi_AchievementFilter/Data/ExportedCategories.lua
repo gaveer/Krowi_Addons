@@ -1,4 +1,4 @@
--- [[ Exported at 2021-06-28 13-13-26 ]] --
+-- [[ Exported at 2021-07-02 23-53-11 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -33,6 +33,9 @@ function exportedCategories.Load(c, a)
     tmp[433].AlwaysVisible = true;
     tmp[433].HasFlexibleData = true;
     local currentZoneCategory = tmp[433];
+    tmp[850] = IaR(c, cat:New(addon.L["Selected Zone"])); -- Selected Zone
+    tmp[850].HasFlexibleData = true;
+    local selectedZoneCategory = tmp[850];
     tmp[1] = IaR(c, cat:New((GetCategoryInfo(14864)))); -- Classic
     tmp[648] = IaR(c, cat:New(addon.L["Zones"])); -- Zones
     AddC(tmp[1], tmp[648]);
@@ -4801,6 +4804,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[420], a[14833]); -- Fashion Abomination
     AddA(tmp[420], a[14763]); -- Crypt Couture
 
-    return currentZoneCategory, nextPatchCategory;
+    return currentZoneCategory, selectedZoneCategory, nextPatchCategory;
 end
 

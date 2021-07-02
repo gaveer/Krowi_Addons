@@ -55,6 +55,29 @@ local defaults = {
             },
             CollapseSeries = true
         },
+        SelectedZone = {
+            Completion = {
+                Completed = false,
+                NotCompleted = true
+            },
+            Obtainability = {
+                Obtainable = true,
+                NotObtainable = false
+            },
+            Faction = {
+                Neutral = true,
+                Alliance = false,
+                Horde = false
+            },
+            Covenant = {
+                Neutral = true,
+                Kyrian = false,
+                Venthyr = false,
+                NightFae = false,
+                Necrolord = false
+            },
+            CollapseSeries = true
+        },
         SortBy = {
             Criteria = addon.L["Default"],
             ReverseSort = false
@@ -66,7 +89,7 @@ local ResetFilters;
 
 -- [[ Constructors ]] --
 filterButton.__index = filterButton; -- Used to support OOP like code
-function filterButton:New(categoriesFrame, achievementsFrame)
+function filterButton:New(categoriesFrame, achievementsFrame, worldMapButton)
     diagnostics.Trace("filterButton:New");
 
 	-- Increment ID
@@ -84,6 +107,7 @@ function filterButton:New(categoriesFrame, achievementsFrame)
     categoriesFrame.FilterButton = button;
     button.AchievementsFrame = achievementsFrame;
     achievementsFrame.FilterButton = button;
+    worldMapButton.FilterButton = button;
 
     -- Load filters
     button.Filters = LibStub("AceDB-3.0"):New("Filters", defaults, true);
@@ -322,6 +346,8 @@ function filterButton:OnMouseDown()
 
     menu:AddSeparator();
 
+    -- move this section to separate function because we need this 3 times
+    -- have some stuff as inputs so we can configure where to add what
 	-- Current Zone Filters
 	local currentZone = addon.Objects.MenuItem:New({Text = addon.L["Current Zone"]});
     currentZone:AddChildFull({	Text = addon.L["Completed"],

@@ -19,6 +19,7 @@ L["T_TAB_TEXT"] = "Achievement Filter";
 
 -- Categories
 L["Current Zone"] = "Current Zone";
+L["Selected Zone"] = "Selected Zone";
 L["Zones"] = "Zones";
 L["Class Hall"] = "Class Hall";
 L["Coming in "] = "Coming in ";

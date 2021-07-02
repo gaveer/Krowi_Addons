@@ -55,7 +55,7 @@ end
 
 local function CreatePanel()
     local optionsTable = {
-        name = AF_NAME,
+        name = addon.MetaData.Title,
         type = "group",
         childGroups = "tab",
         args = {
@@ -71,14 +71,14 @@ local function CreatePanel()
                         order = 1,
                         args = {
                             Version = {
-                                name = string.format(addon.Yellow, addon.L["Version"] .. ": ") .. AF_VERSION,
+                                name = string.format(addon.Yellow, addon.L["Version"] .. ": ") .. addon.MetaData.Version,
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
                                 order = 1.1,
                             },
                             Build = {
-                                name = string.format(addon.Yellow, addon.L["Build"] .. ": ") .. AF_BUILD,
+                                name = string.format(addon.Yellow, addon.L["Build"] .. ": ") .. addon.MetaData.Build,
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
@@ -118,7 +118,7 @@ local function CreatePanel()
                                 end
                             },
                             Author = {
-                                name = string.format(addon.Yellow, addon.L["Author"] .. ": ") .. "Krowi-Frostmane EU",
+                                name = string.format(addon.Yellow, addon.L["Author"] .. ": ") .. addon.MetaData.Author,
                                 type = "description",
                                 width = "normal",
                                 fontSize = "medium",
@@ -138,7 +138,7 @@ local function CreatePanel()
                                 order = 2.3,
                                 func = function()
                                     InterfaceOptionsFrame:Hide();
-                                    popupDialog.ShowExternalLink("https://discord.gg/DCxq5rRNW5");
+                                    popupDialog.ShowExternalLink("https://discord.gg/" .. addon.MetaData.Discord);
                                 end
                             },
                             blank31 = {
@@ -158,13 +158,13 @@ local function CreatePanel()
                             CurseForge = {
                                 name = addon.L["CurseForge"],
                                 desc = core.ReplaceVars{addon.L["CurseForge Desc"],
-                                                        addonName = AF_NAME,
+                                                        addonName = addon.MetaData.Title,
                                                         curseForge = addon.L["CurseForge"]},
                                 type = "execute",
                                 order = 3.3,
                                 func = function()
                                     InterfaceOptionsFrame:Hide();
-                                    popupDialog.ShowExternalLink("https://www.curseforge.com/wow/addons/krowi-achievement-filter");
+                                    popupDialog.ShowExternalLink("https://www.curseforge.com/wow/addons/" .. addon.MetaData.CurseForge);
                                 end
                             }
                         }
@@ -426,7 +426,7 @@ local function CreatePanel()
                                     end;
         
                                     addon.Options.db.Window.AchievementFrameHeightOffset = value;
-                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.General.args.Search.args.NumberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
+                                    local numberOfSearchPreviews = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(addon.MetaData.Title, "cmd", "KROWIAF-0.0").args.General.args.Search.args.NumberOfSearchPreviews; -- cmd and KROWIAF-0.0 are just to make the function work
                                     numberOfSearchPreviews.max = maxNumberOfSearchPreviews();
                                     if numberOfSearchPreviews.get() > numberOfSearchPreviews.max then
                                         numberOfSearchPreviews.set(nil, numberOfSearchPreviews.max);
@@ -573,7 +573,7 @@ local function CreatePanel()
                                 get = function () return addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show; end,
                                 set = function()
                                     addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show;
-                                    local objectivesProgressShowWhenAchievementCompleted = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(AF_NAME, "cmd", "KROWIAF-0.0").args.Layout.args.Tooltip.args.ObjectivesProgressShowWhenAchievementCompleted; -- cmd and KROWIAF-0.0 are just to make the function work
+                                    local objectivesProgressShowWhenAchievementCompleted = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(addon.MetaData.Title, "cmd", "KROWIAF-0.0").args.Layout.args.Tooltip.args.ObjectivesProgressShowWhenAchievementCompleted; -- cmd and KROWIAF-0.0 are just to make the function work
                                     objectivesProgressShowWhenAchievementCompleted.disabled = not addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show;
                                     
                                     diagnostics.Debug(addon.L["Show Objectives progress"] .. ": " .. tostring(addon.Options.db.Tooltip.Achievements.ObjectivesProgress.Show));
@@ -720,13 +720,13 @@ local function CreatePanel()
         }
     }
 
-    LibStub("AceConfig-3.0"):RegisterOptionsTable(AF_NAME, optionsTable);
-    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(AF_NAME, nil, nil);
+    LibStub("AceConfig-3.0"):RegisterOptionsTable(addon.MetaData.Title, optionsTable);
+    LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addon.MetaData.Title, nil, nil);
 end
 
 local function Open()
     InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
-    InterfaceOptionsFrame_OpenToCategory(AF_NAME);
+    InterfaceOptionsFrame_OpenToCategory(addon.MetaData.Title);
 end
 
 -- Load the options

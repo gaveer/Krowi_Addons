@@ -7,7 +7,7 @@ addon.Event = {};
 LibStub("AceEvent-3.0"):Embed(addon.Event);
 
 -- [[ Binding names ]] --
-BINDING_HEADER_AF_NAME = AF_NAME;
+BINDING_HEADER_AF_NAME = addon.MetaData.Title;
 BINDING_NAME_AF_OPEN_TAB1 = addon.L["BINDING_NAME_AF_OPEN_TAB1"];
 
 -- [[ Faction data ]] --
@@ -79,6 +79,38 @@ function addon.GetAchievementInfo(achievementID, excludeNextPatch)
     return nil; -- Achievement info not found, default function also returns nil when not found
 end
 
+function addon.Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
+	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
+		numOfAch = numOfAch + 1;
+		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
+		if completed then
+			numOfCompAch = numOfCompAch + 1;
+		-- else
+		-- 	numOfIncompAch = numOfIncompAch + 1;
+		elseif achievement.NotObtainable then
+			numOfNotObtAch = numOfNotObtAch + 1;
+		end
+	end
+
+	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
+end
+
+-- [[ Tooltip ]] --
+local progressBar = LibStub("Krowi_ProgressBar-1.0");
+function addon.StatusBarTooltip(self)
+	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
+	GameTooltip:SetOwner(self, "ANCHOR_NONE");
+	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
+	GameTooltip:SetMinimumWidth(128, true);
+	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
+	local numOfNotObtAch = 0;
+	if addon.Options.db.Tooltip.Categories.ShowNotObtainable then
+		numOfNotObtAch = self.numOfNotObtAch;
+	end
+	progressBar:ShowProgressBar(GameTooltip, 0, self.numAchievements, self.numCompleted, numOfNotObtAch, 0, 0, addon.GreenRGB, addon.RedRGB, nil, nil, self.numCompletedText);
+	GameTooltip:Show();
+end
+
 -- [[ IAT integration ]] --
 function addon.IsIATLoaded()
     return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
@@ -98,7 +130,8 @@ function loadHelper:OnEvent(event, arg1)
             addon.Data.SavedData.Load();
 
             addon.GUI.ElvUISkin.Load();
-            -- addon.GUI.WorldMapButton.Load();
+            addon.GUI.AddFrame("WorldMapButton", addon.GUI.WorldMapButton.Load());
+
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load

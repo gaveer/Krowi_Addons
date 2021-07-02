@@ -2,7 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 ## [9.1.0.25.0] - 
-### TBD
+### Added
+- Worldmap button that will show the achievements progress for the current viewed zone
+- Clicking the worldmap button will bring you to a new Selected Zone category
+- When a zone has no achievements the button will be hidden (TODO)
+- Selected Zone category has a seperate filter similar to the Current Zone category (TODO)
+- Achievements in the Selected Zone category always have a Go To item so you can easily go to the achievement in the categories tree
+
+### Fixed
+- When Merge Small Categories was selected, the 2nd tutorial page would not show the correct achievements
 
 ## [9.1.0.24.0] - 2021-06-29
 ### Added

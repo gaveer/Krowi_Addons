@@ -2,10 +2,17 @@ local addonName, addon = ...;
 
 AF_TAB = "|T:1:8|t";
 
-AF_NAME = GetAddOnMetadata(addonName, "Title");
-AF_BUILD = GetBuildInfo();
-AF_VERSION = GetAddOnMetadata(addonName, "Version");
-AF_BUILD_VERSION = AF_BUILD .. "." .. AF_VERSION;
+addon.MetaData = {};
+local metaData = addon.MetaData;
+
+metaData.Title = GetAddOnMetadata(addonName, "Title");
+metaData.Build = GetBuildInfo();
+metaData.Version = GetAddOnMetadata(addonName, "Version");
+metaData.BuildVersion = metaData.Build .. "." .. metaData.Version;
+
+metaData.Author = GetAddOnMetadata(addonName, "Author");
+metaData.Discord = GetAddOnMetadata(addonName, "X-Discord");
+metaData.CurseForge = GetAddOnMetadata(addonName, "X-CurseForge");
 
 -- [[ Colors ]] --
 function addon.RemoveColor(text)

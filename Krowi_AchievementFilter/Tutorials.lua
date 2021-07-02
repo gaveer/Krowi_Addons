@@ -75,7 +75,7 @@ function tutorials.Load()
                                 xuFuPetGuides = string.format(addon.Yellow, addon.L["Xu-Fu's Pet Guides"]),
                                 petBattles = (GetCategoryInfo(15117)),
                                 IAT = string.format(addon.Yellow, addon.L["Instance Achievement Tracker"]),
-                                addonName = AF_NAME},
+                                addonName = addon.MetaData.Title},
         ShineHeight = SavedData.ElvUISkin.MiscFrames and 9 or 6,
         ShineWidth = SavedData.ElvUISkin.MiscFrames and 10 or 7,
         OnShow = function(self)
@@ -110,7 +110,7 @@ function tutorials.Load()
                                 excludeNextPatch = addon.L["Exclude Next Patch"],
                                 minCharToSearch = addon.L["Minimum characters to search"],
                                 numSearchPreviews = addon.L["Number of search previews"],
-                                addonName = AF_NAME},
+                                addonName = addon.MetaData.Title},
         TextSize = {355, 0},
         ShineTop = SavedData.ElvUISkin.Tutorials and 10 or 30,
         ShineLeft = SavedData.ElvUISkin.Tutorials and -10 or -11,
@@ -198,7 +198,7 @@ function tutorials.Load()
                                 reverseSort = string.format(addon.Yellow, addon.L["Reverse Sort"]),
                                 help = string.format(addon.Yellow, addon.L["Help"]),
                                 options = string.format(addon.Yellow, addon.L["Options"]),
-                                addonName = AF_NAME,
+                                addonName = addon.MetaData.Title,
                                 discord = addon.L["Discord"],
                                 curseForge = addon.L["CurseForge"]},
         TextSize = {588, 0},
@@ -267,7 +267,7 @@ function tutorials.Load()
     });
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");
-    tutorials.FeaturesTutorial:SetFrameTitle(AF_NAME .. " - " .. AF_BUILD_VERSION);
+    tutorials.FeaturesTutorial:SetFrameTitle(addon.MetaData.Title .. " - " .. addon.MetaData.BuildVersion);
     tutorials.FeaturesTutorial:SetFrameWidth(512);
     tutorials.FeaturesTutorial:SetPages(pages);
     tutorials.FeaturesTutorial:SetImageMargin(10);

@@ -203,7 +203,9 @@ local function AddGoTo(achievementsFrame, achievement)
 			addSeparator = true;
 		end
 
-		if achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then
+		if achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory or
+			achievementsFrame.CategoriesFrame.SelectedCategory == addon.SelectedZoneCategory then
+
 			if addSeparator then
 				goTo:AddSeparator();
 				addSeparator = nil;

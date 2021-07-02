@@ -530,7 +530,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 		category = achievement:GetMergedCategory(); -- This way we get the parent category
 		diagnostics.Debug(category.Name);
 	else
-		category = achievement.Category
+		category = achievement.Category;
 	end
 
 	self.CategoriesFrame:SelectCategory(category);

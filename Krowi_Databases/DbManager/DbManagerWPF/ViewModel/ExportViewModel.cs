@@ -172,7 +172,7 @@ namespace DbManagerWPF.ViewModel
                 ExportCategory(sb, category);
 
             sb.AppendLine("");
-            sb.AppendLineTabbed(1, "return currentZoneCategory, nextPatchCategory;");
+            sb.AppendLineTabbed(1, "return currentZoneCategory, selectedZoneCategory, nextPatchCategory;");
             sb.AppendLine("end");
 
             using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedCategories.lua");
@@ -199,6 +199,11 @@ namespace DbManagerWPF.ViewModel
                 sb.AppendLineTabbed(1, $"tmp[{category.ID}].AlwaysVisible = true;");
                 sb.AppendLineTabbed(1, $"tmp[{category.ID}].HasFlexibleData = true;");
                 sb.AppendLineTabbed(1, $"local currentZoneCategory = tmp[{category.ID}];");
+            }
+            if (category.Function == functionDM.GetSelectedZoneFunction())
+            {
+                sb.AppendLineTabbed(1, $"tmp[{category.ID}].HasFlexibleData = true;");
+                sb.AppendLineTabbed(1, $"local selectedZoneCategory = tmp[{category.ID}];");
             }
             if (category.Function == functionDM.GetComingInFunction())
                 sb.AppendLineTabbed(1, $"local nextPatchCategory = tmp[{category.ID}];");

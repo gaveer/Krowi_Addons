@@ -123,21 +123,21 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	func(scrollBar);
 end
 
-local function Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
-	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
-		numOfAch = numOfAch + 1;
-		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
-		if completed then
-			numOfCompAch = numOfCompAch + 1;
-		-- else
-		-- 	numOfIncompAch = numOfIncompAch + 1;
-		elseif achievement.NotObtainable then
-			numOfNotObtAch = numOfNotObtAch + 1;
-		end
-	end
+-- local function Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
+-- 	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
+-- 		numOfAch = numOfAch + 1;
+-- 		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
+-- 		if completed then
+-- 			numOfCompAch = numOfCompAch + 1;
+-- 		-- else
+-- 		-- 	numOfIncompAch = numOfIncompAch + 1;
+-- 		elseif achievement.NotObtainable then
+-- 			numOfNotObtAch = numOfNotObtAch + 1;
+-- 		end
+-- 	end
 
-	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
-end
+-- 	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
+-- end
 
 local function GetAchievementNumbers(self, category)
 	-- diagnostics.Trace("GetAchievementNumbers"); -- Generates a lot of messages
@@ -162,13 +162,13 @@ local function GetAchievementNumbers(self, category)
 
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
@@ -250,20 +250,20 @@ function categoriesFrame:Update(getAchNums)
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
-local progressBar = LibStub("Krowi_ProgressBar-1.0");
-local function StatusBarTooltip(self)
-	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
-	GameTooltip:SetOwner(self, "ANCHOR_NONE");
-	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
-	GameTooltip:SetMinimumWidth(128, true);
-	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
-	local numOfNotObtAch = 0;
-	if addon.Options.db.Tooltip.Categories.ShowNotObtainable then
-		numOfNotObtAch = self.numOfNotObtAch;
-	end
-	progressBar:ShowProgressBar(GameTooltip, 0, self.numAchievements, self.numCompleted, numOfNotObtAch, 0, 0, addon.GreenRGB, addon.RedRGB, nil, nil, self.numCompletedText);
-	GameTooltip:Show();
-end
+-- local progressBar = LibStub("Krowi_ProgressBar-1.0");
+-- local function StatusBarTooltip(self)
+-- 	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
+-- 	GameTooltip:SetOwner(self, "ANCHOR_NONE");
+-- 	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
+-- 	GameTooltip:SetMinimumWidth(128, true);
+-- 	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
+-- 	local numOfNotObtAch = 0;
+-- 	if addon.Options.db.Tooltip.Categories.ShowNotObtainable then
+-- 		numOfNotObtAch = self.numOfNotObtAch;
+-- 	end
+-- 	progressBar:ShowProgressBar(GameTooltip, 0, self.numAchievements, self.numCompleted, numOfNotObtAch, 0, 0, addon.GreenRGB, addon.RedRGB, nil, nil, self.numCompletedText);
+-- 	GameTooltip:Show();
+-- end
 
 function categoriesFrame:DisplayButton(button, category, baseWidth)
 	-- local name = "";
@@ -321,7 +321,7 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 			numOfNotObtAchText = " (+" .. numOfNotObtAch .. ")";
 		end
 		button.numCompletedText = numOfCompAch .. numOfNotObtAchText .. " / " .. numOfAch;
-		button.showTooltipFunc = StatusBarTooltip;
+		button.showTooltipFunc = addon.StatusBarTooltip;
 	end
 end
 
@@ -379,6 +379,8 @@ end
 -- [[ API ]] --
 local function Select(self, category, collapsed, quick)
 	diagnostics.Trace("Select");
+	diagnostics.Debug(category.Name);
+	diagnostics.Debug(quick);
 
 	local shown = false;
 	local previousScrollValue;
@@ -421,6 +423,13 @@ end
 
 function categoriesFrame:SelectCategory(category, collapsed)
 	diagnostics.Trace("categoriesFrame:SelectCategory");
+
+	if self.FilterButton.Filters.db.MergeSmallCategories then
+		while category.Merged do
+			category = category.Parent;
+		end
+		diagnostics.Debug(category.Name);
+	end
 
 	local categoriesTree = category:GetTree();
 

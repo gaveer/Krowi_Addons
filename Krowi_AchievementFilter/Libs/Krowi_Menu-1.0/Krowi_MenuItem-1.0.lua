@@ -44,7 +44,7 @@ function lib:NewExtLink(text, externalLink)
 end
 
 -- [[ Other ]] --
-function lib:AddChild(item)
+function lib:Add(item)
     if self.Children == nil then
         self.Children = {}; -- By creating the children table here we reduce memory usage because not every category has children
     end
@@ -54,14 +54,14 @@ function lib:AddChild(item)
     return item;
 end
 
-function lib:AddChildFull(info)
-    return self:AddChild(lib:New(info));
-end
-
-function lib:AddChildExtLinkFull(text, externalLink)
-    return self:AddChild(lib:NewExtLink(text, externalLink));
+function lib:AddFull(info)
+    return self:Add(lib:New(info));
 end
 
 function lib:AddSeparator()
-    return self:AddChildFull({IsSeparator = true});
+    return self:AddFull({IsSeparator = true});
+end
+
+function lib:AddExtLinkFull(text, externalLink)
+    return self:Add(lib:NewExtLink(text, externalLink));
 end

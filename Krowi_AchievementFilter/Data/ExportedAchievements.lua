@@ -1,4 +1,4 @@
--- [[ Exported at 2021-06-28 13-13-26 ]] --
+-- [[ Exported at 2021-07-04 23-23-07 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -2117,7 +2117,7 @@ function exportedAchievements.Load(a)
     a[11175] = ach:New(11175, 10); -- Higher Dimensional Learning
     a[11178] = ach:New(11178, 10); -- Wake the Dragon
     a[11180] = ach:New(11180, 25); -- Glory of the Legion Raider
-    a[11181] = ach:New(11181, 10); -- Legion Keymaster
+    a[11181] = ach:New(11181, 10, nil, nil, false); -- Legion Keymaster
     a[11186] = ach:New(11186, 5); -- Tehd & Marius' Excellent Adventure
     a[11188] = ach:New(11188, 25); -- Broken Isles Explorer
     a[11189] = ach:New(11189, 10); -- Variety is the Spice of Life
@@ -3073,8 +3073,8 @@ function exportedAchievements.Load(a)
     a[14416] = ach:New(14416, 10); -- Heroic: Theater of Pain
     a[14417] = ach:New(14417, 10); -- Mythic: Theater of Pain
     a[14418] = ach:New(14418, 20); -- Shadowlands Dungeon Hero
-    a[14460] = ach:New(14460, 0); -- Ahead of the Curve: Sire Denathrius
-    a[14461] = ach:New(14461, 0); -- Cutting Edge: Sire Denathrius
+    a[14460] = ach:New(14460, 0, nil, nil, false); -- Ahead of the Curve: Sire Denathrius
+    a[14461] = ach:New(14461, 0, nil, nil, false); -- Cutting Edge: Sire Denathrius
     a[14463] = ach:New(14463, 10); -- Skoldus Hall
     a[14468] = ach:New(14468, 10); -- Twisting Corridors: Layer 1
     a[14469] = ach:New(14469, 10); -- Twisting Corridors: Layer 2
@@ -3108,8 +3108,8 @@ function exportedAchievements.Load(a)
     a[14523] = ach:New(14523, 10); -- Taking Care of Business
     a[14524] = ach:New(14524, 10); -- I Don't Know What I Expected
     a[14525] = ach:New(14525, 10); -- "Feed Me, Seymour!"
-    a[14531] = ach:New(14531, 0); -- Shadowlands Keystone Conqueror: Season One
-    a[14532] = ach:New(14532, 0); -- Shadowlands Keystone Master: Season One
+    a[14531] = ach:New(14531, 0, nil, nil, false); -- Shadowlands Keystone Conqueror: Season One
+    a[14532] = ach:New(14532, 0, nil, nil, false); -- Shadowlands Keystone Master: Season One
     a[14533] = ach:New(14533, 10); -- Royal Rumble
     a[14567] = ach:New(14567, 10); -- Picking Up the Pieces
     a[14568] = ach:New(14568, 10); -- Twisting Corridors: Layer 6
@@ -3269,7 +3269,7 @@ function exportedAchievements.Load(a)
     a[14887] = ach:New(14887, 0, nil, cov.Kyrian); -- To the Moon
     a[14894] = ach:New(14894, 10); -- "To 'Ghast, Two Curios"
     a[14895] = ach:New(14895, 10); -- 'Ghast Five
-    a[14938] = ach:New(14938, 0); -- Shadowlands Keystone Explorer: Season One
+    a[14938] = ach:New(14938, 0, nil, nil, false); -- Shadowlands Keystone Explorer: Season One
     a[14943] = ach:New(14943, 10); -- Guarmageddon
     a[14961] = ach:New(14961, 10); -- Chains of Domination
     a[14998] = ach:New(14998, 10); -- "Name A Better Duo, I'll Wait"

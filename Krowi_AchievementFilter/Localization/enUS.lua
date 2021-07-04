@@ -21,7 +21,13 @@ L["T_TAB_TEXT"] = "Achievement Filter";
 L["Current Zone"] = "Current Zone";
 L["Selected Zone"] = "Selected Zone";
 L["Zones"] = "Zones";
+L["Buildings"] = "Buildings";
+L["Stables"] = "Stables";
+L["Gladiator's Sanctum"] = "Gladiator's Sanctum";
+L["Shipyard"] = "Shipyard";
+L["Invasions"] = "Invasions";
 L["Class Hall"] = "Class Hall";
+L["Dueler's Guild"] = "Dueler's Guild";
 L["Coming in "] = "Coming in ";
 L["* SPOILER WARNING *"] = "* SPOILER WARNING *";
 L["Coming in Disclaimer"] = "All achievements in this category and children of this category are subject to change and might contain spoilers for the next patch!";
@@ -41,6 +47,7 @@ L["ID"] = "ID";
 L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
 L["Objectives progress"] = "Objectives progress";
+L["No achievements available for"] = "No achievements available for {mapName} with the current set of filters";
 
 -- Options
 L["Requires a reload"] = string.format(addon.Orange, "Requires a reload to take full effect.");
@@ -172,8 +179,9 @@ L["Categories per expansion Desc"] = "Achievements are put in categories per exp
                                         AF_TAB .. AF_TAB .. "- {expansionFeatures}\n\n" ..
                                         "Special categories:\n" ..
                                         AF_TAB .. "- {currentZone}: Shows the achievements linked to the current zone you're in\n" ..
+                                        AF_TAB .. "- {selectedZone}: Shows the achievements linked to the selected zone from the world map\n" ..
                                         AF_TAB .. "- {comingIn}: {spoiler}\n" ..
-                                        AF_TAB .. AF_TAB .. "Achievements that might be added in the next patch (subject to change)";
+                                        AF_TAB .. AF_TAB .. "If available, achievements that might be added in the next patch (subject to change)";
 
 -- L["Right Click Menu"] = "Right Click Menu"; -- See at Options Layout Right Click Menu
 L["Right Click Menu Desc"] = "Each achievement in the new tab has a {rightClickMenu}.\n\n" ..
@@ -204,8 +212,9 @@ L["Full Search Desc"] = "By selecting \"{showAllResults}\" (see {quickSearch}) y
 
 L["Enhanced filtering and sorting"] = "Enhanced filtering and sorting";
 L["Enhanced filtering and sorting Desc"] = "Filtering and sorting of achievements is enhanced with following features.\n\n" ..
+                                            "Categories:\n" ..
+                                            AF_TAB .. "- {mergeSmallCategories}: Merge categories if allowed with less than {mergeSmallCategoriesNumber} achievements\n\n" ..
                                             "Filtering (multiple filters can be selected at the same time):\n" ..
-                                            AF_TAB .. "- {mergeSmallCategories}: Merge categories if allowed with less than {mergeSmallCategoriesNumber} achievements\n" ..
                                             AF_TAB .. "- {completed}: Show completed achievements\n" ..
                                             AF_TAB .. "- {notCompleted}: Show not completed achievements\n" ..
                                             AF_TAB .. "- {obtainable}: Show obtainable achievements\n" ..
@@ -224,7 +233,11 @@ L["Enhanced filtering and sorting Desc"] = "Filtering and sorting of achievement
                                             "Sorting:\n" ..
                                             AF_TAB .. "- {noSorting}: No sorting applied\n" ..
                                             AF_TAB .. "- {sortByName}: Sort achievements based on their names\n" ..
+                                            AF_TAB .. "- {sortByCompletion}: Sort achievements based on if they are completed\n" ..
+                                            AF_TAB .. "- {sortByID}: Sort achievements based on their ID\n" ..
                                             AF_TAB .. "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
+                                            "{currentZone} and {selectedZone}:\n" ..
+                                            AF_TAB .. "- These have all the filtering and sorting features mentioned above but can be changed independent from the others\n\n" ..
                                             "Other:\n" ..
                                             AF_TAB .. "- {help}: Start the tutorial from the start and reset what you've viewed\n" ..
                                             AF_TAB .. AF_TAB .. "- Shows the specific tutorial page without resetting what you've viewed\n" ..

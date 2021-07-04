@@ -163,13 +163,13 @@ local function AddGoToLine(goTo, id, achievementsFrame)
 		name = name .. " (" .. addon.L["Missing"] .. ")";
 		disabled = true;
 	end
-	goTo:AddChildFull({ Text = name,
-						Func = function()
-							achievementsFrame:SelectAchievementFromID(id, nil, true);
-							rightClickMenu:Close();
-						end,
-						Disabled = disabled
-					});
+	goTo:AddFull({ Text = name,
+					Func = function()
+						achievementsFrame:SelectAchievementFromID(id, nil, true);
+						rightClickMenu:Close();
+					end,
+					Disabled = disabled
+				});
 end
 
 local function AddGoTo(achievementsFrame, achievement)
@@ -180,7 +180,7 @@ local function AddGoTo(achievementsFrame, achievement)
 		local addSeparator = nil;
 
 		if partOfAChainIDs then
-			goTo:AddChildFull({Text = addon.L["Part of a chain"], IsTitle = true});
+			goTo:AddFull({Text = addon.L["Part of a chain"], IsTitle = true});
 			for _, id in next, partOfAChainIDs do
 				if id ~= achievement.ID then
 					AddGoToLine(goTo, id, achievementsFrame);
@@ -194,7 +194,7 @@ local function AddGoTo(achievementsFrame, achievement)
 				goTo:AddSeparator();
 				addSeparator = nil;
 			end
-			goTo:AddChildFull({Text = addon.L["Required for"], IsTitle = true});
+			goTo:AddFull({Text = addon.L["Required for"], IsTitle = true});
 			for _, id in next, requiredForIDs do
 				if id ~= achievement.ID then
 					AddGoToLine(goTo, id, achievementsFrame);
@@ -210,7 +210,7 @@ local function AddGoTo(achievementsFrame, achievement)
 				goTo:AddSeparator();
 				addSeparator = nil;
 			end
-			goTo:AddChildFull({Text = achievement.Category:GetPath(), IsTitle = true});
+			goTo:AddFull({Text = achievement.Category:GetPath(), IsTitle = true});
 			AddGoToLine(goTo, achievement.ID, achievementsFrame);
 			addSeparator = true;
 		end

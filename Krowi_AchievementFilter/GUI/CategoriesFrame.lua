@@ -162,13 +162,13 @@ local function GetAchievementNumbers(self, category)
 
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = addon.Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, self.FilterButton.Filters.db, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = addon.Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, self.FilterButton.Filters.db, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
@@ -379,8 +379,6 @@ end
 -- [[ API ]] --
 local function Select(self, category, collapsed, quick)
 	diagnostics.Trace("Select");
-	diagnostics.Debug(category.Name);
-	diagnostics.Debug(quick);
 
 	local shown = false;
 	local previousScrollValue;

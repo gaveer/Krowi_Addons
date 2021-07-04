@@ -79,8 +79,8 @@ function addon.GetAchievementInfo(achievementID, excludeNextPatch)
     return nil; -- Achievement info not found, default function also returns nil when not found
 end
 
-function addon.Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
-	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
+function addon.GetAchievementNumbers(filterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
+	if filterButton and filterButton.Validate(filters, achievement, true) > 0 then -- If set to false we lag the game
 		numOfAch = numOfAch + 1;
 		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
 		if completed then
@@ -97,10 +97,12 @@ end
 
 -- [[ Tooltip ]] --
 local progressBar = LibStub("Krowi_ProgressBar-1.0");
-function addon.StatusBarTooltip(self)
+function addon.StatusBarTooltip(self, anchor)
 	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
-	GameTooltip:SetOwner(self, "ANCHOR_NONE");
-	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
+	GameTooltip:SetOwner(self, anchor or "ANCHOR_NONE");
+    if anchor == nil then
+	    GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
+    end
 	GameTooltip:SetMinimumWidth(128, true);
 	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
 	local numOfNotObtAch = 0;

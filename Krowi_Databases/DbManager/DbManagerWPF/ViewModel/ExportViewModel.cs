@@ -342,12 +342,12 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("data.ExportedPetBattles = {};");
             sb.AppendLine("local exportedPetBattles = data.ExportedPetBattles;");
             sb.AppendLine("");
-            sb.AppendLine("local function AddCEL(m, t, e)");
-            sb.AppendLineTabbed(1, "m:AddChildExtLinkFull(t, e)");
+            sb.AppendLine("local function AddEL(m, t, e)");
+            sb.AppendLineTabbed(1, "m:AddExtLinkFull(t, e)");
             sb.AppendLine("end");
             sb.AppendLine("");
-            sb.AppendLine("local function AddCCEL(m, a, c, e)");
-            sb.AppendLineTabbed(1, "m:AddChildCritExtLinkFull(a, c, e)");
+            sb.AppendLine("local function AddCEL(m, a, c, e)");
+            sb.AppendLineTabbed(1, "m:AddCritExtLinkFull(a, c, e)");
             sb.AppendLineTabbed(1, "return m;");
             sb.AppendLine("end");
             sb.AppendLine("");
@@ -427,9 +427,9 @@ namespace DbManagerWPF.ViewModel
                         externalLink = $"\"{criterion.ExternalLink}";
 
                     if (criterion.ID.StartsWith("C"))
-                        sb.AppendLineTabbed(indent, $"AddCEL({list}, {criterion.Name}, {externalLink}\");");
+                        sb.AppendLineTabbed(indent, $"AddEL({list}, {criterion.Name}, {externalLink}\");");
                     else
-                        sb.AppendLineTabbed(indent, $"AddCCEL({list}, {achievementID}, {criterion.CriteriaNumber}, {externalLink}\");");
+                        sb.AppendLineTabbed(indent, $"AddCEL({list}, {achievementID}, {criterion.CriteriaNumber}, {externalLink}\");");
 
                     GetSubCriteria(sb, criterion.ID.Substring(1), subCriteria, list: assign);
                 }

@@ -60,7 +60,7 @@ function achievementButton:PostLoadButtons(achievementsFrame)
 		button:HookScript("OnLeave", button.Leave);
 		button.shield:EnableMouse(false);
 		button.ShowTooltip = function()
-			self.Tooltip.ShowTooltip(button);
+			self.Tooltip.ShowTooltip(button, achievementsFrame);
 		end;
 	end
 end
@@ -173,8 +173,8 @@ local function AddGoToLine(goTo, id, achievementsFrame)
 end
 
 local function AddGoTo(achievementsFrame, achievement)
-	local partOfAChainIDs = achievement:GetPartOfAChainIDs(); -- Chance to optimize here since tooltip also gets this
-	local requiredForIDs = achievement:GetRequiredForIDs(); -- Chance to optimize here since tooltip also gets this
+	local partOfAChainIDs = achievement:GetPartOfAChainIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
+	local requiredForIDs = achievement:GetRequiredForIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
 	if partOfAChainIDs or requiredForIDs or achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then -- Others can be added here later
 		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
 		local addSeparator = nil;

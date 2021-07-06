@@ -160,15 +160,22 @@ local function GetAchievementNumbers(self, category)
 		end
 	end
 
+	local filters = self.FilterButton.Filters.db;
+	if category == addon.CurrentZoneCategory then
+		filters = self.FilterButton.Filters.db.CurrentZone;
+	elseif category == addon.SelectedZoneCategory then
+		filters = self.FilterButton.Filters.db.SelectedZone;
+	end
+
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, self.FilterButton.Filters.db, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, self.FilterButton.Filters.db, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 

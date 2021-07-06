@@ -270,10 +270,25 @@ function tutorials.Load()
                                             currentCharacterIconEnabled = (addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower())))};
         end
     });
+    tinsert(pages, { -- 9
+    Image = media .. "WorldMapButton",
+    ImageSize = {434, 394},
+    ImageTexCoord = {0, 434/512, 0, 394/512},
+    SubTitle = string.format(addon.Yellow, addon.L["World Map Button"]),
+    Text = core.ReplaceVars{addon.L["World Map Button Desc"],
+                            enhancedTooltipCategories = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Categories"] .. ")"),
+                            selectedZone = string.format(addon.Yellow, addon.L["Selected Zone"]),
+                            enhancedFilteringAndSorting = string.format(addon.Yellow, addon.L["Enhanced filtering and sorting"])},
+    OnShow = function(self)
+        -- AchievementFrame:Hide();
+        -- WorldMapFrame:Show();
+        -- WorldMapFrame:Show();
+    end
+});
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");
     tutorials.FeaturesTutorial:SetFrameTitle(addon.MetaData.Title .. " - " .. addon.MetaData.BuildVersion);
-    tutorials.FeaturesTutorial:SetFrameWidth(512);
+    -- tutorials.FeaturesTutorial:SetFrameWidth(50);
     tutorials.FeaturesTutorial:SetPages(pages);
     tutorials.FeaturesTutorial:SetImageMargin(10);
     tutorials.FeaturesTutorial:SetTextMargin({10, 0, 10, 20});

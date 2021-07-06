@@ -6,15 +6,15 @@ achievementButton.Tooltip = {};
 local tooltip = achievementButton.Tooltip;
 
 local AddBlizzardDefault, AddPartOfAChain, AddRequiredFor, AddObjectives;
-function tooltip.ShowTooltip(button)
+function tooltip.ShowTooltip(button, achievementsFrame)
 	diagnostics.Trace("ShowTooltip");
 
 	GameTooltip:SetOwner(button, "ANCHOR_NONE");
 	GameTooltip:SetPoint("TOPLEFT", button, "TOPRIGHT");
 
 	AddBlizzardDefault(button);
-	AddPartOfAChain(button);
-	AddRequiredFor(button);
+	AddPartOfAChain(button, achievementsFrame);
+	AddRequiredFor(button, achievementsFrame);
 	AddObjectives(button);
 
 	-- AchievementFrameAchievements_CheckGuildMembersTooltip(self.shield); -- Guild can be ignored for now
@@ -74,14 +74,14 @@ function AddBlizzardDefault(self)
 	end
 end
 
-function AddPartOfAChain(self)
+function AddPartOfAChain(self, achievementsFrame)
 	diagnostics.Trace("AddPartOfAChain");
 
 	if not addon.Options.db.Tooltip.Achievements.ShowPartOfAChain then
 		return;
 	end
 
-	local partOfAChainIDs = self.Achievement:GetPartOfAChainIDs();
+	local partOfAChainIDs = self.Achievement:GetPartOfAChainIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
 	if partOfAChainIDs == nil then
 		return;
 	end
@@ -94,18 +94,17 @@ function AddPartOfAChain(self)
 
 	for _, id in next, partOfAChainIDs do
 		AddAchievementLine(self.Achievement, id);
-		id = GetNextAchievement(id);
 	end
 end
 
-function AddRequiredFor(self)
+function AddRequiredFor(self, achievementsFrame)
 	diagnostics.Trace("AddRequiredFor");
 
 	if not addon.Options.db.Tooltip.Achievements.ShowRequiredFor then
 		return;
 	end
 
-	local requiredForIDs = self.Achievement:GetRequiredForIDs();
+	local requiredForIDs = self.Achievement:GetRequiredForIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
 	if requiredForIDs == nil then
 		return;
 	end

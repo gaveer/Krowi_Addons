@@ -95,7 +95,7 @@ local default = {
 	RelativePoint = "CENTER",
 	OffsetX = 0,
 	OffsetY = 0,
-	Width = 512,
+	Width = 50,
 	Title = "Tutorial",
 	ImageSize = {
 		Width = 0,
@@ -146,6 +146,9 @@ local function UpdateFrame(frame, i)
 	local relativePoint = page.RelativePoint or (frame.RelativePoint or default.RelativePoint);
 	local offsetX = page.OffsetX or (frame.OffsetX or default.OffsetX);
 	local offsetY = page.OffsetY or (frame.OffsetY or default.OffsetY);
+	print(page.Width);
+	print(frame.Width);
+	print(default.Width);
 	local width = page.Width or (frame.Width or default.Width);
 	local title = page.Title or (frame.Title or default.Title);
 	local imageSize = page.ImageSize or (frame.ImageSize or default.ImageSize);
@@ -213,11 +216,17 @@ local function UpdateFrame(frame, i)
 	local textOffsetX = (layout == "HORIZONTAL" and imageMargin.Right - default.ImageMargin.Right or 0) + textMargin.Left;
 	local textOffsetY = textMargin.Top + (page.Image and imageMargin.Bottom - default.ImageMargin.Bottom or 0);
 	local textWidth = textSize.Width ~= 0 and textSize.Width or max(imageSize.Width, width);
+	print(textSize.Width);
+	print(imageSize.Width);
+	print(width);
+	print(textWidth);
 	frame.Text:SetPoint("TOPLEFT", textRelativeFrame, textRelativePoint, textOffsetX, -textOffsetY);
 	frame.Text:SetWidth(layout == "HORIZONTAL" and textSize.Width or textWidth - textMargin.Left - textMargin.Right);
 	frame.Text:SetText(text);
 	local fullTextWidth = text and textMargin.Left + max(textSize.Width, frame.Text:GetWidth()) + textMargin.Right or 0;
+	print(fullTextWidth);
 	fullTextWidth = fullTextWidth + (layout == "HORIZONTAL" and default.ImageMargin.Right or 0);
+	print(fullTextWidth);
 	local fullTextHeight = text and textMargin.Top + max(textSize.Height, frame.Text:GetHeight()) + textMargin.Bottom or 0;
 	fullTextHeight = fullTextHeight + (layout == "HORIZONTAL" and imageMargin.Top + imageMargin.Bottom or 0); -- imageMargin.Top + imageMargin.Bottom needed as frame offsets
 
@@ -314,6 +323,8 @@ local function UpdateFrame(frame, i)
 	end
 
 	-- Frame
+	print(fullImageWidth);
+	print(fullTextWidth);
 	frame:SetWidth(layout == "HORIZONTAL" and fullImageWidth + fullTextWidth or max(fullImageWidth, fullTextWidth));
 	frame:SetHeight(layout == "HORIZONTAL" and max(fullImageHeight, fullTextHeight) or fullImageHeight + fullTextHeight);
 	frame.ShownIndex = i;

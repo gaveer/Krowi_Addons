@@ -522,6 +522,10 @@ function filterButton.Validate(filters, achievement, ignoreCollapseSeries)
     return 1;
 end
 
+function filterButton:AutoValidate(achievement, ignoreCollapseSeries)
+    return self.Validate(self:GetFilters(), achievement, ignoreCollapseSeries);
+end
+
 function filterButton:SetFilters(achievement)
     diagnostics.Trace("filterButton:SetFilters");
 
@@ -591,6 +595,16 @@ function filterButton:GetHighestAchievementWhenCollapseSeries(achievement)
     return achievement;
 end
 
+function filterButton:GetFilters()
+	if self.AchievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then
+		return self.Filters.db.CurrentZone;
+	elseif self.AchievementsFrame.CategoriesFrame.SelectedCategory == addon.SelectedZoneCategory then
+		return self.Filters.db.SelectedZone;
+	end
+
+    return self.Filters.db;
+end
+
 function ResetFilters(self)
     -- Always reset faction filter
     self.Filters.db.Faction.Neutral = true;
@@ -599,6 +613,9 @@ function ResetFilters(self)
     self.Filters.db.CurrentZone.Faction.Neutral = true;
     self.Filters.db.CurrentZone.Faction.Alliance = addon.Faction.IsAlliance;
     self.Filters.db.CurrentZone.Faction.Horde = addon.Faction.IsHorde;
+    self.Filters.db.SelectedZone.Faction.Neutral = true;
+    self.Filters.db.SelectedZone.Faction.Alliance = addon.Faction.IsAlliance;
+    self.Filters.db.SelectedZone.Faction.Horde = addon.Faction.IsHorde;
 
     -- Always reset covenant filter
     for covenant, _ in next, self.Filters.db.Covenant do
@@ -611,4 +628,9 @@ function ResetFilters(self)
     end
     self.Filters.db.CurrentZone.Covenant.Neutral = true;
     self.Filters.db.CurrentZone.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
+    for covenant, _ in next, self.Filters.db.SelectedZone.Covenant do
+        self.Filters.db.SelectedZone.Covenant[covenant] = false;
+    end
+    self.Filters.db.SelectedZone.Covenant.Neutral = true;
+    self.Filters.db.SelectedZone.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
 end

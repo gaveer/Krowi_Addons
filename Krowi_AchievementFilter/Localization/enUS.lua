@@ -47,7 +47,7 @@ L["ID"] = "ID";
 L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
 L["Objectives progress"] = "Objectives progress";
-L["No achievements available for"] = "No achievements available for {mapName} with the current set of filters";
+L["No achievements are available with the current set of filters"] = "No achievements are available with the current set of filters";
 
 -- Options
 L["Requires a reload"] = string.format(addon.Orange, "Requires a reload to take full effect.");
@@ -271,6 +271,13 @@ L["Enhanced tooltip Achievements Desc"] = "Each tooltip has additional informati
                                             AF_TAB .. "- {grey}: The achievement/objective is not completed\n" ..
                                             AF_TAB .. "- {red}: The achievement is not possible to obtain anymore\n" ..
                                             AF_TAB .. "- Lighter {lightGreen}, {lightGrey} or {lightRed}: The hovered achievement";
+
+L["World Map Button"] = "World Map Button";
+L["World Map Button Desc"] = "Hover:\n" ..
+                                AF_TAB .. "- Shows how many achievements are (not) obtainable and (not) completed like the {enhancedTooltipCategories} based on the filters set for the {selectedZone}.\n" ..
+                                AF_TAB .. "- See {enhancedTooltipCategories} and {enhancedFilteringAndSorting} for more information.\n\n" ..
+                                "Click:\n" ..
+                                AF_TAB .. "- Opens the achievements window to the {selectedZone} category.";
 
 L["OC"] = "OC";
 L["NONC"] = "NONC";

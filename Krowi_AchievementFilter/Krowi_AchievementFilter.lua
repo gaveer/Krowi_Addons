@@ -7,7 +7,7 @@ addon.Event = {};
 LibStub("AceEvent-3.0"):Embed(addon.Event);
 
 -- [[ Binding names ]] --
-BINDING_HEADER_AF_NAME = AF_NAME;
+BINDING_HEADER_AF_NAME = addon.MetaData.Title;
 BINDING_NAME_AF_OPEN_TAB1 = addon.L["BINDING_NAME_AF_OPEN_TAB1"];
 
 -- [[ Faction data ]] --
@@ -33,7 +33,16 @@ function addon.GetAchievement(id)
 	end
 end
 
-function addon.GetAchievementsInZone(mapID)
+local function TableConcat(t1, t2)
+    if t2 then
+        for _, achievement in next, t2 do
+            tinsert(t1, achievement);
+        end
+    end
+    return t1;
+end
+
+function addon.GetAchievementsInZone(mapID, getAll)
     addon.Diagnostics.Trace("addon.GetAchievementsInZone");
 
     -- Differentiate between 10 and 25 man raids and Normal and Heroic raids
@@ -43,21 +52,24 @@ function addon.GetAchievementsInZone(mapID)
     local player25Hc = GetDifficultyInfo(6); -- 25 player
     local _, _, _, difficulty = GetInstanceInfo();
 
-    local achievements;
+    local achievements = {};
     if addon.Maps[mapID] == nil then
-        return {};
+        return achievements;
     else
-        achievements = addon.Maps[mapID].Achievements or {};
+        TableConcat(achievements, addon.Maps[mapID].Achievements);
     end
 
-    if difficulty ~= "" then
+    if difficulty ~= "" then -- Need to add 10 and 25 when doing it from the map
         if difficulty == player10 or difficulty == player10Hc then
             -- checkCategory = not string.find(category.Name, player25);
-            tinsert(achievements, addon.Maps[mapID].Achievements10);
+            TableConcat(achievements, addon.Maps[mapID].Achievements10);
         elseif difficulty == player25 or difficulty == player25Hc then
             -- checkCategory = not string.find(category.Name, player10);
-            tinsert(achievements, addon.Maps[mapID].Achievements25);
+            TableConcat(achievements, addon.Maps[mapID].Achievements25);
         end
+    elseif getAll then
+        TableConcat(achievements, addon.Maps[mapID].Achievements10);
+        TableConcat(achievements, addon.Maps[mapID].Achievements25);
     end
 
     return achievements;
@@ -79,6 +91,40 @@ function addon.GetAchievementInfo(achievementID, excludeNextPatch)
     return nil; -- Achievement info not found, default function also returns nil when not found
 end
 
+function addon.GetAchievementNumbers(filterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
+	if filterButton and filterButton.Validate(filters, achievement, true) > 0 then -- If set to false we lag the game
+		numOfAch = numOfAch + 1;
+		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
+		if completed then
+			numOfCompAch = numOfCompAch + 1;
+		-- else
+		-- 	numOfIncompAch = numOfIncompAch + 1;
+		elseif achievement.NotObtainable then
+			numOfNotObtAch = numOfNotObtAch + 1;
+		end
+	end
+
+	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
+end
+
+-- [[ Tooltip ]] --
+local progressBar = LibStub("Krowi_ProgressBar-1.0");
+function addon.StatusBarTooltip(self, anchor)
+	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
+	GameTooltip:SetOwner(self, anchor or "ANCHOR_NONE");
+    if anchor == nil then
+	    GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
+    end
+	GameTooltip:SetMinimumWidth(128, true);
+	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
+	local numOfNotObtAch = 0;
+	if addon.Options.db.Tooltip.Categories.ShowNotObtainable then
+		numOfNotObtAch = self.numOfNotObtAch;
+	end
+	progressBar:ShowProgressBar(GameTooltip, 0, self.numAchievements, self.numCompleted, numOfNotObtAch, 0, 0, addon.GreenRGB, addon.RedRGB, nil, nil, self.numCompletedText);
+	GameTooltip:Show();
+end
+
 -- [[ IAT integration ]] --
 function addon.IsIATLoaded()
     return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
@@ -98,7 +144,8 @@ function loadHelper:OnEvent(event, arg1)
             addon.Data.SavedData.Load();
 
             addon.GUI.ElvUISkin.Load();
-            -- addon.GUI.WorldMapButton.Load();
+            addon.GUI.AddFrame("WorldMapButton", addon.GUI.WorldMapButton.Load());
+
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load

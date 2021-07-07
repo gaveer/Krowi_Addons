@@ -47,6 +47,7 @@ function tutorials.Load()
                                 expansionFeatures = (GetCategoryInfo(15301)),
                                 spoiler = string.format(addon.Orange, addon.L["* SPOILER WARNING *"]),
                                 currentZone = string.format(addon.Yellow, addon.L["Current Zone"]),
+                                selectedZone = string.format(addon.Yellow, addon.L["Selected Zone"]),
                                 comingIn = string.format(addon.Yellow, addon.L["Coming in "])},
         TextSize = {361, 0},
         ShineHeight = 6,
@@ -75,7 +76,7 @@ function tutorials.Load()
                                 xuFuPetGuides = string.format(addon.Yellow, addon.L["Xu-Fu's Pet Guides"]),
                                 petBattles = (GetCategoryInfo(15117)),
                                 IAT = string.format(addon.Yellow, addon.L["Instance Achievement Tracker"]),
-                                addonName = AF_NAME},
+                                addonName = addon.MetaData.Title},
         ShineHeight = SavedData.ElvUISkin.MiscFrames and 9 or 6,
         ShineWidth = SavedData.ElvUISkin.MiscFrames and 10 or 7,
         OnShow = function(self)
@@ -110,7 +111,7 @@ function tutorials.Load()
                                 excludeNextPatch = addon.L["Exclude Next Patch"],
                                 minCharToSearch = addon.L["Minimum characters to search"],
                                 numSearchPreviews = addon.L["Number of search previews"],
-                                addonName = AF_NAME},
+                                addonName = addon.MetaData.Title},
         TextSize = {355, 0},
         ShineTop = SavedData.ElvUISkin.Tutorials and 10 or 30,
         ShineLeft = SavedData.ElvUISkin.Tutorials and -10 or -11,
@@ -168,8 +169,8 @@ function tutorials.Load()
     tinsert(pages, { -- 6
         Layout = "HORIZONTAL",
         Image = media .. "FilteringSorting",
-        ImageSize = {588, 453},
-        ImageTexCoord = {0, 588/1024, 0, 453/512},
+        ImageSize = {588, 509},
+        ImageTexCoord = {0, 588/1024, 0, 509/512},
         SubTitle = string.format(addon.Yellow, addon.L["Enhanced filtering and sorting"]),
         Text = core.ReplaceVars{addon.L["Enhanced filtering and sorting Desc"],
                                 mergeSmallCategories = string.format(addon.Yellow, addon.L["Merge Small Categories"]),
@@ -195,10 +196,14 @@ function tutorials.Load()
                                 collapseChain = string.format(addon.Yellow, addon.L["Collapse Chain"]),
                                 noSorting = string.format(addon.Yellow, addon.L["Default"]),
                                 sortByName = string.format(addon.Yellow, addon.L["Name"]),
+                                sortByCompletion = string.format(addon.Yellow, addon.L["Completion"]),
+                                sortByID = string.format(addon.Yellow, addon.L["ID"]),
                                 reverseSort = string.format(addon.Yellow, addon.L["Reverse Sort"]),
+                                currentZone = string.format(addon.Yellow, addon.L["Current Zone"]),
+                                selectedZone = string.format(addon.Yellow, addon.L["Selected Zone"]),
                                 help = string.format(addon.Yellow, addon.L["Help"]),
                                 options = string.format(addon.Yellow, addon.L["Options"]),
-                                addonName = AF_NAME,
+                                addonName = addon.MetaData.Title,
                                 discord = addon.L["Discord"],
                                 curseForge = addon.L["CurseForge"]},
         TextSize = {588, 0},
@@ -265,10 +270,25 @@ function tutorials.Load()
                                             currentCharacterIconEnabled = (addon.Options.db.Tooltip.Achievements.ShowCurrentCharacterIcons and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower())))};
         end
     });
+    tinsert(pages, { -- 9
+    Image = media .. "WorldMapButton",
+    ImageSize = {434, 394},
+    ImageTexCoord = {0, 434/512, 0, 394/512},
+    SubTitle = string.format(addon.Yellow, addon.L["World Map Button"]),
+    Text = core.ReplaceVars{addon.L["World Map Button Desc"],
+                            enhancedTooltipCategories = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Categories"] .. ")"),
+                            selectedZone = string.format(addon.Yellow, addon.L["Selected Zone"]),
+                            enhancedFilteringAndSorting = string.format(addon.Yellow, addon.L["Enhanced filtering and sorting"])},
+    OnShow = function(self)
+        -- AchievementFrame:Hide();
+        -- WorldMapFrame:Show();
+        -- WorldMapFrame:Show();
+    end
+});
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");
-    tutorials.FeaturesTutorial:SetFrameTitle(AF_NAME .. " - " .. AF_BUILD_VERSION);
-    tutorials.FeaturesTutorial:SetFrameWidth(512);
+    tutorials.FeaturesTutorial:SetFrameTitle(addon.MetaData.Title .. " - " .. addon.MetaData.BuildVersion);
+    -- tutorials.FeaturesTutorial:SetFrameWidth(50);
     tutorials.FeaturesTutorial:SetPages(pages);
     tutorials.FeaturesTutorial:SetImageMargin(10);
     tutorials.FeaturesTutorial:SetTextMargin({10, 0, 10, 20});

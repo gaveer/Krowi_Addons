@@ -223,7 +223,7 @@ namespace DbManagerWPF.DataManager
         {
             _ = achievement ?? throw new ArgumentNullException(nameof(achievement));
             if (ID <= 0) throw new ArgumentOutOfRangeException(nameof(ID));
-            if (points <= 0) throw new ArgumentOutOfRangeException(nameof(points));
+            if (points < 0) throw new ArgumentOutOfRangeException(nameof(points));
 
             var cmd = connection.CreateCommand();
             cmd.CommandText = @"UPDATE Achievement SET ID = @NewID, FactionID = @FactionID, CovenantID = @CovenantID, Points = @Points, Obtainable = @Obtainable, WowheadLink = @WowheadLink

@@ -190,7 +190,7 @@ namespace DbManagerWPF.ViewModel
 
         public void RemoveUIMapFromAchievement()
         {
-            uiMapDM.RemoveFromAchievement(SelectedAchievement, SelectedCategoryUIMap);
+            uiMapDM.RemoveFromAchievement(SelectedAchievement, SelectedAchievementUIMap);
 
             RefreshAchievementUIMapView(SelectedAchievement, true);
         }

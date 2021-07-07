@@ -413,9 +413,21 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <GroupBox Header="Import">
+            <GroupBox Header="Refresh">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="All" Command="{Binding RefreshAllCommand}" Margin="3" />
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Import">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -433,7 +445,7 @@
                     <TextBlock Grid.Row="3" Text="{Binding ImportText, FallbackValue=TEXT}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Row="1" Header="Export">
+            <GroupBox Grid.Row="2" Header="Export">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

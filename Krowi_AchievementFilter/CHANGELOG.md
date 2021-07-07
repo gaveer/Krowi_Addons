@@ -1,6 +1,51 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.1.0.25.1] - 2021-07-07
+[9.1.0.25.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
+### Fixed
+- Opening the Tutorial Pages should not spam the chat window with numbers anymore
+
+## [9.1.0.25.0] - 2021-07-07
+### Added
+- Worldmap button that will show the achievements progress for the current viewed zone
+- Clicking the worldmap button will bring you to a new Selected Zone category
+- When a zone has no achievements the button will be disabled
+- Selected Zone category has a seperate filter similar to the Current Zone category
+- Achievements in the Selected Zone category always have a Go To item so you can easily go to the achievement in the categories tree
+- Current Zone and Selected Zone categories have independent filtering and sorting
+- More zone data for multi-zone achievements for Shadowlands
+- More zone data for multi-zone achievements for Battle for Azeroth
+- World Map Button Tutorial Page
+
+### Changed
+- Updated the Enhanced filtering and sorting tutorial page
+- If an achievement is in multiple categories, searching for it will return the first category match
+- Moved Death's Advance from Shadowlands - Zones - The Maw - Reputation to Shadowlands - Zones - Korthia - Reputation
+- Moved Conquiring Korthia from Shadowlands - Zones to Shadowlands - Zones - The Maw - Exploration and - Korthia - Exploration
+- Shadowlands Keystone Explorer: Season One, Shadowlands Keystone Conqueror: Season One and Shadowlands Keystone Master: Season One in Shadowlands - Dungeons are no longer obtainable
+- Ahead of the Curve: Sire Denathrius and Cutting Edge: Sire Denathrius in Shadowlands - Raids are no longer obtainable
+- Moved achievements related to the Dueler's Guild from Battle for Azeroth - Kul Tiras & Zandalar - PvP to Battle for Azeroth - Dueler's Guild
+- Moved No Shellfish Endeavor from Legion - Zones - Broken Isles - Quests to Legion - Zones - Highmountain - Quests, Stormheim - Quests and Surumar - Quests
+- Moved What A Strange, Interdimensional Trip It's Been from Warlords of Dreanor - Zones - Dreanor to Warlords of Dreanor
+- Split Warlords of Dreanor - Garrison in Dreanor - Garrison - Buildings and - Invasions and - Buildings further into Buildings - Stables, - Gladiator's Sanctum and - Shipyard
+- Moved Chapter I: Call of the Archmage, Chapter II: Gul'dan Strikes Back, Chapter III: The Foundry Falls and Chapter IV: Darkness Incarnate from Warlords of Dreanor - Garrison to Warlords of Dreanor
+- Moved Tranquil Master from Mists of Pandaria - Zones - Pandaria to Mists of Pandaria
+- Moved Chapter I: Trial of the Black Prince, A Test of Valor, Chapter II: Wrathion's War, Chapter III: Two Princes, Chapter IV: Celestial Blessings and Chapter V: Judgment of the Black Prince from Mists of Pandaria - Zones - The Veiled Stair to Mists of Pandaria
+- Criteria cache now excludes statistics, guild and tracking achievements
+- Improved already great performance of getting Required For and Part of a Chain achievements
+
+### Fixed
+- When Merge Small Categories was selected, the 2nd tutorial page would not show the correct achievements
+- Legion Keymaster is not obtainable
+- Achievement Button Tooltip and Achievement Button Right Click Menu did not take filters into account
+- Problems with showing achievements in the Current Zone category when instances have 10 and 25 man difficulties
+
+### Removed
+- What A Strange, Interdimensional Trip It's Been from Warlords of Dreanor - Dungeons and - Raids
+- Tranquil Master from Mists of Pandaria - Dungeons and - Raids
+- Wrath of the Lich King - Zones - Grizzly Hills - Quests - Guru of Drakuru (Still available in Wrath of the Lich King - Zones - Zul'Drak - Quests - Guru of Drakuru)
+
 ## [9.1.0.24.0] - 2021-06-29
 ### Added
 - More zone data for multi-zone achievements for Shadowlands
@@ -451,6 +496,8 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
+[9.1.0.25.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
+[9.1.0.25.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379223
 [9.1.0.24.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3369293
 [9.0.5.23.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3326868
 [9.0.5.22.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3308327

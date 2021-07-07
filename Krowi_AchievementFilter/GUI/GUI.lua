@@ -10,7 +10,7 @@ function gui:Load()
 
     self.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
     self.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
-    self.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrames("CategoriesFrame", "AchievementsFrame")));
+    self.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrames("CategoriesFrame", "AchievementsFrame", "WorldMapButton")));
     self.AddFrame("FullSearchResultsFrame", gui.Search.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
     self.AddFrame("SearchPreviewFrame", gui.Search.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
     self.AddFrame("SearchBoxFrame", gui.Search.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));

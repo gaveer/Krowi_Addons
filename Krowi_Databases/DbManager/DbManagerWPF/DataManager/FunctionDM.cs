@@ -54,6 +54,14 @@ namespace DbManagerWPF.DataManager
             return functions.Single(x => x.ID == 21);
         }
 
+        public Function GetSelectedZoneFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 27);
+        }
+
         public Function GetComingInFunction()
         {
             if (!functions.Any())

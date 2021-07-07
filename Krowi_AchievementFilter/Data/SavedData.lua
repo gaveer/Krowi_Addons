@@ -13,13 +13,13 @@ function savedData.Load()
 
     local prevBuild = SavedData["Build"];
     diagnostics.Debug("Previous Build: " .. tostring(prevBuild)); -- Can be nil
-    SavedData["Build"] = AF_BUILD;
+    SavedData["Build"] = addon.MetaData.Build;
     local currBuild = SavedData["Build"];
     diagnostics.Debug("Current Build: " .. SavedData["Build"]);
 
     local prevVersion = SavedData["Version"];
     diagnostics.Debug("Previous Version: " .. tostring(prevVersion)); -- Can be nil
-    SavedData["Version"] = AF_VERSION;
+    SavedData["Version"] = addon.MetaData.Version;
     local currVersion = SavedData["Version"];
     diagnostics.Debug("Current Version: " .. SavedData["Version"]);
 

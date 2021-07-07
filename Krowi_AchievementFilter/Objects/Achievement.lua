@@ -52,13 +52,14 @@ function achievement:GetMergedCategory() -- Gets the achievement's category, use
 end
 
 local criteriaCache;
-function achievement:GetRequiredForIDs()
+function achievement:GetRequiredForIDs(validate, filters)
     if criteriaCache == nil then -- Build cache the first time
         criteriaCache = {};
 		local nils, i = 0, 1;
 		while nils < 500 do -- Biggest gap is 209 in 9.0.5 as of 2021-05-03
-			local id = addon.GetAchievementInfo(i);
-			if id then
+			local id, _, _, _, _, _, _, _, flags = addon.GetAchievementInfo(i);
+            -- Exclude statistics (1), guild (4000) and tracking (100000) achievements
+			if id and (flags / tonumber("1", 16)) % 2 < 1 and (flags / tonumber("4000", 16)) % 2 < 1 and (flags / tonumber("100000", 16)) % 2 < 1 then
 				local numCriteria = GetAchievementNumCriteria(id);
 				if numCriteria > 0 then
 					for j = 1, numCriteria do
@@ -80,27 +81,28 @@ function achievement:GetRequiredForIDs()
         return self.RequiredForIDs;
     end
 
-    local ids = {};
+    self.RequiredForIDs = {};
 	for _, criteria in next, criteriaCache do
 		if criteria.AchievementID == self.ID then
-			tinsert(ids, criteria.RequiredForID);
+            if validate and filters and addon.Achievements[criteria.RequiredForID] then
+                if validate(filters, addon.Achievements[criteria.RequiredForID], true) > 0 then
+			        tinsert(self.RequiredForIDs, criteria.RequiredForID);
+                end
+            else
+			    tinsert(self.RequiredForIDs, criteria.RequiredForID);
+            end
 		end
 	end
 
-    if #ids == 0 then
+    if #self.RequiredForIDs == 0 then
+        self.RequiredForIDs = nil;
         return;
-    end
-
-    self.RequiredForIDs = {}; -- By creating the required for IDs table here we reduce memory usage because not every achievement has required for IDs
-
-    for _, id in next, ids do
-        tinsert(self.RequiredForIDs, id);
     end
 
     return self.RequiredForIDs;
 end
 
-function achievement:GetPartOfAChainIDs()
+function achievement:GetPartOfAChainIDs(validate, filters)
     if self.PartOfAChainIDs then -- Return cached list
         return self.PartOfAChainIDs;
     end
@@ -119,7 +121,13 @@ function achievement:GetPartOfAChainIDs()
     self.PartOfAChainIDs = {}; -- By creating the part of a chain IDs table here we reduce memory usage because not every achievement has part of a chain IDs
 
 	while id do
-		tinsert(self.PartOfAChainIDs, id);
+        if validate and filters and addon.Achievements[id] then
+            if validate(filters, addon.Achievements[id], true) > 0 then
+                tinsert(self.PartOfAChainIDs, id);
+            end
+        else
+            tinsert(self.PartOfAChainIDs, id);
+        end
 		id = GetNextAchievement(id);
 	end
 

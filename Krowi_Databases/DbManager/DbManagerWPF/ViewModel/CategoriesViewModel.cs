@@ -52,7 +52,8 @@ namespace DbManagerWPF.ViewModel
         private string _CategoryNameNew;
         public string CategoryNameNew { get { return _CategoryNameNew; } set { _CategoryNameNew = value; NotifyPropertyChanged(); } }
 
-        public ObservableCollection<Function> Functions { get; set; }
+        private ObservableCollection<Function> _Functions;
+        public ObservableCollection<Function> Functions { get { return _Functions; } set { _Functions = value; NotifyPropertyChanged(); } }
 
         private Function _SelectedFunctionNew;
         public Function SelectedFunctionNew { get { return _SelectedFunctionNew; } set { _SelectedFunctionNew = value; NotifyPropertyChanged(); } }
@@ -144,7 +145,7 @@ namespace DbManagerWPF.ViewModel
 
         public void LoadCategoriesViewModel()
         {
-            Functions = new ObservableCollection<Function>(functionDM.GetAll());
+            Functions = new ObservableCollection<Function>(functionDM.GetAll(true));
             RefreshCategoriesView();
         }
 

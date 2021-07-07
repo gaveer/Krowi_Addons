@@ -5,6 +5,7 @@ addon.Data = {};
 local data = addon.Data;
 addon.Categories = {};
 addon.CurrentZoneCategory = {};
+addon.SelectedZoneCategory = {};
 addon.NextPatchCategory = {};
 addon.Achievements = {};
 addon.RCMenuExtras = {};
@@ -13,7 +14,7 @@ addon.Maps = {};
 
 function data.Load()
     data.ExportedAchievements.Load(addon.Achievements);
-    addon.CurrentZoneCategory, addon.NextPatchCategory = data.ExportedCategories.Load(addon.Categories, addon.Achievements);
+    addon.CurrentZoneCategory, addon.SelectedZoneCategory, addon.NextPatchCategory = data.ExportedCategories.Load(addon.Categories, addon.Achievements);
     data.ExportedPetBattles.Load(addon.RCMenuExtras);
     data.NextPatch.Load(addon.NextPatchAchievements);
     data.ExportedMaps.Load(addon.Maps, addon.Achievements);

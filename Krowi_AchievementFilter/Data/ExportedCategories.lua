@@ -1,4 +1,4 @@
--- [[ Exported at 2021-06-28 13-13-26 ]] --
+-- [[ Exported at 2021-07-05 22-45-28 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -33,6 +33,9 @@ function exportedCategories.Load(c, a)
     tmp[433].AlwaysVisible = true;
     tmp[433].HasFlexibleData = true;
     local currentZoneCategory = tmp[433];
+    tmp[850] = IaR(c, cat:New(addon.L["Selected Zone"])); -- Selected Zone
+    tmp[850].HasFlexibleData = true;
+    local selectedZoneCategory = tmp[850];
     tmp[1] = IaR(c, cat:New((GetCategoryInfo(14864)))); -- Classic
     tmp[648] = IaR(c, cat:New(addon.L["Zones"])); -- Zones
     AddC(tmp[1], tmp[648]);
@@ -820,7 +823,6 @@ function exportedCategories.Load(c, a)
     AddC(tmp[581], tmp[595]);
     AddA(tmp[595], a[37]); -- Fo' Grizzle My Shizzle
     AddA(tmp[595], a[1357]); -- Fo' Grizzle My Shizzle
-    AddA(tmp[595], a[1596]); -- Guru of Drakuru
     tmp[596] = IaR(c, cat:New((GetCategoryInfo(97)), true)); -- Exploration
     AddC(tmp[581], tmp[596]);
     AddA(tmp[596], a[1266]); -- Explore Grizzly Hills
@@ -1811,11 +1813,19 @@ function exportedCategories.Load(c, a)
     AddA(tmp[575], a[5375]); -- Baradin's Wardens
     AddA(tmp[575], a[5376]); -- Hellscream's Reach
     tmp[189] = IaR(c, cat:New((GetCategoryInfo(15164)))); -- Mists of Pandaria
+    AddA(tmp[189], a[6926]); -- Tranquil Master
+    AddA(tmp[189], a[7533]); -- Chapter I: Trial of the Black Prince
+    AddA(tmp[189], a[8030]); -- A Test of Valor
+    AddA(tmp[189], a[8031]); -- A Test of Valor
+    AddA(tmp[189], a[7534]); -- Chapter II: Wrathion's War
+    AddA(tmp[189], a[8008]); -- Chapter II: Wrathion's War
+    AddA(tmp[189], a[7535]); -- Chapter III: Two Princes
+    AddA(tmp[189], a[7536]); -- Chapter IV: Celestial Blessings
+    AddA(tmp[189], a[8325]); -- Chapter V: Judgment of the Black Prince
     tmp[491] = IaR(c, cat:New(addon.L["Zones"])); -- Zones
     AddC(tmp[189], tmp[491]);
     tmp[526] = IaR(c, cat:New(C_Map.GetMapInfo(424).name)); -- Pandaria
     AddC(tmp[491], tmp[526]);
-    AddA(tmp[526], a[6926]); -- Tranquil Master
     tmp[527] = IaR(c, cat:New((GetCategoryInfo(15447)), true)); -- Quests
     AddC(tmp[526], tmp[527]);
     AddA(tmp[527], a[6541]); -- Loremaster of Pandaria
@@ -1976,16 +1986,6 @@ function exportedCategories.Load(c, a)
     tmp[537] = IaR(c, cat:New((GetCategoryInfo(15273)), true)); -- Reputation
     AddC(tmp[498], tmp[537]);
     AddA(tmp[537], a[6546]); -- The Golden Lotus
-    tmp[798] = IaR(c, cat:New(C_Map.GetMapInfo(433).name)); -- The Veiled Stair
-    AddC(tmp[491], tmp[798]);
-    AddA(tmp[798], a[7533]); -- Chapter I: Trial of the Black Prince
-    AddA(tmp[798], a[8030]); -- A Test of Valor
-    AddA(tmp[798], a[8031]); -- A Test of Valor
-    AddA(tmp[798], a[7534]); -- Chapter II: Wrathion's War
-    AddA(tmp[798], a[8008]); -- Chapter II: Wrathion's War
-    AddA(tmp[798], a[7535]); -- Chapter III: Two Princes
-    AddA(tmp[798], a[7536]); -- Chapter IV: Celestial Blessings
-    AddA(tmp[798], a[8325]); -- Chapter V: Judgment of the Black Prince
     tmp[534] = IaR(c, cat:New(C_Map.GetMapInfo(507).name)); -- Isle of Giants
     AddC(tmp[491], tmp[534]);
     AddA(tmp[534], a[8123]); -- Millions of Years of Evolution vs. My Fist
@@ -2058,7 +2058,6 @@ function exportedCategories.Load(c, a)
     tmp[190] = IaR(c, cat:New((GetCategoryInfo(15272)))); -- Dungeons
     AddC(tmp[189], tmp[190]);
     AddA(tmp[190], a[6925]); -- Pandaria Dungeon Hero
-    AddA(tmp[190], a[6926]); -- Tranquil Master
     AddA(tmp[190], a[6927]); -- Glory of the Pandaria Hero
     AddA(tmp[190], a[8903]); -- Mistwalker
     AddA(tmp[190], a[6920]); -- Challenge Conqueror
@@ -2178,7 +2177,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[201], a[8438]); -- Challenge Master: Scholomance
     tmp[191] = IaR(c, cat:New((GetCategoryInfo(15271)))); -- Raids
     AddC(tmp[189], tmp[191]);
-    AddA(tmp[191], a[6926]); -- Tranquil Master
     AddA(tmp[191], a[6932]); -- Glory of the Pandaria Raider
     AddA(tmp[191], a[8124]); -- Glory of the Thundering Raider
     AddA(tmp[191], a[8454]); -- Glory of the Orgrimmar Raider
@@ -2491,11 +2489,16 @@ function exportedCategories.Load(c, a)
     AddA(tmp[490], a[8697]); -- You're Doing it Wrong (Level 90)
     AddA(tmp[490], a[8812]); -- You're Really Doing It Wrong (Level 90)
     tmp[223] = IaR(c, cat:New((GetCategoryInfo(15233)))); -- Warlords of Dreanor
+    AddA(tmp[223], a[9838]); -- "What A Strange, Interdimensional Trip It's Been"
+    AddA(tmp[223], a[9640]); -- Chapter I: Call of the Archmage
+    AddA(tmp[223], a[9641]); -- Chapter II: Gul'dan Strikes Back
+    AddA(tmp[223], a[9642]); -- Chapter III: The Foundry Falls
+    AddA(tmp[223], a[10021]); -- Chapter IV: Darkness Incarnate
+    AddA(tmp[223], a[10148]); -- Chapter IV: Darkness Incarnate
     tmp[449] = IaR(c, cat:New(addon.L["Zones"])); -- Zones
     AddC(tmp[223], tmp[449]);
     tmp[486] = IaR(c, cat:New(C_Map.GetMapInfo(572).name)); -- Draenor
     AddC(tmp[449], tmp[486]);
-    AddA(tmp[486], a[9838]); -- "What A Strange, Interdimensional Trip It's Been"
     AddA(tmp[486], a[10053]); -- I Found Pepe!
     tmp[487] = IaR(c, cat:New((GetCategoryInfo(15447)), true)); -- Quests
     AddC(tmp[486], tmp[487]);
@@ -2678,7 +2681,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[224], a[9391]); -- Draenor Dungeon Hero
     AddA(tmp[224], a[9619]); -- Savage Hero
     AddA(tmp[224], a[9396]); -- Glory of the Draenor Hero
-    AddA(tmp[224], a[9838]); -- "What A Strange, Interdimensional Trip It's Been"
     AddA(tmp[224], a[8895]); -- Challenge Warlord
     AddA(tmp[224], a[8897]); -- Challenge Warlord: Bronze
     AddA(tmp[224], a[8898]); -- Challenge Warlord: Silver
@@ -2793,7 +2795,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[225], a[9619]); -- Savage Hero
     AddA(tmp[225], a[8985]); -- Glory of the Draenor Raider
     AddA(tmp[225], a[10149]); -- Glory of the Hellfire Raider
-    AddA(tmp[225], a[9838]); -- "What A Strange, Interdimensional Trip It's Been"
     tmp[234] = IaR(c, cat:New((EJ_GetInstanceInfo(477)))); -- Highmaul
     AddC(tmp[225], tmp[234]);
     AddA(tmp[234], a[8948]); -- Flame On!
@@ -2926,58 +2927,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[432], a[9897]); -- Ten Hit Tunes
     AddA(tmp[432], a[9914]); -- Azeroth's Top Twenty Tunes
     AddA(tmp[432], a[10016]); -- Full Discography
-    AddA(tmp[432], a[9125]); -- Draftsman
-    AddA(tmp[432], a[9126]); -- Master Draftsman
-    AddA(tmp[432], a[9128]); -- Grand Master Draftsman
-    AddA(tmp[432], a[9095]); -- Builder
-    AddA(tmp[432], a[9096]); -- Master Builder
-    AddA(tmp[432], a[9097]); -- Keepin' Busy
-    AddA(tmp[432], a[9094]); -- Garrison Architect
-    AddA(tmp[432], a[9487]); -- Got My Mind On My Draenor Money
-    AddA(tmp[432], a[9076]); -- Choppin' Some Logs
-    AddA(tmp[432], a[9077]); -- Choppin' Some More Logs
-    AddA(tmp[432], a[9080]); -- Choppin' Even More Logs
-    AddA(tmp[432], a[9078]); -- Choppin' Even More Logs
-    AddA(tmp[432], a[9429]); -- Upgrading the Mill
-    AddA(tmp[432], a[9099]); -- Time for an Upgrade
-    AddA(tmp[432], a[9098]); -- Movin' On Up
-    AddA(tmp[432], a[9405]); -- Working Some Orders
-    AddA(tmp[432], a[9406]); -- Working More Orders
-    AddA(tmp[432], a[9407]); -- Working Many Orders
-    AddA(tmp[432], a[9450]); -- The Trap Game
-    AddA(tmp[432], a[9565]); -- Master Trapper
-    AddA(tmp[432], a[9451]); -- Trapper's Delight
-    AddA(tmp[432], a[9452]); -- Trap Superstar
-    AddA(tmp[432], a[9468]); -- Salvaging Pays Off
-    AddA(tmp[432], a[9495]); -- The Bone Collector
-    AddA(tmp[432], a[9497]); -- Finding Your Waystones
-    AddA(tmp[432], a[9498]); -- Wingman
-    AddA(tmp[432], a[9499]); -- Wingmen
-    AddA(tmp[432], a[9538]); -- Intro to Husbandry
-    AddA(tmp[432], a[9526]); -- Master of Mounts
-    AddA(tmp[432], a[9539]); -- Advanced Husbandry
-    AddA(tmp[432], a[9705]); -- Advanced Husbandry
-    AddA(tmp[432], a[9540]); -- The Stable Master
-    AddA(tmp[432], a[9706]); -- The Stable Master
-    AddA(tmp[432], a[9527]); -- Terrific Technology
-    AddA(tmp[432], a[9703]); -- Stay Awhile and Listen
-    AddA(tmp[432], a[9516]); -- Nemesis: Slayer of Sin'dorei
-    AddA(tmp[432], a[9517]); -- Nemesis: Death Stalker
-    AddA(tmp[432], a[9518]); -- Nemesis: Killer of Kezan
-    AddA(tmp[432], a[9519]); -- Nemesis: Orcslayer
-    AddA(tmp[432], a[9520]); -- Nemesis: Huojin's Fall
-    AddA(tmp[432], a[9521]); -- Nemesis: The Butcher
-    AddA(tmp[432], a[9522]); -- Nemesis: Troll Hunter
-    AddA(tmp[432], a[9509]); -- Nemesis: Draenei Destroyer
-    AddA(tmp[432], a[9510]); -- Nemesis: Dwarfstalker
-    AddA(tmp[432], a[9511]); -- Nemesis: Gnomebane
-    AddA(tmp[432], a[9512]); -- Nemesis: Manslayer
-    AddA(tmp[432], a[9513]); -- Nemesis: Scourge of the Kaldorei
-    AddA(tmp[432], a[9514]); -- Nemesis: Terror of the Tushui
-    AddA(tmp[432], a[9515]); -- Nemesis: Worgen Hunter
-    AddA(tmp[432], a[9639]); -- "Fight, Kill, Salute!"
-    AddA(tmp[432], a[9508]); -- Warlord of Draenor
-    AddA(tmp[432], a[9738]); -- Warlord of Draenor
     AddA(tmp[432], a[9107]); -- Follow the Leader
     AddA(tmp[432], a[9108]); -- "Where You Go, They Will Follow"
     AddA(tmp[432], a[9109]); -- Fearless Leader
@@ -2992,23 +2941,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[432], a[9213]); -- Item Level Army
     AddA(tmp[432], a[9243]); -- Item Level Force
     AddA(tmp[432], a[9152]); -- It's an Invasion!
-    AddA(tmp[432], a[9167]); -- Invasion Specialist
-    AddA(tmp[432], a[9543]); -- Invasion? What Invasion?
-    AddA(tmp[432], a[9244]); -- Invasions Are Better with Friends
-    AddA(tmp[432], a[9205]); -- Iron Horde Invasion
-    AddA(tmp[432], a[9206]); -- Shadowmoon Clan Invasion
-    AddA(tmp[432], a[9203]); -- Shadow Council Invasion
-    AddA(tmp[432], a[9204]); -- Ogre Invasion
-    AddA(tmp[432], a[9207]); -- Goren Invasion
-    AddA(tmp[432], a[9208]); -- Botani Invasion
-    AddA(tmp[432], a[9162]); -- Bronze Defender
-    AddA(tmp[432], a[9164]); -- Silver Defender
-    AddA(tmp[432], a[9165]); -- Golden Defender
-    AddA(tmp[432], a[9826]); -- Platinum Defender
-    AddA(tmp[432], a[9209]); -- Master Defender
-    AddA(tmp[432], a[9827]); -- Impervious Defender
-    AddA(tmp[432], a[9181]); -- Save Those Buildings!
-    AddA(tmp[432], a[9858]); -- Master and Commander
     AddA(tmp[432], a[9133]); -- On a Mission
     AddA(tmp[432], a[9134]); -- On a Few Missions
     AddA(tmp[432], a[9138]); -- On a Lot of Missions
@@ -3031,42 +2963,116 @@ function exportedCategories.Load(c, a)
     AddA(tmp[432], a[9631]); -- Mythic Draenor Raider
     AddA(tmp[432], a[9264]); -- Draenor Pet Brawler
     AddA(tmp[432], a[9265]); -- Master of Apexis
-    AddA(tmp[432], a[10177]); -- Set Sail!
-    AddA(tmp[432], a[10169]); -- Naval Fleet
-    AddA(tmp[432], a[10168]); -- Naval Armada
-    AddA(tmp[432], a[10170]); -- Seaman
-    AddA(tmp[432], a[10172]); -- Petty Officer
-    AddA(tmp[432], a[10173]); -- Fleet Commander
-    AddA(tmp[432], a[10255]); -- Petty Officer
-    AddA(tmp[432], a[10275]); -- Fleet Commander
-    AddA(tmp[432], a[10276]); -- Admiral
-    AddA(tmp[432], a[10174]); -- Admiral
-    AddA(tmp[432], a[10156]); -- Naval Combat Specialist
-    AddA(tmp[432], a[10154]); -- Naval Combat Expert
-    AddA(tmp[432], a[10159]); -- Naval Treasure Specialist
-    AddA(tmp[432], a[10160]); -- Naval Treasure Expert
-    AddA(tmp[432], a[10161]); -- Naval Siege Specialist
-    AddA(tmp[432], a[10155]); -- Naval Siege Expert
-    AddA(tmp[432], a[10162]); -- Naval Training Specialist
-    AddA(tmp[432], a[10163]); -- Naval Training Expert
-    AddA(tmp[432], a[10017]); -- Naval Bonus Specialist
-    AddA(tmp[432], a[10036]); -- Naval Bonus Expert
-    AddA(tmp[432], a[10164]); -- Master of the Seas
-    AddA(tmp[432], a[10165]); -- Ironsides
-    AddA(tmp[432], a[10166]); -- Naval Mechanics
-    AddA(tmp[432], a[10256]); -- Charting a Course
-    AddA(tmp[432], a[10167]); -- Exploring the High Seas
-    AddA(tmp[432], a[10258]); -- Charting a Course
-    AddA(tmp[432], a[10307]); -- Exploring the High Seas
-    AddA(tmp[432], a[9640]); -- Chapter I: Call of the Archmage
-    AddA(tmp[432], a[9641]); -- Chapter II: Gul'dan Strikes Back
-    AddA(tmp[432], a[9642]); -- Chapter III: The Foundry Falls
-    AddA(tmp[432], a[10021]); -- Chapter IV: Darkness Incarnate
-    AddA(tmp[432], a[10148]); -- Chapter IV: Darkness Incarnate
     tmp[485] = IaR(c, cat:New((GetCategoryInfo(15447)), true)); -- Quests
     AddC(tmp[432], tmp[485]);
     AddA(tmp[485], a[9825]); -- Master Relic Hunter
     AddA(tmp[485], a[9836]); -- Master Relic Hunter
+    tmp[852] = IaR(c, cat:New(addon.L["Buildings"])); -- Buildings
+    AddC(tmp[432], tmp[852]);
+    AddA(tmp[852], a[9125]); -- Draftsman
+    AddA(tmp[852], a[9126]); -- Master Draftsman
+    AddA(tmp[852], a[9128]); -- Grand Master Draftsman
+    AddA(tmp[852], a[9095]); -- Builder
+    AddA(tmp[852], a[9096]); -- Master Builder
+    AddA(tmp[852], a[9097]); -- Keepin' Busy
+    AddA(tmp[852], a[9094]); -- Garrison Architect
+    AddA(tmp[852], a[9487]); -- Got My Mind On My Draenor Money
+    AddA(tmp[852], a[9076]); -- Choppin' Some Logs
+    AddA(tmp[852], a[9077]); -- Choppin' Some More Logs
+    AddA(tmp[852], a[9080]); -- Choppin' Even More Logs
+    AddA(tmp[852], a[9078]); -- Choppin' Even More Logs
+    AddA(tmp[852], a[9429]); -- Upgrading the Mill
+    AddA(tmp[852], a[9099]); -- Time for an Upgrade
+    AddA(tmp[852], a[9098]); -- Movin' On Up
+    AddA(tmp[852], a[9405]); -- Working Some Orders
+    AddA(tmp[852], a[9406]); -- Working More Orders
+    AddA(tmp[852], a[9407]); -- Working Many Orders
+    AddA(tmp[852], a[9450]); -- The Trap Game
+    AddA(tmp[852], a[9565]); -- Master Trapper
+    AddA(tmp[852], a[9451]); -- Trapper's Delight
+    AddA(tmp[852], a[9452]); -- Trap Superstar
+    AddA(tmp[852], a[9468]); -- Salvaging Pays Off
+    AddA(tmp[852], a[9495]); -- The Bone Collector
+    AddA(tmp[852], a[9497]); -- Finding Your Waystones
+    AddA(tmp[852], a[9498]); -- Wingman
+    AddA(tmp[852], a[9499]); -- Wingmen
+    AddA(tmp[852], a[9538]); -- Intro to Husbandry
+    AddA(tmp[852], a[9527]); -- Terrific Technology
+    AddA(tmp[852], a[9703]); -- Stay Awhile and Listen
+    tmp[854] = IaR(c, cat:New(addon.L["Stables"], true)); -- Stables
+    AddC(tmp[852], tmp[854]);
+    AddA(tmp[854], a[9526]); -- Master of Mounts
+    AddA(tmp[854], a[9539]); -- Advanced Husbandry
+    AddA(tmp[854], a[9705]); -- Advanced Husbandry
+    AddA(tmp[854], a[9540]); -- The Stable Master
+    AddA(tmp[854], a[9706]); -- The Stable Master
+    tmp[853] = IaR(c, cat:New(addon.L["Gladiator's Sanctum"], true)); -- Gladiator's Sanctum
+    AddC(tmp[852], tmp[853]);
+    AddA(tmp[853], a[9516]); -- Nemesis: Slayer of Sin'dorei
+    AddA(tmp[853], a[9517]); -- Nemesis: Death Stalker
+    AddA(tmp[853], a[9518]); -- Nemesis: Killer of Kezan
+    AddA(tmp[853], a[9519]); -- Nemesis: Orcslayer
+    AddA(tmp[853], a[9520]); -- Nemesis: Huojin's Fall
+    AddA(tmp[853], a[9521]); -- Nemesis: The Butcher
+    AddA(tmp[853], a[9522]); -- Nemesis: Troll Hunter
+    AddA(tmp[853], a[9509]); -- Nemesis: Draenei Destroyer
+    AddA(tmp[853], a[9510]); -- Nemesis: Dwarfstalker
+    AddA(tmp[853], a[9511]); -- Nemesis: Gnomebane
+    AddA(tmp[853], a[9512]); -- Nemesis: Manslayer
+    AddA(tmp[853], a[9513]); -- Nemesis: Scourge of the Kaldorei
+    AddA(tmp[853], a[9514]); -- Nemesis: Terror of the Tushui
+    AddA(tmp[853], a[9515]); -- Nemesis: Worgen Hunter
+    AddA(tmp[853], a[9639]); -- "Fight, Kill, Salute!"
+    AddA(tmp[853], a[9508]); -- Warlord of Draenor
+    AddA(tmp[853], a[9738]); -- Warlord of Draenor
+    tmp[856] = IaR(c, cat:New(addon.L["Shipyard"], true)); -- Shipyard
+    AddC(tmp[852], tmp[856]);
+    AddA(tmp[856], a[10177]); -- Set Sail!
+    AddA(tmp[856], a[10169]); -- Naval Fleet
+    AddA(tmp[856], a[10168]); -- Naval Armada
+    AddA(tmp[856], a[10170]); -- Seaman
+    AddA(tmp[856], a[10172]); -- Petty Officer
+    AddA(tmp[856], a[10173]); -- Fleet Commander
+    AddA(tmp[856], a[10255]); -- Petty Officer
+    AddA(tmp[856], a[10275]); -- Fleet Commander
+    AddA(tmp[856], a[10276]); -- Admiral
+    AddA(tmp[856], a[10174]); -- Admiral
+    AddA(tmp[856], a[10156]); -- Naval Combat Specialist
+    AddA(tmp[856], a[10154]); -- Naval Combat Expert
+    AddA(tmp[856], a[10159]); -- Naval Treasure Specialist
+    AddA(tmp[856], a[10160]); -- Naval Treasure Expert
+    AddA(tmp[856], a[10161]); -- Naval Siege Specialist
+    AddA(tmp[856], a[10155]); -- Naval Siege Expert
+    AddA(tmp[856], a[10162]); -- Naval Training Specialist
+    AddA(tmp[856], a[10163]); -- Naval Training Expert
+    AddA(tmp[856], a[10017]); -- Naval Bonus Specialist
+    AddA(tmp[856], a[10036]); -- Naval Bonus Expert
+    AddA(tmp[856], a[10164]); -- Master of the Seas
+    AddA(tmp[856], a[10165]); -- Ironsides
+    AddA(tmp[856], a[10166]); -- Naval Mechanics
+    AddA(tmp[856], a[10256]); -- Charting a Course
+    AddA(tmp[856], a[10167]); -- Exploring the High Seas
+    AddA(tmp[856], a[10258]); -- Charting a Course
+    AddA(tmp[856], a[10307]); -- Exploring the High Seas
+    tmp[855] = IaR(c, cat:New(addon.L["Invasions"], true)); -- Invasions
+    AddC(tmp[432], tmp[855]);
+    AddA(tmp[855], a[9167]); -- Invasion Specialist
+    AddA(tmp[855], a[9543]); -- Invasion? What Invasion?
+    AddA(tmp[855], a[9244]); -- Invasions Are Better with Friends
+    AddA(tmp[855], a[9205]); -- Iron Horde Invasion
+    AddA(tmp[855], a[9206]); -- Shadowmoon Clan Invasion
+    AddA(tmp[855], a[9203]); -- Shadow Council Invasion
+    AddA(tmp[855], a[9204]); -- Ogre Invasion
+    AddA(tmp[855], a[9207]); -- Goren Invasion
+    AddA(tmp[855], a[9208]); -- Botani Invasion
+    AddA(tmp[855], a[9162]); -- Bronze Defender
+    AddA(tmp[855], a[9164]); -- Silver Defender
+    AddA(tmp[855], a[9165]); -- Golden Defender
+    AddA(tmp[855], a[9826]); -- Platinum Defender
+    AddA(tmp[855], a[9209]); -- Master Defender
+    AddA(tmp[855], a[9827]); -- Impervious Defender
+    AddA(tmp[855], a[9181]); -- Save Those Buildings!
+    AddA(tmp[855], a[9858]); -- Master and Commander
     tmp[237] = IaR(c, cat:New((GetCategoryInfo(15258)))); -- Legion
     tmp[381] = IaR(c, cat:New(addon.L["Zones"])); -- Zones
     AddC(tmp[237], tmp[381]);
@@ -3078,7 +3084,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[397], a[11157]); -- Loremaster of Legion
     AddA(tmp[397], a[10877]); -- Pillars of Creation
     AddA(tmp[397], a[11189]); -- Variety is the Spice of Life
-    AddA(tmp[397], a[11427]); -- No Shellfish Endeavor
     AddA(tmp[397], a[11186]); -- Tehd & Marius' Excellent Adventure
     AddA(tmp[397], a[11240]); -- Harbinger
     AddA(tmp[397], a[11544]); -- Defender of the Broken Isles
@@ -3145,6 +3150,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[392], a[10774]); -- Hatchling of the Talon
     AddA(tmp[392], a[10626]); -- Zoom!
     AddA(tmp[392], a[10398]); -- Drum Circle
+    AddA(tmp[392], a[11427]); -- No Shellfish Endeavor
     tmp[401] = IaR(c, cat:New((GetCategoryInfo(97)), true)); -- Exploration
     AddC(tmp[388], tmp[401]);
     AddA(tmp[401], a[10667]); -- Explore Highmountain
@@ -3163,6 +3169,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[390], a[10790]); -- "Vrykul Story, Bro"
     AddA(tmp[390], a[10793]); -- What a Ripoff!
     AddA(tmp[390], a[11232]); -- "Lock, Stock and Two Smoking Goblins"
+    AddA(tmp[390], a[11427]); -- No Shellfish Endeavor
     tmp[402] = IaR(c, cat:New((GetCategoryInfo(97)), true)); -- Exploration
     AddC(tmp[386], tmp[402]);
     AddA(tmp[402], a[10668]); -- Explore Stormheim
@@ -3183,6 +3190,7 @@ function exportedCategories.Load(c, a)
     AddA(tmp[393], a[11125]); -- Now You're Thinking With Portals
     AddA(tmp[393], a[11133]); -- Why Can't I Hold All This Mana?
     AddA(tmp[393], a[11340]); -- Insurrection
+    AddA(tmp[393], a[11427]); -- No Shellfish Endeavor
     tmp[403] = IaR(c, cat:New((GetCategoryInfo(97)), true)); -- Exploration
     AddC(tmp[389], tmp[403]);
     AddA(tmp[403], a[10669]); -- Explore Suramar
@@ -3596,19 +3604,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[274], a[12573]); -- Band of Brothers
     AddA(tmp[274], a[12605]); -- Conqueror of Azeroth
     AddA(tmp[274], a[12604]); -- Conqueror of Azeroth
-    AddA(tmp[274], a[12856]); -- The First Rule of Dueler's Guild
-    AddA(tmp[274], a[12857]); -- Trial by Combat
-    AddA(tmp[274], a[12858]); -- Slugfest
-    AddA(tmp[274], a[12860]); -- Contender
-    AddA(tmp[274], a[12863]); -- Dueling Master
-    AddA(tmp[274], a[12859]); -- Prize Fighter
-    AddA(tmp[274], a[12861]); -- Master of Duels
-    AddA(tmp[274], a[12862]); -- Thirty Six and Two
-    AddA(tmp[274], a[13387]); -- Frontline Veteran
-    AddA(tmp[274], a[13388]); -- Frontline Veteran
-    AddA(tmp[274], a[13402]); -- Frontline Slayer
-    AddA(tmp[274], a[13403]); -- Frontline Slayer
-    AddA(tmp[274], a[13623]); -- Fighting on Two Fronts
     tmp[275] = IaR(c, cat:New((GetCategoryInfo(15273)), true)); -- Reputation
     AddC(tmp[271], tmp[275]);
     AddA(tmp[275], a[12947]); -- Azerothian Diplomat
@@ -4142,6 +4137,21 @@ function exportedCategories.Load(c, a)
     AddA(tmp[793], a[11570]); -- Educated Guesser
     AddA(tmp[793], a[13194]); -- I Am Thrall's Complete Lack Of Surprise
     AddA(tmp[793], a[11573]); -- Rumble Club
+    tmp[851] = IaR(c, cat:New(addon.L["Dueler's Guild"])); -- Dueler's Guild
+    AddC(tmp[258], tmp[851]);
+    AddA(tmp[851], a[12856]); -- The First Rule of Dueler's Guild
+    AddA(tmp[851], a[12857]); -- Trial by Combat
+    AddA(tmp[851], a[12858]); -- Slugfest
+    AddA(tmp[851], a[12860]); -- Contender
+    AddA(tmp[851], a[12863]); -- Dueling Master
+    AddA(tmp[851], a[12859]); -- Prize Fighter
+    AddA(tmp[851], a[12861]); -- Master of Duels
+    AddA(tmp[851], a[12862]); -- Thirty Six and Two
+    AddA(tmp[851], a[13387]); -- Frontline Veteran
+    AddA(tmp[851], a[13388]); -- Frontline Veteran
+    AddA(tmp[851], a[13402]); -- Frontline Slayer
+    AddA(tmp[851], a[13403]); -- Frontline Slayer
+    AddA(tmp[851], a[13623]); -- Fighting on Two Fronts
     tmp[425] = IaR(c, cat:New((GetCategoryInfo(15307)))); -- Island Expeditions
     AddC(tmp[258], tmp[425]);
     AddA(tmp[425], a[13142]); -- Archipelago Explorer
@@ -4320,7 +4330,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[344], a[14516]); -- Impressing Zo'Sorg
     AddA(tmp[344], a[14519]); -- Covenant Combat
     AddA(tmp[344], a[14315]); -- Shadowlands Diplomat
-    AddA(tmp[344], a[15107]); -- Conquering Korthia
     AddA(tmp[344], a[15064]); -- Breaking the Chains
     tmp[345] = IaR(c, cat:New(C_Map.GetMapInfo(1533).name)); -- Bastion
     AddC(tmp[344], tmp[345]);
@@ -4465,11 +4474,11 @@ function exportedCategories.Load(c, a)
     AddA(tmp[367], a[14894]); -- "To 'Ghast, Two Curios"
     AddA(tmp[367], a[14895]); -- 'Ghast Five
     AddA(tmp[367], a[15054]); -- Minions of the Cold Dark
+    AddA(tmp[367], a[15107]); -- Conquering Korthia
     AddA(tmp[367], a[14943]); -- Guarmageddon
     tmp[368] = IaR(c, cat:New((GetCategoryInfo(15273)), true)); -- Reputation
     AddC(tmp[365], tmp[368]);
     AddA(tmp[368], a[14656]); -- Trading Partners
-    AddA(tmp[368], a[15059]); -- Death's Advance
     tmp[812] = IaR(c, cat:New("Korthia")); -- Korthia
     AddC(tmp[344], tmp[812]);
     tmp[817] = IaR(c, cat:New((GetCategoryInfo(15447)), true)); -- Quests
@@ -4481,9 +4490,11 @@ function exportedCategories.Load(c, a)
     tmp[818] = IaR(c, cat:New((GetCategoryInfo(97)), true)); -- Exploration
     AddC(tmp[812], tmp[818]);
     AddA(tmp[818], a[15053]); -- Explore Korthia
+    AddA(tmp[818], a[15107]); -- Conquering Korthia
     AddA(tmp[818], a[15099]); -- Treasures of Korthia
     tmp[813] = IaR(c, cat:New((GetCategoryInfo(15273)), true)); -- Reputation
     AddC(tmp[812], tmp[813]);
+    AddA(tmp[813], a[15059]); -- Death's Advance
     AddA(tmp[813], a[15069]); -- The Archivists' Codex
     tmp[369] = IaR(c, cat:New((GetCategoryInfo(15272)))); -- Dungeons
     AddC(tmp[6], tmp[369]);
@@ -4801,6 +4812,6 @@ function exportedCategories.Load(c, a)
     AddA(tmp[420], a[14833]); -- Fashion Abomination
     AddA(tmp[420], a[14763]); -- Crypt Couture
 
-    return currentZoneCategory, nextPatchCategory;
+    return currentZoneCategory, selectedZoneCategory, nextPatchCategory;
 end
 

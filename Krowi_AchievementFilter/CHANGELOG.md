@@ -1,15 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-[9.1.0.26.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
 ## [9.1.0.26.0] - 2021-
 ### Added
 - TBD
 
-[9.1.0.25.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
+[9.1.0.26.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
+
 ## [9.1.0.25.1] - 2021-07-07
 ### Fixed
 - Opening the Tutorial Pages should not spam the chat window with numbers anymore
+
+[9.1.0.25.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
 
 ## [9.1.0.25.0] - 2021-07-07
 ### Added
@@ -51,6 +53,8 @@ All notable changes to this project will be documented in this file.
 - Tranquil Master from Mists of Pandaria - Dungeons and - Raids
 - Wrath of the Lich King - Zones - Grizzly Hills - Quests - Guru of Drakuru (Still available in Wrath of the Lich King - Zones - Zul'Drak - Quests - Guru of Drakuru)
 
+[9.1.0.25.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379223
+
 ## [9.1.0.24.0] - 2021-06-29
 ### Added
 - More zone data for multi-zone achievements for Shadowlands
@@ -70,6 +74,8 @@ All notable changes to this project will be documented in this file.
 - Page 6's text of the tutorials could be outside the frame with certain text fonts
 - Northrend Safari, Northrend Tamer and Taming Northrend are now obtainable
 - Discord link replaced with one that does not expire
+
+[9.1.0.24.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3369293
 
 ## [9.0.5.23.0] - 2021-05-27
 ### Added
@@ -99,6 +105,8 @@ All notable changes to this project will be documented in this file.
 - Issue #42: When achievements with same objective types are shown in default and new tab, both objectives would stay hidden
 - Issue #43: Go to in Current Zone and searching does not properly work when Merge Small Categories is checked
 
+[9.0.5.23.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3326868
+
 ## [9.0.5.22.0] - 2021-05-13
 ### Added
 - New Coming in 9.1 (25 achievements)
@@ -112,6 +120,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Tooltip should not dissapear anymore when hovering over achievement criteria
 - Clicking on an achievement in a meta achievement will now select the achievement in the new tab
+
+[9.0.5.22.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3308327
 
 ## [9.0.5.21.0] - 2021-05-08
 ### Added
@@ -129,6 +139,8 @@ All notable changes to this project will be documented in this file.
 - ElvUI Skins Status options are moved to a seperate tab
 - Layout options are moved to a seperate tab
 - Renamed 'Collapse Series' to 'Collapse Chain'
+
+[9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611
 
 ## [9.0.5.20.0] - 2021-05-01
 ### Added
@@ -249,6 +261,8 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - Shadowlands Torghast (1 achievement, in preperation for 9.1)
 
+[9.0.5.20.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3294651
+
 ## [9.0.5.19.0] - 2021-04-27
 ### Added
 - Filter to merge small categories into the parent category
@@ -262,6 +276,8 @@ All notable changes to this project will be documented in this file.
 - Moved achievement Crypt Couture from Shadowlands Zones Maldraxxus Exploration to Shadowlands Covenant Sanctums Necrolord
 - Optimized data file sizes
 - Backend database optimized
+
+[9.0.5.19.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3290570
 
 ## [9.0.5.18.0] - 2021-04-13
 ### Added
@@ -280,6 +296,8 @@ All notable changes to this project will be documented in this file.
 - Code cleanup
 - Removed Classic Dungeons Deadmines, Shadowfang Keep, Scarlet Halls, Scarlet Monastery and Scholomance
 
+[9.0.5.18.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3275157
+
 ## [9.0.5.17.0] - 2021-04-06
 ### Added
 - Cataclysm Zones (145 achievements) + zone data except for the shared zone group
@@ -290,6 +308,8 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Issue #33: Random numbers in chat
+
+[9.0.5.17.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3264965
 
 ## [9.0.5.16.0] - 2021-04-02
 ### Added
@@ -306,6 +326,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - 2 wrong achievements in The Nighthold raid
 
+[9.0.5.16.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3259864
+
 ## [9.0.5.15.0] - 2021-03-23
 ### Added
 - Warlords of Draenor Garrison (151 achievements) + zone data
@@ -321,6 +343,8 @@ All notable changes to this project will be documented in this file.
 - Battle for Azeroth Island Expeditions are now split per Island Expeditions
 - Battle for Azeroth War Effort are now split per War Effort
 
+[9.0.5.15.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3248934
+
 ## [9.0.5.14.0] - 2021-03-10
 ### Added
 - Legion Pet Battles (with external links) (25 achievements)
@@ -333,6 +357,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Battle for Azeroth Pet Battles and Shadowlands Pet Battles external links
+
+[9.0.5.14.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3234117
 
 ## [9.0.2.13.0] - 2021-02-24
 ### Added
@@ -348,6 +374,8 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated all tutorial images to have a fade to transparent instead of fade to black to better work with ElvUI's Blizzard Skins and Tutorials (Compatibility #7)
 
+[9.0.2.13.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3215749
+
 ## [9.0.2.12.0] - 2021-02-15
 ### Added
 - Filtering by Neutral, Alliance and Horde achievements now possible
@@ -356,6 +384,8 @@ All notable changes to this project will be documented in this file.
 - Category tooltip info is now cached instead of fetching it every time resulting in huge performance increases to up to 10 times faster GUI loading
 - Data is now stored and maintained in a SQLite database with an export to lua if new data is added
 - IAT v3.18.0 or higher required
+
+[9.0.2.12.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3205404
 
 ## [9.0.2.11.0] - 2021-02-05
 ### Added
@@ -367,10 +397,14 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Right click menu items have no bullets in front of their names anymore
 
+[9.0.2.11.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3193640
+
 ## [9.0.2.10.1] - 2021-02-02
 ### Fixed
 - Issue #25: Tutorial step 3 does not toggle the correct categories to show the right click menu
 - Issue #26: Going through the tutorial, the Achievement Window toggles instead of staying open
+
+[9.0.2.10.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3190348
 
 ## [9.0.2.10.0] - 2021-02-02
 ### Added
@@ -389,6 +423,8 @@ All notable changes to this project will be documented in this file.
 - Issue #23: Searching achievement in category that is selected and not collapsed will trigger error
 - Issue #24: When Ace3 libraries are not installed as an addon, loading this addon causes errors
 
+[9.0.2.10.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3189892
+
 ## [9.0.2.9.0] - 2021-01-27
 ### Added
 - Searching achievements in the new tab (Feature #17)
@@ -405,9 +441,13 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Issue #20: The Ruby Sanctum category has the name of Icecrown Citadel under WotLK Raids
 
+[9.0.2.9.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3183198
+
 ## [9.0.2.8.1] - 2021-01-16
 ### Fixed
 - Issue #19: 'Overachiever' (a nil value)
+
+[9.0.2.8.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3170618
 
 ## [9.0.2.8.0] - 2021-01-15
 ### Added
@@ -422,6 +462,8 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Issue #13: Updating addon in the past could lead to errors if new SavedVariables were added
+
+[9.0.2.8.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3169416
 
 ## [v9.0.2.7.0] - 2021-01-09
 ### Added
@@ -440,22 +482,32 @@ All notable changes to this project will be documented in this file.
 - Issue #11: Revisit issue #2
 - Issue #12: Button loses state of IsSelected when categories are updated by selecting a category and by the scrollbar
 
+[v9.0.2.7.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3163711
+
 ## [90002.6.0] - 2021-01-02
 ### Added
 - Right click menu for every achievement in the new tab with a link to Wowhead.
 
+[90002.6.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3156244
+
 ## [90002.5.0] - 2020-12-29
 ### Added
 - Shadowlands pet battles (13 achievements)
+
+[90002.5.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3152510
 
 ## [90002.4.0] - 2020-12-26
 ### Added
 - Split Shadowlands zones achievements in their respective zones
 - More distinctive visual between collapsed and not collapsed categories
 
+[90002.4.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3149372
+
 ## [90002.3.0] - 2020-11-27
 ### Added
 - Shadowlands zones (93 achievements)
+
+[90002.3.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3124829
 
 ## [90002.2.0] - 2020-11-23
 ### Added
@@ -463,6 +515,8 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Issue #8: Toggling achievement tracking does not update the achievement for Blizzard achievement tracking
+
+[90002.2.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3120770
 
 ## [90002.1.0] - 2020-11-22
 ### Added
@@ -480,6 +534,8 @@ All notable changes to this project will be documented in this file.
 - Issue #4: Tooltip only shows when hovering the shield, not the entire achievement
 - Issue #6: Error GetNextAchievement(achievementID)
 
+[90002.1.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3119574
+
 ## [90002.0.2 Beta] - 2020-11-20
 ### Added
 - Cataclysm dungeons (66 achievements)
@@ -491,6 +547,8 @@ All notable changes to this project will be documented in this file.
 - Legion dungeons (72 achievements)
 - Legion raids (111 achievements)
 
+[90002.0.2 Beta]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3118037
+
 ## [90002.Beta 0.1] - 2020-11-19
 ### Added
 - Battle for Azeroth dungeons (63 achievements)
@@ -501,33 +559,4 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - The need for almost all localization
 
-[9.1.0.25.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
-[9.1.0.25.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379223
-[9.1.0.24.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3369293
-[9.0.5.23.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3326868
-[9.0.5.22.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3308327
-[9.0.5.21.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3302611
-[9.0.5.20.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3294651
-[9.0.5.19.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3290570
-[9.0.5.18.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3275157
-[9.0.5.17.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3264965
-[9.0.5.16.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3259864
-[9.0.5.15.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3248934
-[9.0.5.14.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3234117
-[9.0.2.13.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3215749
-[9.0.2.12.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3205404
-[9.0.2.11.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3193640
-[9.0.2.10.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3190348
-[9.0.2.10.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3189892
-[9.0.2.9.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3183198
-[9.0.2.8.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3170618
-[9.0.2.8.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3169416
-[v9.0.2.7.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3163711
-[90002.6.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3156244
-[90002.5.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3152510
-[90002.4.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3149372
-[90002.3.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3124829
-[90002.2.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3120770
-[90002.1.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3119574
-[90002.0.2 Beta]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3118037
 [90002.Beta 0.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3116568

@@ -1,7 +1,8 @@
-<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3350 achievements are added so far.</p>
+<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3350 achievements are added so far spread over 700+ categories and linked to 1150+ zones.</p>
 <p><strong>Categories</strong></p>
 <ul>
 <li>The <em><strong>Current Zone</strong></em> category show which achievements are related to the current zone you're in. (This is still being approved on.)</li>
+<li>The <em><strong>Selected Zone</strong></em> category show which achievements are related to the zone you're viewing in the World Map. (This is still being approved on.)</li>
 <li>Each expansion has its own category: <strong><em>Classic</em></strong>, <strong><em>The Burning Crusade</em></strong>, <strong><em>Wrath of the Lich King</em></strong>, <strong><em>Cataclysm</em></strong>, <strong><em>Mists of Pandaria</em></strong>, <strong><em>Warlords of Dreanor</em></strong>, <strong><em>Legion</em></strong>, <strong><em>Battle for Azeroth</em></strong> and <em><strong>Shadowlands</strong></em>.</li>
 <li>Each expansion is divided in Zones, Dungeons and Raids and Pet Battles where available.</li>
 <li><strong><em>Wrath of the Lich King</em></strong> has separate categories for 10 and 25 man Raids.</li>
@@ -27,10 +28,13 @@
 <li><strong><em>ElvUI skin</em></strong>. (See the ingame options on how to enable each part.)</li>
 <li><del>Coming in 9.1 section. This section is guarded with spoiler warnings and will be removed once 9.1 is live.</del></li>
 <li>Clicking achievements in meta achievements select the achievement in the new tab.</li>
+<li><strong><em>World Map Button</em></strong> with its own Selected Zone category to show achievements for the zone you're viewing.</li>
 </ul>
 <p><strong>Planned in next version</strong></p>
 <ul>
-<li>Worldmap button. This is similar to the Current Zone category but will show achievements for the zone you're viewing.</li>
+<li>Exclude achievements you're not interested in.</li>
+<li>More zone data.</li>
+<li>Achievement split per raid (Glory + Mythic kills in separate categories for example).</li>
 </ul>
 <p><strong>Planned in future version</strong></p>
 <ul>
@@ -39,7 +43,6 @@
 <p><strong>Suggestions for future versions</strong></p>
 <ul>
 <li>Custom filters the player can add.</li>
-<li>Exclude achievements.</li>
 </ul>
 <p>More features are planned in the future and can be requested via the issues system or discord.</p>
 <p>Feel free to join discord and say hi: <a href="https://discord.gg/DCxq5rRNW5">https://discord.gg/DCxq5rRNW5</a>.</p>

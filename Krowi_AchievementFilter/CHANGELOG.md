@@ -1,8 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.25.1] - 2021-07-07
+[9.1.0.26.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
+## [9.1.0.26.0] - 2021-
+### Added
+- TBD
+
 [9.1.0.25.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
+## [9.1.0.25.1] - 2021-07-07
 ### Fixed
 - Opening the Tutorial Pages should not spam the chat window with numbers anymore
 

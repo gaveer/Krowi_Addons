@@ -301,11 +301,11 @@ L["World Map Button Desc"] = "Hover:\n" ..
                                 AF_TAB .. "- Opens the achievements window to the {selectedZone} category.";
 
 
-L["New Achievement Headers"] = "New Achievement Headers";
-L["New Achievement Headers Desc"] = "- The default Blizzard achievement header of an obtained achievement.\n" ..
-                                    "- The new achievement header of a not obtained not obtainable achievement.\n" ..
-                                    "- The new achievement header of a an obtained not obtainable achievement.\n" ..
-                                    "- The default Blizzard achievement header of an obtained account-wide achievement.\n";
+L["New Achievement Colors"] = "New Achievement Colors";
+L["New Achievement Colors Desc"] = "- The default gold Blizzard achievement of an obtained achievement. The border is changed from red to gold.\n" ..
+                                    "- The new red achievement of a not obtained not obtainable achievement with default grey Blizzard border.\n" ..
+                                    "- The new red achievement and red border of an obtained not obtainable achievement\n" ..
+                                    "- The default blue Blizzard achievement and border of an obtained account-wide achievement.\n";
 
 L["OC"] = "OC";
 L["NONC"] = "NONC";

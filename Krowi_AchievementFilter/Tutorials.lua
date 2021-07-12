@@ -290,11 +290,11 @@ function tutorials.Load()
     end
     });
     tinsert(pages, { -- 10
-        Image = media .. "AchievementHeaders",
+        Image = media .. "AchievementColors",
         ImageSize = {689, 498},
         ImageTexCoord = {0, 689/1024, 0, 498/512},
-        SubTitle = string.format(addon.Yellow, addon.L["New Achievement Headers"]),
-        Text = addon.L["New Achievement Headers Desc"],
+        SubTitle = string.format(addon.Yellow, addon.L["New Achievement Colors"]),
+        Text = addon.L["New Achievement Colors Desc"],
         OnShow = function(self)
         end
     });

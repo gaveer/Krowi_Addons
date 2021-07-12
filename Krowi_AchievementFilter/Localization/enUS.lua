@@ -30,6 +30,7 @@ L["Invasions"] = "Invasions";
 L["Class Hall"] = "Class Hall";
 L["Dueler's Guild"] = "Dueler's Guild";
 L["Excluded"] = "Excluded";
+L["Glory"] = "Glory";
 L["Coming in "] = "Coming in ";
 L["* SPOILER WARNING *"] = "* SPOILER WARNING *";
 L["Coming in Disclaimer"] = "All achievements in this category and children of this category are subject to change and might contain spoilers for the next patch!";

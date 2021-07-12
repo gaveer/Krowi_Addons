@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 - Options to Exclude Excluded achievements from the search results
 - (Not) obtained not obtainable achievements now have a red header
 - The Achievement Tooltip will now clearly tell if an achievement is no longer obtainable
+- More zone data for multi-zone achievements for Legion
+- Split Raids into Glory and Mythic categories for Legiom, Battle for Azeroth and Shadowlands
 
 ### Changed
 - Tutorials Page 2's selected category is now the same as in the image

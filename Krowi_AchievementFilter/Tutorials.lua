@@ -9,7 +9,6 @@ local tutorials = addon.Tutorials; -- Local tutorial object
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
 local pages = {};
-local tabButton1, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame, searchPreviewFrame, fullSearchResultsFrame;
 function tutorials.Load()
     diagnostics.Trace("tutorials.Load");
 
@@ -25,7 +24,7 @@ function tutorials.Load()
         ShineRight = SavedData.ElvUISkin.Tutorials and 0 or -2,
         OnShow = function(self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
-            self.Shine = tabButton1;
+            self.Shine = addon.GUI.TabButton1;
         end
     });
     tinsert(pages, { -- 2
@@ -48,6 +47,7 @@ function tutorials.Load()
                                 spoiler = string.format(addon.Orange, addon.L["* SPOILER WARNING *"]),
                                 currentZone = string.format(addon.Yellow, addon.L["Current Zone"]),
                                 selectedZone = string.format(addon.Yellow, addon.L["Selected Zone"]),
+                                excludedCategory = string.format(addon.Yellow, addon.L["Excluded"]),
                                 comingIn = string.format(addon.Yellow, addon.L["Coming in "])},
         TextSize = {361, 0},
         ShineHeight = 6,
@@ -57,14 +57,14 @@ function tutorials.Load()
         ShineRight = SavedData.ElvUISkin.Tutorials and 8 or nil,
         OnShow = function(self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
-            categoriesFrame:SelectCategory(addon.GetAchievement(14281).Category);
-            self.Shine = categoriesFrame;
+            addon.GUI.CategoriesFrame:SelectCategory(addon.Data.Achievements[1997].Category);
+            self.Shine = addon.GUI.CategoriesFrame;
         end
     });
     tinsert(pages, { -- 3
         Image = media .. "RightClickMenu",
-        ImageSize = {754, 286},
-        ImageTexCoord = {0, 754/1024, 0, 286/512},
+        ImageSize = {772, 340},
+        ImageTexCoord = {0, 772/1024, 0, 340/512},
         SubTitle = string.format(addon.Yellow, addon.L["Right Click Menu"]),
         Text = core.ReplaceVars{addon.L["Right Click Menu Desc"],
                                 rightClickMenu = addon.L["Right Click Menu"],
@@ -76,6 +76,9 @@ function tutorials.Load()
                                 xuFuPetGuides = string.format(addon.Yellow, addon.L["Xu-Fu's Pet Guides"]),
                                 petBattles = (GetCategoryInfo(15117)),
                                 IAT = string.format(addon.Yellow, addon.L["Instance Achievement Tracker"]),
+                                more = string.format(addon.Yellow, addon.L["More"]),
+                                include = string.format(addon.Yellow, addon.L["Include"]),
+                                exclude = string.format(addon.Yellow, addon.L["Exclude"]),
                                 addonName = addon.MetaData.Title},
         ShineHeight = SavedData.ElvUISkin.MiscFrames and 9 or 6,
         ShineWidth = SavedData.ElvUISkin.MiscFrames and 10 or 7,
@@ -88,10 +91,10 @@ function tutorials.Load()
                                             installed = (addon.IsIATLoaded() and (string.format(addon.Green, addon.L["Installed"]:lower())) or (string.format(addon.Red, addon.L["Not installed"]:lower())))};
 
             addon.GUI.ToggleAchievementFrameAtTab1(true);
-            local achievementsButtons = achievementsFrame.Container.buttons;
-            achievementsFrame:SelectAchievementFromID(4632);
-            achievementsButtons[3]:Enter(achievementsFrame); -- Gets the required information to show the Go to line
-            achievementsButtons[3]:Leave(achievementsFrame);
+            local achievementsButtons = addon.GUI.AchievementsFrame.Container.buttons;
+            addon.GUI.AchievementsFrame:SelectAchievementFromID(4632);
+            achievementsButtons[3]:Enter(addon.GUI.AchievementsFrame); -- Gets the required information to show the Go to line
+            achievementsButtons[3]:Leave(addon.GUI.AchievementsFrame);
             if achievementsButtons[3].RightClickMenuButton then
                 achievementsButtons[3].RightClickMenuButton:Click();
             else
@@ -103,12 +106,13 @@ function tutorials.Load()
     tinsert(pages, { -- 4
         Layout = "HORIZONTAL",
         Image = media .. "QuickSearch",
-        ImageSize = {355, 324},
-        ImageTexCoord = {0, 355/512, 0, 324/512},
+        ImageSize = {358, 324},
+        ImageTexCoord = {0, 358/512, 0, 324/512},
         SubTitle = string.format(addon.Yellow, addon.L["Quick Search"]),
         Text = core.ReplaceVars{addon.L["Quick Search Desc"],
                                 clearOnRightClick = addon.L["Clear search field on Right Click"],
-                                excludeNextPatch = addon.L["Exclude Next Patch"],
+                                -- excludeNextPatch = addon.L["Exclude Next Patch"],
+                                excludedCategory = addon.L["Exclude Excluded achievements"],
                                 minCharToSearch = addon.L["Minimum characters to search"],
                                 numSearchPreviews = addon.L["Number of search previews"],
                                 addonName = addon.MetaData.Title},
@@ -122,26 +126,27 @@ function tutorials.Load()
             end
             self.Text = core.ReplaceVars{self.OriginalText,
                                             clearOnRightClickEnabled = (addon.Options.db.SearchBox.ClearOnRightClick and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
-                                            excludeNextPatchEnabled = (addon.Options.db.SearchBox.ExcludeNextPatch and (string.format(addon.Green, addon.L["Exclude"]:lower())) or (string.format(addon.Red, addon.L["Include"]:lower()))),
+                                            -- excludeNextPatchEnabled = (addon.Options.db.SearchBox.ExcludeNextPatch and (string.format(addon.Green, addon.L["Exclude"]:lower())) or (string.format(addon.Red, addon.L["Include"]:lower()))),
+                                            excludedCategoryEnabled = (addon.Options.db.SearchBox.ExcludeExcluded and (string.format(addon.Green, addon.L["Exclude"]:lower())) or (string.format(addon.Red, addon.L["Include"]:lower()))),
                                             minCharToSearchNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.MinimumCharactersToSearch),
                                             numSearchPreviewsNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.NumberOfSearchPreviews)};
 
             addon.GUI.ToggleAchievementFrameAtTab1(true);
-            searchBoxFrame:SetText("myt");
-            searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
+            addon.GUI.Search.SearchBoxFrame:SetText("myt");
+            addon.GUI.Search.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
             local bottom;
-            if searchPreviewFrame.ShowFullSearchResultsButton:IsShown() then
-                bottom = searchPreviewFrame.ShowFullSearchResultsButton:GetBottom();
+            if addon.GUI.Search.SearchPreviewFrame.ShowFullSearchResultsButton:IsShown() then
+                bottom = addon.GUI.Search.SearchPreviewFrame.ShowFullSearchResultsButton:GetBottom();
             else
-                local buttons = searchPreviewFrame.Buttons;
+                local buttons = addon.GUI.Search.SearchPreviewFrame.Buttons;
                 for _, button in next, buttons do
                     if button:IsShown() then
                         bottom = button:GetBottom();
                     end
                 end
             end
-            self.ShineBottom = bottom - searchPreviewFrame:GetBottom() - 10;
-            self.Shine = searchPreviewFrame;
+            self.ShineBottom = bottom - addon.GUI.Search.SearchPreviewFrame:GetBottom() - 10;
+            self.Shine = addon.GUI.Search.SearchPreviewFrame;
         end
     });
     tinsert(pages, { -- 5
@@ -158,19 +163,19 @@ function tutorials.Load()
         ShineRight = SavedData.ElvUISkin.Tutorials and 11 or 13,
         OnShow = function(self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
-            searchBoxFrame:SetText("myt");
-            searchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
-            searchPreviewFrame.ShowFullSearchResultsButton:Click();
-            searchBoxFrame:SetText("");
-            searchBoxFrame:OnTextChanged();
-            self.Shine = fullSearchResultsFrame;
+            addon.GUI.Search.SearchBoxFrame:SetText("myt");
+            addon.GUI.Search.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
+            addon.GUI.Search.SearchPreviewFrame.ShowFullSearchResultsButton:Click();
+            addon.GUI.Search.SearchBoxFrame:SetText("");
+            addon.GUI.Search.SearchBoxFrame:OnTextChanged();
+            self.Shine = addon.GUI.Search.FullSearchResultsFrame;
         end
     });
     tinsert(pages, { -- 6
         Layout = "HORIZONTAL",
         Image = media .. "FilteringSorting",
-        ImageSize = {588, 509},
-        ImageTexCoord = {0, 588/1024, 0, 509/512},
+        ImageSize = {587, 548},
+        ImageTexCoord = {0, 587/1024, 0, 548/1024},
         SubTitle = string.format(addon.Yellow, addon.L["Enhanced filtering and sorting"]),
         Text = core.ReplaceVars{addon.L["Enhanced filtering and sorting Desc"],
                                 mergeSmallCategories = string.format(addon.Yellow, addon.L["Merge Small Categories"]),
@@ -201,6 +206,7 @@ function tutorials.Load()
                                 reverseSort = string.format(addon.Yellow, addon.L["Reverse Sort"]),
                                 currentZone = string.format(addon.Yellow, addon.L["Current Zone"]),
                                 selectedZone = string.format(addon.Yellow, addon.L["Selected Zone"]),
+                                excludedCategory = string.format(addon.Yellow, addon.L["Excluded"]),
                                 help = string.format(addon.Yellow, addon.L["Help"]),
                                 options = string.format(addon.Yellow, addon.L["Options"]),
                                 addonName = addon.MetaData.Title,
@@ -218,14 +224,13 @@ function tutorials.Load()
                                             mergeSmallCategoriesNumber = string.format(addon.Yellow, addon.Options.db.Window.MergeSmallCategoriesThreshold)};
 
             addon.GUI.ToggleAchievementFrameAtTab1(true);
-            self.Shine = filterButton;
-            print(filterButton:GetTop());
+            self.Shine = addon.GUI.FilterButton;
         end
     });
     tinsert(pages, { -- 7
         Image = media .. "TooltipCategories",
-        ImageSize = {507, 154},
-        ImageTexCoord = {0, 507/512, 0, 154/256},
+        ImageSize = {554, 154},
+        ImageTexCoord = {0, 554/1024, 0, 154/256},
         SubTitle = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Categories"] .. ")"),
         Text = core.ReplaceVars{addon.L["Enhanced tooltip Categories Desc"],
                                 oc = string.format(addon.Green, addon.L["OC"]),
@@ -243,10 +248,12 @@ function tutorials.Load()
     });
     tinsert(pages, { -- 8
         Image = media .. "TooltipAchievements",
-        ImageSize = {1018, 383},
-        ImageTexCoord = {0, 1018/1024, 0, 383/512},
+        ImageSize = {1016, 381},
+        ImageTexCoord = {0, 1016/1024, 0, 381/512},
         SubTitle = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Achievements"] .. ")"),
         Text = core.ReplaceVars{addon.L["Enhanced tooltip Achievements Desc"],
+                                notObtainable = string.format(addon.Yellow, addon.L["Not Obtainable"]),
+                                noLongerObtainable = string.format(addon.Red, addon.L["This achievement is no longer obtainable"]),
                                 partOfAChain = string.format(addon.Yellow, addon.L["Part of a chain"]),
                                 requiredFor = string.format(addon.Yellow, addon.L["Required for"]),
                                 objectivesProgress = string.format(addon.Yellow, addon.L["Objectives progress"]),
@@ -272,19 +279,25 @@ function tutorials.Load()
     });
     tinsert(pages, { -- 9
     Image = media .. "WorldMapButton",
-    ImageSize = {434, 394},
-    ImageTexCoord = {0, 434/512, 0, 394/512},
+    ImageSize = {433, 392},
+    ImageTexCoord = {0, 433/512, 0, 392/512},
     SubTitle = string.format(addon.Yellow, addon.L["World Map Button"]),
     Text = core.ReplaceVars{addon.L["World Map Button Desc"],
                             enhancedTooltipCategories = string.format(addon.Yellow, addon.L["Enhanced tooltip"] .. " (" .. addon.L["Categories"] .. ")"),
                             selectedZone = string.format(addon.Yellow, addon.L["Selected Zone"]),
                             enhancedFilteringAndSorting = string.format(addon.Yellow, addon.L["Enhanced filtering and sorting"])},
     OnShow = function(self)
-        -- AchievementFrame:Hide();
-        -- WorldMapFrame:Show();
-        -- WorldMapFrame:Show();
     end
-});
+    });
+    tinsert(pages, { -- 10
+        Image = media .. "AchievementHeaders",
+        ImageSize = {689, 498},
+        ImageTexCoord = {0, 689/1024, 0, 498/512},
+        SubTitle = string.format(addon.Yellow, addon.L["New Achievement Headers"]),
+        Text = addon.L["New Achievement Headers Desc"],
+        OnShow = function(self)
+        end
+    });
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");
     tutorials.FeaturesTutorial:SetFrameTitle(addon.MetaData.Title .. " - " .. addon.MetaData.BuildVersion);
@@ -308,16 +321,6 @@ function tutorials.Load()
     end);
 
     diagnostics.Debug("Tutorial loaded");
-end
-
-function tutorials.SetFrames(tabBtn1, catFrame, achFrame, fltrBtn, srchBxFrame, srchPrvwFrame, fullSrchRsltsFrame)
-    tabButton1 = tabBtn1;
-    categoriesFrame = catFrame;
-    achievementsFrame = achFrame;
-    filterButton = fltrBtn;
-    searchBoxFrame = srchBxFrame;
-    searchPreviewFrame = srchPrvwFrame;
-    fullSearchResultsFrame = fullSrchRsltsFrame;
 end
 
 function tutorials.HookTrigger(hook)

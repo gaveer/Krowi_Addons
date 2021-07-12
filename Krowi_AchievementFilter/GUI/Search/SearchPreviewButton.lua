@@ -1,69 +1,68 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
-local search = addon.GUI.Search;
+local gui = addon.GUI;
+local search = gui.Search;
 search.SearchPreviewButton = {};
 local searchPreviewButton = search.SearchPreviewButton;
 
 local OnEnter, OnClick, OnClick_ShowFullSearchResults;
-function searchPreviewButton.PostLoadButtons(searchPreviewFrame, fullSearchResultsFrame, achievementsFrame)
+function searchPreviewButton.PostLoadButtons(buttons, showFullSearchResultsButton)
 	diagnostics.Trace("searchPreviewButton.PostLoadButtons");
 
-    for _, button in next, searchPreviewFrame.Buttons do
-        button.Enter = function(self)
-            OnEnter(self, searchPreviewFrame);
+    for _, button in next, buttons do
+        button.Enter = function(self) -- Done this way so we can call Enter externally
+            OnEnter(self);
         end;
         button:SetScript("OnEnter", button.Enter);
 		button:SetScript("OnClick", function(self, button, down)
-			OnClick(self, searchPreviewFrame, searchPreviewFrame.SearchBoxFrame, achievementsFrame);
+			OnClick(self);
 		end);
     end
-    local button = searchPreviewFrame.ShowFullSearchResultsButton;
-    button.Enter = function(self)
-        OnEnter(self, searchPreviewFrame);
+    showFullSearchResultsButton.Enter = function(self) -- Done this way so we can call Enter externally
+        OnEnter(self);
     end;
-    button:SetScript("OnEnter", button.Enter);
-    button:SetScript("OnClick", function(self, button, down)
-        OnClick_ShowFullSearchResults(fullSearchResultsFrame, searchPreviewFrame, searchPreviewFrame.SearchBoxFrame);
+    showFullSearchResultsButton:SetScript("OnEnter", showFullSearchResultsButton.Enter);
+    showFullSearchResultsButton:SetScript("OnClick", function(self, button, down)
+        OnClick_ShowFullSearchResults();
     end);
 end
 
-function OnEnter(self, searchPreviewFrame)
-    diagnostics.Trace("OnEnter");
+function OnEnter(self)
+    diagnostics.Trace("searchPreviewButton.OnEnter");
 
-    local buttons = searchPreviewFrame.Buttons;
+    local buttons = search.SearchPreviewFrame.Buttons;
     for _, button in next, buttons do
         button.SelectedTexture:Hide();
         button.IsSelected = nil;
     end
-	searchPreviewFrame.ShowFullSearchResultsButton.SelectedTexture:Hide();
-    searchPreviewFrame.ShowFullSearchResultsButton.IsSelected = nil;
+	search.SearchPreviewFrame.ShowFullSearchResultsButton.SelectedTexture:Hide();
+    search.SearchPreviewFrame.ShowFullSearchResultsButton.IsSelected = nil;
 
     self.SelectedTexture:Show();
     self.IsSelected = true;
 end
 
-function OnClick(self, searchPreviewFrame, searchBoxFrame, achievementsFrame)
-    diagnostics.Trace("OnClick");
+function OnClick(self)
+    diagnostics.Trace("searchPreviewButton.OnClick");
 
     if self.Achievement then
-        achievementsFrame:SelectAchievement(self.Achievement, nil, true);
-        searchPreviewFrame:Hide();
-        searchBoxFrame.SearchPreviewFrame:Hide();
-        searchBoxFrame:ClearFocus();
+        gui.AchievementsFrame:SelectAchievement(self.Achievement, nil, true);
+        search.SearchPreviewFrame:Hide();
+        search.SearchBoxFrame:ClearFocus();
 	end
 end
 
-function OnClick_ShowFullSearchResults(fullSearchResultsFrame, searchPreviewFrame, searchBoxFrame)
-    diagnostics.Trace("OnClick_ShowFullSearchResults");
+function OnClick_ShowFullSearchResults()
+    diagnostics.Trace("searchPreviewButton.OnClick_ShowFullSearchResults");
 
-    fullSearchResultsFrame:Update(searchBoxFrame:GetText(), searchBoxFrame.Results);
-	if #searchBoxFrame.Results == 0 then
-		fullSearchResultsFrame:Hide();
+    search.FullSearchResultsFrame:Update(search.SearchBoxFrame:GetText(), search.SearchBoxFrame.Results);
+	if #search.SearchBoxFrame.Results == 0 then
+		search.FullSearchResultsFrame:Hide();
 		return;
 	end
-    searchPreviewFrame:Hide();
-	searchBoxFrame:ClearFocus();
-    fullSearchResultsFrame:Show();
+    search.SearchPreviewFrame:Hide();
+	search.SearchBoxFrame:ClearFocus();
+    search.FullSearchResultsFrame:Show();
     PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
 end

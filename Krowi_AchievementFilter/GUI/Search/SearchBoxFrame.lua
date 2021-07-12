@@ -6,30 +6,19 @@ local search = addon.GUI.Search;
 search.SearchBoxFrame = {};
 local searchBoxFrame = search.SearchBoxFrame;
 
-local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
-
 -- [[ Constructors ]] --
-searchBoxFrame.__index = searchBoxFrame; -- Used to support OOP like code
-function searchBoxFrame:New(searchPreviewFrame, fullSearchResults, achievementsFrame)
-    diagnostics.Trace("searchBox:New");
-
-	-- Increment ID
-	numFrames = numFrames + 1;
+searchBoxFrame.__index = searchBoxFrame; -- Used to inject all the namespace functions to the frame
+function searchBoxFrame:Load()
+    diagnostics.Trace("searchBoxFrame:Load");
 
 	-- Create frame
-    local frame = CreateFrame("EditBox", "KrowiAF_AchievementFrameSearchBox" .. numFrames, AchievementFrame, "SearchBoxTemplate");
+    local frame = CreateFrame("EditBox", "KrowiAF_AchievementFrameSearchBox", AchievementFrame, "SearchBoxTemplate");
 	frame:SetPoint("TOPLEFT", AchievementFrame.searchBox);
     frame:SetPoint("BOTTOMRIGHT", AchievementFrame.searchBox);
     frame:SetMaxLetters(40);
-	core.InjectMetatable(frame, searchBoxFrame);
+	core.InjectMetatable(frame, searchBoxFrame); -- Inject all the namespace functions to the frame
 
-	-- Set properties
-	frame.ID = numFrames;
-	frame.SearchPreviewFrame = searchPreviewFrame;
-	frame.SearchPreviewFrame.SearchBoxFrame = frame;
-	frame.FullSearchResults = fullSearchResults;
-	frame.AchievementsFrame = achievementsFrame;
-
+	-- Rest
     frame:SetScript("OnShow", frame.OnShow);
     frame:SetScript("OnHide", frame.OnHide);
     frame:SetScript("OnEnterPressed", frame.OnEnterPressed);
@@ -44,18 +33,18 @@ function searchBoxFrame:New(searchPreviewFrame, fullSearchResults, achievementsF
 
 	SearchBoxTemplate_OnLoad(frame);
 	frame.HasStickyFocus = function()
-		local ancestry = frame.SearchPreviewFrame;
+		local ancestry = search.SearchPreviewFrame;
 		return DoesAncestryInclude(ancestry, GetMouseFocus());
     end
 
-	return frame;
+	addon.GUI.Search.SearchBoxFrame = frame;
 end
 
 function searchBoxFrame:OnShow()
 	diagnostics.Trace("searchBoxFrame:OnShow");
 
 	self:SetFrameLevel(self:GetParent():GetFrameLevel() + 7);
-	self.SearchPreviewFrame.Buttons[1]:Enter();
+	search.SearchPreviewFrame.Buttons[1]:Enter();
 end
 
 function searchBoxFrame:OnHide()
@@ -64,8 +53,8 @@ function searchBoxFrame:OnHide()
 	if not AchievementFrame:IsShown() then
 		self:SetText("");
 	end
-	self.SearchPreviewFrame:Hide();
-	self.FullSearchResults:Hide();
+	search.SearchPreviewFrame:Hide();
+	search.FullSearchResultsFrame:Hide();
 end
 
 function searchBoxFrame:OnEnterPressed()
@@ -75,11 +64,11 @@ function searchBoxFrame:OnEnterPressed()
 		return;
 	end
 
-	local searchPreviewFrame = self.SearchPreviewFrame;
+	local searchPreviewFrame = search.SearchPreviewFrame;
 	if searchPreviewFrame.ShowFullSearchResultsButton.IsSelected and searchPreviewFrame.ShowFullSearchResultsButton:IsShown() then
 		searchPreviewFrame.ShowFullSearchResultsButton:Click();
 	else
-		local buttons = searchPreviewFrame.Buttons;
+		local buttons = search.SearchPreviewFrame.Buttons;
 		for _, button in next, buttons do
 			if button.IsSelected and button:IsShown() then
 				button:Click();
@@ -93,10 +82,11 @@ local function GetSearchResults(text)
 
 	local results = {};
 
-    for _, achievement in next, addon.Achievements do
+    for _, achievement in next, addon.Data.Achievements do
 		if string.match(text:lower(), "^#") then
 			if string.match(tostring(achievement.ID):lower(), string.sub(text, 2):lower()) then
-				if not (addon.Options.db.SearchBox.ExcludeNextPatch and addon.NextPatchAchievements[achievement.ID]) then
+				if not (addon.Options.db.SearchBox.ExcludeNextPatch and addon.Data.NextPatchAchievements[achievement.ID])
+					and not (addon.Options.db.SearchBox.ExcludeExcluded and achievement.Excluded) then
 					tinsert(results, achievement);
 				end
 			end
@@ -104,8 +94,10 @@ local function GetSearchResults(text)
 			local achievementID = achievement.ID;
 			local _, name, _, _, _, _, _, description, _, _, _, _, _, _ = addon.GetAchievementInfo(achievementID, addon.Options.db.SearchBox.ExcludeNextPatch);
 			if name and (string.match(name:lower(), text:lower()) or string.match(description:lower(), text:lower())) then
-				tinsert(results, achievement);
-				-- addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
+				if not (addon.Options.db.SearchBox.ExcludeExcluded and achievement.Excluded) then
+					tinsert(results, achievement);
+					-- addon.Diagnostics.Debug(tostring(achievementID) .. " - " .. name);
+				end
 			end
 		end
     end
@@ -122,7 +114,7 @@ function searchBoxFrame:OnTextChanged()
 		self.Results = GetSearchResults(self:GetText());
 		self:ShowSearchPreviewResults();
 	else
-		self.SearchPreviewFrame:Hide();
+		search.SearchPreviewFrame:Hide();
 	end
 end
 
@@ -130,19 +122,19 @@ function searchBoxFrame:OnEditFocusLost()
 	diagnostics.Trace("searchBoxFrame:OnEditFocusLost");
 
 	SearchBoxTemplate_OnEditFocusLost(self);
-	self.SearchPreviewFrame:Hide();
+	search.SearchPreviewFrame:Hide();
 end
 
 function searchBoxFrame:OnEditFocusGained()
 	diagnostics.Trace("searchBoxFrame:OnEditFocusGained");
 
 	SearchBoxTemplate_OnEditFocusGained(self);
-	self.FullSearchResults:Hide();
+	search.FullSearchResultsFrame:Hide();
 
 	if self:HasFocus() and strlen(self:GetText()) >= addon.Options.db.SearchBox.MinimumCharactersToSearch then
 		self:ShowSearchPreviewResults();
 	else
-		self.SearchPreviewFrame:Hide();
+		search.SearchPreviewFrame:Hide();
 	end
 end
 
@@ -150,9 +142,9 @@ function searchBoxFrame:OnKeyDown(key)
 	diagnostics.Trace("searchBoxFrame:OnKeyDown");
 
 	if key == "UP" then
-		self.SearchPreviewFrame:SelectPrevious(#self.Results);
+		search.SearchPreviewFrame:SelectPrevious(#self.Results);
 	elseif key == "DOWN" then
-		self.SearchPreviewFrame:SelectNext(#self.Results);
+		search.SearchPreviewFrame:SelectNext(#self.Results);
 	end
 end
 
@@ -173,9 +165,9 @@ function searchBoxFrame:ShowSearchPreviewResults()
 	local results = self.Results;
 	local numResults = #results;
 	if numResults > 0 then
-		self.SearchPreviewFrame.Buttons[1]:Enter();
+		search.SearchPreviewFrame.Buttons[1]:Enter();
 	end
-	local searchPreviewContainer = self.SearchPreviewFrame;
+	local searchPreviewContainer = search.SearchPreviewFrame;
 	local buttons = searchPreviewContainer.Buttons;
 	local numButtons = searchPreviewContainer:GetNumButtons();
 	local lastButton;

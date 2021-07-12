@@ -11,6 +11,7 @@ L["Xu-Fu's Pet Guides"] = "Xu-Fu's Pet Guides";
 L["Instance Achievement Tracker"] = "Instance Achievement Tracker";
 L["IAT Tactics"] = "IAT Tactics";
 L["Go to"] = "Go to";
+L["More"] = "More";
 L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
 L["Include"] = "Include";
@@ -28,6 +29,7 @@ L["Shipyard"] = "Shipyard";
 L["Invasions"] = "Invasions";
 L["Class Hall"] = "Class Hall";
 L["Dueler's Guild"] = "Dueler's Guild";
+L["Excluded"] = "Excluded";
 L["Coming in "] = "Coming in ";
 L["* SPOILER WARNING *"] = "* SPOILER WARNING *";
 L["Coming in Disclaimer"] = "All achievements in this category and children of this category are subject to change and might contain spoilers for the next patch!";
@@ -48,6 +50,7 @@ L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
 L["Objectives progress"] = "Objectives progress";
 L["No achievements are available with the current set of filters"] = "No achievements are available with the current set of filters";
+L["This achievement is no longer obtainable"] = "This achievement is no longer obtainable.";
 
 -- Options
 L["Requires a reload"] = string.format(addon.Orange, "Requires a reload to take full effect.");
@@ -77,6 +80,8 @@ L["Clear search field on Right Click Desc"] = "Enable / disable the option to cl
 L["Exclude Next Patch"] = "Exclude Next Patch";
 L["Exclude Next Patch Desc"] = "Exclude / include Next Patch achievements from / in the search results.\n\n{spoilerWarning}";
 L["Exclude Next Patch Confirm"] = "Including Next Patch achievements will show achievements that are subject to change and might contain spoilers for the next patch!";
+L["Exclude Excluded achievements"] = "Exclude Excluded achievements";
+L["Exclude Excluded achievements Desc"] = "Exclude / include excluded achievements from / in the search results.";
 L["Minimum characters to search"] = "Minimum characters to search";
 L["Minimum characters to search Desc"] = "The number of characters needed in order to start searching for achievements matching the query.\n" ..
                                             "The smaller the number, the greater the impact on the game.";
@@ -87,6 +92,8 @@ L["Number of search previews Desc"] = "The numbers of achievements shown as a pr
 L["Debug"] = "Debug";
 L["Enable debug info"] = "Enable debug info";
 L["Enable debug info Desc"] = "Enable / disable debug info";
+L["Screenshot Mode"] = "Screenshot Mode";
+L["Screenshot Mode Desc"] = "Adds a black frame above everything. Only newly opened windows are visible. Used for taking screenshots.";
 L["Enable trace info"] = "Enable trace info";
 L["Enable trace info Desc"] = "Enable / disable trace info";
 
@@ -105,6 +112,13 @@ L["Merge small categories threshold"] = "Merge small categories threshold";
 L["Merge small categories threshold Desc"] = "Categories with a number of achievements lower than this number will merge into the parent category.\n\n" ..
                                                 "Only preset categories can merge (mostly child categories from zones).\n\n{reloadRequired}";
 
+-- Options Layout Categories
+L["Show Excluded Category"] = "Show {excluded} category";
+L["Show Excluded Category Desc"] = "Show / hide {excluded} category.\n\nWhen checked, the category is only shown when there are actually excluded achievements and the set filters allow showing them.\n\n" ..
+                                    "When not checked, the category is always hidden and the filters are hidden too.";
+L["Include all"] = "Include all";
+L["Include all Desc"] = "Include all excluded achievements.";
+                                                
 -- Options Layout Right Click Menu
 L["Right Click Menu"] = "Right Click Menu";
 L["Show Right Click Menu"] = "Show {rightClickMenu} button";
@@ -180,8 +194,10 @@ L["Categories per expansion Desc"] = "Achievements are put in categories per exp
                                         "Special categories:\n" ..
                                         AF_TAB .. "- {currentZone}: Shows the achievements linked to the current zone you're in\n" ..
                                         AF_TAB .. "- {selectedZone}: Shows the achievements linked to the selected zone from the world map\n" ..
+                                        AF_TAB .. "- {excludedCategory}: Shows the excluded achievements. Can be permanently hidden in the options.\n" ..
                                         AF_TAB .. "- {comingIn}: {spoiler}\n" ..
-                                        AF_TAB .. AF_TAB .. "If available, achievements that might be added in the next patch (subject to change)";
+                                        AF_TAB .. AF_TAB .. "If available, achievements that might be added in the next patch (subject to change)\n\n" ..
+                                        "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
 
 -- L["Right Click Menu"] = "Right Click Menu"; -- See at Options Layout Right Click Menu
 L["Right Click Menu Desc"] = "Each achievement in the new tab has a {rightClickMenu}.\n\n" ..
@@ -190,7 +206,10 @@ L["Right Click Menu Desc"] = "Each achievement in the new tab has a {rightClickM
                                 AF_TAB .. "- {goTo} shortcut to achievements that are {partOfAChain} or that are {require} this achievment to be completed. " ..
                                 "Achievements in the {currentZone} category have a shortcut to their proper location in the categories tree.\n" ..
                                 AF_TAB .. "- Link to {xuFuPetGuides} if the achievement is related to {petBattles} and {xuFuPetGuides} has relevant information about it\n" ..
-                                AF_TAB .. "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})\n\n" ..
+                                AF_TAB .. "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})\n" ..
+                                AF_TAB .. "- {more}: Groups misc. items to not clutter the main menu\n" ..
+                                AF_TAB .. AF_TAB .. "- {include}: Includes the achievement back into the normal view. (Only available on excluded achievements)\n" ..
+                                AF_TAB .. AF_TAB .. "- {exclude}: Excludes the achievement from the normal view. (Only available on included achievements)\n\n" ..
                                 "Options:\n" ..
                                 AF_TAB .. "- A button can be shown on each achievement that opens the {rightClickMenu}. (Button is {enabled})\n\n" ..
                                 "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
@@ -202,7 +221,8 @@ L["Quick Search Desc"] = "Searches for achievements in the new tab.\n\n" ..
                             AF_TAB .. "- Search by achievement ID by starting the search query with '#'\n\n" ..
                             "Options:\n" ..
                             AF_TAB .. "- {clearOnRightClick} ({clearOnRightClickEnabled})\n" ..
-                            AF_TAB .. "- {excludeNextPatch} ({excludeNextPatchEnabled} next patch achievements)\n" ..
+                            -- AF_TAB .. "- {excludeNextPatch} ({excludeNextPatchEnabled} next patch achievements)\n" ..
+                            AF_TAB .. "- {excludedCategory} ({excludedCategoryEnabled} excluded achievements)\n" ..
                             AF_TAB .. "- {minCharToSearch} ({minCharToSearchNumber})\n" ..
                             AF_TAB .. "- {numSearchPreviews} ({numSearchPreviewsNumber})\n\n" ..
                             "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
@@ -236,7 +256,7 @@ L["Enhanced filtering and sorting Desc"] = "Filtering and sorting of achievement
                                             AF_TAB .. "- {sortByCompletion}: Sort achievements based on if they are completed\n" ..
                                             AF_TAB .. "- {sortByID}: Sort achievements based on their ID\n" ..
                                             AF_TAB .. "- {reverseSort}: When this is selected, invert the order of the sorted achievements\n\n" ..
-                                            "{currentZone} and {selectedZone}:\n" ..
+                                            "{currentZone}, {selectedZone} and {excludedCategory} category:\n" ..
                                             AF_TAB .. "- These have all the filtering and sorting features mentioned above but can be changed independent from the others\n\n" ..
                                             "Other:\n" ..
                                             AF_TAB .. "- {help}: Start the tutorial from the start and reset what you've viewed\n" ..
@@ -258,6 +278,7 @@ L["Enhanced tooltip Categories Desc"] = "Each tooltip has additional information
                                         "The {red} part of the progress bar and number in brackets can either be disbled in options ({showNotObtainable}) or by unchecking the {notObtainable} filter.";
 L["Enhanced tooltip Achievements Desc"] = "Each tooltip has additional information on how achievements relate to each other (if they do). Several new sections are added to it.\n\n" ..
                                             "Features:\n" ..
+                                            AF_TAB .. "- {notObtainable}: Shows the text \"{noLongerObtainable}\" if the achievement is no longer obtainable\n" ..
                                             AF_TAB .. "- {partOfAChain}: Shows the list of achievements the hovered achievement is part of (1) ({partOfAChainEnabled})\n" ..
                                             AF_TAB .. "- {requiredFor}: Shows a list of achievements that require the hovered achievement to be completed in order to earn it (1) ({requiredForEnabled})\n" ..
                                             AF_TAB .. "- {objectivesProgress}: Shows the list of objectives with progress ({objectivesProgressEnabled})\n\n" ..
@@ -278,6 +299,13 @@ L["World Map Button Desc"] = "Hover:\n" ..
                                 AF_TAB .. "- See {enhancedTooltipCategories} and {enhancedFilteringAndSorting} for more information.\n\n" ..
                                 "Click:\n" ..
                                 AF_TAB .. "- Opens the achievements window to the {selectedZone} category.";
+
+
+L["New Achievement Headers"] = "New Achievement Headers";
+L["New Achievement Headers Desc"] = "- The default Blizzard achievement header of an obtained achievement.\n" ..
+                                    "- The new achievement header of a not obtained not obtainable achievement.\n" ..
+                                    "- The new achievement header of a an obtained not obtainable achievement.\n" ..
+                                    "- The default Blizzard achievement header of an obtained account-wide achievement.\n";
 
 L["OC"] = "OC";
 L["NONC"] = "NONC";

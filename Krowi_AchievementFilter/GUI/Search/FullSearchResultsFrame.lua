@@ -2,33 +2,27 @@
 local _, addon = ...;
 local core = addon.Core;
 local diagnostics = addon.Diagnostics;
-local search = addon.GUI.Search;
+local gui = addon.GUI;
+local search = gui.Search;
 search.FullSearchResultsFrame = {};
 local fullSearchResultsFrame = search.FullSearchResultsFrame;
 
-local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
-
 -- [[ Constructors ]] --
-fullSearchResultsFrame.__index = fullSearchResultsFrame; -- Used to support OOP like code
-function fullSearchResultsFrame:New(achievementsFrame)
-    diagnostics.Trace("fullSearchResults:New");
+fullSearchResultsFrame.__index = fullSearchResultsFrame; -- Used to inject all the namespace functions to the frame
+function fullSearchResultsFrame:Load()
+    diagnostics.Trace("fullSearchResults:Load");
 
-	-- Increment ID
-	numFrames = numFrames + 1;
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameFullSearchResults", AchievementFrame, "KrowiAF_FullSearchResults_Template");
+	core.InjectMetatable(frame, fullSearchResultsFrame); -- Inject all the namespace functions to the frame
 
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameFullSearchResults" .. numFrames, AchievementFrame, "KrowiAF_FullSearchResults_Template");
-	core.InjectMetatable(frame, fullSearchResultsFrame);
-
-	-- Set properties
-	frame.ID = numFrames;
-
+	-- Rest
     frame:Hide();
 
 	frame.Container.ScrollBar.Show = function()
-		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Show, 575, -24);
+		self.Show_Hide(frame, getmetatable(frame.Container.ScrollBar).__index.Show, 575, -24);
 	end;
 	frame.Container.ScrollBar.Hide = function()
-		self.Show_Hide(frame, frame.Container.ScrollBar, getmetatable(frame.Container.ScrollBar).__index.Hide, 597, 0);
+		self.Show_Hide(frame, getmetatable(frame.Container.ScrollBar).__index.Hide, 597, 0);
 	end;
 
     frame.Container.update = function()
@@ -36,12 +30,12 @@ function fullSearchResultsFrame:New(achievementsFrame)
     end
 
     HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_FullSearchResultButton_Template", 0, 0);
-	search.FullSearchResult.PostLoadButtons(frame, achievementsFrame);
+	search.FullSearchResultsButton.PostLoadButtons(frame.Container.buttons);
 
-	return frame;
+	addon.GUI.Search.FullSearchResultsFrame = frame;
 end
 
-function fullSearchResultsFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achievementsOffsetX)
+function fullSearchResultsFrame.Show_Hide(frame, func, categoriesWidth, achievementsOffsetX)
 	diagnostics.Trace("fullSearchResultsFrame.Show_Hide");
 
 	frame.Container:SetPoint("BOTTOMRIGHT", frame.bottomRightCorner, achievementsOffsetX, 8);
@@ -54,9 +48,9 @@ function fullSearchResultsFrame.Show_Hide(frame, scrollBar, func, categoriesWidt
 			lastVisible = button;
 		end
 	end
-	func(scrollBar);
+	func(frame.Container.ScrollBar);
 	local offset = 0;
-	if not scrollBar:IsShown() then
+	if not frame.Container.ScrollBar:IsShown() then
 		offset = max(0, lastVisible:GetBottom() - frame:GetBottom() - 12);
 	end
 	frame:SetPoint("TOP", 0, -112 - offset);

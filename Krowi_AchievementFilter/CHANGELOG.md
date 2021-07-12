@@ -3,7 +3,28 @@ All notable changes to this project will be documented in this file.
 
 ## [9.1.0.26.0] - 2021-
 ### Added
-- TBD
+- More item in the Right Click Menu to group things under to not clutter the main Right Click Menu
+- Exclude achievements you have no interest in seeing
+- Options to show / hide the Excluded category and to include (reset) them all at once
+- Options to Exclude Excluded achievements from the search results
+- (Not) obtained not obtainable achievements now have a red header
+- The Achievement Tooltip will now clearly tell if an achievement is no longer obtainable
+
+### Changed
+- Tutorials Page 2's selected category is now the same as in the image
+- Shadowlands - Pet Battles - A Sly Fox should now be visible in the Current Zone and Selected Zone when in The Maw or when it's selected
+- Remade all Tutorial images with higher compression rate so their size is smaller
+- Restructured Data for better maintainability
+- Restructured GUI for better maintainability
+- Tutorials Pages 2, 3, 4 and 6 to reflect the new Exclude feature
+- Obtained not account-wide obtainable achievements now have a golden border instead of the default red one
+- Obtained not obtainable achievements now have a red border
+- Tutorials Page 8 to add that the achievements tooltip will now show more clearly if the achievement is not obtainable
+
+### Fixed
+- Achievements in the Selected Zone category now properly always have a Go To item so you can easily go to the achievement in the categories tree
+- Showing the Enhanced Filtering and Sorting Tutorial Page should no longer write numbers to the chat window
+- Issue #49: Shadowlands Keystone Conqueror: Season Two and Shadowlands Keystone Master: Season Two in Shadowlands - Dungeons appear as part of a wrong chain
 
 [9.1.0.26.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
 

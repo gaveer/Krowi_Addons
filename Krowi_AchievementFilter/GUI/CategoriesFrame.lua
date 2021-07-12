@@ -6,36 +6,30 @@ local gui = addon.GUI;
 gui.CategoriesFrame = {};
 local categoriesFrame = gui.CategoriesFrame;
 
-local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
-
 -- [[ Constructors ]] --
-categoriesFrame.__index = categoriesFrame; -- Used to support OOP like code
-function categoriesFrame:New(categories, achievementsFrame)
-    diagnostics.Trace("categoriesFrame:New");
-
-	-- Increment ID
-	numFrames = numFrames + 1;
+categoriesFrame.__index = categoriesFrame; -- Used to inject all the namespace functions to the frame
+function categoriesFrame:Load(categories)
+    diagnostics.Trace("categoriesFrame:Load");
 
 	-- Create frame
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories" .. numFrames, AchievementFrame, "KrowiAF_CategoriesFrame_Template");
-	core.InjectMetatable(frame, categoriesFrame);
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "KrowiAF_CategoriesFrame_Template");
+	core.InjectMetatable(frame, categoriesFrame); -- Inject all the namespace functions to the frame
 
 	-- Set properties
-	frame.ID = numFrames;
 	frame.Categories = categories;
 	frame.SelectedCategory = frame.Categories[1];
-	frame.AchievementsFrame = achievementsFrame;
-	frame.AchievementsFrame.CategoriesFrame = frame; -- Needed for API
 
 	-- Set parents
 	frame.Container.ParentFrame = frame;
 	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
+	-- Rest
 	frame:RegisterEvent("ADDON_LOADED");
 
-	-- We need to insert the categories frame infront of the achievements frame
+	-- We need to insert the categories frame infront of the achievements frame so the show/hide function fire in the correct order
 	for i, frameName in next, ACHIEVEMENTFRAME_SUBFRAMES do
-		if frameName == frame.AchievementsFrame:GetName() then
+
+		if frameName == gui.AchievementsFrame:GetName() then
 			tinsert(ACHIEVEMENTFRAME_SUBFRAMES, i, frame:GetName());
 			break;
 		end
@@ -56,12 +50,12 @@ function categoriesFrame:New(categories, achievementsFrame)
 	end
 
 	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementCategoryButton_Template", -4, 0, "TOPRIGHT", "TOPRIGHT", 0, 0, "TOPRIGHT", "BOTTOMRIGHT");
-	gui.CategoryButton.PostLoadButtons(frame);
+	gui.CategoryButton.PostLoadButtons(frame.Container.buttons);
 
-	return frame;
+	addon.GUI.CategoriesFrame = frame; -- Overwrite with the actual frame since all functions are injected to it
 end
 
-function KrowiAF_CategoriesFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_AchievementsFrame_Template
+function KrowiAF_CategoriesFrame_OnEvent(self, event, ...) -- Used in Templates - KrowiAF_CategoriesFrame_Template
 	local addonName = ...;
 	diagnostics.Trace("KrowiAF_CategoriesFrame_OnEvent - " .. event .. " - " .. addonName);
 
@@ -113,7 +107,7 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 
 	frame:SetWidth(categoriesWidth);
 	frame.Container:GetScrollChild():SetWidth(categoriesWidth);
-	frame.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
+	gui.AchievementsFrame:SetPoint("TOPLEFT", frame, "TOPRIGHT", achievementsOffsetX, 0);
 	AchievementFrameWaterMark:SetWidth(categoriesWidth - watermarkWidthOffset);
 	AchievementFrameWaterMark:SetTexCoord(0, (categoriesWidth - watermarkWidthOffset)/256, 0, 1);
 	AchievementFrameCategoriesBG:SetWidth(categoriesWidth - 2); -- Offset of 2 needed to compensate with Blizzard tabs
@@ -122,22 +116,6 @@ function categoriesFrame.Show_Hide(frame, scrollBar, func, categoriesWidth, achi
 	end
 	func(scrollBar);
 end
-
--- local function Validate(self, achievement, numOfAch, numOfCompAch, numOfNotObtAch) -- , numOfIncompAch
--- 	if self.FilterButton and self.FilterButton:Validate(achievement, true) > 0 then -- If set to false we lag the game
--- 		numOfAch = numOfAch + 1;
--- 		local _, _, _, completed = addon.GetAchievementInfo(achievement.ID);
--- 		if completed then
--- 			numOfCompAch = numOfCompAch + 1;
--- 		-- else
--- 		-- 	numOfIncompAch = numOfIncompAch + 1;
--- 		elseif achievement.NotObtainable then
--- 			numOfNotObtAch = numOfNotObtAch + 1;
--- 		end
--- 	end
-
--- 	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
--- end
 
 local function GetAchievementNumbers(self, category)
 	-- diagnostics.Trace("GetAchievementNumbers"); -- Generates a lot of messages
@@ -160,26 +138,28 @@ local function GetAchievementNumbers(self, category)
 		end
 	end
 
-	local filters = self.FilterButton.Filters.db;
-	if category == addon.CurrentZoneCategory then
-		filters = self.FilterButton.Filters.db.CurrentZone;
-	elseif category == addon.SelectedZoneCategory then
-		filters = self.FilterButton.Filters.db.SelectedZone;
+	local filters = gui.FilterButton.Filters.db;
+	if category == addon.Data.CurrentZoneCategory then
+		filters = gui.FilterButton.Filters.db.CurrentZone;
+	elseif category == addon.Data.SelectedZoneCategory then
+		filters = gui.FilterButton.Filters.db.SelectedZone;
+	elseif category == addon.Data.ExcludedCategory then
+		filters = gui.FilterButton.Filters.db.ExcludedCategory;
 	end
 
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(gui.FilterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
-			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(self.FilterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
+			numOfAch, numOfCompAch, numOfNotObtAch = addon.GetAchievementNumbers(gui.FilterButton, filters, achievement, numOfAch, numOfCompAch, numOfNotObtAch); -- , numOfIncompAch
 		end
 	end
 
-	if self.FilterButton.Filters.db.MergeSmallCategories then
+	if gui.FilterButton.Filters.db.MergeSmallCategories then
 		if category.Parent and category.CanMerge then
 			if category.Achievements then
 				if numOfAch < addon.Options.db.Window.MergeSmallCategoriesThreshold then
@@ -257,27 +237,8 @@ function categoriesFrame:Update(getAchNums)
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 end
 
--- local progressBar = LibStub("Krowi_ProgressBar-1.0");
--- local function StatusBarTooltip(self)
--- 	-- GameTooltip_SetDefaultAnchor(GameTooltip, self);
--- 	GameTooltip:SetOwner(self, "ANCHOR_NONE");
--- 	GameTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", -3, -3);
--- 	GameTooltip:SetMinimumWidth(128, true);
--- 	GameTooltip:SetText(self.name, 1, 1, 1, nil, true);
--- 	local numOfNotObtAch = 0;
--- 	if addon.Options.db.Tooltip.Categories.ShowNotObtainable then
--- 		numOfNotObtAch = self.numOfNotObtAch;
--- 	end
--- 	progressBar:ShowProgressBar(GameTooltip, 0, self.numAchievements, self.numCompleted, numOfNotObtAch, 0, 0, addon.GreenRGB, addon.RedRGB, nil, nil, self.numCompletedText);
--- 	GameTooltip:Show();
--- end
-
 function categoriesFrame:DisplayButton(button, category, baseWidth)
-	-- local name = "";
-	-- if category then
-	-- 	name = category.Name;
-	-- end
-	-- diagnostics.Trace("categoriesFrame:DisplayButton for " .. name); -- Generates a lot of messages
+	-- diagnostics.Trace("categoriesFrame:DisplayButton for " .. (category and category.Name or "")); -- Generates a lot of messages
 
 	if not category then
 		button.Category = nil;
@@ -315,7 +276,7 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	-- For the tooltip
 	local numOfAch, numOfCompAch, numOfNotObtAch = category.NumOfAch, category.NumOfCompAch, category.NumOfNotObtAch;
 	button.name = category.Name;
-	if category == addon.NextPatchCategory then
+	if category == addon.Data.NextPatchCategory then
 		button.text = string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]);
 		button.showTooltipFunc = AchievementFrameCategory_FeatOfStrengthTooltip;
 	else
@@ -360,26 +321,18 @@ function categoriesFrame:SelectButton(button, quick)
 		button.Category.NotCollapsed = true;
 	end
 
-	-- local buttons = self.Container.buttons;
-	-- for _, button in next, buttons do
-	-- 	if button.Category then
-	-- 		button.Category.IsSelected = nil; -- Issue #12: Fix
-	-- 	end
-	-- end
-
 	button.Category.IsSelected = true; -- Issue #12: Fix
 
 	if button.Category == self.SelectedCategory and button.Category.HasFlexibleData ~= true then
-		-- If this category was selected already,
-		-- bail after changing collapsed states.
+		-- If this category was selected already, bail after changing collapsed states.
 		return;
 	end
 
 	self.SelectedCategory = button.Category; -- Issue #21: Broken, Fix
 	if not quick then -- Skip refreshing achievements if we're still busy selecting the correct category
-		self.AchievementsFrame:ClearSelection();
-		self.AchievementsFrame.Container.ScrollBar:SetValue(0);
-		self.AchievementsFrame:Update();
+		gui.AchievementsFrame:ClearSelection();
+		gui.AchievementsFrame.Container.ScrollBar:SetValue(0);
+		gui.AchievementsFrame:Update();
 	end
 end
 
@@ -429,7 +382,7 @@ end
 function categoriesFrame:SelectCategory(category, collapsed)
 	diagnostics.Trace("categoriesFrame:SelectCategory");
 
-	if self.FilterButton.Filters.db.MergeSmallCategories then
+	if gui.FilterButton.Filters.db.MergeSmallCategories then
 		while category.Merged do
 			category = category.Parent;
 		end

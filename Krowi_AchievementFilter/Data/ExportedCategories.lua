@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-05 22-45-28 ]] --
+-- [[ Exported at 2021-07-11 12-45-30 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4811,7 +4811,9 @@ function exportedCategories.Load(c, a)
     AddA(tmp[420], a[14764]); -- The Great Luckydo
     AddA(tmp[420], a[14833]); -- Fashion Abomination
     AddA(tmp[420], a[14763]); -- Crypt Couture
+    tmp[857] = IaR(c, cat:New(addon.L["Excluded"])); -- Excluded
+    local excludedCategory = tmp[857];
 
-    return currentZoneCategory, selectedZoneCategory, nextPatchCategory;
+    return currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
 end
 

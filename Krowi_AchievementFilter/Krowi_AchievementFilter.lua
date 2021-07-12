@@ -6,9 +6,17 @@ addon.L = LibStub("AceLocale-3.0"):GetLocale(addonName);
 addon.Event = {};
 LibStub("AceEvent-3.0"):Embed(addon.Event);
 
+-- [[ Personal libraries ]] --
+addon.Util = LibStub("Krowi_Util-1.0");
+
 -- [[ Binding names ]] --
 BINDING_HEADER_AF_NAME = addon.MetaData.Title;
 BINDING_NAME_AF_OPEN_TAB1 = addon.L["BINDING_NAME_AF_OPEN_TAB1"];
+
+-- [[ Guild view ]] --
+function addon.InGuildView()
+    return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
+end
 
 -- [[ Faction data ]] --
 addon.Faction = {};
@@ -22,26 +30,6 @@ function addon.GetActiveCovenant()
 end
 
 -- [[ Achievements ]] --
-function addon.GetAchievement(id)
-    addon.Diagnostics.Trace("addon.GetAchievement");
-
-	for _, achievement in next, addon.Achievements do
-		if achievement.ID == id then
-            addon.Diagnostics.Debug(achievement);
-			return achievement;
-		end
-	end
-end
-
-local function TableConcat(t1, t2)
-    if t2 then
-        for _, achievement in next, t2 do
-            tinsert(t1, achievement);
-        end
-    end
-    return t1;
-end
-
 function addon.GetAchievementsInZone(mapID, getAll)
     addon.Diagnostics.Trace("addon.GetAchievementsInZone");
 
@@ -53,23 +41,23 @@ function addon.GetAchievementsInZone(mapID, getAll)
     local _, _, _, difficulty = GetInstanceInfo();
 
     local achievements = {};
-    if addon.Maps[mapID] == nil then
+    if addon.Data.Maps[mapID] == nil then
         return achievements;
     else
-        TableConcat(achievements, addon.Maps[mapID].Achievements);
+        addon.Util.ConcatTables(achievements, addon.Data.Maps[mapID].Achievements);
     end
 
     if difficulty ~= "" then -- Need to add 10 and 25 when doing it from the map
         if difficulty == player10 or difficulty == player10Hc then
             -- checkCategory = not string.find(category.Name, player25);
-            TableConcat(achievements, addon.Maps[mapID].Achievements10);
+            addon.Util.ConcatTables(achievements, addon.Data.Maps[mapID].Achievements10);
         elseif difficulty == player25 or difficulty == player25Hc then
             -- checkCategory = not string.find(category.Name, player10);
-            TableConcat(achievements, addon.Maps[mapID].Achievements25);
+            addon.Util.ConcatTables(achievements, addon.Data.Maps[mapID].Achievements25);
         end
     elseif getAll then
-        TableConcat(achievements, addon.Maps[mapID].Achievements10);
-        TableConcat(achievements, addon.Maps[mapID].Achievements25);
+        addon.Util.ConcatTables(achievements, addon.Data.Maps[mapID].Achievements10);
+        addon.Util.ConcatTables(achievements, addon.Data.Maps[mapID].Achievements25);
     end
 
     return achievements;
@@ -82,7 +70,7 @@ function addon.GetAchievementInfo(achievementID, excludeNextPatch)
     end
 
     if not excludeNextPatch then
-        local achievement = addon.NextPatchAchievements[achievementID];
+        local achievement = addon.Data.NextPatchAchievements[achievementID];
         if achievement then
             return achievement[1], achievement[2], achievement[3], false, nil, nil, nil, achievement[4], achievement[5], achievement[6], achievement[7], false, nil, false;
         end
@@ -105,6 +93,32 @@ function addon.GetAchievementNumbers(filterButton, filters, achievement, numOfAc
 	end
 
 	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
+end
+
+function addon.ExcludeAchievement(achievement, update)
+    achievement:Exclude();
+    if addon.Options.db.Categories.ShowExcludedCategory then
+        addon.Data.ExcludedCategory:AddAchievement(achievement);
+        if update ~= false then
+            addon.GUI.CategoriesFrame:Update(true);
+            addon.GUI.AchievementsFrame:ForceUpdate();
+        end
+    else
+        addon.GUI.AchievementsFrame:ForceUpdate();
+    end
+end
+
+function addon.IncludeAchievement(achievement, update)
+    achievement:Include();
+    addon.Data.ExcludedCategory:RemoveAchievement(achievement);
+    if update ~= false then
+        addon.GUI.CategoriesFrame:Update(true);
+        addon.GUI.AchievementsFrame:ForceUpdate();
+    end
+    if #addon.Data.ExcludedCategory.Achievements < 1 then
+        SavedData.ExcludedAchievements = nil;
+        addon.Data.ExcludedCategory.Achievements = nil;
+    end
 end
 
 -- [[ Tooltip ]] --
@@ -143,22 +157,22 @@ function loadHelper:OnEvent(event, arg1)
 
             addon.Data.SavedData.Load();
 
-            addon.GUI.ElvUISkin.Load();
-            addon.GUI.AddFrame("WorldMapButton", addon.GUI.WorldMapButton.Load());
+            addon.GUI:LoadWithAddon();
 
             addon.Icon.Load();
             addon.Tutorials.Load();
         elseif arg1 == "Blizzard_AchievementUI" then -- This needs the Blizzard_AchievementUI addon available to load
             addon.Data.Load();
 
-            addon.GUI:Load();
+            addon.GUI:LoadWithBlizzard_AchievementUI();
+            
+            addon.Data.LoadExcludedAchievements(addon.Data.Achievements);
 
-            addon.Tutorials.SetFrames(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
-            addon.Tutorials.HookTrigger(addon.GUI.GetFrame("TabButton1"));
+            addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
 
-            addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
+            addon.GUI.ElvUISkin.Apply();
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
-            addon.GUI.ElvUISkin.Apply(addon.GUI.GetFrames("TabButton1", "CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame", "SearchPreviewFrame", "FullSearchResultsFrame"));
+            addon.GUI.ElvUISkin.Apply();
         end
     elseif event == "PLAYER_LOGIN" then
         -- addon.GUI.FilterButton:ResetFilters();
@@ -172,13 +186,3 @@ function loadHelper:OnEvent(event, arg1)
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
-
--- [[ SCREENSHOT MODE ]] --
--- local f = CreateFrame("Frame", nil, UIParent);
--- f:SetAllPoints();
--- f:SetPoint("CENTER");
--- f:SetSize(64, 64);
-
--- f.tex = f:CreateTexture();
--- f.tex:SetAllPoints(f);
--- f.tex:SetTexture("Interface\\AddOns\\Krowi_AchievementFilter\\Media\\Black");

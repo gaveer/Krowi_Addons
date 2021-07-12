@@ -1,20 +1,24 @@
 -- [[ Namespaces ]] --
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
-local achievementButton = addon.GUI.AchievementButton;
+local gui = addon.GUI;
+local achievementButton = gui.AchievementButton;
 achievementButton.Tooltip = {};
 local tooltip = achievementButton.Tooltip;
 
-local AddBlizzardDefault, AddPartOfAChain, AddRequiredFor, AddObjectives;
-function tooltip.ShowTooltip(button, achievementsFrame)
+local AddBlizzardDefault, AddNotObtainable, AddPartOfAChain, AddRequiredFor, AddObjectives;
+function tooltip.ShowTooltip(button)
 	diagnostics.Trace("ShowTooltip");
 
 	GameTooltip:SetOwner(button, "ANCHOR_NONE");
 	GameTooltip:SetPoint("TOPLEFT", button, "TOPRIGHT");
 
+	if button.Achievement.NotObtainable then
+		AddNotObtainable();
+	end
 	AddBlizzardDefault(button);
-	AddPartOfAChain(button, achievementsFrame);
-	AddRequiredFor(button, achievementsFrame);
+	AddPartOfAChain(button);
+	AddRequiredFor(button);
 	AddObjectives(button);
 
 	-- AchievementFrameAchievements_CheckGuildMembersTooltip(self.shield); -- Guild can be ignored for now
@@ -54,6 +58,10 @@ end
 function AddBlizzardDefault(self)
 	diagnostics.Trace("AddBlizzardDefault");
 
+	if (GameTooltip:NumLines() > 0) then
+		-- GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		GameTooltip_AddBlankLineToTooltip(GameTooltip);
+	end
 	if self.accountWide then
 		if self.completed then
 			GameTooltip:AddLine(ACCOUNT_WIDE_ACHIEVEMENT_COMPLETED);
@@ -74,14 +82,25 @@ function AddBlizzardDefault(self)
 	end
 end
 
-function AddPartOfAChain(self, achievementsFrame)
+function AddNotObtainable()
+	diagnostics.Trace("AddNotObtainable");
+	
+	if (GameTooltip:NumLines() > 0) then
+		-- GameTooltip:AddLine(" "); -- Empty line to seperate it from the previous block
+		GameTooltip_AddBlankLineToTooltip(GameTooltip);
+	end
+	local color = addon.RedRGB;
+	GameTooltip:AddLine(addon.L["This achievement is no longer obtainable"], color.R, color.G, color.B);
+end
+
+function AddPartOfAChain(self)
 	diagnostics.Trace("AddPartOfAChain");
 
 	if not addon.Options.db.Tooltip.Achievements.ShowPartOfAChain then
 		return;
 	end
 
-	local partOfAChainIDs = self.Achievement:GetPartOfAChainIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
+	local partOfAChainIDs = self.Achievement:GetPartOfAChainIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
 	if partOfAChainIDs == nil then
 		return;
 	end
@@ -97,14 +116,14 @@ function AddPartOfAChain(self, achievementsFrame)
 	end
 end
 
-function AddRequiredFor(self, achievementsFrame)
+function AddRequiredFor(self)
 	diagnostics.Trace("AddRequiredFor");
 
 	if not addon.Options.db.Tooltip.Achievements.ShowRequiredFor then
 		return;
 	end
 
-	local requiredForIDs = self.Achievement:GetRequiredForIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
+	local requiredForIDs = self.Achievement:GetRequiredForIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
 	if requiredForIDs == nil then
 		return;
 	end

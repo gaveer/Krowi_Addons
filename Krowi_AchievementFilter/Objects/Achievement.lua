@@ -16,10 +16,10 @@ function achievement:New(id, points, faction, covenant, obtainable, hasWowheadLi
     self.Faction = faction;
     self.Covenant = covenant;
     if obtainable == false then -- We only want to set it if it's not obtainable, otherwise nil
-        self.NotObtainable = true; -- By inverting this we reduce memory usage because 99% is obtainable
+        self.NotObtainable = true; -- By inverting this we reduce memory usage because most are obtainable
     end
     if hasWowheadLink == false then -- We only want to set it if it has no Wowhead link, otherwise nil
-        self.HasNoWowheadLink = true; -- By inverting this we reduce memory usage because 99% has a Wowhead link
+        self.HasNoWowheadLink = true; -- By inverting this we reduce memory usage because most have a Wowhead link
     end
 
     return self;
@@ -84,8 +84,8 @@ function achievement:GetRequiredForIDs(validate, filters)
     self.RequiredForIDs = {};
 	for _, criteria in next, criteriaCache do
 		if criteria.AchievementID == self.ID then
-            if validate and filters and addon.Achievements[criteria.RequiredForID] then
-                if validate(filters, addon.Achievements[criteria.RequiredForID], true) > 0 then
+            if validate and filters and addon.Data.Achievements[criteria.RequiredForID] then
+                if validate(filters, addon.Data.Achievements[criteria.RequiredForID], true) > 0 then
 			        tinsert(self.RequiredForIDs, criteria.RequiredForID);
                 end
             else
@@ -107,6 +107,10 @@ function achievement:GetPartOfAChainIDs(validate, filters)
         return self.PartOfAChainIDs;
     end
 
+    if self.ID == 15077 or self.ID == 15078 then -- Issue #49 : Fix
+        return;
+    end
+
 	if not GetNextAchievement(self.ID) and not GetPreviousAchievement(self.ID) then
 		return;
 	end
@@ -121,8 +125,8 @@ function achievement:GetPartOfAChainIDs(validate, filters)
     self.PartOfAChainIDs = {}; -- By creating the part of a chain IDs table here we reduce memory usage because not every achievement has part of a chain IDs
 
 	while id do
-        if validate and filters and addon.Achievements[id] then
-            if validate(filters, addon.Achievements[id], true) > 0 then
+        if validate and filters and addon.Data.Achievements[id] then
+            if validate(filters, addon.Data.Achievements[id], true) > 0 then
                 tinsert(self.PartOfAChainIDs, id);
             end
         else
@@ -132,4 +136,22 @@ function achievement:GetPartOfAChainIDs(validate, filters)
 	end
 
     return self.PartOfAChainIDs;
+end
+
+function achievement:Exclude()
+    self.Excluded = true;
+    if SavedData.ExcludedAchievements == nil then
+        SavedData.ExcludedAchievements = {};
+    end
+
+    SavedData.ExcludedAchievements[self.ID] = true;
+end
+
+function achievement:Include()
+    self.Excluded = nil;
+    if SavedData.ExcludedAchievements == nil then
+        return;
+    end
+
+    SavedData.ExcludedAchievements[self.ID] = nil;
 end

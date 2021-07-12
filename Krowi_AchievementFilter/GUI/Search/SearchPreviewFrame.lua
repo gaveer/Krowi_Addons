@@ -6,23 +6,15 @@ local search = addon.GUI.Search;
 search.SearchPreviewFrame = {};
 local searchPreviewFrame = search.SearchPreviewFrame;
 
-local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
-
 -- [[ Constructors ]] --
-searchPreviewFrame.__index = searchPreviewFrame; -- Used to support OOP like code
-function searchPreviewFrame:New(fullSearchResultsFrame, achievementsFrame)
-    diagnostics.Trace("searchPreviewContainer:New");
-
-	-- Increment ID
-    numFrames = numFrames + 1;
+searchPreviewFrame.__index = searchPreviewFrame; -- Used to inject all the namespace functions to the frame
+function searchPreviewFrame:Load()
+    diagnostics.Trace("searchPreviewContainer:Load");
 
 	-- Create frame
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameSearchPreviewContainer" .. numFrames, AchievementFrame, "KrowiAF_SearchPreviewsFrame_Template");
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameSearchPreviewContainer", AchievementFrame, "KrowiAF_SearchPreviewsFrame_Template");
 	frame:SetPoint("TOPLEFT", AchievementFrame.searchBox, "BOTTOMLEFT", -4, 3);
-	core.InjectMetatable(frame, searchPreviewFrame);
-
-	-- Set properties
-    frame.ID = numFrames;
+	core.InjectMetatable(frame, searchPreviewFrame); -- Inject all the namespace functions to the frame
 
     -- Populate the frame with buttons - doing this in code allows us to change the number of buttons later
     frame.Buttons = {};
@@ -34,7 +26,7 @@ function searchPreviewFrame:New(fullSearchResultsFrame, achievementsFrame)
         button:SetPoint("TOPLEFT", frame.Buttons[i - 1], "BOTTOMLEFT");
         tinsert(frame.Buttons, button);
     end
-    search.SearchPreviewButton.PostLoadButtons(frame, fullSearchResultsFrame, achievementsFrame);
+    search.SearchPreviewButton.PostLoadButtons(frame.Buttons, frame.ShowFullSearchResultsButton);
 
     -- Anchor the ShowFullSearchResultsButton to the last SearchPreviewButton
     frame.ShowFullSearchResultsButton:SetPoint("LEFT", frame.Buttons[1]);
@@ -42,7 +34,7 @@ function searchPreviewFrame:New(fullSearchResultsFrame, achievementsFrame)
 
     frame:Hide();
 
-	return frame;
+	addon.GUI.Search.SearchPreviewFrame = frame;
 end
 
 function searchPreviewFrame:GetNumButtons()

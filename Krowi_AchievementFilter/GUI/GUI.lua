@@ -4,43 +4,25 @@ local diagnostics = addon.Diagnostics;
 addon.GUI = {};
 local gui = addon.GUI;
 
-function gui:Load()
+function gui:LoadWithAddon()
+    gui.ElvUISkin.Load();
+    gui.WorldMapButton.Load();
+end
 
+function gui:LoadWithBlizzard_AchievementUI()
     self.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
 
-    self.AddFrame("AchievementsFrame", gui.AchievementsFrame:New());
-    self.AddFrame("CategoriesFrame", gui.CategoriesFrame:New(addon.Categories, gui.GetFrame("AchievementsFrame")));
-    self.AddFrame("FilterButton", gui.FilterButton:New(gui.GetFrames("CategoriesFrame", "AchievementsFrame", "WorldMapButton")));
-    self.AddFrame("FullSearchResultsFrame", gui.Search.FullSearchResultsFrame:New(gui.GetFrame("AchievementsFrame")));
-    self.AddFrame("SearchPreviewFrame", gui.Search.SearchPreviewFrame:New(gui.GetFrames("FullSearchResultsFrame", "AchievementsFrame")));
-    self.AddFrame("SearchBoxFrame", gui.Search.SearchBoxFrame:New(gui.GetFrames("SearchPreviewFrame", "FullSearchResultsFrame", "AchievementsFrame")));
-    self.AddFrame("TabButton1", gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], gui.GetFrames("CategoriesFrame", "AchievementsFrame", "FilterButton", "SearchBoxFrame")));
+    gui.AchievementsFrame:Load();
+    gui.CategoriesFrame:Load(addon.Data.Categories);
+    gui.FilterButton:Load();
+
+    gui.Search.Load();
+
+    gui.TabButton1 = gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], {gui.CategoriesFrame, gui.AchievementsFrame, gui.FilterButton, gui.Search.SearchBoxFrame});
 
     self.ResetAchievementFrameHeight();
 
     diagnostics.Debug("GUI loaded");
-end
-
--- [[ Frames ]] --
-local frames = {};
-
-function gui.AddFrame(name, frame)
-    frames[name] = frame;
-
-    return frames[name];
-end
-
-function gui.GetFrame(name)
-    return frames[name];
-end
-
-function gui.GetFrames(...)
-    local table = {};
-    for _, name in next, {...} do
-        tinsert(table, frames[name]);
-    end
-
-    return unpack(table);
 end
 
 -- [[ AchievementFrame Width ]] --
@@ -64,12 +46,12 @@ function gui.ResetAchievementFrameWidth()
 end
 
 local function UpdateAchievementFrameWidth(message , offset)
-    if frames["TabButton1"] and frames["TabButton1"].Selected then -- Need to check if it exists since this can be triggered before it's created
-        frames["AchievementsFrame"]:Hide();
-        frames["CategoriesFrame"]:Hide();
+    if gui.TabButton1 and gui.TabButton1.Selected then -- Need to check if it exists since this can be triggered before it's created
+        gui.AchievementsFrame:Hide();
+        gui.CategoriesFrame:Hide();
         gui.SetAchievementFrameWidth(offset);
-        frames["AchievementsFrame"]:Show();
-        frames["CategoriesFrame"]:Show();
+        gui.AchievementsFrame:Show();
+        gui.CategoriesFrame:Show();
     end
 end
 
@@ -102,12 +84,12 @@ function gui.ResetAchievementFrameHeight()
 end
 
 local function UpdateAchievementFrameHeight(message, offset)
-    if frames["TabButton1"] and frames["TabButton1"].Selected then -- Need to check if it exists since this can be triggered before it's created
-        frames["AchievementsFrame"]:Hide();
-        frames["CategoriesFrame"]:Hide();
-        gui.SetAchievementFrameHeight(offset);
-        frames["AchievementsFrame"]:Show();
-        frames["CategoriesFrame"]:Show();
+    if gui.TabButton1 and gui.TabButton1.Selected then -- Need to check if it exists since this can be triggered before it's created
+        gui.AchievementsFrame:Hide();
+        gui.CategoriesFrame:Hide();
+        gui.SetAchievementFrameWidth(offset);
+        gui.AchievementsFrame:Show();
+        gui.CategoriesFrame:Show();
     end
 end
 
@@ -123,18 +105,18 @@ end
 function gui.ResetView()
 	diagnostics.Trace("gui.ResetView");
 
-    if frames["CategoriesFrame"] and frames["CategoriesFrame"].ID then -- Checking ID is to know if the frame is initialised or not
+    if gui.CategoriesFrame and gui.CategoriesFrame.Categories then -- Checking ID is to know if the frame is initialised or not
         -- We want to have Classic selected and collapsed
         -- Achievement 1283 has Dungeons as parent but we need its parent which is Classic
-        frames["CategoriesFrame"]:SelectCategory(addon.Categories[1], true);
+        gui.CategoriesFrame:SelectCategory(addon.Data.Categories[1], true);
     end
 
-    if frames["SearchBoxFrame"] and frames["SearchBoxFrame"].ID then
-        frames["SearchBoxFrame"]:SetText("");
+    if gui.Search.SearchBoxFrame and gui.Search.SearchBoxFrame.SearchPreviewFrame then
+        gui.Search.SearchBoxFrame:SetText("");
     end
 
-    if frames["FullSearchResultsFrame"] and frames["FullSearchResultsFrame"].ID then
-        frames["FullSearchResultsFrame"]:Hide();
+    if gui.Search.FullSearchResultsFrame and gui.Search.FullSearchResultsFrame.Update then
+        gui.Search.FullSearchResultsFrame:Hide();
     end
 end
 
@@ -153,7 +135,7 @@ function gui.ToggleAchievementFrameAtTab1(forceOpen) -- Issue #26 Broken, Fix
 		ShowUIPanel(AchievementFrame);
         AchievementFrame_SetTabs();
         AchievementFrame_HideSearchPreview();
-        frames["TabButton1"]:Select();
+        gui.TabButton1:Select();
         if addon.Options.db.ResetViewOnOpen or forceOpen then
             gui.ResetView();
         end

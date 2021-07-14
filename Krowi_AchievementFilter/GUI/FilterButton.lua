@@ -6,8 +6,6 @@ local gui = addon.GUI;
 gui.FilterButton = {};
 local filterButton = gui.FilterButton;
 
-local numButtons = 0; -- Local ID for naming, starts at 0 and will increment if a new button is added
-
 local defaults = {
     profile = {
         MergeSmallCategories = true,
@@ -32,6 +30,7 @@ local defaults = {
             Necrolord = false
         },
         CollapseSeries = true,
+        Excluded = false,
         SortBy = {
             Criteria = addon.L["Default"],
             ReverseSort = false
@@ -58,6 +57,7 @@ local defaults = {
                 Necrolord = false
             },
             CollapseSeries = true,
+            Excluded = false,
             SortBy = {
                 Criteria = addon.L["Default"],
                 ReverseSort = false
@@ -85,8 +85,37 @@ local defaults = {
                 Necrolord = false
             },
             CollapseSeries = true,
+            Excluded = false,
             SortBy = {
                 Criteria = addon.L["Default"],
+                ReverseSort = false
+            }
+        },
+        ExcludedCategory = {
+            Completion = {
+                Completed = true,
+                NotCompleted = true
+            },
+            Obtainability = {
+                Obtainable = true,
+                NotObtainable = true
+            },
+            Faction = {
+                Neutral = true,
+                Alliance = false,
+                Horde = false
+            },
+            Covenant = {
+                Neutral = true,
+                Kyrian = false,
+                Venthyr = false,
+                NightFae = false,
+                Necrolord = false
+            },
+            CollapseSeries = true,
+            Excluded = true,
+            SortBy = {
+                Criteria = addon.L["Name"],
                 ReverseSort = false
             }
         }
@@ -96,26 +125,15 @@ local defaults = {
 local ResetFilters;
 
 -- [[ Constructors ]] --
-filterButton.__index = filterButton; -- Used to support OOP like code
-function filterButton:New(categoriesFrame, achievementsFrame, worldMapButton)
-    diagnostics.Trace("filterButton:New");
-
-	-- Increment ID
-    numButtons = numButtons + 1;
+filterButton.__index = filterButton; -- Used to inject all the namespace functions to the frame
+function filterButton:Load()
+    diagnostics.Trace("filterButton:Load");
 
     -- Create button
-    local button = CreateFrame("DropDownToggleButton", "KrowiAF_FilterButton" .. numButtons, AchievementFrame, "KrowiAF_FilterButton_Template");
-    core.InjectMetatable(button, filterButton);
+    local button = CreateFrame("DropDownToggleButton", "KrowiAF_FilterButton", AchievementFrame, "KrowiAF_FilterButton_Template");
+    core.InjectMetatable(button, filterButton); -- Inject all the namespace functions to the frame
     button:SetScript("OnMouseDown", filterButton.OnMouseDown);
 	button:SetFrameLevel(button:GetParent():GetFrameLevel() + 7);
-
-	-- Set properties
-	button.ID = numButtons;
-	button.CategoriesFrame = categoriesFrame;
-    categoriesFrame.FilterButton = button;
-    button.AchievementsFrame = achievementsFrame;
-    achievementsFrame.FilterButton = button;
-    worldMapButton.FilterButton = button;
 
     -- Load filters
     button.Filters = LibStub("AceDB-3.0"):New("Filters", defaults, true);
@@ -125,14 +143,14 @@ function filterButton:New(categoriesFrame, achievementsFrame, worldMapButton)
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, button:GetName());
     button:Hide();
 
-    return button;
+	addon.GUI.FilterButton = button; -- Overwrite with the actual frame since all functions are injected to it
 end
 
 function filterButton:UpdateAchievementFrame()
     diagnostics.Trace("filterButton:UpdateAchievementFrame");
 
-    self.CategoriesFrame:Update(true);
-    self.AchievementsFrame:ForceUpdate(true); -- Issue #27: Fix
+    gui.CategoriesFrame:Update(true);
+    gui.AchievementsFrame:ForceUpdate(true); -- Issue #27: Fix
 end
 
 local menu = LibStub("Krowi_Menu-1.0");
@@ -176,6 +194,9 @@ function filterButton:OnMouseDown()
 
     self:AddAchievementFilters(menu, addon.Objects.MenuItem:New({Text = addon.L["Current Zone"]}), self.Filters.db.CurrentZone);
     self:AddAchievementFilters(menu, addon.Objects.MenuItem:New({Text = addon.L["Selected Zone"]}), self.Filters.db.SelectedZone);
+    if addon.Options.db.Categories.ShowExcludedCategory then
+        self:AddAchievementFilters(menu, addon.Objects.MenuItem:New({Text = addon.L["Excluded"]}), self.Filters.db.ExcludedCategory);
+    end
 
     menu:AddSeparator();
 
@@ -393,6 +414,19 @@ function filterButton:AddAchievementFilters(menu, childMenu, filters)
                         KeepShownOnClick = true
                     });
 
+    tmpMenu:AddFull({	Text = addon.L["Excluded"],
+                    Checked = function() -- Using function here, we force the GUI to get the value again instead of only once (caused visual bugs)
+                        return filters.Excluded
+                    end,
+                    Func = function()
+                        filters.Excluded = not filters.Excluded;
+                        self:UpdateAchievementFrame();
+                    end,
+                    IsNotRadio = true,
+                    NotCheckable = false,
+                    KeepShownOnClick = true
+                });
+
     tmpMenu:AddSeparator();
 
     local sortBy = addon.Objects.MenuItem:New({Text = addon.L["Sort By"]});
@@ -403,7 +437,7 @@ function filterButton:AddAchievementFilters(menu, childMenu, filters)
                             Func = function()
                                 filters.SortBy.Criteria = addon.L["Default"];
                                 menu:SetSelectedName(addon.L["Default"]);
-                                self.AchievementsFrame:ForceUpdate();
+                                gui.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -415,7 +449,7 @@ function filterButton:AddAchievementFilters(menu, childMenu, filters)
                             Func = function()
                                 filters.SortBy.Criteria = addon.L["Name"];
                                 menu:SetSelectedName(addon.L["Name"]);
-                                self.AchievementsFrame:ForceUpdate();
+                                gui.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -427,7 +461,7 @@ function filterButton:AddAchievementFilters(menu, childMenu, filters)
                             Func = function()
                                 filters.SortBy.Criteria = addon.L["Completion"];
                                 menu:SetSelectedName(addon.L["Completion"]);
-                                self.AchievementsFrame:ForceUpdate();
+                                gui.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -439,7 +473,7 @@ function filterButton:AddAchievementFilters(menu, childMenu, filters)
                             Func = function()
                                 filters.SortBy.Criteria = addon.L["ID"];
                                 menu:SetSelectedName(addon.L["ID"]);
-                                self.AchievementsFrame:ForceUpdate();
+                                gui.AchievementsFrame:ForceUpdate();
                             end,
                             NotCheckable = false,
                             KeepShownOnClick = true
@@ -451,7 +485,7 @@ function filterButton:AddAchievementFilters(menu, childMenu, filters)
                             end,
                             Func = function()
                                 filters.SortBy.ReverseSort = not filters.SortBy.ReverseSort;
-                                self.AchievementsFrame:ForceUpdate();
+                                gui.AchievementsFrame:ForceUpdate();
                             end,
                             IsNotRadio = true,
                             NotCheckable = false,
@@ -518,12 +552,41 @@ function filterButton.Validate(filters, achievement, ignoreCollapseSeries)
             end
         end
     end
+    if not filters.Excluded and achievement.Excluded then
+        return -14;
+    end
 
     return 1;
 end
 
 function filterButton:AutoValidate(achievement, ignoreCollapseSeries)
     return self.Validate(self:GetFilters(), achievement, ignoreCollapseSeries);
+end
+
+function filterButton:GetHighestAchievementWhenCollapseSeries(achievement)
+    diagnostics.Trace("filterButton:GetHighestCollapsedSeriesAchievement");
+
+    if not achievement then
+        return;
+    end
+
+    if self.Filters.db.CollapseSeries then
+		local nextID, completed = GetNextAchievement(achievement.ID);
+		local nextAchievement = addon.Data.Achievements[nextID];
+		if nextAchievement and completed then
+			local newID, newAchievement;
+			while nextAchievement and completed do
+				newID, completed = GetNextAchievement(nextAchievement.ID);
+				newAchievement = addon.Data.Achievements[newID];
+				if newAchievement and completed then
+					nextAchievement = newAchievement;
+				end
+			end
+			achievement = nextAchievement;
+		end
+	end
+
+    return achievement;
 end
 
 function filterButton:SetFilters(achievement)
@@ -563,43 +626,21 @@ function filterButton:SetFilters(achievement)
             self.Filters.db.Covenant.Necrolord = not self.Filters.db.Covenant.Necrolord;
         elseif id == -13 then
             return; -- This filter can't be changed here. See AchievementsFrame SelectAchievement
+        elseif id == -14 then
+            self.Filters.db.Excluded = not self.Filters.db.Excluded;
         end
 
         iterations = iterations + 1;
     end
 end
 
-function filterButton:GetHighestAchievementWhenCollapseSeries(achievement)
-    diagnostics.Trace("filterButton:GetHighestCollapsedSeriesAchievement");
-
-    if not achievement then
-        return;
-    end
-
-    if self.Filters.db.CollapseSeries then
-		local nextID, completed = GetNextAchievement(achievement.ID);
-		local nextAchievement = addon.GetAchievement(nextID);
-		if nextAchievement and completed then
-			local newID, newAchievement;
-			while nextAchievement and completed do
-				newID, completed = GetNextAchievement(nextAchievement.ID);
-				newAchievement = addon.GetAchievement(newID);
-				if newAchievement and completed then
-					nextAchievement = newAchievement;
-				end
-			end
-			achievement = nextAchievement;
-		end
-	end
-
-    return achievement;
-end
-
 function filterButton:GetFilters()
-	if self.AchievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then
+	if gui.CategoriesFrame.SelectedCategory == addon.Data.CurrentZoneCategory then
 		return self.Filters.db.CurrentZone;
-	elseif self.AchievementsFrame.CategoriesFrame.SelectedCategory == addon.SelectedZoneCategory then
+	elseif gui.CategoriesFrame.SelectedCategory == addon.Data.SelectedZoneCategory then
 		return self.Filters.db.SelectedZone;
+	elseif gui.CategoriesFrame.SelectedCategory == addon.Data.ExcludedCategory then
+		return self.Filters.db.ExcludedCategory;
 	end
 
     return self.Filters.db;
@@ -616,6 +657,9 @@ function ResetFilters(self)
     self.Filters.db.SelectedZone.Faction.Neutral = true;
     self.Filters.db.SelectedZone.Faction.Alliance = addon.Faction.IsAlliance;
     self.Filters.db.SelectedZone.Faction.Horde = addon.Faction.IsHorde;
+    self.Filters.db.ExcludedCategory.Faction.Neutral = true;
+    self.Filters.db.ExcludedCategory.Faction.Alliance = addon.Faction.IsAlliance;
+    self.Filters.db.ExcludedCategory.Faction.Horde = addon.Faction.IsHorde;
 
     -- Always reset covenant filter
     for covenant, _ in next, self.Filters.db.Covenant do
@@ -633,4 +677,9 @@ function ResetFilters(self)
     end
     self.Filters.db.SelectedZone.Covenant.Neutral = true;
     self.Filters.db.SelectedZone.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
+    for covenant, _ in next, self.Filters.db.ExcludedCategory.Covenant do
+        self.Filters.db.ExcludedCategory.Covenant[covenant] = false;
+    end
+    self.Filters.db.ExcludedCategory.Covenant.Neutral = true;
+    self.Filters.db.ExcludedCategory.Covenant[addon.Objects.Covenant[addon.GetActiveCovenant()]] = true;
 end

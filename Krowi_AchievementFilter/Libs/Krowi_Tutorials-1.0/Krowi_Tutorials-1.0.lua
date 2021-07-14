@@ -493,8 +493,9 @@ function lib:New(savedVariables, key, icon, font)
 	if frame.SavedVariables[frame.Key].PageViewed == nil then
 		frame.SavedVariables[frame.Key].PageViewed = {}; -- First time creation
 	end
-	if ElvUI then
-		frame.Point = default.Point; -- Set this here because ElvUI will otherwise put a function in this
+	if ElvUI then -- Set these here because ElvUI will otherwise put a function in this
+		frame.Point = default.Point;
+		frame.Width = default.Width;
 	end
 
 	ApplyElvUISkin(frame);

@@ -2,9 +2,9 @@
 
     <Script file="Data\Data.lua" />
     <Script file="Data\ExportedAchievements.lua" />
+    <Script file="Data\ExportedNextPatchAchievements.lua" />
     <Script file="Data\ExportedCategories.lua" />
     <Script file="Data\ExportedPetBattles.lua" />
-    <Script file="Data\ExportedNextPatch.lua" />
     <Script file="Data\ExportedMaps.lua" />
     <Script file="Data\SavedData.lua" />
     

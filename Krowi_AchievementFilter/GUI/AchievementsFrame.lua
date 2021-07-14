@@ -6,23 +6,16 @@ local gui = addon.GUI;
 gui.AchievementsFrame = {};
 local achievementsFrame = gui.AchievementsFrame;
 
-local numFrames = 0; -- Local ID for naming, starts at 0 and will increment if a new frame is added
-
--- [[ Constructors ]] --
-achievementsFrame.__index = achievementsFrame; -- Used to support OOP like code
-function achievementsFrame:New()
-    diagnostics.Trace("achievementsFrame:New");
-
-	-- Increment ID
-	numFrames = numFrames + 1;
+achievementsFrame.__index = achievementsFrame; -- Used to inject all the namespace functions to the frame
+function achievementsFrame:Load()
+    diagnostics.Trace("achievementsFrame:Load");
 
 	-- Create frame
-	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements" .. numFrames, AchievementFrame, "KrowiAF_AchievementsFrame_Template");
+	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameAchievements", AchievementFrame, "KrowiAF_AchievementsFrame_Template");
 	frame:SetWidth(504);
-	core.InjectMetatable(frame, achievementsFrame);
+	core.InjectMetatable(frame, achievementsFrame); -- Inject all the namespace functions to the frame
 
 	-- Set properties
-	frame.ID = numFrames;
 	frame.SelectedAchievement = nil; -- Issue #6: Fix
 	frame.UIFontHeight = nil;
 
@@ -30,6 +23,7 @@ function achievementsFrame:New()
 	frame.Container.ParentFrame = frame;
 	frame.Container.ScrollBar.ParentContainer = frame.Container;
 
+	-- Rest
 	frame:RegisterEvent("ADDON_LOADED");
 
 	tinsert(ACHIEVEMENTFRAME_SUBFRAMES, frame:GetName());
@@ -54,7 +48,7 @@ function achievementsFrame:New()
 		frame:ForceUpdate();
 	end); -- Issue #3: Fix
 
-	return frame;
+	addon.GUI.AchievementsFrame = frame; -- Overwrite with the actual frame since all functions are injected to it
 end
 
 function KrowiAF_AchievementsFrame_OnShow(self) -- Used in Templates - KrowiAF_AchievementsFrame_Template
@@ -89,8 +83,8 @@ function achievementsFrame.Show_Hide(frame, self, func, achievementsWidth, achie
 	func(self);
 end
 
-local function Validate(self, filters, achievements, achievement)
-	if self.FilterButton and self.FilterButton.Validate(filters, achievement) > 0 then
+local function Validate(achievements, achievement)
+	if gui.FilterButton and gui.FilterButton:AutoValidate(achievement) > 0 then
 		tinsert(achievements, achievement);
 	end
 end
@@ -101,17 +95,10 @@ local function GetFilteredAchievements(self, category)
 	local achievements = {};
 	local indexes = {};
 
-	local filters = self.FilterButton.Filters.db;
-	if category == addon.CurrentZoneCategory then
-		filters = self.FilterButton.Filters.db.CurrentZone;
-	elseif category == addon.SelectedZoneCategory then
-		filters = self.FilterButton.Filters.db.SelectedZone;
-	end
-
 	-- Filter achievements
 	if category.Achievements then
 		for _, achievement in next, category.Achievements do
-			Validate(self, filters, achievements, achievement);
+			Validate(achievements, achievement);
 			indexes[achievement] = #achievements;
 		end
 	end
@@ -119,11 +106,12 @@ local function GetFilteredAchievements(self, category)
 	-- Filter merged achievements
 	if category.MergedAchievements then
 		for _, achievement in next, category.MergedAchievements do
-			Validate(self, filters, achievements, achievement);
+			Validate(achievements, achievement);
 			indexes[achievement] = #achievements;
 		end
 	end
 
+	local filters = gui.FilterButton:GetFilters();
 	if category.Achievements or category.MergedAchievements then
 		-- Sort achievements
 		if filters.SortBy.Criteria == addon.L["Name"] then
@@ -190,13 +178,13 @@ local highlightedButton;
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
-	local updateAchievements = cachedCategory ~= self.CategoriesFrame.SelectedCategory;
-	cachedCategory = self.CategoriesFrame.SelectedCategory;
+	local updateAchievements = cachedCategory ~= gui.CategoriesFrame.SelectedCategory;
+	cachedCategory = gui.CategoriesFrame.SelectedCategory;
 	local scrollFrame = self.Container;
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
 	local buttons = scrollFrame.buttons;
-	if cachedCategory == addon.CurrentZoneCategory then
+	if cachedCategory == addon.Data.CurrentZoneCategory then
 		updateAchievements = addon.Data.GetCurrentZoneAchievements() or updateAchievements;
 	end
 
@@ -205,7 +193,7 @@ function achievementsFrame:Update()
 	end
 	local numButtons = #buttons;
 
-	if cachedCategory == addon.NextPatchCategory then
+	if cachedCategory == addon.Data.NextPatchCategory then
 		self.Text:SetText(string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Coming in Disclaimer"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]));
 		self.Text:Show();
 	else
@@ -236,9 +224,6 @@ function achievementsFrame:Update()
 
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 
-	-- if selection then
-	-- 	self.SelectedAchievement = selection;
-	-- else
 	if not self.SelectedAchievement then
 		HybridScrollFrame_CollapseButton(scrollFrame);
 	end
@@ -260,8 +245,8 @@ function achievementsFrame:ForceUpdate(toTop) -- Issue #3: Fix
 		self.Container.ScrollBar:SetValue(0);
 	end
 
-	if self.FilterButton then
-		self.SelectedAchievement = self.FilterButton:GetHighestAchievementWhenCollapseSeries(self.SelectedAchievement);
+	if gui.FilterButton then
+		self.SelectedAchievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(self.SelectedAchievement);
 	end
 
 	-- Issue #8: Broken
@@ -390,7 +375,11 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 			saturatedStyle = "account";
 		else
 			button.accountWide = nil;
-			saturatedStyle = "normal";
+			if achievement.NotObtainable then
+				saturatedStyle = "NotObtainable";
+			else
+				saturatedStyle = "normal";
+			end
 		end
 		button.id = id;
 		button.label:SetWidth(ACHIEVEMENTBUTTON_LABELWIDTH);
@@ -516,20 +505,20 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 		mouseButton = "LeftButton";
 	end
 
-	if self.FilterButton then
-		achievement = self.FilterButton:GetHighestAchievementWhenCollapseSeries(achievement);
-		self.FilterButton:SetFilters(achievement);
+	if gui.FilterButton then
+		achievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(achievement);
+		gui.FilterButton:SetFilters(achievement);
 	end
 
 	local category;
-	if self.FilterButton.Filters.db.MergeSmallCategories then
+	if gui.FilterButton.Filters.db.MergeSmallCategories then
 		category = achievement:GetMergedCategory(); -- This way we get the parent category
 		diagnostics.Debug(category.Name);
 	else
 		category = achievement.Category;
 	end
 
-	self.CategoriesFrame:SelectCategory(category);
+	gui.CategoriesFrame:SelectCategory(category);
 
 	local shown = false;
 	local previousScrollValue;
@@ -568,6 +557,6 @@ end
 function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
 	diagnostics.Trace("achievementsFrame:SelectAchievementFromID");
 
-	local achievement = addon.GetAchievement(id);
+	local achievement = addon.Data.Achievements[id];
 	self:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end

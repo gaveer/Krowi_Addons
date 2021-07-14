@@ -52,6 +52,18 @@ function category:AddAchievement(achievement) -- Adds an achievement to the achi
     return achievement;
 end
 
+function category:RemoveAchievement(achievement) -- Removes an achievement from the achievement category
+    if self.Achievements == nil then
+        return;
+    end
+    for i, _ in next, self.Achievements do
+        if self.Achievements[i].ID == achievement.ID then
+            tremove(self.Achievements, i);
+            return;
+        end
+    end
+end
+
 function category:GetTree()
     -- diagnostics.Trace("category:GetTree");
 

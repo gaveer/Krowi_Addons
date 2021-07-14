@@ -70,6 +70,14 @@ namespace DbManagerWPF.DataManager
             return functions.Single(x => x.ID == 23);
         }
 
+        public Function GetExcludedFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 34);
+        }
+
         public Function Get10PlayerFunction()
         {
             if (!functions.Any())

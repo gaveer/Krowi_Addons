@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-05 22-45-28 ]] --
+-- [[ Exported at 2021-07-12 23-22-25 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3355,47 +3355,31 @@ function exportedCategories.Load(c, a)
     AddA(tmp[239], a[11987]); -- Glory of the Argus Raider
     tmp[253] = IaR(c, cat:New((EJ_GetInstanceInfo(768)))); -- The Emerald Nightmare
     AddC(tmp[239], tmp[253]);
-    AddA(tmp[253], a[10555]); -- Buggy Fight
-    AddA(tmp[253], a[10830]); -- Took the Red Eye Down
-    AddA(tmp[253], a[10771]); -- Webbing Crashers
-    AddA(tmp[253], a[10753]); -- Scare Bear
-    AddA(tmp[253], a[10663]); -- Imagined Dragons World Tour
-    AddA(tmp[253], a[10772]); -- Use the Force(s)
-    AddA(tmp[253], a[10755]); -- I Attack the Darkness
-    AddA(tmp[253], a[10821]); -- Mythic: Nythendra
-    AddA(tmp[253], a[10823]); -- Mythic: Il'gynoth
-    AddA(tmp[253], a[10822]); -- Mythic: Elerethe Renferal
-    AddA(tmp[253], a[10824]); -- Mythic: Ursoc
-    AddA(tmp[253], a[10825]); -- Mythic: Dragons of Nightmare
-    AddA(tmp[253], a[10826]); -- Mythic: Cenarius
-    AddA(tmp[253], a[10827]); -- Mythic: Xavius
     AddA(tmp[253], a[10818]); -- Darkbough
     AddA(tmp[253], a[10819]); -- Tormented Guardians
     AddA(tmp[253], a[10820]); -- Rift of Aln
     AddA(tmp[253], a[11194]); -- Ahead of the Curve: Xavius
     AddA(tmp[253], a[11191]); -- Cutting Edge: Xavius
+    tmp[873] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[253], tmp[873]);
+    AddA(tmp[873], a[10555]); -- Buggy Fight
+    AddA(tmp[873], a[10830]); -- Took the Red Eye Down
+    AddA(tmp[873], a[10771]); -- Webbing Crashers
+    AddA(tmp[873], a[10753]); -- Scare Bear
+    AddA(tmp[873], a[10663]); -- Imagined Dragons World Tour
+    AddA(tmp[873], a[10772]); -- Use the Force(s)
+    AddA(tmp[873], a[10755]); -- I Attack the Darkness
+    tmp[874] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[253], tmp[874]);
+    AddA(tmp[874], a[10821]); -- Mythic: Nythendra
+    AddA(tmp[874], a[10823]); -- Mythic: Il'gynoth
+    AddA(tmp[874], a[10822]); -- Mythic: Elerethe Renferal
+    AddA(tmp[874], a[10824]); -- Mythic: Ursoc
+    AddA(tmp[874], a[10825]); -- Mythic: Dragons of Nightmare
+    AddA(tmp[874], a[10826]); -- Mythic: Cenarius
+    AddA(tmp[874], a[10827]); -- Mythic: Xavius
     tmp[254] = IaR(c, cat:New((EJ_GetInstanceInfo(786)))); -- The Nighthold
     AddC(tmp[239], tmp[254]);
-    AddA(tmp[254], a[10678]); -- Cage Rematch
-    AddA(tmp[254], a[10697]); -- Grand Opening
-    AddA(tmp[254], a[10742]); -- Gluten Free
-    AddA(tmp[254], a[10817]); -- A Change In Scenery
-    AddA(tmp[254], a[10851]); -- Elementalry!
-    AddA(tmp[254], a[10754]); -- Fruit of All Evil
-    AddA(tmp[254], a[10575]); -- Burning Bridges
-    AddA(tmp[254], a[10704]); -- Not For You
-    AddA(tmp[254], a[10699]); -- Infinitesimal
-    AddA(tmp[254], a[10696]); -- I've Got My Eyes On You
-    AddA(tmp[254], a[10840]); -- Mythic: Skorpyron
-    AddA(tmp[254], a[10842]); -- Mythic: Chronomatic Anomaly
-    AddA(tmp[254], a[10843]); -- Mythic: Trilliax
-    AddA(tmp[254], a[10844]); -- Mythic: Spellblade Aluriel
-    AddA(tmp[254], a[10845]); -- Mythic: Star Augur Etraeus
-    AddA(tmp[254], a[10846]); -- Mythic: High Botanist Tel'arn
-    AddA(tmp[254], a[10848]); -- Mythic: Krosus
-    AddA(tmp[254], a[10847]); -- Mythic: Tichondrius
-    AddA(tmp[254], a[10849]); -- Mythic: Grand Magistrix Elisande
-    AddA(tmp[254], a[10850]); -- Mythic: Gul'dan
     AddA(tmp[254], a[10829]); -- Arcing Aqueducts
     AddA(tmp[254], a[10837]); -- Royal Athenaeum
     AddA(tmp[254], a[10838]); -- Nightspire
@@ -3403,40 +3387,46 @@ function exportedCategories.Load(c, a)
     AddA(tmp[254], a[11195]); -- Ahead of the Curve: Gul'dan
     AddA(tmp[254], a[11192]); -- Cutting Edge: Gul'dan
     AddA(tmp[254], a[11628]); -- That's So Last Millennium
+    tmp[875] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[254], tmp[875]);
+    AddA(tmp[875], a[10678]); -- Cage Rematch
+    AddA(tmp[875], a[10697]); -- Grand Opening
+    AddA(tmp[875], a[10742]); -- Gluten Free
+    AddA(tmp[875], a[10817]); -- A Change In Scenery
+    AddA(tmp[875], a[10851]); -- Elementalry!
+    AddA(tmp[875], a[10754]); -- Fruit of All Evil
+    AddA(tmp[875], a[10575]); -- Burning Bridges
+    AddA(tmp[875], a[10704]); -- Not For You
+    AddA(tmp[875], a[10699]); -- Infinitesimal
+    AddA(tmp[875], a[10696]); -- I've Got My Eyes On You
+    tmp[876] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[254], tmp[876]);
+    AddA(tmp[876], a[10840]); -- Mythic: Skorpyron
+    AddA(tmp[876], a[10842]); -- Mythic: Chronomatic Anomaly
+    AddA(tmp[876], a[10843]); -- Mythic: Trilliax
+    AddA(tmp[876], a[10844]); -- Mythic: Spellblade Aluriel
+    AddA(tmp[876], a[10845]); -- Mythic: Star Augur Etraeus
+    AddA(tmp[876], a[10846]); -- Mythic: High Botanist Tel'arn
+    AddA(tmp[876], a[10848]); -- Mythic: Krosus
+    AddA(tmp[876], a[10847]); -- Mythic: Tichondrius
+    AddA(tmp[876], a[10849]); -- Mythic: Grand Magistrix Elisande
+    AddA(tmp[876], a[10850]); -- Mythic: Gul'dan
     tmp[255] = IaR(c, cat:New((EJ_GetInstanceInfo(861)))); -- Trial of Valor
     AddC(tmp[239], tmp[255]);
     AddA(tmp[255], a[11337]); -- You Runed Everything!
     AddA(tmp[255], a[11386]); -- Boneafide Tri Tip
     AddA(tmp[255], a[11377]); -- Patient Zero
+    AddA(tmp[255], a[11394]); -- Trial of Valor
+    AddA(tmp[255], a[11426]); -- Heroic: Trial of Valor
     AddA(tmp[255], a[11396]); -- Mythic: Odyn
     AddA(tmp[255], a[11397]); -- Mythic: Guarm
     AddA(tmp[255], a[11398]); -- Mythic: Helya
-    AddA(tmp[255], a[11394]); -- Trial of Valor
-    AddA(tmp[255], a[11426]); -- Heroic: Trial of Valor
     AddA(tmp[255], a[11387]); -- The Chosen
     AddA(tmp[255], a[11581]); -- Ahead of the Curve: Helya
     AddA(tmp[255], a[11580]); -- Cutting Edge: Helya
     AddA(tmp[255], a[11762]); -- Can I Get A Helya
     tmp[256] = IaR(c, cat:New((EJ_GetInstanceInfo(875)))); -- Tomb of Sargeras
     AddC(tmp[239], tmp[256]);
-    AddA(tmp[256], a[11724]); -- Fel Turkey!
-    AddA(tmp[256], a[11699]); -- Grand Fin-ale
-    AddA(tmp[256], a[11676]); -- Five Course Seafood Buffet
-    AddA(tmp[256], a[11696]); -- Grin and Bear It
-    AddA(tmp[256], a[11773]); -- "Wax On, Wax Off"
-    AddA(tmp[256], a[11674]); -- "Great Soul, Great Purpose"
-    AddA(tmp[256], a[11675]); -- Sky Walker
-    AddA(tmp[256], a[11683]); -- Bingo!
-    AddA(tmp[256], a[11770]); -- Dark Souls
-    AddA(tmp[256], a[11767]); -- Mythic: Goroth
-    AddA(tmp[256], a[11775]); -- Mythic: Harjatan
-    AddA(tmp[256], a[11776]); -- Mythic: Mistress Sassz'ine
-    AddA(tmp[256], a[11774]); -- Mythic: Demonic Inquisition
-    AddA(tmp[256], a[11777]); -- Mythic: Sisters of the Moon
-    AddA(tmp[256], a[11778]); -- Mythic: The Desolate Host
-    AddA(tmp[256], a[11779]); -- Mythic: Maiden of Vigilance
-    AddA(tmp[256], a[11780]); -- Mythic: Fallen Avatar
-    AddA(tmp[256], a[11781]); -- Mythic: Kil'jaeden
     AddA(tmp[256], a[11787]); -- The Gates of Hell
     AddA(tmp[256], a[11788]); -- Wailing Halls
     AddA(tmp[256], a[11789]); -- Chamber of the Avatar
@@ -3444,30 +3434,30 @@ function exportedCategories.Load(c, a)
     AddA(tmp[256], a[11874]); -- Ahead of the Curve: Kil'jaeden
     AddA(tmp[256], a[11875]); -- Cutting Edge: Kil'jaeden
     AddA(tmp[256], a[11760]); -- Retro Trend
+    tmp[879] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[256], tmp[879]);
+    AddA(tmp[879], a[11724]); -- Fel Turkey!
+    AddA(tmp[879], a[11699]); -- Grand Fin-ale
+    AddA(tmp[879], a[11676]); -- Five Course Seafood Buffet
+    AddA(tmp[879], a[11696]); -- Grin and Bear It
+    AddA(tmp[879], a[11773]); -- "Wax On, Wax Off"
+    AddA(tmp[879], a[11674]); -- "Great Soul, Great Purpose"
+    AddA(tmp[879], a[11675]); -- Sky Walker
+    AddA(tmp[879], a[11683]); -- Bingo!
+    AddA(tmp[879], a[11770]); -- Dark Souls
+    tmp[880] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[256], tmp[880]);
+    AddA(tmp[880], a[11767]); -- Mythic: Goroth
+    AddA(tmp[880], a[11775]); -- Mythic: Harjatan
+    AddA(tmp[880], a[11776]); -- Mythic: Mistress Sassz'ine
+    AddA(tmp[880], a[11774]); -- Mythic: Demonic Inquisition
+    AddA(tmp[880], a[11777]); -- Mythic: Sisters of the Moon
+    AddA(tmp[880], a[11778]); -- Mythic: The Desolate Host
+    AddA(tmp[880], a[11779]); -- Mythic: Maiden of Vigilance
+    AddA(tmp[880], a[11780]); -- Mythic: Fallen Avatar
+    AddA(tmp[880], a[11781]); -- Mythic: Kil'jaeden
     tmp[257] = IaR(c, cat:New((EJ_GetInstanceInfo(946)))); -- Antorus, the Burning Throne
     AddC(tmp[239], tmp[257]);
-    AddA(tmp[257], a[11930]); -- Worm-monger
-    AddA(tmp[257], a[12065]); -- Hounds Good To Me
-    AddA(tmp[257], a[12129]); -- This is the War Room!
-    AddA(tmp[257], a[11928]); -- Portal Combat
-    AddA(tmp[257], a[12067]); -- Spheres of Influence
-    AddA(tmp[257], a[11949]); -- Hard to Kill
-    AddA(tmp[257], a[12030]); -- The World Revolves Around Me
-    AddA(tmp[257], a[11948]); -- Together We Stand
-    AddA(tmp[257], a[12046]); -- Remember the Titans
-    AddA(tmp[257], a[11915]); -- Don't Sweat the Technique
-    AddA(tmp[257], a[12257]); -- Stardust Crusaders
-    AddA(tmp[257], a[11992]); -- Mythic: Garothi Worldbreaker
-    AddA(tmp[257], a[11993]); -- Mythic: Hounds of Sargeras
-    AddA(tmp[257], a[11994]); -- Mythic: Antoran High Command
-    AddA(tmp[257], a[11995]); -- Mythic: Portal Keeper Hasabel
-    AddA(tmp[257], a[11996]); -- Mythic: Eonar
-    AddA(tmp[257], a[11997]); -- Mythic: Imonar the Soulhunter
-    AddA(tmp[257], a[11998]); -- Mythic: Kin'garoth
-    AddA(tmp[257], a[11999]); -- Mythic: Varimathras
-    AddA(tmp[257], a[12000]); -- Mythic: The Coven of Shivarra
-    AddA(tmp[257], a[12001]); -- Mythic: Aggramar
-    AddA(tmp[257], a[12002]); -- Mythic: Argus the Unmaker
     AddA(tmp[257], a[11988]); -- Light's Breach
     AddA(tmp[257], a[11990]); -- Hope's End
     AddA(tmp[257], a[11989]); -- Forbidden Descent
@@ -3475,6 +3465,32 @@ function exportedCategories.Load(c, a)
     AddA(tmp[257], a[12110]); -- Ahead of the Curve: Argus the Unmaker
     AddA(tmp[257], a[12111]); -- Cutting Edge: Argus the Unmaker
     AddA(tmp[257], a[12020]); -- Argussy Up
+    tmp[881] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[257], tmp[881]);
+    AddA(tmp[881], a[11930]); -- Worm-monger
+    AddA(tmp[881], a[12065]); -- Hounds Good To Me
+    AddA(tmp[881], a[12129]); -- This is the War Room!
+    AddA(tmp[881], a[11928]); -- Portal Combat
+    AddA(tmp[881], a[12067]); -- Spheres of Influence
+    AddA(tmp[881], a[11949]); -- Hard to Kill
+    AddA(tmp[881], a[12030]); -- The World Revolves Around Me
+    AddA(tmp[881], a[11948]); -- Together We Stand
+    AddA(tmp[881], a[12046]); -- Remember the Titans
+    AddA(tmp[881], a[11915]); -- Don't Sweat the Technique
+    AddA(tmp[881], a[12257]); -- Stardust Crusaders
+    tmp[882] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[257], tmp[882]);
+    AddA(tmp[882], a[11992]); -- Mythic: Garothi Worldbreaker
+    AddA(tmp[882], a[11993]); -- Mythic: Hounds of Sargeras
+    AddA(tmp[882], a[11994]); -- Mythic: Antoran High Command
+    AddA(tmp[882], a[11995]); -- Mythic: Portal Keeper Hasabel
+    AddA(tmp[882], a[11996]); -- Mythic: Eonar
+    AddA(tmp[882], a[11997]); -- Mythic: Imonar the Soulhunter
+    AddA(tmp[882], a[11998]); -- Mythic: Kin'garoth
+    AddA(tmp[882], a[11999]); -- Mythic: Varimathras
+    AddA(tmp[882], a[12000]); -- Mythic: The Coven of Shivarra
+    AddA(tmp[882], a[12001]); -- Mythic: Aggramar
+    AddA(tmp[882], a[12002]); -- Mythic: Argus the Unmaker
     tmp[430] = IaR(c, cat:New((GetCategoryInfo(15117)))); -- Pet Battles
     AddC(tmp[237], tmp[430]);
     AddA(tmp[430], a[11233]); -- Broken Isles Safari
@@ -3984,58 +4000,66 @@ function exportedCategories.Load(c, a)
     AddA(tmp[326], a[14146]); -- Glory of the Ny'alotha Raider
     tmp[338] = IaR(c, cat:New((EJ_GetInstanceInfo(1031)))); -- Uldir
     AddC(tmp[326], tmp[338]);
-    AddA(tmp[338], a[12937]); -- Elevator Music
-    AddA(tmp[338], a[12938]); -- Parental Controls
-    AddA(tmp[338], a[12828]); -- What's in the Box?
-    AddA(tmp[338], a[12823]); -- Thrash Mouth - All Stars
-    AddA(tmp[338], a[12772]); -- Now We Got Bad Blood
-    AddA(tmp[338], a[12830]); -- Edgelords
-    AddA(tmp[338], a[12836]); -- Existential Crisis
-    AddA(tmp[338], a[12551]); -- Double Dribble
     AddA(tmp[338], a[12521]); -- Halls of Containment
     AddA(tmp[338], a[12522]); -- Crimson Descent
     AddA(tmp[338], a[12523]); -- Heart of Corruption
-    AddA(tmp[338], a[12524]); -- Mythic: Taloc
-    AddA(tmp[338], a[12526]); -- Mythic: MOTHER
-    AddA(tmp[338], a[12527]); -- Mythic: Zek'voz
-    AddA(tmp[338], a[12530]); -- Mythic: Fetid Devourer
-    AddA(tmp[338], a[12529]); -- Mythic: Vectis
-    AddA(tmp[338], a[12531]); -- Mythic: Zul
-    AddA(tmp[338], a[12532]); -- Mythic: Mythrax the Unraveler
-    AddA(tmp[338], a[12533]); -- Mythic: G'huun
     AddA(tmp[338], a[12536]); -- Ahead of the Curve: G'huun
     AddA(tmp[338], a[12535]); -- Cutting Edge: G'huun
     AddA(tmp[338], a[12991]); -- "New Mog, G'huun This?"
+    tmp[862] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[338], tmp[862]);
+    AddA(tmp[862], a[12937]); -- Elevator Music
+    AddA(tmp[862], a[12938]); -- Parental Controls
+    AddA(tmp[862], a[12828]); -- What's in the Box?
+    AddA(tmp[862], a[12823]); -- Thrash Mouth - All Stars
+    AddA(tmp[862], a[12772]); -- Now We Got Bad Blood
+    AddA(tmp[862], a[12830]); -- Edgelords
+    AddA(tmp[862], a[12836]); -- Existential Crisis
+    AddA(tmp[862], a[12551]); -- Double Dribble
+    tmp[864] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[338], tmp[864]);
+    AddA(tmp[864], a[12524]); -- Mythic: Taloc
+    AddA(tmp[864], a[12526]); -- Mythic: MOTHER
+    AddA(tmp[864], a[12527]); -- Mythic: Zek'voz
+    AddA(tmp[864], a[12530]); -- Mythic: Fetid Devourer
+    AddA(tmp[864], a[12529]); -- Mythic: Vectis
+    AddA(tmp[864], a[12531]); -- Mythic: Zul
+    AddA(tmp[864], a[12532]); -- Mythic: Mythrax the Unraveler
+    AddA(tmp[864], a[12533]); -- Mythic: G'huun
     tmp[339] = IaR(c, cat:New((EJ_GetInstanceInfo(1176)))); -- Battle of Dazar'alor
     AddC(tmp[326], tmp[339]);
-    AddA(tmp[339], a[13316]); -- Can I Get a Hek Hek Hek Yeah?
-    AddA(tmp[339], a[13431]); -- Hidden Dragon
-    AddA(tmp[339], a[13383]); -- Barrel of Monkeys
-    AddA(tmp[339], a[13345]); -- Praise the Sunflower
-    AddA(tmp[339], a[13325]); -- Walk the Dinosaur
-    AddA(tmp[339], a[13425]); -- "We Got Spirit, How About You?"
-    AddA(tmp[339], a[13401]); -- I Got Next!
-    AddA(tmp[339], a[13430]); -- De Lurker Be'loa
-    AddA(tmp[339], a[13410]); -- Snow Fun Allowed
     AddA(tmp[339], a[13286]); -- Siege of Dazar'alor
     AddA(tmp[339], a[13289]); -- Defense of Dazar'alor
     AddA(tmp[339], a[13287]); -- Empire's Fall
     AddA(tmp[339], a[13290]); -- Death's Bargain
     AddA(tmp[339], a[13288]); -- Might of the Alliance
     AddA(tmp[339], a[13291]); -- Victory or Death
-    AddA(tmp[339], a[13292]); -- Mythic: Champion of the Light
-    AddA(tmp[339], a[13298]); -- Mythic: Jadefire Masters
-    AddA(tmp[339], a[13293]); -- Mythic: Grong
-    AddA(tmp[339], a[13295]); -- Mythic: Jadefire Masters
-    AddA(tmp[339], a[13299]); -- Mythic: Opulence
-    AddA(tmp[339], a[13300]); -- Mythic: Conclave of the Chosen
-    AddA(tmp[339], a[13311]); -- Mythic: King Rastakhan
-    AddA(tmp[339], a[13312]); -- Mythic: Mekkatorque
-    AddA(tmp[339], a[13313]); -- Mythic: Stormwall Blockade
-    AddA(tmp[339], a[13314]); -- Mythic: Lady Jaina Proudmoore
     AddA(tmp[339], a[13322]); -- Ahead of the Curve: Lady Jaina Proudmoore
     AddA(tmp[339], a[13323]); -- Cutting Edge: Lady Jaina Proudmoore
     AddA(tmp[339], a[13385]); -- Daz'aling Attire
+    tmp[865] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[339], tmp[865]);
+    AddA(tmp[865], a[13316]); -- Can I Get a Hek Hek Hek Yeah?
+    AddA(tmp[865], a[13431]); -- Hidden Dragon
+    AddA(tmp[865], a[13383]); -- Barrel of Monkeys
+    AddA(tmp[865], a[13345]); -- Praise the Sunflower
+    AddA(tmp[865], a[13325]); -- Walk the Dinosaur
+    AddA(tmp[865], a[13425]); -- "We Got Spirit, How About You?"
+    AddA(tmp[865], a[13401]); -- I Got Next!
+    AddA(tmp[865], a[13430]); -- De Lurker Be'loa
+    AddA(tmp[865], a[13410]); -- Snow Fun Allowed
+    tmp[866] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[339], tmp[866]);
+    AddA(tmp[866], a[13292]); -- Mythic: Champion of the Light
+    AddA(tmp[866], a[13298]); -- Mythic: Jadefire Masters
+    AddA(tmp[866], a[13293]); -- Mythic: Grong
+    AddA(tmp[866], a[13295]); -- Mythic: Jadefire Masters
+    AddA(tmp[866], a[13299]); -- Mythic: Opulence
+    AddA(tmp[866], a[13300]); -- Mythic: Conclave of the Chosen
+    AddA(tmp[866], a[13311]); -- Mythic: King Rastakhan
+    AddA(tmp[866], a[13312]); -- Mythic: Mekkatorque
+    AddA(tmp[866], a[13313]); -- Mythic: Stormwall Blockade
+    AddA(tmp[866], a[13314]); -- Mythic: Lady Jaina Proudmoore
     tmp[340] = IaR(c, cat:New((EJ_GetInstanceInfo(1177)))); -- Crucible of Storms
     AddC(tmp[326], tmp[340]);
     AddA(tmp[340], a[13501]); -- Gotta Bounce
@@ -4047,61 +4071,69 @@ function exportedCategories.Load(c, a)
     AddA(tmp[340], a[13419]); -- "Cutting Edge: Uu'nat, Harbinger of the Void"
     tmp[341] = IaR(c, cat:New((EJ_GetInstanceInfo(1179)))); -- The Eternal Palace
     AddC(tmp[326], tmp[341]);
-    AddA(tmp[341], a[13684]); -- You and What Army?
-    AddA(tmp[341], a[13628]); -- Intro to Marine Biology
-    AddA(tmp[341], a[13767]); -- Fun Run
-    AddA(tmp[341], a[13629]); -- Simple Geometry
-    AddA(tmp[341], a[13724]); -- A Smack of Jellyfish
-    AddA(tmp[341], a[13633]); -- If It Pleases the Court
-    AddA(tmp[341], a[13716]); -- Lactose Intolerant
-    AddA(tmp[341], a[13768]); -- The Best of Us
     AddA(tmp[341], a[13718]); -- The Grand Reception
     AddA(tmp[341], a[13719]); -- Depths of the Devoted
     AddA(tmp[341], a[13725]); -- The Circle of Stars
-    AddA(tmp[341], a[13726]); -- Mythic: Abyssal Commander Sivara
-    AddA(tmp[341], a[13728]); -- Mythic: Blackwater Behemoth
-    AddA(tmp[341], a[13727]); -- Mythic: Radiance of Azshara
-    AddA(tmp[341], a[13729]); -- Mythic: Lady Ashvane
-    AddA(tmp[341], a[13730]); -- Mythic: Orgozoa
-    AddA(tmp[341], a[13731]); -- Mythic: The Queen's Court
-    AddA(tmp[341], a[13732]); -- Mythic: Za'qul
-    AddA(tmp[341], a[13733]); -- Mythic: Queen Azshara
     AddA(tmp[341], a[13784]); -- Ahead of the Curve: Queen Azshara
     AddA(tmp[341], a[13785]); -- Cutting Edge: Queen Azshara
     AddA(tmp[341], a[13571]); -- Under the Seams
+    tmp[869] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[341], tmp[869]);
+    AddA(tmp[869], a[13684]); -- You and What Army?
+    AddA(tmp[869], a[13628]); -- Intro to Marine Biology
+    AddA(tmp[869], a[13767]); -- Fun Run
+    AddA(tmp[869], a[13629]); -- Simple Geometry
+    AddA(tmp[869], a[13724]); -- A Smack of Jellyfish
+    AddA(tmp[869], a[13633]); -- If It Pleases the Court
+    AddA(tmp[869], a[13716]); -- Lactose Intolerant
+    AddA(tmp[869], a[13768]); -- The Best of Us
+    tmp[870] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[341], tmp[870]);
+    AddA(tmp[870], a[13726]); -- Mythic: Abyssal Commander Sivara
+    AddA(tmp[870], a[13728]); -- Mythic: Blackwater Behemoth
+    AddA(tmp[870], a[13727]); -- Mythic: Radiance of Azshara
+    AddA(tmp[870], a[13729]); -- Mythic: Lady Ashvane
+    AddA(tmp[870], a[13730]); -- Mythic: Orgozoa
+    AddA(tmp[870], a[13731]); -- Mythic: The Queen's Court
+    AddA(tmp[870], a[13732]); -- Mythic: Za'qul
+    AddA(tmp[870], a[13733]); -- Mythic: Queen Azshara
     tmp[342] = IaR(c, cat:New((EJ_GetInstanceInfo(1180)))); -- Ny'alotha, the Waking City
     AddC(tmp[326], tmp[342]);
-    AddA(tmp[342], a[14019]); -- Smoke Test
-    AddA(tmp[342], a[14008]); -- Mana Sponge
-    AddA(tmp[342], a[14037]); -- Phase 3: Prophet
-    AddA(tmp[342], a[14024]); -- Buzzer Beater
-    AddA(tmp[342], a[14139]); -- Total Annihilation
-    AddA(tmp[342], a[14023]); -- Realizing Your Potential
-    AddA(tmp[342], a[13999]); -- How? Isn't it Obelisk?
-    AddA(tmp[342], a[13990]); -- "You Can Pet the Dog, But..."
-    AddA(tmp[342], a[14026]); -- Temper Tantrum
-    AddA(tmp[342], a[14038]); -- Bloody Mess
-    AddA(tmp[342], a[14147]); -- Cleansing Treatment
-    AddA(tmp[342], a[14148]); -- It's Not A Cult
     AddA(tmp[342], a[14193]); -- Vision of Destiny
     AddA(tmp[342], a[14194]); -- Halls of Devotion
     AddA(tmp[342], a[14195]); -- Gift of Flesh
     AddA(tmp[342], a[14196]); -- The Waking Dream
-    AddA(tmp[342], a[14041]); -- "Mythic: Wrathion, the Black Emperor"
-    AddA(tmp[342], a[14043]); -- Mythic: Maut
-    AddA(tmp[342], a[14044]); -- Mythic: The Prophet Skitra
-    AddA(tmp[342], a[14045]); -- Mythic: Dark Inquisitor Xanesh
-    AddA(tmp[342], a[14050]); -- Mythic: Vexiona
-    AddA(tmp[342], a[14046]); -- Mythic: The Hivemind
-    AddA(tmp[342], a[14051]); -- Mythic: Ra-den the Despoiled
-    AddA(tmp[342], a[14048]); -- Mythic: Shad'har the Insatiable
-    AddA(tmp[342], a[14049]); -- Mythic: Drest'agath
-    AddA(tmp[342], a[14052]); -- "Mythic: Il'gynoth, Corruption Reborn"
-    AddA(tmp[342], a[14054]); -- Mythic: Carapace of N'Zoth
-    AddA(tmp[342], a[14055]); -- Mythic: N'Zoth the Corruptor
     AddA(tmp[342], a[14068]); -- Ahead of the Curve: N'Zoth the Corruptor
     AddA(tmp[342], a[14069]); -- Cutting Edge: N'Zoth the Corruptor
     AddA(tmp[342], a[14058]); -- All Eyes On Me
+    tmp[871] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[342], tmp[871]);
+    AddA(tmp[871], a[14019]); -- Smoke Test
+    AddA(tmp[871], a[14008]); -- Mana Sponge
+    AddA(tmp[871], a[14037]); -- Phase 3: Prophet
+    AddA(tmp[871], a[14024]); -- Buzzer Beater
+    AddA(tmp[871], a[14139]); -- Total Annihilation
+    AddA(tmp[871], a[14023]); -- Realizing Your Potential
+    AddA(tmp[871], a[13999]); -- How? Isn't it Obelisk?
+    AddA(tmp[871], a[13990]); -- "You Can Pet the Dog, But..."
+    AddA(tmp[871], a[14026]); -- Temper Tantrum
+    AddA(tmp[871], a[14038]); -- Bloody Mess
+    AddA(tmp[871], a[14147]); -- Cleansing Treatment
+    AddA(tmp[871], a[14148]); -- It's Not A Cult
+    tmp[872] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[342], tmp[872]);
+    AddA(tmp[872], a[14041]); -- "Mythic: Wrathion, the Black Emperor"
+    AddA(tmp[872], a[14043]); -- Mythic: Maut
+    AddA(tmp[872], a[14044]); -- Mythic: The Prophet Skitra
+    AddA(tmp[872], a[14045]); -- Mythic: Dark Inquisitor Xanesh
+    AddA(tmp[872], a[14050]); -- Mythic: Vexiona
+    AddA(tmp[872], a[14046]); -- Mythic: The Hivemind
+    AddA(tmp[872], a[14051]); -- Mythic: Ra-den the Despoiled
+    AddA(tmp[872], a[14048]); -- Mythic: Shad'har the Insatiable
+    AddA(tmp[872], a[14049]); -- Mythic: Drest'agath
+    AddA(tmp[872], a[14052]); -- "Mythic: Il'gynoth, Corruption Reborn"
+    AddA(tmp[872], a[14054]); -- Mythic: Carapace of N'Zoth
+    AddA(tmp[872], a[14055]); -- Mythic: N'Zoth the Corruptor
     tmp[343] = IaR(c, cat:New((GetCategoryInfo(15117)))); -- Pet Battles
     AddC(tmp[258], tmp[343]);
     AddA(tmp[343], a[12930]); -- Battle Safari
@@ -4592,44 +4624,38 @@ function exportedCategories.Load(c, a)
     AddA(tmp[370], a[15130]); -- Glory of the Dominant Raider
     tmp[379] = IaR(c, cat:New((EJ_GetInstanceInfo(1190)))); -- Castle Nathria
     AddC(tmp[370], tmp[379]);
-    AddA(tmp[379], a[14293]); -- Blind as a Bat
-    AddA(tmp[379], a[14523]); -- Taking Care of Business
-    AddA(tmp[379], a[14376]); -- Feed the Beast
-    AddA(tmp[379], a[14524]); -- I Don't Know What I Expected
-    AddA(tmp[379], a[14617]); -- Private Stock
-    AddA(tmp[379], a[14608]); -- Burning Bright
-    AddA(tmp[379], a[14619]); -- Pour Decision Making
-    AddA(tmp[379], a[14294]); -- Dirtflap's Revenge
-    AddA(tmp[379], a[14525]); -- "Feed Me, Seymour!"
-    AddA(tmp[379], a[14610]); -- Clear Conscience
     AddA(tmp[379], a[14715]); -- Castle Nathria
     AddA(tmp[379], a[14717]); -- Heroic: Castle Nathria
     AddA(tmp[379], a[14718]); -- Mythic: Castle Nathria
-    AddA(tmp[379], a[14356]); -- Mythic: Shriekwing
-    AddA(tmp[379], a[14357]); -- Mythic: Huntsman Altimor
-    AddA(tmp[379], a[14358]); -- Mythic: Hungering Destroyer
-    AddA(tmp[379], a[14361]); -- Mythic: Lady Inerva Darkvein
-    AddA(tmp[379], a[14359]); -- Mythic: Artificer Xy'mox
-    AddA(tmp[379], a[14360]); -- Mythic: Sun King's Salvation
-    AddA(tmp[379], a[14362]); -- Mythic: The Council of Blood
-    AddA(tmp[379], a[14363]); -- Mythic: Sludgefist
-    AddA(tmp[379], a[14364]); -- Mythic: Stone Legion Generals
-    AddA(tmp[379], a[14365]); -- Mythic: Sire Denathrius
     AddA(tmp[379], a[14460]); -- Ahead of the Curve: Sire Denathrius
     AddA(tmp[379], a[14461]); -- Cutting Edge: Sire Denathrius
     AddA(tmp[379], a[14614]); -- Castle Vain
+    tmp[860] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[379], tmp[860]);
+    AddA(tmp[860], a[14293]); -- Blind as a Bat
+    AddA(tmp[860], a[14523]); -- Taking Care of Business
+    AddA(tmp[860], a[14376]); -- Feed the Beast
+    AddA(tmp[860], a[14524]); -- I Don't Know What I Expected
+    AddA(tmp[860], a[14617]); -- Private Stock
+    AddA(tmp[860], a[14608]); -- Burning Bright
+    AddA(tmp[860], a[14619]); -- Pour Decision Making
+    AddA(tmp[860], a[14294]); -- Dirtflap's Revenge
+    AddA(tmp[860], a[14525]); -- "Feed Me, Seymour!"
+    AddA(tmp[860], a[14610]); -- Clear Conscience
+    tmp[861] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[379], tmp[861]);
+    AddA(tmp[861], a[14356]); -- Mythic: Shriekwing
+    AddA(tmp[861], a[14357]); -- Mythic: Huntsman Altimor
+    AddA(tmp[861], a[14358]); -- Mythic: Hungering Destroyer
+    AddA(tmp[861], a[14361]); -- Mythic: Lady Inerva Darkvein
+    AddA(tmp[861], a[14359]); -- Mythic: Artificer Xy'mox
+    AddA(tmp[861], a[14360]); -- Mythic: Sun King's Salvation
+    AddA(tmp[861], a[14362]); -- Mythic: The Council of Blood
+    AddA(tmp[861], a[14363]); -- Mythic: Sludgefist
+    AddA(tmp[861], a[14364]); -- Mythic: Stone Legion Generals
+    AddA(tmp[861], a[14365]); -- Mythic: Sire Denathrius
     tmp[821] = IaR(c, cat:New("Sanctum of Domination")); -- Sanctum of Domination
     AddC(tmp[370], tmp[821]);
-    AddA(tmp[821], a[14998]); -- "Name A Better Duo, I'll Wait"
-    AddA(tmp[821], a[15065]); -- Eye Wish You Were Here
-    AddA(tmp[821], a[15003]); -- To the Nines
-    AddA(tmp[821], a[15058]); -- I Used to Bullseye Deeprun Rats Back Home
-    AddA(tmp[821], a[15105]); -- Tormentor's Tango
-    AddA(tmp[821], a[15131]); -- Whack-A-Soul
-    AddA(tmp[821], a[15132]); -- Knowledge is Power
-    AddA(tmp[821], a[15040]); -- Flawless Fate
-    AddA(tmp[821], a[15108]); -- Together Forever
-    AddA(tmp[821], a[15133]); -- This World is a Prism
     AddA(tmp[821], a[15122]); -- The Jailer's Vanguard
     AddA(tmp[821], a[15123]); -- The Dark Bastille
     AddA(tmp[821], a[15124]); -- Shackles of Fate
@@ -4637,20 +4663,34 @@ function exportedCategories.Load(c, a)
     AddA(tmp[821], a[15126]); -- Sanctum of Domination
     AddA(tmp[821], a[15127]); -- Heroic: Sanctum of Domination
     AddA(tmp[821], a[15128]); -- Mythic: Sanctum of Domination
-    AddA(tmp[821], a[15112]); -- Mythic: The Tarragrue
-    AddA(tmp[821], a[15113]); -- Mythic: The Eye of the Jailer
-    AddA(tmp[821], a[15114]); -- Mythic: The Nine
-    AddA(tmp[821], a[15115]); -- Mythic: Remnant of Ner'zhul
-    AddA(tmp[821], a[15116]); -- Mythic: Soulrender Dormazain
-    AddA(tmp[821], a[15117]); -- Mythic: Painsmith Raznal
-    AddA(tmp[821], a[15118]); -- Mythic: Guardian of the First Ones
-    AddA(tmp[821], a[15119]); -- Mythic: Fatescribe Roh-Kalo
-    AddA(tmp[821], a[15120]); -- Mythic: Kel'Thuzad
-    AddA(tmp[821], a[15121]); -- Mythic: Sylvanas Windrunner
     AddA(tmp[821], a[15134]); -- Ahead of the Curve: Sylvanas Windrunner
     AddA(tmp[821], a[15135]); -- Cutting Edge: Sylvanas Windrunner
     AddA(tmp[821], a[15110]); -- Dominating the Catwalk
     AddA(tmp[821], a[15191]); -- "Rae'shalare, Death's Whisper"
+    tmp[858] = IaR(c, cat:New(addon.L["Glory"])); -- Glory
+    AddC(tmp[821], tmp[858]);
+    AddA(tmp[858], a[14998]); -- "Name A Better Duo, I'll Wait"
+    AddA(tmp[858], a[15065]); -- Eye Wish You Were Here
+    AddA(tmp[858], a[15003]); -- To the Nines
+    AddA(tmp[858], a[15058]); -- I Used to Bullseye Deeprun Rats Back Home
+    AddA(tmp[858], a[15105]); -- Tormentor's Tango
+    AddA(tmp[858], a[15131]); -- Whack-A-Soul
+    AddA(tmp[858], a[15132]); -- Knowledge is Power
+    AddA(tmp[858], a[15040]); -- Flawless Fate
+    AddA(tmp[858], a[15108]); -- Together Forever
+    AddA(tmp[858], a[15133]); -- This World is a Prism
+    tmp[859] = IaR(c, cat:New(addon.L["Mythic"])); -- Mythic
+    AddC(tmp[821], tmp[859]);
+    AddA(tmp[859], a[15112]); -- Mythic: The Tarragrue
+    AddA(tmp[859], a[15113]); -- Mythic: The Eye of the Jailer
+    AddA(tmp[859], a[15114]); -- Mythic: The Nine
+    AddA(tmp[859], a[15115]); -- Mythic: Remnant of Ner'zhul
+    AddA(tmp[859], a[15116]); -- Mythic: Soulrender Dormazain
+    AddA(tmp[859], a[15117]); -- Mythic: Painsmith Raznal
+    AddA(tmp[859], a[15118]); -- Mythic: Guardian of the First Ones
+    AddA(tmp[859], a[15119]); -- Mythic: Fatescribe Roh-Kalo
+    AddA(tmp[859], a[15120]); -- Mythic: Kel'Thuzad
+    AddA(tmp[859], a[15121]); -- Mythic: Sylvanas Windrunner
     tmp[380] = IaR(c, cat:New((GetCategoryInfo(15117)))); -- Pet Battles
     AddC(tmp[6], tmp[380]);
     AddA(tmp[380], a[14867]); -- Shadowlands Safari
@@ -4811,7 +4851,9 @@ function exportedCategories.Load(c, a)
     AddA(tmp[420], a[14764]); -- The Great Luckydo
     AddA(tmp[420], a[14833]); -- Fashion Abomination
     AddA(tmp[420], a[14763]); -- Crypt Couture
+    tmp[857] = IaR(c, cat:New(addon.L["Excluded"])); -- Excluded
+    local excludedCategory = tmp[857];
 
-    return currentZoneCategory, selectedZoneCategory, nextPatchCategory;
+    return currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
 end
 

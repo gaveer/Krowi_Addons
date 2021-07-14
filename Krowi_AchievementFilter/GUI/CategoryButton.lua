@@ -5,20 +5,21 @@ local gui = addon.GUI;
 gui.CategoryButton = {};
 local categoryButton = gui.CategoryButton;
 
-function categoryButton.PostLoadButtons(categoriesFrame)
+local OnClick;
+function categoryButton.PostLoadButtons(buttons)
 	diagnostics.Trace("categoryButton.PostLoadButtons");
 
-	for _, button in next, categoriesFrame.Container.buttons do
+	for _, button in next, buttons do
 		button.Click = function(self, button, down, quick)
-			categoryButton.OnClick(self, categoriesFrame, quick);
+			OnClick(self, quick);
 		end;
 		button:SetScript("OnClick", button.Click);
 	end
 end
 
-function categoryButton.OnClick(self, categoriesFrame, quick)
+function OnClick(self, quick)
     diagnostics.Trace("categoryButton.OnClick");
 
-    categoriesFrame:SelectButton(self, quick);
-    categoriesFrame:Update();
+    gui.CategoriesFrame:SelectButton(self, quick);
+    gui.CategoriesFrame:Update();
 end

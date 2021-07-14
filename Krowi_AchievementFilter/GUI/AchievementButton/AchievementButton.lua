@@ -5,7 +5,9 @@ local gui = addon.GUI;
 gui.AchievementButton = {};
 local achievementButton = gui.AchievementButton;
 
-local OnEnter, OnLeave, OnClick;
+local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
+
+local Saturate, Desaturate, OnEnter, OnLeave, OnClick;
 function achievementButton:PostLoadButtons(achievementsFrame)
 	-- Here we hook a lot of our own functionality to extend the default Blizzard Buttons
 	diagnostics.Trace("achievementButton.PostLoadButtons");
@@ -60,8 +62,62 @@ function achievementButton:PostLoadButtons(achievementsFrame)
 		button:HookScript("OnLeave", button.Leave);
 		button.shield:EnableMouse(false);
 		button.ShowTooltip = function()
-			self.Tooltip.ShowTooltip(button, achievementsFrame);
+			self.Tooltip.ShowTooltip(button);
 		end;
+		
+		local name = button:GetName();
+		button.BottomTsunami1 = _G[name.."BottomTsunami1"];
+		button.TopTsunami1 = _G[name.."TopTsunami1"];
+
+		hooksecurefunc(button, "Saturate", Saturate);
+		hooksecurefunc(button, "Desaturate", Desaturate);
+	end
+end
+
+local function SetTsunamis(self)
+	if self.Achievement.NotObtainable then
+		self.BottomTsunami1:SetTexture(media .. "NotObtainableAchievementBorders");
+		self.BottomTsunami1:SetTexCoord(0, 0.72265, 0.51953125, 0.58203125);
+		self.BottomTsunami1:SetAlpha(0.35);
+		self.TopTsunami1:SetTexture(media .. "NotObtainableAchievementBorders");
+		self.TopTsunami1:SetTexCoord(0.72265, 0, 0.58203125, 0.51953125);
+		self.TopTsunami1:SetAlpha(0.3);
+	else
+		self.BottomTsunami1:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Borders");
+		self.BottomTsunami1:SetTexCoord(0, 0.72265, 0.51953125, 0.58203125);
+		self.BottomTsunami1:SetAlpha(0.35);
+		self.TopTsunami1:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Borders");
+		self.TopTsunami1:SetTexCoord(0.72265, 0, 0.58203125, 0.51953125);
+		self.TopTsunami1:SetAlpha(0.3);
+	end
+end
+
+-- [[ Saturate ]] --
+function Saturate(self)
+	if self.Achievement.NotObtainable then
+		self.titleBar:SetTexture(media .. "NotObtainableAchievementBorders");
+		self.titleBar:SetTexCoord(0, 1, 0.66015625, 0.73828125);
+		self:SetBackdropBorderColor(ACHIEVEMENT_RED_BORDER_COLOR:GetRGB());
+		self.saturatedStyle = "NotObtainable";
+
+		SetTsunamis(self);
+	else
+		if not addon.InGuildView() and not self.accountWide then
+			self:SetBackdropBorderColor(ACHIEVEMENT_GOLD_BORDER_COLOR:GetRGB());
+		end
+		SetTsunamis(self);
+	end
+end
+
+-- [[ Desaturate ]] --
+function Desaturate(self)
+	if self.Achievement.NotObtainable then
+		self.titleBar:SetTexture(media .. "NotObtainableAchievementBorders");
+		self.titleBar:SetTexCoord(0, 1, 0.91796875, 0.99609375);
+
+		SetTsunamis(self);
+	else
+		SetTsunamis(self);
 	end
 end
 
@@ -159,7 +215,7 @@ end
 local function AddGoToLine(goTo, id, achievementsFrame)
 	local _, name = addon.GetAchievementInfo(id);
 	local disabled;
-	if not addon.GetAchievement(id) then -- Catch missing achievements from the addon to prevent errors
+	if not addon.Data.Achievements[id] then -- Catch missing achievements from the addon to prevent errors
 		name = name .. " (" .. addon.L["Missing"] .. ")";
 		disabled = true;
 	end
@@ -173,9 +229,9 @@ local function AddGoToLine(goTo, id, achievementsFrame)
 end
 
 local function AddGoTo(achievementsFrame, achievement)
-	local partOfAChainIDs = achievement:GetPartOfAChainIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
-	local requiredForIDs = achievement:GetRequiredForIDs(achievementsFrame.FilterButton.Validate, achievementsFrame.FilterButton:GetFilters());
-	if partOfAChainIDs or requiredForIDs or achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory then -- Others can be added here later
+	local partOfAChainIDs = achievement:GetPartOfAChainIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
+	local requiredForIDs = achievement:GetRequiredForIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
+	if partOfAChainIDs or requiredForIDs or gui.CategoriesFrame.SelectedCategory == addon.Data.CurrentZoneCategory or gui.CategoriesFrame.SelectedCategory == addon.Data.SelectedZoneCategory then -- Others can be added here later
 		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
 		local addSeparator = nil;
 
@@ -203,8 +259,8 @@ local function AddGoTo(achievementsFrame, achievement)
 			addSeparator = true;
 		end
 
-		if achievementsFrame.CategoriesFrame.SelectedCategory == addon.CurrentZoneCategory or
-			achievementsFrame.CategoriesFrame.SelectedCategory == addon.SelectedZoneCategory then
+		if gui.CategoriesFrame.SelectedCategory == addon.Data.CurrentZoneCategory or
+			gui.CategoriesFrame.SelectedCategory == addon.Data.SelectedZoneCategory then
 
 			if addSeparator then
 				goTo:AddSeparator();
@@ -217,6 +273,28 @@ local function AddGoTo(achievementsFrame, achievement)
 
 		rightClickMenu:Add(goTo); -- Add Go to menu to the right click menu
 	end
+end
+
+local function AddIncludeExclude(menu, achievement)
+	if achievement.Excluded then
+		menu:AddFull({Text = addon.L["Include"], Func = function()
+			addon.IncludeAchievement(achievement);
+			rightClickMenu:Close();
+		end});
+	else
+		menu:AddFull({Text = addon.L["Exclude"], Func = function()
+			addon.ExcludeAchievement(achievement);
+			rightClickMenu:Close();
+		end});
+	end
+end
+
+local function AddMore(achievement)
+	local more = addon.Objects.MenuItem:New({Text = addon.L["More"]});
+
+	AddIncludeExclude(more, achievement);
+
+	rightClickMenu:Add(more);
 end
 
 function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
@@ -236,9 +314,11 @@ function OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame)
 	AddGoTo(achievementsFrame, achievement);
 
 	-- Extra menu defined at the achievement self including pet battles
-	if addon.RCMenuExtras[achievement.ID] ~= nil then
-		rightClickMenu:Add(addon.RCMenuExtras[achievement.ID]);
+	if addon.Data.RCMenuExtras[achievement.ID] ~= nil then
+		rightClickMenu:Add(addon.Data.RCMenuExtras[achievement.ID]);
 	end
+	
+	AddMore(achievement);
 
 	rightClickMenu:Open(anchor, offsetX, offsetY);
 end

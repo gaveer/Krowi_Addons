@@ -87,12 +87,12 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
             sb.AppendLine("local data = addon.Data;");
-            sb.AppendLine("data.NextPatch = {};");
-            sb.AppendLine("local nextPatch = data.NextPatch;");
+            sb.AppendLine("data.ExportedNextPatchAchievements = {};");
+            sb.AppendLine("local exportedNextPatchAchievements = data.ExportedNextPatchAchievements;");
             sb.AppendLine("");
-            sb.AppendLine("function nextPatch.Load(achievements)");
-            sb.AppendLineTabbed(1, "for i, _ in next, achievements do");
-            sb.AppendLineTabbed(2, "achievements[i] = nil;");
+            sb.AppendLine("function exportedNextPatchAchievements.Load(a)");
+            sb.AppendLineTabbed(1, "for i, _ in next, a do");
+            sb.AppendLineTabbed(2, "a[i] = nil;");
             sb.AppendLineTabbed(1, "end");
             sb.AppendLine("");
 
@@ -103,7 +103,7 @@ namespace DbManagerWPF.ViewModel
 
             sb.AppendLine("end");
 
-            using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedNextPatch.lua");
+            using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedNextPatchAchievements.lua");
             file.WriteLine(sb.ToString());
         }
 
@@ -124,7 +124,7 @@ namespace DbManagerWPF.ViewModel
                     description = Regex.Replace(description, "(\"){2,}", "\\\"");
                     var rewardText = Regex.Replace(achievementAGT.RewardText, "^\"", "");
                     rewardText = Regex.Replace(rewardText, "\"$", "");
-                    var line = $"achievements[{achievementAGT.ID}] = {{{achievementAGT.ID}, \"{name}\", {achievementAGT.Points}, \"{description}\", {achievementAGT.Flags}, {achievementAGT.IconFileID}, \"{rewardText}\"}};";
+                    var line = $"a[{achievementAGT.ID}] = {{{achievementAGT.ID}, \"{name}\", {achievementAGT.Points}, \"{description}\", {achievementAGT.Flags}, {achievementAGT.IconFileID}, \"{rewardText}\"}};";
                     sb.AppendLineTabbed(1, line);
                 }
             }
@@ -172,7 +172,7 @@ namespace DbManagerWPF.ViewModel
                 ExportCategory(sb, category);
 
             sb.AppendLine("");
-            sb.AppendLineTabbed(1, "return currentZoneCategory, selectedZoneCategory, nextPatchCategory;");
+            sb.AppendLineTabbed(1, "return currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;");
             sb.AppendLine("end");
 
             using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedCategories.lua");
@@ -205,6 +205,8 @@ namespace DbManagerWPF.ViewModel
                 sb.AppendLineTabbed(1, $"tmp[{category.ID}].HasFlexibleData = true;");
                 sb.AppendLineTabbed(1, $"local selectedZoneCategory = tmp[{category.ID}];");
             }
+            if (category.Function == functionDM.GetExcludedFunction())
+                sb.AppendLineTabbed(1, $"local excludedCategory = tmp[{category.ID}];");
             if (category.Function == functionDM.GetComingInFunction())
                 sb.AppendLineTabbed(1, $"local nextPatchCategory = tmp[{category.ID}];");
 
@@ -338,6 +340,7 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
             sb.AppendLine("local objects = addon.Objects;");
+            sb.AppendLine("local menItm = objects.MenuItem;");
             sb.AppendLine("local data = addon.Data;");
             sb.AppendLine("data.ExportedPetBattles = {};");
             sb.AppendLine("local exportedPetBattles = data.ExportedPetBattles;");
@@ -388,7 +391,7 @@ namespace DbManagerWPF.ViewModel
                                 externalLink = $"\"{criterion.ExternalLink}";
 
                             var list = $"m[{achievement.ID}]";
-                            sb.AppendTabbed(1, $"{list} = objects.MenuItem:NewExtLink(addon.L[\"Xu-Fu's Pet Guides\"]");
+                            sb.AppendTabbed(1, $"{list} = menItm:NewExtLink(addon.L[\"Xu-Fu's Pet Guides\"]");
                             sb.Append(", ");
                             sb.Append(externalLink);
                             sb.AppendLine($"\"); -- {criterion.Name}");

@@ -1,10 +1,11 @@
--- [[ Exported at 2021-07-05 22-45-30 ]] --
+-- [[ Exported at 2021-07-12 23-22-27 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
 -- [[ Namespaces ]] --
 local _, addon = ...;
 local objects = addon.Objects;
+local menItm = objects.MenuItem;
 local data = addon.Data;
 data.ExportedPetBattles = {};
 local exportedPetBattles = data.ExportedPetBattles;
@@ -25,7 +26,7 @@ function exportedPetBattles.Load(m)
 
     local url = "https://www.wow-petguide.com/";
 
-    m[6606] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/3"); -- Taming Pandaria
+    m[6606] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/3"); -- Taming Pandaria
     AddCEL(m[6606], 6606, 1, url .. "Encounter/36");
     AddCEL(m[6606], 6606, 2, url .. "Encounter/31");
     AddCEL(m[6606], 6606, 3, url .. "Encounter/68");
@@ -33,8 +34,8 @@ function exportedPetBattles.Load(m)
     AddCEL(m[6606], 6606, 5, url .. "Encounter/35");
     AddCEL(m[6606], 6606, 6, url .. "Encounter/34");
     AddCEL(m[6606], 6606, 7, url .. "Encounter/33");
-    m[8410] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/8"); -- The Celestial Tournament
-    m[8518] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/8"); -- Master of the Masters
+    m[8410] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/8"); -- The Celestial Tournament
+    m[8518] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/8"); -- Master of the Masters
     AddCEL(m[8518], 8518, 1, url .. "Encounter/42");
     AddCEL(m[8518], 8518, 2, url .. "Encounter/38");
     AddCEL(m[8518], 8518, 3, url .. "Encounter/47");
@@ -48,13 +49,13 @@ function exportedPetBattles.Load(m)
     AddCEL(m[8518], 8518, 11, url .. "Encounter/51");
     AddCEL(m[8518], 8518, 12, url .. "Encounter/52");
     AddCEL(m[8518], 8518, 13, url .. "Encounter/50");
-    m[7908] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/33"); -- addon.L["Aki the Chosen"]
-    m[7936] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/6"); -- Pandaren Spirit Tamer
+    m[7908] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/33"); -- addon.L["Aki the Chosen"]
+    m[7936] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/6"); -- Pandaren Spirit Tamer
     AddEL(m[7936], addon.L["Burning Pandaren Spirit"], url .. "Encounter/26");
     AddEL(m[7936], addon.L["Flowing Pandaren Spirit"], url .. "Encounter/27");
     AddEL(m[7936], addon.L["Thundering Pandaren Spirit"], url .. "Encounter/24");
     AddEL(m[7936], addon.L["Whispering Pandaren Spirit"], url .. "Encounter/25");
-    m[8080] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/10"); -- Fabled Pandaren Tamer
+    m[8080] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/10"); -- Fabled Pandaren Tamer
     AddEL(m[8080], addon.L["Dos-Ryga"], url .. "Encounter/69");
     AddEL(m[8080], addon.L["Kafi"], url .. "Encounter/70");
     AddEL(m[8080], addon.L["Ti'un the Wanderer"], url .. "Encounter/71");
@@ -65,7 +66,7 @@ function exportedPetBattles.Load(m)
     AddEL(m[8080], addon.L["Lucky Yi"] , url .. "Encounter/76");
     AddEL(m[8080], addon.L["Ka'wi the Gorger"], url .. "Encounter/77");
     AddEL(m[8080], addon.L["Nitun"], url .. "Encounter/78");
-    m[9069] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/12"); -- An Awfully Big Adventure
+    m[9069] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/12"); -- An Awfully Big Adventure
     AddCEL(m[9069], 9069, 1, url .. "Encounter/112");
     AddCEL(m[9069], 9069, 2, url .. "Encounter/92");
     AddCEL(m[9069], 9069, 3, url .. "Encounter/122");
@@ -110,14 +111,14 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9069], 9069, 42, url .. "Encounter/114");
     AddCEL(m[9069], 9069, 43, url .. "Encounter/85");
     AddCEL(m[9069], 9069, 44, url .. "Encounter/81");
-    m[9724] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/5"); -- Taming Draenor
+    m[9724] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/5"); -- Taming Draenor
     AddCEL(m[9724], 9724, 1, url .. "Encounter/16");
     AddCEL(m[9724], 9724, 2, url .. "Encounter/17");
     AddCEL(m[9724], 9724, 3, url .. "Encounter/18");
     AddCEL(m[9724], 9724, 4, url .. "Encounter/19");
     AddCEL(m[9724], 9724, 5, url .. "Encounter/20");
     AddCEL(m[9724], 9724, 6, url .. "Encounter/21");
-    m[10052] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/9"); -- Tiny Terrors in Tanaan
+    m[10052] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/9"); -- Tiny Terrors in Tanaan
     AddCEL(m[10052], 10052, 1, url .. "Encounter/66");
     AddCEL(m[10052], 10052, 2, url .. "Encounter/65");
     AddCEL(m[10052], 10052, 3, url .. "Encounter/67");
@@ -133,7 +134,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[10052], 10052, 13, url .. "Encounter/55");
     AddCEL(m[10052], 10052, 14, url .. "Encounter/54");
     AddCEL(m[10052], 10052, 15, url .. "Encounter/53");
-    m[10876] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/16"); -- Battle on the Broken Isles
+    m[10876] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/16"); -- Battle on the Broken Isles
     AddCEL(m[10876], 10876, 1, url .. "Encounter/153");
     AddCEL(m[10876], 10876, 3, url .. "Encounter/155");
     AddCEL(m[10876], 10876, 4, url .. "Encounter/156");
@@ -171,7 +172,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[10876], 10876, 34, url .. "Encounter/162");
     AddCEL(m[10876], 10876, 35, url .. "Encounter/163");
     AddCEL(m[10876], 10876, 37, url .. "Encounter/165");
-    m[9686] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/187"); -- Aquatic Acquiescence
+    m[9686] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/187"); -- Aquatic Acquiescence
     AddCEL(m[9686], 9686, 1, url .. "Encounter/191");
     AddCEL(m[9686], 9686, 2, url .. "Encounter/188");
     AddCEL(m[9686], 9686, 3, url .. "Encounter/190");
@@ -187,7 +188,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9686], 9686, 13, url .. "Encounter/201");
     AddCEL(m[9686], 9686, 14, url .. "Encounter/193");
     AddCEL(m[9686], 9686, 15, url .. "Encounter/192");
-    m[9687] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/202"); -- Best of the Beasts
+    m[9687] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/202"); -- Best of the Beasts
     AddCEL(m[9687], 9687, 1, url .. "Encounter/206");
     AddCEL(m[9687], 9687, 2, url .. "Encounter/203");
     AddCEL(m[9687], 9687, 3, url .. "Encounter/205");
@@ -203,7 +204,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9687], 9687, 13, url .. "Encounter/216");
     AddCEL(m[9687], 9687, 14, url .. "Encounter/208");
     AddCEL(m[9687], 9687, 15, url .. "Encounter/207");
-    m[9688] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/217"); -- Mousing Around
+    m[9688] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/217"); -- Mousing Around
     AddCEL(m[9688], 9688, 1, url .. "Encounter/221");
     AddCEL(m[9688], 9688, 2, url .. "Encounter/218");
     AddCEL(m[9688], 9688, 3, url .. "Encounter/220");
@@ -219,7 +220,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9688], 9688, 13, url .. "Encounter/231");
     AddCEL(m[9688], 9688, 14, url .. "Encounter/223");
     AddCEL(m[9688], 9688, 15, url .. "Encounter/222");
-    m[9689] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/232"); -- Dragons!
+    m[9689] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/232"); -- Dragons!
     AddCEL(m[9689], 9689, 1, url .. "Encounter/236");
     AddCEL(m[9689], 9689, 2, url .. "Encounter/233");
     AddCEL(m[9689], 9689, 3, url .. "Encounter/235");
@@ -235,7 +236,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9689], 9689, 13, url .. "Encounter/246");
     AddCEL(m[9689], 9689, 14, url .. "Encounter/238");
     AddCEL(m[9689], 9689, 15, url .. "Encounter/237");
-    m[9690] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/247"); -- Ragnaros, Watch and Learn
+    m[9690] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/247"); -- Ragnaros, Watch and Learn
     AddCEL(m[9690], 9690, 1, url .. "Encounter/251");
     AddCEL(m[9690], 9690, 2, url .. "Encounter/248");
     AddCEL(m[9690], 9690, 3, url .. "Encounter/250");
@@ -251,7 +252,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9690], 9690, 13, url .. "Encounter/261");
     AddCEL(m[9690], 9690, 14, url .. "Encounter/253");
     AddCEL(m[9690], 9690, 15, url .. "Encounter/252");
-    m[9691] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/262"); -- Flock Together
+    m[9691] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/262"); -- Flock Together
     AddCEL(m[9691], 9691, 1, url .. "Encounter/266");
     AddCEL(m[9691], 9691, 2, url .. "Encounter/263");
     AddCEL(m[9691], 9691, 3, url .. "Encounter/265");
@@ -267,7 +268,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9691], 9691, 13, url .. "Encounter/276");
     AddCEL(m[9691], 9691, 14, url .. "Encounter/268");
     AddCEL(m[9691], 9691, 15, url .. "Encounter/267");
-    m[9692] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/277"); -- Murlocs, Harpies, and Wolvar, Oh My!
+    m[9692] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/277"); -- Murlocs, Harpies, and Wolvar, Oh My!
     AddCEL(m[9692], 9692, 1, url .. "Encounter/281");
     AddCEL(m[9692], 9692, 2, url .. "Encounter/278");
     AddCEL(m[9692], 9692, 3, url .. "Encounter/280");
@@ -283,7 +284,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9692], 9692, 13, url .. "Encounter/291");
     AddCEL(m[9692], 9692, 14, url .. "Encounter/283");
     AddCEL(m[9692], 9692, 15, url .. "Encounter/282");
-    m[9693] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/292"); -- Master of Magic
+    m[9693] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/292"); -- Master of Magic
     AddCEL(m[9693], 9693, 1, url .. "Encounter/296");
     AddCEL(m[9693], 9693, 2, url .. "Encounter/293");
     AddCEL(m[9693], 9693, 3, url .. "Encounter/295");
@@ -299,7 +300,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9693], 9693, 13, url .. "Encounter/306");
     AddCEL(m[9693], 9693, 14, url .. "Encounter/298");
     AddCEL(m[9693], 9693, 15, url .. "Encounter/297");
-    m[9694] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/307"); -- Roboteer
+    m[9694] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/307"); -- Roboteer
     AddCEL(m[9694], 9694, 1, url .. "Encounter/311");
     AddCEL(m[9694], 9694, 2, url .. "Encounter/308");
     AddCEL(m[9694], 9694, 3, url .. "Encounter/310");
@@ -315,7 +316,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9694], 9694, 13, url .. "Encounter/321");
     AddCEL(m[9694], 9694, 14, url .. "Encounter/313");
     AddCEL(m[9694], 9694, 15, url .. "Encounter/312");
-    m[9695] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/322"); -- The Lil' Necromancer
+    m[9695] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/322"); -- The Lil' Necromancer
     AddCEL(m[9695], 9695, 1, url .. "Encounter/326");
     AddCEL(m[9695], 9695, 2, url .. "Encounter/323");
     AddCEL(m[9695], 9695, 3, url .. "Encounter/325");
@@ -331,7 +332,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[9695], 9695, 13, url .. "Encounter/336");
     AddCEL(m[9695], 9695, 14, url .. "Encounter/328");
     AddCEL(m[9695], 9695, 15, url .. "Encounter/327");
-    m[9696] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/17"); -- Family Familiar
+    m[9696] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/17"); -- Family Familiar
     local tempA9686 = AddCEL(m[9696], 9696, 1, url .. "Encounter/187");
     AddCEL(tempA9686, 9686, 1, url .. "Encounter/191");
     AddCEL(tempA9686, 9686, 2, url .. "Encounter/188");
@@ -492,7 +493,7 @@ function exportedPetBattles.Load(m)
     AddCEL(tempA9695, 9695, 13, url .. "Encounter/336");
     AddCEL(tempA9695, 9695, 14, url .. "Encounter/328");
     AddCEL(tempA9695, 9695, 15, url .. "Encounter/327");
-    m[12088] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/42"); -- Anomalous Animals of Argus
+    m[12088] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/42"); -- Anomalous Animals of Argus
     AddCEL(m[12088], 12088, 1, url .. "Encounter/480");
     AddCEL(m[12088], 12088, 2, url .. "Encounter/478");
     AddCEL(m[12088], 12088, 3, url .. "Encounter/476");
@@ -511,7 +512,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12088], 12088, 16, url .. "Encounter/469");
     AddCEL(m[12088], 12088, 17, url .. "Encounter/468");
     AddCEL(m[12088], 12088, 18, url .. "Encounter/471");
-    m[12089] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/657"); -- Aquatic Assault
+    m[12089] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/657"); -- Aquatic Assault
     AddCEL(m[12089], 12089, 1, url .. "Encounter/669");
     AddCEL(m[12089], 12089, 2, url .. "Encounter/667");
     AddCEL(m[12089], 12089, 3, url .. "Encounter/665");
@@ -530,7 +531,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12089], 12089, 16, url .. "Encounter/658");
     AddCEL(m[12089], 12089, 17, url .. "Encounter/657");
     AddCEL(m[12089], 12089, 18, url .. "Encounter/660");
-    m[12091] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/636"); -- Beast Blitz
+    m[12091] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/636"); -- Beast Blitz
     AddCEL(m[12091], 12091, 1, url .. "Encounter/648");
     AddCEL(m[12091], 12091, 2, url .. "Encounter/646");
     AddCEL(m[12091], 12091, 3, url .. "Encounter/644");
@@ -549,7 +550,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12091], 12091, 16, url .. "Encounter/637");
     AddCEL(m[12091], 12091, 17, url .. "Encounter/636");
     AddCEL(m[12091], 12091, 18, url .. "Encounter/639");
-    m[12092] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/573"); -- Critical Critters
+    m[12092] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/573"); -- Critical Critters
     AddCEL(m[12092], 12092, 1, url .. "Encounter/585");
     AddCEL(m[12092], 12092, 2, url .. "Encounter/583");
     AddCEL(m[12092], 12092, 3, url .. "Encounter/581");
@@ -568,7 +569,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12092], 12092, 16, url .. "Encounter/574");
     AddCEL(m[12092], 12092, 17, url .. "Encounter/573");
     AddCEL(m[12092], 12092, 18, url .. "Encounter/576");
-    m[12093] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/510"); -- Draconic Destruction
+    m[12093] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/510"); -- Draconic Destruction
     AddCEL(m[12093], 12093, 1, url .. "Encounter/522");
     AddCEL(m[12093], 12093, 2, url .. "Encounter/520");
     AddCEL(m[12093], 12093, 3, url .. "Encounter/518");
@@ -587,7 +588,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12093], 12093, 16, url .. "Encounter/511");
     AddCEL(m[12093], 12093, 17, url .. "Encounter/510");
     AddCEL(m[12093], 12093, 18, url .. "Encounter/513");
-    m[12094] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/615"); -- Elemental Escalation
+    m[12094] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/615"); -- Elemental Escalation
     AddCEL(m[12094], 12094, 1, url .. "Encounter/627");
     AddCEL(m[12094], 12094, 2, url .. "Encounter/625");
     AddCEL(m[12094], 12094, 3, url .. "Encounter/623");
@@ -606,7 +607,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12094], 12094, 16, url .. "Encounter/616");
     AddCEL(m[12094], 12094, 17, url .. "Encounter/615");
     AddCEL(m[12094], 12094, 18, url .. "Encounter/618");
-    m[12095] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/531"); -- Fierce Fliers
+    m[12095] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/531"); -- Fierce Fliers
     AddCEL(m[12095], 12095, 1, url .. "Encounter/543");
     AddCEL(m[12095], 12095, 2, url .. "Encounter/541");
     AddCEL(m[12095], 12095, 3, url .. "Encounter/539");
@@ -625,7 +626,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12095], 12095, 16, url .. "Encounter/532");
     AddCEL(m[12095], 12095, 17, url .. "Encounter/531");
     AddCEL(m[12095], 12095, 18, url .. "Encounter/534");
-    m[12096] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/489"); -- Humanoid Havoc
+    m[12096] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/489"); -- Humanoid Havoc
     AddCEL(m[12096], 12096, 1, url .. "Encounter/501");
     AddCEL(m[12096], 12096, 2, url .. "Encounter/499");
     AddCEL(m[12096], 12096, 3, url .. "Encounter/497");
@@ -644,7 +645,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12096], 12096, 16, url .. "Encounter/490");
     AddCEL(m[12096], 12096, 17, url .. "Encounter/489");
     AddCEL(m[12096], 12096, 18, url .. "Encounter/492");
-    m[12097] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/594"); -- Magical Mayhem
+    m[12097] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/594"); -- Magical Mayhem
     AddCEL(m[12097], 12097, 1, url .. "Encounter/606");
     AddCEL(m[12097], 12097, 2, url .. "Encounter/604");
     AddCEL(m[12097], 12097, 3, url .. "Encounter/602");
@@ -663,7 +664,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12097], 12097, 16, url .. "Encounter/595");
     AddCEL(m[12097], 12097, 17, url .. "Encounter/594");
     AddCEL(m[12097], 12097, 18, url .. "Encounter/597");
-    m[12098] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/678"); -- Mechanical Melee
+    m[12098] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/678"); -- Mechanical Melee
     AddCEL(m[12098], 12098, 1, url .. "Encounter/690");
     AddCEL(m[12098], 12098, 2, url .. "Encounter/688");
     AddCEL(m[12098], 12098, 3, url .. "Encounter/686");
@@ -682,7 +683,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12098], 12098, 16, url .. "Encounter/679");
     AddCEL(m[12098], 12098, 17, url .. "Encounter/678");
     AddCEL(m[12098], 12098, 18, url .. "Encounter/681");
-    m[12099] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/552"); -- Unstoppable Undead
+    m[12099] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/552"); -- Unstoppable Undead
     AddCEL(m[12099], 12099, 1, url .. "Encounter/564");
     AddCEL(m[12099], 12099, 2, url .. "Encounter/562");
     AddCEL(m[12099], 12099, 3, url .. "Encounter/560");
@@ -701,7 +702,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12099], 12099, 16, url .. "Encounter/553");
     AddCEL(m[12099], 12099, 17, url .. "Encounter/552");
     AddCEL(m[12099], 12099, 18, url .. "Encounter/555");
-    m[12100] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/42"); -- Family Fighter
+    m[12100] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/42"); -- Family Fighter
     local tempA12089 = AddCEL(m[12100], 12100, 1, url .. "Encounter/657");
     AddCEL(tempA12089, 12089, 1, url .. "Encounter/669");
     AddCEL(tempA12089, 12089, 2, url .. "Encounter/667");
@@ -892,7 +893,7 @@ function exportedPetBattles.Load(m)
     AddCEL(tempA12099, 12099, 16, url .. "Encounter/553");
     AddCEL(tempA12099, 12099, 17, url .. "Encounter/552");
     AddCEL(tempA12099, 12099, 18, url .. "Encounter/555");
-    m[12936] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/51"); -- Battle on Zandalar and Kul Tiras
+    m[12936] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/51"); -- Battle on Zandalar and Kul Tiras
     AddCEL(m[12936], 12936, 1, url .. "Encounter/712");
     AddCEL(m[12936], 12936, 2, url .. "Encounter/707");
     AddCEL(m[12936], 12936, 3, url .. "Encounter/706");
@@ -917,7 +918,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[12936], 12936, 22, url .. "Encounter/714");
     AddCEL(m[12936], 12936, 23, url .. "Encounter/716");
     AddCEL(m[12936], 12936, 24, url .. "Encounter/715");
-    m[13280] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/969"); -- Hobbyist Aquarist
+    m[13280] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/969"); -- Hobbyist Aquarist
     AddCEL(m[13280], 13280, 1, url .. "Encounter/982");
     AddCEL(m[13280], 13280, 2, url .. "Encounter/976");
     AddCEL(m[13280], 13280, 3, url .. "Encounter/981");
@@ -937,7 +938,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13280], 13280, 17, url .. "Encounter/987");
     AddCEL(m[13280], 13280, 18, url .. "Encounter/984");
     AddCEL(m[13280], 13280, 19, url .. "Encounter/985");
-    m[13270] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/939"); -- Beast Mode
+    m[13270] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/939"); -- Beast Mode
     AddCEL(m[13270], 13270, 1, url .. "Encounter/952");
     AddCEL(m[13270], 13270, 2, url .. "Encounter/946");
     AddCEL(m[13270], 13270, 3, url .. "Encounter/951");
@@ -957,7 +958,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13270], 13270, 17, url .. "Encounter/957");
     AddCEL(m[13270], 13270, 18, url .. "Encounter/954");
     AddCEL(m[13270], 13270, 19, url .. "Encounter/955");
-    m[13271] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/849"); -- Critters With Huge Teeth
+    m[13271] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/849"); -- Critters With Huge Teeth
     AddCEL(m[13271], 13271, 1, url .. "Encounter/862");
     AddCEL(m[13271], 13271, 2, url .. "Encounter/856");
     AddCEL(m[13271], 13271, 3, url .. "Encounter/861");
@@ -977,7 +978,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13271], 13271, 17, url .. "Encounter/867");
     AddCEL(m[13271], 13271, 18, url .. "Encounter/864");
     AddCEL(m[13271], 13271, 19, url .. "Encounter/865");
-    m[13272] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/759"); -- Dragons Make Everything Better
+    m[13272] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/759"); -- Dragons Make Everything Better
     AddCEL(m[13272], 13272, 1, url .. "Encounter/772");
     AddCEL(m[13272], 13272, 2, url .. "Encounter/766");
     AddCEL(m[13272], 13272, 3, url .. "Encounter/771");
@@ -997,7 +998,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13272], 13272, 17, url .. "Encounter/777");
     AddCEL(m[13272], 13272, 18, url .. "Encounter/774");
     AddCEL(m[13272], 13272, 19, url .. "Encounter/775");
-    m[13273] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/909"); -- Element of Success
+    m[13273] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/909"); -- Element of Success
     AddCEL(m[13273], 13273, 1, url .. "Encounter/922");
     AddCEL(m[13273], 13273, 2, url .. "Encounter/916");
     AddCEL(m[13273], 13273, 3, url .. "Encounter/921");
@@ -1017,7 +1018,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13273], 13273, 17, url .. "Encounter/927");
     AddCEL(m[13273], 13273, 18, url .. "Encounter/924");
     AddCEL(m[13273], 13273, 19, url .. "Encounter/925");
-    m[13274] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/789"); -- Fun With Flying
+    m[13274] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/789"); -- Fun With Flying
     AddCEL(m[13274], 13274, 1, url .. "Encounter/802");
     AddCEL(m[13274], 13274, 2, url .. "Encounter/796");
     AddCEL(m[13274], 13274, 3, url .. "Encounter/801");
@@ -1037,7 +1038,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13274], 13274, 17, url .. "Encounter/807");
     AddCEL(m[13274], 13274, 18, url .. "Encounter/804");
     AddCEL(m[13274], 13274, 19, url .. "Encounter/805");
-    m[13281] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/729"); -- Human Resources
+    m[13281] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/729"); -- Human Resources
     AddCEL(m[13281], 13281, 1, url .. "Encounter/742");
     AddCEL(m[13281], 13281, 2, url .. "Encounter/736");
     AddCEL(m[13281], 13281, 3, url .. "Encounter/741");
@@ -1057,7 +1058,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13281], 13281, 17, url .. "Encounter/747");
     AddCEL(m[13281], 13281, 18, url .. "Encounter/744");
     AddCEL(m[13281], 13281, 19, url .. "Encounter/745");
-    m[13275] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/879"); -- Magician's Secrets
+    m[13275] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/879"); -- Magician's Secrets
     AddCEL(m[13275], 13275, 1, url .. "Encounter/892");
     AddCEL(m[13275], 13275, 2, url .. "Encounter/886");
     AddCEL(m[13275], 13275, 3, url .. "Encounter/891");
@@ -1077,7 +1078,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13275], 13275, 17, url .. "Encounter/897");
     AddCEL(m[13275], 13275, 18, url .. "Encounter/894");
     AddCEL(m[13275], 13275, 19, url .. "Encounter/895");
-    m[13277] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/999"); -- Machine Learning
+    m[13277] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/999"); -- Machine Learning
     AddCEL(m[13277], 13277, 1, url .. "Encounter/1012");
     AddCEL(m[13277], 13277, 2, url .. "Encounter/1006");
     AddCEL(m[13277], 13277, 3, url .. "Encounter/1011");
@@ -1097,7 +1098,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13277], 13277, 17, url .. "Encounter/1017");
     AddCEL(m[13277], 13277, 18, url .. "Encounter/1014");
     AddCEL(m[13277], 13277, 19, url .. "Encounter/1015");
-    m[13278] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/819"); -- Not Quite Dead Yet
+    m[13278] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/819"); -- Not Quite Dead Yet
     AddCEL(m[13278], 13278, 1, url .. "Encounter/832");
     AddCEL(m[13278], 13278, 2, url .. "Encounter/826");
     AddCEL(m[13278], 13278, 3, url .. "Encounter/831");
@@ -1117,7 +1118,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13278], 13278, 17, url .. "Encounter/837");
     AddCEL(m[13278], 13278, 18, url .. "Encounter/834");
     AddCEL(m[13278], 13278, 19, url .. "Encounter/835");
-    m[13279] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/54"); -- Family Battler
+    m[13279] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/54"); -- Family Battler
     local tempA13280 = AddCEL(m[13279], 13279, 1, url .. "Encounter/969");
     AddCEL(tempA13280, 13280, 1, url .. "Encounter/982");
     AddCEL(tempA13280, 13280, 2, url .. "Encounter/976");
@@ -1318,7 +1319,7 @@ function exportedPetBattles.Load(m)
     AddCEL(tempA13278, 13278, 17, url .. "Encounter/837");
     AddCEL(tempA13278, 13278, 18, url .. "Encounter/834");
     AddCEL(tempA13278, 13278, 19, url .. "Encounter/835");
-    m[13625] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/61"); -- Mighty Minions of Mechagon
+    m[13625] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/61"); -- Mighty Minions of Mechagon
     AddCEL(m[13625], 13625, 1, url .. "Encounter/1095");
     AddCEL(m[13625], 13625, 2, url .. "Encounter/1099");
     AddCEL(m[13625], 13625, 3, url .. "Encounter/1096");
@@ -1327,7 +1328,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13625], 13625, 6, url .. "Encounter/1101");
     AddCEL(m[13625], 13625, 7, url .. "Encounter/1098");
     AddCEL(m[13625], 13625, 8, url .. "Encounter/1114");
-    m[13626] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/62"); -- Nautical Nuisances of Nazjatar
+    m[13626] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/62"); -- Nautical Nuisances of Nazjatar
     AddCEL(m[13626], 13626, 1, url .. "Encounter/1102");
     AddCEL(m[13626], 13626, 2, url .. "Encounter/1108");
     AddCEL(m[13626], 13626, 3, url .. "Encounter/1103");
@@ -1340,7 +1341,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[13626], 13626, 10, url .. "Encounter/1112");
     AddCEL(m[13626], 13626, 11, url .. "Encounter/1107");
     AddCEL(m[13626], 13626, 12, url .. "Encounter/1113");
-    m[13695] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/61"); -- Team Aquashock
+    m[13695] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/61"); -- Team Aquashock
     local tempA13626 = AddCEL(m[13695], 13695, 3, url .. "Section/62");
     AddCEL(tempA13626, 13626, 1, url .. "Encounter/1102");
     AddCEL(tempA13626, 13626, 2, url .. "Encounter/1108");
@@ -1363,7 +1364,7 @@ function exportedPetBattles.Load(m)
     AddCEL(tempA13625, 13625, 6, url .. "Encounter/1101");
     AddCEL(tempA13625, 13625, 7, url .. "Encounter/1098");
     AddCEL(tempA13625, 13625, 8, url .. "Encounter/1114");
-    m[14625] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/70"); -- Battle in the Shadowlands
+    m[14625] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/70"); -- Battle in the Shadowlands
     AddCEL(m[14625], 14625, 1, url .. "Encounter/1197");
     AddCEL(m[14625], 14625, 2, url .. "Encounter/1196");
     AddCEL(m[14625], 14625, 3, url .. "Encounter/1195");
@@ -1380,7 +1381,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14625], 14625, 14, url .. "Encounter/1180");
     AddCEL(m[14625], 14625, 15, url .. "Encounter/1179");
     AddCEL(m[14625], 14625, 16, url .. "Encounter/1181");
-    m[14868] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1340"); -- Aquatic Apparitions
+    m[14868] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1340"); -- Aquatic Apparitions
     AddCEL(m[14868], 14868, 1, url .. "Encounter/1338");
     AddCEL(m[14868], 14868, 2, url .. "Encounter/1339");
     AddCEL(m[14868], 14868, 3, url .. "Encounter/1340");
@@ -1392,7 +1393,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14868], 14868, 9, url .. "Encounter/1330");
     AddCEL(m[14868], 14868, 10, url .. "Encounter/1342");
     AddCEL(m[14868], 14868, 11, url .. "Encounter/1343");
-    m[14869] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1325"); -- Beast Busters
+    m[14869] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1325"); -- Beast Busters
     AddCEL(m[14869], 14869, 1, url .. "Encounter/1323");
     AddCEL(m[14869], 14869, 2, url .. "Encounter/1324");
     AddCEL(m[14869], 14869, 3, url .. "Encounter/1325");
@@ -1404,7 +1405,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14869], 14869, 9, url .. "Encounter/1315");
     AddCEL(m[14869], 14869, 10, url .. "Encounter/1327");
     AddCEL(m[14869], 14869, 11, url .. "Encounter/1328");
-    m[14870] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1280"); -- Creepy Critters
+    m[14870] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1280"); -- Creepy Critters
     AddCEL(m[14870], 14870, 1, url .. "Encounter/1278");
     AddCEL(m[14870], 14870, 2, url .. "Encounter/1279");
     AddCEL(m[14870], 14870, 3, url .. "Encounter/1280");
@@ -1416,7 +1417,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14870], 14870, 9, url .. "Encounter/1270");
     AddCEL(m[14870], 14870, 10, url .. "Encounter/1282");
     AddCEL(m[14870], 14870, 11, url .. "Encounter/1283");
-    m[14871] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1235"); -- Deathly Dragonkin
+    m[14871] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1235"); -- Deathly Dragonkin
     AddCEL(m[14871], 14871, 1, url .. "Encounter/1233");
     AddCEL(m[14871], 14871, 2, url .. "Encounter/1234");
     AddCEL(m[14871], 14871, 3, url .. "Encounter/1235");
@@ -1428,7 +1429,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14871], 14871, 9, url .. "Encounter/1225");
     AddCEL(m[14871], 14871, 10, url .. "Encounter/1237");
     AddCEL(m[14871], 14871, 11, url .. "Encounter/1238");
-    m[14872] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1310"); -- Eerie Elementals
+    m[14872] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1310"); -- Eerie Elementals
     AddCEL(m[14872], 14872, 1, url .. "Encounter/1308");
     AddCEL(m[14872], 14872, 2, url .. "Encounter/1309");
     AddCEL(m[14872], 14872, 3, url .. "Encounter/1310");
@@ -1440,7 +1441,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14872], 14872, 9, url .. "Encounter/1300");
     AddCEL(m[14872], 14872, 10, url .. "Encounter/1312");
     AddCEL(m[14872], 14872, 11, url .. "Encounter/1313");
-    m[14873] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1250"); -- Flickering Fliers
+    m[14873] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1250"); -- Flickering Fliers
     AddCEL(m[14873], 14873, 1, url .. "Encounter/1248");
     AddCEL(m[14873], 14873, 2, url .. "Encounter/1249");
     AddCEL(m[14873], 14873, 3, url .. "Encounter/1250");
@@ -1452,7 +1453,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14873], 14873, 9, url .. "Encounter/1240");
     AddCEL(m[14873], 14873, 10, url .. "Encounter/1252");
     AddCEL(m[14873], 14873, 11, url .. "Encounter/1253");
-    m[14874] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1220"); -- Haunted Humanoids
+    m[14874] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1220"); -- Haunted Humanoids
     AddCEL(m[14874], 14874, 1, url .. "Encounter/1218");
     AddCEL(m[14874], 14874, 2, url .. "Encounter/1219");
     AddCEL(m[14874], 14874, 3, url .. "Encounter/1220");
@@ -1464,7 +1465,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14874], 14874, 9, url .. "Encounter/1210");
     AddCEL(m[14874], 14874, 10, url .. "Encounter/1222");
     AddCEL(m[14874], 14874, 11, url .. "Encounter/1223");
-    m[14875] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1295"); -- Mummified Magics
+    m[14875] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1295"); -- Mummified Magics
     AddCEL(m[14875], 14875, 1, url .. "Encounter/1293");
     AddCEL(m[14875], 14875, 2, url .. "Encounter/1294");
     AddCEL(m[14875], 14875, 3, url .. "Encounter/1295");
@@ -1476,7 +1477,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14875], 14875, 9, url .. "Encounter/1285");
     AddCEL(m[14875], 14875, 10, url .. "Encounter/1297");
     AddCEL(m[14875], 14875, 11, url .. "Encounter/1298");
-    m[14876] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1355"); -- Macabre Mechanicals
+    m[14876] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1355"); -- Macabre Mechanicals
     AddCEL(m[14876], 14876, 1, url .. "Encounter/1353");
     AddCEL(m[14876], 14876, 2, url .. "Encounter/1354");
     AddCEL(m[14876], 14876, 3, url .. "Encounter/1355");
@@ -1488,7 +1489,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14876], 14876, 9, url .. "Encounter/1345");
     AddCEL(m[14876], 14876, 10, url .. "Encounter/1357");
     AddCEL(m[14876], 14876, 11, url .. "Encounter/1358");
-    m[14877] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1265"); -- Unholy Undead
+    m[14877] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Encounter/1265"); -- Unholy Undead
     AddCEL(m[14877], 14877, 1, url .. "Encounter/1263");
     AddCEL(m[14877], 14877, 2, url .. "Encounter/1264");
     AddCEL(m[14877], 14877, 3, url .. "Encounter/1265");
@@ -1500,7 +1501,7 @@ function exportedPetBattles.Load(m)
     AddCEL(m[14877], 14877, 9, url .. "Encounter/1255");
     AddCEL(m[14877], 14877, 10, url .. "Encounter/1267");
     AddCEL(m[14877], 14877, 11, url .. "Encounter/1268");
-    m[14879] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/73"); -- Family Exorcist
+    m[14879] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/73"); -- Family Exorcist
     local tempA14868 = AddCEL(m[14879], 14879, 1, url .. "Encounter/1340");
     AddCEL(tempA14868, 14868, 1, url .. "Encounter/1338");
     AddCEL(tempA14868, 14868, 2, url .. "Encounter/1339");
@@ -1621,7 +1622,7 @@ function exportedPetBattles.Load(m)
     AddCEL(tempA14877, 14877, 9, url .. "Encounter/1255");
     AddCEL(tempA14877, 14877, 10, url .. "Encounter/1267");
     AddCEL(tempA14877, 14877, 11, url .. "Encounter/1268");
-    m[14881] = objects.MenuItem:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/72"); -- Abhorrent Adversaries of the Afterlife
+    m[14881] = menItm:NewExtLink(addon.L["Xu-Fu's Pet Guides"], url .. "Section/72"); -- Abhorrent Adversaries of the Afterlife
     AddCEL(m[14881], 14881, 1, url .. "Encounter/1199");
     AddCEL(m[14881], 14881, 2, url .. "Encounter/1206");
     AddCEL(m[14881], 14881, 3, url .. "Encounter/1207");

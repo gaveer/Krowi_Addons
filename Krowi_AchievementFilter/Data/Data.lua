@@ -3,31 +3,44 @@ local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 addon.Data = {};
 local data = addon.Data;
-addon.Categories = {};
-addon.CurrentZoneCategory = {};
-addon.SelectedZoneCategory = {};
-addon.NextPatchCategory = {};
-addon.Achievements = {};
-addon.RCMenuExtras = {};
-addon.NextPatchAchievements = {};
-addon.Maps = {};
+
+data.Achievements, data.NextPatchAchievements = {}, {};
+
+data.Categories, data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = {}, {}, {}, {}, {};
+
+data.RCMenuExtras = {};
+
+data.Maps = {};
 
 function data.Load()
-    data.ExportedAchievements.Load(addon.Achievements);
-    addon.CurrentZoneCategory, addon.SelectedZoneCategory, addon.NextPatchCategory = data.ExportedCategories.Load(addon.Categories, addon.Achievements);
-    data.ExportedPetBattles.Load(addon.RCMenuExtras);
-    data.NextPatch.Load(addon.NextPatchAchievements);
-    data.ExportedMaps.Load(addon.Maps, addon.Achievements);
+    data.ExportedAchievements.Load(data.Achievements);
+    data.ExportedNextPatchAchievements.Load(data.NextPatchAchievements);
 
-    -- Get rid of the following namespaces since it's not needed anymore after loading the data and free up memory on the next garbage collection
-    data.ExportedAchievements = nil;
-    data.ExportedCategories = nil;
-    data.ExportedMaps = nil;
+    data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = data.ExportedCategories.Load(data.Categories, data.Achievements);
+
+    data.ExportedPetBattles.Load(data.RCMenuExtras);
+
+    data.ExportedMaps.Load(data.Maps, data.Achievements);
 
     addon.Diagnostics.Debug("Expansion data loaded");
 
     -- TEST = {};
     -- data.PrintCriteria(14879, nil, 0);
+end
+
+function data.LoadExcludedAchievements(achievements)
+    if SavedData.ExcludedAchievements == nil or type(SavedData.ExcludedAchievements) ~= "table" then
+        return;
+    end
+
+    for achievementID, _ in next, SavedData.ExcludedAchievements do
+        addon.ExcludeAchievement(achievements[achievementID], false);
+    end
+
+    addon.GUI.CategoriesFrame:Update(true);
+
+    addon.Diagnostics.Debug("Excluded achievements loaded");
+    diagnostics.DebugTable(SavedData.ExcludedAchievements);
 end
 
 local cachedZone;
@@ -36,7 +49,7 @@ function data.GetCurrentZoneAchievements()
 
     if cachedZone ~= C_Map.GetBestMapForUnit("player") then
         cachedZone = C_Map.GetBestMapForUnit("player");
-        addon.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(cachedZone);
+        addon.Data.CurrentZoneCategory.Achievements = addon.GetAchievementsInZone(cachedZone);
         return true; -- Output that the zone has changed
     end
 end

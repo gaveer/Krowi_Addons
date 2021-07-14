@@ -5,27 +5,28 @@
 local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 local gui = addon.GUI;
+local search = gui.Search;
 gui.ElvUISkin = {};
 local elvUISkin = gui.ElvUISkin;
 -- local engine, skins;
 
-local function ApplyToCategoriesFrame(categoriesFrame, skins)
+local function ApplyToCategoriesFrame(frame, skins)
     -- Frame
-    categoriesFrame:StripTextures();
-    categoriesFrame.Container.ScrollBar.trackBG:SetAlpha(0);
-    categoriesFrame.Container:CreateBackdrop("Transparent");
-	categoriesFrame.Container.backdrop:Point("TOPLEFT", 0, 4);
-	categoriesFrame.Container.backdrop:Point("BOTTOMRIGHT", -2, -3);
+    frame:StripTextures();
+    frame.Container.ScrollBar.trackBG:SetAlpha(0);
+    frame.Container:CreateBackdrop("Transparent");
+	frame.Container.backdrop:Point("TOPLEFT", 0, 4);
+	frame.Container.backdrop:Point("BOTTOMRIGHT", -2, -3);
 
     -- Buttons
-    for _, button in next, categoriesFrame.Container.buttons do
+    for _, button in next, frame.Container.buttons do
         button:StripTextures(true);
 		button:StyleButton();
     end
 
     -- Scrollbar
-    if categoriesFrame.Container.ScrollBar then
-        skins:HandleScrollBar(categoriesFrame.Container.ScrollBar, 5);
+    if frame.Container.ScrollBar then
+        skins:HandleScrollBar(frame.Container.ScrollBar, 5);
     end
 end
 
@@ -76,14 +77,14 @@ local function SkinAchievementButton(button, biggerIcon, engine, skins)
 end
 
 local blueAchievement = { r = 0.1, g = 0.2, b = 0.3 }
-local function blueBackdrop(self)
+local function BlueBackdrop(self)
 	self:SetBackdropColor(blueAchievement.r, blueAchievement.g, blueAchievement.b)
 end
 
 local function SetAchievementButtonColor(frame, engine)
 	if frame and frame.backdrop then
 		if frame.accountWide then
-			frame.backdrop.callbackBackdropColor = blueBackdrop;
+			frame.backdrop.callbackBackdropColor = BlueBackdrop;
 			frame.backdrop:SetBackdropColor(blueAchievement.r, blueAchievement.g, blueAchievement.b);
 		else
 			frame.backdrop.callbackBackdropColor = nil;
@@ -92,31 +93,31 @@ local function SetAchievementButtonColor(frame, engine)
 	end
 end
 
-local function ApplyToAchievementsFrame(achievementsFrame, engine, skins)
+local function ApplyToAchievementsFrame(frame, engine, skins)
     -- Frame
-    select(2, achievementsFrame:GetChildren()):Hide();
-    achievementsFrame.Background:Hide();
-    achievementsFrame.Artwork:Hide();
+    select(2, frame:GetChildren()):Hide();
+    frame.Background:Hide();
+    frame.Artwork:Hide();
 
-    if achievementsFrame and achievementsFrame.GetNumChildren then
-        for i = 1, achievementsFrame:GetNumChildren() do
-            local child = select(i, achievementsFrame:GetChildren());
+    if frame and frame.GetNumChildren then
+        for i = 1, frame:GetNumChildren() do
+            local child = select(i, frame:GetChildren());
             if child and not child:GetName() then
                 child:SetBackdrop();
             end
         end
     end
 
-	achievementsFrame.Container:CreateBackdrop("Transparent");
-	achievementsFrame.Container.backdrop:Point("TOPLEFT", -2, 2);
-	achievementsFrame.Container.backdrop:Point("BOTTOMRIGHT", -2, -3);
+	frame.Container:CreateBackdrop("Transparent");
+	frame.Container.backdrop:Point("TOPLEFT", -2, 2);
+	frame.Container.backdrop:Point("BOTTOMRIGHT", -2, -3);
 
     -- Buttons
-    for _, button in next, achievementsFrame.Container.buttons do
+    for _, button in next, frame.Container.buttons do
         SkinAchievementButton(button, true, engine, skins);
     end
 
-    hooksecurefunc(achievementsFrame, "Update", function(frame)
+    hooksecurefunc(frame, "Update", function(frame)
         for _, button in next, frame.Container.buttons do
             if button:IsShown() then
                 SetAchievementButtonColor(button, engine);
@@ -127,32 +128,32 @@ local function ApplyToAchievementsFrame(achievementsFrame, engine, skins)
     end);
 
     -- Scrollbar
-    if achievementsFrame.Container.ScrollBar then
-        skins:HandleScrollBar(achievementsFrame.Container.ScrollBar, 5);
+    if frame.Container.ScrollBar then
+        skins:HandleScrollBar(frame.Container.ScrollBar, 5);
     end
 end
 
-local function ApplyToFilterButton(filterButton, achievementsFrame, skins)
-    skins:HandleButton(filterButton);
+local function ApplyToFilterButton(button, achievementsFrame, skins)
+    skins:HandleButton(button);
 
-    local highlightTex = filterButton.GetHighlightTexture and filterButton:GetHighlightTexture()
+    local highlightTex = button.GetHighlightTexture and button:GetHighlightTexture()
     if highlightTex then
         highlightTex:SetTexture();
     else
-        filterButton:StripTextures();
+        button:StripTextures();
     end
 
-	filterButton:ClearAllPoints();
-	filterButton:Point("BOTTOMLEFT", achievementsFrame, "TOPLEFT", 3, -1);
+	button:ClearAllPoints();
+	button:Point("BOTTOMLEFT", achievementsFrame, "TOPLEFT", 3, -1);
 end
 
-local function ApplyToSearchBoxFrame(searchBoxFrame, achievementsFrame, skins)
-    skins:HandleEditBox(searchBoxFrame);
-	searchBoxFrame.backdrop:Point('TOPLEFT', searchBoxFrame, 'TOPLEFT', -3, -3);
-	searchBoxFrame.backdrop:Point('BOTTOMRIGHT', searchBoxFrame, 'BOTTOMRIGHT', 0, 3);
-	searchBoxFrame:ClearAllPoints();
-	searchBoxFrame:Point('BOTTOMRIGHT', achievementsFrame, 'TOPRIGHT', -30, 2);
-	searchBoxFrame:Size(107, 25);
+local function ApplyToSearchBoxFrame(frame, achievementsFrame, skins)
+    skins:HandleEditBox(frame);
+	frame.backdrop:Point('TOPLEFT', frame, 'TOPLEFT', -3, -3);
+	frame.backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', 0, 3);
+	frame:ClearAllPoints();
+	frame:Point('BOTTOMRIGHT', achievementsFrame, 'TOPRIGHT', -30, 2);
+	frame:Size(107, 25);
 end
 
 local function SkinSearchButton(self, engine, skins)
@@ -171,22 +172,22 @@ local function SkinSearchButton(self, engine, skins)
 	hl:Point('BOTTOMRIGHT', -1, 1);
 end
 
-local function ApplyToSearchPreviewFrame(searchPreviewFrame, achievementsFrame, engine, skins)
-    searchPreviewFrame:StripTextures();
-	searchPreviewFrame:ClearAllPoints();
-	searchPreviewFrame:Point('TOPLEFT', achievementsFrame, 'TOPRIGHT', 22, 25);
+local function ApplyToSearchPreviewFrame(frame, achievementsFrame, engine, skins)
+    frame:StripTextures();
+	frame:ClearAllPoints();
+	frame:Point('TOPLEFT', achievementsFrame, 'TOPRIGHT', 22, 25);
 
-    for _, button in next, searchPreviewFrame.Buttons do
+    for _, button in next, frame.Buttons do
 		SkinSearchButton(button, engine, skins);
 	end
-	SkinSearchButton(searchPreviewFrame.ShowFullSearchResultsButton, engine, skins);
+	SkinSearchButton(frame.ShowFullSearchResultsButton, engine, skins);
 end
 
-local function ApplyToFullSearchResultsFrame(fullSearchResultsFrame, skins)
-    fullSearchResultsFrame:StripTextures();
-    fullSearchResultsFrame:CreateBackdrop('Transparent');
+local function ApplyToFullSearchResultsFrame(frame, skins)
+    frame:StripTextures();
+    frame:CreateBackdrop('Transparent');
 
-    for _, button in next, fullSearchResultsFrame.Container.buttons do
+    for _, button in next, frame.Container.buttons do
         button:SetNormalTexture('');
         button:SetPushedTexture('');
         button:GetRegions():Hide();
@@ -195,8 +196,8 @@ local function ApplyToFullSearchResultsFrame(fullSearchResultsFrame, skins)
         button.path:SetTextColor(1, 1, 1);
     end
 
-    skins:HandleCloseButton(fullSearchResultsFrame.closeButton);
-	skins:HandleScrollBar(fullSearchResultsFrame.Container.ScrollBar);
+    skins:HandleCloseButton(frame.closeButton);
+	skins:HandleScrollBar(frame.Container.ScrollBar);
 end
 
 local engine, skins;
@@ -225,18 +226,18 @@ function elvUISkin.Load()
     diagnostics.DebugTable(SavedData.ElvUISkin, 1);
 end
 
-function elvUISkin.Apply(tabButton1, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame, searchPreviewFrame, fullSearchResultsFrame)
+function elvUISkin.Apply()
 	diagnostics.Trace("elvUISkin.Apply");
 
     -- local enabled, engine, skins = elvUISkin.Load();
 
     if SavedData.ElvUISkin.Achievements then
-        skins:HandleTab(tabButton1);
-        ApplyToCategoriesFrame(categoriesFrame, skins);
-        ApplyToAchievementsFrame(achievementsFrame, engine, skins);
-        ApplyToFilterButton(filterButton, achievementsFrame, skins);
-        ApplyToSearchBoxFrame(searchBoxFrame, achievementsFrame, skins);
-        ApplyToSearchPreviewFrame(searchPreviewFrame, achievementsFrame, engine, skins);
-        ApplyToFullSearchResultsFrame(fullSearchResultsFrame, skins);
+        skins:HandleTab(gui.TabButton1);
+        ApplyToCategoriesFrame(gui.CategoriesFrame, skins);
+        ApplyToAchievementsFrame(gui.AchievementsFrame, engine, skins);
+        ApplyToFilterButton(gui.FilterButton, gui.AchievementsFrame, skins);
+        ApplyToSearchBoxFrame(search.SearchBoxFrame, gui.AchievementsFrame, skins);
+        ApplyToSearchPreviewFrame(search.SearchPreviewFrame, gui.AchievementsFrame, engine, skins);
+        ApplyToFullSearchResultsFrame(search.FullSearchResultsFrame, skins);
     end
 end

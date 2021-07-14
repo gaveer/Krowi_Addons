@@ -8,7 +8,7 @@ local achFrameTabBtn = gui.AchievementFrameTabButton;
 
 -- [[ Constructors ]] --
 achFrameTabBtn.__index = achFrameTabBtn; -- Used to support OOP like code
-function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, filterButton, searchBoxFrame)
+function achFrameTabBtn:New(text, framesToShow)
     diagnostics.Trace("achievementFrameTabButton:New");
 
 	-- Increment ID
@@ -22,10 +22,7 @@ function achFrameTabBtn:New(text, categoriesFrame, achievementsFrame, filterButt
 
 	-- Set properties
     frame.ID = AchievementFrame.numTabs;
-    frame.CategoriesFrame = categoriesFrame;
-    frame.AchievementsFrame = achievementsFrame;
-    frame.FilterButton = filterButton;
-    frame.SearchBoxFrame = searchBoxFrame;
+    frame.FramesToShow = framesToShow;
 
     frame:RegisterEvent("ADDON_LOADED");
     frame:SetScript("OnClick", function(selfFunc)
@@ -64,21 +61,17 @@ function achFrameTabBtn:AchievementFrameTab_OnEvent(event, ...)
 	end
 end
 
-local function InGuildView()
-    return AchievementFrameHeaderTitle:GetText() == GUILD_ACHIEVEMENTS_TITLE;
-end
-
 function achFrameTabBtn:Base_OnClick(id)
     diagnostics.Trace("achFrameTabBtn:Base_OnClick");
 
 	AchievementFrame_UpdateTabs(id);
 
-    if InGuildView() then
+    if addon.InGuildView() then
         AchievementFrame_ToggleView();
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();
     end
-    AchievementFrame_ShowSubFrame(self.CategoriesFrame, self.AchievementsFrame, self.FilterButton, self.SearchBoxFrame);
+    AchievementFrame_ShowSubFrame(unpack(self.FramesToShow));
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 end
 

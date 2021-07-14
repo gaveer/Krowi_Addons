@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.26.0] - 2021-
+## [9.1.0.26.0] - 2021-07-14
 ### Added
 - More item in the Right Click Menu to group things under to not clutter the main Right Click Menu
 - Exclude achievements you have no interest in seeing
@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file.
 - Showing the Enhanced Filtering and Sorting Tutorial Page should no longer write numbers to the chat window
 - Issue #49: Shadowlands Keystone Conqueror: Season Two and Shadowlands Keystone Master: Season Two in Shadowlands - Dungeons appear as part of a wrong chain
 
-[9.1.0.26.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3379606
+[9.1.0.26.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3388261
 
 ## [9.1.0.25.1] - 2021-07-07
 ### Fixed

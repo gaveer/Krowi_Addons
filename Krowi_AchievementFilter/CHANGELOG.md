@@ -1,18 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.27.0] - 2021-
-### Added
-- 
-
-### Changed
-- 
-
-### Fixed
-- 
-
-[9.1.0.27.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3388261
-
 ## [9.1.0.26.0] - 2021-07-14
 ### Added
 - More item in the Right Click Menu to group things under to not clutter the main Right Click Menu

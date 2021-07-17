@@ -184,13 +184,16 @@ namespace DbManagerWPF.ViewModel
             if (!category.IsActive)
                 return;
 
-            var appendString = $"tmp[{category.ID}] = IaR(c, cat:New(";
+            var appendString = $"tmp[{category.ID}] = ";
+            appendString += category.Parent == null ? "IaR(c, " : "";
+            appendString += "cat:New(";
             appendString += category.Function.Call.Replace("%value%", category.FunctionValue); // Category name
             appendString += $"{(category.IsLegacy ? $" .. \" (\" .. {functionDM.GetLegacyFunction().Call} .. \")\"" : "")}"; // Legacy if applicable
             appendString += ", ";
             appendString += $"{(category.CanMerge ? "true" : "nil")}"; // CanMerge
             appendString = TrimNils(appendString); // Remove unneccesary nils
-            appendString += $")); -- {category.Name}";
+            appendString += category.Parent == null ? ")" : "";
+            appendString += $"); -- {category.Name}";
             sb.AppendLineTabbed(1, appendString);
             if (category.Parent != null)
                 sb.AppendLineTabbed(1, $"AddC(tmp[{category.Parent.ID}], tmp[{category.ID}]);");

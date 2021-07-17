@@ -185,6 +185,27 @@ local function GetAchievementNumbers(self, category)
 	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
 end
 
+local function GetDisplayCategories(self, displayCategories, category, getAchNums)
+	if category.NotHidden or category.AlwaysVisible then -- If already visible, keep visible
+		if (category.NumOfAch == nil or getAchNums or category.HasFlexibleData) and category.Parent == nil then
+			-- Huge increase over performance if we cache the achievement numbers and only update them when needed,
+			-- only for the top level categories since it works recursive
+			if GetAchievementNumbers(self, category) > 0 or category.AlwaysVisible then
+				tinsert(displayCategories, category);
+			end
+		elseif category.NumOfAch > 0 or category.AlwaysVisible then
+			tinsert(displayCategories, category);
+		end
+		-- diagnostics.Debug("Showing " .. category.Name);
+	end
+
+	if category.Children then
+		for _, category in next, category.Children do
+			GetDisplayCategories(self, displayCategories, category, getAchNums);
+		end
+	end
+end
+
 function categoriesFrame:Update(getAchNums)
 	diagnostics.Trace("categoriesFrame:Update");
 
@@ -199,19 +220,22 @@ function categoriesFrame:Update(getAchNums)
 
 	local displayCategories = {};
 	for _, category in next, self.Categories do
-		if category.NotHidden or category.AlwaysVisible then -- If already visible, keep visible
-			if (category.NumOfAch == nil or getAchNums or category.HasFlexibleData) and category.Parent == nil then
-				-- Huge increase over performance if we cache the achievement numbers and only update them when needed,
-				-- only for the top level categories since it works recursive
-				if GetAchievementNumbers(self, category) > 0 or category.AlwaysVisible then
-					tinsert(displayCategories, category);
-				end
-			elseif category.NumOfAch > 0 or category.AlwaysVisible then
-				tinsert(displayCategories, category);
-			end
-			-- diagnostics.Debug("Showing " .. category.Name);
-		end
+		GetDisplayCategories(self, displayCategories, category, getAchNums);
 	end
+	-- for _, category in next, self.Categories do
+	-- 	if category.NotHidden or category.AlwaysVisible then -- If already visible, keep visible
+	-- 		if (category.NumOfAch == nil or getAchNums or category.HasFlexibleData) and category.Parent == nil then
+	-- 			-- Huge increase over performance if we cache the achievement numbers and only update them when needed,
+	-- 			-- only for the top level categories since it works recursive
+	-- 			if GetAchievementNumbers(self, category) > 0 or category.AlwaysVisible then
+	-- 				tinsert(displayCategories, category);
+	-- 			end
+	-- 		elseif category.NumOfAch > 0 or category.AlwaysVisible then
+	-- 			tinsert(displayCategories, category);
+	-- 		end
+	-- 		-- diagnostics.Debug("Showing " .. category.Name);
+	-- 	end
+	-- end
 
 	local totalHeight = #displayCategories * buttons[1]:GetHeight();
 	local displayedHeight = 0;
@@ -293,30 +317,65 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	end
 end
 
+local function HideCategory(button, category)
+	if category.Level > button.Category.Level then
+		category.NotHidden = nil;
+	end
+
+	if category.Children then
+		for _, category in next, category.Children do
+			HideCategory(button, category);
+		end
+	end
+end
+
+local function OpenCloseCategory(button, category)
+	if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
+		category.NotCollapsed = nil;
+	end
+	if category.Level > button.Category.Level then -- Category on higher level
+		if category.Parent == button.Category then -- Show child of clicked button
+			category.NotHidden = true;
+		else
+			category.NotHidden = nil; -- Hide the rest
+		end
+		category.NotCollapsed = nil;
+	end
+	category.IsSelected = nil; -- Issue #12: Fix
+	
+	if category.Children then
+		for _, category in next, category.Children do
+			OpenCloseCategory(button, category);
+		end
+	end
+end
+
 function categoriesFrame:SelectButton(button, quick)
 	diagnostics.Trace("categoriesFrame:SelectButton");
 
 	if button.Category.IsSelected and button.Category.NotCollapsed then -- Collapse selected categories -- Issue #12: Fix
 		button.Category.NotCollapsed = nil;
 		for _, category in next, self.Categories do
-			if category.Level > button.Category.Level then
-				category.NotHidden = nil;
-			end
+			HideCategory(button, category);
+			-- if category.Level > button.Category.Level then
+			-- 	category.NotHidden = nil;
+			-- end
 		end
 	else -- Open selected category, close other highest level categories
 		for _, category in next, self.Categories do
-			if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
-				category.NotCollapsed = nil;
-			end
-			if category.Level > button.Category.Level then -- Category on higher level
-				if category.Parent == button.Category then -- Show child of clicked button
-					category.NotHidden = true;
-				else
-					category.NotHidden = nil; -- Hide the rest
-				end
-				category.NotCollapsed = nil;
-			end
-			category.IsSelected = nil; -- Issue #12: Fix
+			OpenCloseCategory(button, category);
+			-- if category.Level == button.Category.Level and category.Parent == button.Category.Parent then -- Category on same level and same parent
+			-- 	category.NotCollapsed = nil;
+			-- end
+			-- if category.Level > button.Category.Level then -- Category on higher level
+			-- 	if category.Parent == button.Category then -- Show child of clicked button
+			-- 		category.NotHidden = true;
+			-- 	else
+			-- 		category.NotHidden = nil; -- Hide the rest
+			-- 	end
+			-- 	category.NotCollapsed = nil;
+			-- end
+			-- category.IsSelected = nil; -- Issue #12: Fix
 		end
 		button.Category.NotCollapsed = true;
 	end

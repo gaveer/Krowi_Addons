@@ -24,7 +24,7 @@ function tutorials.Load()
         ShineRight = SavedData.ElvUISkin.Tutorials and 0 or -2,
         OnShow = function(self)
             addon.GUI.ToggleAchievementFrameAtTab1(true);
-            self.Shine = addon.GUI.TabButton1;
+            self.Shine = addon.GUI.TabButtonExpansions;
         end
     });
     tinsert(pages, { -- 2

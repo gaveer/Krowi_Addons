@@ -6,6 +6,8 @@ local gui = addon.GUI;
 gui.AchievementFrameTabButton = {};
 local achFrameTabBtn = gui.AchievementFrameTabButton;
 
+local ourTabIDs = {};
+
 -- [[ Constructors ]] --
 achFrameTabBtn.__index = achFrameTabBtn; -- Used to support OOP like code
 function achFrameTabBtn:New(text, framesToShow)
@@ -22,6 +24,7 @@ function achFrameTabBtn:New(text, framesToShow)
 
 	-- Set properties
     frame.ID = AchievementFrame.numTabs;
+    tinsert(ourTabIDs, frame.ID);
     frame.FramesToShow = framesToShow;
 
     frame:RegisterEvent("ADDON_LOADED");
@@ -87,7 +90,13 @@ end
 function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab)
     diagnostics.Trace("achFrameTabBtn:AchievementFrame_UpdateTabs - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
 
-    if clickedTab == thisTabID then -- Our tab was clicked
+    local ourTabClicked; -- Extra logic to handle multiple tabs of ours
+    for _, id in next, ourTabIDs do
+        if clickedTab == id then
+            ourTabClicked = true;
+        end
+    end
+    if ourTabClicked then -- Our tab was clicked
         thisTab.text:SetPoint("CENTER", 0, -5);
         thisTab.Selected = true;
         gui.SetAchievementFrameWidth(addon.Options.db.Window.CategoriesFrameWidthOffset);

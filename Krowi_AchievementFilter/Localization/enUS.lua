@@ -16,7 +16,10 @@ L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
 L["Include"] = "Include";
 L["Exclude"] = "Exclude";
-L["T_TAB_TEXT"] = "Achievement Filter";
+
+-- Tabs
+L["Expansions"] = "Expansions";
+L["Events"] = "Events";
 
 -- Categories
 L["Current Zone"] = "Current Zone";

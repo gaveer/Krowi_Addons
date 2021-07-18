@@ -18,7 +18,8 @@ function gui:LoadWithBlizzard_AchievementUI()
 
     gui.Search.Load();
 
-    gui.TabButton1 = gui.AchievementFrameTabButton:New(addon.L["T_TAB_TEXT"], {gui.CategoriesFrame, gui.AchievementsFrame, gui.FilterButton, gui.Search.SearchBoxFrame});
+    gui.TabButtonExpansions = gui.AchievementFrameTabButton:New(addon.L["Expansions"], {gui.CategoriesFrame, gui.AchievementsFrame, gui.FilterButton, gui.Search.SearchBoxFrame});
+    gui.TabButtonEvents = gui.AchievementFrameTabButton:New(addon.L["Events"], {gui.CategoriesFrame, gui.AchievementsFrame, gui.FilterButton, gui.Search.SearchBoxFrame});
 
     self.ResetAchievementFrameHeight();
 
@@ -46,7 +47,7 @@ function gui.ResetAchievementFrameWidth()
 end
 
 local function UpdateAchievementFrameWidth(message , offset)
-    if gui.TabButton1 and gui.TabButton1.Selected then -- Need to check if it exists since this can be triggered before it's created
+    if gui.TabButtonExpansions and gui.TabButtonExpansions.Selected then -- Need to check if it exists since this can be triggered before it's created
         gui.AchievementsFrame:Hide();
         gui.CategoriesFrame:Hide();
         gui.SetAchievementFrameWidth(offset);
@@ -84,7 +85,7 @@ function gui.ResetAchievementFrameHeight()
 end
 
 local function UpdateAchievementFrameHeight(message, offset)
-    if gui.TabButton1 and gui.TabButton1.Selected then -- Need to check if it exists since this can be triggered before it's created
+    if gui.TabButtonExpansions and gui.TabButtonExpansions.Selected then -- Need to check if it exists since this can be triggered before it's created
         gui.AchievementsFrame:Hide();
         gui.CategoriesFrame:Hide();
         gui.SetAchievementFrameWidth(offset);
@@ -135,7 +136,7 @@ function gui.ToggleAchievementFrameAtTab1(forceOpen) -- Issue #26 Broken, Fix
 		ShowUIPanel(AchievementFrame);
         AchievementFrame_SetTabs();
         AchievementFrame_HideSearchPreview();
-        gui.TabButton1:Select();
+        gui.TabButtonExpansions:Select();
         if addon.Options.db.ResetViewOnOpen or forceOpen then
             gui.ResetView();
         end

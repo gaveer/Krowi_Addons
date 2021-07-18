@@ -433,7 +433,7 @@ local function CreatePanel()
                             CategoriesFrameWidthOffset = {
                                 name = addon.L["Categories width offset"],
                                 desc = core.ReplaceVars{addon.L["Categories width offset Desc"],
-                                                        tabName = string.format(addon.Yellow, addon.L["T_TAB_TEXT"]),
+                                                        tabName = string.format(addon.Yellow, addon.L["Expansions"]),
                                                         reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,
@@ -458,7 +458,7 @@ local function CreatePanel()
                             AchievementFrameHeightOffset = {
                                 name = addon.L["Achievement window height offset"],
                                 desc = core.ReplaceVars{addon.L["Achievement window height offset Desc"],
-                                                        tabName = string.format(addon.Yellow, addon.L["T_TAB_TEXT"]),
+                                                        tabName = string.format(addon.Yellow, addon.L["Expansions"]),
                                                         reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,

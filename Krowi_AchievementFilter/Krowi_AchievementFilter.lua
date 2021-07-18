@@ -168,7 +168,7 @@ function loadHelper:OnEvent(event, arg1)
             
             addon.Data.LoadExcludedAchievements(addon.Data.Achievements);
 
-            addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
+            addon.Tutorials.HookTrigger(addon.GUI.TabButtonExpansions);
 
             addon.GUI.ElvUISkin.Apply();
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI

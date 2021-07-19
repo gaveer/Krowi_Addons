@@ -6,6 +6,7 @@
 ## Notes: Filters your achievements.
 ## X-Discord: DCxq5rRNW5
 ## X-CurseForge: krowi-achievement-filter
+## X-Curse-Project-ID: 413582
 
 Core/Files.xml
 

@@ -97,7 +97,7 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("");
 
             var categories = categoryDM.GetAll(true);
-            var category = categories.Single(x => x.ID == 799);
+            var category = categories.Single(x => x.ID == 883).Children.Single(x => x.ID == 799);
 
             ExportNextPatchAchievements(sb, category);
 

@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file.
 ## [9.1.0.27.A1] - 2021-
 ### Added
 - 2nd tab added with Event achievements (WIP)
+- Even more zone data for multi-zone achievements for Legion and Battle for Azeroth
+- More zone data for multi-zone achievements for Mists of Pandaria and Warlords of Dreanor
+- Split Raids into Glory and Mythic categories for Mists of Pandaria and Warlords of Dreanor
 
 ### Changed
 - Categories are now only stored hierarchical in preperation of new features; Reduced memory usage by 1%
 - Achievement Filter tab renamed to Expansions
+- Moved Operation: Shieldwall Campaign and Dominance Offensive Campaign from Mists of Pandaria - Zones - Pandaria - Quests to Mists of Pandaria - Zones - Krasarang Wilds - Quests
 
 ### Fixed
 - 

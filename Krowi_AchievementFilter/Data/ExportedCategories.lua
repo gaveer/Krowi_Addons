@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-18 09-10-54 ]] --
+-- [[ Exported at 2021-07-19 23-42-00 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -1831,8 +1831,6 @@ function exportedCategories.Load(a)
     AddC(tmp[526], tmp[527]);
     AddA(tmp[527], a[6541]); -- Loremaster of Pandaria
     AddA(tmp[527], a[7285]); -- Every Day I'm Pand-a-ren
-    AddA(tmp[527], a[7928]); -- Operation: Shieldwall Campaign
-    AddA(tmp[527], a[7929]); -- Dominance Offensive Campaign
     tmp[528] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[526], tmp[528]);
     AddA(tmp[528], a[6716]); -- Between a Saurok and a Hard Place
@@ -1844,11 +1842,11 @@ function exportedCategories.Load(a)
     AddA(tmp[528], a[6856]); -- Ballad of Liu Lang
     AddA(tmp[528], a[6858]); -- What Is Worth Fighting For
     AddA(tmp[528], a[7230]); -- Legend of the Brewfathers
-    AddA(tmp[528], a[7281]); -- Lost and Found
     AddA(tmp[528], a[7994]); -- Treasure of Pandaria
     AddA(tmp[528], a[7995]); -- Fortune of Pandaria
     AddA(tmp[528], a[7996]); -- Bounty of Pandaria
     AddA(tmp[528], a[7997]); -- Riches of Pandaria
+    AddA(tmp[528], a[7281]); -- Lost and Found
     AddA(tmp[528], a[7282]); -- Finders Keepers
     AddA(tmp[528], a[7283]); -- One Man's Trash...
     AddA(tmp[528], a[7284]); -- Is Another Man's Treasure
@@ -1911,6 +1909,8 @@ function exportedCategories.Load(a)
     AddA(tmp[513], a[6535]); -- Mighty Roamin' Krasaranger
     AddA(tmp[513], a[6536]); -- Mighty Roamin' Krasaranger
     AddA(tmp[513], a[7287]); -- Champion of Chi-Ji
+    AddA(tmp[513], a[7928]); -- Operation: Shieldwall Campaign
+    AddA(tmp[513], a[7929]); -- Dominance Offensive Campaign
     tmp[514] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[494], tmp[514]);
     AddA(tmp[514], a[6975]); -- Explore Krasarang Wilds
@@ -2183,82 +2183,69 @@ function exportedCategories.Load(a)
     AddA(tmp[191], a[8454]); -- Glory of the Orgrimmar Raider
     tmp[202] = cat:New((EJ_GetInstanceInfo(317))); -- Mogu'shan Vaults
     AddC(tmp[191], tmp[202]);
-    AddA(tmp[202], a[6823]); -- Must Love Dogs
-    AddA(tmp[202], a[6674]); -- "Anything You Can Do, I Can Do Better..."
-    AddA(tmp[202], a[7056]); -- "Sorry, Were You Looking for This?"
     AddA(tmp[202], a[7933]); -- And... It's Good!
     AddA(tmp[202], a[6687]); -- Getting Hot In Here
-    AddA(tmp[202], a[6686]); -- Straight Six
     AddA(tmp[202], a[6455]); -- Show Me Your Moves!
-    AddA(tmp[202], a[6719]); -- Heroic: Stone Guard
-    AddA(tmp[202], a[6720]); -- Heroic: Feng the Accursed
-    AddA(tmp[202], a[6721]); -- Heroic: Gara'jal the Spiritbinder
-    AddA(tmp[202], a[6722]); -- Heroic: Four Kings
-    AddA(tmp[202], a[6723]); -- Heroic: Elegon
-    AddA(tmp[202], a[6724]); -- Heroic: Will of the Emperor
     AddA(tmp[202], a[6458]); -- Guardians of Mogu'shan
     AddA(tmp[202], a[6844]); -- The Vault of Mysteries
     AddA(tmp[202], a[6954]); -- Ahead of the Curve: Will of the Emperor
     AddA(tmp[202], a[7485]); -- Cutting Edge: Will of the Emperor
+    tmp[892] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[202], tmp[892]);
+    AddA(tmp[892], a[6823]); -- Must Love Dogs
+    AddA(tmp[892], a[6674]); -- "Anything You Can Do, I Can Do Better..."
+    AddA(tmp[892], a[7056]); -- "Sorry, Were You Looking for This?"
+    AddA(tmp[892], a[6686]); -- Straight Six
+    tmp[893] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[202], tmp[893]);
+    AddA(tmp[893], a[6719]); -- Heroic: Stone Guard
+    AddA(tmp[893], a[6720]); -- Heroic: Feng the Accursed
+    AddA(tmp[893], a[6721]); -- Heroic: Gara'jal the Spiritbinder
+    AddA(tmp[893], a[6722]); -- Heroic: Four Kings
+    AddA(tmp[893], a[6723]); -- Heroic: Elegon
+    AddA(tmp[893], a[6724]); -- Heroic: Will of the Emperor
     tmp[203] = cat:New((EJ_GetInstanceInfo(330))); -- Heart of Fear
     AddC(tmp[191], tmp[203]);
-    AddA(tmp[203], a[6937]); -- Overzealous
-    AddA(tmp[203], a[6936]); -- Candle in the Wind
-    AddA(tmp[203], a[6553]); -- Like an Arrow to the Face
-    AddA(tmp[203], a[6683]); -- Less Than Three
-    AddA(tmp[203], a[6518]); -- I Heard You Like Amber...
-    AddA(tmp[203], a[6922]); -- Timing is Everything
-    AddA(tmp[203], a[6725]); -- Heroic: Imperial Vizier Zor'lok
-    AddA(tmp[203], a[6726]); -- Heroic: Blade Lord Ta'yak
-    AddA(tmp[203], a[6727]); -- Heroic: Garalon
-    AddA(tmp[203], a[6728]); -- Heroic: Wind Lord Mel'jarak
-    AddA(tmp[203], a[6729]); -- Heroic: Amber-Shaper Un'sok
-    AddA(tmp[203], a[6730]); -- Heroic: Grand Empress Shek'zeer
     AddA(tmp[203], a[6718]); -- The Dread Approach
     AddA(tmp[203], a[6845]); -- Nightmare of Shek'zeer
     AddA(tmp[203], a[8246]); -- Ahead of the Curve: Grand Empress Shek'zeer
     AddA(tmp[203], a[7486]); -- Cutting Edge: Grand Empress Shek'zeer
     AddA(tmp[203], a[11757]); -- Sha of Fabulous
+    tmp[894] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[203], tmp[894]);
+    AddA(tmp[894], a[6937]); -- Overzealous
+    AddA(tmp[894], a[6936]); -- Candle in the Wind
+    AddA(tmp[894], a[6553]); -- Like an Arrow to the Face
+    AddA(tmp[894], a[6683]); -- Less Than Three
+    AddA(tmp[894], a[6518]); -- I Heard You Like Amber...
+    AddA(tmp[894], a[6922]); -- Timing is Everything
+    tmp[895] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[203], tmp[895]);
+    AddA(tmp[895], a[6725]); -- Heroic: Imperial Vizier Zor'lok
+    AddA(tmp[895], a[6726]); -- Heroic: Blade Lord Ta'yak
+    AddA(tmp[895], a[6727]); -- Heroic: Garalon
+    AddA(tmp[895], a[6728]); -- Heroic: Wind Lord Mel'jarak
+    AddA(tmp[895], a[6729]); -- Heroic: Amber-Shaper Un'sok
+    AddA(tmp[895], a[6730]); -- Heroic: Grand Empress Shek'zeer
     tmp[204] = cat:New((EJ_GetInstanceInfo(320))); -- Terrace of Endless Spring
     AddC(tmp[191], tmp[204]);
-    AddA(tmp[204], a[6717]); -- Power Overwhelming
-    AddA(tmp[204], a[6933]); -- Who's Got Two Green Thumbs?
-    AddA(tmp[204], a[6824]); -- Face Clutchers
-    AddA(tmp[204], a[6825]); -- The Mind-Killer
-    AddA(tmp[204], a[6731]); -- Heroic: Protectors of the Endless
-    AddA(tmp[204], a[6732]); -- Heroic: Tsulong
-    AddA(tmp[204], a[6733]); -- Heroic: Lei Shi
-    AddA(tmp[204], a[6734]); -- Heroic: Sha of Fear
     AddA(tmp[204], a[6689]); -- Terrace of Endless Spring
     AddA(tmp[204], a[8248]); -- Ahead of the Curve: Sha of Fear
     AddA(tmp[204], a[7487]); -- Cutting Edge: Sha of Fear
+    tmp[896] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[204], tmp[896]);
+    AddA(tmp[896], a[6717]); -- Power Overwhelming
+    AddA(tmp[896], a[6933]); -- Who's Got Two Green Thumbs?
+    AddA(tmp[896], a[6824]); -- Face Clutchers
+    AddA(tmp[896], a[6825]); -- The Mind-Killer
+    tmp[897] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[204], tmp[897]);
+    AddA(tmp[897], a[6731]); -- Heroic: Protectors of the Endless
+    AddA(tmp[897], a[6732]); -- Heroic: Tsulong
+    AddA(tmp[897], a[6733]); -- Heroic: Lei Shi
+    AddA(tmp[897], a[6734]); -- Heroic: Sha of Fear
     tmp[205] = cat:New((EJ_GetInstanceInfo(362))); -- Throne of Thunder
     AddC(tmp[191], tmp[205]);
-    AddA(tmp[205], a[8094]); -- Lightning Overload
-    AddA(tmp[205], a[8038]); -- Cretaceous Collector
-    AddA(tmp[205], a[8073]); -- Cage Match
-    AddA(tmp[205], a[8077]); -- One-Up
-    AddA(tmp[205], a[8082]); -- Head Case
-    AddA(tmp[205], a[8097]); -- Soft Hands
-    AddA(tmp[205], a[8098]); -- You Said Crossing the Streams Was Bad
-    AddA(tmp[205], a[8037]); -- Genetically Unmodified Organism
-    AddA(tmp[205], a[8081]); -- Ritualist Who?
-    AddA(tmp[205], a[8087]); -- Can't Touch This
-    AddA(tmp[205], a[8086]); -- From Dusk 'til Dawn
-    AddA(tmp[205], a[8090]); -- A Complete Circuit
-    AddA(tmp[205], a[8056]); -- Heroic: Jin'rokh the Breaker
-    AddA(tmp[205], a[8057]); -- Heroic: Horridon
-    AddA(tmp[205], a[8058]); -- Heroic: Council of Elders
-    AddA(tmp[205], a[8059]); -- Heroic: Tortos
-    AddA(tmp[205], a[8060]); -- Heroic: Megaera
-    AddA(tmp[205], a[8061]); -- Heroic: Ji-Kun
-    AddA(tmp[205], a[8062]); -- Heroic: Durumu the Forgotten
-    AddA(tmp[205], a[8063]); -- Heroic: Primordius
-    AddA(tmp[205], a[8064]); -- Heroic: Dark Animus
-    AddA(tmp[205], a[8065]); -- Heroic: Iron Qon
-    AddA(tmp[205], a[8066]); -- Heroic: Twin Consorts
-    AddA(tmp[205], a[8067]); -- Heroic: Lei Shen
-    AddA(tmp[205], a[8068]); -- Heroic: Ra-den
     AddA(tmp[205], a[8069]); -- Last Stand of the Zandalari
     AddA(tmp[205], a[8070]); -- Forgotten Depths
     AddA(tmp[205], a[8071]); -- Halls of Flesh-Shaping
@@ -2268,36 +2255,37 @@ function exportedCategories.Load(a)
     AddA(tmp[205], a[8238]); -- Cutting Edge: Lei Shen
     AddA(tmp[205], a[8260]); -- Cutting Edge: Ra-den
     AddA(tmp[205], a[11758]); -- Thunderwear
+    tmp[898] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[205], tmp[898]);
+    AddA(tmp[898], a[8094]); -- Lightning Overload
+    AddA(tmp[898], a[8038]); -- Cretaceous Collector
+    AddA(tmp[898], a[8073]); -- Cage Match
+    AddA(tmp[898], a[8077]); -- One-Up
+    AddA(tmp[898], a[8082]); -- Head Case
+    AddA(tmp[898], a[8097]); -- Soft Hands
+    AddA(tmp[898], a[8098]); -- You Said Crossing the Streams Was Bad
+    AddA(tmp[898], a[8037]); -- Genetically Unmodified Organism
+    AddA(tmp[898], a[8081]); -- Ritualist Who?
+    AddA(tmp[898], a[8087]); -- Can't Touch This
+    AddA(tmp[898], a[8086]); -- From Dusk 'til Dawn
+    AddA(tmp[898], a[8090]); -- A Complete Circuit
+    tmp[899] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[205], tmp[899]);
+    AddA(tmp[899], a[8056]); -- Heroic: Jin'rokh the Breaker
+    AddA(tmp[899], a[8057]); -- Heroic: Horridon
+    AddA(tmp[899], a[8058]); -- Heroic: Council of Elders
+    AddA(tmp[899], a[8059]); -- Heroic: Tortos
+    AddA(tmp[899], a[8060]); -- Heroic: Megaera
+    AddA(tmp[899], a[8061]); -- Heroic: Ji-Kun
+    AddA(tmp[899], a[8062]); -- Heroic: Durumu the Forgotten
+    AddA(tmp[899], a[8063]); -- Heroic: Primordius
+    AddA(tmp[899], a[8064]); -- Heroic: Dark Animus
+    AddA(tmp[899], a[8065]); -- Heroic: Iron Qon
+    AddA(tmp[899], a[8066]); -- Heroic: Twin Consorts
+    AddA(tmp[899], a[8067]); -- Heroic: Lei Shen
+    AddA(tmp[899], a[8068]); -- Heroic: Ra-den
     tmp[206] = cat:New((EJ_GetInstanceInfo(369))); -- Siege of Orgrimmar
     AddC(tmp[191], tmp[206]);
-    AddA(tmp[206], a[8536]); -- No More Tears
-    AddA(tmp[206], a[8528]); -- Go Long
-    AddA(tmp[206], a[8532]); -- None Shall Pass
-    AddA(tmp[206], a[8521]); -- Swallow Your Pride
-    AddA(tmp[206], a[8530]); -- The Immortal Vanguard
-    AddA(tmp[206], a[8520]); -- Fire in the Hole!
-    AddA(tmp[206], a[8453]); -- Rescue Raiders
-    AddA(tmp[206], a[8448]); -- Gamon Will Save Us!
-    AddA(tmp[206], a[8538]); -- Unlimited Potential
-    AddA(tmp[206], a[8529]); -- Criss Cross
-    AddA(tmp[206], a[8527]); -- Giant Dinosaur vs. Mega Snail
-    AddA(tmp[206], a[8543]); -- Lasers and Magnets and Drills! Oh My!
-    AddA(tmp[206], a[8531]); -- Now We are the Paragon
-    AddA(tmp[206], a[8537]); -- Strike!
-    AddA(tmp[206], a[8463]); -- Mythic: Immerseus
-    AddA(tmp[206], a[8465]); -- Mythic: Fallen Protectors
-    AddA(tmp[206], a[8466]); -- Mythic: Norushen
-    AddA(tmp[206], a[8467]); -- Mythic: Sha of Pride
-    AddA(tmp[206], a[8468]); -- Mythic: Galakras
-    AddA(tmp[206], a[8469]); -- Mythic: Iron Juggernaut
-    AddA(tmp[206], a[8470]); -- Mythic: Kor'kron Dark Shaman
-    AddA(tmp[206], a[8471]); -- Mythic: General Nazgrim
-    AddA(tmp[206], a[8472]); -- Mythic: Malkorok
-    AddA(tmp[206], a[8478]); -- Mythic: Spoils of Pandaria
-    AddA(tmp[206], a[8479]); -- Mythic: Thok the Bloodthirsty
-    AddA(tmp[206], a[8480]); -- Mythic: Siegecrafter Blackfuse
-    AddA(tmp[206], a[8481]); -- Mythic: Paragons of the Klaxxi
-    AddA(tmp[206], a[8482]); -- Mythic: Garrosh Hellscream
     AddA(tmp[206], a[8458]); -- Vale of Eternal Sorrows
     AddA(tmp[206], a[8459]); -- Gates of Retribution
     AddA(tmp[206], a[8461]); -- The Underhold
@@ -2305,10 +2293,42 @@ function exportedCategories.Load(a)
     AddA(tmp[206], a[8679]); -- Conqueror of Orgrimmar
     AddA(tmp[206], a[8680]); -- Liberator of Orgrimmar
     AddA(tmp[206], a[8398]); -- Ahead of the Curve: Garrosh Hellscream (10 player)
-    AddA(tmp[206], a[8399]); -- Ahead of the Curve: Garrosh Hellscream (25 player)
     AddA(tmp[206], a[8400]); -- Cutting Edge: Garrosh Hellscream (10 player)
+    AddA(tmp[206], a[8399]); -- Ahead of the Curve: Garrosh Hellscream (25 player)
     AddA(tmp[206], a[8401]); -- Cutting Edge: Garrosh Hellscream (25 player)
     AddA(tmp[206], a[11759]); -- Yaass'shaarj
+    tmp[900] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[206], tmp[900]);
+    AddA(tmp[900], a[8536]); -- No More Tears
+    AddA(tmp[900], a[8528]); -- Go Long
+    AddA(tmp[900], a[8532]); -- None Shall Pass
+    AddA(tmp[900], a[8521]); -- Swallow Your Pride
+    AddA(tmp[900], a[8530]); -- The Immortal Vanguard
+    AddA(tmp[900], a[8520]); -- Fire in the Hole!
+    AddA(tmp[900], a[8453]); -- Rescue Raiders
+    AddA(tmp[900], a[8448]); -- Gamon Will Save Us!
+    AddA(tmp[900], a[8538]); -- Unlimited Potential
+    AddA(tmp[900], a[8529]); -- Criss Cross
+    AddA(tmp[900], a[8527]); -- Giant Dinosaur vs. Mega Snail
+    AddA(tmp[900], a[8543]); -- Lasers and Magnets and Drills! Oh My!
+    AddA(tmp[900], a[8531]); -- Now We are the Paragon
+    AddA(tmp[900], a[8537]); -- Strike!
+    tmp[901] = cat:New(addon.L["Mythic"]); -- Mythic
+    AddC(tmp[206], tmp[901]);
+    AddA(tmp[901], a[8463]); -- Mythic: Immerseus
+    AddA(tmp[901], a[8465]); -- Mythic: Fallen Protectors
+    AddA(tmp[901], a[8466]); -- Mythic: Norushen
+    AddA(tmp[901], a[8467]); -- Mythic: Sha of Pride
+    AddA(tmp[901], a[8468]); -- Mythic: Galakras
+    AddA(tmp[901], a[8469]); -- Mythic: Iron Juggernaut
+    AddA(tmp[901], a[8470]); -- Mythic: Kor'kron Dark Shaman
+    AddA(tmp[901], a[8471]); -- Mythic: General Nazgrim
+    AddA(tmp[901], a[8472]); -- Mythic: Malkorok
+    AddA(tmp[901], a[8478]); -- Mythic: Spoils of Pandaria
+    AddA(tmp[901], a[8479]); -- Mythic: Thok the Bloodthirsty
+    AddA(tmp[901], a[8480]); -- Mythic: Siegecrafter Blackfuse
+    AddA(tmp[901], a[8481]); -- Mythic: Paragons of the Klaxxi
+    AddA(tmp[901], a[8482]); -- Mythic: Garrosh Hellscream
     tmp[549] = cat:New((GetCategoryInfo(15117))); -- Pet Battles
     AddC(tmp[189], tmp[549]);
     AddA(tmp[549], a[6616]); -- Pandaria Tamer
@@ -2799,47 +2819,31 @@ function exportedCategories.Load(a)
     AddA(tmp[225], a[10149]); -- Glory of the Hellfire Raider
     tmp[234] = cat:New((EJ_GetInstanceInfo(477))); -- Highmaul
     AddC(tmp[225], tmp[234]);
-    AddA(tmp[234], a[8948]); -- Flame On!
-    AddA(tmp[234], a[8947]); -- "Hurry Up, Maggot!"
-    AddA(tmp[234], a[8974]); -- More Like Wrecked-us
-    AddA(tmp[234], a[8975]); -- A Fungus Among Us
-    AddA(tmp[234], a[8958]); -- Brothers in Arms
-    AddA(tmp[234], a[8976]); -- Pair Annihilation
-    AddA(tmp[234], a[8977]); -- Lineage of Power
-    AddA(tmp[234], a[8949]); -- Mythic: Kargath Bladefist
-    AddA(tmp[234], a[8960]); -- Mythic: The Butcher
-    AddA(tmp[234], a[8961]); -- Mythic: Tectus
-    AddA(tmp[234], a[8962]); -- Mythic: Brackenspore
-    AddA(tmp[234], a[8963]); -- Mythic: Twin Ogron
-    AddA(tmp[234], a[8964]); -- Mythic: Ko'ragh
-    AddA(tmp[234], a[8965]); -- Mythic: Imperator's Fall
     AddA(tmp[234], a[8986]); -- The Walled City
     AddA(tmp[234], a[8987]); -- Arcane Sanctum
     AddA(tmp[234], a[8988]); -- Imperator's Fall
     AddA(tmp[234], a[9441]); -- Ahead of the Curve: Imperator's Fall
     AddA(tmp[234], a[9442]); -- Cutting Edge: Imperator's Fall
+    tmp[886] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[234], tmp[886]);
+    AddA(tmp[886], a[8948]); -- Flame On!
+    AddA(tmp[886], a[8947]); -- "Hurry Up, Maggot!"
+    AddA(tmp[886], a[8974]); -- More Like Wrecked-us
+    AddA(tmp[886], a[8975]); -- A Fungus Among Us
+    AddA(tmp[886], a[8958]); -- Brothers in Arms
+    AddA(tmp[886], a[8976]); -- Pair Annihilation
+    AddA(tmp[886], a[8977]); -- Lineage of Power
+    tmp[887] = cat:New(addon.L["Mythic"]); -- Mythic
+    AddC(tmp[234], tmp[887]);
+    AddA(tmp[887], a[8949]); -- Mythic: Kargath Bladefist
+    AddA(tmp[887], a[8960]); -- Mythic: The Butcher
+    AddA(tmp[887], a[8961]); -- Mythic: Tectus
+    AddA(tmp[887], a[8962]); -- Mythic: Brackenspore
+    AddA(tmp[887], a[8963]); -- Mythic: Twin Ogron
+    AddA(tmp[887], a[8964]); -- Mythic: Ko'ragh
+    AddA(tmp[887], a[8965]); -- Mythic: Imperator's Fall
     tmp[235] = cat:New((EJ_GetInstanceInfo(457))); -- Blackrock Foundry
     AddC(tmp[225], tmp[235]);
-    AddA(tmp[235], a[8979]); -- "He Shoots, He Ores"
-    AddA(tmp[235], a[8978]); -- The Iron Price
-    AddA(tmp[235], a[8930]); -- "Ya, We've Got Time..."
-    AddA(tmp[235], a[8980]); -- Stamp Stamp Revolution
-    AddA(tmp[235], a[8929]); -- The Steel Has Been Brought
-    AddA(tmp[235], a[8983]); -- Would You Give Me a Hand?
-    AddA(tmp[235], a[8981]); -- Fain Would Lie Down
-    AddA(tmp[235], a[8982]); -- There's Always a Bigger Train
-    AddA(tmp[235], a[8984]); -- Be Quick or Be Dead
-    AddA(tmp[235], a[8952]); -- "Ashes, Ashes..."
-    AddA(tmp[235], a[8967]); -- Mythic: Oregorger
-    AddA(tmp[235], a[8966]); -- Mythic: Gruul
-    AddA(tmp[235], a[8970]); -- Mythic: Blast Furnace
-    AddA(tmp[235], a[8968]); -- Mythic: Hans'gar and Franzok
-    AddA(tmp[235], a[8932]); -- Mythic: Flamebender Ka'graz
-    AddA(tmp[235], a[8971]); -- Mythic: Kromog
-    AddA(tmp[235], a[8956]); -- Mythic: Beastlord Darmac
-    AddA(tmp[235], a[8969]); -- Mythic: Operator Thogar
-    AddA(tmp[235], a[8972]); -- Mythic: Iron Maidens
-    AddA(tmp[235], a[8973]); -- Mythic: Blackhand's Crucible
     AddA(tmp[235], a[8989]); -- Slagworks
     AddA(tmp[235], a[8990]); -- Black Forge
     AddA(tmp[235], a[8991]); -- Iron Assembly
@@ -2847,34 +2851,32 @@ function exportedCategories.Load(a)
     AddA(tmp[235], a[9444]); -- Ahead of the Curve: Blackhand's Crucible
     AddA(tmp[235], a[9443]); -- Cutting Edge: Blackhand's Crucible
     AddA(tmp[235], a[11740]); -- Make it W-orc W-orc
+    tmp[888] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[235], tmp[888]);
+    AddA(tmp[888], a[8979]); -- "He Shoots, He Ores"
+    AddA(tmp[888], a[8978]); -- The Iron Price
+    AddA(tmp[888], a[8930]); -- "Ya, We've Got Time..."
+    AddA(tmp[888], a[8980]); -- Stamp Stamp Revolution
+    AddA(tmp[888], a[8929]); -- The Steel Has Been Brought
+    AddA(tmp[888], a[8983]); -- Would You Give Me a Hand?
+    AddA(tmp[888], a[8981]); -- Fain Would Lie Down
+    AddA(tmp[888], a[8982]); -- There's Always a Bigger Train
+    AddA(tmp[888], a[8984]); -- Be Quick or Be Dead
+    AddA(tmp[888], a[8952]); -- "Ashes, Ashes..."
+    tmp[889] = cat:New(addon.L["Mythic"]); -- Mythic
+    AddC(tmp[235], tmp[889]);
+    AddA(tmp[889], a[8967]); -- Mythic: Oregorger
+    AddA(tmp[889], a[8966]); -- Mythic: Gruul
+    AddA(tmp[889], a[8970]); -- Mythic: Blast Furnace
+    AddA(tmp[889], a[8968]); -- Mythic: Hans'gar and Franzok
+    AddA(tmp[889], a[8932]); -- Mythic: Flamebender Ka'graz
+    AddA(tmp[889], a[8971]); -- Mythic: Kromog
+    AddA(tmp[889], a[8956]); -- Mythic: Beastlord Darmac
+    AddA(tmp[889], a[8969]); -- Mythic: Operator Thogar
+    AddA(tmp[889], a[8972]); -- Mythic: Iron Maidens
+    AddA(tmp[889], a[8973]); -- Mythic: Blackhand's Crucible
     tmp[236] = cat:New((EJ_GetInstanceInfo(669))); -- Hellfire Citadel
     AddC(tmp[225], tmp[236]);
-    AddA(tmp[236], a[10026]); -- Nearly Indestructible
-    AddA(tmp[236], a[10057]); -- Turning the Tide
-    AddA(tmp[236], a[10013]); -- Waves Came Crashing Down All Around
-    AddA(tmp[236], a[10054]); -- Don't Fear the Reaper
-    AddA(tmp[236], a[9972]); -- A Race Against Slime
-    AddA(tmp[236], a[9979]); -- Get In My Belly!
-    AddA(tmp[236], a[9988]); -- Pro Toss
-    AddA(tmp[236], a[10086]); -- I'm a Soul Man
-    AddA(tmp[236], a[9989]); -- Non-Lethal Enforcer
-    AddA(tmp[236], a[10012]); -- This Land Was Green and Good Until...
-    AddA(tmp[236], a[10087]); -- You Gotta Keep 'em Separated
-    AddA(tmp[236], a[10030]); -- Bad Manner(oth)
-    AddA(tmp[236], a[10073]); -- Echoes of Doomfire
-    AddA(tmp[236], a[10027]); -- Mythic: Hellfire Assault
-    AddA(tmp[236], a[10032]); -- Mythic: Iron Reaver
-    AddA(tmp[236], a[10033]); -- Mythic: Kormrok
-    AddA(tmp[236], a[10034]); -- Mythic: Hellfire High Council
-    AddA(tmp[236], a[10035]); -- Mythic: Kilrogg Deadeye
-    AddA(tmp[236], a[10253]); -- Mythic: Gorefiend
-    AddA(tmp[236], a[10037]); -- Mythic: Shadow-Lord Iskar
-    AddA(tmp[236], a[10040]); -- Mythic: Socrethar the Eternal
-    AddA(tmp[236], a[10041]); -- Mythic: Tyrant Velhari
-    AddA(tmp[236], a[10038]); -- Mythic: Fel Lord Zakuun
-    AddA(tmp[236], a[10039]); -- Mythic: Xhul'horac
-    AddA(tmp[236], a[10042]); -- Mythic: Mannoroth
-    AddA(tmp[236], a[10043]); -- Mythic: Archimonde
     AddA(tmp[236], a[10023]); -- Hellbreach
     AddA(tmp[236], a[10024]); -- Halls of Blood
     AddA(tmp[236], a[10025]); -- Bastion of Shadows
@@ -2884,6 +2886,36 @@ function exportedCategories.Load(a)
     AddA(tmp[236], a[10044]); -- Ahead of the Curve: The Black Gate
     AddA(tmp[236], a[10045]); -- Cutting Edge: The Black Gate
     AddA(tmp[236], a[11631]); -- Extreme Makeover: Fel Edition
+    tmp[890] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[236], tmp[890]);
+    AddA(tmp[890], a[10026]); -- Nearly Indestructible
+    AddA(tmp[890], a[10057]); -- Turning the Tide
+    AddA(tmp[890], a[10013]); -- Waves Came Crashing Down All Around
+    AddA(tmp[890], a[10054]); -- Don't Fear the Reaper
+    AddA(tmp[890], a[9972]); -- A Race Against Slime
+    AddA(tmp[890], a[9979]); -- Get In My Belly!
+    AddA(tmp[890], a[9988]); -- Pro Toss
+    AddA(tmp[890], a[10086]); -- I'm a Soul Man
+    AddA(tmp[890], a[9989]); -- Non-Lethal Enforcer
+    AddA(tmp[890], a[10012]); -- This Land Was Green and Good Until...
+    AddA(tmp[890], a[10087]); -- You Gotta Keep 'em Separated
+    AddA(tmp[890], a[10030]); -- Bad Manner(oth)
+    AddA(tmp[890], a[10073]); -- Echoes of Doomfire
+    tmp[891] = cat:New(addon.L["Mythic"]); -- Mythic
+    AddC(tmp[236], tmp[891]);
+    AddA(tmp[891], a[10027]); -- Mythic: Hellfire Assault
+    AddA(tmp[891], a[10032]); -- Mythic: Iron Reaver
+    AddA(tmp[891], a[10033]); -- Mythic: Kormrok
+    AddA(tmp[891], a[10034]); -- Mythic: Hellfire High Council
+    AddA(tmp[891], a[10035]); -- Mythic: Kilrogg Deadeye
+    AddA(tmp[891], a[10253]); -- Mythic: Gorefiend
+    AddA(tmp[891], a[10037]); -- Mythic: Shadow-Lord Iskar
+    AddA(tmp[891], a[10040]); -- Mythic: Socrethar the Eternal
+    AddA(tmp[891], a[10041]); -- Mythic: Tyrant Velhari
+    AddA(tmp[891], a[10038]); -- Mythic: Fel Lord Zakuun
+    AddA(tmp[891], a[10039]); -- Mythic: Xhul'horac
+    AddA(tmp[891], a[10042]); -- Mythic: Mannoroth
+    AddA(tmp[891], a[10043]); -- Mythic: Archimonde
     tmp[548] = cat:New((GetCategoryInfo(15117))); -- Pet Battles
     AddC(tmp[223], tmp[548]);
     AddA(tmp[548], a[9685]); -- Draenor Safari

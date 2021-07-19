@@ -147,11 +147,6 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("data.ExportedCategories = {};");
             sb.AppendLine("local exportedCategories = data.ExportedCategories;");
             sb.AppendLine("");
-            sb.AppendLine("local function IaR(table, value) -- InsertAndReturn");
-            sb.AppendLineTabbed(1, "tinsert(table, value);");
-            sb.AppendLineTabbed(1, "return value;");
-            sb.AppendLine("end");
-            sb.AppendLine("");
             sb.AppendLine("local function AddC(c1, c2)");
             sb.AppendLineTabbed(1, "c1:AddCategory(c2)");
             sb.AppendLine("end");
@@ -160,11 +155,7 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLineTabbed(1, "c:AddAchievement(a)");
             sb.AppendLine("end");
             sb.AppendLine("");
-            sb.AppendLine("function exportedCategories.Load(c, a)");
-            sb.AppendLineTabbed(1, "for i, _ in next, c do");
-            sb.AppendLineTabbed(2, "c[i] = nil;");
-            sb.AppendLineTabbed(1, "end");
-            sb.AppendLine("");
+            sb.AppendLine("function exportedCategories.Load(a)");
             sb.AppendLineTabbed(1, "local tmp = {};");
 
             var categories = categoryDM.GetAll(true);
@@ -172,7 +163,7 @@ namespace DbManagerWPF.ViewModel
                 ExportCategory(sb, category);
 
             sb.AppendLine("");
-            sb.AppendLineTabbed(1, "return currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;");
+            sb.AppendLineTabbed(1, "return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;");
             sb.AppendLine("end");
 
             using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedCategories.lua");
@@ -185,18 +176,28 @@ namespace DbManagerWPF.ViewModel
                 return;
 
             var appendString = $"tmp[{category.ID}] = ";
-            appendString += category.Parent == null ? "IaR(c, " : "";
+            //appendString += category.Parent == null ? "IaR(c, " : "";
             appendString += "cat:New(";
             appendString += category.Function.Call.Replace("%value%", category.FunctionValue); // Category name
             appendString += $"{(category.IsLegacy ? $" .. \" (\" .. {functionDM.GetLegacyFunction().Call} .. \")\"" : "")}"; // Legacy if applicable
             appendString += ", ";
             appendString += $"{(category.CanMerge ? "true" : "nil")}"; // CanMerge
             appendString = TrimNils(appendString); // Remove unneccesary nils
-            appendString += category.Parent == null ? ")" : "";
+            //appendString += category.Parent == null ? ")" : "";
             appendString += $"); -- {category.Name}";
             sb.AppendLineTabbed(1, appendString);
             if (category.Parent != null)
                 sb.AppendLineTabbed(1, $"AddC(tmp[{category.Parent.ID}], tmp[{category.ID}]);");
+            if (category.Function == functionDM.GetTabExpansionsFunction())
+            {
+                sb.AppendLineTabbed(1, $"tmp[{category.ID}].IsTab = true;");
+                sb.AppendLineTabbed(1, $"local tabExpansionsCategories = tmp[{category.ID}];");
+            }
+            if (category.Function == functionDM.GetTabEventsFunction())
+            {
+                sb.AppendLineTabbed(1, $"tmp[{category.ID}].IsTab = true;");
+                sb.AppendLineTabbed(1, $"local tabEventsCategories = tmp[{category.ID}];");
+            }
             if (category.Function == functionDM.GetCurrentZoneFunction())
             {
                 sb.AppendLineTabbed(1, $"tmp[{category.ID}].AlwaysVisible = true;");

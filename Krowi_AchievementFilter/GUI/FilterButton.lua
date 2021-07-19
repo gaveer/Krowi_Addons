@@ -635,11 +635,11 @@ function filterButton:SetFilters(achievement)
 end
 
 function filterButton:GetFilters()
-	if gui.CategoriesFrame.SelectedCategory == addon.Data.CurrentZoneCategory then
+	if gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory then
 		return self.Filters.db.CurrentZone;
-	elseif gui.CategoriesFrame.SelectedCategory == addon.Data.SelectedZoneCategory then
+	elseif gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then
 		return self.Filters.db.SelectedZone;
-	elseif gui.CategoriesFrame.SelectedCategory == addon.Data.ExcludedCategory then
+	elseif gui.SelectedTab.SelectedCategory == addon.Data.ExcludedCategory then
 		return self.Filters.db.ExcludedCategory;
 	end
 

@@ -16,7 +16,6 @@ function achievementsFrame:Load()
 	core.InjectMetatable(frame, achievementsFrame); -- Inject all the namespace functions to the frame
 
 	-- Set properties
-	frame.SelectedAchievement = nil; -- Issue #6: Fix
 	frame.UIFontHeight = nil;
 
 	-- Set parents
@@ -178,8 +177,8 @@ local highlightedButton;
 function achievementsFrame:Update()
 	diagnostics.Trace("achievementsFrame:Update");
 
-	local updateAchievements = cachedCategory ~= gui.CategoriesFrame.SelectedCategory;
-	cachedCategory = gui.CategoriesFrame.SelectedCategory;
+	local updateAchievements = cachedCategory ~= gui.SelectedTab.SelectedCategory;
+	cachedCategory = gui.SelectedTab.SelectedCategory;
 	local scrollFrame = self.Container;
 
 	local offset = HybridScrollFrame_GetOffset(scrollFrame);
@@ -200,12 +199,12 @@ function achievementsFrame:Update()
 		self.Text:Hide();
 	end
 
-	-- local selection = self.SelectedAchievement;
-	if self.SelectedAchievement then
+	if gui.SelectedTab.SelectedAchievement then
 		AchievementFrameAchievementsObjectives:Hide();
 	end
 
-	local extraHeight = scrollFrame.largeButtonHeight or ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT
+	local extraHeight = scrollFrame.largeButtonHeight or ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	-- diagnostics.Debug("extraHeight " .. tostring(extraHeight));
 
 	local achievementIndex;
 	local displayedHeight = 0;
@@ -214,17 +213,21 @@ function achievementsFrame:Update()
 		if achievementIndex > #cachedAchievements then
 			buttons[i]:Hide();
 		else
-			self:DisplayAchievement(buttons[i], cachedAchievements[achievementIndex], achievementIndex, self.SelectedAchievement);
+			self:DisplayAchievement(buttons[i], cachedAchievements[achievementIndex], achievementIndex, gui.SelectedTab.SelectedAchievement);
 			displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		end
 	end
 
 	local totalHeight = #cachedAchievements * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	-- diagnostics.Debug("totalHeight1 " .. tostring(totalHeight));
 	totalHeight = totalHeight + extraHeight - ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	-- diagnostics.Debug("totalHeight2 " .. tostring(totalHeight));
 
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
 
-	if not self.SelectedAchievement then
+	-- gui.SelectedTab.AchievementsFrameScrollBarValue = scrollFrame.ScrollBar:GetValue();
+
+	if not gui.SelectedTab.SelectedAchievement then
 		HybridScrollFrame_CollapseButton(scrollFrame);
 	end
 
@@ -246,7 +249,7 @@ function achievementsFrame:ForceUpdate(toTop) -- Issue #3: Fix
 	end
 
 	if gui.FilterButton then
-		self.SelectedAchievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(self.SelectedAchievement);
+		gui.SelectedTab.SelectedAchievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(gui.SelectedTab.SelectedAchievement);
 	end
 
 	-- Issue #8: Broken
@@ -263,6 +266,13 @@ function achievementsFrame:ForceUpdate(toTop) -- Issue #3: Fix
 	cachedAchievements = nil;
 
 	self:Update();
+
+	-- if gui.SelectedTab.SelectedAchievement then
+	-- 	-- self:SelectAchievement(gui.SelectedTab.SelectedAchievement);
+	-- 	self:FindSelection();
+	-- else
+	-- 	self.Container.ScrollBar:SetValue(0);
+	-- end
 end
 
 function achievementsFrame:ClearSelection()
@@ -282,13 +292,13 @@ function achievementsFrame:ClearSelection()
 		button.hiddenDescription:Hide();
 	end
 
-	self.SelectedAchievement = nil;
+	gui.SelectedTab.SelectedAchievement = nil;
 end
 
 function achievementsFrame:SelectButton(button)
 	diagnostics.Trace("achievementsFrame:SelectButton");
 
-	self.SelectedAchievement = button.Achievement;
+	gui.SelectedTab.SelectedAchievement = button.Achievement;
 	button.selected = true;
 
 	SetFocusedAchievement(button.Achievement.ID);
@@ -519,6 +529,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 	end
 
 	gui.CategoriesFrame:SelectCategory(category);
+	self.Container.ScrollBar:SetValue(0); -- Makes sure the scrollbar is at the top since this can be in a diff location if the category is already selected
 
 	local shown = false;
 	local previousScrollValue;
@@ -531,7 +542,9 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 			-- diagnostics.Debug(math.ceil(button:GetTop()));
 			-- diagnostics.Debug(math.ceil(gui.GetSafeScrollChildBottom(child)));
 			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
-				button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
+				if not (gui.SelectedTab.SelectedAchievement and gui.SelectedTab.SelectedAchievement.ID == achievement.ID) then
+					button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
+				end
 				shown = button;
 				break;
 			end

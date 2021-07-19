@@ -1,12 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.27.0] - 2021-
+## [9.1.0.27.A1] - 2021-
 ### Added
-- 
+- 2nd tab added with Event achievements (WIP)
 
 ### Changed
 - Categories are now only stored hierarchical in preperation of new features; Reduced memory usage by 1%
+- Achievement Filter tab renamed to Expansions
 
 ### Fixed
 - 

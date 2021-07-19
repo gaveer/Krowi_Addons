@@ -73,7 +73,7 @@ function display:DisplayObjectives(renderOffScreen, achievementsFrame)
 		self.description:Hide();
 		local descriptionHeight = self.hiddenDescription:GetHeight();
 		height = height + descriptionHeight - ACHIEVEMENTBUTTON_DESCRIPTIONHEIGHT;
-		if ( self.reward:IsShown() ) then
+		if self.reward:IsShown() then
 			height = height + 4;
 		end
 	end

@@ -19,7 +19,7 @@ L["Exclude"] = "Exclude";
 
 -- Tabs
 L["Expansions"] = "Expansions";
-L["Events"] = "Events";
+L["Events"] = "Events (WIP)";
 
 -- Categories
 L["Current Zone"] = "Current Zone";

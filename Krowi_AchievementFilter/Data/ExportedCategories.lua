@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-17 14-47-42 ]] --
+-- [[ Exported at 2021-07-18 09-10-54 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -10,11 +10,6 @@ local data = addon.Data;
 data.ExportedCategories = {};
 local exportedCategories = data.ExportedCategories;
 
-local function IaR(table, value) -- InsertAndReturn
-    tinsert(table, value);
-    return value;
-end
-
 local function AddC(c1, c2)
     c1:AddCategory(c2)
 end
@@ -23,20 +18,22 @@ local function AddA(c, a)
     c:AddAchievement(a)
 end
 
-function exportedCategories.Load(c, a)
-    for i, _ in next, c do
-        c[i] = nil;
-    end
-
+function exportedCategories.Load(a)
     local tmp = {};
-    tmp[433] = IaR(c, cat:New(addon.L["Current Zone"])); -- Current Zone
+    tmp[883] = cat:New(); -- TAB - Expansions
+    tmp[883].IsTab = true;
+    local tabExpansionsCategories = tmp[883];
+    tmp[433] = cat:New(addon.L["Current Zone"]); -- Current Zone
+    AddC(tmp[883], tmp[433]);
     tmp[433].AlwaysVisible = true;
     tmp[433].HasFlexibleData = true;
     local currentZoneCategory = tmp[433];
-    tmp[850] = IaR(c, cat:New(addon.L["Selected Zone"])); -- Selected Zone
+    tmp[850] = cat:New(addon.L["Selected Zone"]); -- Selected Zone
+    AddC(tmp[883], tmp[850]);
     tmp[850].HasFlexibleData = true;
     local selectedZoneCategory = tmp[850];
-    tmp[1] = IaR(c, cat:New((GetCategoryInfo(14864)))); -- Classic
+    tmp[1] = cat:New((GetCategoryInfo(14864))); -- Classic
+    AddC(tmp[883], tmp[1]);
     tmp[648] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[1], tmp[648]);
     AddA(tmp[648], a[1206]); -- To All The Squirrels I've Loved Before
@@ -497,7 +494,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[785], a[6612]); -- Kalimdor Tamer
     AddA(tmp[785], a[6603]); -- Taming Eastern Kingdoms
     AddA(tmp[785], a[6602]); -- Taming Kalimdor
-    tmp[55] = IaR(c, cat:New((GetCategoryInfo(14865)))); -- The Burning Crusade
+    tmp[55] = cat:New((GetCategoryInfo(14865))); -- The Burning Crusade
+    AddC(tmp[883], tmp[55]);
     tmp[616] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[55], tmp[616]);
     AddA(tmp[616], a[1262]); -- Loremaster of Outland
@@ -760,7 +758,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[786], a[6587]); -- Outland Safari
     AddA(tmp[786], a[6614]); -- Outland Tamer
     AddA(tmp[786], a[6604]); -- Taming Outland
-    tmp[83] = IaR(c, cat:New((GetCategoryInfo(14866)))); -- Wrath of the Lich King
+    tmp[83] = cat:New((GetCategoryInfo(14866))); -- Wrath of the Lich King
+    AddC(tmp[883], tmp[83]);
     tmp[577] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[83], tmp[577]);
     AddA(tmp[577], a[41]); -- Loremaster of Northrend
@@ -1488,7 +1487,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[781], a[3676]); -- A Silver Confidant
     AddA(tmp[781], a[3677]); -- The Sunreavers
     AddA(tmp[781], a[4596]); -- The Sword in the Skull
-    tmp[129] = IaR(c, cat:New((GetCategoryInfo(15072)))); -- Cataclysm
+    tmp[129] = cat:New((GetCategoryInfo(15072))); -- Cataclysm
+    AddC(tmp[883], tmp[129]);
     tmp[550] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[129], tmp[550]);
     AddA(tmp[550], a[4875]); -- Loremaster of Cataclysm
@@ -1812,7 +1812,8 @@ function exportedCategories.Load(c, a)
     AddC(tmp[547], tmp[575]);
     AddA(tmp[575], a[5375]); -- Baradin's Wardens
     AddA(tmp[575], a[5376]); -- Hellscream's Reach
-    tmp[189] = IaR(c, cat:New((GetCategoryInfo(15164)))); -- Mists of Pandaria
+    tmp[189] = cat:New((GetCategoryInfo(15164))); -- Mists of Pandaria
+    AddC(tmp[883], tmp[189]);
     AddA(tmp[189], a[6926]); -- Tranquil Master
     AddA(tmp[189], a[7533]); -- Chapter I: Trial of the Black Prince
     AddA(tmp[189], a[8030]); -- A Test of Valor
@@ -2488,7 +2489,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[490], a[8509]); -- Proving Yourself: Endless Healer (Wave 30) (Level 90)
     AddA(tmp[490], a[8697]); -- You're Doing it Wrong (Level 90)
     AddA(tmp[490], a[8812]); -- You're Really Doing It Wrong (Level 90)
-    tmp[223] = IaR(c, cat:New((GetCategoryInfo(15233)))); -- Warlords of Dreanor
+    tmp[223] = cat:New((GetCategoryInfo(15233))); -- Warlords of Dreanor
+    AddC(tmp[883], tmp[223]);
     AddA(tmp[223], a[9838]); -- "What A Strange, Interdimensional Trip It's Been"
     AddA(tmp[223], a[9640]); -- Chapter I: Call of the Archmage
     AddA(tmp[223], a[9641]); -- Chapter II: Gul'dan Strikes Back
@@ -3073,7 +3075,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[855], a[9827]); -- Impervious Defender
     AddA(tmp[855], a[9181]); -- Save Those Buildings!
     AddA(tmp[855], a[9858]); -- Master and Commander
-    tmp[237] = IaR(c, cat:New((GetCategoryInfo(15258)))); -- Legion
+    tmp[237] = cat:New((GetCategoryInfo(15258))); -- Legion
+    AddC(tmp[883], tmp[237]);
     tmp[381] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[237], tmp[381]);
     tmp[396] = cat:New(C_Map.GetMapInfo(619).name); -- Broken Isles
@@ -3569,7 +3572,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[429], a[12071]); -- Crucible's Promise
     AddA(tmp[429], a[12072]); -- Now You're Cooking with Netherlight
     AddA(tmp[429], a[11218]); -- There's a Boss In There
-    tmp[258] = IaR(c, cat:New((GetCategoryInfo(15305)))); -- Battle for Azeroth
+    tmp[258] = cat:New((GetCategoryInfo(15305))); -- Battle for Azeroth
+    AddC(tmp[883], tmp[258]);
     tmp[259] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[258], tmp[259]);
     tmp[271] = cat:New(C_Map.GetMapInfo(876).name .. " & " .. C_Map.GetMapInfo(875).name); -- Kul Tiras & Zandalar
@@ -4351,7 +4355,8 @@ function exportedCategories.Load(c, a)
     AddA(tmp[428], a[14172]); -- A Monumental Amount of Mementos
     AddA(tmp[428], a[14173]); -- A Mountain of Mementos
     AddA(tmp[428], a[14140]); -- Mad World
-    tmp[6] = IaR(c, cat:New((GetCategoryInfo(15439)))); -- Shadowlands
+    tmp[6] = cat:New((GetCategoryInfo(15439))); -- Shadowlands
+    AddC(tmp[883], tmp[6]);
     tmp[344] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[6], tmp[344]);
     AddA(tmp[344], a[14280]); -- Loremaster of Shadowlands
@@ -4851,9 +4856,31 @@ function exportedCategories.Load(c, a)
     AddA(tmp[420], a[14764]); -- The Great Luckydo
     AddA(tmp[420], a[14833]); -- Fashion Abomination
     AddA(tmp[420], a[14763]); -- Crypt Couture
-    tmp[857] = IaR(c, cat:New(addon.L["Excluded"])); -- Excluded
+    tmp[857] = cat:New(addon.L["Excluded"]); -- Excluded
+    AddC(tmp[883], tmp[857]);
     local excludedCategory = tmp[857];
+    tmp[884] = cat:New(); -- TAB - Events
+    tmp[884].IsTab = true;
+    local tabEventsCategories = tmp[884];
+    tmp[885] = cat:New((GetCategoryInfo(160))); -- Lunar Festival
+    AddC(tmp[884], tmp[885]);
+    AddA(tmp[885], a[605]); -- A Coin of Ancestry
+    AddA(tmp[885], a[606]); -- 5 Coins of Ancestry
+    AddA(tmp[885], a[607]); -- 10 Coins of Ancestry
+    AddA(tmp[885], a[608]); -- 25 Coins of Ancestry
+    AddA(tmp[885], a[609]); -- 50 Coins of Ancestry
+    AddA(tmp[885], a[626]); -- Lunar Festival Finery
+    AddA(tmp[885], a[1281]); -- The Rocket's Red Glare
+    AddA(tmp[885], a[1552]); -- Frenzied Firecracker
+    AddA(tmp[885], a[937]); -- Elune's Blessing
+    AddA(tmp[885], a[6006]); -- Elders of Cataclysm
+    AddA(tmp[885], a[912]); -- Elders of Eastern Kingdoms
+    AddA(tmp[885], a[911]); -- Elders of Kalimdor
+    AddA(tmp[885], a[1396]); -- Elders of Northrend
+    AddA(tmp[885], a[910]); -- Elders of the Dungeons
+    AddA(tmp[885], a[915]); -- Elders of the Alliance
+    AddA(tmp[885], a[914]); -- Elders of the Horde
 
-    return currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
+    return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
 end
 

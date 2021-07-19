@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-12 23-22-25 ]] --
+-- [[ Exported at 2021-07-18 09-10-53 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -79,10 +79,16 @@ function exportedAchievements.Load(a)
     a[577] = ach:New(577, 50); -- The Fall of Naxxramas (25 player)
     a[578] = ach:New(578, 25); -- The Dedicated Few (10 player)
     a[579] = ach:New(579, 50); -- The Dedicated Few (25 player)
+    a[605] = ach:New(605, 10); -- A Coin of Ancestry
+    a[606] = ach:New(606, 10); -- 5 Coins of Ancestry
+    a[607] = ach:New(607, 10); -- 10 Coins of Ancestry
+    a[608] = ach:New(608, 10); -- 25 Coins of Ancestry
+    a[609] = ach:New(609, 10); -- 50 Coins of Ancestry
     a[622] = ach:New(622, 10); -- The Spellweaver's Downfall (10 player)
     a[623] = ach:New(623, 25); -- The Spellweaver's Downfall (25 player)
     a[624] = ach:New(624, 10); -- Less Is More (10 player)
     a[625] = ach:New(625, 25); -- Besting the Black Dragonflight (25 player)
+    a[626] = ach:New(626, 10); -- Lunar Festival Finery
     a[627] = ach:New(627, 10); -- Explore Dun Morogh
     a[628] = ach:New(628, 10); -- Deadmines
     a[629] = ach:New(629, 10); -- Ragefire Chasm
@@ -220,6 +226,12 @@ function exportedAchievements.Load(a)
     a[901] = ach:New(901, 15, fac.Horde); -- Mag'har of Draenor
     a[902] = ach:New(902, 10); -- Chief Exalted Officer
     a[903] = ach:New(903, 10); -- Shattrath Divided
+    a[910] = ach:New(910, 10); -- Elders of the Dungeons
+    a[911] = ach:New(911, 10); -- Elders of Kalimdor
+    a[912] = ach:New(912, 10); -- Elders of Eastern Kingdoms
+    a[914] = ach:New(914, 10); -- Elders of the Horde
+    a[915] = ach:New(915, 10); -- Elders of the Alliance
+    a[937] = ach:New(937, 10); -- Elune's Blessing
     a[938] = ach:New(938, 10); -- The Snows of Northrend
     a[939] = ach:New(939, 10); -- Hills Like White Elekk
     a[940] = ach:New(940, 10); -- The Green Hills of Stranglethorn
@@ -277,6 +289,7 @@ function exportedAchievements.Load(a)
     a[1275] = ach:New(1275, 10); -- Bombs Away
     a[1276] = ach:New(1276, 10); -- Blade's Edge Bomberman
     a[1277] = ach:New(1277, 10); -- Rapid Defense
+    a[1281] = ach:New(1281, 10); -- The Rocket's Red Glare
     a[1283] = ach:New(1283, 10); -- Classic Dungeonmaster
     a[1284] = ach:New(1284, 10); -- Outland Dungeonmaster
     a[1285] = ach:New(1285, 20); -- Classic Raider
@@ -293,8 +306,10 @@ function exportedAchievements.Load(a)
     a[1357] = ach:New(1357, 10, fac.Horde); -- Fo' Grizzle My Shizzle
     a[1358] = ach:New(1358, 10, fac.Horde); -- Nothing Boring About Borean
     a[1359] = ach:New(1359, 10, fac.Horde); -- Might of Dragonblight
+    a[1396] = ach:New(1396, 10); -- Elders of Northrend
     a[1428] = ach:New(1428, 10); -- Mine Sweeper
     a[1457] = ach:New(1457, 10); -- Explore Crystalsong Forest
+    a[1552] = ach:New(1552, 10); -- Frenzied Firecracker
     a[1576] = ach:New(1576, 10); -- Of Blood and Anguish
     a[1596] = ach:New(1596, 10); -- Guru of Drakuru
     a[1638] = ach:New(1638, 10); -- Skyshattered
@@ -932,6 +947,7 @@ function exportedAchievements.Load(a)
     a[5874] = ach:New(5874, 10); -- Death From Above
     a[5879] = ach:New(5879, 10); -- Veteran of the Molten Front
     a[5995] = ach:New(5995, 10); -- Moon Guard
+    a[6006] = ach:New(6006, 10); -- Elders of Cataclysm
     a[6045] = ach:New(6045, 10); -- Occu'thar
     a[6070] = ach:New(6070, 10); -- That's Not Canon!
     a[6084] = ach:New(6084, 10); -- Minutes to Midnight

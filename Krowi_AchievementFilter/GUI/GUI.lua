@@ -3,6 +3,7 @@ local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 addon.GUI = {};
 local gui = addon.GUI;
+-- gui.SelectedTab = {};
 
 function gui:LoadWithAddon()
     gui.ElvUISkin.Load();
@@ -13,13 +14,13 @@ function gui:LoadWithBlizzard_AchievementUI()
     self.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
 
     gui.AchievementsFrame:Load();
-    gui.CategoriesFrame:Load(addon.Data.Categories);
+    gui.CategoriesFrame:Load();
     gui.FilterButton:Load();
 
     gui.Search.Load();
 
-    gui.TabButtonExpansions = gui.AchievementFrameTabButton:New(addon.L["Expansions"], {gui.CategoriesFrame, gui.AchievementsFrame, gui.FilterButton, gui.Search.SearchBoxFrame});
-    gui.TabButtonEvents = gui.AchievementFrameTabButton:New(addon.L["Events"], {gui.CategoriesFrame, gui.AchievementsFrame, gui.FilterButton, gui.Search.SearchBoxFrame});
+    gui.TabButtonExpansions = gui.AchievementFrameTabButton:New(addon.L["Expansions"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesExpansions);
+    gui.TabButtonEvents = gui.AchievementFrameTabButton:New(addon.L["Events"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesEvents);
 
     self.ResetAchievementFrameHeight();
 
@@ -109,7 +110,9 @@ function gui.ResetView()
     if gui.CategoriesFrame and gui.CategoriesFrame.Categories then -- Checking ID is to know if the frame is initialised or not
         -- We want to have Classic selected and collapsed
         -- Achievement 1283 has Dungeons as parent but we need its parent which is Classic
-        gui.CategoriesFrame:SelectCategory(addon.Data.Categories[1], true);
+        if gui.SelectedTab.Categories then
+            gui.CategoriesFrame:SelectCategory(gui.SelectedTab.Categories[1], true);
+        end
     end
 
     if gui.Search.SearchBoxFrame and gui.Search.SearchBoxFrame.SearchPreviewFrame then

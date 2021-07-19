@@ -186,7 +186,7 @@ function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
 
 	achievementsFrame:ClearSelection();
 	achievementsFrame:SelectButton(self);
-	achievementsFrame:DisplayAchievement(self, achievementsFrame.SelectedAchievement, self.index, self.Achievement);
+	achievementsFrame:DisplayAchievement(self, gui.SelectedTab.SelectedAchievement, self.index, self.Achievement);
 	HybridScrollFrame_ExpandButton(achievementsFrame.Container, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
 	achievementsFrame:Update();
 	if not ignoreModifiers then
@@ -231,7 +231,7 @@ end
 local function AddGoTo(achievementsFrame, achievement)
 	local partOfAChainIDs = achievement:GetPartOfAChainIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
 	local requiredForIDs = achievement:GetRequiredForIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
-	if partOfAChainIDs or requiredForIDs or gui.CategoriesFrame.SelectedCategory == addon.Data.CurrentZoneCategory or gui.CategoriesFrame.SelectedCategory == addon.Data.SelectedZoneCategory then -- Others can be added here later
+	if partOfAChainIDs or requiredForIDs or gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then -- Others can be added here later
 		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
 		local addSeparator = nil;
 
@@ -259,8 +259,8 @@ local function AddGoTo(achievementsFrame, achievement)
 			addSeparator = true;
 		end
 
-		if gui.CategoriesFrame.SelectedCategory == addon.Data.CurrentZoneCategory or
-			gui.CategoriesFrame.SelectedCategory == addon.Data.SelectedZoneCategory then
+		if gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or
+			gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then
 
 			if addSeparator then
 				goTo:AddSeparator();

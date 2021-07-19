@@ -8,16 +8,12 @@ local categoriesFrame = gui.CategoriesFrame;
 
 -- [[ Constructors ]] --
 categoriesFrame.__index = categoriesFrame; -- Used to inject all the namespace functions to the frame
-function categoriesFrame:Load(categories)
+function categoriesFrame:Load()
     diagnostics.Trace("categoriesFrame:Load");
 
 	-- Create frame
 	local frame = CreateFrame("Frame", "KrowiAF_AchievementFrameCategories", AchievementFrame, "KrowiAF_CategoriesFrame_Template");
 	core.InjectMetatable(frame, categoriesFrame); -- Inject all the namespace functions to the frame
-
-	-- Set properties
-	frame.Categories = categories;
-	frame.SelectedCategory = frame.Categories[1];
 
 	-- Set parents
 	frame.Container.ParentFrame = frame;
@@ -187,7 +183,7 @@ end
 
 local function GetDisplayCategories(self, displayCategories, category, getAchNums)
 	if category.NotHidden or category.AlwaysVisible then -- If already visible, keep visible
-		if (category.NumOfAch == nil or getAchNums or category.HasFlexibleData) and category.Parent == nil then
+		if (category.NumOfAch == nil or getAchNums or category.HasFlexibleData) and category.Parent.IsTab then
 			-- Huge increase over performance if we cache the achievement numbers and only update them when needed,
 			-- only for the top level categories since it works recursive
 			if GetAchievementNumbers(self, category) > 0 or category.AlwaysVisible then
@@ -219,7 +215,7 @@ function categoriesFrame:Update(getAchNums)
 	local buttons = scrollFrame.buttons;
 
 	local displayCategories = {};
-	for _, category in next, self.Categories do
+	for _, category in next, gui.SelectedTab.Categories do
 		GetDisplayCategories(self, displayCategories, category, getAchNums);
 	end
 
@@ -232,7 +228,7 @@ function categoriesFrame:Update(getAchNums)
 		displayedHeight = displayedHeight + buttons[i]:GetHeight();
 		if category then
 			self:DisplayButton(buttons[i], category, self:GetWidth());
-			if category == self.SelectedCategory then
+			if category == gui.SelectedTab.SelectedCategory then
 				buttons[i]:LockHighlight();
 			else
 				buttons[i]:UnlockHighlight();
@@ -245,6 +241,8 @@ function categoriesFrame:Update(getAchNums)
 	end
 
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
+
+	-- gui.SelectedTab.CategoriesFrameScrollBarValue = scrollFrame.ScrollBar:GetValue();
 end
 
 function categoriesFrame:DisplayButton(button, category, baseWidth)
@@ -259,7 +257,7 @@ function categoriesFrame:DisplayButton(button, category, baseWidth)
 	baseWidth = baseWidth or 197;
 
 	button:Show();
-	if category.Parent then -- Not top level category has parent
+	if not category.Parent.IsTab then -- Not top level category has parent
 		button:SetWidth(baseWidth - 15 - (category.Level - 1) * 5);
 		button.label:SetFontObject("GameFontHighlight");
 		button.BackgroundLeft:SetVertexColor(0.6, 0.6, 0.6);
@@ -341,11 +339,11 @@ function categoriesFrame:SelectButton(button, quick)
 
 	if button.Category.IsSelected and button.Category.NotCollapsed then -- Collapse selected categories -- Issue #12: Fix
 		button.Category.NotCollapsed = nil;
-		for _, category in next, self.Categories do
+		for _, category in next, gui.SelectedTab.Categories do
 			HideCategory(button, category);
 		end
 	else -- Open selected category, close other highest level categories
-		for _, category in next, self.Categories do
+		for _, category in next, gui.SelectedTab.Categories do
 			OpenCloseCategory(button, category);
 		end
 		button.Category.NotCollapsed = true;
@@ -353,12 +351,12 @@ function categoriesFrame:SelectButton(button, quick)
 
 	button.Category.IsSelected = true; -- Issue #12: Fix
 
-	if button.Category == self.SelectedCategory and button.Category.HasFlexibleData ~= true then
+	if button.Category == gui.SelectedTab.SelectedCategory and button.Category.HasFlexibleData ~= true then
 		-- If this category was selected already, bail after changing collapsed states.
 		return;
 	end
 
-	self.SelectedCategory = button.Category; -- Issue #21: Broken, Fix
+	gui.SelectedTab.SelectedCategory = button.Category; -- Issue #21: Broken, Fix
 	if not quick then -- Skip refreshing achievements if we're still busy selecting the correct category
 		gui.AchievementsFrame:ClearSelection();
 		gui.AchievementsFrame.Container.ScrollBar:SetValue(0);
@@ -418,6 +416,10 @@ function categoriesFrame:SelectCategory(category, collapsed)
 		end
 		diagnostics.Debug(category.Name);
 	end
+
+	-- if category.IsSelected then
+	-- 	return;
+	-- end
 
 	local categoriesTree = category:GetTree();
 

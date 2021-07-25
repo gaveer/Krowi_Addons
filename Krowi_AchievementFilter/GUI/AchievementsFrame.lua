@@ -520,6 +520,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 		gui.FilterButton:SetFilters(achievement);
 	end
 
+	-- Select category
 	local category;
 	if gui.FilterButton.Filters.db.MergeSmallCategories then
 		category = achievement:GetMergedCategory(); -- This way we get the parent category
@@ -531,6 +532,7 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 	gui.CategoriesFrame:SelectCategory(category);
 	self.Container.ScrollBar:SetValue(0); -- Makes sure the scrollbar is at the top since this can be in a diff location if the category is already selected
 
+	-- Select achievement
 	local shown = false;
 	local previousScrollValue;
 	local container = self.Container;

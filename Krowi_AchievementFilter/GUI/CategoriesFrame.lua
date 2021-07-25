@@ -417,15 +417,17 @@ function categoriesFrame:SelectCategory(category, collapsed)
 		diagnostics.Debug(category.Name);
 	end
 
-	-- if category.IsSelected then
-	-- 	return;
-	-- end
-
 	local categoriesTree = category:GetTree();
 
+	-- Select tab
+	gui.SelectTab(categoriesTree[1]);
+
+	-- Select category
 	for i, cat in next, categoriesTree do
-		if not cat.IsSelected or (cat.NotCollapsed == collapsed) then -- Issue #23: Fix -- Issue #25 Broken, Fix
-			Select(self, cat, collapsed, i ~= #categoriesTree); -- Issue #23: Broken
+		if not cat.IsTab then
+			if not cat.IsSelected or (cat.NotCollapsed == collapsed) then -- Issue #23: Fix -- Issue #25 Broken, Fix
+				Select(self, cat, collapsed, i ~= #categoriesTree); -- Issue #23: Broken
+			end
 		end
 	end
 end

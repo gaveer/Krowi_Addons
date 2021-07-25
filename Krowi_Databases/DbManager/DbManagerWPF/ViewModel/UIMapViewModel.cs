@@ -37,6 +37,8 @@ namespace DbManagerWPF.ViewModel
 
         public ICommand SelectedUIMapChangedCommand => new CommandHandler(() => { }, () => true);
 
+        public ICommand MouseRightButtonDownAddUIMapToAchievementCommand => new CommandHandler(() => { AddUIMapToAchievement(); }, () => SelectedUIMap != null);
+
         public ICommand MoveUIMapCommand => new CommandHandler(() => MoveUIMap(), () => SelectedUIMap != null || uiMapToMove != null);
         //public ICommand PruneCategoriesCommand => new CommandHandler(() => PruneCategories(), () => true);
 

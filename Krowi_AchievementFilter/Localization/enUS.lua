@@ -37,6 +37,9 @@ L["Glory"] = "Glory";
 L["Coming in "] = "Coming in ";
 L["* SPOILER WARNING *"] = "* SPOILER WARNING *";
 L["Coming in Disclaimer"] = "All achievements in this category and children of this category are subject to change and might contain spoilers for the next patch!";
+L["Holidays"] = "Holidays";
+L["Pirates' Day"] = "Pirates' Day";
+L["Day of the Dead"] = "Day of the Dead";
 
 -- Filters
 L["Obtainable"] = "Obtainable";
@@ -167,7 +170,7 @@ L["Special thanks Desc"] = "Special thanks to {bur} ";
 L["Donations"] = "Donations";
 
 -- Keybindings
-L["BINDING_NAME_AF_OPEN_TAB1"] = "Toggle Achievement Window";
+L["Toggle Achievement Window to "] = "Toggle Achievement Window to ";
 
 -- Icon
 L["Left click"] = "Left click";

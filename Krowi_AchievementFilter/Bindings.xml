@@ -1,5 +1,8 @@
 <Bindings>
     <Binding name="AF_OPEN_TAB1" header="AF_NAME" category="ADDONS">
-        KrowiAF_ToggleAchievementFrameAtTab1();
+        KrowiAF_ToggleAchievementFrame(1);
+    </Binding>
+    <Binding name="AF_OPEN_TAB2" category="ADDONS">
+        KrowiAF_ToggleAchievementFrame(2);
     </Binding>
 </Bindings>

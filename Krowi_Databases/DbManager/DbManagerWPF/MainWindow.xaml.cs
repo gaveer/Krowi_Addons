@@ -11,5 +11,10 @@ namespace DbManagerWPF
         {
             InitializeComponent();
         }
+
+        private void TreeViewItem_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MessageBox.Show("mousedown fired");
+        }
     }
 }

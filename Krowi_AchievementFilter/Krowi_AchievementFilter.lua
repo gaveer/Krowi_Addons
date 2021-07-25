@@ -11,7 +11,8 @@ addon.Util = LibStub("Krowi_Util-1.0");
 
 -- [[ Binding names ]] --
 BINDING_HEADER_AF_NAME = addon.MetaData.Title;
-BINDING_NAME_AF_OPEN_TAB1 = addon.L["BINDING_NAME_AF_OPEN_TAB1"];
+BINDING_NAME_AF_OPEN_TAB1 = addon.L["Toggle Achievement Window to "] .. addon.L["Expansions"];
+BINDING_NAME_AF_OPEN_TAB2 = addon.L["Toggle Achievement Window to "] .. addon.L["Events"];
 
 -- [[ Guild view ]] --
 function addon.InGuildView()

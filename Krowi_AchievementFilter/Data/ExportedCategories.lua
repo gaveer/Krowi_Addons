@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-19 23-42-00 ]] --
+-- [[ Exported at 2021-07-26 01-29-24 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -20,7 +20,7 @@ end
 
 function exportedCategories.Load(a)
     local tmp = {};
-    tmp[883] = cat:New(); -- TAB - Expansions
+    tmp[883] = cat:New(addon.L["Expansions"]); -- TAB - Expansions
     tmp[883].IsTab = true;
     local tabExpansionsCategories = tmp[883];
     tmp[433] = cat:New(addon.L["Current Zone"]); -- Current Zone
@@ -44,6 +44,11 @@ function exportedCategories.Load(a)
     AddC(tmp[648], tmp[687]);
     AddA(tmp[687], a[1676]); -- Loremaster of Eastern Kingdoms
     AddA(tmp[687], a[42]); -- Eastern Kingdoms Explorer
+    tmp[922] = cat:New(C_Map.GetMapInfo(84).name); -- Stormwind City
+    AddC(tmp[687], tmp[922]);
+    AddA(tmp[922], a[615]); -- Storming Stormwind
+    AddA(tmp[922], a[14815]); -- Executing the Exarch
+    AddA(tmp[922], a[388]); -- City Defender
     tmp[721] = cat:New(C_Map.GetMapInfo(27).name); -- Dun Morogh
     AddC(tmp[687], tmp[721]);
     AddA(tmp[721], a[1186]); -- Down With The Dark Iron
@@ -226,6 +231,15 @@ function exportedCategories.Load(a)
     AddC(tmp[648], tmp[688]);
     AddA(tmp[688], a[1678]); -- Loremaster of Kalimdor
     AddA(tmp[688], a[43]); -- Kalimdor Explorer
+    tmp[921] = cat:New(C_Map.GetMapInfo(85).name); -- Orgrimmar
+    AddC(tmp[688], tmp[921]);
+    AddA(tmp[921], a[610]); -- Orgrimmar Offensive
+    AddA(tmp[921], a[612]); -- Downing the Dark Lady
+    AddA(tmp[921], a[14817]); -- Opposing Orgrimmar
+    AddA(tmp[921], a[1006]); -- City Defender
+    tmp[923] = cat:New(C_Map.GetMapInfo(88).name); -- Thunder Bluff
+    AddC(tmp[688], tmp[923]);
+    AddA(tmp[923], a[611]); -- Bleeding Bloodhoof
     tmp[756] = cat:New(C_Map.GetMapInfo(57).name); -- Teldrassil
     AddC(tmp[688], tmp[756]);
     tmp[757] = cat:New((GetCategoryInfo(97)), true); -- Exploration
@@ -510,6 +524,9 @@ function exportedCategories.Load(a)
     tmp[794] = cat:New(C_Map.GetMapInfo(111).name); -- Shattrath City
     AddC(tmp[616], tmp[794]);
     AddA(tmp[794], a[1165]); -- "My Sack is ""Gigantique"""
+    tmp[924] = cat:New(C_Map.GetMapInfo(110).name); -- Silvermoon City
+    AddC(tmp[616], tmp[924]);
+    AddA(tmp[924], a[613]); -- Killed in Quel'Thalas
     tmp[758] = cat:New(C_Map.GetMapInfo(97).name); -- Azuremyst Isle
     AddC(tmp[616], tmp[758]);
     tmp[759] = cat:New((GetCategoryInfo(97)), true); -- Exploration
@@ -1493,7 +1510,6 @@ function exportedCategories.Load(a)
     AddC(tmp[129], tmp[550]);
     AddA(tmp[550], a[4875]); -- Loremaster of Cataclysm
     AddA(tmp[550], a[4827]); -- Surveying the Damage
-    AddA(tmp[550], a[5518]); -- Stood in the Fire
     AddA(tmp[550], a[5548]); -- To All the Squirrels Who Cared for Me
     AddA(tmp[550], a[5754]); -- Drown Your Sorrows
     AddA(tmp[550], a[5753]); -- Cataclysmically Delicious
@@ -1708,33 +1724,42 @@ function exportedCategories.Load(a)
     AddA(tmp[146], a[6108]); -- Alizabal
     tmp[147] = cat:New((EJ_GetInstanceInfo(73))); -- Blackwing Descent
     AddC(tmp[131], tmp[147]);
-    AddA(tmp[147], a[5306]); -- Parasite Evening
-    AddA(tmp[147], a[5307]); -- Achieve-a-tron
-    AddA(tmp[147], a[5309]); -- Full of Sound and Fury
-    AddA(tmp[147], a[5308]); -- Silence is Golden
-    AddA(tmp[147], a[5310]); -- Aberrant Behavior
-    AddA(tmp[147], a[4849]); -- Keeping it in the Family
     AddA(tmp[147], a[4842]); -- Blackwing Descent
-    AddA(tmp[147], a[5094]); -- Heroic: Magmaw
-    AddA(tmp[147], a[5107]); -- Heroic: Omnotron Defense System
-    AddA(tmp[147], a[5115]); -- Heroic: Chimaeron
-    AddA(tmp[147], a[5109]); -- Heroic: Atramedes
-    AddA(tmp[147], a[5108]); -- Heroic: Maloriak
-    AddA(tmp[147], a[5116]); -- Heroic: Nefarian
+    AddA(tmp[147], a[11754]); -- Glamour of Twilight
+    tmp[902] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[147], tmp[902]);
+    AddA(tmp[902], a[5306]); -- Parasite Evening
+    AddA(tmp[902], a[5307]); -- Achieve-a-tron
+    AddA(tmp[902], a[5309]); -- Full of Sound and Fury
+    AddA(tmp[902], a[5308]); -- Silence is Golden
+    AddA(tmp[902], a[5310]); -- Aberrant Behavior
+    AddA(tmp[902], a[4849]); -- Keeping it in the Family
+    tmp[903] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[147], tmp[903]);
+    AddA(tmp[903], a[5094]); -- Heroic: Magmaw
+    AddA(tmp[903], a[5107]); -- Heroic: Omnotron Defense System
+    AddA(tmp[903], a[5115]); -- Heroic: Chimaeron
+    AddA(tmp[903], a[5109]); -- Heroic: Atramedes
+    AddA(tmp[903], a[5108]); -- Heroic: Maloriak
+    AddA(tmp[903], a[5116]); -- Heroic: Nefarian
     tmp[148] = cat:New((EJ_GetInstanceInfo(72))); -- The Bastion of Twilight
     AddC(tmp[131], tmp[148]);
-    AddA(tmp[148], a[5300]); -- The Only Escape
-    AddA(tmp[148], a[4852]); -- Double Dragon
-    AddA(tmp[148], a[5311]); -- Elementary
-    AddA(tmp[148], a[5312]); -- The Abyss Will Gaze Back Into You
-    AddA(tmp[148], a[5118]); -- Heroic: Halfus Wyrmbreaker
-    AddA(tmp[148], a[5117]); -- Heroic: Valiona and Theralion
-    AddA(tmp[148], a[5119]); -- Heroic: Ascendant Council
-    AddA(tmp[148], a[5120]); -- Heroic: Cho'gall
-    AddA(tmp[148], a[5121]); -- Heroic: Sinestra
     AddA(tmp[148], a[4850]); -- The Bastion of Twilight
     AddA(tmp[148], a[5313]); -- I Can't Hear You Over the Sound of How Awesome I Am
     AddA(tmp[148], a[11754]); -- Glamour of Twilight
+    tmp[904] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[148], tmp[904]);
+    AddA(tmp[904], a[5300]); -- The Only Escape
+    AddA(tmp[904], a[4852]); -- Double Dragon
+    AddA(tmp[904], a[5311]); -- Elementary
+    AddA(tmp[904], a[5312]); -- The Abyss Will Gaze Back Into You
+    tmp[905] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[148], tmp[905]);
+    AddA(tmp[905], a[5118]); -- Heroic: Halfus Wyrmbreaker
+    AddA(tmp[905], a[5117]); -- Heroic: Valiona and Theralion
+    AddA(tmp[905], a[5119]); -- Heroic: Ascendant Council
+    AddA(tmp[905], a[5120]); -- Heroic: Cho'gall
+    AddA(tmp[905], a[5121]); -- Heroic: Sinestra
     tmp[149] = cat:New((EJ_GetInstanceInfo(74))); -- Throne of the Four Winds
     AddC(tmp[131], tmp[149]);
     AddA(tmp[149], a[5304]); -- Stay Chill
@@ -1744,49 +1769,58 @@ function exportedCategories.Load(a)
     AddA(tmp[149], a[4851]); -- Throne of the Four Winds
     tmp[150] = cat:New((EJ_GetInstanceInfo(78))); -- Firelands
     AddC(tmp[131], tmp[150]);
-    AddA(tmp[150], a[5821]); -- Death from Above
-    AddA(tmp[150], a[5813]); -- Do a Barrel Roll!
-    AddA(tmp[150], a[5810]); -- Not an Ambi-Turner
-    AddA(tmp[150], a[5829]); -- Bucket List
-    AddA(tmp[150], a[5830]); -- Share the Pain
-    AddA(tmp[150], a[5799]); -- Only the Penitent...
     AddA(tmp[150], a[5855]); -- Ragnar-O's
-    AddA(tmp[150], a[5807]); -- Heroic: Beth'tilac
-    AddA(tmp[150], a[5809]); -- Heroic: Alysrazor
-    AddA(tmp[150], a[5808]); -- Heroic: Lord Rhyolith
-    AddA(tmp[150], a[5806]); -- Heroic: Shannox
-    AddA(tmp[150], a[5805]); -- Heroic: Baleroc
-    AddA(tmp[150], a[5804]); -- Heroic: Majordomo Fandral Staghelm
-    AddA(tmp[150], a[5803]); -- Heroic: Ragnaros
     AddA(tmp[150], a[5802]); -- Firelands
     AddA(tmp[150], a[11755]); -- Hot Couture
     AddA(tmp[150], a[5839]); -- "Dragonwrath, Tarecgosa's Rest"
+    tmp[906] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[150], tmp[906]);
+    AddA(tmp[906], a[5821]); -- Death from Above
+    AddA(tmp[906], a[5813]); -- Do a Barrel Roll!
+    AddA(tmp[906], a[5810]); -- Not an Ambi-Turner
+    AddA(tmp[906], a[5829]); -- Bucket List
+    AddA(tmp[906], a[5830]); -- Share the Pain
+    AddA(tmp[906], a[5799]); -- Only the Penitent...
+    tmp[907] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[150], tmp[907]);
+    AddA(tmp[907], a[5807]); -- Heroic: Beth'tilac
+    AddA(tmp[907], a[5809]); -- Heroic: Alysrazor
+    AddA(tmp[907], a[5808]); -- Heroic: Lord Rhyolith
+    AddA(tmp[907], a[5806]); -- Heroic: Shannox
+    AddA(tmp[907], a[5805]); -- Heroic: Baleroc
+    AddA(tmp[907], a[5804]); -- Heroic: Majordomo Fandral Staghelm
+    AddA(tmp[907], a[5803]); -- Heroic: Ragnaros
     tmp[576] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[150], tmp[576]);
     AddA(tmp[576], a[5827]); -- Avengers of Hyjal
     tmp[151] = cat:New((EJ_GetInstanceInfo(187))); -- Dragon Soul
     AddC(tmp[131], tmp[151]);
-    AddA(tmp[151], a[6174]); -- Don't Stand So Close to Me
-    AddA(tmp[151], a[6128]); -- Ping Pong Champion
-    AddA(tmp[151], a[6129]); -- Taste the Rainbow!
     AddA(tmp[151], a[6175]); -- Holding Hands
-    AddA(tmp[151], a[6084]); -- Minutes to Midnight
-    AddA(tmp[151], a[6105]); -- Deck Defender
-    AddA(tmp[151], a[6133]); -- Maybe He'll Get Dizzy...
-    AddA(tmp[151], a[6180]); -- Chromatic Champion
-    AddA(tmp[151], a[6109]); -- Heroic: Morchok
-    AddA(tmp[151], a[6110]); -- Heroic: Warlord Zon'ozz
-    AddA(tmp[151], a[6111]); -- Heroic: Yor'sahj the Unsleeping
-    AddA(tmp[151], a[6112]); -- Heroic: Hagara the Stormbinder
-    AddA(tmp[151], a[6113]); -- Heroic: Ultraxion
-    AddA(tmp[151], a[6114]); -- Heroic: Warmaster Blackhorn
-    AddA(tmp[151], a[6115]); -- Heroic: Spine of Deathwing
-    AddA(tmp[151], a[6116]); -- Heroic: Madness of Deathwing
+    AddA(tmp[151], a[5518]); -- Stood in the Fire
     AddA(tmp[151], a[6106]); -- Siege of Wyrmrest Temple
     AddA(tmp[151], a[6107]); -- Fall of Deathwing
     AddA(tmp[151], a[6177]); -- Destroyer's End
     AddA(tmp[151], a[11756]); -- Wardrobe of the Old Gods
     AddA(tmp[151], a[6181]); -- Fangs of the Father
+    tmp[908] = cat:New(addon.L["Glory"]); -- Glory
+    AddC(tmp[151], tmp[908]);
+    AddA(tmp[908], a[6174]); -- Don't Stand So Close to Me
+    AddA(tmp[908], a[6128]); -- Ping Pong Champion
+    AddA(tmp[908], a[6129]); -- Taste the Rainbow!
+    AddA(tmp[908], a[6084]); -- Minutes to Midnight
+    AddA(tmp[908], a[6105]); -- Deck Defender
+    AddA(tmp[908], a[6133]); -- Maybe He'll Get Dizzy...
+    AddA(tmp[908], a[6180]); -- Chromatic Champion
+    tmp[909] = cat:New(addon.L["Heroic"]); -- Heroic
+    AddC(tmp[151], tmp[909]);
+    AddA(tmp[909], a[6109]); -- Heroic: Morchok
+    AddA(tmp[909], a[6110]); -- Heroic: Warlord Zon'ozz
+    AddA(tmp[909], a[6111]); -- Heroic: Yor'sahj the Unsleeping
+    AddA(tmp[909], a[6112]); -- Heroic: Hagara the Stormbinder
+    AddA(tmp[909], a[6113]); -- Heroic: Ultraxion
+    AddA(tmp[909], a[6114]); -- Heroic: Warmaster Blackhorn
+    AddA(tmp[909], a[6115]); -- Heroic: Spine of Deathwing
+    AddA(tmp[909], a[6116]); -- Heroic: Madness of Deathwing
     tmp[788] = cat:New((GetCategoryInfo(15117))); -- Pet Battles
     AddC(tmp[129], tmp[788]);
     AddA(tmp[788], a[7525]); -- Taming Cataclysm
@@ -2232,6 +2266,7 @@ function exportedCategories.Load(a)
     AddA(tmp[204], a[6689]); -- Terrace of Endless Spring
     AddA(tmp[204], a[8248]); -- Ahead of the Curve: Sha of Fear
     AddA(tmp[204], a[7487]); -- Cutting Edge: Sha of Fear
+    AddA(tmp[204], a[11757]); -- Sha of Fabulous
     tmp[896] = cat:New(addon.L["Glory"]); -- Glory
     AddC(tmp[204], tmp[896]);
     AddA(tmp[896], a[6717]); -- Power Overwhelming
@@ -3286,6 +3321,10 @@ function exportedCategories.Load(a)
     AddA(tmp[238], a[11164]); -- Legion Dungeon Hero
     AddA(tmp[238], a[11163]); -- Glory of the Legion Hero
     AddA(tmp[238], a[11181]); -- Legion Keymaster
+    AddA(tmp[238], a[11183]); -- Keystone Initiate
+    AddA(tmp[238], a[11184]); -- Keystone Challenger
+    AddA(tmp[238], a[11185]); -- Keystone Conqueror
+    AddA(tmp[238], a[11162]); -- Keystone Master
     tmp[240] = cat:New((EJ_GetInstanceInfo(716))); -- Eye of Azshara
     AddC(tmp[238], tmp[240]);
     AddA(tmp[240], a[10456]); -- But You Say He's Just a Friend
@@ -3608,6 +3647,7 @@ function exportedCategories.Load(a)
     AddC(tmp[883], tmp[258]);
     tmp[259] = cat:New(addon.L["Zones"]); -- Zones
     AddC(tmp[258], tmp[259]);
+    AddA(tmp[259], a[46]); -- Universal Explorer
     tmp[271] = cat:New(C_Map.GetMapInfo(876).name .. " & " .. C_Map.GetMapInfo(875).name); -- Kul Tiras & Zandalar
     AddC(tmp[259], tmp[271]);
     AddA(tmp[271], a[14183]); -- Conspicuous Consumption
@@ -4891,11 +4931,14 @@ function exportedCategories.Load(a)
     tmp[857] = cat:New(addon.L["Excluded"]); -- Excluded
     AddC(tmp[883], tmp[857]);
     local excludedCategory = tmp[857];
-    tmp[884] = cat:New(); -- TAB - Events
+    tmp[884] = cat:New(addon.L["Events"]); -- TAB - Events
     tmp[884].IsTab = true;
     local tabEventsCategories = tmp[884];
+    tmp[918] = cat:New(addon.L["Holidays"]); -- Holidays
+    AddC(tmp[884], tmp[918]);
+    AddA(tmp[918], a[2144]); -- "What a Long, Strange Trip It's Been"
     tmp[885] = cat:New((GetCategoryInfo(160))); -- Lunar Festival
-    AddC(tmp[884], tmp[885]);
+    AddC(tmp[918], tmp[885]);
     AddA(tmp[885], a[605]); -- A Coin of Ancestry
     AddA(tmp[885], a[606]); -- 5 Coins of Ancestry
     AddA(tmp[885], a[607]); -- 10 Coins of Ancestry
@@ -4912,6 +4955,258 @@ function exportedCategories.Load(a)
     AddA(tmp[885], a[910]); -- Elders of the Dungeons
     AddA(tmp[885], a[915]); -- Elders of the Alliance
     AddA(tmp[885], a[914]); -- Elders of the Horde
+    AddA(tmp[885], a[913]); -- To Honor One's Elders
+    tmp[910] = cat:New((GetCategoryInfo(187))); -- Love is in the Air
+    AddC(tmp[918], tmp[910]);
+    AddA(tmp[910], a[1701]); -- Be Mine!
+    AddA(tmp[910], a[260]); -- Charming
+    AddA(tmp[910], a[1695]); -- Dangerous Love
+    AddA(tmp[910], a[1699]); -- Fistful of Love
+    AddA(tmp[910], a[1279]); -- Flirt With Disaster
+    AddA(tmp[910], a[1280]); -- Flirt With Disaster
+    AddA(tmp[910], a[1704]); -- I Pitied The Fool
+    AddA(tmp[910], a[1291]); -- Lonely?
+    AddA(tmp[910], a[1694]); -- Lovely Luck Is On Your Side
+    AddA(tmp[910], a[1703]); -- "My Love is Like a Red, Red Rose"
+    AddA(tmp[910], a[1697]); -- Nation of Adoration
+    AddA(tmp[910], a[1698]); -- Nation of Adoration
+    AddA(tmp[910], a[1700]); -- Perma-Peddle
+    AddA(tmp[910], a[1696]); -- The Rocket's Pink Glare
+    AddA(tmp[910], a[1188]); -- Shafted!
+    AddA(tmp[910], a[1702]); -- Sweet Tooth
+    AddA(tmp[910], a[4624]); -- Tough Love
+    AddA(tmp[910], a[9389]); -- It Might Just Save Your Life
+    AddA(tmp[910], a[9392]); -- Love Magnet
+    AddA(tmp[910], a[9393]); -- Beacon of Love
+    AddA(tmp[910], a[9394]); -- They Really Love Me!
+    AddA(tmp[910], a[1693]); -- Fool For Love
+    tmp[911] = cat:New((GetCategoryInfo(159))); -- Noblegarden
+    AddC(tmp[918], tmp[911]);
+    AddA(tmp[911], a[2676]); -- I Found One!
+    AddA(tmp[911], a[2417]); -- Chocolate Lover
+    AddA(tmp[911], a[2418]); -- Chocoholic
+    AddA(tmp[911], a[248]); -- Sunday's Finest
+    AddA(tmp[911], a[249]); -- Dressed for the Occasion
+    AddA(tmp[911], a[2416]); -- Hard Boiled
+    AddA(tmp[911], a[2419]); -- Spring Fling
+    AddA(tmp[911], a[2497]); -- Spring Fling
+    AddA(tmp[911], a[2420]); -- Noble Garden
+    AddA(tmp[911], a[2421]); -- Noble Garden
+    AddA(tmp[911], a[2422]); -- Shake Your Bunny-Maker
+    AddA(tmp[911], a[2436]); -- Desert Rose
+    AddA(tmp[911], a[2576]); -- Blushing Bride
+    AddA(tmp[911], a[2798]); -- Noble Gardener
+    tmp[912] = cat:New((GetCategoryInfo(163))); -- Children's Week
+    AddC(tmp[918], tmp[912]);
+    AddA(tmp[912], a[1791]); -- Home Alone
+    AddA(tmp[912], a[1788]); -- Bad Example
+    AddA(tmp[912], a[1789]); -- Daily Chores
+    AddA(tmp[912], a[1792]); -- "Aw, Isn't It Cute?"
+    AddA(tmp[912], a[1786]); -- School of Hard Knocks
+    AddA(tmp[912], a[1790]); -- "Hail To The King, Baby"
+    AddA(tmp[912], a[275]); -- Veteran Nanny
+    AddA(tmp[912], a[1793]); -- For the Children
+    tmp[913] = cat:New((GetCategoryInfo( 161))); -- Midsummer
+    AddC(tmp[918], tmp[913]);
+    AddA(tmp[913], a[263]); -- Ice the Frost Lord
+    AddA(tmp[913], a[271]); -- Burning Hot Pole Dance
+    AddA(tmp[913], a[1145]); -- King of the Fire Festival
+    AddA(tmp[913], a[272]); -- Torch Juggler
+    AddA(tmp[913], a[1022]); -- Flame Warden of Eastern Kingdoms
+    AddA(tmp[913], a[1023]); -- Flame Warden of Kalimdor
+    AddA(tmp[913], a[1024]); -- Flame Warden of Outland
+    AddA(tmp[913], a[6008]); -- Flame Warden of Northrend
+    AddA(tmp[913], a[6011]); -- Flame Warden of Cataclysm
+    AddA(tmp[913], a[1034]); -- The Fires of Azeroth
+    AddA(tmp[913], a[8045]); -- Flame Warden of Pandaria
+    AddA(tmp[913], a[11283]); -- Flame Warden of Draenor
+    AddA(tmp[913], a[11280]); -- Flame Warden of the Broken Isles
+    AddA(tmp[913], a[13341]); -- Flame Warden of Kul Tiras
+    AddA(tmp[913], a[1028]); -- Extinguishing Eastern Kingdoms
+    AddA(tmp[913], a[1029]); -- Extinguishing Kalimdor
+    AddA(tmp[913], a[1030]); -- Extinguishing Outland
+    AddA(tmp[913], a[6007]); -- Extinguishing Northrend
+    AddA(tmp[913], a[6013]); -- Extinguishing the Cataclysm
+    AddA(tmp[913], a[1035]); -- Desecration of the Horde
+    AddA(tmp[913], a[8042]); -- Extinguishing Pandaria
+    AddA(tmp[913], a[11276]); -- Extinguishing Draenor
+    AddA(tmp[913], a[11278]); -- Extinguishing the Broken Isles
+    AddA(tmp[913], a[13343]); -- Extinguishing Zandalar
+    AddA(tmp[913], a[1038]); -- The Flame Warden
+    AddA(tmp[913], a[1025]); -- Flame Keeper of Eastern Kingdoms
+    AddA(tmp[913], a[1026]); -- Flame Keeper of Kalimdor
+    AddA(tmp[913], a[1027]); -- Flame Keeper of Outland
+    AddA(tmp[913], a[6009]); -- Flame Keeper of Northrend
+    AddA(tmp[913], a[6012]); -- Flame Keeper of Cataclysm
+    AddA(tmp[913], a[1036]); -- The Fires of Azeroth
+    AddA(tmp[913], a[8044]); -- Flame Keeper of Pandaria
+    AddA(tmp[913], a[11284]); -- Flame Keeper of Draenor
+    AddA(tmp[913], a[11282]); -- Flame Keeper of the Broken Isles
+    AddA(tmp[913], a[13340]); -- Flame Keeper of Zandalar
+    AddA(tmp[913], a[1031]); -- Extinguishing Eastern Kingdoms
+    AddA(tmp[913], a[1032]); -- Extinguishing Kalimdor
+    AddA(tmp[913], a[1033]); -- Extinguishing Outland
+    AddA(tmp[913], a[6010]); -- Extinguishing Northrend
+    AddA(tmp[913], a[6014]); -- Extinguishing the Cataclysm
+    AddA(tmp[913], a[1037]); -- Desecration of the Alliance
+    AddA(tmp[913], a[8043]); -- Extinguishing Pandaria
+    AddA(tmp[913], a[11277]); -- Extinguishing Draenor
+    AddA(tmp[913], a[11279]); -- Extinguishing the Broken Isles
+    AddA(tmp[913], a[13342]); -- Extinguishing Kul Tiras
+    AddA(tmp[913], a[1039]); -- The Flame Keeper
+    tmp[919] = cat:New(addon.L["Pirates' Day"]); -- Pirates' Day
+    AddC(tmp[918], tmp[919]);
+    AddA(tmp[919], a[3457]); -- The Captain's Booty
+    tmp[914] = cat:New((GetCategoryInfo(162))); -- Brewfest
+    AddC(tmp[918], tmp[914]);
+    AddA(tmp[914], a[1184]); -- Strange Brew
+    AddA(tmp[914], a[1203]); -- Strange Brew
+    AddA(tmp[914], a[1936]); -- Does Your Wolpertinger Linger?
+    AddA(tmp[914], a[1185]); -- The Brewfest Diet
+    AddA(tmp[914], a[2796]); -- Brew of the Month
+    AddA(tmp[914], a[1183]); -- Brew of the Year
+    AddA(tmp[914], a[1260]); -- Almost Blind Luck
+    AddA(tmp[914], a[295]); -- Direbrewfest
+    AddA(tmp[914], a[293]); -- Disturbing the Peace
+    AddA(tmp[914], a[303]); -- "Have Keg, Will Travel"
+    AddA(tmp[914], a[1683]); -- Brewmaster
+    tmp[915] = cat:New((GetCategoryInfo(158))); -- Hallow's End
+    AddC(tmp[918], tmp[915]);
+    AddA(tmp[915], a[972]); -- Trick or Treat!
+    AddA(tmp[915], a[288]); -- Out With It
+    AddA(tmp[915], a[255]); -- Bring Me The Head of... Oh Wait
+    AddA(tmp[915], a[289]); -- The Savior of Hallow's End
+    AddA(tmp[915], a[979]); -- The Mask Task
+    AddA(tmp[915], a[284]); -- A Mask for All Occasions
+    AddA(tmp[915], a[981]); -- That Sparkling Smile
+    AddA(tmp[915], a[1040]); -- Rotten Hallow
+    AddA(tmp[915], a[1041]); -- Rotten Hallow
+    AddA(tmp[915], a[1261]); -- G.N.E.R.D. Rage
+    AddA(tmp[915], a[291]); -- Check Your Head
+    AddA(tmp[915], a[283]); -- The Masquerade
+    AddA(tmp[915], a[292]); -- Sinister Calling
+    AddA(tmp[915], a[966]); -- Tricks and Treats of Eastern Kingdoms
+    AddA(tmp[915], a[963]); -- Tricks and Treats of Kalimdor
+    AddA(tmp[915], a[969]); -- Tricks and Treats of Outland
+    AddA(tmp[915], a[967]); -- Tricks and Treats of Eastern Kingdoms
+    AddA(tmp[915], a[965]); -- Tricks and Treats of Kalimdor
+    AddA(tmp[915], a[968]); -- Tricks and Treats of Outland
+    AddA(tmp[915], a[971]); -- Tricks and Treats of Azeroth
+    AddA(tmp[915], a[5836]); -- Tricks and Treats of Northrend
+    AddA(tmp[915], a[5837]); -- Tricks and Treats of the Cataclysm
+    AddA(tmp[915], a[7601]); -- Tricks and Treats of Pandaria
+    AddA(tmp[915], a[5835]); -- Tricks and Treats of Northrend
+    AddA(tmp[915], a[5838]); -- Tricks and Treats of the Cataclysm
+    AddA(tmp[915], a[7602]); -- Tricks and Treats of Pandaria
+    AddA(tmp[915], a[10365]); -- A Frightening Friend
+    AddA(tmp[915], a[1656]); -- Hallowed Be Thy Name
+    tmp[920] = cat:New(addon.L["Day of the Dead"]); -- Day of the Dead
+    AddC(tmp[918], tmp[920]);
+    AddA(tmp[920], a[3456]); -- Dead Man's Party
+    AddA(tmp[920], a[9426]); -- To The Afterlife
+    AddA(tmp[920], a[9427]); -- Vientos!
+    AddA(tmp[920], a[9428]); -- Calavera
+    tmp[916] = cat:New((GetCategoryInfo(14981))); -- Pilgrim's Bounty
+    AddC(tmp[918], tmp[916]);
+    AddA(tmp[916], a[3579]); -- """FOOD FIGHT!"""
+    AddA(tmp[916], a[3576]); -- Now We're Cookin'
+    AddA(tmp[916], a[3577]); -- Now We're Cookin'
+    AddA(tmp[916], a[3556]); -- Pilgrim's Paunch
+    AddA(tmp[916], a[3557]); -- Pilgrim's Paunch
+    AddA(tmp[916], a[3580]); -- Pilgrim's Peril
+    AddA(tmp[916], a[3581]); -- Pilgrim's Peril
+    AddA(tmp[916], a[3596]); -- Pilgrim's Progress
+    AddA(tmp[916], a[3597]); -- Pilgrim's Progress
+    AddA(tmp[916], a[3558]); -- Sharing is Caring
+    AddA(tmp[916], a[3582]); -- Terokkar Turkey Time
+    AddA(tmp[916], a[3578]); -- The Turkinator
+    AddA(tmp[916], a[3559]); -- Turkey Lurkey
+    AddA(tmp[916], a[3478]); -- Pilgrim
+    tmp[917] = cat:New((GetCategoryInfo(156))); -- Winter Veil
+    AddC(tmp[918], tmp[917]);
+    AddA(tmp[917], a[273]); -- On Metzen!
+    AddA(tmp[917], a[252]); -- With a Little Helper from My Friends
+    AddA(tmp[917], a[259]); -- Scrooge
+    AddA(tmp[917], a[1255]); -- Scrooge
+    AddA(tmp[917], a[1282]); -- Fa-la-la-la-Ogri'la
+    AddA(tmp[917], a[277]); -- 'Tis the Season
+    AddA(tmp[917], a[1295]); -- Crashin' & Thrashin'
+    AddA(tmp[917], a[279]); -- Simply Abominable
+    AddA(tmp[917], a[1687]); -- Let It Snow
+    AddA(tmp[917], a[1685]); -- Bros. Before Ho Ho Ho's
+    AddA(tmp[917], a[1686]); -- Bros. Before Ho Ho Ho's
+    AddA(tmp[917], a[1688]); -- The Winter Veil Gourmet
+    AddA(tmp[917], a[1689]); -- He Knows If You've Been Naughty
+    AddA(tmp[917], a[1690]); -- A Frosty Shake
+    AddA(tmp[917], a[4436]); -- BB King
+    AddA(tmp[917], a[4437]); -- BB King
+    AddA(tmp[917], a[5853]); -- A-Caroling We Will Go
+    AddA(tmp[917], a[5854]); -- A-Caroling We Will Go
+    AddA(tmp[917], a[8699]); -- The Danger Zone
+    AddA(tmp[917], a[10353]); -- Iron Armada
+    AddA(tmp[917], a[1691]); -- Merrymaker
+    tmp[925] = cat:New((GetCategoryInfo(15101))); -- Darkmoon Faire
+    AddC(tmp[884], tmp[925]);
+    AddA(tmp[925], a[6019]); -- "Come One, Come All!"
+    AddA(tmp[925], a[6021]); -- Blastenheimer Bullseye
+    AddA(tmp[925], a[6023]); -- Darkmoon Duelist
+    AddA(tmp[925], a[6024]); -- Darkmoon Dominator
+    AddA(tmp[925], a[6027]); -- Darkmoon Dungeoneer
+    AddA(tmp[925], a[6028]); -- Darkmoon Defender
+    AddA(tmp[925], a[6029]); -- Darkmoon Despoiler
+    AddA(tmp[925], a[6032]); -- Faire Favors
+    AddA(tmp[925], a[6026]); -- Fairegoer's Feast
+    AddA(tmp[925], a[6025]); -- I Was Promised a Pony
+    AddA(tmp[925], a[6022]); -- Quick Shot
+    AddA(tmp[925], a[6020]); -- Step Right Up
+    AddA(tmp[925], a[6030]); -- Taking the Show on the Road
+    AddA(tmp[925], a[6031]); -- Taking the Show on the Road
+    AddA(tmp[925], a[6332]); -- That Rabbit's Dynamite!
+    AddA(tmp[925], a[9250]); -- Flying High
+    AddA(tmp[925], a[9251]); -- Ringmaster
+    AddA(tmp[925], a[9252]); -- Brood of Alysrazor
+    AddA(tmp[925], a[9885]); -- Ace Tonk Commander
+    AddA(tmp[925], a[9894]); -- Triumphant Turtle Tossing
+    AddA(tmp[925], a[9983]); -- That's Whack!
+    AddA(tmp[925], a[9755]); -- Darkmoon Race Enthusiast
+    AddA(tmp[925], a[9756]); -- Darkmoon Racer Novice
+    AddA(tmp[925], a[9759]); -- Darkmoon Racer Jockey
+    AddA(tmp[925], a[9760]); -- Darkmoon Racer Leadfoot
+    AddA(tmp[925], a[9761]); -- Darkmoon Racer Roadhog
+    AddA(tmp[925], a[9770]); -- Blast Off!
+    AddA(tmp[925], a[9769]); -- Rocketeer: Bronze
+    AddA(tmp[925], a[9766]); -- Rocketeer: Silver
+    AddA(tmp[925], a[9764]); -- Rocketeer: Gold
+    AddA(tmp[925], a[9786]); -- Wayfarer
+    AddA(tmp[925], a[9787]); -- Wanderluster: Bronze
+    AddA(tmp[925], a[9790]); -- Wanderluster: Silver
+    AddA(tmp[925], a[9792]); -- Wanderluster: Gold
+    AddA(tmp[925], a[9780]); -- Go-Getter
+    AddA(tmp[925], a[9781]); -- Powermonger: Bronze
+    AddA(tmp[925], a[9783]); -- Powermonger: Silver
+    AddA(tmp[925], a[9785]); -- Powermonger: Gold
+    AddA(tmp[925], a[9793]); -- Big Race Enthusiast
+    AddA(tmp[925], a[9794]); -- Big Race Novice
+    AddA(tmp[925], a[9795]); -- Big Race Jockey
+    AddA(tmp[925], a[9797]); -- Big Race Leadfoot
+    AddA(tmp[925], a[9799]); -- Big Race Roadhog
+    AddA(tmp[925], a[9800]); -- Rocket Man
+    AddA(tmp[925], a[9801]); -- Big Rocketeer: Bronze
+    AddA(tmp[925], a[9803]); -- Big Rocketeer: Silver
+    AddA(tmp[925], a[9805]); -- Big Rocketeer: Gold
+    AddA(tmp[925], a[9806]); -- Vagabond
+    AddA(tmp[925], a[9807]); -- Big Wanderluster: Bronze
+    AddA(tmp[925], a[9809]); -- Big Wanderluster: Silver
+    AddA(tmp[925], a[9811]); -- Big Wanderluster: Gold
+    AddA(tmp[925], a[9812]); -- Goal-Oriented
+    AddA(tmp[925], a[9813]); -- Big Powermonger: Bronze
+    AddA(tmp[925], a[9815]); -- Big Powermonger: Silver
+    AddA(tmp[925], a[9817]); -- Big Powermonger: Gold
+    AddA(tmp[925], a[9819]); -- Darkmoon Like the Wind
+    AddA(tmp[925], a[11918]); -- "Hey, You're a Rockstar!"
+    AddA(tmp[925], a[11919]); -- Taking this Show on the Road
+    AddA(tmp[925], a[11920]); -- Perfect Performance
+    AddA(tmp[925], a[11921]); -- Mosh Pit
 
     return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
 end

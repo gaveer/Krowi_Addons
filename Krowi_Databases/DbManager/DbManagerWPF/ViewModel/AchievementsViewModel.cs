@@ -65,7 +65,10 @@ namespace DbManagerWPF.ViewModel
             RefreshAchievementUIMapView(SelectedAchievement);
         }, () => true);
 
-        public string AchievementIDsNew { get; set; }
+        private string _AchievementIDsNew;
+        public string AchievementIDsNew { get { return _AchievementIDsNew; } set { _AchievementIDsNew = value; NotifyPropertyChanged(); } }
+
+        public ICommand EnterNewCommand => new CommandHandler(() => AddNewAchievement(), () => true);
 
         public string PointsNew { get; set; }
 
@@ -196,74 +199,89 @@ namespace DbManagerWPF.ViewModel
                 return;
             }
 
-            if (!int.TryParse(AchievementIDsNew.Trim(), out int achievementID))
+            // Add a loop here to comma separate a list of achievements
+            List<string> stringAchievementIDs;
+            if (AchievementIDsNew.Contains(',')) // Multiple achievement IDs were entered
+                stringAchievementIDs = AchievementIDsNew.Split(',').ToList();
+            else
+                stringAchievementIDs = new() { AchievementIDsNew };
+
+            List<int> achievementIDs = new();
+            foreach (var stringAchievementID in stringAchievementIDs)
             {
-                MessageBox.Show("Please enter (a) valid ID(s).", "No valid ID(s) entered", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                if (!int.TryParse(stringAchievementID.Trim(), out int achievementID))
+                {
+                    MessageBox.Show("Please enter (a) valid ID(s).", "No valid ID(s) entered", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                achievementIDs.Add(achievementID);
             }
 
-            int location = SelectedAchievement?.Location + 1 ?? 1;
-
-            var faction = Faction.Unknown;
-            if (FactionDefaultNew)
-                faction = achievementDM.GetFaction(achievementID);
-            else if (FactionNoFactionNew)
-                faction = Faction.NoFaction;
-            else if (FactionAllianceNew)
-                faction = Faction.Alliance;
-            else if (FactionHordeNew)
-                faction = Faction.Horde;
-
-            if (faction == Faction.Unknown)
+            foreach (var achievementID in achievementIDs)
             {
-                MessageBox.Show("No faction found for the entered ID.", "No faction found", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                int location = SelectedAchievement?.Location + 1 ?? 1;
+
+                var faction = Faction.Unknown;
+                if (FactionDefaultNew)
+                    faction = achievementDM.GetFaction(achievementID);
+                else if (FactionNoFactionNew)
+                    faction = Faction.NoFaction;
+                else if (FactionAllianceNew)
+                    faction = Faction.Alliance;
+                else if (FactionHordeNew)
+                    faction = Faction.Horde;
+
+                if (faction == Faction.Unknown)
+                {
+                    MessageBox.Show("No faction found for the entered ID.", "No faction found", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                var covenant = Covenant.Unknown;
+                if (CovenantDefaultNew)
+                    covenant = achievementDM.GetCovenant(achievementID);
+                else if (CovenantNoCovenantNew)
+                    covenant = Covenant.NoCovenant;
+                else if (CovenantKyrianNew)
+                    covenant = Covenant.Kyrian;
+                else if (CovenantVenthyrNew)
+                    covenant = Covenant.Venthyr;
+                else if (CovenantNightFaeNew)
+                    covenant = Covenant.NightFae;
+                else if (CovenantNecrolordNew)
+                    covenant = Covenant.Necrolord;
+
+                if (covenant == Covenant.Unknown)
+                {
+                    MessageBox.Show("No covenant found for the entered ID.", "No covenant found", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                var parsed = int.TryParse(PointsNew?.Trim(), out int points);
+
+                if (string.IsNullOrEmpty(PointsNew?.Trim()))
+                    points = achievementDM.GetPoints(achievementID);
+                else if (!parsed)
+                {
+                    MessageBox.Show("Please enter a valid integer for the points.", "No valid points entered", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (points < 0)
+                {
+                    MessageBox.Show("No points found for the entered ID.", "No points found", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                achievementDM.Add(achievementID, location, faction, covenant, points, ObtainableNew, WowheadLinkNew, SelectedCategory);
+
+                // Update locations
+                achievementDM.IncreaseLocations(SelectedCategory, Achievements, location);
+
+                // Refresh view and select the new achievement
+                RefreshAchievementsView(SelectedCategory);
+                SelectedAchievement = Achievements.Single(x => x.ID == achievementID);
             }
-
-            var covenant = Covenant.Unknown;
-            if (CovenantDefaultNew)
-                covenant = achievementDM.GetCovenant(achievementID);
-            else if (CovenantNoCovenantNew)
-                covenant = Covenant.NoCovenant;
-            else if (CovenantKyrianNew)
-                covenant = Covenant.Kyrian;
-            else if (CovenantVenthyrNew)
-                covenant = Covenant.Venthyr;
-            else if (CovenantNightFaeNew)
-                covenant = Covenant.NightFae;
-            else if (CovenantNecrolordNew)
-                covenant = Covenant.Necrolord;
-
-            if (covenant == Covenant.Unknown)
-            {
-                MessageBox.Show("No covenant found for the entered ID.", "No covenant found", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            var parsed = int.TryParse(PointsNew?.Trim(), out int points);
-
-            if (string.IsNullOrEmpty(PointsNew?.Trim()))
-                points = achievementDM.GetPoints(achievementID);
-            else if (!parsed)
-            {
-                MessageBox.Show("Please enter a valid integer for the points.", "No valid points entered", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (points < 0)
-            {
-                MessageBox.Show("No points found for the entered ID.", "No points found", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            achievementDM.Add(achievementID, location, faction, covenant, points, ObtainableNew, WowheadLinkNew, SelectedCategory);
-
-            // Update locations
-            achievementDM.IncreaseLocations(SelectedCategory, Achievements, location);
-
-            // Refresh view and select the new achievement
-            RefreshAchievementsView(SelectedCategory);
-            SelectedAchievement = Achievements.Single(x => x.ID == achievementID);
 
             // Clear input fields
             AchievementIDsNew = null;

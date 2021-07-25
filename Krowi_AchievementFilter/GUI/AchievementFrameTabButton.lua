@@ -88,12 +88,10 @@ function achFrameTabBtn:Base_OnClick(id)
     end
 
     if self.CategoriesFrame and self.CategoriesFrame:IsShown() then
-	    -- self.CategoriesFrame.Container.ScrollBar:SetValue(gui.SelectedTab.CategoriesFrameScrollBarValue);
         self.CategoriesFrame:Hide();
     end
 
     local selectedAchievement = self.SelectedAchievement;
-    -- local achievementsFrameScrollBarValue = self.AchievementsFrameScrollBarValue;
     if self.AchievementsFrame and self.AchievementsFrame:IsShown() then
         self.AchievementsFrame:Hide();
         self.SelectedAchievement = nil;
@@ -140,6 +138,7 @@ function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedT
         gui.ResetAchievementFrameWidth();
         gui.ResetAchievementFrameHeight();
         achievementFrameSizeSet = nil;
+        gui.SelectedTab = nil;
     end
 
     if thisTabID == clickedTab then
@@ -148,29 +147,6 @@ function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedT
     else
         thisTab.text:SetPoint("CENTER", 0, -3);
     end
-
-    -- if thisTabID == clickedTab then
-    --     diagnostics.Debug("SelectedTab is " .. thisTab:GetText());
-    --     -- if self.CategoriesFrame:IsShown() or self.AchievementsFrame:IsShown() then
-    --     --     gui.ResetView();
-    --     --     if self.SelectedAchievement then
-    --     --         self.AchievementsFrame:SelectAchievement(self.SelectedAchievement);
-    --     --     end
-    --     --     -- select achievement if available, otherwise select category if available
-    --     --     -- restore scrollbar locations
-    --     -- end
-    --     -- if gui.SelectedTab ~= self then
-    --     --     
-    --     --     -- if self.AchievementsFrame:IsShown() then
-                
-    --     --     -- end
-    --     --     -- self.AchievementsFrame:Hide();
-    --     -- end
-    --     gui.SelectedTab = self;
-
-    --     -- tab set, now we need to refresh the categories and achievements based on the tabs last state and based on if the categories and/or achievements were already visible or not
-
-    -- end
 end
 
 function achFrameTabBtn:Select()

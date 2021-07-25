@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-26 01-29-24 ]] --
+-- [[ Exported at 2021-07-26 01-32-21 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -2349,7 +2349,7 @@ function exportedAchievements.Load(a)
     a[11157] = ach:New(11157, 10); -- Loremaster of Legion
     a[11159] = ach:New(11159, 5); -- Friends in a Broken Land
     a[11160] = ach:New(11160, 10); -- Unleashed Monstrosities
-    a[11162] = ach:New(11162, 10, nil, nil, false); -- Keystone Master
+    a[11162] = ach:New(11162, 10); -- Keystone Master
     a[11163] = ach:New(11163, 25); -- Glory of the Legion Hero
     a[11164] = ach:New(11164, 20); -- Legion Dungeon Hero
     a[11171] = ach:New(11171, 10); -- Arsenal of Power
@@ -2358,9 +2358,9 @@ function exportedAchievements.Load(a)
     a[11178] = ach:New(11178, 10); -- Wake the Dragon
     a[11180] = ach:New(11180, 25); -- Glory of the Legion Raider
     a[11181] = ach:New(11181, 10, nil, nil, false); -- Legion Keymaster
-    a[11183] = ach:New(11183, 10, nil, nil, false); -- Keystone Initiate
-    a[11184] = ach:New(11184, 10, nil, nil, false); -- Keystone Challenger
-    a[11185] = ach:New(11185, 10, nil, nil, false); -- Keystone Conqueror
+    a[11183] = ach:New(11183, 10); -- Keystone Initiate
+    a[11184] = ach:New(11184, 10); -- Keystone Challenger
+    a[11185] = ach:New(11185, 10); -- Keystone Conqueror
     a[11186] = ach:New(11186, 5); -- Tehd & Marius' Excellent Adventure
     a[11188] = ach:New(11188, 25); -- Broken Isles Explorer
     a[11189] = ach:New(11189, 10); -- Variety is the Spice of Life

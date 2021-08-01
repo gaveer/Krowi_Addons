@@ -46,7 +46,8 @@ namespace DbManagerWPF.ViewModel
             CanMergeEdit = SelectedCategory.CanMerge;
 
             RefreshAchievementsView(SelectedCategory);
-            RefreshCategoryUIMapView(SelectedCategory);
+            RefreshCategoryUIMapsView(SelectedCategory);
+            RefreshCategoryEvenstView(SelectedCategory);
         }, () => true);
 
         private string _CategoryNameNew;

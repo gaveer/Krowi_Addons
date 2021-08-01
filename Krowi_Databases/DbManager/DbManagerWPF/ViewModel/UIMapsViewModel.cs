@@ -78,13 +78,13 @@ namespace DbManagerWPF.ViewModel
             UIMaps = new ObservableCollection<UIMap>(uiMapDM.GetAll(true));
         }
 
-        private void RefreshCategoryUIMapView(Category category, bool refresh = false)
+        private void RefreshCategoryUIMapsView(Category category, bool refresh = false)
         {
             if (category != null)
                 CategoryUIMaps = new ObservableCollection<UIMap>(category.GetUIMaps(refresh));
         }
 
-        private void RefreshAchievementUIMapView(Achievement achievement, bool refresh = false)
+        private void RefreshAchievementUIMapsView(Achievement achievement, bool refresh = false)
         {
             if (achievement != null)
                 AchievementUIMaps = new ObservableCollection<UIMap>(achievement.GetUIMaps(refresh));
@@ -120,8 +120,8 @@ namespace DbManagerWPF.ViewModel
 
                 // Refresh view and select the previous achievement
                 RefreshUIMapView();
-                RefreshCategoryUIMapView(SelectedCategory, true);
-                RefreshAchievementUIMapView(SelectedAchievement, true);
+                RefreshCategoryUIMapsView(SelectedCategory, true);
+                RefreshAchievementUIMapsView(SelectedAchievement, true);
                 SelectedUIMap = UIMaps.Find(uiMapToMove.ID);
 
                 uiMapToMove = null;
@@ -173,28 +173,28 @@ namespace DbManagerWPF.ViewModel
         {
             uiMapDM.AddToCategory(SelectedCategory, SelectedUIMap);
 
-            RefreshCategoryUIMapView(SelectedCategory, true);
+            RefreshCategoryUIMapsView(SelectedCategory, true);
         }
 
         public void RemoveUIMapFromCategory()
         {
             uiMapDM.RemoveFromCategory(SelectedCategory, SelectedCategoryUIMap);
 
-            RefreshCategoryUIMapView(SelectedCategory, true);
+            RefreshCategoryUIMapsView(SelectedCategory, true);
         }
 
         public void AddUIMapToAchievement()
         {
             uiMapDM.AddToAchievement(SelectedAchievement, SelectedUIMap);
 
-            RefreshAchievementUIMapView(SelectedAchievement, true);
+            RefreshAchievementUIMapsView(SelectedAchievement, true);
         }
 
         public void RemoveUIMapFromAchievement()
         {
             uiMapDM.RemoveFromAchievement(SelectedAchievement, SelectedAchievementUIMap);
 
-            RefreshAchievementUIMapView(SelectedAchievement, true);
+            RefreshAchievementUIMapsView(SelectedAchievement, true);
         }
     }
 }

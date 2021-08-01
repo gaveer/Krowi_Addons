@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-26 01-32-21 ]] --
+-- [[ Exported at 2021-07-26 13-12-10 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3321,10 +3321,6 @@ function exportedCategories.Load(a)
     AddA(tmp[238], a[11164]); -- Legion Dungeon Hero
     AddA(tmp[238], a[11163]); -- Glory of the Legion Hero
     AddA(tmp[238], a[11181]); -- Legion Keymaster
-    AddA(tmp[238], a[11183]); -- Keystone Initiate
-    AddA(tmp[238], a[11184]); -- Keystone Challenger
-    AddA(tmp[238], a[11185]); -- Keystone Conqueror
-    AddA(tmp[238], a[11162]); -- Keystone Master
     tmp[240] = cat:New((EJ_GetInstanceInfo(716))); -- Eye of Azshara
     AddC(tmp[238], tmp[240]);
     AddA(tmp[240], a[10456]); -- But You Say He's Just a Friend
@@ -4609,6 +4605,10 @@ function exportedCategories.Load(a)
     AddC(tmp[6], tmp[369]);
     AddA(tmp[369], a[14418]); -- Shadowlands Dungeon Hero
     AddA(tmp[369], a[14322]); -- Glory of the Shadowlands Hero
+    AddA(tmp[369], a[11183]); -- Keystone Initiate
+    AddA(tmp[369], a[11184]); -- Keystone Challenger
+    AddA(tmp[369], a[11185]); -- Keystone Conqueror
+    AddA(tmp[369], a[11162]); -- Keystone Master
     AddA(tmp[369], a[14938]); -- Shadowlands Keystone Explorer: Season One
     AddA(tmp[369], a[14531]); -- Shadowlands Keystone Conqueror: Season One
     AddA(tmp[369], a[14532]); -- Shadowlands Keystone Master: Season One

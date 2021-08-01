@@ -9,8 +9,10 @@ namespace DbManagerWPF.Model
     {
         private readonly IAchievementDM achievementDM;
         private readonly IUIMapDM uiMapDM;
+        private readonly IEventDM eventDM;
         private IEnumerable<Achievement> achievements;
         private List<UIMap> uiMaps = new();
+        private List<Event> events = new();
 
         public int ID { get; set; } = -1;
         public int Location { get; set; } = -1;
@@ -23,10 +25,11 @@ namespace DbManagerWPF.Model
         public bool CanMerge { get; set; } = false;
         public List<Category> Children { get; set; } = new List<Category>();
 
-        public Category(IAchievementDM achievementDM, IUIMapDM uiMapDM)
+        public Category(IAchievementDM achievementDM, IUIMapDM uiMapDM, IEventDM eventDM)
         {
             this.achievementDM = achievementDM;
             this.uiMapDM = uiMapDM;
+            this.eventDM = eventDM;
         }
 
         public IEnumerable<Achievement> GetAchievements()
@@ -60,6 +63,23 @@ namespace DbManagerWPF.Model
         public void SetUIMaps(IEnumerable<UIMap> uiMaps)
         {
             this.uiMaps = uiMaps.ToList();
+        }
+
+        public IEnumerable<Event> GetEvents(bool refresh = false)
+        {
+            if (!refresh)
+                if (events.Any())
+                    return events;
+
+            events.Clear();
+
+            events = eventDM.GetWithCategory(this).ToList();
+            return events;
+        }
+
+        public void SetEvents(IEnumerable<Event> events)
+        {
+            this.events = events.ToList();
         }
 
         public override string ToString()

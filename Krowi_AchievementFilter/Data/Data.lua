@@ -13,7 +13,14 @@ data.RCMenuExtras = {};
 
 data.Maps = {};
 
+data.Events = {};
+
+local isLoaded;
 function data.Load()
+    if isLoaded then
+        return;
+    end
+
     data.ExportedAchievements.Load(data.Achievements);
     data.ExportedNextPatchAchievements.Load(data.NextPatchAchievements);
 
@@ -23,6 +30,9 @@ function data.Load()
 
     data.ExportedMaps.Load(data.Maps, data.Achievements);
 
+    data.ExportedEvents.LoadCategories(data.Events, data.Achievements);
+
+    isLoaded = true;
     addon.Diagnostics.Debug("Expansion data loaded");
 
     -- TEST = {};

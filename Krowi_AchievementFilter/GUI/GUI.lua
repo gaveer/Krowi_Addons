@@ -8,10 +8,13 @@ local gui = addon.GUI;
 function gui:LoadWithAddon()
     gui.ElvUISkin.Load();
     gui.WorldMapButton.Load();
+    gui.AlertSystem:Load();
 end
 
 function gui:LoadWithBlizzard_AchievementUI()
     self.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset); -- Do this in order to create the correct amount of buttons based on our settings
+
+    -- gui.AlertSystem:Load();
 
     gui.AchievementsFrame:Load();
     gui.CategoriesFrame:Load();
@@ -134,7 +137,7 @@ function gui.SelectTab(tabName)
     end
 end
 
-function gui.ToggleAchievementFrame(tabName, forceOpen) -- Issue #26 Broken, Fix
+function gui.ToggleAchievementFrame(tabName, resetView, forceOpen) -- Issue #26 Broken, Fix
     diagnostics.Trace("gui.ToggleAchievementFrame");
 
     if not IsAddOnLoaded("Blizzard_AchievementUI") then
@@ -151,14 +154,14 @@ function gui.ToggleAchievementFrame(tabName, forceOpen) -- Issue #26 Broken, Fix
        end
     end
 
-	if AchievementFrame:IsShown() and tabIsSelected and not forceOpen then -- AchievementFrame.selectedTab == 4 and
+	if AchievementFrame:IsShown() and tabIsSelected and not resetView and not forceOpen then
 		HideUIPanel(AchievementFrame);
 	else
 		ShowUIPanel(AchievementFrame);
         AchievementFrame_SetTabs();
         AchievementFrame_HideSearchPreview();
         gui.SelectTab(tabName);
-        if addon.Options.db.ResetViewOnOpen or forceOpen then
+        if addon.Options.db.ResetViewOnOpen or resetView then
             gui.ResetView();
         end
 	end

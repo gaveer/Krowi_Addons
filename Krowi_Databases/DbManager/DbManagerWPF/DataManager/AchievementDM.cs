@@ -10,11 +10,13 @@ namespace DbManagerWPF.DataManager
     public class AchievementDM : DataManagerBase, IAchievementDM
     {
         private readonly IUIMapDM uiMapDM;
+        private readonly IEventDM eventDM;
         private readonly List<Achievement> achievements = new();
 
-        public AchievementDM(SqliteConnection connection, IUIMapDM uiMapDM) : base(connection)
+        public AchievementDM(SqliteConnection connection, IUIMapDM uiMapDM, IEventDM eventDM) : base(connection)
         {
             this.uiMapDM = uiMapDM;
+            this.eventDM = eventDM;
         }
 
         public IEnumerable<Achievement> GetAll(bool refresh = false)
@@ -37,7 +39,7 @@ namespace DbManagerWPF.DataManager
             {
                 achievements.Clear();
                 while (reader.Read())
-                    achievements.Add(new Achievement(uiMapDM)
+                    achievements.Add(new Achievement(uiMapDM, eventDM)
                     {
                         ID = reader.GetInt32(0),
                         Name = reader.IsDBNull(1) ? null : reader.GetString(1),
@@ -74,7 +76,44 @@ namespace DbManagerWPF.DataManager
             var achievements = new List<Achievement>();
             using (var reader = cmd.ExecuteReader())
                 while (reader.Read())
-                    achievements.Add(new Achievement(uiMapDM)
+                    achievements.Add(new Achievement(uiMapDM, eventDM)
+                    {
+                        ID = reader.GetInt32(0),
+                        Location = reader.GetInt32(1),
+                        Name = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        Faction = (Faction)reader.GetInt32(3),
+                        Covenant = (Covenant)reader.GetInt32(4),
+                        Points = reader.GetInt32(5),
+                        Obtainable = reader.GetBoolean(6),
+                        WowheadLink = reader.GetBoolean(7)
+                    });
+
+            return achievements;
+        }
+
+        public IEnumerable<Achievement> GetWithEvent(Event @event)
+        {
+            _ = @event ?? throw new ArgumentNullException(nameof(@event));
+
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = @"SELECT
+                                    A.ID, CA.Location, AGT.Name, A.FactionID, A.CovenantID, A.Points, A.Obtainable, A.WowheadLink
+                                FROM
+                                    Achievement A
+                                    LEFT JOIN CategoryAchievement CA
+                                        ON A.ID = CA.AchievementID
+                                    LEFT JOIN Achievement_AGT AGT
+                                        ON A.ID = AGT.ID
+                                WHERE
+                                    CA.CategoryID = @Category
+                                ORDER BY
+                                    CA.Location ASC;";
+            cmd.Parameters.AddWithValue("@Category", @event.ID);
+
+            var achievements = new List<Achievement>();
+            using (var reader = cmd.ExecuteReader())
+                while (reader.Read())
+                    achievements.Add(new Achievement(uiMapDM, eventDM)
                     {
                         ID = reader.GetInt32(0),
                         Location = reader.GetInt32(1),

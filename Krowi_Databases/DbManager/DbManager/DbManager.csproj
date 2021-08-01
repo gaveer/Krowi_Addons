@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataManagers\DataManagerBase.cs" />
+    <Compile Include="DataManagers\EventDataManager.cs" />
     <Compile Include="DataManagers\IDataManager.cs" />
     <Compile Include="DataManagers\PetBattleLinksDataManager.cs" />
     <Compile Include="DataManagers\UIMapDataManager.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Objects\AchievementCategory.cs" />
     <Compile Include="GUI\AchievementCategoryTreeNode.cs" />
     <Compile Include="Objects\AchievementFlags.cs" />
+    <Compile Include="Objects\Event.cs" />
     <Compile Include="Objects\UIMap.cs" />
     <Compile Include="Objects\PetBattleLink.cs" />
     <Compile Include="Objects\Covenant.cs" />

@@ -8,7 +8,9 @@ namespace DbManagerWPF.Model
     public class Achievement : IComparable<Achievement>, IEquatable<Achievement>
     {
         private readonly IUIMapDM uiMapDM;
+        private readonly IEventDM eventDM;
         private List<UIMap> uiMaps = new();
+        private List<Event> events = new();
 
         public int ID { get; set; }
         public int Location { get; set; }
@@ -21,9 +23,10 @@ namespace DbManagerWPF.Model
         public bool Obtainable { get; set; }
         public bool WowheadLink { get; set; }
 
-        public Achievement(IUIMapDM uiMapDM)
+        public Achievement(IUIMapDM uiMapDM, IEventDM eventDM)
         {
             this.uiMapDM = uiMapDM;
+            this.eventDM = eventDM;
         }
 
         public IEnumerable<UIMap> GetUIMaps(bool refresh = false)
@@ -44,6 +47,23 @@ namespace DbManagerWPF.Model
         public void SetUIMaps(IEnumerable<UIMap> uiMaps)
         {
             this.uiMaps = uiMaps.ToList();
+        }
+
+        public IEnumerable<Event> GetEvents(bool refresh = false)
+        {
+            if (!refresh)
+                if (events.Any())
+                    return events;
+
+            events.Clear();
+
+            events = eventDM.GetWithAchievement(this).ToList();
+            return events;
+        }
+
+        public void SetEvents(IEnumerable<Event> events)
+        {
+            this.events = events.ToList();
         }
 
         public override string ToString()

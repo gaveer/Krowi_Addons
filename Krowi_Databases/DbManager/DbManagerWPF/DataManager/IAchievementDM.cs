@@ -6,5 +6,6 @@ namespace DbManagerWPF.DataManager
     public interface IAchievementDM
     {
         public IEnumerable<Achievement> GetWithCategory(Category category);
+        public IEnumerable<Achievement> GetWithEvent(Event @event);
     }
 }

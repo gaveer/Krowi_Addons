@@ -166,7 +166,7 @@ function loadHelper:OnEvent(event, arg1)
             addon.Data.Load();
 
             addon.GUI:LoadWithBlizzard_AchievementUI();
-            
+
             addon.Data.LoadExcludedAchievements(addon.Data.Achievements);
 
             addon.Tutorials.HookTrigger(addon.GUI.TabButtonExpansions);
@@ -177,6 +177,9 @@ function loadHelper:OnEvent(event, arg1)
         end
     elseif event == "PLAYER_LOGIN" then
         -- addon.GUI.FilterButton:ResetFilters();
+
+        addon.Data.ExportedEvents.Load(addon.Data.Events);
+        addon.EventData.Load();
 
         if addon.Diagnostics.DebugEnabled() then
             hooksecurefunc(WorldMapFrame, "OnMapChanged", function()

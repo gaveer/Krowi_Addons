@@ -420,7 +420,7 @@ function categoriesFrame:SelectCategory(category, collapsed)
 	local categoriesTree = category:GetTree();
 
 	-- Select tab
-	gui.SelectTab(categoriesTree[1]);
+	gui.ToggleAchievementFrame(categoriesTree[1].Name, nil, true);
 
 	-- Select category
 	for i, cat in next, categoriesTree do

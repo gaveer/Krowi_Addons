@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.27.A1] - 2021-
+## [9.1.0.27.A2] - 2021-
 ### Added
 - 2nd tab added with Event achievements (WIP)
 - Search is now possible from any tab (Expansions and Events)
@@ -15,7 +15,9 @@ All notable changes to this project will be documented in this file.
 - The Burning Crusade - Zones - Silvermoon City achievements
 - Battle for Azeroth - Zones - Universal Explorer
 - All Holidays and Darkmoon Faire
-- Legion - Dungeons - Keystone Initiate, Challenger, Conqueror and Master
+- Shadowlands - Dungeons - Keystone Initiate, Challenger, Conqueror and Master
+- Toast to notify if a holiday or event is active (will be expanded upon in the future)
+- Clicking this toast will open the related category
 
 ### Changed
 - Categories are now only stored hierarchical in preperation of new features; Reduced memory usage by 1%
@@ -26,6 +28,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Glamour of Twilight in Cataclysm - Raids - The Bastion of Twilight is obtainable
+- Possible duplicates of achievements in the Current Zone and Selected Zone categories resolved
 
 [9.1.0.27.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3388261
 

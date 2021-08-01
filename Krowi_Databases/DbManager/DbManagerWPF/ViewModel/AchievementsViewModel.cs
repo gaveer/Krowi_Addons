@@ -62,7 +62,8 @@ namespace DbManagerWPF.ViewModel
                     break;
             }
 
-            RefreshAchievementUIMapView(SelectedAchievement);
+            RefreshAchievementUIMapsView(SelectedAchievement);
+            RefreshAchievementEventsView(SelectedAchievement);
         }, () => true);
 
         private string _AchievementIDsNew;

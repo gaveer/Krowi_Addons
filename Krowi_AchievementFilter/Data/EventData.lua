@@ -88,3 +88,28 @@ function GetEvents()
 
     return events;
 end
+
+local activeEvents;
+function eventData.GetActiveEvents()
+    if activeEvents == nil then
+        activeEvents = {};
+
+        local currentDate = C_DateAndTime.GetCurrentCalendarTime();
+        currentDate.day = currentDate.monthDay;
+        currentDate.monthDay = nil;
+        currentDate.wday = currentDate.weekday;
+        currentDate.weekday = nil;
+        currentDate.min = currentDate.minute;
+        currentDate.minute = nil;
+        currentDate = time(currentDate);
+        for _, event in next, data.Events do
+            local deltaT = math.floor((time(event.EventDetails.startTime) - currentDate) / (3600 * 24));
+            if deltaT < 0 then
+                diagnostics.Debug("Event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+                tinsert(activeEvents, event);
+            end
+        end
+    end
+
+    return activeEvents;
+end

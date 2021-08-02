@@ -5,6 +5,7 @@
     <Script file="GUI/AlertSystem.lua" />
 
     <Script file="GUI/AchievementFrameTabButton.lua" />
+    <Script file="GUI/SideButton.lua" />
     <Script file="GUI/CategoriesFrame.lua" />
     <Script file="GUI/CategoryButton.lua" />
     <Script file="GUI/AchievementsFrame.lua" />

@@ -16,8 +16,9 @@ All notable changes to this project will be documented in this file.
 - Battle for Azeroth - Zones - Universal Explorer
 - All Holidays and Darkmoon Faire
 - Shadowlands - Dungeons - Keystone Initiate, Challenger, Conqueror and Master
-- Toast to notify if a holiday or event is active (will be expanded upon in the future)
-- Clicking this toast will open the related category
+- Alert to notify if a holiday or event is active (will be expanded upon in the future)
+- Clicking this alert will open the related category
+- This alert is also present on the right side of the achievement window
 
 ### Changed
 - Categories are now only stored hierarchical in preperation of new features; Reduced memory usage by 1%

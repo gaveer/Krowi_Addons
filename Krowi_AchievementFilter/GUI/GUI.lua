@@ -3,7 +3,8 @@ local _, addon = ...;
 local diagnostics = addon.Diagnostics;
 addon.GUI = {};
 local gui = addon.GUI;
--- gui.SelectedTab = {};
+gui.SideButtons = {};
+local sideButtons = gui.SideButtons;
 
 function gui:LoadWithAddon()
     gui.ElvUISkin.Load();
@@ -24,6 +25,12 @@ function gui:LoadWithBlizzard_AchievementUI()
 
     gui.TabButtonExpansions = gui.AchievementFrameTabButton:New(addon.L["Expansions"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesExpansions);
     gui.TabButtonEvents = gui.AchievementFrameTabButton:New(addon.L["Events"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesEvents);
+
+    local activeEvents = addon.EventData.GetActiveEvents();
+
+    for _, activeEvent in next, activeEvents do
+        tinsert(sideButtons, gui.SideButton:New(activeEvent, sideButtons));
+    end
 
     self.ResetAchievementFrameHeight();
 

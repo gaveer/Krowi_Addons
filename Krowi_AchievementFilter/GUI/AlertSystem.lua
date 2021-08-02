@@ -5,25 +5,42 @@ local gui = addon.GUI;
 gui.AlertSystem = {};
 local alertSystem = gui.AlertSystem;
 
+local ShowActiveEvents;
 function alertSystem:Load()
-    addon.GUI.AlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("KrowiAF_AlertFrameTemplate", self.SetUp, 2, 6);
+    addon.GUI.AlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("KrowiAF_AlertFrameTemplate", self.SetUp, 4, 6);
+    addon.GUI.AlertSystem.ShowActiveEvents = ShowActiveEvents;
 end
 
-function KrowiAFShowAlert(id)
-    if Kiosk.IsEnabled() then
+local shows = 0;
+function ShowActiveEvents()
+    if shows >= addon.Options.db.EventAlert.ShowTimes then
         return;
     end
 
-    -- if not AchievementFrame then
-    --     AchievementFrame_LoadUI();
-    -- end
+    local activeEvents = addon.EventData.GetActiveEvents();
 
-    if id == nil then
-        id = 141;
+    for _, activeEvent in next, activeEvents do
+        addon.GUI.AlertSystem:AddAlert(activeEvent, addon.Options.db.EventAlert.FadeDelay);
     end
 
-    addon.GUI.AlertSystem:AddAlert(addon.Data.Events[id], 60);-- maybe make 60 a setting, this is the time the alert stays on screen in seconds
+    shows = shows + 1;
 end
+
+-- function KrowiAFShowAlert(id)
+--     if Kiosk.IsEnabled() then
+--         return;
+--     end
+
+--     -- if not AchievementFrame then
+--     --     AchievementFrame_LoadUI();
+--     -- end
+
+--     if id == nil then
+--         id = 141;
+--     end
+
+--     addon.GUI.AlertSystem:AddAlert(addon.Data.Events[id], addon.Options.db.EventAlert.FadeDelay);
+-- end
 
 function alertSystem.SetUp(frame, event, duration)
 	-- local _, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);

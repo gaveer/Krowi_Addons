@@ -147,8 +147,9 @@ end
 
 -- [[ Load addon ]] --
 local loadHelper = CreateFrame("Frame");
-loadHelper:RegisterEvent("ADDON_LOADED");
-loadHelper:RegisterEvent("PLAYER_LOGIN");
+loadHelper:RegisterEvent("ADDON_LOADED"); -- 1
+loadHelper:RegisterEvent("PLAYER_LOGIN"); -- 4
+loadHelper:RegisterEvent("PLAYER_ENTERING_WORLD"); -- 5
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then
@@ -187,6 +188,8 @@ function loadHelper:OnEvent(event, arg1)
                 print(mapID);
             end);
         end
+    elseif event == "PLAYER_ENTERING_WORLD" then
+        addon.GUI.AlertSystem.ShowActiveEvents();
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

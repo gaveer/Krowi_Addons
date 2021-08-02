@@ -19,7 +19,7 @@ L["Exclude"] = "Exclude";
 
 -- Tabs
 L["Expansions"] = "Expansions";
-L["Events"] = "Events (WIP)";
+L["Events"] = "Events";
 
 -- Categories
 L["Current Zone"] = "Current Zone";
@@ -79,6 +79,13 @@ L["Show minimap icon Desc"] = "Show / hide the minimap icon";
 -- Options General Key Binding
 L["Reset view on open"] = "Reset view on open";
 L["Reset view on open Desc"] = "Collapse all categories and select the first category or\nKeep the last selected category when last closed";
+
+-- Options General Event Alert
+L["Event alert"] = "Event alert";
+L["Show times"] = "Show times";
+L["Show times Desc"] = "Show the event alert x times. This happens every time you transition zones through a loading screen. Will only show once on login if set to 1.";
+L["Fade delay"] = "Fade delay";
+L["Fade delay Desc"] = "The time in seconds it takes for the event alert to fade when it's ignored. Right clicking will close it immidiatly.";
 
 -- Options General Search
 L["Search"] = "Search";
@@ -181,8 +188,8 @@ L["Icon Right click"] = "for Options.";
 
 -- Tutorials
 -- Features tutorial
-L["New achievement window tab"] = "New achievement window tab";
-L["New achievement window tab Desc"] = "A new tab is added to the achievement window to offer a new way of displaying achievements " ..
+L["New achievement window tabs"] = "New achievement window tabs";
+L["New achievement window tabs Desc"] = "New tabs are added to the achievement window to offer a new way of displaying achievements " ..
                                         "in a familiar fashion without interfering with the default tabs.";
 
 L["Categories per expansion"] = "Categories per expansion";
@@ -313,6 +320,12 @@ L["New Achievement Colors Desc"] = "- The default gold Blizzard achievement of a
                                     "- The new red achievement of a not obtained not obtainable achievement with default grey Blizzard border.\n" ..
                                     "- The new red achievement and red border of an obtained not obtainable achievement\n" ..
                                     "- The default blue Blizzard achievement and border of an obtained account-wide achievement.\n";
+                                    
+L["Event Reminder"] = "Event Reminder";
+L["Event Reminder Desc"] = "Events are added to the new tab and a reminder will pop up when one of the events is active.\n\n" ..
+                            "Clicking it will open the category with the obtainable achievements while the event is active.\n" ..
+                            "It will dissapear when right clicked or after {EventAlertFadeDelay} seconds when ignored.\n\n" ..
+                            "The reminder is also present on the right side of the achievement window.";
 
 L["OC"] = "OC";
 L["NONC"] = "NONC";

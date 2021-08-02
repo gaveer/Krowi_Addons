@@ -14,10 +14,10 @@ function tutorials.Load()
 
     tinsert(pages, { -- 1
         Image = media .. "TabButton",
-        ImageSize = {614, 158},
-        ImageTexCoord = {0, 614/1024, 0, 158/256},
-        SubTitle = string.format(addon.Yellow, addon.L["New achievement window tab"]),
-        Text = addon.L["New achievement window tab Desc"],
+        ImageSize = {664, 158},
+        ImageTexCoord = {0, 664/1024, 0, 158/256},
+        SubTitle = string.format(addon.Yellow, addon.L["New achievement window tabs"]),
+        Text = addon.L["New achievement window tabs Desc"],
         ShineTop = SavedData.ElvUISkin.Tutorials and 7 or 12,
         ShineBottom = SavedData.ElvUISkin.Tutorials and -6 or -21,
         ShineLeft = SavedData.ElvUISkin.Tutorials and 1 or 2,
@@ -296,6 +296,26 @@ function tutorials.Load()
         SubTitle = string.format(addon.Yellow, addon.L["New Achievement Colors"]),
         Text = addon.L["New Achievement Colors Desc"],
         OnShow = function(self)
+        end
+    });
+    tinsert(pages, { -- 11
+        Image = media .. "EventReminder",
+        ImageSize = {392, 183},
+        ImageTexCoord = {0, 392/512, 0, 183/256},
+        SubTitle = string.format(addon.Yellow, addon.L["Event Reminder"]),
+        Text = addon.L["Event Reminder Desc"],
+        -- ShineTop = SavedData.ElvUISkin.Tutorials and 7 or 12,
+        -- ShineBottom = SavedData.ElvUISkin.Tutorials and -6 or -21,
+        -- ShineLeft = SavedData.ElvUISkin.Tutorials and 1 or 2,
+        -- ShineRight = SavedData.ElvUISkin.Tutorials and 0 or -2,
+        OnShow = function(self)
+            -- addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
+            -- self.Shine = addon.GUI.TabButtonExpansions;
+            if self.OriginalText == nil then
+                self.OriginalText = self.Text;
+            end
+            self.Text = core.ReplaceVars{self.OriginalText,
+                                            EventAlertFadeDelay = string.format(addon.Yellow, addon.Options.db.EventAlert.FadeDelay)};
         end
     });
 

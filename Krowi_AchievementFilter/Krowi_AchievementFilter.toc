@@ -1,11 +1,12 @@
 ## Interface: 90100
 ## Title: Krowi's |cFF1D92C2Achievement Filter|r
-## Version: 25.0
+## Version: 27.0
 ## Author: Krowi-Frostmane EU
-## SavedVariables: Options, SavedData, Filters
+## SavedVariables: Options, SavedData, Filters, EventDetails
 ## Notes: Filters your achievements.
 ## X-Discord: DCxq5rRNW5
 ## X-CurseForge: krowi-achievement-filter
+## X-Curse-Project-ID: 413582
 
 Core/Files.xml
 

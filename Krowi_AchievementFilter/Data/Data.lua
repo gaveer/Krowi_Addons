@@ -6,22 +6,33 @@ local data = addon.Data;
 
 data.Achievements, data.NextPatchAchievements = {}, {};
 
-data.Categories, data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = {}, {}, {}, {}, {};
+data.CategoriesExpansions, data.CategoriesEvents = {}, {};
+data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = {}, {}, {}, {}, {};
 
 data.RCMenuExtras = {};
 
 data.Maps = {};
 
+data.Events = {};
+
+local isLoaded;
 function data.Load()
+    if isLoaded then
+        return;
+    end
+
     data.ExportedAchievements.Load(data.Achievements);
     data.ExportedNextPatchAchievements.Load(data.NextPatchAchievements);
 
-    data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = data.ExportedCategories.Load(data.Categories, data.Achievements);
+    data.CategoriesExpansions, data.CategoriesEvents, data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = data.ExportedCategories.Load(data.Achievements);
 
     data.ExportedPetBattles.Load(data.RCMenuExtras);
 
     data.ExportedMaps.Load(data.Maps, data.Achievements);
 
+    data.ExportedEvents.LoadCategories(data.Events, data.Achievements);
+
+    isLoaded = true;
     addon.Diagnostics.Debug("Expansion data loaded");
 
     -- TEST = {};

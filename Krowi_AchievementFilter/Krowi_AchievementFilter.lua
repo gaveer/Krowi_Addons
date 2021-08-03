@@ -11,7 +11,8 @@ addon.Util = LibStub("Krowi_Util-1.0");
 
 -- [[ Binding names ]] --
 BINDING_HEADER_AF_NAME = addon.MetaData.Title;
-BINDING_NAME_AF_OPEN_TAB1 = addon.L["BINDING_NAME_AF_OPEN_TAB1"];
+BINDING_NAME_AF_OPEN_TAB1 = addon.L["Toggle Achievement Window to "] .. addon.L["Expansions"];
+BINDING_NAME_AF_OPEN_TAB2 = addon.L["Toggle Achievement Window to "] .. addon.L["Events"];
 
 -- [[ Guild view ]] --
 function addon.InGuildView()
@@ -146,8 +147,9 @@ end
 
 -- [[ Load addon ]] --
 local loadHelper = CreateFrame("Frame");
-loadHelper:RegisterEvent("ADDON_LOADED");
-loadHelper:RegisterEvent("PLAYER_LOGIN");
+loadHelper:RegisterEvent("ADDON_LOADED"); -- 1
+loadHelper:RegisterEvent("PLAYER_LOGIN"); -- 4
+loadHelper:RegisterEvent("PLAYER_ENTERING_WORLD"); -- 5
 
 function loadHelper:OnEvent(event, arg1)
     if event == "ADDON_LOADED" then
@@ -165,10 +167,10 @@ function loadHelper:OnEvent(event, arg1)
             addon.Data.Load();
 
             addon.GUI:LoadWithBlizzard_AchievementUI();
-            
+
             addon.Data.LoadExcludedAchievements(addon.Data.Achievements);
 
-            addon.Tutorials.HookTrigger(addon.GUI.TabButton1);
+            addon.Tutorials.HookTrigger(addon.GUI.TabButtonExpansions);
 
             addon.GUI.ElvUISkin.Apply();
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
@@ -177,12 +179,17 @@ function loadHelper:OnEvent(event, arg1)
     elseif event == "PLAYER_LOGIN" then
         -- addon.GUI.FilterButton:ResetFilters();
 
+        addon.Data.ExportedEvents.Load(addon.Data.Events);
+        addon.EventData.Load();
+
         if addon.Diagnostics.DebugEnabled() then
             hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
                 local mapID = WorldMapFrame.mapID;
                 print(mapID);
             end);
         end
+    elseif event == "PLAYER_ENTERING_WORLD" then
+        addon.GUI.AlertSystem.ShowActiveEvents();
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

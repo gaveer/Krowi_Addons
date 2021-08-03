@@ -6,9 +6,11 @@ local gui = addon.GUI;
 gui.AchievementFrameTabButton = {};
 local achFrameTabBtn = gui.AchievementFrameTabButton;
 
+local ourTabIDs = {};
+
 -- [[ Constructors ]] --
 achFrameTabBtn.__index = achFrameTabBtn; -- Used to support OOP like code
-function achFrameTabBtn:New(text, framesToShow)
+function achFrameTabBtn:New(text, framesToShow, achievementsFrame, categoriesFrame, categories)
     diagnostics.Trace("achievementFrameTabButton:New");
 
 	-- Increment ID
@@ -22,7 +24,20 @@ function achFrameTabBtn:New(text, framesToShow)
 
 	-- Set properties
     frame.ID = AchievementFrame.numTabs;
+    tinsert(ourTabIDs, frame.ID);
+    frame.AchievementsFrame = achievementsFrame;
+    tinsert(framesToShow, 1, achievementsFrame);
+    frame.CategoriesFrame = categoriesFrame;
+    tinsert(framesToShow, 1, categoriesFrame);
     frame.FramesToShow = framesToShow;
+
+    -- frame.AchievementsFrameScrollBarValue = 0;
+    frame.SelectedAchievement = nil; -- Issue #6: Fix
+    -- frame.CategoriesFrameScrollBarValue = 0;
+	frame.Categories = categories;
+    if frame.Categories then
+	    frame.SelectedCategory = frame.Categories[1];
+    end
 
     frame:RegisterEvent("ADDON_LOADED");
     frame:SetScript("OnClick", function(selfFunc)
@@ -71,8 +86,27 @@ function achFrameTabBtn:Base_OnClick(id)
         AchievementFrameGuildEmblemLeft:Hide();
         AchievementFrameGuildEmblemRight:Hide();
     end
+
+    if self.CategoriesFrame and self.CategoriesFrame:IsShown() then
+        self.CategoriesFrame:Hide();
+    end
+
+    local selectedAchievement = self.SelectedAchievement;
+    if self.AchievementsFrame and self.AchievementsFrame:IsShown() then
+        self.AchievementsFrame:Hide();
+        self.SelectedAchievement = nil;
+    end
+
     AchievementFrame_ShowSubFrame(unpack(self.FramesToShow));
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
+
+    if self.AchievementsFrame then
+        if selectedAchievement then
+            self.AchievementsFrame:SelectAchievement(selectedAchievement, nil, true);
+        else
+            self.AchievementsFrame.Container.ScrollBar:SetValue(0);
+        end
+    end
 end
 
 function achFrameTabBtn:Comparison_OnClick(id)
@@ -84,26 +118,41 @@ function achFrameTabBtn:Comparison_OnClick(id)
     self:OnClick(id);
 end
 
+local achievementFrameSizeSet; -- If multiple tabs are added, this variable makes sure the resizing only fires once
 function achFrameTabBtn:AchievementFrame_UpdateTabs(thisTab, thisTabID, clickedTab)
     diagnostics.Trace("achFrameTabBtn:AchievementFrame_UpdateTabs - " .. tostring(thisTabID) .. " - " .. tostring(clickedTab));
 
-    if clickedTab == thisTabID then -- Our tab was clicked
-        thisTab.text:SetPoint("CENTER", 0, -5);
-        thisTab.Selected = true;
-        gui.SetAchievementFrameWidth(addon.Options.db.Window.CategoriesFrameWidthOffset);
-        gui.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset);
-    else -- Another tab was clicked
-        thisTab.text:SetPoint("CENTER", 0, -3);
-        thisTab.Selected = nil;
+    local ourTabClicked; -- Extra logic to handle multiple tabs of ours
+    for _, id in next, ourTabIDs do
+        if clickedTab == id then
+            ourTabClicked = true;
+        end
+    end
+    if ourTabClicked then -- One of our tabs was clicked
+        if not achievementFrameSizeSet then -- And custom size was not yet set
+            gui.SetAchievementFrameWidth(addon.Options.db.Window.CategoriesFrameWidthOffset);
+            gui.SetAchievementFrameHeight(addon.Options.db.Window.AchievementFrameHeightOffset);
+            achievementFrameSizeSet = true;
+        end
+    elseif achievementFrameSizeSet then -- Not one of our tabs was clicked and size is not yet reset
         gui.ResetAchievementFrameWidth();
         gui.ResetAchievementFrameHeight();
+        achievementFrameSizeSet = nil;
+        gui.SelectedTab = nil;
+    end
+
+    if thisTabID == clickedTab then
+        thisTab.text:SetPoint("CENTER", 0, -5);
+        gui.SelectedTab = self;
+    else
+        thisTab.text:SetPoint("CENTER", 0, -3);
     end
 end
 
 function achFrameTabBtn:Select()
     diagnostics.Trace("achFrameTabBtn:Select");
 
-    if not self.Selected then
+    if gui.SelectedTab ~= self then
         self:OnClick(self.ID);
     end
 end

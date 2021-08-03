@@ -232,7 +232,7 @@ function elvUISkin.Apply()
     -- local enabled, engine, skins = elvUISkin.Load();
 
     if SavedData.ElvUISkin.Achievements then
-        skins:HandleTab(gui.TabButton1);
+        skins:HandleTab(gui.TabButtonExpansions);
         ApplyToCategoriesFrame(gui.CategoriesFrame, skins);
         ApplyToAchievementsFrame(gui.AchievementsFrame, engine, skins);
         ApplyToFilterButton(gui.FilterButton, gui.AchievementsFrame, skins);

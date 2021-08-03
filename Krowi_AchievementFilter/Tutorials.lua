@@ -14,17 +14,17 @@ function tutorials.Load()
 
     tinsert(pages, { -- 1
         Image = media .. "TabButton",
-        ImageSize = {614, 158},
-        ImageTexCoord = {0, 614/1024, 0, 158/256},
-        SubTitle = string.format(addon.Yellow, addon.L["New achievement window tab"]),
-        Text = addon.L["New achievement window tab Desc"],
+        ImageSize = {664, 158},
+        ImageTexCoord = {0, 664/1024, 0, 158/256},
+        SubTitle = string.format(addon.Yellow, addon.L["New achievement window tabs"]),
+        Text = addon.L["New achievement window tabs Desc"],
         ShineTop = SavedData.ElvUISkin.Tutorials and 7 or 12,
         ShineBottom = SavedData.ElvUISkin.Tutorials and -6 or -21,
         ShineLeft = SavedData.ElvUISkin.Tutorials and 1 or 2,
         ShineRight = SavedData.ElvUISkin.Tutorials and 0 or -2,
         OnShow = function(self)
-            addon.GUI.ToggleAchievementFrameAtTab1(true);
-            self.Shine = addon.GUI.TabButton1;
+            addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
+            self.Shine = addon.GUI.TabButtonExpansions;
         end
     });
     tinsert(pages, { -- 2
@@ -56,7 +56,7 @@ function tutorials.Load()
         ShineLeft = SavedData.ElvUISkin.Tutorials and -10 or nil,
         ShineRight = SavedData.ElvUISkin.Tutorials and 8 or nil,
         OnShow = function(self)
-            addon.GUI.ToggleAchievementFrameAtTab1(true);
+            addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
             addon.GUI.CategoriesFrame:SelectCategory(addon.Data.Achievements[1997].Category);
             self.Shine = addon.GUI.CategoriesFrame;
         end
@@ -90,7 +90,7 @@ function tutorials.Load()
                                             enabled = (addon.Options.db.RightClickMenu.ShowButtonOnAchievement and (string.format(addon.Green, addon.L["Enabled"]:lower())) or (string.format(addon.Red, addon.L["Disabled"]:lower()))),
                                             installed = (addon.IsIATLoaded() and (string.format(addon.Green, addon.L["Installed"]:lower())) or (string.format(addon.Red, addon.L["Not installed"]:lower())))};
 
-            addon.GUI.ToggleAchievementFrameAtTab1(true);
+            addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
             local achievementsButtons = addon.GUI.AchievementsFrame.Container.buttons;
             addon.GUI.AchievementsFrame:SelectAchievementFromID(4632);
             achievementsButtons[3]:Enter(addon.GUI.AchievementsFrame); -- Gets the required information to show the Go to line
@@ -131,7 +131,7 @@ function tutorials.Load()
                                             minCharToSearchNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.MinimumCharactersToSearch),
                                             numSearchPreviewsNumber = string.format(addon.Yellow, addon.Options.db.SearchBox.NumberOfSearchPreviews)};
 
-            addon.GUI.ToggleAchievementFrameAtTab1(true);
+            addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
             addon.GUI.Search.SearchBoxFrame:SetText("myt");
             addon.GUI.Search.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
             local bottom;
@@ -162,7 +162,7 @@ function tutorials.Load()
         ShineLeft = SavedData.ElvUISkin.Tutorials and -11 or -12,
         ShineRight = SavedData.ElvUISkin.Tutorials and 11 or 13,
         OnShow = function(self)
-            addon.GUI.ToggleAchievementFrameAtTab1(true);
+            addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
             addon.GUI.Search.SearchBoxFrame:SetText("myt");
             addon.GUI.Search.SearchBoxFrame:OnTextChanged(); -- Trigger this one manually as the previous line does not trigger it in order to search for achievements
             addon.GUI.Search.SearchPreviewFrame.ShowFullSearchResultsButton:Click();
@@ -223,7 +223,7 @@ function tutorials.Load()
             self.Text = core.ReplaceVars{self.OriginalText,
                                             mergeSmallCategoriesNumber = string.format(addon.Yellow, addon.Options.db.Window.MergeSmallCategoriesThreshold)};
 
-            addon.GUI.ToggleAchievementFrameAtTab1(true);
+            addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
             self.Shine = addon.GUI.FilterButton;
         end
     });
@@ -298,6 +298,26 @@ function tutorials.Load()
         OnShow = function(self)
         end
     });
+    tinsert(pages, { -- 11
+        Image = media .. "EventReminder",
+        ImageSize = {392, 183},
+        ImageTexCoord = {0, 392/512, 0, 183/256},
+        SubTitle = string.format(addon.Yellow, addon.L["Event Reminder"]),
+        Text = addon.L["Event Reminder Desc"],
+        -- ShineTop = SavedData.ElvUISkin.Tutorials and 7 or 12,
+        -- ShineBottom = SavedData.ElvUISkin.Tutorials and -6 or -21,
+        -- ShineLeft = SavedData.ElvUISkin.Tutorials and 1 or 2,
+        -- ShineRight = SavedData.ElvUISkin.Tutorials and 0 or -2,
+        OnShow = function(self)
+            -- addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
+            -- self.Shine = addon.GUI.TabButtonExpansions;
+            if self.OriginalText == nil then
+                self.OriginalText = self.Text;
+            end
+            self.Text = core.ReplaceVars{self.OriginalText,
+                                            EventAlertFadeDelay = string.format(addon.Yellow, addon.Options.db.EventAlert.FadeDelay)};
+        end
+    });
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");
     tutorials.FeaturesTutorial:SetFrameTitle(addon.MetaData.Title .. " - " .. addon.MetaData.BuildVersion);
@@ -312,8 +332,8 @@ function tutorials.Load()
         addon.GUI.ResetView();
     end);
 
-    hooksecurefunc("KrowiAF_ToggleAchievementFrameAtTab1", function()
-        diagnostics.Trace("tutorials.HookTrigger KrowiAF_ToggleAchievementFrameAtTab1");
+    hooksecurefunc("KrowiAF_ToggleAchievementFrame", function()
+        diagnostics.Trace("tutorials.HookTrigger KrowiAF_ToggleAchievementFrame");
 
         if not tutorials.FeaturesTutorial:IsShown() then
             tutorials.FeaturesTutorial:ShowTutorial();

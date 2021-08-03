@@ -6,5 +6,6 @@
     <Script file="Objects/Covenant.lua" />
     <Script file="Objects/Achievement.lua" />
     <Script file="Objects/AchievementCategory.lua" />
+    <Script file="Objects/Event.lua" />
     
 </Ui>

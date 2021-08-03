@@ -15,7 +15,7 @@ local function CreateIcon()
             diagnostics.Debug("Icon clicked with " .. button);
             if button == "LeftButton" then
                 diagnostics.Trace("icon.AchievementFilterLDB.OnClick with LeftButton");
-                addon.GUI.ToggleAchievementFrameAtTab1();
+                addon.GUI.ToggleAchievementFrame(addon.L["Expansions"]);
             elseif button == "RightButton" then
                 diagnostics.Trace("icon.AchievementFilterLDB.OnClick with RightButton");
                 addon.Options.Open();

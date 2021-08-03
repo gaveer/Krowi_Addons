@@ -93,5 +93,21 @@ namespace DbManagerWPF.DataManager
 
             return functions.Single(x => x.ID == 7);
         }
+
+        public Function GetTabEventsFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 37);
+        }
+
+        public Function GetTabExpansionsFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 38);
+        }
     }
 }

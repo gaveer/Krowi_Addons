@@ -27,7 +27,9 @@ function category:AddCategory(cat) -- Adds a child achievement category to the a
     tinsert(self.Children, cat);
     cat.Parent = self;
     cat.Level = self.Level + 1;
-    cat.NotHidden = nil; -- Has parent so initially we are hidden
+    if not self.IsTab then
+        cat.NotHidden = nil; -- Has parent so initially we are hidden
+    end
     return cat;
 end
 

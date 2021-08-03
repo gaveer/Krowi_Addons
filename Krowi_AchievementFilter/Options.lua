@@ -49,6 +49,10 @@ local defaults = {
             ClearOnRightClick = true,
             ExcludeNextPatch = true,
             ExcludeExcluded = true
+        },
+        EventAlert = {
+            FadeDelay = 60,
+            ShowTimes = 5
         }
     }
 }
@@ -221,11 +225,63 @@ local function CreatePanel()
                             }
                         }
                     },
+                    EventAlert = {
+                        name = addon.L["Event alert"],
+                        type = "group",
+                        inline = true,
+                        order = 4,
+                        args = {
+                            ShowTimes = {
+                                name = addon.L["Show times"],
+                                desc = addon.L["Show times Desc"],
+                                type = "range",
+                                min = 1,
+                                max = 100,
+                                step = 1,
+                                width = 1.5,
+                                order = 1.1,
+                                get = function ()
+                                    return addon.Options.db.EventAlert.ShowTimes;
+                                end,
+                                set = function(_, value)
+                                    if addon.Options.db.EventAlert.ShowTimes == value then
+                                        return;
+                                    end;
+        
+                                    addon.Options.db.EventAlert.ShowTimes = value;
+        
+                                    diagnostics.Debug(addon.L["Show times"] .. ": " .. tostring(addon.Options.db.EventAlert.ShowTimes));
+                                end
+                            },
+                            FadeDelay = {
+                                name = addon.L["Fade delay"],
+                                desc = addon.L["Fade delay Desc"],
+                                type = "range",
+                                min = 1,
+                                max = 120,
+                                step = 1,
+                                width = 1.5,
+                                order = 1.2,
+                                get = function ()
+                                    return addon.Options.db.EventAlert.FadeDelay;
+                                end,
+                                set = function(_, value)
+                                    if addon.Options.db.EventAlert.FadeDelay == value then
+                                        return;
+                                    end;
+        
+                                    addon.Options.db.EventAlert.FadeDelay = value;
+        
+                                    diagnostics.Debug(addon.L["Fade delay"] .. ": " .. tostring(addon.Options.db.EventAlert.FadeDelay));
+                                end
+                            },
+                        }
+                    },
                     Search = {
                         name = addon.L["Search"],
                         type = "group",
                         inline = true,
-                        order = 4,
+                        order = 5,
                         args = {
                             ClearOnRightClick = {
                                 name = addon.L["Clear search field on Right Click"],
@@ -319,7 +375,7 @@ local function CreatePanel()
                         name = addon.L["Debug"],
                         type = "group",
                         inline = true,
-                        order = 5,
+                        order = 6,
                         args = {
                             EnableDebugInfo = {
                                 name = addon.L["Enable debug info"],
@@ -433,7 +489,7 @@ local function CreatePanel()
                             CategoriesFrameWidthOffset = {
                                 name = addon.L["Categories width offset"],
                                 desc = core.ReplaceVars{addon.L["Categories width offset Desc"],
-                                                        tabName = string.format(addon.Yellow, addon.L["T_TAB_TEXT"]),
+                                                        tabName = string.format(addon.Yellow, addon.L["Expansions"]),
                                                         reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,
@@ -458,7 +514,7 @@ local function CreatePanel()
                             AchievementFrameHeightOffset = {
                                 name = addon.L["Achievement window height offset"],
                                 desc = core.ReplaceVars{addon.L["Achievement window height offset Desc"],
-                                                        tabName = string.format(addon.Yellow, addon.L["T_TAB_TEXT"]),
+                                                        tabName = string.format(addon.Yellow, addon.L["Expansions"]),
                                                         reloadRequired = addon.L["Requires a reload"]},
                                 type = "range",
                                 min = 0,

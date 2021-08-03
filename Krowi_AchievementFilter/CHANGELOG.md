@@ -1,6 +1,39 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.1.0.27.0] - 2021-08-03
+### Added
+- 2nd tab added with Event achievements (WIP)
+- Search is now possible from any tab (Expansions and Events)
+- Even more zone data for multi-zone achievements for Legion and Battle for Azeroth
+- More zone data for multi-zone achievements for Classic, The Burning Crusade, Wrath of the Lich King, Cataclysm, Mists of Pandaria and Warlords of Dreanor
+- Split Raids into Glory and Mythic/Heroic categories for Cataclysm, Mists of Pandaria and Warlords of Dreanor
+- Glamour of Twilight in Cataclysm - Raids - Blackwing Descent
+- Sha of Fabulous in Mists of Pandaria - Raids - Terrace of Endless Spring
+- Second keybinding under Game Menu -> Key Bindings -> AddOns to toggle the Achievement Window to the new Events tab
+- Classic - Zones - Eastern Kingdoms - Stormwind City, Classic - Zones - Kalimdor - Orgrimmar and - Thunder Bluff achievements
+- The Burning Crusade - Zones - Silvermoon City achievements
+- Battle for Azeroth - Zones - Universal Explorer
+- All Holidays and Darkmoon Faire
+- Shadowlands - Dungeons - Keystone Initiate, Challenger, Conqueror and Master
+- Alert to notify if a holiday or event is active (will be expanded upon in the future)
+- Clicking this alert will open the related category
+- This alert is also present on the right side of the achievement window
+- The tooltip when hovering an achievement in a meta achievement now has more information
+
+### Changed
+- Categories are now only stored hierarchical in preperation of new features; Reduced memory usage by 1%
+- Achievement Filter tab renamed to Expansions
+- Moved Operation: Shieldwall Campaign and Dominance Offensive Campaign from Mists of Pandaria - Zones - Pandaria - Quests to Mists of Pandaria - Zones - Krasarang Wilds - Quests
+- Moved Stood in the Fire from Cataclysm - Zones to Cataclysm - Raids - Dragon Soul
+- Keybinding under Game Menu -> Key Bindings -> AddOns to toggle the Achievement Window to the new tab has been renamed and might need rebinding
+
+### Fixed
+- Glamour of Twilight in Cataclysm - Raids - The Bastion of Twilight is obtainable
+- Possible duplicates of achievements in the Current Zone and Selected Zone categories resolved
+
+[9.1.0.27.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3411946
+
 ## [9.1.0.26.0] - 2021-07-14
 ### Added
 - More item in the Right Click Menu to group things under to not clutter the main Right Click Menu

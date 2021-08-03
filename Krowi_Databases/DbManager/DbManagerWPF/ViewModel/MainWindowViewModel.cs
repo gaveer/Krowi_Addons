@@ -8,9 +8,10 @@ namespace DbManagerWPF.ViewModel
     public partial class MainWindowViewModel : INotifyPropertyChanged
     {
         private FunctionDM functionDM;
+        private UIMapDM uiMapDM;
+        private EventDM eventDM;
         private AchievementDM achievementDM;
         private CategoryDM categoryDM;
-        private UIMapDM uiMapDM;
         private PetBattleLinksDM petBattleLinksDM;
         private XuFuEncounterDM xuFuEncounterDM;
 
@@ -23,13 +24,15 @@ namespace DbManagerWPF.ViewModel
 
             functionDM = new FunctionDM(connection);
             uiMapDM = new UIMapDM(connection);
-            achievementDM = new AchievementDM(connection, uiMapDM);
-            categoryDM = new CategoryDM(connection, functionDM, achievementDM, uiMapDM);
+            eventDM = new EventDM(connection);
+            achievementDM = new AchievementDM(connection, uiMapDM, eventDM);
+            categoryDM = new CategoryDM(connection, functionDM, achievementDM, uiMapDM, eventDM);
             petBattleLinksDM = new PetBattleLinksDM(connection);
             xuFuEncounterDM = new XuFuEncounterDM(connection);
 
             LoadCategoriesViewModel();
             LoadUIMapViewModel();
+            LoadEventsViewModel();
             LoadImportViewModel();
         }
 

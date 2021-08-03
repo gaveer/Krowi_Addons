@@ -18,6 +18,7 @@ function globalStrings.Load(L)
     L["Garrison"] = GARRISON_LOCATION_TOOLTIP;
     L["Cities"] = BUG_CATEGORY4;
     L["Mythic"] = PLAYER_DIFFICULTY6;
+    L["Heroic"] = PLAYER_DIFFICULTY2;
 
     -- Filters
     L["Completed"] = CRITERIA_COMPLETED;

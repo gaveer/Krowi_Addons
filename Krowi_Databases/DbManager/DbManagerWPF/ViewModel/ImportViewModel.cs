@@ -145,7 +145,7 @@ namespace DbManagerWPF.ViewModel
                 if (id == 0)
                     continue;
 
-                var achievement = new Achievement(uiMapDM)
+                var achievement = new Achievement(uiMapDM, eventDM)
                 {
                     ID = id,
                     Name = name,

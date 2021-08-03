@@ -37,9 +37,9 @@ function WorldMapAchievementButtonMixin:OnClick()
     if worldMapButton.Achievements and #worldMapButton.Achievements > 0 then
         HideUIPanel(WorldMapFrame);
         addon.Data.SelectedZoneCategory.Achievements = worldMapButton.Achievements;
-        addon.GUI.ToggleAchievementFrameAtTab1(true);
-        addon.Data.Categories[2].Name = addon.L["Selected Zone"] .. " (" .. worldMapButton.name .. ")";
-        gui.CategoriesFrame:SelectCategory(addon.Data.Categories[2]);
+        addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
+        addon.Data.CategoriesExpansions[2].Name = addon.L["Selected Zone"] .. " (" .. worldMapButton.name .. ")";
+        gui.CategoriesFrame:SelectCategory(addon.Data.CategoriesExpansions[2]);
     end
 end
 

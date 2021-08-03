@@ -11,13 +11,15 @@ namespace DbManagerWPF.DataManager
         private readonly FunctionDM functionDM;
         private readonly IAchievementDM achievementDM;
         private readonly IUIMapDM uiMapDM;
+        private readonly IEventDM eventDM;
         private readonly List<Category> categories = new();
 
-        public CategoryDM(SqliteConnection connection, FunctionDM functionDM, IAchievementDM achievementDM, IUIMapDM uiMapDM) : base(connection)
+        public CategoryDM(SqliteConnection connection, FunctionDM functionDM, IAchievementDM achievementDM, IUIMapDM uiMapDM, IEventDM eventDM) : base(connection)
         {
             this.functionDM = functionDM;
             this.achievementDM = achievementDM;
             this.uiMapDM = uiMapDM;
+            this.eventDM = eventDM;
         }
 
         public IEnumerable<Category> GetAll(bool refresh = false)
@@ -57,7 +59,7 @@ namespace DbManagerWPF.DataManager
                 categories.Clear();
                 while (reader.Read())
                 {
-                    var category = new Category(achievementDM, uiMapDM)
+                    var category = new Category(achievementDM, uiMapDM, eventDM)
                     {
                         ID = reader.GetInt32(0),
                         Location = reader.GetInt32(1),
@@ -77,6 +79,26 @@ namespace DbManagerWPF.DataManager
             }
 
             return categories;
+        }
+
+        public Category Get(int id, IEnumerable<Category> categories = null)
+        {
+            if (categories == null)
+                categories = GetAll(true);
+
+            foreach (var category in categories)
+            {
+                if (category.ID == id)
+                    return category;
+                else if (category.Children.Any())
+                {
+                    var found = Get(id, category.Children);
+                    if (found?.ID == id)
+                        return found;
+                }
+            }
+
+            return null;
         }
 
         public void Add(int location, string name, Category parent, Function function, string functionValue, bool isLegacy, bool isActive, bool canMerge)
@@ -146,7 +168,7 @@ namespace DbManagerWPF.DataManager
             {
                 while (reader.Read())
                 {
-                    return new Category(achievementDM, uiMapDM)
+                    return new Category(achievementDM, uiMapDM, eventDM)
                     {
                         ID = reader.GetInt32(0),
                         Location = reader.GetInt32(1),

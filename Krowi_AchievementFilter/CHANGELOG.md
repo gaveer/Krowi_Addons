@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
 - Glamour of Twilight in Cataclysm - Raids - The Bastion of Twilight is obtainable
 - Possible duplicates of achievements in the Current Zone and Selected Zone categories resolved
 
-[9.1.0.27.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3388261
+[9.1.0.27.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3411946
 
 ## [9.1.0.26.0] - 2021-07-14
 ### Added

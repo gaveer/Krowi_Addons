@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.27.A2] - 2021-
+## [9.1.0.27.0] - 2021-08-03
 ### Added
 - 2nd tab added with Event achievements (WIP)
 - Search is now possible from any tab (Expansions and Events)
@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - Alert to notify if a holiday or event is active (will be expanded upon in the future)
 - Clicking this alert will open the related category
 - This alert is also present on the right side of the achievement window
+- The tooltip when hovering an achievement in a meta achievement now has more information
 
 ### Changed
 - Categories are now only stored hierarchical in preperation of new features; Reduced memory usage by 1%

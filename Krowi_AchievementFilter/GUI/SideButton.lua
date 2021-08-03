@@ -29,8 +29,13 @@ function sideButton:New(event, otherButtons)
 
     -- Overwrite original alert frame properties
     frame:RegisterForClicks("LeftButtonUp");
-    frame:SetScript("OnEnter", nil); -- Need to add new highlight fade in
-    frame:SetScript("OnLeave", nil); -- Need to add new highlight fade out
+    frame:SetScript("OnEnter", function(self)
+        if self.shine then
+            self.shine:Show();
+            self.shine.animIn:Play();
+        end
+    end); -- Need to add new highlight fade in
+    frame:SetScript("OnLeave", nil);
 
     -- Set OnClick
     frame:SetScript("OnClick", function(self)

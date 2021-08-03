@@ -15,7 +15,7 @@ local FORCE_COLUMNS_LEFT_OFFSET = -10;
 local FORCE_COLUMNS_RIGHT_OFFSET = 24;
 local FORCE_COLUMNS_RIGHT_COLUMN_SPACE = 150;
 
-local DisplayCriteria, GetMeta, GetCriteria;
+local DisplayCriteria, GetMeta, GetCriteria, OnEnter;
 function display:DisplayObjectives(renderOffScreen, achievementsFrame)
     diagnostics.Trace("display:DisplayObjectives");
 
@@ -351,6 +351,7 @@ function GetMeta(index, renderOffScreen, achievementsFrame)
 		frame:SetScript("OnClick", function()
             achievementsFrame:SelectAchievementFromID(frame.id, nil, true);
         end);
+		frame:SetScript("OnEnter", OnEnter);
 		AchievementButton_LocalizeMetaAchievement(frame);
 		mcTable[index] = frame;
 	end
@@ -389,4 +390,17 @@ function GetCriteria(index, renderOffScreen)
 	AchievementFrame_LocalizeCriteria(frame);
 	criTable[index] = frame;
 	return frame;
+end
+
+function OnEnter(self)
+	GameTooltip:SetOwner(self, "ANCHOR_NONE");
+	GameTooltip:SetPoint("TOPLEFT", self, "BOTTOMLEFT");
+	local link = GetAchievementLink(self.id);
+	GameTooltip:SetHyperlink(link);
+	AchievementFrameAchievements_CheckGuildMembersTooltip(self);
+	GameTooltip:Show();
+	if GameTooltip:GetTop() > self:GetBottom() then
+		GameTooltip:ClearAllPoints();
+		GameTooltip:SetPoint("BOTTOMLEFT", self, "TOPLEFT");
+	end
 end

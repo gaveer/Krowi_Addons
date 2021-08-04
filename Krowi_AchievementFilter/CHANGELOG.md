@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.27.1] - 2021-
+## [9.1.0.27.1] - 2021-08-04
 ### Fixed
 - Issue #52: attempt to index field 'EventDetails'
 

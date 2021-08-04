@@ -45,7 +45,7 @@ function eventData.Load()
             events[id].endTime.weekday = nil;
             events[id].endTime.min = events[id].endTime.minute;
             events[id].endTime.minute = nil;
-            diagnostics.Debug(event.ID .. " - " .. event.Title .. " - " ..
+            diagnostics.Debug(event.ID .. " - " .. events[id].title .. " - " ..
                                 events[id].startTime.year .. "/" .. events[id].startTime.month .. "/" .. events[id].startTime.day .. " - " ..
                                 events[id].endTime.year .. "/" .. events[id].endTime.month .. "/" .. events[id].endTime.day);
             EventDetails[id] = events[id]; -- Cache for later

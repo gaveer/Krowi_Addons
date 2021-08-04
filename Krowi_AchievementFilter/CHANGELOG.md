@@ -1,8 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.28.0] - 2021-
-### Added
+## [9.1.0.27.1] - 2021-
+### Fixed
+- Issue #52: attempt to index field 'EventDetails'
 
 [9.1.0.28.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3411946
 

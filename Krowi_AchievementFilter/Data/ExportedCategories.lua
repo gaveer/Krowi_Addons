@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-26 13-12-10 ]] --
+-- [[ Exported at 2021-08-06 10-22-49 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4584,7 +4584,7 @@ function exportedCategories.Load(a)
     tmp[368] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[365], tmp[368]);
     AddA(tmp[368], a[14656]); -- Trading Partners
-    tmp[812] = cat:New("Korthia"); -- Korthia
+    tmp[812] = cat:New(C_Map.GetMapInfo(1961).name); -- Korthia
     AddC(tmp[344], tmp[812]);
     tmp[817] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[812], tmp[817]);
@@ -4687,7 +4687,7 @@ function exportedCategories.Load(a)
     AddA(tmp[378], a[14198]); -- Heroic: Sanguine Depths
     AddA(tmp[378], a[14199]); -- Mythic: Sanguine Depths
     AddA(tmp[378], a[15052]); -- Keystone Hero: Sanguine Depths
-    tmp[823] = cat:New("Tazavesh, the Veiled Market"); -- Tazavesh, the Veiled Market
+    tmp[823] = cat:New((EJ_GetInstanceInfo(1194))); -- Tazavesh, the Veiled Market
     AddC(tmp[369], tmp[823]);
     AddA(tmp[823], a[15109]); -- Will it Blend?
     AddA(tmp[823], a[15106]); -- Quality Control
@@ -4731,7 +4731,7 @@ function exportedCategories.Load(a)
     AddA(tmp[861], a[14363]); -- Mythic: Sludgefist
     AddA(tmp[861], a[14364]); -- Mythic: Stone Legion Generals
     AddA(tmp[861], a[14365]); -- Mythic: Sire Denathrius
-    tmp[821] = cat:New("Sanctum of Domination"); -- Sanctum of Domination
+    tmp[821] = cat:New((EJ_GetInstanceInfo(1193))); -- Sanctum of Domination
     AddC(tmp[370], tmp[821]);
     AddA(tmp[821], a[15122]); -- The Jailer's Vanguard
     AddA(tmp[821], a[15123]); -- The Dark Bastille
@@ -5207,6 +5207,30 @@ function exportedCategories.Load(a)
     AddA(tmp[925], a[11919]); -- Taking this Show on the Road
     AddA(tmp[925], a[11920]); -- Perfect Performance
     AddA(tmp[925], a[11921]); -- Mosh Pit
+    tmp[926] = cat:New((GetCategoryInfo(15439))); -- Shadowlands
+    AddC(tmp[884], tmp[926]);
+    tmp[927] = cat:New(addon.L["Covenant Assaults"]); -- Covenant Assaults
+    AddC(tmp[926], tmp[927]);
+    tmp[928] = cat:New(addon.L["Kyrian Assault"]); -- Kyrian Assault
+    AddC(tmp[927], tmp[928]);
+    AddA(tmp[928], a[15041]); -- The Zovaal Shuffle
+    AddA(tmp[928], a[15034]); -- Wings Against the Flames
+    AddA(tmp[928], a[15004]); -- A Sly Fox
+    tmp[929] = cat:New(addon.L["Necrolords Assault"]); -- Necrolords Assault
+    AddC(tmp[927], tmp[929]);
+    AddA(tmp[929], a[15037]); -- This Army
+    AddA(tmp[929], a[15039]); -- Up For Grabs
+    AddA(tmp[929], a[15032]); -- Breaking Their Hold
+    tmp[930] = cat:New(addon.L["Night Fae Assault"]); -- Night Fae Assault
+    AddC(tmp[927], tmp[930]);
+    AddA(tmp[930], a[15001]); -- Jailer's Personal Stash
+    AddA(tmp[930], a[15044]); -- Krrprripripkraak's Heroes
+    AddA(tmp[930], a[15036]); -- Rooting Out the Evil
+    tmp[931] = cat:New(addon.L["Venthyr Assault"]); -- Venthyr Assault
+    AddC(tmp[927], tmp[931]);
+    AddA(tmp[931], a[15043]); -- Hoarder of Torghast
+    AddA(tmp[931], a[15042]); -- Tea for the Troubled
+    AddA(tmp[931], a[15033]); -- Taking the Tremaculum
 
     return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
 end

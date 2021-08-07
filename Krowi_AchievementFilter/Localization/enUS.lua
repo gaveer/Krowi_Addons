@@ -40,6 +40,11 @@ L["Coming in Disclaimer"] = "All achievements in this category and children of t
 L["Holidays"] = "Holidays";
 L["Pirates' Day"] = "Pirates' Day";
 L["Day of the Dead"] = "Day of the Dead";
+L["Covenant Assaults"] = "Covenant Assaults";
+L["Kyrian Assault"] = "Kyrian Assault";
+L["Necrolords Assault"] = "Necrolords Assault";
+L["Night Fae Assault"] = "Night Fae Assault";
+L["Venthyr Assault"] = "Venthyr Assault";
 
 -- Filters
 L["Obtainable"] = "Obtainable";
@@ -82,8 +87,31 @@ L["Reset view on open Desc"] = "Collapse all categories and select the first cat
 
 -- Options General Event Alert
 L["Event alert"] = "Event alert";
-L["Show times"] = "Show times";
-L["Show times Desc"] = "Show the event alert x times. This happens every time you transition zones through a loading screen. Will only show once on login if set to 1.";
+L["Date and Time format"] = "Date and Time format";
+L["Presets"] = "Presets";
+L["Custom"] = "Custom";
+L["Date and Time Formatting Guide"] = "Date and Time Formatting Guide";
+L["Date and Time Formatting Guide Desc"] =  "{a} - Abbreviated weekday name (eg. Wed)\n" ..
+                                            "{A} - Full weekday name (eg. Wednesday)\n" ..
+                                            "{b} - Abbreviated month name (eg. Sep)\n" ..
+                                            "{B} - Full month name (eg. September)\n" ..
+                                            "{c} - Date and time representation appropriate for locale (eg. 23/04/07 10:20:41)\n" ..
+                                            "{d} - Day of month as decimal number (01 - 31)\n" ..
+                                            "{H} - Hour in 24-hour format (00 - 23)\n" ..
+                                            "{I} - Hour in 12-hour format (01 - 12)\n" ..
+                                            "{j} - Day of year as decimal number (001 - 366)\n" ..
+                                            "{m} - Month as decimal number (01 - 12)\n" ..
+                                            "{M} - Minute as decimal number (00 - 59)\n" ..
+                                            "{p} - Current locale’s A.M./P.M. indicator for 12-hour clock (eg. AM/PM)\n" ..
+                                            "{S} - Second as decimal number (00 - 59)\n" ..
+                                            "{U} - Week of year as decimal number, with Sunday as first day of week 1 (00 - 53)\n" ..
+                                            "{w} - Weekday as decimal number (0 - 6; Sunday is 0)\n" ..
+                                            "{W} - Week of year as decimal number, with Monday as first day of week 1 (00 - 53)\n" ..
+                                            "{x} - Date representation for current locale (Standard date string)\n" ..
+                                            "{X} - Time representation for current locale (Standard time string)\n" ..
+                                            "{y} - Year without century, as decimal number (00 - 99)  (eg. 07)\n" ..
+                                            "{Y} - Year with century, as decimal number (eg. 2007)\n" ..
+                                            "{Z} - Time-zone name or abbreviation; no characters if time zone is unknown";
 L["Fade delay"] = "Fade delay";
 L["Fade delay Desc"] = "The time in seconds it takes for the event alert to fade when it's ignored. Right clicking will close it immidiatly.";
 

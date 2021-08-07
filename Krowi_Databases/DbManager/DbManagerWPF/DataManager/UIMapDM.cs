@@ -63,6 +63,13 @@ namespace DbManagerWPF.DataManager
             return uiMaps;
         }
 
+        public UIMap Get(int uiMapID, bool refresh = false)
+        {
+            GetAll(refresh);
+
+            return uiMaps.Find(uiMapID);
+        }
+
         public void SetNewParent(UIMap uiMap, UIMap newParent)
         {
             _ = uiMap ?? throw new ArgumentNullException(nameof(uiMap));

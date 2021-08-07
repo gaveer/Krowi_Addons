@@ -1,9 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.28.0] - 2021-08-04
+## [9.1.0.28.0] - 2021-
+### Added
+- Shadowlands Covenant Assaults as Event Reminders
+- Options to set the date and time format of the event reminders
+
 ### Fixed
-- Issue #52: attempt to index field 'EventDetails'
+- Shadowlands - Zones - Korthia, Shadowlands - Dungeons - Tazavesh, the Veiled Market and Shadowlands - Raids - Sanctum of Domination now all should localize properly
+
+### Removed
+- Option to set the number of times the active events should be shown
+
+### TODO
+- If an achievement is expanded in Expansions, selecting the Events tab with a category and achievements does something strange
 
 [9.1.0.28.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3412562
 

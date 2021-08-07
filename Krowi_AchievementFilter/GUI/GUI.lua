@@ -26,9 +26,15 @@ function gui:LoadWithBlizzard_AchievementUI()
     gui.TabButtonExpansions = gui.AchievementFrameTabButton:New(addon.L["Expansions"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesExpansions);
     gui.TabButtonEvents = gui.AchievementFrameTabButton:New(addon.L["Events"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesEvents);
 
-    local activeEvents = addon.EventData.GetActiveEvents();
+    local activeCalendarEvents = addon.EventData.GetActiveCalendarEvents();
 
-    for _, activeEvent in next, activeEvents do
+    for _, activeEvent in next, activeCalendarEvents do
+        tinsert(sideButtons, gui.SideButton:New(activeEvent, sideButtons));
+    end
+
+    local activeWorldEvents = addon.EventData.GetActiveWorldEvents();
+
+    for _, activeEvent in next, activeWorldEvents do
         tinsert(sideButtons, gui.SideButton:New(activeEvent, sideButtons));
     end
 

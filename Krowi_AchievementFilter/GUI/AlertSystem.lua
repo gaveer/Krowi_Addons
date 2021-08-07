@@ -5,25 +5,31 @@ local gui = addon.GUI;
 gui.AlertSystem = {};
 local alertSystem = gui.AlertSystem;
 
-local ShowActiveEvents;
+local ShowActiveCalendarEvents, ShowActiveWorldEvents;
 function alertSystem:Load()
     addon.GUI.AlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("KrowiAF_AlertFrameTemplate", self.SetUp, 4, 6);
-    addon.GUI.AlertSystem.ShowActiveEvents = ShowActiveEvents;
+    addon.GUI.AlertSystem.ShowActiveCalendarEvents = ShowActiveCalendarEvents;
+    addon.GUI.AlertSystem.ShowActiveWorldEvents = ShowActiveWorldEvents;
 end
 
-local shows = 0;
-function ShowActiveEvents()
-    if shows >= addon.Options.db.EventAlert.ShowTimes then
-        return;
-    end
+function ShowActiveCalendarEvents()
+    diagnostics.Trace("ShowActiveCalendarEvents");
 
-    local activeEvents = addon.EventData.GetActiveEvents();
+    local activeEvents = addon.EventData.GetActiveCalendarEvents();
 
     for _, activeEvent in next, activeEvents do
         addon.GUI.AlertSystem:AddAlert(activeEvent, addon.Options.db.EventAlert.FadeDelay);
     end
+end
 
-    shows = shows + 1;
+function ShowActiveWorldEvents()
+    diagnostics.Trace("ShowActiveWorldEvents");
+
+    local activeEvents = addon.EventData.GetActiveWorldEvents();
+
+    for _, activeEvent in next, activeEvents do
+        addon.GUI.AlertSystem:AddAlert(activeEvent, addon.Options.db.EventAlert.FadeDelay);
+    end
 end
 
 -- function KrowiAFShowAlert(id)
@@ -43,11 +49,16 @@ end
 -- end
 
 function alertSystem.SetUp(frame, event, duration)
-	-- local _, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID);
+    -- frame.Background = frame:CreateTexture(nil, "BACKGROUND");
+    -- frame.Background:SetPoint("LEFT");
+    -- frame.Background:SetWidth(256);
+    -- frame.Background:SetHeight(84);
+    -- frame.Background:SetTexture("Media/AlertFrame");
+    -- frame.Background:SetTexCoord(imageTexCoord[1], imageTexCoord[2], imageTexCoord[3], imageTexCoord[4]);
 
 	frame.Name:SetText(event.EventDetails.title);
 
-    frame.Unlocked:SetText(tostring(date("%x", time(event.EventDetails.startTime))) .. " - " .. tostring(date("%x", time(event.EventDetails.endTime))));
+    frame.Unlocked:SetText(tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.startTime)) .. "\n" .. tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.endTime)));
 
 	frame.Icon.Texture:SetTexture(event.Icon);
 
@@ -65,5 +76,6 @@ function KrowiAF_AlertFrame_OnClick(self, button, down)
         LoadAddOn("Blizzard_AchievementUI");
     end
 
+    diagnostics.Debug(self.Event.Category);
     addon.GUI.CategoriesFrame:SelectCategory(self.Event.Category);
 end

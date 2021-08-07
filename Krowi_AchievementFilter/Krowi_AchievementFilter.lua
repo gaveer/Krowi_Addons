@@ -140,6 +140,22 @@ function addon.StatusBarTooltip(self, anchor)
 	GameTooltip:Show();
 end
 
+-- [[ Time functions ]] --
+function addon.GetSecondsSince(date)
+    date.day = date.monthDay;
+    date.monthDay = nil;
+    date.wday = date.weekday;
+    date.weekday = nil;
+    date.min = date.minute;
+    date.minute = nil;
+
+    return time(date);
+end
+
+function addon.GetCurrentCalendarTimeSecondsSince()
+    return addon.GetSecondsSince(C_DateAndTime.GetCurrentCalendarTime());
+end
+
 -- [[ IAT integration ]] --
 function addon.IsIATLoaded()
     return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
@@ -151,7 +167,7 @@ loadHelper:RegisterEvent("ADDON_LOADED"); -- 1
 loadHelper:RegisterEvent("PLAYER_LOGIN"); -- 4
 loadHelper:RegisterEvent("PLAYER_ENTERING_WORLD"); -- 5
 
-function loadHelper:OnEvent(event, arg1)
+function loadHelper:OnEvent(event, arg1, arg2)
     if event == "ADDON_LOADED" then
         if arg1 == "Krowi_AchievementFilter" then -- This always needs to load
             addon.Diagnostics.Load();
@@ -179,7 +195,8 @@ function loadHelper:OnEvent(event, arg1)
     elseif event == "PLAYER_LOGIN" then
         -- addon.GUI.FilterButton:ResetFilters();
 
-        addon.Data.ExportedEvents.Load(addon.Data.Events);
+        addon.Data.ExportedCalendarEvents.Load(addon.Data.CalendarEvents);
+        addon.Data.ExportedWorldEvents.Load(addon.Data.WorldEvents);
         addon.EventData.Load();
 
         if addon.Diagnostics.DebugEnabled() then
@@ -189,7 +206,29 @@ function loadHelper:OnEvent(event, arg1)
             end);
         end
     elseif event == "PLAYER_ENTERING_WORLD" then
-        addon.GUI.AlertSystem.ShowActiveEvents();
+        addon.Diagnostics.Debug("PLAYER_ENTERING_WORLD");
+        addon.Diagnostics.Debug("isLogin: " .. tostring(arg1));
+        addon.Diagnostics.Debug("isReload: " .. tostring(arg2));
+         -- arg1 = isLogin, arg2 = isReload
+        if arg1 then -- On a fresh login we need AREA_POIS_UPDATED to get world events
+            loadHelper:RegisterEvent("AREA_POIS_UPDATED");
+        end
+        -- if arg1 or arg2 then -- On both login and reload we need to get calendar events
+        --     addon.GUI.AlertSystem.ShowActiveCalendarEvents();
+        -- end
+        if arg2 then -- On reload we can get world events here since AREA_POIS_UPDATED does not always trigger and data is already available
+            addon.GUI.AlertSystem.ShowActiveCalendarEvents();
+            addon.GUI.AlertSystem.ShowActiveWorldEvents();
+        end
+    elseif event == "AREA_POIS_UPDATED" then
+        addon.Diagnostics.Debug("AREA_POIS_UPDATED");
+        if addon.EventData.GetActiveWorldEvents() ~= nil then
+            -- It takes a couple of times in order to properly load all POI info
+            addon.GUI.AlertSystem.ShowActiveCalendarEvents();
+            addon.GUI.AlertSystem.ShowActiveWorldEvents();
+            loadHelper:UnregisterEvent("AREA_POIS_UPDATED");
+            addon.Diagnostics.Debug("UnregisterEvent AREA_POIS_UPDATED");
+        end
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);

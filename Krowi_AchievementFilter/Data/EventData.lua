@@ -9,20 +9,17 @@ local GetEvents;
 function eventData.Load()
     local refreshEvents = false;
 
-    if EventDetails ~= nil then -- Check if all event end dates are in the future
-        local currentDate = C_DateAndTime.GetCurrentCalendarTime();
-        currentDate.day = currentDate.monthDay;
-        currentDate.monthDay = nil;
-        currentDate.wday = currentDate.weekday;
-        currentDate.weekday = nil;
-        currentDate.min = currentDate.minute;
-        currentDate.minute = nil;
-        currentDate = time(currentDate);
-        for _, event in next, EventDetails do
-            local deltaT = math.floor((time(event.endTime) - currentDate) / (3600 * 24));
-            diagnostics.Debug(event.eventID .. " - " .. event.title .. " - " .. tostring(deltaT));
-            if deltaT < 0 then
-                refreshEvents = true;
+    if type(EventDetails) == "table" then -- Check if all event end dates are in the future
+        if next(EventDetails) == nil then
+            refreshEvents = true;
+        else
+            local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
+            for _, event in next, EventDetails do
+                local deltaT = math.floor((event.endTime - currentDate) / (3600 * 24));
+                diagnostics.Debug(event.eventID .. " - " .. event.title .. " - " .. tostring(deltaT));
+                if deltaT < 0 then
+                    refreshEvents = true;
+                end
             end
         end
     else
@@ -30,29 +27,23 @@ function eventData.Load()
         refreshEvents = true;
     end
 
+    diagnostics.Debug("refreshEvents: " .. tostring(refreshEvents));
     if refreshEvents then -- Events are either empty or an event has elapsed so get new data
         local events = GetEvents();
-        for id, event in next, data.Events do
-            events[id].startTime.day = events[id].startTime.monthDay;
-            events[id].startTime.monthDay = nil;
-            events[id].startTime.wday = events[id].startTime.weekday;
-            events[id].startTime.weekday = nil;
-            events[id].startTime.min = events[id].startTime.minute;
-            events[id].startTime.minute = nil;
-            events[id].endTime.day = events[id].endTime.monthDay;
-            events[id].endTime.monthDay = nil;
-            events[id].endTime.wday = events[id].endTime.weekday;
-            events[id].endTime.weekday = nil;
-            events[id].endTime.min = events[id].endTime.minute;
-            events[id].endTime.minute = nil;
-            diagnostics.Debug(event.ID .. " - " .. events[id].title .. " - " ..
-                                events[id].startTime.year .. "/" .. events[id].startTime.month .. "/" .. events[id].startTime.day .. " - " ..
-                                events[id].endTime.year .. "/" .. events[id].endTime.month .. "/" .. events[id].endTime.day);
-            EventDetails[id] = events[id]; -- Cache for later
+        for id, event in next, data.CalendarEvents do
+            if events[id] then -- At this time we only handle calendar events, POI's are handeled later
+                events[id].startTime = addon.GetSecondsSince(events[id].startTime);
+                events[id].endTime = addon.GetSecondsSince(events[id].endTime);
+                diagnostics.Debug(event.ID .. " - " .. events[id].title .. " - " ..
+                                    -- events[id].startTime.year .. "/" .. events[id].startTime.month .. "/" .. events[id].startTime.day .. " - " ..
+                                    -- events[id].endTime.year .. "/" .. events[id].endTime.month .. "/" .. events[id].endTime.day);
+                                    date("%Y/%m/%d %H:%M", events[id].startTime) .. " - " .. date("%Y/%m/%d %H:%M", events[id].endTime));
+                EventDetails[id] = events[id]; -- Cache for later
+            end
         end
     end
 
-    for id, event in next, data.Events do
+    for id, event in next, data.CalendarEvents do
         event.EventDetails = EventDetails[id];
     end
 end
@@ -89,27 +80,73 @@ function GetEvents()
     return events;
 end
 
-local activeEvents;
-function eventData.GetActiveEvents()
-    if activeEvents == nil then
-        activeEvents = {};
+-- local activeCalendarEvents;
+function eventData.GetActiveCalendarEvents()
+    diagnostics.Trace("eventData.GetActiveCalendarEvents");
+    -- if activeCalendarEvents == nil then
+        local activeCalendarEvents = {};
 
-        local currentDate = C_DateAndTime.GetCurrentCalendarTime();
-        currentDate.day = currentDate.monthDay;
-        currentDate.monthDay = nil;
-        currentDate.wday = currentDate.weekday;
-        currentDate.weekday = nil;
-        currentDate.min = currentDate.minute;
-        currentDate.minute = nil;
-        currentDate = time(currentDate);
-        for _, event in next, data.Events do
-            local deltaT = math.floor((time(event.EventDetails.startTime) - currentDate) / (3600 * 24));
-            if deltaT < 0 then
-                diagnostics.Debug("Event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
-                tinsert(activeEvents, event);
+        local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
+        for _, event in next, data.CalendarEvents do
+            if event.EventDetails ~= nil then
+                local deltaT = math.floor((event.EventDetails.startTime - currentDate) / (3600 * 24));
+                if deltaT < 0 then
+                    diagnostics.Debug("Event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+                    tinsert(activeCalendarEvents, event);
+                else
+                    diagnostics.Debug("Event not active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+                end
             end
         end
-    end
+    -- end
 
-    return activeEvents;
+    return activeCalendarEvents;
+end
+
+local GetStartAndEndTime;
+-- local activeWorldEvents;
+function eventData.GetActiveWorldEvents()
+    diagnostics.Trace("eventData.GetActiveWorldEvents");
+    -- if activeWorldEvents == nil then
+        local activeWorldEvents = {};
+
+        local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
+        for _, event in next, data.WorldEvents do
+            local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(event.MapID, event.ID);
+            if poiInfo then -- The event is active
+                local secondsLeft = C_AreaPoiInfo.GetAreaPOISecondsLeft(event.ID);
+                diagnostics.Debug(secondsLeft);
+                if secondsLeft == nil or secondsLeft == 0 then
+                    return; -- C_AreaPoiInfo is not yet properly loaded
+                end
+
+                local startTime, endTime = GetStartAndEndTime(secondsLeft, event.TotalDuration or 0);
+                diagnostics.Debug(startTime);
+                diagnostics.Debug(endTime);
+
+                event.EventDetails = {startTime = startTime, endTime = endTime, eventID = event.ID, title = event.Title};
+                diagnostics.Debug(event.ID .. " - " .. event.EventDetails.title .. " - " ..
+                                    date("%Y/%m/%d %H:%M", event.EventDetails.startTime) .. " - " .. date("%Y/%m/%d %H:%M", event.EventDetails.endTime));
+
+                if event.EventDetails ~= nil then
+                    local deltaT = math.floor((event.EventDetails.startTime - currentDate) / (3600 * 24));
+                    if deltaT < 0 then
+                        diagnostics.Debug("Event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+                        tinsert(activeWorldEvents, event);
+                    end
+                end
+            end
+        end
+    -- end
+
+    return activeWorldEvents;
+end
+
+function GetStartAndEndTime(secondsLeft, totalDuration) -- both in seconds
+
+    local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
+    local endTime = floor((currentDate + secondsLeft) / 3600 + 0.5) * 3600;
+    local startTime = endTime - totalDuration;
+
+    return startTime, endTime;
 end

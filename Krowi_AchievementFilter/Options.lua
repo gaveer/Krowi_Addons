@@ -52,7 +52,7 @@ local defaults = {
         },
         EventAlert = {
             FadeDelay = 60,
-            ShowTimes = 5
+            DateTimeFormat = "%d/%m/%Y %H:%M"
         }
     }
 }
@@ -61,8 +61,25 @@ local maxNumberOfSearchPreviews = function()
     return 17 + math.floor(addon.Options.db.Window.AchievementFrameHeightOffset / 29);
 end
 
-local screenshotModeFrame;
+local currentDateTime, dateTimeFormats, dateTimeValues;
+local function AddFormat(format)
+    tinsert(dateTimeFormats, format);
+    tinsert(dateTimeValues, date(format, currentDateTime));
+end
 
+local function PrepareDateTimeFormatTables()
+    currentDateTime = addon.GetCurrentCalendarTimeSecondsSince();
+    dateTimeFormats, dateTimeValues = {}, {};
+    AddFormat(defaults.profile.EventAlert.DateTimeFormat);
+    AddFormat("%d/%m/%Y %I:%M %p");
+    AddFormat("%m/%d/%Y %H:%M");
+    AddFormat("%m/%d/%Y %I:%M %p");
+    AddFormat("%Y/%m/%d %H:%M");
+    AddFormat("%Y/%m/%d %I:%M %p");
+    AddFormat("%c");
+end
+
+local screenshotModeFrame;
 local function CreatePanel()
     local optionsTable = {
         name = addon.MetaData.Title,
@@ -225,58 +242,6 @@ local function CreatePanel()
                             }
                         }
                     },
-                    EventAlert = {
-                        name = addon.L["Event alert"],
-                        type = "group",
-                        inline = true,
-                        order = 4,
-                        args = {
-                            ShowTimes = {
-                                name = addon.L["Show times"],
-                                desc = addon.L["Show times Desc"],
-                                type = "range",
-                                min = 1,
-                                max = 100,
-                                step = 1,
-                                width = 1.5,
-                                order = 1.1,
-                                get = function ()
-                                    return addon.Options.db.EventAlert.ShowTimes;
-                                end,
-                                set = function(_, value)
-                                    if addon.Options.db.EventAlert.ShowTimes == value then
-                                        return;
-                                    end;
-        
-                                    addon.Options.db.EventAlert.ShowTimes = value;
-        
-                                    diagnostics.Debug(addon.L["Show times"] .. ": " .. tostring(addon.Options.db.EventAlert.ShowTimes));
-                                end
-                            },
-                            FadeDelay = {
-                                name = addon.L["Fade delay"],
-                                desc = addon.L["Fade delay Desc"],
-                                type = "range",
-                                min = 1,
-                                max = 120,
-                                step = 1,
-                                width = 1.5,
-                                order = 1.2,
-                                get = function ()
-                                    return addon.Options.db.EventAlert.FadeDelay;
-                                end,
-                                set = function(_, value)
-                                    if addon.Options.db.EventAlert.FadeDelay == value then
-                                        return;
-                                    end;
-        
-                                    addon.Options.db.EventAlert.FadeDelay = value;
-        
-                                    diagnostics.Debug(addon.L["Fade delay"] .. ": " .. tostring(addon.Options.db.EventAlert.FadeDelay));
-                                end
-                            },
-                        }
-                    },
                     Search = {
                         name = addon.L["Search"],
                         type = "group",
@@ -289,7 +254,7 @@ local function CreatePanel()
                                 type = "toggle",
                                 width = "full",
                                 order = 1.1,
-                                get = function () return addon.Options.db.SearchBox.ClearOnRightClick; end,
+                                get = function() return addon.Options.db.SearchBox.ClearOnRightClick; end,
                                 set = function()
                                     addon.Options.db.SearchBox.ClearOnRightClick = not addon.Options.db.SearchBox.ClearOnRightClick;
         
@@ -306,7 +271,7 @@ local function CreatePanel()
                                 order = 1.2,
                                 confirm = function() return addon.Options.db.SearchBox.ExcludeNextPatch; end,
                                 confirmText = string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Exclude Next Patch Confirm"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]),
-                                get = function () return addon.Options.db.SearchBox.ExcludeNextPatch; end,
+                                get = function() return addon.Options.db.SearchBox.ExcludeNextPatch; end,
                                 set = function()
                                     addon.Options.db.SearchBox.ExcludeNextPatch = not addon.Options.db.SearchBox.ExcludeNextPatch;
         
@@ -319,7 +284,7 @@ local function CreatePanel()
                                 type = "toggle",
                                 width = "full",
                                 order = 2.1,
-                                get = function () return addon.Options.db.SearchBox.ExcludeExcluded; end,
+                                get = function() return addon.Options.db.SearchBox.ExcludeExcluded; end,
                                 set = function()
                                     addon.Options.db.SearchBox.ExcludeExcluded = not addon.Options.db.SearchBox.ExcludeExcluded;
         
@@ -335,9 +300,7 @@ local function CreatePanel()
                                 step = 1,
                                 width = 1.5,
                                 order = 3.1,
-                                get = function ()
-                                    return addon.Options.db.SearchBox.MinimumCharactersToSearch;
-                                end,
+                                get = function() return addon.Options.db.SearchBox.MinimumCharactersToSearch; end,
                                 set = function(_, value)
                                     if addon.Options.db.SearchBox.MinimumCharactersToSearch == value then
                                         return;
@@ -358,7 +321,7 @@ local function CreatePanel()
                                 step = 1,
                                 width = 1.5,
                                 order = 3.2,
-                                get = function () return addon.Options.db.SearchBox.NumberOfSearchPreviews; end,
+                                get = function() return addon.Options.db.SearchBox.NumberOfSearchPreviews; end,
                                 set = function(_, value)
                                     if addon.Options.db.SearchBox.NumberOfSearchPreviews == value then
                                         return;
@@ -383,7 +346,7 @@ local function CreatePanel()
                                 type = "toggle",
                                 width = "normal",
                                 order = 1.1,
-                                get = function () return addon.Options.db.EnableDebugInfo; end,
+                                get = function() return addon.Options.db.EnableDebugInfo; end,
                                 set = function()
                                     addon.Options.db.EnableDebugInfo = not addon.Options.db.EnableDebugInfo;
         
@@ -397,7 +360,7 @@ local function CreatePanel()
                                 fontSize = "medium",
                                 order = 1.2,
                             },
-                            Discord = {
+                            ScreenshotMode = {
                                 name = addon.L["Screenshot Mode"],
                                 desc = addon.L["Screenshot Mode Desc"],
                                 type = "execute",
@@ -771,10 +734,119 @@ local function CreatePanel()
                     }
                 }
             },
+            EventAlert = {
+                name = addon.L["Event alert"],
+                type = "group",
+                order = 3,
+                args = {
+                    FadeDelay = {
+                        name = addon.L["Fade delay"],
+                        desc = addon.L["Fade delay Desc"],
+                        type = "range",
+                        min = 1,
+                        max = 120,
+                        step = 1,
+                        width = 1.5,
+                        order = 1.1,
+                        get = function ()
+                            return addon.Options.db.EventAlert.FadeDelay;
+                        end,
+                        set = function(_, value)
+                            if addon.Options.db.EventAlert.FadeDelay == value then
+                                return;
+                            end;
+
+                            addon.Options.db.EventAlert.FadeDelay = value;
+
+                            diagnostics.Debug(addon.L["Fade delay"] .. ": " .. tostring(addon.Options.db.EventAlert.FadeDelay));
+                        end
+                    },
+                    blank12 = {
+                        name = "",
+                        type = "description",
+                        width = 1.5,
+                        fontSize = "medium",
+                        order = 1.2,
+                    },
+                    DateTimeFormatLine = {
+                        name = addon.L["Date and Time format"],
+                        type = "header",
+                        order = 2
+                    },
+                    Presets = {
+                        name = addon.L["Presets"],
+                        type = "select",
+                        width = 1.5,
+                        order = 3.1,
+                        values = dateTimeValues,
+                        get = function ()
+                            return addon.Options.db.EventAlert.DateTimeFormat;
+                        end,
+                        set = function(_, value)
+                            if addon.Options.db.EventAlert.DateTimeFormat == dateTimeFormats[value] then
+                                return;
+                            end;
+
+                            addon.Options.db.EventAlert.DateTimeFormat = dateTimeFormats[value];
+
+                            diagnostics.Debug(addon.L["Presets"] .. ": " .. tostring(addon.Options.db.EventAlert.DateTimeFormat));
+                        end
+                    },
+                    Custom = {
+                        name = addon.L["Custom"],
+                        type = "input",
+                        width = 1.5,
+                        order = 3.2,
+                        get = function ()
+                            return addon.Options.db.EventAlert.DateTimeFormat;
+                        end,
+                        set = function(_, value)
+                            if addon.Options.db.EventAlert.DateTimeFormat == value then
+                                return;
+                            end;
+
+                            addon.Options.db.EventAlert.DateTimeFormat = value;
+
+                            diagnostics.Debug(addon.L["Custom"] .. ": " .. tostring(addon.Options.db.EventAlert.DateTimeFormat));
+                        end
+                    },
+                    DateTimeFormattingGuideLine = {
+                        name = addon.L["Date and Time Formatting Guide"],
+                        type = "header",
+                        order = 4
+                    },
+                    DateTimeFormattingGuide = {
+                        name = core.ReplaceVars{addon.L["Date and Time Formatting Guide Desc"],
+                                                a = string.format(addon.Yellow, "%a"),
+                                                A = string.format(addon.Yellow, "%A"),
+                                                b = string.format(addon.Yellow, "%b"),
+                                                B = string.format(addon.Yellow, "%B"),
+                                                c = string.format(addon.Yellow, "%c"),
+                                                d = string.format(addon.Yellow, "%d"),
+                                                H = string.format(addon.Yellow, "%H"),
+                                                I = string.format(addon.Yellow, "%I"),
+                                                j = string.format(addon.Yellow, "%j"),
+                                                m = string.format(addon.Yellow, "%m"),
+                                                M = string.format(addon.Yellow, "%M"),
+                                                p = string.format(addon.Yellow, "%p"),
+                                                S = string.format(addon.Yellow, "%S"),
+                                                U = string.format(addon.Yellow, "%U"),
+                                                w = string.format(addon.Yellow, "%w"),
+                                                W = string.format(addon.Yellow, "%W"),
+                                                x = string.format(addon.Yellow, "%x"),
+                                                X = string.format(addon.Yellow, "%X"),
+                                                y = string.format(addon.Yellow, "%y"),
+                                                Y = string.format(addon.Yellow, "%Y"),
+                                                Z = string.format(addon.Yellow, "%Z")},
+                        type = "description",
+                        order = 5
+                    }
+                }
+            },
             Style = {
                 name = addon.L["ElvUI Skins Status"],
                 type = "group",
-                order = 3,
+                order = 4,
                 args = {
                     description = {
                         name = addon.L["ElvUI Skins Status Desc"],
@@ -838,7 +910,7 @@ local function CreatePanel()
             Credits = {
                 name = addon.L["Credits"],
                 type = "group",
-                order = 4,
+                order = 5,
                 args = {
                     SpecialThanks = {
                         name = addon.L["Special thanks"],
@@ -887,6 +959,7 @@ function options.Load()
     addon.Options.db = addon.Options.profile;
 
     -- TODO: add something to check if the options panel closes that we prompt for a reload
+    PrepareDateTimeFormatTables();
     CreatePanel();
 
     diagnostics.Debug("Options loaded");

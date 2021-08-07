@@ -21,7 +21,7 @@ function sideButton:New(event, otherButtons)
     -- Properties
     frame.Name:SetText(event.EventDetails.title);
 
-    frame.Unlocked:SetText(tostring(date("%x", time(event.EventDetails.startTime))) .. " - " .. tostring(date("%x", time(event.EventDetails.endTime))));
+    frame.Unlocked:SetText(tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.startTime)) .. "\n" .. tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.endTime)));
 
 	frame.Icon.Texture:SetTexture(event.Icon);
 

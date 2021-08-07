@@ -24,7 +24,7 @@ namespace DbManagerWPF.ViewModel
 
             functionDM = new FunctionDM(connection);
             uiMapDM = new UIMapDM(connection);
-            eventDM = new EventDM(connection);
+            eventDM = new EventDM(connection, uiMapDM);
             achievementDM = new AchievementDM(connection, uiMapDM, eventDM);
             categoryDM = new CategoryDM(connection, functionDM, achievementDM, uiMapDM, eventDM);
             petBattleLinksDM = new PetBattleLinksDM(connection);

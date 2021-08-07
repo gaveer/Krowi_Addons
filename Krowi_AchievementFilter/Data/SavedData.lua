@@ -28,12 +28,13 @@ function savedData.Load()
     diagnostics.Debug("SavedData loaded");
 end
 
-local FixFeaturesTutorialProgress, FixElvUISkin, FixFilters;
+local FixFeaturesTutorialProgress, FixElvUISkin, FixFilters, FixEventDetails;
 function LoadSolutions()
     local solutions = {
         FixFeaturesTutorialProgress, -- 1
         FixElvUISkin, -- 2
         FixFilters, -- 3
+        FixEventDetails, -- 4
     };
 
     return solutions;
@@ -82,4 +83,17 @@ function FixFilters(prevBuild, currBuild, prevVersion, currVersion)
     addon.Options.db.Filters = nil;
 
     diagnostics.Debug("Clear filter settings from previous location");
+end
+
+function FixEventDetails(prevBuild, currBuild, prevVersion, currVersion)
+    if prevBuild == currBuild and prevVersion == currVersion then
+        diagnostics.Debug("EventDetails already reset");
+        return;
+    end
+
+    if prevBuild < currBuild or prevVersion < currVersion then
+        EventDetails = nil;
+    end
+
+    diagnostics.Debug("EventDetails reset");
 end

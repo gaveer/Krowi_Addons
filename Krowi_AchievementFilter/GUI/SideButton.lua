@@ -19,13 +19,13 @@ function sideButton:New(event, otherButtons)
     core.InjectMetatable(frame, sideButton);
 
     -- Properties
+	frame.Event = event;
+
     frame.Name:SetText(event.EventDetails.title);
 
-    frame.Unlocked:SetText(tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.startTime)) .. "\n" .. tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.endTime)));
+    frame:UpdateRuntime();
 
 	frame.Icon.Texture:SetTexture(event.Icon);
-
-	frame.Event = event;
 
     -- Overwrite original alert frame properties
     frame:RegisterForClicks("LeftButtonUp");
@@ -58,6 +58,10 @@ function sideButton:New(event, otherButtons)
     end);
 
     return frame;
+end
+
+function sideButton:UpdateRuntime()
+    self.Unlocked:SetText(tostring(date(addon.Options.db.EventAlert.DateTimeFormat, self.Event.EventDetails.startTime)) .. "\n" .. tostring(date(addon.Options.db.EventAlert.DateTimeFormat, self.Event.EventDetails.endTime)));
 end
 
 function OnClick(self)

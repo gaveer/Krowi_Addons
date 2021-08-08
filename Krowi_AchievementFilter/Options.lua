@@ -77,6 +77,8 @@ local function PrepareDateTimeFormatTables()
     AddFormat("%Y/%m/%d %H:%M");
     AddFormat("%Y/%m/%d %I:%M %p");
     AddFormat("%c");
+    tinsert(dateTimeValues, "Custom");
+    tinsert(dateTimeFormats, "");
 end
 
 local screenshotModeFrame;
@@ -780,14 +782,16 @@ local function CreatePanel()
                         order = 3.1,
                         values = dateTimeValues,
                         get = function ()
-                            return addon.Options.db.EventAlert.DateTimeFormat;
+                            for i, format in next, dateTimeFormats do
+                                if format == addon.Options.db.EventAlert.DateTimeFormat then
+                                    return i;
+                                end
+                            end
+                            return #dateTimeFormats;
                         end,
                         set = function(_, value)
-                            if addon.Options.db.EventAlert.DateTimeFormat == dateTimeFormats[value] then
-                                return;
-                            end;
-
-                            addon.Options.db.EventAlert.DateTimeFormat = dateTimeFormats[value];
+                            local custom = LibStub("AceConfigRegistry-3.0"):GetOptionsTable(addon.MetaData.Title, "cmd", "KROWIAF-0.0").args.EventAlert.args.Custom; -- cmd and KROWIAF-0.0 are just to make the function work
+                            custom.set(nil, dateTimeFormats[value]);
 
                             diagnostics.Debug(addon.L["Presets"] .. ": " .. tostring(addon.Options.db.EventAlert.DateTimeFormat));
                         end
@@ -806,6 +810,10 @@ local function CreatePanel()
                             end;
 
                             addon.Options.db.EventAlert.DateTimeFormat = value;
+
+                            for _, sideButton in next, addon.GUI.SideButtons do
+                                sideButton:UpdateRuntime();
+                            end
 
                             diagnostics.Debug(addon.L["Custom"] .. ": " .. tostring(addon.Options.db.EventAlert.DateTimeFormat));
                         end

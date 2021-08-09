@@ -1,4 +1,4 @@
--- [[ Exported at 2021-08-06 14-59-22 ]] --
+-- [[ Exported at 2021-08-10 00-03-23 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -34,17 +34,17 @@ function exportedCalendarEvents.LoadCategories(e, a)
         exportedEvents.Load(e);
     end
 
-    e[141].Category = data.CategoriesEvents[1].Children[11]; -- Winter Veil
-    e[181].Category = data.CategoriesEvents[1].Children[3]; -- Noblegarden
-    e[201].Category = data.CategoriesEvents[1].Children[4]; -- Children's Week
-    e[324].Category = data.CategoriesEvents[1].Children[8]; -- Hallow's End
-    e[327].Category = data.CategoriesEvents[1].Children[1]; -- Lunar Festival
-    e[341].Category = data.CategoriesEvents[1].Children[5]; -- Midsummer
-    e[372].Category = data.CategoriesEvents[1].Children[7]; -- Brewfest
-    e[398].Category = data.CategoriesEvents[1].Children[6]; -- Pirates' Day
-    e[404].Category = data.CategoriesEvents[1].Children[10]; -- Pilgrim's Bounty
-    e[409].Category = data.CategoriesEvents[1].Children[9]; -- Day of the Dead
-    e[423].Category = data.CategoriesEvents[1].Children[2]; -- Love is in the Air
-    e[479].Category = data.CategoriesEvents[2]; -- Darkmoon Faire
+    e[141].Category = data.CategoriesEvents[3].Children[11]; -- Winter Veil
+    e[181].Category = data.CategoriesEvents[3].Children[3]; -- Noblegarden
+    e[201].Category = data.CategoriesEvents[3].Children[4]; -- Children's Week
+    e[324].Category = data.CategoriesEvents[3].Children[8]; -- Hallow's End
+    e[327].Category = data.CategoriesEvents[3].Children[1]; -- Lunar Festival
+    e[341].Category = data.CategoriesEvents[3].Children[5]; -- Midsummer
+    e[372].Category = data.CategoriesEvents[3].Children[7]; -- Brewfest
+    e[398].Category = data.CategoriesEvents[3].Children[6]; -- Pirates' Day
+    e[404].Category = data.CategoriesEvents[3].Children[10]; -- Pilgrim's Bounty
+    e[409].Category = data.CategoriesEvents[3].Children[9]; -- Day of the Dead
+    e[423].Category = data.CategoriesEvents[3].Children[2]; -- Love is in the Air
+    e[479].Category = data.CategoriesEvents[4]; -- Darkmoon Faire
 end
 

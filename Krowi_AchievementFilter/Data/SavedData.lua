@@ -91,7 +91,7 @@ function FixEventDetails(prevBuild, currBuild, prevVersion, currVersion)
         return;
     end
 
-    if prevBuild < currBuild or prevVersion < currVersion then
+    if currVersion >= "28.0" and (prevBuild < currBuild or prevVersion < currVersion) then
         EventDetails = nil;
     end
 

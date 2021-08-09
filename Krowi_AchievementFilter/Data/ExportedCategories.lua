@@ -1,4 +1,4 @@
--- [[ Exported at 2021-08-06 10-22-49 ]] --
+-- [[ Exported at 2021-08-10 00-03-19 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3666,9 +3666,7 @@ function exportedCategories.Load(a)
     AddA(tmp[272], a[13466]); -- Tides of Vengeance
     AddA(tmp[272], a[13924]); -- The Fourth War
     AddA(tmp[272], a[13517]); -- Two Sides to Every Tale
-    AddA(tmp[272], a[13283]); -- Frontline Warrior
     AddA(tmp[272], a[13251]); -- In Teldrassil's Shadow
-    AddA(tmp[272], a[13284]); -- Frontline Warrior
     AddA(tmp[272], a[13144]); -- Wide World of Quests
     AddA(tmp[272], a[13263]); -- The Shadow Hunter
     AddA(tmp[272], a[14157]); -- The Corruptor's End
@@ -3686,7 +3684,6 @@ function exportedCategories.Load(a)
     tmp[274] = cat:New((GetCategoryInfo(15270)), true); -- PvP
     AddC(tmp[271], tmp[274]);
     AddA(tmp[274], a[13429]); -- Azerfighter
-    AddA(tmp[274], a[13317]); -- Supplied and Ready
     AddA(tmp[274], a[12572]); -- War Supplied
     AddA(tmp[274], a[12571]); -- Bounty Hunting
     AddA(tmp[274], a[12573]); -- Band of Brothers
@@ -3727,7 +3724,6 @@ function exportedCategories.Load(a)
     tmp[283] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[282], tmp[283]);
     AddA(tmp[283], a[12497]); -- Drust Do It.
-    AddA(tmp[283], a[13435]); -- Doomsoul Surprise
     tmp[284] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[282], tmp[284]);
     AddA(tmp[284], a[12557]); -- Explore Drustvar
@@ -3772,7 +3768,6 @@ function exportedCategories.Load(a)
     AddC(tmp[259], tmp[292]);
     tmp[293] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[292], tmp[293]);
-    AddA(tmp[293], a[13440]); -- Pushing the Payload
     AddA(tmp[293], a[11861]); -- The Throne of Zuldazar
     AddA(tmp[293], a[12480]); -- A Bargain of Blood
     AddA(tmp[293], a[12481]); -- The Final Seal
@@ -3788,6 +3783,7 @@ function exportedCategories.Load(a)
     AddA(tmp[293], a[13573]); -- How to Ptrain Your Pterrordax
     AddA(tmp[293], a[13542]); -- How to Train Your Direhorn
     AddA(tmp[293], a[13035]); -- By de Power of de Loa!
+    AddA(tmp[293], a[13440]); -- Pushing the Payload
     tmp[294] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[292], tmp[294]);
     AddA(tmp[294], a[12559]); -- Explore Zuldazar
@@ -3806,14 +3802,14 @@ function exportedCategories.Load(a)
     AddC(tmp[259], tmp[297]);
     tmp[298] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[297], tmp[298]);
-    AddA(tmp[298], a[13426]); -- Come On and Slam
     AddA(tmp[298], a[13026]); -- 7th Legion Spycatcher
+    AddA(tmp[298], a[13025]); -- Zandalari Spycatcher
     AddA(tmp[298], a[11868]); -- The Dark Heart of Nazmir
     AddA(tmp[298], a[13048]); -- Life Finds a Way... To Die!
-    AddA(tmp[298], a[13025]); -- Zandalari Spycatcher
     AddA(tmp[298], a[13023]); -- It's Really Getting Out of Hand
     AddA(tmp[298], a[13022]); -- Revenge is Best Served Speedily
     AddA(tmp[298], a[13021]); -- A Most Efficient Apocalypse
+    AddA(tmp[298], a[13426]); -- Come On and Slam
     tmp[299] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[297], tmp[299]);
     AddA(tmp[299], a[12561]); -- Explore Nazmir
@@ -3833,12 +3829,12 @@ function exportedCategories.Load(a)
     tmp[303] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[302], tmp[303]);
     AddA(tmp[303], a[12478]); -- Secrets in the Sands
-    AddA(tmp[303], a[13437]); -- Scavenge like a Vulpera
     AddA(tmp[303], a[13009]); -- Adept Sandfisher
     AddA(tmp[303], a[13011]); -- Scourge of Zem'lan
     AddA(tmp[303], a[13014]); -- Vorrik's Champion
     AddA(tmp[303], a[13041]); -- "Hungry, Hungry Ranishu"
     AddA(tmp[303], a[13017]); -- Champion of the Vulpera
+    AddA(tmp[303], a[13437]); -- Scavenge like a Vulpera
     tmp[304] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[302], tmp[304]);
     AddA(tmp[304], a[12560]); -- Explore Vol'dun
@@ -4251,10 +4247,6 @@ function exportedCategories.Load(a)
     AddA(tmp[851], a[12859]); -- Prize Fighter
     AddA(tmp[851], a[12861]); -- Master of Duels
     AddA(tmp[851], a[12862]); -- Thirty Six and Two
-    AddA(tmp[851], a[13387]); -- Frontline Veteran
-    AddA(tmp[851], a[13388]); -- Frontline Veteran
-    AddA(tmp[851], a[13402]); -- Frontline Slayer
-    AddA(tmp[851], a[13403]); -- Frontline Slayer
     AddA(tmp[851], a[13623]); -- Fighting on Two Fronts
     tmp[425] = cat:New((GetCategoryInfo(15307))); -- Island Expeditions
     AddC(tmp[258], tmp[425]);
@@ -4934,6 +4926,112 @@ function exportedCategories.Load(a)
     tmp[884] = cat:New(addon.L["Events"]); -- TAB - Events
     tmp[884].IsTab = true;
     local tabEventsCategories = tmp[884];
+    tmp[932] = cat:New((GetCategoryInfo(15305))); -- Battle for Azeroth
+    AddC(tmp[884], tmp[932]);
+    tmp[933] = cat:New(addon.L["Faction Assaults"]); -- Faction Assaults
+    AddC(tmp[932], tmp[933]);
+    tmp[935] = cat:New(addon.L["Assault on Tiragarde Sound"]); -- Assault on Tiragarde Sound
+    AddC(tmp[933], tmp[935]);
+    AddA(tmp[935], a[13285]); -- Upright Citizens
+    AddA(tmp[935], a[13317]); -- Supplied and Ready
+    AddA(tmp[935], a[13283]); -- Frontline Warrior
+    AddA(tmp[935], a[13284]); -- Frontline Warrior
+    AddA(tmp[935], a[13387]); -- Frontline Veteran
+    AddA(tmp[935], a[13388]); -- Frontline Veteran
+    AddA(tmp[935], a[13402]); -- Frontline Slayer
+    AddA(tmp[935], a[13403]); -- Frontline Slayer
+    tmp[936] = cat:New(addon.L["Assault on Drustvar"]); -- Assault on Drustvar
+    AddC(tmp[933], tmp[936]);
+    AddA(tmp[936], a[13317]); -- Supplied and Ready
+    AddA(tmp[936], a[13283]); -- Frontline Warrior
+    AddA(tmp[936], a[13284]); -- Frontline Warrior
+    AddA(tmp[936], a[13387]); -- Frontline Veteran
+    AddA(tmp[936], a[13388]); -- Frontline Veteran
+    AddA(tmp[936], a[13402]); -- Frontline Slayer
+    AddA(tmp[936], a[13403]); -- Frontline Slayer
+    tmp[937] = cat:New(addon.L["Assault on Stormsong Valley"]); -- Assault on Stormsong Valley
+    AddC(tmp[933], tmp[937]);
+    AddA(tmp[937], a[13317]); -- Supplied and Ready
+    AddA(tmp[937], a[13283]); -- Frontline Warrior
+    AddA(tmp[937], a[13284]); -- Frontline Warrior
+    AddA(tmp[937], a[13387]); -- Frontline Veteran
+    AddA(tmp[937], a[13388]); -- Frontline Veteran
+    AddA(tmp[937], a[13402]); -- Frontline Slayer
+    AddA(tmp[937], a[13403]); -- Frontline Slayer
+    tmp[934] = cat:New(addon.L["Assault on Zuldazar"]); -- Assault on Zuldazar
+    AddC(tmp[933], tmp[934]);
+    AddA(tmp[934], a[13440]); -- Pushing the Payload
+    AddA(tmp[934], a[13441]); -- Pushing the Payload
+    AddA(tmp[934], a[13439]); -- Boxing Match
+    AddA(tmp[934], a[13317]); -- Supplied and Ready
+    AddA(tmp[934], a[13283]); -- Frontline Warrior
+    AddA(tmp[934], a[13284]); -- Frontline Warrior
+    AddA(tmp[934], a[13387]); -- Frontline Veteran
+    AddA(tmp[934], a[13388]); -- Frontline Veteran
+    AddA(tmp[934], a[13402]); -- Frontline Slayer
+    AddA(tmp[934], a[13403]); -- Frontline Slayer
+    tmp[938] = cat:New(addon.L["Assault on Nazmir"]); -- Assault on Nazmir
+    AddC(tmp[933], tmp[938]);
+    AddA(tmp[938], a[13426]); -- Come On and Slam
+    AddA(tmp[938], a[13317]); -- Supplied and Ready
+    AddA(tmp[938], a[13283]); -- Frontline Warrior
+    AddA(tmp[938], a[13284]); -- Frontline Warrior
+    AddA(tmp[938], a[13387]); -- Frontline Veteran
+    AddA(tmp[938], a[13388]); -- Frontline Veteran
+    AddA(tmp[938], a[13402]); -- Frontline Slayer
+    AddA(tmp[938], a[13403]); -- Frontline Slayer
+    tmp[939] = cat:New(addon.L["Assault on Vol'dun"]); -- Assault on Vol'dun
+    AddC(tmp[933], tmp[939]);
+    AddA(tmp[939], a[13437]); -- Scavenge like a Vulpera
+    AddA(tmp[939], a[13317]); -- Supplied and Ready
+    AddA(tmp[939], a[13283]); -- Frontline Warrior
+    AddA(tmp[939], a[13284]); -- Frontline Warrior
+    AddA(tmp[939], a[13387]); -- Frontline Veteran
+    AddA(tmp[939], a[13388]); -- Frontline Veteran
+    AddA(tmp[939], a[13402]); -- Frontline Slayer
+    AddA(tmp[939], a[13403]); -- Frontline Slayer
+    tmp[940] = cat:New(addon.L["N'Zoth Assaults"]); -- N'Zoth Assaults
+    AddC(tmp[932], tmp[940]);
+    tmp[941] = cat:New(C_Map.GetMapInfo(1530).name); -- Vale of Eternal Blossoms
+    AddC(tmp[940], tmp[941]);
+    AddA(tmp[941], a[14154]); -- Defend the Vale
+    AddA(tmp[941], a[14161]); -- All Consuming
+    AddA(tmp[941], a[14160]); -- Rare to Well Done
+    AddA(tmp[941], a[14159]); -- Combating the Corruption
+    AddA(tmp[941], a[14158]); -- It's Not A Tumor!
+    AddA(tmp[941], a[14156]); -- The Rajani
+    tmp[942] = cat:New(C_Map.GetMapInfo(1527).name); -- Uldum
+    AddC(tmp[940], tmp[942]);
+    AddA(tmp[942], a[14153]); -- Uldum Under Assault
+    AddA(tmp[942], a[14161]); -- All Consuming
+    AddA(tmp[942], a[14160]); -- Rare to Well Done
+    AddA(tmp[942], a[14159]); -- Combating the Corruption
+    AddA(tmp[942], a[14158]); -- It's Not A Tumor!
+    AddA(tmp[942], a[14155]); -- Uldum Accord
+    tmp[926] = cat:New((GetCategoryInfo(15439))); -- Shadowlands
+    AddC(tmp[884], tmp[926]);
+    tmp[927] = cat:New(addon.L["Covenant Assaults"]); -- Covenant Assaults
+    AddC(tmp[926], tmp[927]);
+    tmp[928] = cat:New(addon.L["Kyrian Assault"]); -- Kyrian Assault
+    AddC(tmp[927], tmp[928]);
+    AddA(tmp[928], a[15041]); -- The Zovaal Shuffle
+    AddA(tmp[928], a[15034]); -- Wings Against the Flames
+    AddA(tmp[928], a[15004]); -- A Sly Fox
+    tmp[929] = cat:New(addon.L["Necrolords Assault"]); -- Necrolords Assault
+    AddC(tmp[927], tmp[929]);
+    AddA(tmp[929], a[15037]); -- This Army
+    AddA(tmp[929], a[15039]); -- Up For Grabs
+    AddA(tmp[929], a[15032]); -- Breaking Their Hold
+    tmp[930] = cat:New(addon.L["Night Fae Assault"]); -- Night Fae Assault
+    AddC(tmp[927], tmp[930]);
+    AddA(tmp[930], a[15001]); -- Jailer's Personal Stash
+    AddA(tmp[930], a[15044]); -- Krrprripripkraak's Heroes
+    AddA(tmp[930], a[15036]); -- Rooting Out the Evil
+    tmp[931] = cat:New(addon.L["Venthyr Assault"]); -- Venthyr Assault
+    AddC(tmp[927], tmp[931]);
+    AddA(tmp[931], a[15043]); -- Hoarder of Torghast
+    AddA(tmp[931], a[15042]); -- Tea for the Troubled
+    AddA(tmp[931], a[15033]); -- Taking the Tremaculum
     tmp[918] = cat:New(addon.L["Holidays"]); -- Holidays
     AddC(tmp[884], tmp[918]);
     AddA(tmp[918], a[2144]); -- "What a Long, Strange Trip It's Been"
@@ -5207,30 +5305,6 @@ function exportedCategories.Load(a)
     AddA(tmp[925], a[11919]); -- Taking this Show on the Road
     AddA(tmp[925], a[11920]); -- Perfect Performance
     AddA(tmp[925], a[11921]); -- Mosh Pit
-    tmp[926] = cat:New((GetCategoryInfo(15439))); -- Shadowlands
-    AddC(tmp[884], tmp[926]);
-    tmp[927] = cat:New(addon.L["Covenant Assaults"]); -- Covenant Assaults
-    AddC(tmp[926], tmp[927]);
-    tmp[928] = cat:New(addon.L["Kyrian Assault"]); -- Kyrian Assault
-    AddC(tmp[927], tmp[928]);
-    AddA(tmp[928], a[15041]); -- The Zovaal Shuffle
-    AddA(tmp[928], a[15034]); -- Wings Against the Flames
-    AddA(tmp[928], a[15004]); -- A Sly Fox
-    tmp[929] = cat:New(addon.L["Necrolords Assault"]); -- Necrolords Assault
-    AddC(tmp[927], tmp[929]);
-    AddA(tmp[929], a[15037]); -- This Army
-    AddA(tmp[929], a[15039]); -- Up For Grabs
-    AddA(tmp[929], a[15032]); -- Breaking Their Hold
-    tmp[930] = cat:New(addon.L["Night Fae Assault"]); -- Night Fae Assault
-    AddC(tmp[927], tmp[930]);
-    AddA(tmp[930], a[15001]); -- Jailer's Personal Stash
-    AddA(tmp[930], a[15044]); -- Krrprripripkraak's Heroes
-    AddA(tmp[930], a[15036]); -- Rooting Out the Evil
-    tmp[931] = cat:New(addon.L["Venthyr Assault"]); -- Venthyr Assault
-    AddC(tmp[927], tmp[931]);
-    AddA(tmp[931], a[15043]); -- Hoarder of Torghast
-    AddA(tmp[931], a[15042]); -- Tea for the Troubled
-    AddA(tmp[931], a[15033]); -- Taking the Tremaculum
 
     return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
 end

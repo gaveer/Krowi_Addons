@@ -17,6 +17,7 @@ namespace DbManagerWPF.ViewModel
         {
             LoadCategoriesViewModel();
             LoadUIMapViewModel();
+            LoadEventsViewModel();
         }
     }
 }

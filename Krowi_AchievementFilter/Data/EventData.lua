@@ -9,12 +9,16 @@ local GetEvents;
 function eventData.Load()
     local refreshEvents = false;
 
-    if type(EventDetails) == "table" then -- Check if all event end dates are in the future
-        if next(EventDetails) == nil then
+    if EventDetails == nil then
+        EventDetails = {};
+    end
+
+    if type(EventDetails.CalendarEvents) == "table" then -- Check if all event end dates are in the future
+        if next(EventDetails.CalendarEvents) == nil then
             refreshEvents = true;
         else
             local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
-            for _, event in next, EventDetails do
+            for _, event in next, EventDetails.CalendarEvents do
                 local deltaT = math.floor((event.endTime - currentDate) / (3600 * 24));
                 diagnostics.Debug(event.eventID .. " - " .. event.title .. " - " .. tostring(deltaT));
                 if deltaT < 0 then
@@ -23,7 +27,7 @@ function eventData.Load()
             end
         end
     else
-        EventDetails = {};
+        EventDetails.CalendarEvents = {};
         refreshEvents = true;
     end
 
@@ -35,16 +39,14 @@ function eventData.Load()
                 events[id].startTime = addon.GetSecondsSince(events[id].startTime);
                 events[id].endTime = addon.GetSecondsSince(events[id].endTime);
                 diagnostics.Debug(event.ID .. " - " .. events[id].title .. " - " ..
-                                    -- events[id].startTime.year .. "/" .. events[id].startTime.month .. "/" .. events[id].startTime.day .. " - " ..
-                                    -- events[id].endTime.year .. "/" .. events[id].endTime.month .. "/" .. events[id].endTime.day);
                                     date("%Y/%m/%d %H:%M", events[id].startTime) .. " - " .. date("%Y/%m/%d %H:%M", events[id].endTime));
-                EventDetails[id] = events[id]; -- Cache for later
+                EventDetails.CalendarEvents[id] = events[id]; -- Cache for later
             end
         end
     end
 
     for id, event in next, data.CalendarEvents do
-        event.EventDetails = EventDetails[id];
+        event.EventDetails = EventDetails.CalendarEvents[id];
     end
 end
 
@@ -103,15 +105,43 @@ function eventData.GetActiveCalendarEvents()
     return activeCalendarEvents;
 end
 
-local GetStartAndEndTime;
--- local activeWorldEvents;
+local GetSavedWorldEvents, GetNewWorldEvents, GetStartAndEndTime;
 function eventData.GetActiveWorldEvents()
     diagnostics.Trace("eventData.GetActiveWorldEvents");
-    -- if activeWorldEvents == nil then
-        local activeWorldEvents = {};
 
-        local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
-        for _, event in next, data.WorldEvents do
+    local activeWorldEvents = {};
+    if EventDetails.WorldEvents == nil then
+        EventDetails.WorldEvents = {};
+    end
+
+    local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
+    GetSavedWorldEvents(activeWorldEvents, currentDate);
+    GetNewWorldEvents(activeWorldEvents);
+
+    return activeWorldEvents;
+end
+
+function GetSavedWorldEvents(activeWorldEvents, currentDate)
+    for id, event in next, EventDetails.WorldEvents do
+        local deltaT = math.floor((event.endTime - currentDate) / (3600 * 24));
+        diagnostics.Debug(event.eventID .. " - " .. event.title .. " - " .. tostring(deltaT));
+        if deltaT < 0 then
+            EventDetails.WorldEvents[id] = nil;
+        end
+    end
+
+    for id, event in next, data.WorldEvents do
+        if EventDetails.WorldEvents[id] then
+            event.EventDetails = EventDetails.WorldEvents[id];
+            diagnostics.Debug("Existing event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+            tinsert(activeWorldEvents, event);
+        end
+    end
+end
+
+function GetNewWorldEvents(activeWorldEvents)
+    for _, event in next, data.WorldEvents do
+        if event.EventDetails == nil then
             local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(event.MapID, event.ID);
             if poiInfo then -- The event is active
                 local secondsLeft = C_AreaPoiInfo.GetAreaPOISecondsLeft(event.ID);
@@ -128,18 +158,19 @@ function eventData.GetActiveWorldEvents()
                 diagnostics.Debug(event.ID .. " - " .. event.EventDetails.title .. " - " ..
                                     date("%Y/%m/%d %H:%M", event.EventDetails.startTime) .. " - " .. date("%Y/%m/%d %H:%M", event.EventDetails.endTime));
 
-                if event.EventDetails ~= nil then
-                    local deltaT = math.floor((event.EventDetails.startTime - currentDate) / (3600 * 24));
-                    if deltaT < 0 then
-                        diagnostics.Debug("Event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+                -- if event.EventDetails ~= nil then
+                    -- local deltaT = math.floor((event.EventDetails.startTime - currentDate) / (3600 * 24)); -- Think this can be removed since world events will only show when they're active
+                    -- if deltaT < 0 then
+                        diagnostics.Debug("New event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+                        EventDetails.WorldEvents[event.ID] = event.EventDetails;
                         tinsert(activeWorldEvents, event);
-                    end
-                end
+                    -- end
+                -- end
+            else
+                diagnostics.Debug("Event not active:" .. event.ID .. " - " .. event.Title);
             end
         end
-    -- end
-
-    return activeWorldEvents;
+    end
 end
 
 function GetStartAndEndTime(secondsLeft, totalDuration) -- both in seconds

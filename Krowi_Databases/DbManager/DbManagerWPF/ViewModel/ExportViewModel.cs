@@ -611,7 +611,7 @@ namespace DbManagerWPF.ViewModel
             {
                 if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && keyValuePair.Key.UIMap != null)
                 {
-                    appendString = $"e[{keyValuePair.Key.ID}] = event:New({keyValuePair.Key.ID}, {keyValuePair.Key.Icon}, {keyValuePair.Value[0].Category.Function.Call.Replace("%value%", keyValuePair.Value[0].Category.FunctionValue)}";
+                    appendString = $"e[{keyValuePair.Key.ID}] = event:New({keyValuePair.Key.ID}, {keyValuePair.Key.Icon}, addon.L[\"{ keyValuePair.Key.Title}\"]"; // {keyValuePair.Value[0].Category.Function.Call.Replace("%value%", keyValuePair.Value[0].Category.FunctionValue)}
                     appendString += ", ";
                     appendString += $"{(keyValuePair.Key.UIMap != null ? keyValuePair.Key.UIMap.ID : "nil")}";
                     appendString += ", ";

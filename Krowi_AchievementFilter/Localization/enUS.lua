@@ -45,6 +45,21 @@ L["Kyrian Assault"] = "Kyrian Assault";
 L["Necrolords Assault"] = "Necrolords Assault";
 L["Night Fae Assault"] = "Night Fae Assault";
 L["Venthyr Assault"] = "Venthyr Assault";
+L["Faction Assaults"] = "Faction Assaults";
+L["Assault on Tiragarde Sound"] = "Assault on Tiragarde Sound";
+L["Assault on Drustvar"] = "Assault on Drustvar";
+L["Assault on Stormsong Valley"] = "Assault on Stormsong Valley";
+L["Assault on Zuldazar"] = "Assault on Zuldazar";
+L["Assault on Nazmir"] = "Assault on Nazmir";
+L["Assault on Vol'dun"] = "Assault on Vol'dun";
+L["N'Zoth Assaults"] = "N'Zoth Assaults";
+L["Assault: N'Zoth (Vale of Eternal Blossoms)"] = "Assault: N'Zoth (Vale of Eternal Blossoms)";
+L["Assault: Mogu"] = "Assault: Mogu";
+L["Assault: Mantid"] = "Assault: Mantid";
+L["Assault: N'Zoth (Uldum)"] = "Assault: N'Zoth (Uldum)";
+L["Assault: Amathet"] = "Assault: Amathet";
+L["Assault: Aqir"] = "Assault: Aqir";
+
 
 -- Filters
 L["Obtainable"] = "Obtainable";

@@ -124,8 +124,7 @@ function gui.ResetView()
 	diagnostics.Trace("gui.ResetView");
 
     if gui.CategoriesFrame and gui.SelectedTab.Categories then -- Checking ID is to know if the frame is initialised or not
-        -- We want to have Classic selected and collapsed
-        -- Achievement 1283 has Dungeons as parent but we need its parent which is Classic
+        -- Select the first category
         if gui.SelectedTab.Categories then
             gui.CategoriesFrame:SelectCategory(gui.SelectedTab.Categories[1], true);
         end

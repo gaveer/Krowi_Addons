@@ -1,4 +1,4 @@
--- [[ Exported at 2021-08-10 00-03-23 ]] --
+-- [[ Exported at 2021-08-10 07-55-11 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -15,6 +15,10 @@ function exportedWorldEvents.Load(e)
         e[i] = nil;
     end
 
+    e[5175] = event:New(5175, 1408998, addon.L["Assault on Azsuna"], 619, 21600); -- Assault on Azsuna
+    e[5177] = event:New(5177, 1409000, addon.L["Assault on Highmountain"], 619, 21600); -- Assault on Highmountain
+    e[5178] = event:New(5178, 1409001, addon.L["Assault on Stormheim"], 619, 21600); -- Assault on Stormheim
+    e[5210] = event:New(5210, 1409010, addon.L["Assault on Val'sharah"], 619, 21600); -- Assault on Val'sharah
     e[5896] = event:New(5896, 2065630, addon.L["Assault on Tiragarde Sound"], 876, 25200); -- Assault on Tiragarde Sound
     e[5964] = event:New(5964, 2065567, addon.L["Assault on Drustvar"], 876, 25200); -- Assault on Drustvar
     e[5966] = event:New(5966, 2065627, addon.L["Assault on Stormsong Valley"], 876, 25200); -- Assault on Stormsong Valley
@@ -34,25 +38,29 @@ function exportedWorldEvents.Load(e)
 end
 
 function exportedWorldEvents.LoadCategories(e, a)
-    if e[5896] == nil or e[5964] == nil or e[5966] == nil or e[5969] == nil or e[5970] == nil or e[5973] == nil or e[6486] == nil or e[6487] == nil or e[6488] == nil or e[6489] == nil or e[6490] == nil or e[6491] == nil or e[6989] == nil or e[6990] == nil or e[6991] == nil or e[6992] == nil then
+    if e[5175] == nil or e[5177] == nil or e[5178] == nil or e[5210] == nil or e[5896] == nil or e[5964] == nil or e[5966] == nil or e[5969] == nil or e[5970] == nil or e[5973] == nil or e[6486] == nil or e[6487] == nil or e[6488] == nil or e[6489] == nil or e[6490] == nil or e[6491] == nil or e[6989] == nil or e[6990] == nil or e[6991] == nil or e[6992] == nil then
         exportedEvents.Load(e);
     end
 
-    e[5896].Category = data.CategoriesEvents[1].Children[1].Children[1]; -- Assault on Tiragarde Sound
-    e[5964].Category = data.CategoriesEvents[1].Children[1].Children[2]; -- Assault on Drustvar
-    e[5966].Category = data.CategoriesEvents[1].Children[1].Children[3]; -- Assault on Stormsong Valley
-    e[5969].Category = data.CategoriesEvents[1].Children[1].Children[5]; -- Assault on Nazmir
-    e[5970].Category = data.CategoriesEvents[1].Children[1].Children[6]; -- Assault on Vol'dun
-    e[5973].Category = data.CategoriesEvents[1].Children[1].Children[4]; -- Assault on Zuldazar
-    e[6486].Category = data.CategoriesEvents[1].Children[2].Children[2]; -- Uldum
-    e[6487].Category = data.CategoriesEvents[1].Children[2].Children[2]; -- Uldum
-    e[6488].Category = data.CategoriesEvents[1].Children[2].Children[2]; -- Uldum
-    e[6489].Category = data.CategoriesEvents[1].Children[2].Children[1]; -- Vale of Eternal Blossoms
-    e[6490].Category = data.CategoriesEvents[1].Children[2].Children[1]; -- Vale of Eternal Blossoms
-    e[6491].Category = data.CategoriesEvents[1].Children[2].Children[1]; -- Vale of Eternal Blossoms
-    e[6989].Category = data.CategoriesEvents[2].Children[1].Children[2]; -- Necrolords Assault
-    e[6990].Category = data.CategoriesEvents[2].Children[1].Children[4]; -- Venthyr Assault
-    e[6991].Category = data.CategoriesEvents[2].Children[1].Children[1]; -- Kyrian Assault
-    e[6992].Category = data.CategoriesEvents[2].Children[1].Children[3]; -- Night Fae Assault
+    e[5175].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
+    e[5177].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
+    e[5178].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
+    e[5210].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
+    e[5896].Category = data.CategoriesEvents[4].Children[1].Children[1]; -- Assault on Tiragarde Sound
+    e[5964].Category = data.CategoriesEvents[4].Children[1].Children[2]; -- Assault on Drustvar
+    e[5966].Category = data.CategoriesEvents[4].Children[1].Children[3]; -- Assault on Stormsong Valley
+    e[5969].Category = data.CategoriesEvents[4].Children[1].Children[5]; -- Assault on Nazmir
+    e[5970].Category = data.CategoriesEvents[4].Children[1].Children[6]; -- Assault on Vol'dun
+    e[5973].Category = data.CategoriesEvents[4].Children[1].Children[4]; -- Assault on Zuldazar
+    e[6486].Category = data.CategoriesEvents[4].Children[2].Children[2]; -- Uldum
+    e[6487].Category = data.CategoriesEvents[4].Children[2].Children[2]; -- Uldum
+    e[6488].Category = data.CategoriesEvents[4].Children[2].Children[2]; -- Uldum
+    e[6489].Category = data.CategoriesEvents[4].Children[2].Children[1]; -- Vale of Eternal Blossoms
+    e[6490].Category = data.CategoriesEvents[4].Children[2].Children[1]; -- Vale of Eternal Blossoms
+    e[6491].Category = data.CategoriesEvents[4].Children[2].Children[1]; -- Vale of Eternal Blossoms
+    e[6989].Category = data.CategoriesEvents[5].Children[1].Children[2]; -- Necrolords Assault
+    e[6990].Category = data.CategoriesEvents[5].Children[1].Children[4]; -- Venthyr Assault
+    e[6991].Category = data.CategoriesEvents[5].Children[1].Children[1]; -- Kyrian Assault
+    e[6992].Category = data.CategoriesEvents[5].Children[1].Children[3]; -- Night Fae Assault
 end
 

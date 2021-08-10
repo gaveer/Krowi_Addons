@@ -58,7 +58,11 @@ L["Assault: Mogu"] = "Assault: Mogu";
 L["Assault: Mantid"] = "Assault: Mantid";
 L["Assault: N'Zoth (Uldum)"] = "Assault: N'Zoth (Uldum)";
 L["Assault: Amathet"] = "Assault: Amathet";
-L["Assault: Aqir"] = "Assault: Aqir";
+L["Legion Assaults"] = "Legion Assaults";
+L["Assault on Azsuna"] = "Assault on Azsuna";
+L["Assault on Val'sharah"] = "Assault on Val'sharah";
+L["Assault on Highmountain"] = "Assault on Highmountain";
+L["Assault on Stormheim"] = "Assault on Stormheim";
 
 
 -- Filters

@@ -12,12 +12,12 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Shadowlands - Zones - Korthia, Shadowlands - Dungeons - Tazavesh, the Veiled Market and Shadowlands - Raids - Sanctum of Domination now all should localize properly
+- When switching between new tabs, achievements would sometimes be selected wrongly, not visible or have no content
 
 ### Removed
 - Option to set the number of times the active events should be shown
 
 ### TODO
-- If an achievement is expanded in Expansions, selecting the Events tab with a category and achievements does something strange
 - Add the option to show the "Time Left" on events instead of start and endtime
 
 [9.1.0.28.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3412562

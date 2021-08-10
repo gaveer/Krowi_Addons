@@ -37,6 +37,7 @@ function achievementsFrame:Load()
 
 	frame.Container.ScrollBar.trackBG:Show();
 	frame.Container.update = function(container)
+		diagnostics.Trace("AchievementsFrame.Container.update");
 		container.ParentFrame:Update();
 	end
 
@@ -266,13 +267,6 @@ function achievementsFrame:ForceUpdate(toTop) -- Issue #3: Fix
 	cachedAchievements = nil;
 
 	self:Update();
-
-	-- if gui.SelectedTab.SelectedAchievement then
-	-- 	-- self:SelectAchievement(gui.SelectedTab.SelectedAchievement);
-	-- 	self:FindSelection();
-	-- else
-	-- 	self.Container.ScrollBar:SetValue(0);
-	-- end
 end
 
 function achievementsFrame:ClearSelection()
@@ -541,8 +535,8 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	while not shown do
 		for _, button in next, container.buttons do
-			-- diagnostics.Debug(math.ceil(button:GetTop()));
-			-- diagnostics.Debug(math.ceil(gui.GetSafeScrollChildBottom(child)));
+			diagnostics.Debug(button:GetTop());
+			diagnostics.Debug(gui.GetSafeScrollChildBottom(child));
 			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
 				if not (gui.SelectedTab.SelectedAchievement and gui.SelectedTab.SelectedAchievement.ID == achievement.ID) then
 					button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);

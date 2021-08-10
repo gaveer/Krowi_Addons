@@ -7,7 +7,7 @@ local alertSystem = gui.AlertSystem;
 
 local ShowActiveCalendarEvents, ShowActiveWorldEvents;
 function alertSystem:Load()
-    addon.GUI.AlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("KrowiAF_AlertFrameTemplate", self.SetUp, 4, 6);
+    addon.GUI.AlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("KrowiAF_AlertFrameTemplate", self.SetUp, 5, 10);
     addon.GUI.AlertSystem.ShowActiveCalendarEvents = ShowActiveCalendarEvents;
     addon.GUI.AlertSystem.ShowActiveWorldEvents = ShowActiveWorldEvents;
 end

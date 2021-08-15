@@ -187,16 +187,10 @@ function loadHelper:OnEvent(event, arg1, arg2)
             addon.Tutorials.HookTrigger(addon.GUI.TabButtonExpansions);
 
             addon.GUI.ElvUISkin.Apply();
-
-            -- if addon.Diagnostics.TraceEnabled() then
-            --     HookForTesting();
-            -- end
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
             addon.GUI.ElvUISkin.Apply();
         end
     elseif event == "PLAYER_LOGIN" then
-        -- addon.GUI.FilterButton:ResetFilters();
-
         addon.Data.ExportedCalendarEvents.Load(addon.Data.CalendarEvents);
         addon.Data.ExportedWorldEvents.Load(addon.Data.WorldEvents);
         addon.EventData.Load();
@@ -216,9 +210,6 @@ function loadHelper:OnEvent(event, arg1, arg2)
         if arg1 then -- On a fresh login we need AREA_POIS_UPDATED to get world events
             loadHelper:RegisterEvent("AREA_POIS_UPDATED");
         end
-        -- if arg1 or arg2 then -- On both login and reload we need to get calendar events
-        --     addon.GUI.AlertSystem.ShowActiveCalendarEvents();
-        -- end
         if arg2 then -- On reload we can get world events here since AREA_POIS_UPDATED does not always trigger and data is already available
             addon.GUI.AlertSystem.ShowActiveCalendarEvents();
             addon.GUI.AlertSystem.ShowActiveWorldEvents();
@@ -235,18 +226,3 @@ function loadHelper:OnEvent(event, arg1, arg2)
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
-
--- function HookForTesting()
---     hooksecurefunc("HybridScrollFrame_SetOffset", function() print("HybridScrollFrame_SetOffset"); end);
---     hooksecurefunc("HybridScrollFrame_Update", function(self) print("HybridScrollFrame_Update:"  .. tostring(self:GetName())); end);
---     hooksecurefunc("HybridScrollFrame_SetDoNotHideScrollBar", function() print("HybridScrollFrame_SetDoNotHideScrollBar"); end);
---     hooksecurefunc("AchievementFrameCategories_Update", function() print("AchievementFrameCategories_Update"); end);
---     hooksecurefunc("AchievementFrameAchievements_Update", function() print("AchievementFrameAchievements_Update"); end);
---     hooksecurefunc("AchievementFrameStats_Update", function() print("AchievementFrameStats_Update"); end);
---     hooksecurefunc("AchievementFrameComparison_Update", function() print("AchievementFrameComparison_Update"); end);
---     hooksecurefunc("AchievementFrameComparison_UpdateStats", function() print("AchievementFrameComparison_UpdateStats"); end);
---     hooksecurefunc("AchievementFrame_UpdateFullSearchResults", function() print("AchievementFrame_UpdateFullSearchResults"); end);
---     hooksecurefunc("HybridScrollFrame_OnValueChanged", function() print("HybridScrollFrame_OnValueChanged"); end);
---     hooksecurefunc("HybridScrollFrame_ExpandButton", function() print("HybridScrollFrame_ExpandButton"); end);
---     hooksecurefunc("HybridScrollFrame_CollapseButton", function() print("HybridScrollFrame_CollapseButton"); end);
--- end

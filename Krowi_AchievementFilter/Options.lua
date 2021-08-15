@@ -65,8 +65,7 @@ local defaults = {
         EventAlert = {
             FadeDelay = 60,
             DateTimeFormat = {
-                StartTimeAndEndTime = "%d/%m/%Y %R",
-                -- TimeLeft = "%e Days %H Hr %M Min"
+                StartTimeAndEndTime = "%d/%m/%Y %R"
             },
             TimeDisplay = {
                 Line1 = 2,
@@ -80,40 +79,28 @@ local maxNumberOfSearchPreviews = function()
     return 17 + math.floor(addon.Options.db.Window.AchievementFrameHeightOffset / 29);
 end
 
-local startTimeAndEndTimeDateTimeFormats, startTimeAndEndTimeDateTimeValues = {}, {}; --, timeLeftDateTimeFormats, timeLeftDateTimeValues;
+local startTimeAndEndTimeDateTimeFormats, startTimeAndEndTimeDateTimeValues = {}, {};
+
 local function AddFormat(formats, values, format)
     tinsert(formats, format);
     tinsert(values, date(format, time()));
 end
+
 local function AddStartTimeAndEndTimeFormat(format)
     AddFormat(startTimeAndEndTimeDateTimeFormats, startTimeAndEndTimeDateTimeValues, format);
 end
--- local function AddTimeLeftFormat(format)
---     AddFormat(timeLeftDateTimeFormats, timeLeftDateTimeValues, format);
--- end
 
--- local function PrepareDateTimeFormatTables()
-    -- Start Time and End Time
-    -- startTimeAndEndTimeDateTimeFormats, startTimeAndEndTimeDateTimeValues = {}, {};
-    AddStartTimeAndEndTimeFormat(defaults.profile.EventAlert.DateTimeFormat.StartTimeAndEndTime);
-    AddStartTimeAndEndTimeFormat("%d/%m/%Y %I:%M %p");
-    AddStartTimeAndEndTimeFormat("%m/%d/%Y %R");
-    AddStartTimeAndEndTimeFormat("%m/%d/%Y %I:%M %p");
-    AddStartTimeAndEndTimeFormat("%Y/%m/%d %R");
-    AddStartTimeAndEndTimeFormat("%Y/%m/%d %I:%M %p");
-    AddStartTimeAndEndTimeFormat("%c");
-    tinsert(startTimeAndEndTimeDateTimeValues, "Custom");
-    tinsert(startTimeAndEndTimeDateTimeFormats, "%m/%d/%y %R");
-
-    -- Time Left
-    -- timeLeftDateTimeFormats, timeLeftDateTimeValues = {}, {};
-    -- AddTimeLeftFormat(defaults.profile.EventAlert.DateTimeFormat.TimeLeft);
-    -- tinsert(timeLeftDateTimeValues, "Custom");
-    -- tinsert(timeLeftDateTimeFormats, "%e:%H:%M:%S");
--- end
+AddStartTimeAndEndTimeFormat(defaults.profile.EventAlert.DateTimeFormat.StartTimeAndEndTime);
+AddStartTimeAndEndTimeFormat("%d/%m/%Y %I:%M %p");
+AddStartTimeAndEndTimeFormat("%m/%d/%Y %R");
+AddStartTimeAndEndTimeFormat("%m/%d/%Y %I:%M %p");
+AddStartTimeAndEndTimeFormat("%Y/%m/%d %R");
+AddStartTimeAndEndTimeFormat("%Y/%m/%d %I:%M %p");
+AddStartTimeAndEndTimeFormat("%c");
+tinsert(startTimeAndEndTimeDateTimeValues, "Custom");
+tinsert(startTimeAndEndTimeDateTimeFormats, "%m/%d/%y %R");
 
 local screenshotModeFrame;
--- local function CreatePanel()
 local optionsTable = {
     name = addon.MetaData.Title,
     type = "group",
@@ -1111,10 +1098,6 @@ local optionsTable = {
     }
 }
 
-    -- LibStub("AceConfig-3.0"):RegisterOptionsTable(addon.MetaData.Title, optionsTable);
-    -- LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addon.MetaData.Title, nil, nil);
--- end
-
 local function Open()
     InterfaceAddOnsList_Update(); -- This way the correct category will be shown when calling InterfaceOptionsFrame_OpenToCategory
     InterfaceOptionsFrame_OpenToCategory(addon.MetaData.Title);
@@ -1125,10 +1108,6 @@ function options.Load()
     addon.Options = LibStub("AceDB-3.0"):New("Options", defaults, true);
     addon.Options.Open = Open;
     addon.Options.db = addon.Options.profile;
-
-    -- TODO: add something to check if the options panel closes that we prompt for a reload
-    -- PrepareDateTimeFormatTables();
-    -- CreatePanel();
 
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addon.MetaData.Title, optionsTable);
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addon.MetaData.Title, nil, nil);

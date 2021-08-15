@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.28.0] - 2021-
+## [9.1.0.28.0] - 2021-08-16
 ### Added
 - Shadowlands Covenant Assaults as Event Reminders
 - Battle for Azeroth Faction Assaults and N'Zoth Assaults as Event Reminders
@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 - Option to set the number of times the active events should be shown
 
-[9.1.0.28.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3412562
+[9.1.0.28.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3426679
 
 ## [9.1.0.27.1] - 2021-08-04
 ### Fixed

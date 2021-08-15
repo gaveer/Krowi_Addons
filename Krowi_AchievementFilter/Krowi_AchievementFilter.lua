@@ -152,10 +152,6 @@ function addon.GetSecondsSince(date)
     return time(date);
 end
 
-function addon.GetCurrentCalendarTimeSecondsSince()
-    return addon.GetSecondsSince(C_DateAndTime.GetCurrentCalendarTime());
-end
-
 -- [[ IAT integration ]] --
 function addon.IsIATLoaded()
     return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
@@ -171,6 +167,8 @@ function loadHelper:OnEvent(event, arg1, arg2)
     if event == "ADDON_LOADED" then
         if arg1 == "Krowi_AchievementFilter" then -- This always needs to load
             addon.Diagnostics.Load();
+            addon.Data.ExportedCalendarEvents.InjectOptions()
+            addon.Data.ExportedWorldEvents.InjectOptions()
             addon.Options.Load();
 
             addon.Data.SavedData.Load();
@@ -190,9 +188,9 @@ function loadHelper:OnEvent(event, arg1, arg2)
 
             addon.GUI.ElvUISkin.Apply();
 
-            if addon.Diagnostics.TraceEnabled() then
-                HookForTesting();
-            end
+            -- if addon.Diagnostics.TraceEnabled() then
+            --     HookForTesting();
+            -- end
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
             addon.GUI.ElvUISkin.Apply();
         end
@@ -209,6 +207,7 @@ function loadHelper:OnEvent(event, arg1, arg2)
                 print(mapID);
             end);
         end
+        addon.Diagnostics.DebugTable(addon.Objects.TimeDisplay);
     elseif event == "PLAYER_ENTERING_WORLD" then
         addon.Diagnostics.Debug("PLAYER_ENTERING_WORLD");
         addon.Diagnostics.Debug("isLogin: " .. tostring(arg1));
@@ -237,17 +236,17 @@ function loadHelper:OnEvent(event, arg1, arg2)
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
 
-function HookForTesting()
-    hooksecurefunc("HybridScrollFrame_SetOffset", function() print("HybridScrollFrame_SetOffset"); end);
-    hooksecurefunc("HybridScrollFrame_Update", function(self) print("HybridScrollFrame_Update:"  .. tostring(self:GetName())); end);
-    hooksecurefunc("HybridScrollFrame_SetDoNotHideScrollBar", function() print("HybridScrollFrame_SetDoNotHideScrollBar"); end);
-    hooksecurefunc("AchievementFrameCategories_Update", function() print("AchievementFrameCategories_Update"); end);
-    hooksecurefunc("AchievementFrameAchievements_Update", function() print("AchievementFrameAchievements_Update"); end);
-    hooksecurefunc("AchievementFrameStats_Update", function() print("AchievementFrameStats_Update"); end);
-    hooksecurefunc("AchievementFrameComparison_Update", function() print("AchievementFrameComparison_Update"); end);
-    hooksecurefunc("AchievementFrameComparison_UpdateStats", function() print("AchievementFrameComparison_UpdateStats"); end);
-    hooksecurefunc("AchievementFrame_UpdateFullSearchResults", function() print("AchievementFrame_UpdateFullSearchResults"); end);
-    hooksecurefunc("HybridScrollFrame_OnValueChanged", function() print("HybridScrollFrame_OnValueChanged"); end);
-    hooksecurefunc("HybridScrollFrame_ExpandButton", function() print("HybridScrollFrame_ExpandButton"); end);
-    hooksecurefunc("HybridScrollFrame_CollapseButton", function() print("HybridScrollFrame_CollapseButton"); end);
-end
+-- function HookForTesting()
+--     hooksecurefunc("HybridScrollFrame_SetOffset", function() print("HybridScrollFrame_SetOffset"); end);
+--     hooksecurefunc("HybridScrollFrame_Update", function(self) print("HybridScrollFrame_Update:"  .. tostring(self:GetName())); end);
+--     hooksecurefunc("HybridScrollFrame_SetDoNotHideScrollBar", function() print("HybridScrollFrame_SetDoNotHideScrollBar"); end);
+--     hooksecurefunc("AchievementFrameCategories_Update", function() print("AchievementFrameCategories_Update"); end);
+--     hooksecurefunc("AchievementFrameAchievements_Update", function() print("AchievementFrameAchievements_Update"); end);
+--     hooksecurefunc("AchievementFrameStats_Update", function() print("AchievementFrameStats_Update"); end);
+--     hooksecurefunc("AchievementFrameComparison_Update", function() print("AchievementFrameComparison_Update"); end);
+--     hooksecurefunc("AchievementFrameComparison_UpdateStats", function() print("AchievementFrameComparison_UpdateStats"); end);
+--     hooksecurefunc("AchievementFrame_UpdateFullSearchResults", function() print("AchievementFrame_UpdateFullSearchResults"); end);
+--     hooksecurefunc("HybridScrollFrame_OnValueChanged", function() print("HybridScrollFrame_OnValueChanged"); end);
+--     hooksecurefunc("HybridScrollFrame_ExpandButton", function() print("HybridScrollFrame_ExpandButton"); end);
+--     hooksecurefunc("HybridScrollFrame_CollapseButton", function() print("HybridScrollFrame_CollapseButton"); end);
+-- end

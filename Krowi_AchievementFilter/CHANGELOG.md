@@ -6,19 +6,19 @@ All notable changes to this project will be documented in this file.
 - Shadowlands Covenant Assaults as Event Reminders
 - Battle for Azeroth Faction Assaults and N'Zoth Assaults as Event Reminders
 - Options to set the date and time format of the event reminders
+- Options to show Start Time, End Time and Time Left on the Event Reminders
+- Options to enable/disable specific Event Reminders
 
 ### Changed
 - Moved Battle for Azeroth - Dueler's Guild - Frontline Veteran and - Frontline Slayer to Battle for Azeroth - Zones - Kul Tiras & Zandalar - Player vs. Player
 
 ### Fixed
 - Shadowlands - Zones - Korthia, Shadowlands - Dungeons - Tazavesh, the Veiled Market and Shadowlands - Raids - Sanctum of Domination now all should localize properly
-- When switching between new tabs, achievements would sometimes be selected wrongly, not visible or have no content
+- When switching between new tabs, achievements would sometimes be selected wrongly, not visible or have no content (still some wierd behaviour when the selected achievement in one tab is lower than the last achievement in the other tab - not addon breaking, might fix later)
+- The Events tab should now properly skin with ElvUI
 
 ### Removed
 - Option to set the number of times the active events should be shown
-
-### TODO
-- Add the option to show the "Time Left" on events instead of start and endtime
 
 [9.1.0.28.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3412562
 

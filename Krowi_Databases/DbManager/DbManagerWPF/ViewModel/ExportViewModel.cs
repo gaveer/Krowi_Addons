@@ -477,6 +477,7 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("");
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
+            sb.AppendLine("local diagnostics = addon.Diagnostics;");
             sb.AppendLine("local objects = addon.Objects;");
             sb.AppendLine("local event = objects.Event;");
             sb.AppendLine("local data = addon.Data;");
@@ -536,7 +537,7 @@ namespace DbManagerWPF.ViewModel
             appendString = Trim(appendString, " or ");
             appendString += " then";
             sb.AppendLineTabbed(1, appendString);
-            sb.AppendLineTabbed(2, $"exportedEvents.Load(e);");
+            sb.AppendLineTabbed(2, $"exportedCalendarEvents.Load(e);");
             sb.AppendLineTabbed(1, $"end");
             sb.AppendLine("");
 
@@ -550,6 +551,7 @@ namespace DbManagerWPF.ViewModel
                 }
 
             sb.AppendLine("end");
+            AddInjects(keyValuePairs, sb, "exportedCalendarEvents", true, "Calendar Events");
 
             using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedCalendarEvents.lua");
             file.WriteLine(sb.ToString());
@@ -583,7 +585,7 @@ namespace DbManagerWPF.ViewModel
 
             var categories = categoryDM.GetAll();
             foreach (var category in categories)
-                LinkAchievementsToWorldEvents(keyValuePairs, category);
+                LinkAchievementsToEvents(keyValuePairs, category);
 
             // At this point we have all data
 
@@ -594,6 +596,7 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("");
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
+            sb.AppendLine("local diagnostics = addon.Diagnostics;");
             sb.AppendLine("local objects = addon.Objects;");
             sb.AppendLine("local event = objects.Event;");
             sb.AppendLine("local data = addon.Data;");
@@ -653,7 +656,7 @@ namespace DbManagerWPF.ViewModel
             appendString = Trim(appendString, " or ");
             appendString += " then";
             sb.AppendLineTabbed(1, appendString);
-            sb.AppendLineTabbed(2, $"exportedEvents.Load(e);");
+            sb.AppendLineTabbed(2, $"exportedWorldEvents.Load(e);");
             sb.AppendLineTabbed(1, $"end");
             sb.AppendLine("");
 
@@ -667,9 +670,48 @@ namespace DbManagerWPF.ViewModel
                 }
 
             sb.AppendLine("end");
+            AddInjects(keyValuePairs, sb, "exportedWorldEvents", false, "World Events");
 
             using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedWorldEvents.lua");
             file.WriteLine(sb.ToString());
+        }
+
+        private static void AddInjects(SortedDictionary<Event, List<(Category Category, Achievement Achievement)>> keyValuePairs, StringBuilder sb, string nameSpace, bool uiMapIsNull, string tableName)
+        {
+            sb.AppendLine("");
+
+            sb.AppendLine($"function {nameSpace}.InjectOptions()");
+            sb.AppendLineTabbed(1, "local defaults = {};");
+            foreach (var keyValuePair in keyValuePairs)
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && (keyValuePair.Key.UIMap == null) == uiMapIsNull)
+                    sb.AppendLineTabbed(1, $"defaults[{keyValuePair.Key.ID}] = true;");
+            sb.AppendLine("");
+            sb.AppendLineTabbed(1, $"addon.Options.InjectDefaults(defaults, \"{tableName.Replace(" ", "")}\", \"EventAlert\");");
+            sb.AppendLine("");
+            sb.AppendLineTabbed(1, "local optionsTable = {");
+            sb.AppendLineTabbed(2, $"name = addon.L[\"{tableName}\"],");
+            sb.AppendLineTabbed(2, "type = \"group\",");
+            sb.AppendLineTabbed(2, "inline = true,");
+            sb.AppendLineTabbed(2, "args = {");
+            foreach (var keyValuePair in keyValuePairs)
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && (keyValuePair.Key.UIMap == null) == uiMapIsNull)
+                {
+                    sb.AppendLineTabbed(3, $"E{keyValuePair.Key.ID} = {{");
+                    sb.AppendLineTabbed(4, $"name = addon.L[\"{ keyValuePair.Key.Title}\"],");
+                    sb.AppendLineTabbed(4, "type = \"toggle\",");
+                    sb.AppendLineTabbed(4, $"get = function() return addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}]; end,");
+                    sb.AppendLineTabbed(4, "set = function()");
+                    sb.AppendLineTabbed(5, $"addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}] = not addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}];");
+                    sb.AppendLine("");
+                    sb.AppendLineTabbed(5, $"diagnostics.Debug(addon.L[\"{ keyValuePair.Key.Title}\"] .. \": \" .. tostring(addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}]));");
+                    sb.AppendLineTabbed(4, "end");
+                    sb.AppendLineTabbed(3, "},");
+                }
+            sb.AppendLineTabbed(2, "}");
+            sb.AppendLineTabbed(1, "};");
+            sb.AppendLine("");
+            sb.AppendLineTabbed(1, $"addon.Options.InjectOptionsTable(optionsTable, \"{tableName.Replace(" ", "")}\", \"EventAlert\", \"args\", \"General\", \"args\");");
+            sb.AppendLine("end");
         }
 
         private string GetCategoryPath(Category category, string appendString)
@@ -702,24 +744,24 @@ namespace DbManagerWPF.ViewModel
             return appendString;
         }
 
-        private void LinkAchievementsToWorldEvents(SortedDictionary<Event, List<(Category Category, Achievement Achievement)>> keyValuePairs, Category category)
-        {
-            var categoryEvents = category.GetEvents(true);
-            var achievements = category.GetAchievements();
+        //private void LinkAchievementsToWorldEvents(SortedDictionary<Event, List<(Category Category, Achievement Achievement)>> keyValuePairs, Category category)
+        //{
+        //    var categoryEvents = category.GetEvents(true);
+        //    var achievements = category.GetAchievements();
 
-            foreach (var achievement in achievements)
-            {
-                foreach (var categoryEvent in categoryEvents)
-                    keyValuePairs[categoryEvent].Add((category, achievement));
+        //    foreach (var achievement in achievements)
+        //    {
+        //        foreach (var categoryEvent in categoryEvents)
+        //            keyValuePairs[categoryEvent].Add((category, achievement));
 
-                var achievementEvents = achievement.GetEvents(true);
-                foreach (var achievementEvent in achievementEvents)
-                    keyValuePairs[achievementEvent].Add((category, achievement));
-            }
+        //        var achievementEvents = achievement.GetEvents(true);
+        //        foreach (var achievementEvent in achievementEvents)
+        //            keyValuePairs[achievementEvent].Add((category, achievement));
+        //    }
 
-            foreach (var child in category.Children)
-                LinkAchievementsToWorldEvents(keyValuePairs, child);
-        }
+        //    foreach (var child in category.Children)
+        //        LinkAchievementsToWorldEvents(keyValuePairs, child);
+        //}
         #endregion
 
         private void ExportAll()

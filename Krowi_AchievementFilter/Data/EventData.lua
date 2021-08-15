@@ -17,9 +17,8 @@ function eventData.Load()
         if next(EventDetails.CalendarEvents) == nil then
             refreshEvents = true;
         else
-            local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
             for _, event in next, EventDetails.CalendarEvents do
-                local deltaT = math.floor((event.endTime - currentDate) / (3600 * 24));
+                local deltaT = math.floor((event.endTime - time()) / (3600 * 24));
                 diagnostics.Debug(event.eventID .. " - " .. event.title .. " - " .. tostring(deltaT));
                 if deltaT < 0 then
                     refreshEvents = true;
@@ -85,22 +84,20 @@ end
 -- local activeCalendarEvents;
 function eventData.GetActiveCalendarEvents()
     diagnostics.Trace("eventData.GetActiveCalendarEvents");
-    -- if activeCalendarEvents == nil then
-        local activeCalendarEvents = {};
 
-        local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
-        for _, event in next, data.CalendarEvents do
-            if event.EventDetails ~= nil then
-                local deltaT = math.floor((event.EventDetails.startTime - currentDate) / (3600 * 24));
-                if deltaT < 0 then
-                    diagnostics.Debug("Event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
-                    tinsert(activeCalendarEvents, event);
-                else
-                    diagnostics.Debug("Event not active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
-                end
+    local activeCalendarEvents = {};
+
+    for _, event in next, data.CalendarEvents do
+        if event.EventDetails ~= nil and addon.Options.db.EventAlert.CalendarEvents[event.ID] then
+            local deltaT = math.floor((event.EventDetails.startTime - time()) / (3600 * 24));
+            if deltaT < 0 then
+                diagnostics.Debug("Event active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
+                tinsert(activeCalendarEvents, event);
+            else
+                diagnostics.Debug("Event not active:" .. event.EventDetails.eventID .. " - " .. event.EventDetails.title .. " - " .. tostring(deltaT));
             end
         end
-    -- end
+    end
 
     return activeCalendarEvents;
 end
@@ -114,8 +111,7 @@ function eventData.GetActiveWorldEvents()
         EventDetails.WorldEvents = {};
     end
 
-    local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
-    GetSavedWorldEvents(activeWorldEvents, currentDate);
+    GetSavedWorldEvents(activeWorldEvents, time());
     GetNewWorldEvents(activeWorldEvents);
 
     return activeWorldEvents;
@@ -125,7 +121,7 @@ function GetSavedWorldEvents(activeWorldEvents, currentDate)
     for id, event in next, EventDetails.WorldEvents do
         local deltaT = math.floor((event.endTime - currentDate) / (3600 * 24));
         diagnostics.Debug(event.eventID .. " - " .. event.title .. " - " .. tostring(deltaT));
-        if deltaT < 0 then
+        if deltaT < 0 or not addon.Options.db.EventAlert.WorldEvents[id] then
             EventDetails.WorldEvents[id] = nil;
         end
     end
@@ -141,7 +137,7 @@ end
 
 function GetNewWorldEvents(activeWorldEvents)
     for _, event in next, data.WorldEvents do
-        if event.EventDetails == nil then
+        if event.EventDetails == nil and addon.Options.db.EventAlert.WorldEvents[event.ID] then
             local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(event.MapID, event.ID);
             if poiInfo then -- The event is active
                 local secondsLeft = C_AreaPoiInfo.GetAreaPOISecondsLeft(event.ID);
@@ -174,9 +170,7 @@ function GetNewWorldEvents(activeWorldEvents)
 end
 
 function GetStartAndEndTime(secondsLeft, totalDuration) -- both in seconds
-
-    local currentDate = addon.GetCurrentCalendarTimeSecondsSince();
-    local endTime = floor((currentDate + secondsLeft) / 3600 + 0.5) * 3600;
+    local endTime = floor((time() + secondsLeft) / 3600 + 0.5) * 3600; -- Round to the hour
     local startTime = endTime - totalDuration;
 
     return startTime, endTime;

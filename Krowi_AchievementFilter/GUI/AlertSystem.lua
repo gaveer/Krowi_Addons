@@ -49,22 +49,25 @@ end
 -- end
 
 function alertSystem.SetUp(frame, event, duration)
-    -- frame.Background = frame:CreateTexture(nil, "BACKGROUND");
-    -- frame.Background:SetPoint("LEFT");
-    -- frame.Background:SetWidth(256);
-    -- frame.Background:SetHeight(84);
-    -- frame.Background:SetTexture("Media/AlertFrame");
-    -- frame.Background:SetTexCoord(imageTexCoord[1], imageTexCoord[2], imageTexCoord[3], imageTexCoord[4]);
+	frame.Event = event;
 
 	frame.Name:SetText(event.EventDetails.title);
 
-    frame.Unlocked:SetText(tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.startTime)) .. "\n" .. tostring(date(addon.Options.db.EventAlert.DateTimeFormat, event.EventDetails.endTime)));
+    gui.UpdateEventRuntime(frame);
 
 	frame.Icon.Texture:SetTexture(event.Icon);
 
-	frame.Event = event;
-
     frame.duration = duration;
+
+    frame.TimeSinceLastUpdate = 0;
+    frame:SetScript("OnUpdate", function(self, elapsed)
+        self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed;
+
+        if self.TimeSinceLastUpdate > 1 then
+            gui.UpdateEventRuntime(frame);
+            self.TimeSinceLastUpdate = 0;
+        end
+    end);
 end
 
 function KrowiAF_AlertFrame_OnClick(self, button, down)

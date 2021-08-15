@@ -186,3 +186,39 @@ function KrowiAF_ToggleAchievementFrame(tab)
         gui.ToggleAchievementFrame(addon.L["Events"]);
     end
 end
+
+function gui.UpdateEventRuntime(self)
+    local line1, line2, timeLeft;
+
+    if addon.Options.db.EventAlert.TimeDisplay.Line1 == 3 or addon.Options.db.EventAlert.TimeDisplay.Line2 == 4 then -- Time Left
+        local secondsLeft = self.Event.EventDetails.endTime - time();
+        local days = floor(secondsLeft / 86400);
+        local hours = floor(mod(secondsLeft, 86400) / 3600);
+        local minutes = floor(mod(secondsLeft, 3600) / 60);
+        local seconds = floor(mod(secondsLeft, 60));
+        timeLeft = days > 0 and days .. " Days" or "";
+        timeLeft = timeLeft .. (days > 0 and " " or "") .. (hours > 0 and hours .. " Hr" or "");
+        timeLeft = timeLeft .. (hours > 0 and " " or "") .. (minutes > 0 and minutes .. " Min" or "");
+        timeLeft = timeLeft .. (minutes > 0 and " " or "") .. (seconds > 0 and seconds .. " Sec" or "");
+    end
+
+    if addon.Options.db.EventAlert.TimeDisplay.Line1 == 1 then -- Start Time
+        line1 = tostring(date(addon.Options.db.EventAlert.DateTimeFormat.StartTimeAndEndTime, self.Event.EventDetails.startTime));
+    elseif addon.Options.db.EventAlert.TimeDisplay.Line1 == 2 then -- End Time
+        line1 = tostring(date(addon.Options.db.EventAlert.DateTimeFormat.StartTimeAndEndTime, self.Event.EventDetails.endTime));
+    elseif addon.Options.db.EventAlert.TimeDisplay.Line1 == 3 then -- Time Left
+        line1 = timeLeft;
+    end
+
+    if addon.Options.db.EventAlert.TimeDisplay.Line2 == 1 then -- None
+        line2 = "";
+    elseif addon.Options.db.EventAlert.TimeDisplay.Line2 == 2 then -- Start Time
+        line2 = "\n" .. tostring(date(addon.Options.db.EventAlert.DateTimeFormat.StartTimeAndEndTime, self.Event.EventDetails.startTime));
+    elseif addon.Options.db.EventAlert.TimeDisplay.Line2 == 3 then -- End Time
+        line2 = "\n" .. tostring(date(addon.Options.db.EventAlert.DateTimeFormat.StartTimeAndEndTime, self.Event.EventDetails.endTime));
+    elseif addon.Options.db.EventAlert.TimeDisplay.Line2 == 4 then -- Time Left
+        line2 = "\n" .. timeLeft;
+    end
+
+    self.Unlocked:SetText(line1 .. line2);
+end

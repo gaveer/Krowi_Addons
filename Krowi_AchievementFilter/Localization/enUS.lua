@@ -104,36 +104,6 @@ L["Show minimap icon Desc"] = "Show / hide the minimap icon";
 L["Reset view on open"] = "Reset view on open";
 L["Reset view on open Desc"] = "Collapse all categories and select the first category or\nKeep the last selected category when last closed";
 
--- Options General Event Alert
-L["Event alert"] = "Event alert";
-L["Date and Time format"] = "Date and Time format";
-L["Presets"] = "Presets";
-L["Custom"] = "Custom";
-L["Date and Time Formatting Guide"] = "Date and Time Formatting Guide";
-L["Date and Time Formatting Guide Desc"] =  "{a} - Abbreviated weekday name (eg. Wed)\n" ..
-                                            "{A} - Full weekday name (eg. Wednesday)\n" ..
-                                            "{b} - Abbreviated month name (eg. Sep)\n" ..
-                                            "{B} - Full month name (eg. September)\n" ..
-                                            "{c} - Date and time representation appropriate for locale (eg. 23/04/07 10:20:41)\n" ..
-                                            "{d} - Day of month as decimal number (01 - 31)\n" ..
-                                            "{H} - Hour in 24-hour format (00 - 23)\n" ..
-                                            "{I} - Hour in 12-hour format (01 - 12)\n" ..
-                                            "{j} - Day of year as decimal number (001 - 366)\n" ..
-                                            "{m} - Month as decimal number (01 - 12)\n" ..
-                                            "{M} - Minute as decimal number (00 - 59)\n" ..
-                                            "{p} - Current locale’s A.M./P.M. indicator for 12-hour clock (eg. AM/PM)\n" ..
-                                            "{S} - Second as decimal number (00 - 59)\n" ..
-                                            "{U} - Week of year as decimal number, with Sunday as first day of week 1 (00 - 53)\n" ..
-                                            "{w} - Weekday as decimal number (0 - 6; Sunday is 0)\n" ..
-                                            "{W} - Week of year as decimal number, with Monday as first day of week 1 (00 - 53)\n" ..
-                                            "{x} - Date representation for current locale (Standard date string)\n" ..
-                                            "{X} - Time representation for current locale (Standard time string)\n" ..
-                                            "{y} - Year without century, as decimal number (00 - 99)  (eg. 07)\n" ..
-                                            "{Y} - Year with century, as decimal number (eg. 2007)\n" ..
-                                            "{Z} - Time-zone name or abbreviation; no characters if time zone is unknown";
-L["Fade delay"] = "Fade delay";
-L["Fade delay Desc"] = "The time in seconds it takes for the event alert to fade when it's ignored. Right clicking will close it immidiatly.";
-
 -- Options General Search
 L["Search"] = "Search";
 L["Clear search field on Right Click"] = "Clear search field on Right Click";
@@ -157,6 +127,59 @@ L["Screenshot Mode"] = "Screenshot Mode";
 L["Screenshot Mode Desc"] = "Adds a black frame above everything. Only newly opened windows are visible. Used for taking screenshots.";
 L["Enable trace info"] = "Enable trace info";
 L["Enable trace info Desc"] = "Enable / disable trace info";
+
+-- Options Event Alert
+L["Event alert"] = "Event alert";
+
+L["Time display"] = "Time display";
+L["Line"] = "Line";
+L["None"] = "None";
+L["Start Time"] = "Start Time";
+L["End Time"] = "End Time";
+L["Time Left"] = "Time Left";
+
+L["Fade delay"] = "Fade delay";
+L["Fade delay Desc"] = "The time in seconds it takes for the event alert to fade when it's ignored. Right clicking will close it immidiatly.";
+
+L["Calendar Events"] = "Calendar Events";
+L["World Events"] = "World Events";
+
+L["Date and Time format"] = "Date and Time format";
+L["Presets"] = "Presets";
+L["Custom"] = "Custom";
+
+L["Date and Time formatting guide"] = "Date and Time Formatting Guide";
+L["Date and Time formatting guide Desc"] =  "{a} - Abbreviated weekday name (eg. Wed)\n" ..
+                                            "{A} - Full weekday name (eg. Wednesday)\n" ..
+                                            "{b} - Abbreviated month name (eg. Sep)\n" ..
+                                            "{B} - Full month name (eg. September)\n" ..
+                                            "{c} - Date and time representation appropriate for locale (eg. 23/04/07 10:20:41)\n" ..
+                                            "{C} - The century number (year/100) (eg. 20)\n" ..
+                                            "{d} - Day of month as decimal number (01 - 31)\n" ..
+                                            "{D} - Equivalent to %m/%d/%y (eg. 04/23/07)\n" ..
+                                            "{e} - Day of month as decimal number (1 - 31)\n" ..
+                                            "{H} - Hour in 24-hour format (00 - 23)\n" ..
+                                            "{I} - Hour in 12-hour format (01 - 12)\n" ..
+                                            "{j} - Day of year as decimal number (001 - 366)\n" ..
+                                            "{k} - Hour in 24-hour format (0 - 23)\n" ..
+                                            "{l} - Hour in 12-hour format (1 - 12)\n" ..
+                                            "{m} - Month as decimal number (01 - 12)\n" ..
+                                            "{M} - Minute as decimal number (00 - 59)\n" ..
+                                            "{p} - Current locale’s A.M./P.M. indicator for 12-hour clock (eg. AM/PM)\n" ..
+                                            "{P} - Current locale’s A.M./P.M. indicator for 12-hour clock (eg. am/pm)\n" ..
+                                            "{R} - Equivalent to %H:%M (eg. 10:20)\n" ..
+                                            "{s} - Number of second since Epoch, i.e., since 1970-01-01 00:00:00 UTC (1177323641)\n" ..
+                                            "{S} - Second as decimal number (00 - 59)\n" ..
+                                            "{u} - Weekday as decimal number (1 - 7; Monday is 1)\n" ..
+                                            "{U} - Week of year as decimal number, with Sunday as first day of week 1 (00 - 53)\n" ..
+                                            "{w} - Weekday as decimal number (0 - 6; Sunday is 0)\n" ..
+                                            "{W} - Week of year as decimal number, with Monday as first day of week 1 (00 - 53)\n" ..
+                                            "{x} - Date representation for current locale (Standard date string)\n" ..
+                                            "{X} - Time representation for current locale (Standard time string)\n" ..
+                                            "{y} - Year without century, as decimal number (00 - 99)  (eg. 07)\n" ..
+                                            "{Y} - Year with century, as decimal number (eg. 2007)\n" ..
+                                            "{z} - Time-zone as hour offset from GMT (eg. +0200)\n" ..
+                                            "{Z} - Time-zone name or abbreviation; no characters if time zone is unknown";
 
 -- Options Layout
 L["Layout"] = "Layout";

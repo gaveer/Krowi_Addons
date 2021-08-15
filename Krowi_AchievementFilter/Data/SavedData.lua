@@ -91,8 +91,13 @@ function FixEventDetails(prevBuild, currBuild, prevVersion, currVersion)
         return;
     end
 
-    if currVersion >= "28.0" and (prevBuild < currBuild or prevVersion < currVersion) then
-        EventDetails = nil;
+    if prevBuild < currBuild or prevVersion < currVersion then
+        if currVersion >= "28.0" then
+            EventDetails = nil;
+        end
+        if currVersion == "28.0" then -- Only reset for this version
+            SavedData.FeaturesTutorial.PageViewed[11] = false;
+        end
     end
 
     diagnostics.Debug("EventDetails reset");

@@ -395,7 +395,8 @@ L["Event Reminder"] = "Event Reminder";
 L["Event Reminder Desc"] = "Events are added to the new tab and a reminder will pop up when one of the events is active.\n\n" ..
                             "Clicking it will open the category with the obtainable achievements while the event is active.\n" ..
                             "It will dissapear when right clicked or after {EventAlertFadeDelay} seconds when ignored.\n\n" ..
-                            "The reminder is also present on the right side of the achievement window.";
+                            "The reminder is also present on the right side of the achievement window.\n\n" ..
+                            "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
 
 L["OC"] = "OC";
 L["NONC"] = "NONC";

@@ -69,8 +69,8 @@ local defaults = {
                 -- TimeLeft = "%e Days %H Hr %M Min"
             },
             TimeDisplay = {
-                Line1 = 1,
-                Line2 = 3
+                Line1 = 2,
+                Line2 = 4
             }
         }
     }

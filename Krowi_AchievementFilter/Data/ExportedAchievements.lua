@@ -1,4 +1,4 @@
--- [[ Exported at 2021-07-26 13-12-10 ]] --
+-- [[ Exported at 2021-08-10 07-55-07 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3024,7 +3024,6 @@ function exportedAchievements.Load(a)
     a[13429] = ach:New(13429, 5); -- Azerfighter
     a[13430] = ach:New(13430, 10); -- De Lurker Be'loa
     a[13431] = ach:New(13431, 10); -- Hidden Dragon
-    a[13435] = ach:New(13435, 5, fac.Horde); -- Doomsoul Surprise
     a[13437] = ach:New(13437, 5, fac.Horde); -- Scavenge like a Vulpera
     a[13438] = ach:New(13438, 5, fac.Horde); -- Boxing Match
     a[13439] = ach:New(13439, 5, fac.Alliance); -- Boxing Match

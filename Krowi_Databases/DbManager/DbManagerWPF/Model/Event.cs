@@ -7,6 +7,8 @@ namespace DbManagerWPF.Model
         public int ID { get; set; } = -1;
         public string Title { get; set; } = "";
         public string Icon { get; set; } = "";
+        public UIMap UIMap { get; set; } = null;
+        public int TotalDuration { get; set; } = 0;
 
         public Event() { }
 

@@ -1,5 +1,5 @@
 <p><strong>See the images for a quick look at the ingame UI! This might give you a better idea of what is added to the default Blizzard UI.</strong></p>
-<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3350 achievements are added so far spread over 700+ categories and linked to 1150+ zones.</p>
+<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3600 achievements are added so far spread over 750+ categories, linked to 1600+ zones and 12 events.</p>
 <p><strong>Categories</strong></p>
 <ul>
 <li>The <em><strong>Current Zone</strong></em> category shows which achievements are related to the current zone you're in. (This is still being approved on.)</li>
@@ -26,17 +26,17 @@
 <li>Achievements are sorted in a way so they make more sense and are easier to find.</li>
 <li>A <strong><em>Right Click Menu</em></strong> for each achievement with a link to Wowhead, IAT (3.18.0+) (if tactics are available), Go to (related achievements) and wow-petguide.com (Xu-Fu's Pet Guides).</li>
 <li>A <em><strong>tutorial</strong> </em>for first time users with an ingame explanation of the most important features.</li>
-<li>The option to <strong><em>keybind</em></strong> the new tab so it opens in one go. (Game Menu -&gt; Key Bindings -&gt; Addons -&gt; Krowi's Achievement Filter)</li>
+<li>The option to <strong><em>keybind</em></strong> the new tabs so it opens in one go. (Game Menu -&gt; Key Bindings -&gt; Addons -&gt; Krowi's Achievement Filter)</li>
 <li><strong><em>ElvUI skin</em></strong>. (See the ingame options on how to enable each part.)</li>
 <li><del>Coming in 9.1 section. This section is guarded with spoiler warnings and will be removed once 9.1 is live.</del></li>
 <li>Clicking achievements in meta achievements select the achievement in the new tab.</li>
+<li>Hovering achievements in meta achievements shows more information about the achievement.</li>
 <li><strong><em>World Map Button</em></strong> with its own Selected Zone category to show achievements for the zone you're viewing.</li>
 <li><strong><em>Exclude achievements</em></strong> you're not interested in.</li>
+<li><strong><em>Event reminder</em></strong> for active events with achievements.</li>
 </ul>
 <p><strong>Planned in next version</strong></p>
 <ul>
-<li>More zone data (Legion, BfA and SL already done).</li>
-<li>Raid achievement split (Legion, BfA and SL already done).</li>
 </ul>
 <p><strong>Planned in future version</strong></p>
 <ul>

@@ -1,6 +1,6 @@
 See the images for a quick look at the ingame UI! This might give you a better idea of what is added to the default Blizzard UI.
 
-Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3350 achievements are added so far spread over 700+ categories and linked to 1150+ zones.
+Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3600 achievements are added so far spread over 750+ categories, linked to 1600+ zones and 12 events.
 
 Categories
 
@@ -27,16 +27,16 @@ Enhanced tooltip to show more about the achievement and related achievements.
 Achievements are sorted in a way so they make more sense and are easier to find.
 A Right Click Menu for each achievement with a link to Wowhead, IAT (3.18.0+) (if tactics are available), Go to (related achievements) and wow-petguide.com (Xu-Fu's Pet Guides).
 A tutorial for first time users with an ingame explanation of the most important features.
-The option to keybind the new tab so it opens in one go. (Game Menu -> Key Bindings -> Addons -> Krowi's Achievement Filter)
+The option to keybind the new tabs so it opens in one go. (Game Menu -> Key Bindings -> Addons -> Krowi's Achievement Filter)
 ElvUI skin. (See the ingame options on how to enable each part.)
 Coming in 9.1 section. This section is guarded with spoiler warnings and will be removed once 9.1 is live.
 Clicking achievements in meta achievements select the achievement in the new tab.
+Hovering achievements in meta achievements shows more information about the achievement.
 World Map Button with its own Selected Zone category to show achievements for the zone you're viewing.
 Exclude achievements you're not interested in.
+Event reminder for active events with achievements.
 Planned in next version
 
-More zone data (Legion, BfA and SL already done).
-Raid achievement split (Legion, BfA and SL already done).
 Planned in future version
 
 Right Click Menu for the default Blizzard tabs with initially only a link to Wowhead.

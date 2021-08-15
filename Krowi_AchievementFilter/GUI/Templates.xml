@@ -612,21 +612,28 @@
     </Animations>
     <Layers>
 		<Layer level="BACKGROUND">
-			<Texture parentKey="Background" atlas="ui-achievement-alert-background-mini" useAtlasSize="true">
+			<!-- <Texture parentKey="Background" atlas="ui-achievement-alert-background-mini" useAtlasSize="true">
 				<Anchors>
 					<Anchor point="LEFT" x="0" y="0"/>
 				</Anchors>
+			</Texture> -->
+			<Texture parentKey="Background" file="Interface\AddOns\Krowi_AchievementFilter\Media\AlertFrame">
+				<Size x="256" y="84"/>
+				<Anchors>
+					<Anchor point="LEFT" x="0" y="0"/>
+				</Anchors>
+				<TexCoords left="0" right="1" top="0" bottom="0.65625"/>
 			</Texture>
-			<FontString parentKey="Unlocked" inherits="GameFontBlack" justifyH="CENTER">
+			<FontString parentKey="Name" inherits="GameFontHighlight" maxLines="1" justifyV="TOP" justifyH="CENTER">
 				<Size x="160" y="0"/>
 				<Anchors>
-					<Anchor point="TOP" x="27" y="-18"/> <!-- -18 looks better with my ElvUI, depends on font? -->
+					<Anchor point="TOP" x="27" y="-18"/>
 				</Anchors>
 			</FontString>
-			<FontString parentKey="Name" inherits="GameFontHighlight" maxLines="2" justifyV="TOP" justifyH="CENTER">
+			<FontString parentKey="Unlocked" inherits="GameFontBlack" maxLines="2" justifyV="TOP" justifyH="CENTER">
 				<Size x="160" y="0"/>
 				<Anchors>
-					<Anchor point="CENTER" x="27" y="-7"/>
+					<Anchor point="CENTER" x="27" y="-7"/> <!-- -18 looks better with my ElvUI, depends on font? -->
 				</Anchors>
 			</FontString>
 		</Layer>

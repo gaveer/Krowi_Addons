@@ -7,12 +7,15 @@ local event = objects.Event;
 
 -- [[ Constructors ]] --
 event.__index = event;
-function event:New(id, icon) -- Creates a new event
+function event:New(id, icon, title, mapID, totalDuration) -- Creates a new event
     local self = {};
     setmetatable(self, event);
 
     self.ID = id or 0;
     self.Icon = icon or 0;
+    self.Title = title;
+    self.MapID = mapID; -- Can be nil
+    self.TotalDuration = totalDuration; -- Can be nil
 
     return self;
 end

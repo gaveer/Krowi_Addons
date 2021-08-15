@@ -453,6 +453,12 @@ namespace DbManagerWPF.ViewModel
         #region ExportEvents
         private void ExportEvents()
         {
+            ExportCalendarEvents();
+            ExportWorldEvents();
+        }
+
+        private void ExportCalendarEvents()
+        {
             SortedDictionary<Event, List<(Category Category, Achievement Achievement)>> keyValuePairs = new();
             var events = eventDM.GetAll();
             foreach (var @event in events)
@@ -471,23 +477,33 @@ namespace DbManagerWPF.ViewModel
             sb.AppendLine("");
             sb.AppendLine("-- [[ Namespaces ]] --");
             sb.AppendLine("local _, addon = ...;");
+            sb.AppendLine("local diagnostics = addon.Diagnostics;");
             sb.AppendLine("local objects = addon.Objects;");
             sb.AppendLine("local event = objects.Event;");
             sb.AppendLine("local data = addon.Data;");
-            sb.AppendLine("data.ExportedEvents = {};");
-            sb.AppendLine("local exportedEvents = data.ExportedEvents;");
+            sb.AppendLine("data.ExportedCalendarEvents = {};");
+            sb.AppendLine("local exportedCalendarEvents = data.ExportedCalendarEvents;");
             sb.AppendLine("");
-            sb.AppendLine("function exportedEvents.Load(e)");
+            sb.AppendLine("function exportedCalendarEvents.Load(e)");
             sb.AppendLineTabbed(1, "for i, _ in next, e do");
             sb.AppendLineTabbed(2, "e[i] = nil;");
             sb.AppendLineTabbed(1, "end");
             sb.AppendLine("");
 
+            string appendString;
             foreach (var keyValuePair in keyValuePairs)
             {
-                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0)
-                    sb.AppendLineTabbed(1, $"e[{keyValuePair.Key.ID}] = event:New({keyValuePair.Key.ID}, {keyValuePair.Key.Icon}); -- {keyValuePair.Key.Title}");
-
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && keyValuePair.Key.UIMap == null)
+                {
+                    appendString = $"e[{keyValuePair.Key.ID}] = event:New({keyValuePair.Key.ID}, {keyValuePair.Key.Icon}";
+                    //appendString += ", ";
+                    //appendString += $"{(keyValuePair.Key.UIMap != null ? keyValuePair.Key.UIMap.ID : "nil")}";
+                    //appendString += ", ";
+                    //appendString += $"{(keyValuePair.Key.TotalDuration != 0 ? keyValuePair.Key.TotalDuration : "nil")}";
+                    //appendString = TrimNils(appendString); // Remove unneccesary nils
+                    appendString += $"); -- {keyValuePair.Key.Title}";
+                    sb.AppendLineTabbed(1, appendString);
+                }
             }
 
             sb.AppendLine("end");
@@ -513,29 +529,31 @@ namespace DbManagerWPF.ViewModel
 
             //}
 
-            sb.AppendLine("function exportedEvents.LoadCategories(e, a)");
-            var appendString = "if ";
+            sb.AppendLine("function exportedCalendarEvents.LoadCategories(e, a)");
+            appendString = "if ";
             foreach (var keyValuePair in keyValuePairs)
-                appendString += $"e[{keyValuePair.Key.ID}] == nil or ";
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && keyValuePair.Key.UIMap == null)
+                    appendString += $"e[{keyValuePair.Key.ID}] == nil or ";
             appendString = Trim(appendString, " or ");
             appendString += " then";
             sb.AppendLineTabbed(1, appendString);
-            sb.AppendLineTabbed(2, $"exportedEvents.Load(e);");
+            sb.AppendLineTabbed(2, $"exportedCalendarEvents.Load(e);");
             sb.AppendLineTabbed(1, $"end");
             sb.AppendLine("");
 
             foreach (var keyValuePair in keyValuePairs)
-            {
-                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0)
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && keyValuePair.Key.UIMap == null)
                 {
-                    sb.AppendLineTabbed(1, $"e[{keyValuePair.Key.ID}].Category = a[{keyValuePair.Value[0].Achievement.ID}].Category; -- {keyValuePair.Value[0].Category.Name}");
+                    appendString = $"e[{keyValuePair.Key.ID}].Category = ";
+                    appendString = GetCategoryPath(keyValuePair.Value[0].Category, appendString);
+                    appendString += $"; -- {keyValuePair.Value[0].Category.Name}";
+                    sb.AppendLineTabbed(1, appendString);
                 }
 
-            }
-
             sb.AppendLine("end");
+            AddInjects(keyValuePairs, sb, "exportedCalendarEvents", true, "Calendar Events");
 
-            using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedEvents.lua");
+            using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedCalendarEvents.lua");
             file.WriteLine(sb.ToString());
         }
 
@@ -557,6 +575,193 @@ namespace DbManagerWPF.ViewModel
             foreach (var child in category.Children)
                 LinkAchievementsToEvents(keyValuePairs, child);
         }
+
+        private void ExportWorldEvents()
+        {
+            SortedDictionary<Event, List<(Category Category, Achievement Achievement)>> keyValuePairs = new();
+            var events = eventDM.GetAll();
+            foreach (var @event in events)
+                keyValuePairs.Add(@event, new List<(Category Category, Achievement Achievement)>());
+
+            var categories = categoryDM.GetAll();
+            foreach (var category in categories)
+                LinkAchievementsToEvents(keyValuePairs, category);
+
+            // At this point we have all data
+
+            var sb = new StringBuilder();
+            sb.AppendLine($"-- [[ Exported at {DateTime.Now:yyyy-MM-dd HH-mm-ss} ]] --");
+            sb.AppendLine($"-- [[ This code is automatically generated as an export from ]] --");
+            sb.AppendLine($"-- [[ an SQLite database and is not meant for manual edit. ]] --");
+            sb.AppendLine("");
+            sb.AppendLine("-- [[ Namespaces ]] --");
+            sb.AppendLine("local _, addon = ...;");
+            sb.AppendLine("local diagnostics = addon.Diagnostics;");
+            sb.AppendLine("local objects = addon.Objects;");
+            sb.AppendLine("local event = objects.Event;");
+            sb.AppendLine("local data = addon.Data;");
+            sb.AppendLine("data.ExportedWorldEvents = {};");
+            sb.AppendLine("local exportedWorldEvents = data.ExportedWorldEvents;");
+            sb.AppendLine("");
+            sb.AppendLine("function exportedWorldEvents.Load(e)");
+            sb.AppendLineTabbed(1, "for i, _ in next, e do");
+            sb.AppendLineTabbed(2, "e[i] = nil;");
+            sb.AppendLineTabbed(1, "end");
+            sb.AppendLine("");
+
+            string appendString;
+            foreach (var keyValuePair in keyValuePairs)
+            {
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && keyValuePair.Key.UIMap != null)
+                {
+                    appendString = $"e[{keyValuePair.Key.ID}] = event:New({keyValuePair.Key.ID}, {keyValuePair.Key.Icon}, addon.L[\"{ keyValuePair.Key.Title}\"]"; // {keyValuePair.Value[0].Category.Function.Call.Replace("%value%", keyValuePair.Value[0].Category.FunctionValue)}
+                    appendString += ", ";
+                    appendString += $"{(keyValuePair.Key.UIMap != null ? keyValuePair.Key.UIMap.ID : "nil")}";
+                    appendString += ", ";
+                    appendString += $"{(keyValuePair.Key.TotalDuration != 0 ? keyValuePair.Key.TotalDuration : "nil")}";
+                    appendString = TrimNils(appendString); // Remove unneccesary nils
+                    appendString += $"); -- {keyValuePair.Key.Title}";
+                    sb.AppendLineTabbed(1, appendString);
+                }
+            }
+
+            sb.AppendLine("end");
+            sb.AppendLine("");
+            //sb.AppendLine("local function AddA(e, a)");
+            //sb.AppendLineTabbed(1, "e:AddAchievement(a);");
+            //sb.AppendLine("end");
+            //sb.AppendLine("");
+
+            //sb.AppendLine("function exportedEvents.LoadAchievements(e, a)");
+            //sb.AppendLineTabbed(1, $"if e == nil or (type(e) == \"table\" and #e == 0) then");
+            //sb.AppendLineTabbed(2, $"exportedEvents.Load(e);");
+            //sb.AppendLineTabbed(1, $"end");
+            //sb.AppendLine("");
+
+            //foreach (var keyValuePair in keyValuePairs)
+            //{
+            //    if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0)
+            //    {
+            //        foreach (var achievement in keyValuePair.Value)
+            //            sb.AppendLineTabbed(1, $"AddA(e[{keyValuePair.Key.ID}], a[{achievement.ID}]); -- {achievement.Name}");
+            //    }
+
+            //}
+
+            sb.AppendLine("function exportedWorldEvents.LoadCategories(e, a)");
+            appendString = "if ";
+            foreach (var keyValuePair in keyValuePairs)
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && keyValuePair.Key.UIMap != null)
+                    appendString += $"e[{keyValuePair.Key.ID}] == nil or ";
+            appendString = Trim(appendString, " or ");
+            appendString += " then";
+            sb.AppendLineTabbed(1, appendString);
+            sb.AppendLineTabbed(2, $"exportedWorldEvents.Load(e);");
+            sb.AppendLineTabbed(1, $"end");
+            sb.AppendLine("");
+
+            foreach (var keyValuePair in keyValuePairs)
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && keyValuePair.Key.UIMap != null)
+                {
+                    appendString = $"e[{keyValuePair.Key.ID}].Category = ";
+                    appendString = GetCategoryPath(keyValuePair.Value[0].Category, appendString);
+                    appendString += $"; -- {keyValuePair.Value[0].Category.Name}";
+                    sb.AppendLineTabbed(1, appendString);
+                }
+
+            sb.AppendLine("end");
+            AddInjects(keyValuePairs, sb, "exportedWorldEvents", false, "World Events");
+
+            using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedWorldEvents.lua");
+            file.WriteLine(sb.ToString());
+        }
+
+        private static void AddInjects(SortedDictionary<Event, List<(Category Category, Achievement Achievement)>> keyValuePairs, StringBuilder sb, string nameSpace, bool uiMapIsNull, string tableName)
+        {
+            sb.AppendLine("");
+
+            sb.AppendLine($"function {nameSpace}.InjectOptions()");
+            sb.AppendLineTabbed(1, "local defaults = {};");
+            foreach (var keyValuePair in keyValuePairs)
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && (keyValuePair.Key.UIMap == null) == uiMapIsNull)
+                    sb.AppendLineTabbed(1, $"defaults[{keyValuePair.Key.ID}] = true;");
+            sb.AppendLine("");
+            sb.AppendLineTabbed(1, $"addon.Options.InjectDefaults(defaults, \"{tableName.Replace(" ", "")}\", \"EventAlert\");");
+            sb.AppendLine("");
+            sb.AppendLineTabbed(1, "local optionsTable = {");
+            sb.AppendLineTabbed(2, $"name = addon.L[\"{tableName}\"],");
+            sb.AppendLineTabbed(2, "type = \"group\",");
+            sb.AppendLineTabbed(2, "inline = true,");
+            sb.AppendLineTabbed(2, "args = {");
+            foreach (var keyValuePair in keyValuePairs)
+                if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && (keyValuePair.Key.UIMap == null) == uiMapIsNull)
+                {
+                    sb.AppendLineTabbed(3, $"E{keyValuePair.Key.ID} = {{");
+                    sb.AppendLineTabbed(4, $"name = addon.L[\"{ keyValuePair.Key.Title}\"],");
+                    sb.AppendLineTabbed(4, "type = \"toggle\",");
+                    sb.AppendLineTabbed(4, $"get = function() return addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}]; end,");
+                    sb.AppendLineTabbed(4, "set = function()");
+                    sb.AppendLineTabbed(5, $"addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}] = not addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}];");
+                    sb.AppendLine("");
+                    sb.AppendLineTabbed(5, $"diagnostics.Debug(addon.L[\"{ keyValuePair.Key.Title}\"] .. \": \" .. tostring(addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}]));");
+                    sb.AppendLineTabbed(4, "end");
+                    sb.AppendLineTabbed(3, "},");
+                }
+            sb.AppendLineTabbed(2, "}");
+            sb.AppendLineTabbed(1, "};");
+            sb.AppendLine("");
+            sb.AppendLineTabbed(1, $"addon.Options.InjectOptionsTable(optionsTable, \"{tableName.Replace(" ", "")}\", \"EventAlert\", \"args\", \"General\", \"args\");");
+            sb.AppendLine("end");
+        }
+
+        private string GetCategoryPath(Category category, string appendString)
+        {
+            var categoryIDs = new List<int>();
+            Category parent = category.Parent;
+
+            while (parent != null)
+            {
+                categoryIDs.Add(parent.Children.IndexOf(category) + 1);
+                category = parent;
+                parent = parent.Parent;
+            }
+
+            switch (category.ID)
+            {
+                case 883:
+                    appendString += "data.CategoriesExpansions";
+                    break;
+                case 884:
+                    appendString += "data.CategoriesEvents";
+                    break;
+                default:
+                    break;
+            }
+
+            for (int i = categoryIDs.Count - 1; i >= 0; i--)
+                appendString += $"{(i == categoryIDs.Count - 1 ? "" : ".Children")}[{categoryIDs[i]}]";
+
+            return appendString;
+        }
+
+        //private void LinkAchievementsToWorldEvents(SortedDictionary<Event, List<(Category Category, Achievement Achievement)>> keyValuePairs, Category category)
+        //{
+        //    var categoryEvents = category.GetEvents(true);
+        //    var achievements = category.GetAchievements();
+
+        //    foreach (var achievement in achievements)
+        //    {
+        //        foreach (var categoryEvent in categoryEvents)
+        //            keyValuePairs[categoryEvent].Add((category, achievement));
+
+        //        var achievementEvents = achievement.GetEvents(true);
+        //        foreach (var achievementEvent in achievementEvents)
+        //            keyValuePairs[achievementEvent].Add((category, achievement));
+        //    }
+
+        //    foreach (var child in category.Children)
+        //        LinkAchievementsToWorldEvents(keyValuePairs, child);
+        //}
         #endregion
 
         private void ExportAll()
@@ -566,6 +771,7 @@ namespace DbManagerWPF.ViewModel
             ExportCategories();
             ExportMaps();
             ExportPetBattles();
+            ExportEvents();
         }
 
         private string TrimNils(string input)

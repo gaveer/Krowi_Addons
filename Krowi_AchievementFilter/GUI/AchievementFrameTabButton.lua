@@ -91,20 +91,17 @@ function achFrameTabBtn:Base_OnClick(id)
         self.CategoriesFrame:Hide();
     end
 
-    local selectedAchievement = self.SelectedAchievement;
     if self.AchievementsFrame and self.AchievementsFrame:IsShown() then
+        self.AchievementsFrame.Container.ScrollBar:SetValue(0);
         self.AchievementsFrame:Hide();
-        self.SelectedAchievement = nil;
     end
 
     AchievementFrame_ShowSubFrame(unpack(self.FramesToShow));
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 
     if self.AchievementsFrame then
-        if selectedAchievement then
-            self.AchievementsFrame:SelectAchievement(selectedAchievement, nil, true);
-        else
-            self.AchievementsFrame.Container.ScrollBar:SetValue(0);
+        if self.SelectedAchievement then
+            self.AchievementsFrame:FindSelection();
         end
     end
 end

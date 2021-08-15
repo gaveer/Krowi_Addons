@@ -8,9 +8,13 @@ namespace DbManagerWPF.DataManager
 {
     public class EventDM : DataManagerBase, IEventDM
     {
+        private readonly IUIMapDM uiMapDM;
         private readonly List<Event> events = new();
 
-        public EventDM(SqliteConnection connection) : base(connection) { }
+        public EventDM(SqliteConnection connection, IUIMapDM uiMapDM) : base(connection)
+        {
+            this.uiMapDM = uiMapDM;
+        }
 
         public IEnumerable<Event> GetAll(bool refresh = false)
         {
@@ -20,7 +24,7 @@ namespace DbManagerWPF.DataManager
 
             var selectCmd = connection.CreateCommand();
             selectCmd.CommandText = @"  SELECT
-                                            ID, Title, Icon
+                                            ID, Title, Icon, UIMapID, TotalDuration
                                         FROM
                                             Event";
 
@@ -32,7 +36,9 @@ namespace DbManagerWPF.DataManager
                     {
                         ID = reader.GetInt32(0),
                         Title = reader.GetString(1),
-                        Icon = reader.GetString(2)
+                        Icon = reader.GetString(2),
+                        UIMap = reader.IsDBNull(3) ? null : uiMapDM.Get(reader.GetInt32(3)),
+                        TotalDuration = reader.IsDBNull(4) ? 0 : reader.GetInt32(4)
                     });
             }
 

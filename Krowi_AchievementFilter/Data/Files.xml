@@ -6,7 +6,8 @@
     <Script file="Data\ExportedCategories.lua" />
     <Script file="Data\ExportedPetBattles.lua" />
     <Script file="Data\ExportedMaps.lua" />
-    <Script file="Data\ExportedEvents.lua" />
+    <Script file="Data\ExportedCalendarEvents.lua" />
+    <Script file="Data\ExportedWorldEvents.lua" />
     <Script file="Data\EventData.lua" />
     <Script file="Data\SavedData.lua" />
     

@@ -19,13 +19,13 @@ function sideButton:New(event, otherButtons)
     core.InjectMetatable(frame, sideButton);
 
     -- Properties
+	frame.Event = event;
+
     frame.Name:SetText(event.EventDetails.title);
 
-    frame.Unlocked:SetText(tostring(date("%x", time(event.EventDetails.startTime))) .. " - " .. tostring(date("%x", time(event.EventDetails.endTime))));
+    frame:UpdateRuntime();
 
 	frame.Icon.Texture:SetTexture(event.Icon);
-
-	frame.Event = event;
 
     -- Overwrite original alert frame properties
     frame:RegisterForClicks("LeftButtonUp");
@@ -43,6 +43,34 @@ function sideButton:New(event, otherButtons)
         PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
     end);
 
+    frame:SetScript("OnShow", function(self)
+        self:UpdateRuntime();
+        if self.Event.EventDetails.endTime - time() < 0 then -- Event finished so remove button and reorder rest
+            for i = 1, #otherButtons, 1 do
+                if otherButtons[i].Event.ID == self.Event.ID then -- Found this button
+                    if i == 1 and i + 1 <= #otherButtons then -- Button is the 1st and there are more
+                        otherButtons[i + 1]:ClearAllPoints();
+                        otherButtons[i + 1]:SetPoint("TOPLEFT", AchievementFrame, "TOPRIGHT", 0, 0); -- Make the 2nd button anchor like the 1st one
+                    elseif i < #otherButtons then -- Button is somewhere in the middle
+                        otherButtons[i + 1]:ClearAllPoints();
+                        otherButtons[i + 1]:SetPoint("TOPLEFT", otherButtons[i - 1], "BOTTOMLEFT", 0, 0); -- Make the 2nd button anchor like the 1st one
+                    -- else -- Button is the last, nothing to move
+                    end
+                end
+            end
+        end
+    end);
+
+    frame.TimeSinceLastUpdate = 0;
+    frame:SetScript("OnUpdate", function(self, elapsed)
+        self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed;
+
+        if self.TimeSinceLastUpdate > 1 then
+            self:UpdateRuntime();
+            self.TimeSinceLastUpdate = 0;
+        end
+    end);
+
     -- SetPoints
     local relativeFrame = AchievementFrame;
     local relativePoint = "TOPRIGHT";
@@ -58,6 +86,10 @@ function sideButton:New(event, otherButtons)
     end);
 
     return frame;
+end
+
+function sideButton:UpdateRuntime()
+    gui.UpdateEventRuntime(self);
 end
 
 function OnClick(self)

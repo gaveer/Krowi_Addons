@@ -140,6 +140,18 @@ function addon.StatusBarTooltip(self, anchor)
 	GameTooltip:Show();
 end
 
+-- [[ Time functions ]] --
+function addon.GetSecondsSince(date)
+    date.day = date.monthDay;
+    date.monthDay = nil;
+    date.wday = date.weekday;
+    date.weekday = nil;
+    date.min = date.minute;
+    date.minute = nil;
+
+    return time(date);
+end
+
 -- [[ IAT integration ]] --
 function addon.IsIATLoaded()
     return IsAddOnLoaded("InstanceAchievementTracker") and GetAddOnMetadata("InstanceAchievementTracker", "Version") >= "3.18.0";
@@ -151,10 +163,12 @@ loadHelper:RegisterEvent("ADDON_LOADED"); -- 1
 loadHelper:RegisterEvent("PLAYER_LOGIN"); -- 4
 loadHelper:RegisterEvent("PLAYER_ENTERING_WORLD"); -- 5
 
-function loadHelper:OnEvent(event, arg1)
+function loadHelper:OnEvent(event, arg1, arg2)
     if event == "ADDON_LOADED" then
         if arg1 == "Krowi_AchievementFilter" then -- This always needs to load
             addon.Diagnostics.Load();
+            addon.Data.ExportedCalendarEvents.InjectOptions()
+            addon.Data.ExportedWorldEvents.InjectOptions()
             addon.Options.Load();
 
             addon.Data.SavedData.Load();
@@ -173,13 +187,18 @@ function loadHelper:OnEvent(event, arg1)
             addon.Tutorials.HookTrigger(addon.GUI.TabButtonExpansions);
 
             addon.GUI.ElvUISkin.Apply();
+
+            -- if addon.Diagnostics.TraceEnabled() then
+            --     HookForTesting();
+            -- end
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
             addon.GUI.ElvUISkin.Apply();
         end
     elseif event == "PLAYER_LOGIN" then
         -- addon.GUI.FilterButton:ResetFilters();
 
-        addon.Data.ExportedEvents.Load(addon.Data.Events);
+        addon.Data.ExportedCalendarEvents.Load(addon.Data.CalendarEvents);
+        addon.Data.ExportedWorldEvents.Load(addon.Data.WorldEvents);
         addon.EventData.Load();
 
         if addon.Diagnostics.DebugEnabled() then
@@ -188,8 +207,46 @@ function loadHelper:OnEvent(event, arg1)
                 print(mapID);
             end);
         end
+        addon.Diagnostics.DebugTable(addon.Objects.TimeDisplay);
     elseif event == "PLAYER_ENTERING_WORLD" then
-        addon.GUI.AlertSystem.ShowActiveEvents();
+        addon.Diagnostics.Debug("PLAYER_ENTERING_WORLD");
+        addon.Diagnostics.Debug("isLogin: " .. tostring(arg1));
+        addon.Diagnostics.Debug("isReload: " .. tostring(arg2));
+         -- arg1 = isLogin, arg2 = isReload
+        if arg1 then -- On a fresh login we need AREA_POIS_UPDATED to get world events
+            loadHelper:RegisterEvent("AREA_POIS_UPDATED");
+        end
+        -- if arg1 or arg2 then -- On both login and reload we need to get calendar events
+        --     addon.GUI.AlertSystem.ShowActiveCalendarEvents();
+        -- end
+        if arg2 then -- On reload we can get world events here since AREA_POIS_UPDATED does not always trigger and data is already available
+            addon.GUI.AlertSystem.ShowActiveCalendarEvents();
+            addon.GUI.AlertSystem.ShowActiveWorldEvents();
+        end
+    elseif event == "AREA_POIS_UPDATED" then
+        addon.Diagnostics.Debug("AREA_POIS_UPDATED");
+        if addon.EventData.GetActiveWorldEvents() ~= nil then
+            -- It takes a couple of times in order to properly load all POI info
+            addon.GUI.AlertSystem.ShowActiveCalendarEvents();
+            addon.GUI.AlertSystem.ShowActiveWorldEvents();
+            loadHelper:UnregisterEvent("AREA_POIS_UPDATED");
+            addon.Diagnostics.Debug("UnregisterEvent AREA_POIS_UPDATED");
+        end
     end
 end
 loadHelper:SetScript("OnEvent", loadHelper.OnEvent);
+
+-- function HookForTesting()
+--     hooksecurefunc("HybridScrollFrame_SetOffset", function() print("HybridScrollFrame_SetOffset"); end);
+--     hooksecurefunc("HybridScrollFrame_Update", function(self) print("HybridScrollFrame_Update:"  .. tostring(self:GetName())); end);
+--     hooksecurefunc("HybridScrollFrame_SetDoNotHideScrollBar", function() print("HybridScrollFrame_SetDoNotHideScrollBar"); end);
+--     hooksecurefunc("AchievementFrameCategories_Update", function() print("AchievementFrameCategories_Update"); end);
+--     hooksecurefunc("AchievementFrameAchievements_Update", function() print("AchievementFrameAchievements_Update"); end);
+--     hooksecurefunc("AchievementFrameStats_Update", function() print("AchievementFrameStats_Update"); end);
+--     hooksecurefunc("AchievementFrameComparison_Update", function() print("AchievementFrameComparison_Update"); end);
+--     hooksecurefunc("AchievementFrameComparison_UpdateStats", function() print("AchievementFrameComparison_UpdateStats"); end);
+--     hooksecurefunc("AchievementFrame_UpdateFullSearchResults", function() print("AchievementFrame_UpdateFullSearchResults"); end);
+--     hooksecurefunc("HybridScrollFrame_OnValueChanged", function() print("HybridScrollFrame_OnValueChanged"); end);
+--     hooksecurefunc("HybridScrollFrame_ExpandButton", function() print("HybridScrollFrame_ExpandButton"); end);
+--     hooksecurefunc("HybridScrollFrame_CollapseButton", function() print("HybridScrollFrame_CollapseButton"); end);
+-- end

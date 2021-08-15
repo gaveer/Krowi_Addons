@@ -13,7 +13,7 @@ data.RCMenuExtras = {};
 
 data.Maps = {};
 
-data.Events = {};
+data.CalendarEvents, data.WorldEvents = {}, {};
 
 local isLoaded;
 function data.Load()
@@ -30,7 +30,8 @@ function data.Load()
 
     data.ExportedMaps.Load(data.Maps, data.Achievements);
 
-    data.ExportedEvents.LoadCategories(data.Events, data.Achievements);
+    data.ExportedCalendarEvents.LoadCategories(data.CalendarEvents, data.Achievements);
+    data.ExportedWorldEvents.LoadCategories(data.WorldEvents, data.Achievements);
 
     isLoaded = true;
     addon.Diagnostics.Debug("Expansion data loaded");

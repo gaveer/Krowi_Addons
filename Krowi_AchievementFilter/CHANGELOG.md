@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Issue #54: First time user get these errors
 
-[9.1.0.28.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3426679
+[9.1.0.28.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3430525
 
 ## [9.1.0.28.0] - 2021-08-16
 ### Added

@@ -23,7 +23,11 @@ function savedData.Load()
     local currVersion = SavedData["Version"];
     diagnostics.Debug("Current Version: " .. SavedData["Version"]);
 
-    Resolve(LoadSolutions(), prevBuild, currBuild, prevVersion, currVersion);
+    if prevBuild ~= nil and prevVersion ~= nil then
+        Resolve(LoadSolutions(), prevBuild, currBuild, prevVersion, currVersion);
+    else
+        -- First time user, nothing to do
+    end
 
     diagnostics.Debug("SavedData loaded");
 end

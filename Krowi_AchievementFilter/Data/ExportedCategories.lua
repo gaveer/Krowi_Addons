@@ -1,4 +1,4 @@
--- [[ Exported at 2021-08-10 07-55-08 ]] --
+-- [[ Exported at 2021-09-02 19-19-14 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -23,6 +23,10 @@ function exportedCategories.Load(a)
     tmp[883] = cat:New(addon.L["Expansions"]); -- TAB - Expansions
     tmp[883].IsTab = true;
     local tabExpansionsCategories = tmp[883];
+    tmp[949] = cat:New(addon.L["Focused"]); -- Focused
+    AddC(tmp[883], tmp[949]);
+    tmp[949].HasFlexibleData = true;
+    local focusedCategory = tmp[949];
     tmp[433] = cat:New(addon.L["Current Zone"]); -- Current Zone
     AddC(tmp[883], tmp[433]);
     tmp[433].AlwaysVisible = true;
@@ -4922,6 +4926,7 @@ function exportedCategories.Load(a)
     AddA(tmp[420], a[14763]); -- Crypt Couture
     tmp[857] = cat:New(addon.L["Excluded"]); -- Excluded
     AddC(tmp[883], tmp[857]);
+    tmp[857].HasFlexibleData = true;
     local excludedCategory = tmp[857];
     tmp[884] = cat:New(addon.L["Events"]); -- TAB - Events
     tmp[884].IsTab = true;
@@ -5311,6 +5316,6 @@ function exportedCategories.Load(a)
     AddA(tmp[931], a[15042]); -- Tea for the Troubled
     AddA(tmp[931], a[15033]); -- Taking the Tremaculum
 
-    return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;
+    return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;
 end
 

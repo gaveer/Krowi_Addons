@@ -139,7 +139,7 @@ local function GetAchievementNumbers(self, category)
 		filters = gui.FilterButton.Filters.db.CurrentZone;
 	elseif category == addon.Data.SelectedZoneCategory then
 		filters = gui.FilterButton.Filters.db.SelectedZone;
-	elseif category == addon.Data.ExcludedCategory then
+	elseif category == addon.Data.ExcludedCategory or category.Excluded then
 		filters = gui.FilterButton.Filters.db.ExcludedCategory;
 	end
 
@@ -204,6 +204,10 @@ end
 
 function categoriesFrame:Update(getAchNums)
 	diagnostics.Trace("categoriesFrame:Update");
+
+	if gui.SelectedTab == nil then
+		return;
+	end
 
 	if addon.Options.db.Window.MergeSmallCategoriesThresholdChanged then
 		addon.Options.db.Window.MergeSmallCategoriesThresholdChanged = false;

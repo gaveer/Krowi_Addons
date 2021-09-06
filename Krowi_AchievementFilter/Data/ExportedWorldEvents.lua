@@ -1,4 +1,4 @@
--- [[ Exported at 2021-08-15 23-17-45 ]] --
+-- [[ Exported at 2021-09-06 22-33-54 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -96,203 +96,183 @@ function exportedWorldEvents.InjectOptions()
         inline = true,
         args = {
             E5175 = {
-                name = addon.L["Assault on Azsuna"],
                 type = "toggle",
+                name = addon.L["Assault on Azsuna"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5175]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5175] = not addon.Options.db.EventAlert.WorldEvents[5175];
-
-                    diagnostics.Debug(addon.L["Assault on Azsuna"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5175]));
+                    addon.Options.Debug(addon.L["Assault on Azsuna"], addon.Options.db.EventAlert.WorldEvents[5175]);
                 end
             },
             E5177 = {
-                name = addon.L["Assault on Highmountain"],
                 type = "toggle",
+                name = addon.L["Assault on Highmountain"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5177]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5177] = not addon.Options.db.EventAlert.WorldEvents[5177];
-
-                    diagnostics.Debug(addon.L["Assault on Highmountain"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5177]));
+                    addon.Options.Debug(addon.L["Assault on Highmountain"], addon.Options.db.EventAlert.WorldEvents[5177]);
                 end
             },
             E5178 = {
-                name = addon.L["Assault on Stormheim"],
                 type = "toggle",
+                name = addon.L["Assault on Stormheim"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5178]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5178] = not addon.Options.db.EventAlert.WorldEvents[5178];
-
-                    diagnostics.Debug(addon.L["Assault on Stormheim"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5178]));
+                    addon.Options.Debug(addon.L["Assault on Stormheim"], addon.Options.db.EventAlert.WorldEvents[5178]);
                 end
             },
             E5210 = {
-                name = addon.L["Assault on Val'sharah"],
                 type = "toggle",
+                name = addon.L["Assault on Val'sharah"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5210]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5210] = not addon.Options.db.EventAlert.WorldEvents[5210];
-
-                    diagnostics.Debug(addon.L["Assault on Val'sharah"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5210]));
+                    addon.Options.Debug(addon.L["Assault on Val'sharah"], addon.Options.db.EventAlert.WorldEvents[5210]);
                 end
             },
             E5896 = {
-                name = addon.L["Assault on Tiragarde Sound"],
                 type = "toggle",
+                name = addon.L["Assault on Tiragarde Sound"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5896]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5896] = not addon.Options.db.EventAlert.WorldEvents[5896];
-
-                    diagnostics.Debug(addon.L["Assault on Tiragarde Sound"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5896]));
+                    addon.Options.Debug(addon.L["Assault on Tiragarde Sound"], addon.Options.db.EventAlert.WorldEvents[5896]);
                 end
             },
             E5964 = {
-                name = addon.L["Assault on Drustvar"],
                 type = "toggle",
+                name = addon.L["Assault on Drustvar"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5964]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5964] = not addon.Options.db.EventAlert.WorldEvents[5964];
-
-                    diagnostics.Debug(addon.L["Assault on Drustvar"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5964]));
+                    addon.Options.Debug(addon.L["Assault on Drustvar"], addon.Options.db.EventAlert.WorldEvents[5964]);
                 end
             },
             E5966 = {
-                name = addon.L["Assault on Stormsong Valley"],
                 type = "toggle",
+                name = addon.L["Assault on Stormsong Valley"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5966]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5966] = not addon.Options.db.EventAlert.WorldEvents[5966];
-
-                    diagnostics.Debug(addon.L["Assault on Stormsong Valley"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5966]));
+                    addon.Options.Debug(addon.L["Assault on Stormsong Valley"], addon.Options.db.EventAlert.WorldEvents[5966]);
                 end
             },
             E5969 = {
-                name = addon.L["Assault on Nazmir"],
                 type = "toggle",
+                name = addon.L["Assault on Nazmir"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5969]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5969] = not addon.Options.db.EventAlert.WorldEvents[5969];
-
-                    diagnostics.Debug(addon.L["Assault on Nazmir"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5969]));
+                    addon.Options.Debug(addon.L["Assault on Nazmir"], addon.Options.db.EventAlert.WorldEvents[5969]);
                 end
             },
             E5970 = {
-                name = addon.L["Assault on Vol'dun"],
                 type = "toggle",
+                name = addon.L["Assault on Vol'dun"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5970]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5970] = not addon.Options.db.EventAlert.WorldEvents[5970];
-
-                    diagnostics.Debug(addon.L["Assault on Vol'dun"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5970]));
+                    addon.Options.Debug(addon.L["Assault on Vol'dun"], addon.Options.db.EventAlert.WorldEvents[5970]);
                 end
             },
             E5973 = {
-                name = addon.L["Assault on Zuldazar"],
                 type = "toggle",
+                name = addon.L["Assault on Zuldazar"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[5973]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[5973] = not addon.Options.db.EventAlert.WorldEvents[5973];
-
-                    diagnostics.Debug(addon.L["Assault on Zuldazar"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[5973]));
+                    addon.Options.Debug(addon.L["Assault on Zuldazar"], addon.Options.db.EventAlert.WorldEvents[5973]);
                 end
             },
             E6486 = {
-                name = addon.L["Assault: N'Zoth (Uldum)"],
                 type = "toggle",
+                name = addon.L["Assault: N'Zoth (Uldum)"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6486]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6486] = not addon.Options.db.EventAlert.WorldEvents[6486];
-
-                    diagnostics.Debug(addon.L["Assault: N'Zoth (Uldum)"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6486]));
+                    addon.Options.Debug(addon.L["Assault: N'Zoth (Uldum)"], addon.Options.db.EventAlert.WorldEvents[6486]);
                 end
             },
             E6487 = {
-                name = addon.L["Assault: Amathet"],
                 type = "toggle",
+                name = addon.L["Assault: Amathet"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6487]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6487] = not addon.Options.db.EventAlert.WorldEvents[6487];
-
-                    diagnostics.Debug(addon.L["Assault: Amathet"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6487]));
+                    addon.Options.Debug(addon.L["Assault: Amathet"], addon.Options.db.EventAlert.WorldEvents[6487]);
                 end
             },
             E6488 = {
-                name = addon.L["Assault: Aqir"],
                 type = "toggle",
+                name = addon.L["Assault: Aqir"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6488]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6488] = not addon.Options.db.EventAlert.WorldEvents[6488];
-
-                    diagnostics.Debug(addon.L["Assault: Aqir"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6488]));
+                    addon.Options.Debug(addon.L["Assault: Aqir"], addon.Options.db.EventAlert.WorldEvents[6488]);
                 end
             },
             E6489 = {
-                name = addon.L["Assault: N'Zoth (Vale of Eternal Blossoms)"],
                 type = "toggle",
+                name = addon.L["Assault: N'Zoth (Vale of Eternal Blossoms)"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6489]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6489] = not addon.Options.db.EventAlert.WorldEvents[6489];
-
-                    diagnostics.Debug(addon.L["Assault: N'Zoth (Vale of Eternal Blossoms)"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6489]));
+                    addon.Options.Debug(addon.L["Assault: N'Zoth (Vale of Eternal Blossoms)"], addon.Options.db.EventAlert.WorldEvents[6489]);
                 end
             },
             E6490 = {
-                name = addon.L["Assault: Mogu"],
                 type = "toggle",
+                name = addon.L["Assault: Mogu"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6490]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6490] = not addon.Options.db.EventAlert.WorldEvents[6490];
-
-                    diagnostics.Debug(addon.L["Assault: Mogu"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6490]));
+                    addon.Options.Debug(addon.L["Assault: Mogu"], addon.Options.db.EventAlert.WorldEvents[6490]);
                 end
             },
             E6491 = {
-                name = addon.L["Assault: Mantid"],
                 type = "toggle",
+                name = addon.L["Assault: Mantid"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6491]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6491] = not addon.Options.db.EventAlert.WorldEvents[6491];
-
-                    diagnostics.Debug(addon.L["Assault: Mantid"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6491]));
+                    addon.Options.Debug(addon.L["Assault: Mantid"], addon.Options.db.EventAlert.WorldEvents[6491]);
                 end
             },
             E6989 = {
-                name = addon.L["Necrolord Assault"],
                 type = "toggle",
+                name = addon.L["Necrolord Assault"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6989]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6989] = not addon.Options.db.EventAlert.WorldEvents[6989];
-
-                    diagnostics.Debug(addon.L["Necrolord Assault"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6989]));
+                    addon.Options.Debug(addon.L["Necrolord Assault"], addon.Options.db.EventAlert.WorldEvents[6989]);
                 end
             },
             E6990 = {
-                name = addon.L["Venthyr Assault"],
                 type = "toggle",
+                name = addon.L["Venthyr Assault"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6990]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6990] = not addon.Options.db.EventAlert.WorldEvents[6990];
-
-                    diagnostics.Debug(addon.L["Venthyr Assault"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6990]));
+                    addon.Options.Debug(addon.L["Venthyr Assault"], addon.Options.db.EventAlert.WorldEvents[6990]);
                 end
             },
             E6991 = {
-                name = addon.L["Kyrian Assault"],
                 type = "toggle",
+                name = addon.L["Kyrian Assault"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6991]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6991] = not addon.Options.db.EventAlert.WorldEvents[6991];
-
-                    diagnostics.Debug(addon.L["Kyrian Assault"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6991]));
+                    addon.Options.Debug(addon.L["Kyrian Assault"], addon.Options.db.EventAlert.WorldEvents[6991]);
                 end
             },
             E6992 = {
-                name = addon.L["Night Fae Assault"],
                 type = "toggle",
+                name = addon.L["Night Fae Assault"],
                 get = function() return addon.Options.db.EventAlert.WorldEvents[6992]; end,
                 set = function()
                     addon.Options.db.EventAlert.WorldEvents[6992] = not addon.Options.db.EventAlert.WorldEvents[6992];
-
-                    diagnostics.Debug(addon.L["Night Fae Assault"] .. ": " .. tostring(addon.Options.db.EventAlert.WorldEvents[6992]));
+                    addon.Options.Debug(addon.L["Night Fae Assault"], addon.Options.db.EventAlert.WorldEvents[6992]);
                 end
             },
         }

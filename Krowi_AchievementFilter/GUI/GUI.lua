@@ -124,7 +124,11 @@ function gui.ResetView()
     if gui.CategoriesFrame and gui.SelectedTab.Categories then -- Checking ID is to know if the frame is initialised or not
         -- Select the first category
         if gui.SelectedTab.Categories then
-            gui.CategoriesFrame:SelectCategory(gui.SelectedTab.Categories[1], true);
+            local category = gui.SelectedTab.Categories[1];
+            if category.Achievements == nil then
+                category = gui.SelectedTab.Categories[2];
+            end
+            gui.CategoriesFrame:SelectCategory(category, true);
         end
     end
 

@@ -32,13 +32,14 @@ function savedData.Load()
     diagnostics.Debug("SavedData loaded");
 end
 
-local FixFeaturesTutorialProgress, FixElvUISkin, FixFilters, FixEventDetails;
+local FixFeaturesTutorialProgress, FixElvUISkin, FixFilters, FixEventDetails, FixShowExcludedCategory;
 function LoadSolutions()
     local solutions = {
         FixFeaturesTutorialProgress, -- 1
         FixElvUISkin, -- 2
         FixFilters, -- 3
         FixEventDetails, -- 4
+        FixShowExcludedCategory, -- 5
     };
 
     return solutions;
@@ -105,4 +106,22 @@ function FixEventDetails(prevBuild, currBuild, prevVersion, currVersion)
     end
 
     diagnostics.Debug("EventDetails reset");
+end
+
+function FixShowExcludedCategory(prevBuild, currBuild, prevVersion, currVersion)
+    if prevBuild == currBuild and prevVersion == currVersion then
+        diagnostics.Debug("Show Excluded Category already moved");
+        return;
+    end
+
+    if prevBuild < currBuild or prevVersion < currVersion then
+        if currVersion >= "29.0" then
+            if addon.Options.db.Categories.ShowExcludedCategory ~= nil then
+                addon.Options.db.Categories.Excluded.Show = addon.Options.db.Categories.ShowExcludedCategory;
+            end
+            addon.Options.db.Categories.ShowExcludedCategory = nil;
+        end
+    end
+
+    diagnostics.Debug("Show Excluded Category moved");
 end

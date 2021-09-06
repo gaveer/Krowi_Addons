@@ -96,10 +96,105 @@ function addon.GetAchievementNumbers(filterButton, filters, achievement, numOfAc
 	return numOfAch, numOfCompAch, numOfNotObtAch; -- , numOfIncompAch
 end
 
+local function ClearTree(categories)
+    for i = #categories, 1, -1 do
+        if categories[i].Achievements == nil or #categories[i].Achievements == 0 then -- No more achievements
+            if categories[i].Children == nil or #categories[i].Children == 0 then -- And no more children
+                categories[i].Parent:RemoveCategory(categories[i]);
+            end
+        end
+    end
+end
+
+function addon.ClearFocusAchievement(achievement, update)
+    achievement:ClearFocus();
+    if addon.Options.db.Categories.Focused.ShowSubCategories then
+        ClearTree(achievement.FocusedCategory:GetTree());
+    end
+    achievement.FocusedCategory:RemoveFocusedAchievement(achievement);
+    if update ~= false then
+        addon.GUI.CategoriesFrame:Update(true);
+        addon.GUI.AchievementsFrame:ForceUpdate();
+    end
+    if (addon.Data.FocusedCategory.Achievements and #addon.Data.FocusedCategory.Achievements == 0) or (addon.Data.FocusedCategory.Children and #addon.Data.FocusedCategory.Children == 0) then
+        SavedData.FocusedAchievements = nil;
+        addon.Data.FocusedCategory.Achievements = nil;
+    end
+end
+
+function addon.FocusAchievement(achievement, update)
+    achievement:Focus();
+    local focusedCategory = addon.Data.FocusedCategory;
+    if addon.Options.db.Categories.Focused.ShowSubCategories then
+        local categories = achievement.Category:GetTree();
+        for _, category in next, categories do
+            local newCategory = addon.Objects.AchievementCategory:New(category.Name);
+            -- newCategory.Focused = true;
+
+            local alreadyAdded;
+            if focusedCategory.Children then
+                for _, child in next, focusedCategory.Children do
+                    if child.Name == newCategory.Name then
+                        alreadyAdded = true;
+                        focusedCategory = child;
+                    end
+                end
+            end
+            if alreadyAdded == nil then
+                focusedCategory = focusedCategory:AddCategory(newCategory);
+            end
+            alreadyAdded = nil;
+        end
+    end
+    focusedCategory:AddFocusedAchievement(achievement);
+    if update ~= false then
+        addon.GUI.CategoriesFrame:Update(true);
+        addon.GUI.AchievementsFrame:ForceUpdate();
+    end
+end
+
+function addon.IncludeAchievement(achievement, update)
+    achievement:Include();
+    if addon.Options.db.Categories.Excluded.ShowSubCategories then
+        ClearTree(achievement.ExcludedCategory:GetTree());
+    end
+    achievement.ExcludedCategory:RemoveExcludedAchievement(achievement);
+    if update ~= false then
+        addon.GUI.CategoriesFrame:Update(true);
+        addon.GUI.AchievementsFrame:ForceUpdate();
+    end
+    if (addon.Data.ExcludedCategory.Achievements and #addon.Data.ExcludedCategory.Achievements == 0) or (addon.Data.ExcludedCategory.Children and #addon.Data.ExcludedCategory.Children == 0) then
+        SavedData.ExcludedAchievements = nil;
+        addon.Data.ExcludedCategory.Achievements = nil;
+    end
+end
+
 function addon.ExcludeAchievement(achievement, update)
     achievement:Exclude();
-    if addon.Options.db.Categories.ShowExcludedCategory then
-        addon.Data.ExcludedCategory:AddAchievement(achievement);
+    if addon.Options.db.Categories.Excluded.Show then
+        local excludedCategory = addon.Data.ExcludedCategory;
+        if addon.Options.db.Categories.Excluded.ShowSubCategories then
+            local categories = achievement.Category:GetTree();
+            for _, category in next, categories do
+                local newCategory = addon.Objects.AchievementCategory:New(category.Name);
+                newCategory.Excluded = true;
+
+                local alreadyAdded;
+                if excludedCategory.Children then
+                    for _, child in next, excludedCategory.Children do
+                        if child.Name == newCategory.Name then
+                            alreadyAdded = true;
+                            excludedCategory = child;
+                        end
+                    end
+                end
+                if alreadyAdded == nil then
+                    excludedCategory = excludedCategory:AddCategory(newCategory);
+                end
+                alreadyAdded = nil;
+            end
+        end
+        excludedCategory:AddExcludedAchievement(achievement);
         if update ~= false then
             addon.GUI.CategoriesFrame:Update(true);
             addon.GUI.AchievementsFrame:ForceUpdate();
@@ -109,16 +204,30 @@ function addon.ExcludeAchievement(achievement, update)
     end
 end
 
-function addon.IncludeAchievement(achievement, update)
-    achievement:Include();
-    addon.Data.ExcludedCategory:RemoveAchievement(achievement);
-    if update ~= false then
-        addon.GUI.CategoriesFrame:Update(true);
-        addon.GUI.AchievementsFrame:ForceUpdate();
+-- [[ Movable window ]] --
+local function MakeMovable(frame, target)
+    if frame:IsMovable() then -- Do not hook it multiple times if another addon already made it movable
+        return;
     end
-    if #addon.Data.ExcludedCategory.Achievements < 1 then
-        SavedData.ExcludedAchievements = nil;
-        addon.Data.ExcludedCategory.Achievements = nil;
+
+    target = target or frame;
+
+    frame:SetMovable(true);
+    frame:EnableMouse(true);
+    frame:SetScript("OnMouseDown", function(frame, button)
+        if button == "LeftButton" then
+            target:StartMoving();
+        end
+    end);
+    frame:SetScript("OnMouseUp", function(frame, button)
+        target:StopMovingOrSizing();
+    end);
+end
+
+function addon.MakeWindowMovable()
+    if addon.Options.db.Window.Movable and AchievementFrame and AchievementFrameHeader then
+        MakeMovable(AchievementFrame);
+        MakeMovable(AchievementFrameHeader, AchievementFrame);
     end
 end
 
@@ -182,11 +291,14 @@ function loadHelper:OnEvent(event, arg1, arg2)
 
             addon.GUI:LoadWithBlizzard_AchievementUI();
 
+            addon.Data.LoadFocusedAchievements(addon.Data.Achievements);
             addon.Data.LoadExcludedAchievements(addon.Data.Achievements);
 
             addon.Tutorials.HookTrigger(addon.GUI.TabButtonExpansions);
 
             addon.GUI.ElvUISkin.Apply();
+
+            addon.MakeWindowMovable();
         elseif arg1 == "ElvUI" then -- Just in case this addon loads before ElvUI
             addon.GUI.ElvUISkin.Apply();
         end

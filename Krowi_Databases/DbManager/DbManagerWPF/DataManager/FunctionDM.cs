@@ -109,5 +109,13 @@ namespace DbManagerWPF.DataManager
 
             return functions.Single(x => x.ID == 38);
         }
+
+        public Function GetFocusedFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 44);
+        }
     }
 }

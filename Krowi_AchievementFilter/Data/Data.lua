@@ -7,7 +7,7 @@ local data = addon.Data;
 data.Achievements, data.NextPatchAchievements = {}, {};
 
 data.CategoriesExpansions, data.CategoriesEvents = {}, {};
-data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = {}, {}, {}, {}, {};
+data.CurrentZoneCategory, data.SelectedZoneCategory, data.FocusedCategory, data.ExcludedCategory, data.NextPatchCategory = {}, {}, {}, {}, {};
 
 data.RCMenuExtras = {};
 
@@ -24,7 +24,7 @@ function data.Load()
     data.ExportedAchievements.Load(data.Achievements);
     data.ExportedNextPatchAchievements.Load(data.NextPatchAchievements);
 
-    data.CategoriesExpansions, data.CategoriesEvents, data.CurrentZoneCategory, data.SelectedZoneCategory, data.ExcludedCategory, data.NextPatchCategory = data.ExportedCategories.Load(data.Achievements);
+    data.CategoriesExpansions, data.CategoriesEvents, data.CurrentZoneCategory, data.SelectedZoneCategory, data.FocusedCategory, data.ExcludedCategory, data.NextPatchCategory = data.ExportedCategories.Load(data.Achievements);
 
     data.ExportedPetBattles.Load(data.RCMenuExtras);
 
@@ -38,6 +38,21 @@ function data.Load()
 
     -- TEST = {};
     -- data.PrintCriteria(14879, nil, 0);
+end
+
+function data.LoadFocusedAchievements(achievements)
+    if SavedData.FocusedAchievements == nil or type(SavedData.FocusedAchievements) ~= "table" then
+        return;
+    end
+
+    for achievementID, _ in next, SavedData.FocusedAchievements do
+        addon.FocusAchievement(achievements[achievementID], false);
+    end
+
+    addon.GUI.CategoriesFrame:Update(true);
+
+    addon.Diagnostics.Debug("Focused achievements loaded");
+    diagnostics.DebugTable(SavedData.FocusedAchievements);
 end
 
 function data.LoadExcludedAchievements(achievements)

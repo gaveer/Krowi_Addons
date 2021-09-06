@@ -138,6 +138,15 @@ function achievement:GetPartOfAChainIDs(validate, filters)
     return self.PartOfAChainIDs;
 end
 
+function achievement:Include()
+    self.Excluded = nil;
+    if SavedData.ExcludedAchievements == nil then
+        return;
+    end
+
+    SavedData.ExcludedAchievements[self.ID] = nil;
+end
+
 function achievement:Exclude()
     self.Excluded = true;
     if SavedData.ExcludedAchievements == nil then
@@ -147,11 +156,20 @@ function achievement:Exclude()
     SavedData.ExcludedAchievements[self.ID] = true;
 end
 
-function achievement:Include()
-    self.Excluded = nil;
-    if SavedData.ExcludedAchievements == nil then
+function achievement:ClearFocus()
+    self.Focused = nil;
+    if SavedData.FocusedAchievements == nil then
         return;
     end
 
-    SavedData.ExcludedAchievements[self.ID] = nil;
+    SavedData.FocusedAchievements[self.ID] = nil;
+end
+
+function achievement:Focus()
+    self.Focused = true;
+    if SavedData.FocusedAchievements == nil then
+        SavedData.FocusedAchievements = {};
+    end
+
+    SavedData.FocusedAchievements[self.ID] = true;
 end

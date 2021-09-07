@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Map button overwrites Current Zone category and shows that one instead of Selected Zone 
 
-[9.1.0.29.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3453346
+[9.1.0.29.1]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3453438
 
 ## [9.1.0.29.0] - 2021-09-07
 ### Added

@@ -275,6 +275,20 @@ local function AddGoTo(achievementsFrame, achievement)
 	end
 end
 
+local function AddClearFocusFocus(menu, achievement)
+	if achievement.Focused then
+		menu:AddFull({Text = addon.L["Clear focus"], Func = function()
+			addon.ClearFocusAchievement(achievement);
+			rightClickMenu:Close();
+		end});
+	else
+		menu:AddFull({Text = addon.L["Focus"], Func = function()
+			addon.FocusAchievement(achievement);
+			rightClickMenu:Close();
+		end});
+	end
+end
+
 local function AddIncludeExclude(menu, achievement)
 	if achievement.Excluded then
 		menu:AddFull({Text = addon.L["Include"], Func = function()
@@ -292,6 +306,7 @@ end
 local function AddMore(achievement)
 	local more = addon.Objects.MenuItem:New({Text = addon.L["More"]});
 
+	AddClearFocusFocus(more, achievement);
 	AddIncludeExclude(more, achievement);
 
 	rightClickMenu:Add(more);

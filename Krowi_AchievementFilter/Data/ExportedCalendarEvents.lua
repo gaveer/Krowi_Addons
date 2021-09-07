@@ -1,4 +1,4 @@
--- [[ Exported at 2021-08-15 23-17-44 ]] --
+-- [[ Exported at 2021-09-06 22-33-53 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -72,123 +72,111 @@ function exportedCalendarEvents.InjectOptions()
         inline = true,
         args = {
             E141 = {
-                name = addon.L["Feast of Winter Veil"],
                 type = "toggle",
+                name = addon.L["Feast of Winter Veil"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[141]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[141] = not addon.Options.db.EventAlert.CalendarEvents[141];
-
-                    diagnostics.Debug(addon.L["Feast of Winter Veil"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[141]));
+                    addon.Options.Debug(addon.L["Feast of Winter Veil"], addon.Options.db.EventAlert.CalendarEvents[141]);
                 end
             },
             E181 = {
-                name = addon.L["Noblegarden"],
                 type = "toggle",
+                name = addon.L["Noblegarden"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[181]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[181] = not addon.Options.db.EventAlert.CalendarEvents[181];
-
-                    diagnostics.Debug(addon.L["Noblegarden"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[181]));
+                    addon.Options.Debug(addon.L["Noblegarden"], addon.Options.db.EventAlert.CalendarEvents[181]);
                 end
             },
             E201 = {
-                name = addon.L["Children's Week"],
                 type = "toggle",
+                name = addon.L["Children's Week"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[201]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[201] = not addon.Options.db.EventAlert.CalendarEvents[201];
-
-                    diagnostics.Debug(addon.L["Children's Week"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[201]));
+                    addon.Options.Debug(addon.L["Children's Week"], addon.Options.db.EventAlert.CalendarEvents[201]);
                 end
             },
             E324 = {
-                name = addon.L["Hallow's End"],
                 type = "toggle",
+                name = addon.L["Hallow's End"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[324]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[324] = not addon.Options.db.EventAlert.CalendarEvents[324];
-
-                    diagnostics.Debug(addon.L["Hallow's End"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[324]));
+                    addon.Options.Debug(addon.L["Hallow's End"], addon.Options.db.EventAlert.CalendarEvents[324]);
                 end
             },
             E327 = {
-                name = addon.L["Lunar Festival"],
                 type = "toggle",
+                name = addon.L["Lunar Festival"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[327]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[327] = not addon.Options.db.EventAlert.CalendarEvents[327];
-
-                    diagnostics.Debug(addon.L["Lunar Festival"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[327]));
+                    addon.Options.Debug(addon.L["Lunar Festival"], addon.Options.db.EventAlert.CalendarEvents[327]);
                 end
             },
             E341 = {
-                name = addon.L["Midsummer Fire Festival"],
                 type = "toggle",
+                name = addon.L["Midsummer Fire Festival"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[341]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[341] = not addon.Options.db.EventAlert.CalendarEvents[341];
-
-                    diagnostics.Debug(addon.L["Midsummer Fire Festival"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[341]));
+                    addon.Options.Debug(addon.L["Midsummer Fire Festival"], addon.Options.db.EventAlert.CalendarEvents[341]);
                 end
             },
             E372 = {
-                name = addon.L["Brewfest"],
                 type = "toggle",
+                name = addon.L["Brewfest"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[372]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[372] = not addon.Options.db.EventAlert.CalendarEvents[372];
-
-                    diagnostics.Debug(addon.L["Brewfest"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[372]));
+                    addon.Options.Debug(addon.L["Brewfest"], addon.Options.db.EventAlert.CalendarEvents[372]);
                 end
             },
             E398 = {
-                name = addon.L["Pirates' Day"],
                 type = "toggle",
+                name = addon.L["Pirates' Day"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[398]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[398] = not addon.Options.db.EventAlert.CalendarEvents[398];
-
-                    diagnostics.Debug(addon.L["Pirates' Day"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[398]));
+                    addon.Options.Debug(addon.L["Pirates' Day"], addon.Options.db.EventAlert.CalendarEvents[398]);
                 end
             },
             E404 = {
-                name = addon.L["Pilgrim's Bounty"],
                 type = "toggle",
+                name = addon.L["Pilgrim's Bounty"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[404]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[404] = not addon.Options.db.EventAlert.CalendarEvents[404];
-
-                    diagnostics.Debug(addon.L["Pilgrim's Bounty"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[404]));
+                    addon.Options.Debug(addon.L["Pilgrim's Bounty"], addon.Options.db.EventAlert.CalendarEvents[404]);
                 end
             },
             E409 = {
-                name = addon.L["Day of the Dead"],
                 type = "toggle",
+                name = addon.L["Day of the Dead"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[409]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[409] = not addon.Options.db.EventAlert.CalendarEvents[409];
-
-                    diagnostics.Debug(addon.L["Day of the Dead"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[409]));
+                    addon.Options.Debug(addon.L["Day of the Dead"], addon.Options.db.EventAlert.CalendarEvents[409]);
                 end
             },
             E423 = {
-                name = addon.L["Love is in the Air"],
                 type = "toggle",
+                name = addon.L["Love is in the Air"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[423]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[423] = not addon.Options.db.EventAlert.CalendarEvents[423];
-
-                    diagnostics.Debug(addon.L["Love is in the Air"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[423]));
+                    addon.Options.Debug(addon.L["Love is in the Air"], addon.Options.db.EventAlert.CalendarEvents[423]);
                 end
             },
             E479 = {
-                name = addon.L["Darkmoon Faire"],
                 type = "toggle",
+                name = addon.L["Darkmoon Faire"],
                 get = function() return addon.Options.db.EventAlert.CalendarEvents[479]; end,
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[479] = not addon.Options.db.EventAlert.CalendarEvents[479];
-
-                    diagnostics.Debug(addon.L["Darkmoon Faire"] .. ": " .. tostring(addon.Options.db.EventAlert.CalendarEvents[479]));
+                    addon.Options.Debug(addon.L["Darkmoon Faire"], addon.Options.db.EventAlert.CalendarEvents[479]);
                 end
             },
         }

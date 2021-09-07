@@ -33,6 +33,18 @@ function category:AddCategory(cat) -- Adds a child achievement category to the a
     return cat;
 end
 
+function category:RemoveCategory(cat)
+    if self.Children == nil then
+        return;
+    end
+    for i, _ in next, self.Children do
+        if self.Children[i].Name == cat.Name and self.Children[i].Level == cat.Level then
+            tremove(self.Children, i);
+            return;
+        end
+    end
+end
+
 function category:MergeAchievement(achievement)
     if self.MergedAchievements == nil then
         self.MergedAchievements = {}; -- By creating the achievements table here we reduce memory usage because not every category has achievements
@@ -54,6 +66,18 @@ function category:AddAchievement(achievement) -- Adds an achievement to the achi
     return achievement;
 end
 
+function category:AddFocusedAchievement(achievement)
+    self:AddAchievement(achievement);
+    achievement.FocusedCategory = self;
+    return achievement;
+end
+
+function category:AddExcludedAchievement(achievement)
+    self:AddAchievement(achievement);
+    achievement.ExcludedCategory = self;
+    return achievement;
+end
+
 function category:RemoveAchievement(achievement) -- Removes an achievement from the achievement category
     if self.Achievements == nil then
         return;
@@ -64,6 +88,16 @@ function category:RemoveAchievement(achievement) -- Removes an achievement from 
             return;
         end
     end
+end
+
+function category:RemoveFocusedAchievement(achievement)
+    self:RemoveAchievement(achievement);
+    achievement.FocusedCategory = nil;
+end
+
+function category:RemoveExcludedAchievement(achievement)
+    self:RemoveAchievement(achievement);
+    achievement.ExcludedCategory = nil;
 end
 
 function category:GetTree()

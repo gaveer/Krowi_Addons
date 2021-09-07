@@ -165,7 +165,7 @@ namespace DbManagerWPF.ViewModel
                 ExportCategory(sb, category);
 
             sb.AppendLine("");
-            sb.AppendLineTabbed(1, "return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, excludedCategory, nextPatchCategory;");
+            sb.AppendLineTabbed(1, "return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;");
             sb.AppendLine("end");
 
             using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedCategories.lua");
@@ -211,8 +211,16 @@ namespace DbManagerWPF.ViewModel
                 sb.AppendLineTabbed(1, $"tmp[{category.ID}].HasFlexibleData = true;");
                 sb.AppendLineTabbed(1, $"local selectedZoneCategory = tmp[{category.ID}];");
             }
+            if (category.Function == functionDM.GetFocusedFunction())
+            {
+                sb.AppendLineTabbed(1, $"tmp[{category.ID}].HasFlexibleData = true;");
+                sb.AppendLineTabbed(1, $"local focusedCategory = tmp[{category.ID}];");
+            }
             if (category.Function == functionDM.GetExcludedFunction())
+            {
+                sb.AppendLineTabbed(1, $"tmp[{category.ID}].HasFlexibleData = true;");
                 sb.AppendLineTabbed(1, $"local excludedCategory = tmp[{category.ID}];");
+            }
             if (category.Function == functionDM.GetComingInFunction())
                 sb.AppendLineTabbed(1, $"local nextPatchCategory = tmp[{category.ID}];");
 
@@ -697,13 +705,12 @@ namespace DbManagerWPF.ViewModel
                 if (keyValuePair.Value.Any() && keyValuePair.Key.ID > 0 && (keyValuePair.Key.UIMap == null) == uiMapIsNull)
                 {
                     sb.AppendLineTabbed(3, $"E{keyValuePair.Key.ID} = {{");
-                    sb.AppendLineTabbed(4, $"name = addon.L[\"{ keyValuePair.Key.Title}\"],");
                     sb.AppendLineTabbed(4, "type = \"toggle\",");
+                    sb.AppendLineTabbed(4, $"name = addon.L[\"{ keyValuePair.Key.Title}\"],");
                     sb.AppendLineTabbed(4, $"get = function() return addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}]; end,");
                     sb.AppendLineTabbed(4, "set = function()");
                     sb.AppendLineTabbed(5, $"addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}] = not addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}];");
-                    sb.AppendLine("");
-                    sb.AppendLineTabbed(5, $"diagnostics.Debug(addon.L[\"{ keyValuePair.Key.Title}\"] .. \": \" .. tostring(addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}]));");
+                    sb.AppendLineTabbed(5, $"addon.Options.Debug(addon.L[\"{ keyValuePair.Key.Title}\"], addon.Options.db.EventAlert.{tableName.Replace(" ", "")}[{keyValuePair.Key.ID}]);");
                     sb.AppendLineTabbed(4, "end");
                     sb.AppendLineTabbed(3, "},");
                 }

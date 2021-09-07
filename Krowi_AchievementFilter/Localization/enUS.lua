@@ -16,6 +16,8 @@ L["Installed"] = "Installed";
 L["Not installed"] = "Not installed";
 L["Include"] = "Include";
 L["Exclude"] = "Exclude";
+L["Clear focus"] = "Clear focus";
+L["Focus"] = "Focus";
 
 -- Tabs
 L["Expansions"] = "Expansions";
@@ -63,7 +65,7 @@ L["Assault on Azsuna"] = "Assault on Azsuna";
 L["Assault on Val'sharah"] = "Assault on Val'sharah";
 L["Assault on Highmountain"] = "Assault on Highmountain";
 L["Assault on Stormheim"] = "Assault on Stormheim";
-
+L["Focused"] = "Focused";
 
 -- Filters
 L["Obtainable"] = "Obtainable";
@@ -186,6 +188,8 @@ L["Layout"] = "Layout";
 
 -- Options Layout Window
 L["Window"] = "Window";
+L["Make window movable"] = "Make window movable";
+L["Make window movable Desc"] = "Make windows movable/not movable.\n\nWhen checked, when keeping the left mouse button pressed, move the Achievement window. This works on the header and borders.";
 L["Categories width offset"] = "Categories width offset";
 L["Categories width offset Desc"] = "The width that will be added to or subtracted from the default categories width.\n\n" ..
                                     "This value can be changed while the achievement window is open while having the {tabName} tab selected. This will however lag your game.\n\n{reloadRequired}";
@@ -197,12 +201,16 @@ L["Merge small categories threshold Desc"] = "Categories with a number of achiev
                                                 "Only preset categories can merge (mostly child categories from zones).\n\n{reloadRequired}";
 
 -- Options Layout Categories
-L["Show Excluded Category"] = "Show {excluded} category";
+L["Show"] = "Show";
+L["Show Sub Categories"] = "Show Sub Categories";
+L["Show Sub Categories Desc"] = "Show / hide sub categories.\n\nWhen checked, the achievements will be placed under their original sub categories instead of all together under the single category.";
+L["Clear all"] = "Clear all";
+L["Clear all Desc"] = "Clear all focused achievements.";
 L["Show Excluded Category Desc"] = "Show / hide {excluded} category.\n\nWhen checked, the category is only shown when there are actually excluded achievements and the set filters allow showing them.\n\n" ..
                                     "When not checked, the category is always hidden and the filters are hidden too.";
 L["Include all"] = "Include all";
 L["Include all Desc"] = "Include all excluded achievements.";
-                                                
+
 -- Options Layout Right Click Menu
 L["Right Click Menu"] = "Right Click Menu";
 L["Show Right Click Menu"] = "Show {rightClickMenu} button";

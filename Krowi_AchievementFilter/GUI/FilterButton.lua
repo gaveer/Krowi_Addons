@@ -194,7 +194,7 @@ function filterButton:OnMouseDown()
 
     self:AddAchievementFilters(menu, addon.Objects.MenuItem:New({Text = addon.L["Current Zone"]}), self.Filters.db.CurrentZone);
     self:AddAchievementFilters(menu, addon.Objects.MenuItem:New({Text = addon.L["Selected Zone"]}), self.Filters.db.SelectedZone);
-    if addon.Options.db.Categories.ShowExcludedCategory then
+    if addon.Options.db.Categories.Excluded.Show then
         self:AddAchievementFilters(menu, addon.Objects.MenuItem:New({Text = addon.L["Excluded"]}), self.Filters.db.ExcludedCategory);
     end
 
@@ -639,7 +639,7 @@ function filterButton:GetFilters()
 		return self.Filters.db.CurrentZone;
 	elseif gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then
 		return self.Filters.db.SelectedZone;
-	elseif gui.SelectedTab.SelectedCategory == addon.Data.ExcludedCategory then
+	elseif gui.SelectedTab.SelectedCategory == addon.Data.ExcludedCategory or gui.SelectedTab.SelectedCategory.Excluded then
 		return self.Filters.db.ExcludedCategory;
 	end
 

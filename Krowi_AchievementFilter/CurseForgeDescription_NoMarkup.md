@@ -1,6 +1,6 @@
 See the images for a quick look at the ingame UI! This might give you a better idea of what is added to the default Blizzard UI.
 
-Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3600 achievements are added so far spread over 750+ categories, linked to 1600+ zones and 12 events.
+Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3600 achievements are added so far spread over 750+ categories, linked to 1600+ zones and 32 events.
 
 Categories
 

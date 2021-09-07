@@ -96,6 +96,10 @@ function achFrameTabBtn:Base_OnClick(id)
         self.AchievementsFrame:Hide();
     end
 
+    if self.SelectedCategory == self.Categories[1] and self.SelectedCategory.Achievements == nil then
+        self.SelectedCategory = self.Categories[2]; -- Make sure the focused category has achievements if selected, otherwise we select current zone
+    end
+
     AchievementFrame_ShowSubFrame(unpack(self.FramesToShow));
     AchievementFrameWaterMark:SetTexture("Interface\\AchievementFrame\\UI-Achievement-AchievementWatermark");
 

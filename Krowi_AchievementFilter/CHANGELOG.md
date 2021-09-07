@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.29.0] - 2021-09-
+## [9.1.0.29.0] - 2021-09-07
 ### Added
 - Focus achievements
 - Focused category has to option to show achievements under their sub categories
@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Rewritten options to make it more maintainable and increase performance a little
 
-[9.1.0.29.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3430525
+[9.1.0.29.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3453346
 
 ## [9.1.0.28.1] - 2021-08-18
 ### Fixed

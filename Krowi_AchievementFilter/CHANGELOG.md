@@ -1,9 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.30.0] - 2021-09-07
+## [9.1.0.30.0] - 2021-
 ### Added
-- 
+- Winter Veil gift achievements under Events - Holidays - Winter Veil - Gifts
+- Legion Timewalking achievements under Events - Legion - Timewalking
+- Renowned achievement under Expansions - Shadowlands - Covenant Sanctum
+
+### Fixed
+- Brawler's Guild category was removed, added category name as localisable text
+
 
 [9.1.0.30.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3453438
 

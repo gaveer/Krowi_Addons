@@ -1,4 +1,4 @@
--- [[ Exported at 2021-09-02 19-19-14 ]] --
+-- [[ Exported at 2021-10-09 18-58-49 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -527,7 +527,7 @@ function exportedCategories.Load(a)
     AddA(tmp[616], a[902]); -- Chief Exalted Officer
     tmp[794] = cat:New(C_Map.GetMapInfo(111).name); -- Shattrath City
     AddC(tmp[616], tmp[794]);
-    AddA(tmp[794], a[1165]); -- "My Sack is ""Gigantique"""
+    AddA(tmp[794], a[1165]); -- "My Storage is ""Gigantique"""
     tmp[924] = cat:New(C_Map.GetMapInfo(110).name); -- Silvermoon City
     AddC(tmp[616], tmp[924]);
     AddA(tmp[924], a[613]); -- Killed in Quel'Thalas
@@ -1685,7 +1685,7 @@ function exportedCategories.Load(a)
     AddA(tmp[140], a[5505]); -- Bullet Time
     AddA(tmp[140], a[631]); -- Shadowfang Keep
     AddA(tmp[140], a[5093]); -- Heroic: Shadowfang Keep
-    AddA(tmp[140], a[4627]); -- Big Love Rocket
+    AddA(tmp[140], a[4627]); -- X-45 Heartbreaker
     tmp[141] = cat:New((EJ_GetInstanceInfo(76))); -- Zul'Gurub
     AddC(tmp[130], tmp[141]);
     AddA(tmp[141], a[5743]); -- It's Not Easy Being Green
@@ -2320,7 +2320,7 @@ function exportedCategories.Load(a)
     AddA(tmp[899], a[8063]); -- Heroic: Primordius
     AddA(tmp[899], a[8064]); -- Heroic: Dark Animus
     AddA(tmp[899], a[8065]); -- Heroic: Iron Qon
-    AddA(tmp[899], a[8066]); -- Heroic: Twin Consorts
+    AddA(tmp[899], a[8066]); -- Heroic: Twin Empyreans
     AddA(tmp[899], a[8067]); -- Heroic: Lei Shen
     AddA(tmp[899], a[8068]); -- Heroic: Ra-den
     tmp[206] = cat:New((EJ_GetInstanceInfo(369))); -- Siege of Orgrimmar
@@ -2380,7 +2380,7 @@ function exportedCategories.Load(a)
     AddA(tmp[549], a[7908]); -- I Choose You
     AddA(tmp[549], a[7936]); -- Pandaren Spirit Tamer
     AddA(tmp[549], a[8080]); -- Fabled Pandaren Tamer
-    tmp[790] = cat:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
+    tmp[790] = cat:New(addon.L["Brawler's Guild"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
     AddC(tmp[189], tmp[790]);
     AddA(tmp[790], a[7937]); -- You Are Not Your $#*@! Legplates (Season 1)
     AddA(tmp[790], a[7940]); -- The Second Rule of Brawler's Guild (Season 1)
@@ -2962,7 +2962,7 @@ function exportedCategories.Load(a)
     AddA(tmp[548], a[9463]); -- Draenic Pet Battler
     AddA(tmp[548], a[9724]); -- Taming Draenor
     AddA(tmp[548], a[10052]); -- Tiny Terrors in Tanaan
-    tmp[791] = cat:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
+    tmp[791] = cat:New(addon.L["Brawler's Guild"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
     AddC(tmp[223], tmp[791]);
     AddA(tmp[791], a[9168]); -- You Are Not Your $#*@! Legplates (Season 2)
     AddA(tmp[791], a[9169]); -- The Second Rule of Brawler's Guild (Season 2)
@@ -3592,7 +3592,7 @@ function exportedCategories.Load(a)
     AddA(tmp[430], a[12098]); -- Mechanical Melee
     AddA(tmp[430], a[12099]); -- Unstoppable Undead
     AddA(tmp[430], a[12100]); -- Family Fighter
-    tmp[792] = cat:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
+    tmp[792] = cat:New(addon.L["Brawler's Guild"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
     AddC(tmp[237], tmp[792]);
     AddA(tmp[792], a[11560]); -- You Are Not Your $#*@! Legplates (Season 3)
     AddA(tmp[792], a[11561]); -- You Are Not Your $#*@! Legplates (Season 3)
@@ -4227,7 +4227,7 @@ function exportedCategories.Load(a)
     AddA(tmp[343], a[13625]); -- Mighty Minions of Mechagon
     AddA(tmp[343], a[13626]); -- Nautical Nuisances of Nazjatar
     AddA(tmp[343], a[13695]); -- Team Aquashock
-    tmp[793] = cat:New((GetCategoryInfo(15282)) .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
+    tmp[793] = cat:New(addon.L["Brawler's Guild"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
     AddC(tmp[258], tmp[793]);
     AddA(tmp[793], a[11558]); -- The First Rule of Brawler's Guild
     AddA(tmp[793], a[13186]); -- You Are Not Your $#*@! Legplates
@@ -4854,6 +4854,7 @@ function exportedCategories.Load(a)
     AddA(tmp[419], a[14629]); -- Gaining Respect
     AddA(tmp[419], a[14630]); -- Becoming a Hero
     AddA(tmp[419], a[14631]); -- Champion of the Covenant
+    AddA(tmp[419], a[15241]); -- Renowned
     AddA(tmp[419], a[14632]); -- Conducting Anima
     AddA(tmp[419], a[14633]); -- Master Navigator
     AddA(tmp[419], a[14636]); -- Adventurer in Chief
@@ -5130,8 +5131,8 @@ function exportedCategories.Load(a)
     AddA(tmp[917], a[1295]); -- Crashin' & Thrashin'
     AddA(tmp[917], a[279]); -- Simply Abominable
     AddA(tmp[917], a[1687]); -- Let It Snow
-    AddA(tmp[917], a[1685]); -- Bros. Before Ho Ho Ho's
-    AddA(tmp[917], a[1686]); -- Bros. Before Ho Ho Ho's
+    AddA(tmp[917], a[1685]); -- Holiday Bromance
+    AddA(tmp[917], a[1686]); -- Holiday Bromance
     AddA(tmp[917], a[1688]); -- The Winter Veil Gourmet
     AddA(tmp[917], a[1689]); -- He Knows If You've Been Naughty
     AddA(tmp[917], a[1690]); -- A Frosty Shake
@@ -5140,8 +5141,26 @@ function exportedCategories.Load(a)
     AddA(tmp[917], a[5853]); -- A-Caroling We Will Go
     AddA(tmp[917], a[5854]); -- A-Caroling We Will Go
     AddA(tmp[917], a[8699]); -- The Danger Zone
+    AddA(tmp[917], a[15181]); -- Rock n' Roll
     AddA(tmp[917], a[10353]); -- Iron Armada
     AddA(tmp[917], a[1691]); -- Merrymaker
+    tmp[950] = cat:New(addon.L["Gifts"], true); -- Gifts
+    AddC(tmp[917], tmp[950]);
+    AddA(tmp[950], a[1705]); -- Clockwork Rocket Bot
+    AddA(tmp[950], a[1706]); -- Crashin' Thrashin' Racer
+    AddA(tmp[950], a[6059]); -- Red Rider Air Rifle
+    AddA(tmp[950], a[6060]); -- MiniZep Controller
+    AddA(tmp[950], a[6061]); -- Gaudy Winter Veil Sweater
+    AddA(tmp[950], a[7852]); -- They're Both Footballs?
+    AddA(tmp[950], a[8698]); -- Crashin' Thrashin' Flyer
+    AddA(tmp[950], a[9915]); -- Crashin' Thrashin' Shredder
+    AddA(tmp[950], a[10337]); -- Crashin' Thrashin' Flamer
+    AddA(tmp[950], a[10751]); -- Brr... It's Cold in Here
+    AddA(tmp[950], a[11913]); -- Don't Play With That In The House
+    AddA(tmp[950], a[12850]); -- At Least You're Being Careful
+    AddA(tmp[950], a[13927]); -- Crashin' Splashin'
+    AddA(tmp[950], a[14931]); -- Flying Festivities
+    AddA(tmp[950], a[15313]); -- Rockin' Rollin' Racer
     tmp[925] = cat:New((GetCategoryInfo(15101))); -- Darkmoon Faire
     AddC(tmp[884], tmp[925]);
     AddA(tmp[925], a[6019]); -- "Come One, Come All!"
@@ -5209,6 +5228,11 @@ function exportedCategories.Load(a)
     tmp[948] = cat:New(addon.L["Legion Assaults"]); -- Legion Assaults
     AddC(tmp[947], tmp[948]);
     AddA(tmp[948], a[11544]); -- Defender of the Broken Isles
+    tmp[951] = cat:New((GetCategoryInfo(15454))); -- Timewalking
+    AddC(tmp[947], tmp[951]);
+    AddA(tmp[951], a[15309]); -- A Towering Success
+    AddA(tmp[951], a[15310]); -- A Tour of Towers
+    AddA(tmp[951], a[15308]); -- Tower Overwhelming
     tmp[932] = cat:New((GetCategoryInfo(15305))); -- Battle for Azeroth
     AddC(tmp[884], tmp[932]);
     tmp[933] = cat:New(addon.L["Faction Assaults"]); -- Faction Assaults

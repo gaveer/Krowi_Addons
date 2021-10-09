@@ -1,4 +1,4 @@
--- [[ Exported at 2021-09-06 22-33-53 ]] --
+-- [[ Exported at 2021-10-09 18-58-53 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -28,10 +28,12 @@ function exportedCalendarEvents.Load(e)
     e[409] = event:New(409, 237272); -- Day of the Dead
     e[423] = event:New(423, 236709); -- Love is in the Air
     e[479] = event:New(479, 134481); -- Darkmoon Faire
+    e[1263] = event:New(1263, 1450455); -- Legion Timewalking Dungeon Event
+    e[1271] = event:New(1271, 1450455); -- Legion Timewalking Dungeon Launch Event
 end
 
 function exportedCalendarEvents.LoadCategories(e, a)
-    if e[141] == nil or e[181] == nil or e[201] == nil or e[324] == nil or e[327] == nil or e[341] == nil or e[372] == nil or e[398] == nil or e[404] == nil or e[409] == nil or e[423] == nil or e[479] == nil then
+    if e[141] == nil or e[181] == nil or e[201] == nil or e[324] == nil or e[327] == nil or e[341] == nil or e[372] == nil or e[398] == nil or e[404] == nil or e[409] == nil or e[423] == nil or e[479] == nil or e[1263] == nil or e[1271] == nil then
         exportedCalendarEvents.Load(e);
     end
 
@@ -47,6 +49,8 @@ function exportedCalendarEvents.LoadCategories(e, a)
     e[409].Category = data.CategoriesEvents[1].Children[9]; -- Day of the Dead
     e[423].Category = data.CategoriesEvents[1].Children[2]; -- Love is in the Air
     e[479].Category = data.CategoriesEvents[2]; -- Darkmoon Faire
+    e[1263].Category = data.CategoriesEvents[3].Children[2]; -- Timewalking
+    e[1271].Category = data.CategoriesEvents[3].Children[2]; -- Timewalking
 end
 
 function exportedCalendarEvents.InjectOptions()
@@ -63,6 +67,8 @@ function exportedCalendarEvents.InjectOptions()
     defaults[409] = true;
     defaults[423] = true;
     defaults[479] = true;
+    defaults[1263] = true;
+    defaults[1271] = true;
 
     addon.Options.InjectDefaults(defaults, "CalendarEvents", "EventAlert");
 
@@ -177,6 +183,24 @@ function exportedCalendarEvents.InjectOptions()
                 set = function()
                     addon.Options.db.EventAlert.CalendarEvents[479] = not addon.Options.db.EventAlert.CalendarEvents[479];
                     addon.Options.Debug(addon.L["Darkmoon Faire"], addon.Options.db.EventAlert.CalendarEvents[479]);
+                end
+            },
+            E1263 = {
+                type = "toggle",
+                name = addon.L["Legion Timewalking Dungeon Event"],
+                get = function() return addon.Options.db.EventAlert.CalendarEvents[1263]; end,
+                set = function()
+                    addon.Options.db.EventAlert.CalendarEvents[1263] = not addon.Options.db.EventAlert.CalendarEvents[1263];
+                    addon.Options.Debug(addon.L["Legion Timewalking Dungeon Event"], addon.Options.db.EventAlert.CalendarEvents[1263]);
+                end
+            },
+            E1271 = {
+                type = "toggle",
+                name = addon.L["Legion Timewalking Dungeon Launch Event"],
+                get = function() return addon.Options.db.EventAlert.CalendarEvents[1271]; end,
+                set = function()
+                    addon.Options.db.EventAlert.CalendarEvents[1271] = not addon.Options.db.EventAlert.CalendarEvents[1271];
+                    addon.Options.Debug(addon.L["Legion Timewalking Dungeon Launch Event"], addon.Options.db.EventAlert.CalendarEvents[1271]);
                 end
             },
         }

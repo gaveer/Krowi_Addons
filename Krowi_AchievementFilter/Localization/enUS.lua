@@ -66,6 +66,8 @@ L["Assault on Val'sharah"] = "Assault on Val'sharah";
 L["Assault on Highmountain"] = "Assault on Highmountain";
 L["Assault on Stormheim"] = "Assault on Stormheim";
 L["Focused"] = "Focused";
+L["Brawler's Guild"] = "Brawler's Guild";
+L["Gifts"] = "Gifts"
 
 -- Filters
 L["Obtainable"] = "Obtainable";

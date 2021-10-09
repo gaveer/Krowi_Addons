@@ -1,4 +1,4 @@
-## Interface: 90100
+## Interface: 90105
 ## Title: Krowi's |cFF1D92C2Achievement Filter|r
 ## Version: 30.0
 ## Author: Krowi-Frostmane EU

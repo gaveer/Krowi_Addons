@@ -1,15 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.0.30.0] - 2021-
+## [9.1.5.30.0] - 2021-
 ### Added
 - Winter Veil gift achievements under Events - Holidays - Winter Veil - Gifts
-- Legion Timewalking achievements under Events - Legion - Timewalking
-- Renowned achievement under Expansions - Shadowlands - Covenant Sanctum
+- Legion Timewalking event and achievements under Events - Legion - Timewalking
+- Renowned achievement under Expansions - Shadowlands - Covenant Sanctums
 
 ### Fixed
 - Brawler's Guild category was removed, added category name as localisable text
-
+- Unobtainable achievements now also have a red background color when ElvUI's Blizzard Skins and Achievements are selected
+- Event Reminders next to the Achievement window are now skinned when ElvUI's Blizzard Skins and Achievements are selected
+- Event Reminders pop ups are now skinned when ElvUI's Blizzard Skins and Alert Frames are selected
 
 [9.1.0.30.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3453438
 

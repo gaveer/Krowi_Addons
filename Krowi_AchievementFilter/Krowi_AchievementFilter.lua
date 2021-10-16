@@ -303,6 +303,7 @@ function loadHelper:OnEvent(event, arg1, arg2)
             addon.GUI.ElvUISkin.Apply();
         end
     elseif event == "PLAYER_LOGIN" then
+        addon.GUI.ElvUISkin.ApplyToAlertFrames();
         addon.Data.ExportedCalendarEvents.Load(addon.Data.CalendarEvents);
         addon.Data.ExportedWorldEvents.Load(addon.Data.WorldEvents);
         addon.EventData.Load();

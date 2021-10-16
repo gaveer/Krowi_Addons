@@ -68,6 +68,7 @@ L["Assault on Stormheim"] = "Assault on Stormheim";
 L["Focused"] = "Focused";
 L["Brawler's Guild"] = "Brawler's Guild";
 L["Gifts"] = "Gifts"
+L["Other"] = "Other";
 
 -- Filters
 L["Obtainable"] = "Obtainable";

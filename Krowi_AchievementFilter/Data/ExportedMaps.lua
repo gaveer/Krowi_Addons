@@ -1,4 +1,4 @@
--- [[ Exported at 2021-10-09 18-58-52 ]] --
+-- [[ Exported at 2021-10-16 14-20-16 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -255,10 +255,10 @@ function exportedMaps.Load(m, a)
     m[223] = {Achievements = {a[632]}}; -- Blackfathom Deeps - The Forgotten Pool
     m[224] = {Achievements = {a[1206], a[1676], a[42], a[4827], a[46]}}; -- Stranglethorn Vale
     m[225] = {Achievements = {a[633]}}; -- The Stockade
-    m[226] = {Achievements = {a[634]}}; -- Gnomeregan - The Hall of Gears
-    m[227] = {Achievements = {a[634]}}; -- Gnomeregan - The Dormitory
-    m[228] = {Achievements = {a[634]}}; -- Gnomeregan - Launch Bay
-    m[229] = {Achievements = {a[634]}}; -- Gnomeregan - Tinkers' Court
+    m[226] = {Achievements = {a[634], a[13269]}}; -- Gnomeregan - The Hall of Gears
+    m[227] = {Achievements = {a[634], a[13269]}}; -- Gnomeregan - The Dormitory
+    m[228] = {Achievements = {a[634], a[13269]}}; -- Gnomeregan - Launch Bay
+    m[229] = {Achievements = {a[634], a[13269]}}; -- Gnomeregan - Tinkers' Court
     m[230] = {Achievements = {a[638]}}; -- Uldaman - Hall of the Keepers
     m[231] = {Achievements = {a[638]}}; -- Uldaman - Khaz'Goroth's Seat
     m[232] = {Achievements = {a[686], a[11741], a[429], a[428], a[9550], a[955], a[2496]}}; -- Molten Core
@@ -269,8 +269,8 @@ function exportedMaps.Load(m, a)
     m[239] = {Achievements = {a[644], a[5788]}}; -- Dire Maul - Warpwood Quarter
     m[240] = {Achievements = {a[644], a[5788]}}; -- Dire Maul - The Shrine of Eldretharr
     m[241] = {Achievements = {a[4875], a[5548], a[4868], a[4881], a[4873], a[5501], a[4960], a[5481], a[5482], a[5320], a[5321], a[5451], a[4958], a[4866], a[4885], a[4886], a[46]}}; -- Twilight Highlands
-    m[242] = {Achievements = {a[642], a[3496]}}; -- Blackrock Depths - Detention Block
-    m[243] = {Achievements = {a[642], a[3496]}}; -- Blackrock Depths - Shadowforge City
+    m[242] = {Achievements = {a[642], a[3496], a[14020]}}; -- Blackrock Depths - Detention Block
+    m[243] = {Achievements = {a[642], a[3496], a[14020]}}; -- Blackrock Depths - Shadowforge City
     m[244] = {Achievements = {a[5548], a[5489], a[5490], a[4874], a[5718], a[5719], a[5412], a[5418], a[5417], a[5415], a[5488], a[5487], a[5486], a[5375], a[5376]}}; -- Tol Barad
     m[245] = {Achievements = {a[5548], a[5489], a[5490], a[4874], a[5718], a[5719], a[5412], a[5418], a[5417], a[5415], a[5488], a[5487], a[5486], a[5375], a[5376]}}; -- Tol Barad Peninsula
     m[246] = {Achievements = {a[763], a[764], a[657], a[678]}}; -- The Shattered Halls
@@ -305,7 +305,7 @@ function exportedMaps.Load(m, a)
     m[273] = {Achievements = {a[763], a[764], a[655], a[676]}}; -- The Black Morass
     m[274] = {Achievements = {a[763], a[764], a[652], a[673]}}; -- Old Hillsbrad Foothills
     m[277] = {Achievements = {a[5291], a[5290], a[5292], a[4848], a[5066]}}; -- Lost City of the Tol'vir
-    m[279] = {Achievements = {a[630]}}; -- Wailing Caverns
+    m[279] = {Achievements = {a[630], a[11765]}}; -- Wailing Caverns
     m[280] = {Achievements = {a[640]}}; -- Maraudon - Caverns of Maraudon
     m[281] = {Achievements = {a[640]}}; -- Maraudon - Zaetar's Grave
     m[282] = {Achievements = {a[5416], a[6045], a[6108]}}; -- Baradin Hold
@@ -317,8 +317,8 @@ function exportedMaps.Load(m, a)
     m[288] = {Achievements = {a[685], a[11742]}}; -- Blackwing Lair - Halls of Strife
     m[289] = {Achievements = {a[685], a[11742]}}; -- Blackwing Lair - Crimson Laboratories
     m[290] = {Achievements = {a[685], a[11742]}}; -- Blackwing Lair - Nefarian's Lair
-    m[291] = {Achievements = {a[5366], a[5367], a[5368], a[5369], a[5370], a[5371], a[628], a[5083]}}; -- The Deadmines - The Deadmines
-    m[292] = {Achievements = {a[5366], a[5367], a[5368], a[5369], a[5370], a[5371], a[628], a[5083]}}; -- The Deadmines - Ironclad Cove
+    m[291] = {Achievements = {a[5366], a[5367], a[5368], a[5369], a[5370], a[5371], a[628], a[5083], a[11856]}}; -- The Deadmines - The Deadmines
+    m[292] = {Achievements = {a[5366], a[5367], a[5368], a[5369], a[5370], a[5371], a[628], a[5083], a[11856]}}; -- The Deadmines - Ironclad Cove
     m[293] = {Achievements = {a[5297], a[5298], a[4840], a[5062]}}; -- Grim Batol
     m[294] = {Achievements = {a[4850], a[5313], a[11754]}}; -- The Bastion of Twilight - The Twilight Enclave
     m[295] = {Achievements = {a[4850], a[5313], a[11754]}}; -- The Bastion of Twilight - Throne of the Apocalypse
@@ -335,8 +335,8 @@ function exportedMaps.Load(m, a)
     m[314] = {Achievements = {a[5503], a[5504], a[5505], a[631], a[5093], a[4627]}}; -- Shadowfang Keep - Upper Observatory
     m[315] = {Achievements = {a[5503], a[5504], a[5505], a[631], a[5093], a[4627]}}; -- Shadowfang Keep - Lord Godfrey's Chamber
     m[316] = {Achievements = {a[5503], a[5504], a[5505], a[631], a[5093], a[4627]}}; -- Shadowfang Keep - The Wall Walk
-    m[317] = {Achievements = {a[646], a[729]}}; -- Stratholme - Crusader's Square
-    m[318] = {Achievements = {a[646], a[729]}}; -- Stratholme - The Gauntlet
+    m[317] = {Achievements = {a[646], a[729], a[13627], a[13766]}}; -- Stratholme - Crusader's Square
+    m[318] = {Achievements = {a[646], a[729], a[13627], a[13766]}}; -- Stratholme - The Gauntlet
     m[319] = {Achievements = {a[687], a[424], a[11743], a[956]}}; -- Ahn'Qiraj - The Hive Undergrounds
     m[320] = {Achievements = {a[687], a[424], a[11743], a[956]}}; -- Ahn'Qiraj - The Temple Gates
     m[321] = {Achievements = {a[687], a[424], a[11743], a[956]}}; -- Ahn'Qiraj - Vault of C'Thun
@@ -879,6 +879,7 @@ function exportedMaps.Load(m, a)
     m[1364] = {Achievements = {a[13315], a[13286], a[13289], a[13287], a[13290], a[13288], a[13291], a[13322], a[13323], a[13385], a[13316], a[13431], a[13383], a[13345], a[13325], a[13425], a[13401], a[13430], a[13410], a[13292], a[13298], a[13293], a[13295], a[13299], a[13300], a[13311], a[13312], a[13313], a[13314]}}; -- Battle of Dazar'alor - The Great Sea
     m[1367] = {Achievements = {a[13315], a[13286], a[13289], a[13287], a[13290], a[13288], a[13291], a[13322], a[13323], a[13385], a[13316], a[13431], a[13383], a[13345], a[13325], a[13425], a[13401], a[13430], a[13410], a[13292], a[13298], a[13293], a[13295], a[13299], a[13300], a[13311], a[13312], a[13313], a[13314]}}; -- Battle of Dazar'alor - Boralus
     m[1375] = {Achievements = {a[1866], a[2154], a[2155], a[485], a[496]}}; -- Halls of Stone
+    m[1409] = {Achievements = {a[14222]}}; -- Exile's Reach
     m[1462] = {Achievements = {a[13250], a[12571], a[12573], a[12605], a[12604], a[13708], a[13513], a[13553], a[13700], a[13790], a[13791], a[13776], a[13470], a[13472], a[13482], a[13473], a[13474], a[13696], a[13686], a[13475], a[13477], a[13476], a[13555], a[13478], a[13479], a[13556], a[13541], a[13570], a[13557]}}; -- Mechagon Island
     m[1468] = {Achievements = {a[10994], a[11135], a[11136], a[10706], a[11212], a[11213], a[11214], a[11215], a[11216], a[11217], a[11219], a[11220], a[11221], a[11222], a[11223], a[11298], a[10746], a[10459], a[10743], a[10745], a[10460], a[10461], a[10747], a[10748], a[11173], a[10749], a[10750], a[11171], a[11137], a[11611], a[11612], a[11144], a[11772], a[11609], a[11610], a[10852], a[10853], a[12071], a[12072], a[11218]}}; -- The Dreamgrove
     m[1469] = {Achievements = {a[14143], a[13994], a[14060], a[14061], a[14062], a[14064], a[14066], a[14063], a[14065], a[14067], a[14162], a[14165], a[14166], a[14167], a[14168], a[14169], a[14170], a[14171], a[14172], a[14173], a[14140]}}; -- Vision of Orgrimmar
@@ -930,6 +931,8 @@ function exportedMaps.Load(m, a)
     m[1597] = {Achievements = {a[14146], a[14193], a[14194], a[14195], a[14196], a[14068], a[14069], a[14058], a[14019], a[14008], a[14037], a[14024], a[14139], a[14023], a[13999], a[13990], a[14026], a[14038], a[14147], a[14148], a[14041], a[14043], a[14044], a[14045], a[14050], a[14046], a[14051], a[14048], a[14049], a[14052], a[14054], a[14055]}}; -- Ny'alotha - Locus of Infinite Truths
     m[1600] = {Achievements = {a[14154], a[14161], a[14160], a[14159], a[14158], a[14156]}}; -- Vault of Y'Shaarj
     m[1604] = {Achievements = {a[12918], a[13998], a[13572], a[13769], a[13770], a[13771], a[13772], a[13773], a[13775], a[13777], a[13779], a[14143], a[13994], a[14060], a[14061], a[14062], a[14064], a[14066], a[14063], a[14065], a[14067], a[14162], a[14165], a[14166], a[14167], a[14168], a[14169], a[14170], a[14171], a[14172], a[14173], a[14140]}}; -- Chamber Of Heart
+    m[1609] = {Achievements = {a[14222]}}; -- Darkmaul Citadel - Bonebreaker Hall
+    m[1610] = {Achievements = {a[14222]}}; -- Darkmaul Citadel - Terrace of Reanimation
     m[1615] = {Achievements = {a[14808], a[14809], a[14810], a[15091], a[15089], a[14499], a[14500], a[14501], a[14468], a[14469], a[14470], a[14471], a[14472], a[14568], a[14569], a[14570], a[14498], a[14773], a[14776], a[14778], a[14754], a[14755], a[14759], a[14760], a[14795], a[15067], a[15075], a[15076], a[15080], a[15079], a[15093], a[15095], a[15094], a[15096], a[15092], a[14463], a[15081], a[14473], a[15082], a[14478], a[15084], a[14483], a[15083], a[14488], a[15087], a[14493], a[15088]}}; -- TG10_Floor [Deprecated]
     m[1616] = {Achievements = {a[14808], a[14809], a[14810], a[15091], a[15089], a[14499], a[14500], a[14501], a[14468], a[14469], a[14470], a[14471], a[14472], a[14568], a[14569], a[14570], a[14498], a[14773], a[14776], a[14778], a[14754], a[14755], a[14759], a[14760], a[14795], a[15067], a[15075], a[15076], a[15080], a[15079], a[15093], a[15095], a[15094], a[15096], a[15092], a[14463], a[15081], a[14473], a[15082], a[14478], a[15084], a[14483], a[15083], a[14488], a[15087], a[14493], a[15088]}}; -- TG11_Floor [Deprecated]
     m[1617] = {Achievements = {a[14808], a[14809], a[14810], a[15091], a[15089], a[14499], a[14500], a[14501], a[14468], a[14469], a[14470], a[14471], a[14472], a[14568], a[14569], a[14570], a[14498], a[14773], a[14776], a[14778], a[14754], a[14755], a[14759], a[14760], a[14795], a[15067], a[15075], a[15076], a[15080], a[15079], a[15093], a[15095], a[15094], a[15096], a[15092], a[14463], a[15081], a[14473], a[15082], a[14478], a[15084], a[14483], a[15083], a[14488], a[15087], a[14493], a[15088]}}; -- TG12_Floor [Deprecated]

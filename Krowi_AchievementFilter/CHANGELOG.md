@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 - Winter Veil gift achievements under Events - Holidays - Winter Veil - Gifts
 - Legion Timewalking event and achievements under Events - Legion - Timewalking
 - Renowned achievement under Expansions - Shadowlands - Covenant Sanctums
+- Doomsoul Surprise achievement under Events - Battle for Azeroth - Faction Assaults - Assault on Drustvar
+- Pet Battle Challenge achievements to Expansions - Classic - Dungeons - Deadmines, - Wailing Caverns, - Gnomeregan, - Blackrock Depths and -Stratholme
 
 ### Fixed
 - Brawler's Guild category was removed, added category name as localisable text

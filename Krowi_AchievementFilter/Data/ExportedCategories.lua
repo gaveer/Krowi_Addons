@@ -1,4 +1,4 @@
--- [[ Exported at 2021-10-09 18-58-49 ]] --
+-- [[ Exported at 2021-10-16 14-20-14 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -411,6 +411,7 @@ function exportedCategories.Load(a)
     tmp[8] = cat:New((EJ_GetInstanceInfo(240))); -- Wailing Caverns
     AddC(tmp[2], tmp[8]);
     AddA(tmp[8], a[630]); -- Wailing Caverns
+    AddA(tmp[8], a[11765]); -- Pet Battle Challenge: Wailing Caverns
     tmp[10] = cat:New((EJ_GetInstanceInfo(227))); -- Blackfathom Deeps
     AddC(tmp[2], tmp[10]);
     AddA(tmp[10], a[632]); -- Blackfathom Deeps
@@ -420,6 +421,7 @@ function exportedCategories.Load(a)
     tmp[12] = cat:New((EJ_GetInstanceInfo(231))); -- Gnomeregan
     AddC(tmp[2], tmp[12]);
     AddA(tmp[12], a[634]); -- Gnomeregan
+    AddA(tmp[12], a[13269]); -- Pet Battle Challenge: Gnomeregan
     tmp[13] = cat:New((EJ_GetInstanceInfo(233))); -- Razorfen Kraul
     AddC(tmp[2], tmp[13]);
     AddA(tmp[13], a[635]); -- Razorfen Kraul
@@ -442,6 +444,7 @@ function exportedCategories.Load(a)
     AddC(tmp[2], tmp[21]);
     AddA(tmp[21], a[642]); -- Blackrock Depths
     AddA(tmp[21], a[3496]); -- A Brew-FAST Mount
+    AddA(tmp[21], a[14020]); -- Pet Battle Challenge: Blackrock Depths
     tmp[22] = cat:New((EJ_GetInstanceInfo(229))); -- Lower Blackrock Spire
     AddC(tmp[2], tmp[22]);
     AddA(tmp[22], a[643]); -- Lower Blackrock Spire
@@ -457,6 +460,8 @@ function exportedCategories.Load(a)
     AddC(tmp[2], tmp[25]);
     AddA(tmp[25], a[646]); -- Stratholme
     AddA(tmp[25], a[729]); -- Deathcharger's Reins
+    AddA(tmp[25], a[13627]); -- Pet Battle Challenge: Stratholme
+    AddA(tmp[25], a[13766]); -- Malowned
     tmp[3] = cat:New((GetCategoryInfo(15271))); -- Raids
     AddC(tmp[1], tmp[3]);
     AddA(tmp[3], a[1285]); -- Classic Raider
@@ -504,6 +509,7 @@ function exportedCategories.Load(a)
     tmp[796] = cat:New((EJ_GetInstanceInfo(754)) .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Naxxramas
     AddC(tmp[3], tmp[796]);
     AddA(tmp[796], a[11744]); -- "Drop Dead, Gorgeous"
+    AddA(tmp[796], a[425]); -- "Atiesh, Greatstaff of the Guardian"
     tmp[785] = cat:New((GetCategoryInfo(15117))); -- Pet Battles
     AddC(tmp[1], tmp[785]);
     AddA(tmp[785], a[6586]); -- Eastern Kingdoms Safari
@@ -4925,6 +4931,11 @@ function exportedCategories.Load(a)
     AddA(tmp[420], a[14764]); -- The Great Luckydo
     AddA(tmp[420], a[14833]); -- Fashion Abomination
     AddA(tmp[420], a[14763]); -- Crypt Couture
+    tmp[952] = cat:New(addon.L["Other"]); -- Other
+    AddC(tmp[883], tmp[952]);
+    tmp[953] = cat:New((select(2, addon.GetAchievementInfo(14222)))); -- Exile's Reach
+    AddC(tmp[952], tmp[953]);
+    AddA(tmp[953], a[14222]); -- Exile's Reach
     tmp[857] = cat:New(addon.L["Excluded"]); -- Excluded
     AddC(tmp[883], tmp[857]);
     tmp[857].HasFlexibleData = true;
@@ -5223,16 +5234,19 @@ function exportedCategories.Load(a)
     AddA(tmp[925], a[11919]); -- Taking this Show on the Road
     AddA(tmp[925], a[11920]); -- Perfect Performance
     AddA(tmp[925], a[11921]); -- Mosh Pit
+    tmp[951] = cat:New((GetCategoryInfo(15454))); -- Timewalking
+    AddC(tmp[884], tmp[951]);
+    AddA(tmp[951], a[13931]); -- "Memories of Fel, Frost and Fire"
+    tmp[954] = cat:New((GetCategoryInfo(15258))); -- Legion
+    AddC(tmp[951], tmp[954]);
+    AddA(tmp[954], a[15309]); -- A Towering Success
+    AddA(tmp[954], a[15310]); -- A Tour of Towers
+    AddA(tmp[954], a[15308]); -- Tower Overwhelming
     tmp[947] = cat:New((GetCategoryInfo(15258))); -- Legion
     AddC(tmp[884], tmp[947]);
     tmp[948] = cat:New(addon.L["Legion Assaults"]); -- Legion Assaults
     AddC(tmp[947], tmp[948]);
     AddA(tmp[948], a[11544]); -- Defender of the Broken Isles
-    tmp[951] = cat:New((GetCategoryInfo(15454))); -- Timewalking
-    AddC(tmp[947], tmp[951]);
-    AddA(tmp[951], a[15309]); -- A Towering Success
-    AddA(tmp[951], a[15310]); -- A Tour of Towers
-    AddA(tmp[951], a[15308]); -- Tower Overwhelming
     tmp[932] = cat:New((GetCategoryInfo(15305))); -- Battle for Azeroth
     AddC(tmp[884], tmp[932]);
     tmp[933] = cat:New(addon.L["Faction Assaults"]); -- Faction Assaults
@@ -5249,6 +5263,7 @@ function exportedCategories.Load(a)
     AddA(tmp[935], a[13403]); -- Frontline Slayer
     tmp[936] = cat:New(addon.L["Assault on Drustvar"]); -- Assault on Drustvar
     AddC(tmp[933], tmp[936]);
+    AddA(tmp[936], a[13435]); -- Doomsoul Surprise
     AddA(tmp[936], a[13317]); -- Supplied and Ready
     AddA(tmp[936], a[13283]); -- Frontline Warrior
     AddA(tmp[936], a[13284]); -- Frontline Warrior

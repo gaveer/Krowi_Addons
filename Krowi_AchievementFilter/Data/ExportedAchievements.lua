@@ -1,4 +1,4 @@
--- [[ Exported at 2021-10-09 18-58-49 ]] --
+-- [[ Exported at 2021-10-16 14-20-14 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -56,6 +56,7 @@ function exportedAchievements.Load(a)
     a[388] = ach:New(388, 10, fac.Alliance); -- City Defender
     a[416] = ach:New(416, 0, nil, nil, false); -- Scarab Lord
     a[424] = ach:New(424, 0); -- Why? Because It's Red
+    a[425] = ach:New(425, 0, nil, nil, false); -- "Atiesh, Greatstaff of the Guardian"
     a[426] = ach:New(426, 0); -- Warglaives of Azzinoth
     a[428] = ach:New(428, 0); -- "Thunderfury, Blessed Blade of the Windseeker"
     a[429] = ach:New(429, 0); -- "Sulfuras, Hand of Ragnaros"
@@ -2504,6 +2505,7 @@ function exportedAchievements.Load(a)
     a[11760] = ach:New(11760, 10); -- Retro Trend
     a[11762] = ach:New(11762, 10); -- Can I Get A Helya
     a[11763] = ach:New(11763, 25); -- Glory of the Tomb Raider
+    a[11765] = ach:New(11765, 5); -- Pet Battle Challenge: Wailing Caverns
     a[11767] = ach:New(11767, 10); -- Mythic: Goroth
     a[11768] = ach:New(11768, 10); -- Boom Bloom
     a[11769] = ach:New(11769, 10); -- A Steamy Romance Saga
@@ -2527,6 +2529,7 @@ function exportedAchievements.Load(a)
     a[11802] = ach:New(11802, 10); -- Bringing Home the Beacon
     a[11841] = ach:New(11841, 10); -- Naxt Victim
     a[11846] = ach:New(11846, 10); -- Champions of Legionfall
+    a[11856] = ach:New(11856, 5); -- Pet Battle Challenge: Deadmines
     a[11861] = ach:New(11861, 10, fac.Horde); -- The Throne of Zuldazar
     a[11868] = ach:New(11868, 10, fac.Horde); -- The Dark Heart of Nazmir
     a[11869] = ach:New(11869, 0); -- I'll Hold These For You Until You Get Out
@@ -2957,6 +2960,7 @@ function exportedAchievements.Load(a)
     a[13250] = ach:New(13250, 25); -- "Battle for Azeroth Pathfinder, Part Two"
     a[13251] = ach:New(13251, 0, fac.Alliance); -- In Teldrassil's Shadow
     a[13263] = ach:New(13263, 10, fac.Horde); -- The Shadow Hunter
+    a[13269] = ach:New(13269, 5); -- Pet Battle Challenge: Gnomeregan
     a[13270] = ach:New(13270, 5); -- Beast Mode
     a[13271] = ach:New(13271, 5); -- Critters With Huge Teeth
     a[13272] = ach:New(13272, 5); -- Dragons Make Everything Better
@@ -3036,6 +3040,7 @@ function exportedAchievements.Load(a)
     a[13429] = ach:New(13429, 5); -- Azerfighter
     a[13430] = ach:New(13430, 10); -- De Lurker Be'loa
     a[13431] = ach:New(13431, 10); -- Hidden Dragon
+    a[13435] = ach:New(13435, 5, fac.Horde); -- Doomsoul Surprise
     a[13437] = ach:New(13437, 5, fac.Horde); -- Scavenge like a Vulpera
     a[13438] = ach:New(13438, 5, fac.Horde); -- Boxing Match
     a[13439] = ach:New(13439, 5, fac.Alliance); -- Boxing Match
@@ -3089,6 +3094,7 @@ function exportedAchievements.Load(a)
     a[13624] = ach:New(13624, 10); -- Keep DPS-ing and Nobody Explodes
     a[13625] = ach:New(13625, 10); -- Mighty Minions of Mechagon
     a[13626] = ach:New(13626, 10); -- Nautical Nuisances of Nazjatar
+    a[13627] = ach:New(13627, 5); -- Pet Battle Challenge: Stratholme
     a[13628] = ach:New(13628, 10); -- Intro to Marine Biology
     a[13629] = ach:New(13629, 10); -- Simple Geometry
     a[13633] = ach:New(13633, 10); -- If It Pleases the Court
@@ -3164,6 +3170,7 @@ function exportedAchievements.Load(a)
     a[13763] = ach:New(13763, 10); -- Back to the Depths!
     a[13764] = ach:New(13764, 10); -- Puzzle Performer
     a[13765] = ach:New(13765, 10); -- Subaquatic Support
+    a[13766] = ach:New(13766, 10); -- Malowned
     a[13767] = ach:New(13767, 10); -- Fun Run
     a[13768] = ach:New(13768, 10); -- The Best of Us
     a[13769] = ach:New(13769, 10); -- Power Up
@@ -3187,12 +3194,14 @@ function exportedAchievements.Load(a)
     a[13924] = ach:New(13924, 10, fac.Horde); -- The Fourth War
     a[13925] = ach:New(13925, 10, fac.Alliance); -- The Fourth War
     a[13927] = ach:New(13927, 0); -- Crashin' Splashin'
+    a[13931] = ach:New(13931, 0, nil, nil, false); -- "Memories of Fel, Frost and Fire"
     a[13990] = ach:New(13990, 10); -- "You Can Pet the Dog, But..."
     a[13994] = ach:New(13994, 20); -- Through the Depths of Visions
     a[13998] = ach:New(13998, 10); -- Pure of Heart
     a[13999] = ach:New(13999, 10); -- How? Isn't it Obelisk?
     a[14008] = ach:New(14008, 10); -- Mana Sponge
     a[14019] = ach:New(14019, 10); -- Smoke Test
+    a[14020] = ach:New(14020, 5); -- Pet Battle Challenge: Blackrock Depths
     a[14023] = ach:New(14023, 10); -- Realizing Your Potential
     a[14024] = ach:New(14024, 10); -- Buzzer Beater
     a[14026] = ach:New(14026, 10); -- Temper Tantrum
@@ -3260,6 +3269,7 @@ function exportedAchievements.Load(a)
     a[14198] = ach:New(14198, 10); -- Heroic: Sanguine Depths
     a[14199] = ach:New(14199, 10); -- Mythic: Sanguine Depths
     a[14206] = ach:New(14206, 10); -- Blade of the Primus
+    a[14222] = ach:New(14222, 10); -- Exile's Reach
     a[14233] = ach:New(14233, 10); -- Tea Tales
     a[14272] = ach:New(14272, 5); -- Best Bud With Benefits
     a[14273] = ach:New(14273, 5); -- Crypt Kicker

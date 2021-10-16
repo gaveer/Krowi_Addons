@@ -1,4 +1,4 @@
--- [[ Exported at 2021-10-09 18-58-53 ]] --
+-- [[ Exported at 2021-10-16 14-20-17 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -49,8 +49,8 @@ function exportedCalendarEvents.LoadCategories(e, a)
     e[409].Category = data.CategoriesEvents[1].Children[9]; -- Day of the Dead
     e[423].Category = data.CategoriesEvents[1].Children[2]; -- Love is in the Air
     e[479].Category = data.CategoriesEvents[2]; -- Darkmoon Faire
-    e[1263].Category = data.CategoriesEvents[3].Children[2]; -- Timewalking
-    e[1271].Category = data.CategoriesEvents[3].Children[2]; -- Timewalking
+    e[1263].Category = data.CategoriesEvents[3].Children[1]; -- Legion
+    e[1271].Category = data.CategoriesEvents[3].Children[1]; -- Legion
 end
 
 function exportedCalendarEvents.InjectOptions()

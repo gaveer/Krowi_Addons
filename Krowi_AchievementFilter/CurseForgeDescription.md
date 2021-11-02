@@ -4,6 +4,7 @@
 <ul>
 <li>The <em><strong>Current Zone</strong></em> category shows which achievements are related to the current zone you're in. (This is still being approved on.)</li>
 <li>The <em><strong>Selected Zone</strong></em> category shows which achievements are related to the zone you're viewing in the World Map. (This is still being approved on.)</li>
+<li>The <strong><em>Focused</em></strong> category shows achievements you want to focus on.</li>
 <li>The <strong><em>Excluded</em></strong> category shows excluded achievements you don't want to see. Showing this category can be toggled in the options.</li>
 <li>Each expansion has its own category: <strong><em>Classic</em></strong>, <strong><em>The Burning Crusade</em></strong>, <strong><em>Wrath of the Lich King</em></strong>, <strong><em>Cataclysm</em></strong>, <strong><em>Mists of Pandaria</em></strong>, <strong><em>Warlords of Dreanor</em></strong>, <strong><em>Legion</em></strong>, <strong><em>Battle for Azeroth</em></strong> and <em><strong>Shadowlands</strong></em>.</li>
 <li>Each expansion is divided in Zones, Dungeons and Raids and Pet Battles where available.</li>

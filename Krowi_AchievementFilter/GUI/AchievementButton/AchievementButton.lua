@@ -99,7 +99,6 @@ function Saturate(self)
 		self.titleBar:SetTexCoord(0, 1, 0.66015625, 0.73828125);
 		self:SetBackdropBorderColor(ACHIEVEMENT_RED_BORDER_COLOR:GetRGB());
 		self.saturatedStyle = "NotObtainable";
-
 		SetTsunamis(self);
 	else
 		if not addon.InGuildView() and not self.accountWide then
@@ -114,7 +113,6 @@ function Desaturate(self)
 	if self.Achievement.NotObtainable then
 		self.titleBar:SetTexture(media .. "NotObtainableAchievementBorders");
 		self.titleBar:SetTexCoord(0, 1, 0.91796875, 0.99609375);
-
 		SetTsunamis(self);
 	else
 		SetTsunamis(self);

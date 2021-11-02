@@ -40,4 +40,4 @@ E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManag
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManagerWPF\obj\Debug\net5.0-windows\ref\DbManagerWPF.dll
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManagerWPF\obj\Debug\net5.0-windows\DbManagerWPF.pdb
 E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManagerWPF\obj\Debug\net5.0-windows\DbManagerWPF.genruntimeconfig.cache
-E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManagerWPF\obj\Debug\net5.0-windows\DbManagerWPF.csprojAssemblyReference.cache
+E:\World of Warcraft\_retail_\Interface\AddOns\Krowi_Databases\DbManager\DbManagerWPF\obj\Debug\net5.0-windows\DbManagerWPF.csproj.AssemblyReference.cache

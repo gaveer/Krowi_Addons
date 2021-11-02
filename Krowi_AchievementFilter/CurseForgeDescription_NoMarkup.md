@@ -6,6 +6,7 @@ Categories
 
 The Current Zone category shows which achievements are related to the current zone you're in. (This is still being approved on.)
 The Selected Zone category shows which achievements are related to the zone you're viewing in the World Map. (This is still being approved on.)
+The Focused category shows achievements you want to focus on.
 The Excluded category shows excluded achievements you don't want to see. Showing this category can be toggled in the options.
 Each expansion has its own category: Classic, The Burning Crusade, Wrath of the Lich King, Cataclysm, Mists of Pandaria, Warlords of Dreanor, Legion, Battle for Azeroth and Shadowlands.
 Each expansion is divided in Zones, Dungeons and Raids and Pet Battles where available.
@@ -49,4 +50,3 @@ Feel free to join discord and say hi: https://discord.gg/DCxq5rRNW5.
 
 Creating and maintaining addons takes a lot of time. If you can miss something, feel free to drop a donation!
 (Button on the right)
-

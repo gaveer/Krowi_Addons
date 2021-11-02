@@ -1,4 +1,4 @@
--- [[ Exported at 2021-09-06 22-33-54 ]] --
+-- [[ Exported at 2021-10-16 14-20-18 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -43,26 +43,26 @@ function exportedWorldEvents.LoadCategories(e, a)
         exportedWorldEvents.Load(e);
     end
 
-    e[5175].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
-    e[5177].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
-    e[5178].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
-    e[5210].Category = data.CategoriesEvents[3].Children[1]; -- Legion Assaults
-    e[5896].Category = data.CategoriesEvents[4].Children[1].Children[1]; -- Assault on Tiragarde Sound
-    e[5964].Category = data.CategoriesEvents[4].Children[1].Children[2]; -- Assault on Drustvar
-    e[5966].Category = data.CategoriesEvents[4].Children[1].Children[3]; -- Assault on Stormsong Valley
-    e[5969].Category = data.CategoriesEvents[4].Children[1].Children[5]; -- Assault on Nazmir
-    e[5970].Category = data.CategoriesEvents[4].Children[1].Children[6]; -- Assault on Vol'dun
-    e[5973].Category = data.CategoriesEvents[4].Children[1].Children[4]; -- Assault on Zuldazar
-    e[6486].Category = data.CategoriesEvents[4].Children[2].Children[2]; -- Uldum
-    e[6487].Category = data.CategoriesEvents[4].Children[2].Children[2]; -- Uldum
-    e[6488].Category = data.CategoriesEvents[4].Children[2].Children[2]; -- Uldum
-    e[6489].Category = data.CategoriesEvents[4].Children[2].Children[1]; -- Vale of Eternal Blossoms
-    e[6490].Category = data.CategoriesEvents[4].Children[2].Children[1]; -- Vale of Eternal Blossoms
-    e[6491].Category = data.CategoriesEvents[4].Children[2].Children[1]; -- Vale of Eternal Blossoms
-    e[6989].Category = data.CategoriesEvents[5].Children[1].Children[2]; -- Necrolords Assault
-    e[6990].Category = data.CategoriesEvents[5].Children[1].Children[4]; -- Venthyr Assault
-    e[6991].Category = data.CategoriesEvents[5].Children[1].Children[1]; -- Kyrian Assault
-    e[6992].Category = data.CategoriesEvents[5].Children[1].Children[3]; -- Night Fae Assault
+    e[5175].Category = data.CategoriesEvents[4].Children[1]; -- Legion Assaults
+    e[5177].Category = data.CategoriesEvents[4].Children[1]; -- Legion Assaults
+    e[5178].Category = data.CategoriesEvents[4].Children[1]; -- Legion Assaults
+    e[5210].Category = data.CategoriesEvents[4].Children[1]; -- Legion Assaults
+    e[5896].Category = data.CategoriesEvents[5].Children[1].Children[1]; -- Assault on Tiragarde Sound
+    e[5964].Category = data.CategoriesEvents[5].Children[1].Children[2]; -- Assault on Drustvar
+    e[5966].Category = data.CategoriesEvents[5].Children[1].Children[3]; -- Assault on Stormsong Valley
+    e[5969].Category = data.CategoriesEvents[5].Children[1].Children[5]; -- Assault on Nazmir
+    e[5970].Category = data.CategoriesEvents[5].Children[1].Children[6]; -- Assault on Vol'dun
+    e[5973].Category = data.CategoriesEvents[5].Children[1].Children[4]; -- Assault on Zuldazar
+    e[6486].Category = data.CategoriesEvents[5].Children[2].Children[2]; -- Uldum
+    e[6487].Category = data.CategoriesEvents[5].Children[2].Children[2]; -- Uldum
+    e[6488].Category = data.CategoriesEvents[5].Children[2].Children[2]; -- Uldum
+    e[6489].Category = data.CategoriesEvents[5].Children[2].Children[1]; -- Vale of Eternal Blossoms
+    e[6490].Category = data.CategoriesEvents[5].Children[2].Children[1]; -- Vale of Eternal Blossoms
+    e[6491].Category = data.CategoriesEvents[5].Children[2].Children[1]; -- Vale of Eternal Blossoms
+    e[6989].Category = data.CategoriesEvents[6].Children[1].Children[2]; -- Necrolords Assault
+    e[6990].Category = data.CategoriesEvents[6].Children[1].Children[4]; -- Venthyr Assault
+    e[6991].Category = data.CategoriesEvents[6].Children[1].Children[1]; -- Kyrian Assault
+    e[6992].Category = data.CategoriesEvents[6].Children[1].Children[3]; -- Night Fae Assault
 end
 
 function exportedWorldEvents.InjectOptions()

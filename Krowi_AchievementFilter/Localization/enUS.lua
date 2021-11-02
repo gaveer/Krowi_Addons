@@ -66,6 +66,9 @@ L["Assault on Val'sharah"] = "Assault on Val'sharah";
 L["Assault on Highmountain"] = "Assault on Highmountain";
 L["Assault on Stormheim"] = "Assault on Stormheim";
 L["Focused"] = "Focused";
+L["Brawler's Guild"] = "Brawler's Guild";
+L["Gifts"] = "Gifts"
+L["Other"] = "Other";
 
 -- Filters
 L["Obtainable"] = "Obtainable";
@@ -245,6 +248,8 @@ L["Skin Tooltip"] = "Skin Tooltip";
 L["Skin Tooltip Desc"] = "Applies the ElvUI skin to the Tooltip.\n-> Blizzard + Tooltip";
 L["Skin Tutorials"] = "Skin Tutorials";
 L["Skin Tutorials Desc"] = "Applies the ElvUI skin to the Tutorials.\n-> Blizzard + Tutorials";
+L["Skin Alert Frames"] = "Skin Alert Frames";
+L["Skin Alert Frames Desc"] = "Applies the ElvUI skin to the Alert Frames.\n-> Blizzard + Alert Frames";
 L["Skin Ace3"] = "Skin Ace3";
 L["Skin Ace3 Desc"] = "Applies the ElvUI skin to the Options.\n-> Ace3";
 

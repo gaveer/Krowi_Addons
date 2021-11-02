@@ -81,9 +81,17 @@ local function BlueBackdrop(self)
 	self:SetBackdropColor(blueAchievement.r, blueAchievement.g, blueAchievement.b)
 end
 
+local redAchievement = { r = 0.3, g = 0, b = 0 }
+local function RedBackdrop(self)
+	self:SetBackdropColor(redAchievement.r, redAchievement.g, redAchievement.b)
+end
+
 local function SetAchievementButtonColor(frame, engine)
 	if frame and frame.backdrop then
-		if frame.accountWide then
+		if frame.Achievement.NotObtainable then
+			frame.backdrop.callbackBackdropColor = RedBackdrop;
+			frame.backdrop:SetBackdropColor(redAchievement.r, redAchievement.g, redAchievement.b);
+        elseif frame.accountWide then
 			frame.backdrop.callbackBackdropColor = BlueBackdrop;
 			frame.backdrop:SetBackdropColor(blueAchievement.r, blueAchievement.g, blueAchievement.b);
 		else
@@ -200,6 +208,70 @@ local function ApplyToFullSearchResultsFrame(frame, skins)
 	skins:HandleScrollBar(frame.Container.ScrollBar);
 end
 
+local function forceAlpha(self, alpha, forced)
+	if alpha ~= 1 and forced ~= true then
+		self:SetAlpha(1, true)
+	end
+end
+
+local function ApplyToAlertFrameTemplate(frame, engine)
+    frame:SetAlpha(1)
+
+    if not frame.hooked then
+        hooksecurefunc(frame, 'SetAlpha', forceAlpha)
+        frame.hooked = true
+    end
+
+    if not frame.backdrop then
+        frame:CreateBackdrop('Transparent')
+        frame.backdrop:Point('TOPLEFT', frame.Background, 'TOPLEFT', -2, -6)
+        frame.backdrop:Point('BOTTOMRIGHT', frame.Background, 'BOTTOMRIGHT', -2, 6)
+    end
+
+    -- Background
+    frame.Background:SetTexture()
+    frame.glow:Kill()
+    frame.shine:Kill()
+    -- frame.GuildBanner:Kill()
+    -- frame.GuildBorder:Kill()
+
+    -- Text
+    frame.Unlocked:FontTemplate(nil, 12)
+    frame.Unlocked:SetTextColor(1, 1, 1)
+    frame.Name:FontTemplate(nil, 12)
+
+    -- Icon
+    frame.Icon.Texture:SetTexCoord(unpack(engine.TexCoords))
+    frame.Icon.Overlay:Kill()
+
+    frame.Icon.Texture:ClearAllPoints()
+    frame.Icon.Texture:Point('LEFT', frame, 7, 0)
+
+    if not frame.Icon.Texture.b then
+        frame.Icon.Texture.b = CreateFrame('Frame', nil, frame)
+        frame.Icon.Texture.b:SetTemplate()
+        frame.Icon.Texture.b:SetOutside(frame.Icon.Texture)
+        frame.Icon.Texture:SetParent(frame.Icon.Texture.b)
+    end
+end
+
+local function ApplyToSideButtons(sideButtons, engine)
+    gui.SideButton.OfsX1 = 5;
+    gui.SideButton.OfsY1 = 13;
+    gui.SideButton.OfsXn = 0;
+    gui.SideButton.OfsYn = 9;
+    for i, button in next, sideButtons do
+        ApplyToAlertFrameTemplate(button, engine);
+        if i == 1 then
+            button:ClearAllPoints();
+            button:SetPoint("TOPLEFT", AchievementFrame, "TOPRIGHT", gui.SideButton.OfsX1, gui.SideButton.OfsY1); -- Make the 2nd button anchor like the 1st one
+        else
+            button:ClearAllPoints();
+            button:SetPoint("TOPLEFT", sideButtons[i - 1], "BOTTOMLEFT", gui.SideButton.OfsXn, gui.SideButton.OfsYn); -- Make the 2nd button anchor like the 1st one
+        end
+    end
+end
+
 local engine, skins;
 function elvUISkin.Load()
 	diagnostics.Trace("elvUISkin.Load");
@@ -216,6 +288,7 @@ function elvUISkin.Load()
         SavedData.ElvUISkin.MiscFrames = blizzardSkins.enable and blizzardSkins.misc;
         SavedData.ElvUISkin.Tooltip = blizzardSkins.enable and blizzardSkins.tooltip;
         SavedData.ElvUISkin.Tutorials = blizzardSkins.enable and blizzardSkins.tutorials;
+        SavedData.ElvUISkin.AlertFrames = blizzardSkins.enable and blizzardSkins.alertframes;
         SavedData.ElvUISkin.Options = engine.private.skins.ace3Enable;
     else
         SavedData.ElvUISkin = {};
@@ -240,5 +313,16 @@ function elvUISkin.Apply()
         ApplyToSearchBoxFrame(search.SearchBoxFrame, gui.AchievementsFrame, skins);
         ApplyToSearchPreviewFrame(search.SearchPreviewFrame, gui.AchievementsFrame, engine, skins);
         ApplyToFullSearchResultsFrame(search.FullSearchResultsFrame, skins);
+        ApplyToSideButtons(gui.SideButtons, engine);
     end
+end
+
+function elvUISkin.ApplyToAlertFrames()
+    if not SavedData.ElvUISkin.AlertFrames then
+        return;
+    end
+
+    hooksecurefunc(addon.GUI.AlertSystem, "setUpFunction", function(frame)
+        ApplyToAlertFrameTemplate(frame, engine);
+    end);
 end

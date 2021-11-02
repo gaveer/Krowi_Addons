@@ -38,8 +38,8 @@ function WorldMapAchievementButtonMixin:OnClick()
         HideUIPanel(WorldMapFrame);
         addon.Data.SelectedZoneCategory.Achievements = worldMapButton.Achievements;
         addon.GUI.ToggleAchievementFrame(addon.L["Expansions"], true);
-        addon.Data.CategoriesExpansions[2].Name = addon.L["Selected Zone"] .. " (" .. worldMapButton.name .. ")";
-        gui.CategoriesFrame:SelectCategory(addon.Data.CategoriesExpansions[2]);
+        addon.Data.CategoriesExpansions[3].Name = addon.L["Selected Zone"] .. " (" .. worldMapButton.name .. ")";
+        gui.CategoriesFrame:SelectCategory(addon.Data.CategoriesExpansions[3]);
     end
 end
 

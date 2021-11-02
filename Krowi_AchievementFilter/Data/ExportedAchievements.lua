@@ -1,4 +1,4 @@
--- [[ Exported at 2021-08-10 07-55-07 ]] --
+-- [[ Exported at 2021-10-16 14-20-14 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -56,6 +56,7 @@ function exportedAchievements.Load(a)
     a[388] = ach:New(388, 10, fac.Alliance); -- City Defender
     a[416] = ach:New(416, 0, nil, nil, false); -- Scarab Lord
     a[424] = ach:New(424, 0); -- Why? Because It's Red
+    a[425] = ach:New(425, 0, nil, nil, false); -- "Atiesh, Greatstaff of the Guardian"
     a[426] = ach:New(426, 0); -- Warglaives of Azzinoth
     a[428] = ach:New(428, 0); -- "Thunderfury, Blessed Blade of the Windseeker"
     a[429] = ach:New(429, 0); -- "Sulfuras, Hand of Ragnaros"
@@ -324,7 +325,7 @@ function exportedAchievements.Load(a)
     a[1040] = ach:New(1040, 10, fac.Alliance); -- Rotten Hallow
     a[1041] = ach:New(1041, 10, fac.Horde); -- Rotten Hallow
     a[1145] = ach:New(1145, 10); -- King of the Fire Festival
-    a[1165] = ach:New(1165, 10); -- "My Sack is ""Gigantique"""
+    a[1165] = ach:New(1165, 10); -- "My Storage is ""Gigantique"""
     a[1183] = ach:New(1183, 10); -- Brew of the Year
     a[1184] = ach:New(1184, 10, fac.Alliance); -- Strange Brew
     a[1185] = ach:New(1185, 10); -- The Brewfest Diet
@@ -393,8 +394,8 @@ function exportedAchievements.Load(a)
     a[1676] = ach:New(1676, 10); -- Loremaster of Eastern Kingdoms
     a[1678] = ach:New(1678, 10); -- Loremaster of Kalimdor
     a[1683] = ach:New(1683, 10); -- Brewmaster
-    a[1685] = ach:New(1685, 10, fac.Horde); -- Bros. Before Ho Ho Ho's
-    a[1686] = ach:New(1686, 10, fac.Alliance); -- Bros. Before Ho Ho Ho's
+    a[1685] = ach:New(1685, 10, fac.Horde); -- Holiday Bromance
+    a[1686] = ach:New(1686, 10, fac.Alliance); -- Holiday Bromance
     a[1687] = ach:New(1687, 10); -- Let It Snow
     a[1688] = ach:New(1688, 10); -- The Winter Veil Gourmet
     a[1689] = ach:New(1689, 10); -- He Knows If You've Been Naughty
@@ -412,6 +413,8 @@ function exportedAchievements.Load(a)
     a[1702] = ach:New(1702, 10); -- Sweet Tooth
     a[1703] = ach:New(1703, 10); -- "My Love is Like a Red, Red Rose"
     a[1704] = ach:New(1704, 10); -- I Pitied The Fool
+    a[1705] = ach:New(1705, 0); -- Clockwork Rocket Bot
+    a[1706] = ach:New(1706, 0); -- Crashin' Thrashin' Racer
     a[1721] = ach:New(1721, 10); -- Archavon the Stone Watcher (25 player)
     a[1722] = ach:New(1722, 10); -- Archavon the Stone Watcher (10 player)
     a[1786] = ach:New(1786, 10); -- School of Hard Knocks
@@ -836,7 +839,7 @@ function exportedAchievements.Load(a)
     a[4624] = ach:New(4624, 10); -- Tough Love
     a[4625] = ach:New(4625, 0); -- Invincible's Reins
     a[4626] = ach:New(4626, 0); -- And I'll Form the Head!
-    a[4627] = ach:New(4627, 0); -- Big Love Rocket
+    a[4627] = ach:New(4627, 0); -- X-45 Heartbreaker
     a[4628] = ach:New(4628, 10); -- Heroic: Storming the Citadel (10 player)
     a[4629] = ach:New(4629, 10); -- Heroic: The Plagueworks (10 player)
     a[4630] = ach:New(4630, 10); -- Heroic: The Crimson Hall (10 player)
@@ -1114,6 +1117,9 @@ function exportedAchievements.Load(a)
     a[6031] = ach:New(6031, 10, fac.Horde); -- Taking the Show on the Road
     a[6032] = ach:New(6032, 10); -- Faire Favors
     a[6045] = ach:New(6045, 10); -- Occu'thar
+    a[6059] = ach:New(6059, 0); -- Red Rider Air Rifle
+    a[6060] = ach:New(6060, 0); -- MiniZep Controller
+    a[6061] = ach:New(6061, 0); -- Gaudy Winter Veil Sweater
     a[6070] = ach:New(6070, 10); -- That's Not Canon!
     a[6084] = ach:New(6084, 10); -- Minutes to Midnight
     a[6089] = ach:New(6089, 10); -- Keep Rollin' Rollin' Rollin'
@@ -1419,6 +1425,7 @@ function exportedAchievements.Load(a)
     a[7536] = ach:New(7536, 0, nil, nil, false); -- Chapter IV: Celestial Blessings
     a[7601] = ach:New(7601, 10, fac.Alliance); -- Tricks and Treats of Pandaria
     a[7602] = ach:New(7602, 10, fac.Horde); -- Tricks and Treats of Pandaria
+    a[7852] = ach:New(7852, 0); -- They're Both Footballs?
     a[7908] = ach:New(7908, 5); -- I Choose You
     a[7928] = ach:New(7928, 10, fac.Alliance); -- Operation: Shieldwall Campaign
     a[7929] = ach:New(7929, 10, fac.Horde); -- Dominance Offensive Campaign
@@ -1486,7 +1493,7 @@ function exportedAchievements.Load(a)
     a[8063] = ach:New(8063, 10); -- Heroic: Primordius
     a[8064] = ach:New(8064, 10); -- Heroic: Dark Animus
     a[8065] = ach:New(8065, 10); -- Heroic: Iron Qon
-    a[8066] = ach:New(8066, 10); -- Heroic: Twin Consorts
+    a[8066] = ach:New(8066, 10); -- Heroic: Twin Empyreans
     a[8067] = ach:New(8067, 10); -- Heroic: Lei Shen
     a[8068] = ach:New(8068, 10); -- Heroic: Ra-den
     a[8069] = ach:New(8069, 10); -- Last Stand of the Zandalari
@@ -1641,6 +1648,7 @@ function exportedAchievements.Load(a)
     a[8679] = ach:New(8679, 10, fac.Alliance); -- Conqueror of Orgrimmar
     a[8680] = ach:New(8680, 10, fac.Horde); -- Liberator of Orgrimmar
     a[8697] = ach:New(8697, 0, nil, nil, false); -- You're Doing it Wrong (Level 90)
+    a[8698] = ach:New(8698, 0); -- Crashin' Thrashin' Flyer
     a[8699] = ach:New(8699, 10); -- The Danger Zone
     a[8712] = ach:New(8712, 10); -- Killing Time
     a[8714] = ach:New(8714, 10); -- Timeless Champion
@@ -2109,6 +2117,7 @@ function exportedAchievements.Load(a)
     a[9901] = ach:New(9901, 10, fac.Horde); -- Don't Call Me Junior
     a[9912] = ach:New(9912, 5, fac.Alliance); -- Azeroth's Top Twenty Tunes
     a[9914] = ach:New(9914, 5, fac.Horde); -- Azeroth's Top Twenty Tunes
+    a[9915] = ach:New(9915, 0); -- Crashin' Thrashin' Shredder
     a[9923] = ach:New(9923, 10, fac.Horde); -- Loremaster of Draenor
     a[9928] = ach:New(9928, 10, fac.Alliance); -- Don't Call Me Junior
     a[9972] = ach:New(9972, 10); -- A Race Against Slime
@@ -2206,6 +2215,7 @@ function exportedAchievements.Load(a)
     a[10276] = ach:New(10276, 10, fac.Horde); -- Admiral
     a[10307] = ach:New(10307, 10, fac.Horde); -- Exploring the High Seas
     a[10334] = ach:New(10334, 0); -- Predator
+    a[10337] = ach:New(10337, 0); -- Crashin' Thrashin' Flamer
     a[10348] = ach:New(10348, 10); -- Master Treasure Hunter
     a[10349] = ach:New(10349, 10, fac.Horde); -- Tanaan Diplomat
     a[10350] = ach:New(10350, 10, fac.Alliance); -- Tanaan Diplomat
@@ -2261,6 +2271,7 @@ function exportedAchievements.Load(a)
     a[10748] = ach:New(10748, 10); -- Fighting with Style: Valorous
     a[10749] = ach:New(10749, 10, fac.Alliance); -- Fighting with Style: War-torn
     a[10750] = ach:New(10750, 10); -- Fighting with Style: Hidden
+    a[10751] = ach:New(10751, 0); -- Brr... It's Cold in Here
     a[10753] = ach:New(10753, 10); -- Scare Bear
     a[10754] = ach:New(10754, 10); -- Fruit of All Evil
     a[10755] = ach:New(10755, 10); -- I Attack the Darkness
@@ -2494,6 +2505,7 @@ function exportedAchievements.Load(a)
     a[11760] = ach:New(11760, 10); -- Retro Trend
     a[11762] = ach:New(11762, 10); -- Can I Get A Helya
     a[11763] = ach:New(11763, 25); -- Glory of the Tomb Raider
+    a[11765] = ach:New(11765, 5); -- Pet Battle Challenge: Wailing Caverns
     a[11767] = ach:New(11767, 10); -- Mythic: Goroth
     a[11768] = ach:New(11768, 10); -- Boom Bloom
     a[11769] = ach:New(11769, 10); -- A Steamy Romance Saga
@@ -2517,11 +2529,13 @@ function exportedAchievements.Load(a)
     a[11802] = ach:New(11802, 10); -- Bringing Home the Beacon
     a[11841] = ach:New(11841, 10); -- Naxt Victim
     a[11846] = ach:New(11846, 10); -- Champions of Legionfall
+    a[11856] = ach:New(11856, 5); -- Pet Battle Challenge: Deadmines
     a[11861] = ach:New(11861, 10, fac.Horde); -- The Throne of Zuldazar
     a[11868] = ach:New(11868, 10, fac.Horde); -- The Dark Heart of Nazmir
     a[11869] = ach:New(11869, 0); -- I'll Hold These For You Until You Get Out
     a[11874] = ach:New(11874, 0, nil, nil, false); -- Ahead of the Curve: Kil'jaeden
     a[11875] = ach:New(11875, 0, nil, nil, false); -- Cutting Edge: Kil'jaeden
+    a[11913] = ach:New(11913, 0); -- Don't Play With That In The House
     a[11915] = ach:New(11915, 10); -- Don't Sweat the Technique
     a[11918] = ach:New(11918, 5); -- "Hey, You're a Rockstar!"
     a[11919] = ach:New(11919, 10); -- Taking this Show on the Road
@@ -2787,6 +2801,7 @@ function exportedAchievements.Load(a)
     a[12847] = ach:New(12847, 10); -- Siege of Boralus
     a[12848] = ach:New(12848, 10); -- Kings' Rest
     a[12849] = ach:New(12849, 10); -- Treasures of Vol'dun
+    a[12850] = ach:New(12850, 0); -- At Least You're Being Careful
     a[12851] = ach:New(12851, 10); -- Treasures of Zuldazar
     a[12852] = ach:New(12852, 10); -- Treasures of Tiragarde Sound
     a[12853] = ach:New(12853, 10); -- Treasures of Stormsong Valley
@@ -2945,6 +2960,7 @@ function exportedAchievements.Load(a)
     a[13250] = ach:New(13250, 25); -- "Battle for Azeroth Pathfinder, Part Two"
     a[13251] = ach:New(13251, 0, fac.Alliance); -- In Teldrassil's Shadow
     a[13263] = ach:New(13263, 10, fac.Horde); -- The Shadow Hunter
+    a[13269] = ach:New(13269, 5); -- Pet Battle Challenge: Gnomeregan
     a[13270] = ach:New(13270, 5); -- Beast Mode
     a[13271] = ach:New(13271, 5); -- Critters With Huge Teeth
     a[13272] = ach:New(13272, 5); -- Dragons Make Everything Better
@@ -3024,6 +3040,7 @@ function exportedAchievements.Load(a)
     a[13429] = ach:New(13429, 5); -- Azerfighter
     a[13430] = ach:New(13430, 10); -- De Lurker Be'loa
     a[13431] = ach:New(13431, 10); -- Hidden Dragon
+    a[13435] = ach:New(13435, 5, fac.Horde); -- Doomsoul Surprise
     a[13437] = ach:New(13437, 5, fac.Horde); -- Scavenge like a Vulpera
     a[13438] = ach:New(13438, 5, fac.Horde); -- Boxing Match
     a[13439] = ach:New(13439, 5, fac.Alliance); -- Boxing Match
@@ -3077,6 +3094,7 @@ function exportedAchievements.Load(a)
     a[13624] = ach:New(13624, 10); -- Keep DPS-ing and Nobody Explodes
     a[13625] = ach:New(13625, 10); -- Mighty Minions of Mechagon
     a[13626] = ach:New(13626, 10); -- Nautical Nuisances of Nazjatar
+    a[13627] = ach:New(13627, 5); -- Pet Battle Challenge: Stratholme
     a[13628] = ach:New(13628, 10); -- Intro to Marine Biology
     a[13629] = ach:New(13629, 10); -- Simple Geometry
     a[13633] = ach:New(13633, 10); -- If It Pleases the Court
@@ -3152,6 +3170,7 @@ function exportedAchievements.Load(a)
     a[13763] = ach:New(13763, 10); -- Back to the Depths!
     a[13764] = ach:New(13764, 10); -- Puzzle Performer
     a[13765] = ach:New(13765, 10); -- Subaquatic Support
+    a[13766] = ach:New(13766, 10); -- Malowned
     a[13767] = ach:New(13767, 10); -- Fun Run
     a[13768] = ach:New(13768, 10); -- The Best of Us
     a[13769] = ach:New(13769, 10); -- Power Up
@@ -3174,12 +3193,15 @@ function exportedAchievements.Load(a)
     a[13878] = ach:New(13878, 10); -- The Master of Revendreth
     a[13924] = ach:New(13924, 10, fac.Horde); -- The Fourth War
     a[13925] = ach:New(13925, 10, fac.Alliance); -- The Fourth War
+    a[13927] = ach:New(13927, 0); -- Crashin' Splashin'
+    a[13931] = ach:New(13931, 0, nil, nil, false); -- "Memories of Fel, Frost and Fire"
     a[13990] = ach:New(13990, 10); -- "You Can Pet the Dog, But..."
     a[13994] = ach:New(13994, 20); -- Through the Depths of Visions
     a[13998] = ach:New(13998, 10); -- Pure of Heart
     a[13999] = ach:New(13999, 10); -- How? Isn't it Obelisk?
     a[14008] = ach:New(14008, 10); -- Mana Sponge
     a[14019] = ach:New(14019, 10); -- Smoke Test
+    a[14020] = ach:New(14020, 5); -- Pet Battle Challenge: Blackrock Depths
     a[14023] = ach:New(14023, 10); -- Realizing Your Potential
     a[14024] = ach:New(14024, 10); -- Buzzer Beater
     a[14026] = ach:New(14026, 10); -- Temper Tantrum
@@ -3247,6 +3269,7 @@ function exportedAchievements.Load(a)
     a[14198] = ach:New(14198, 10); -- Heroic: Sanguine Depths
     a[14199] = ach:New(14199, 10); -- Mythic: Sanguine Depths
     a[14206] = ach:New(14206, 10); -- Blade of the Primus
+    a[14222] = ach:New(14222, 10); -- Exile's Reach
     a[14233] = ach:New(14233, 10); -- Tea Tales
     a[14272] = ach:New(14272, 5); -- Best Bud With Benefits
     a[14273] = ach:New(14273, 5); -- Crypt Kicker
@@ -3529,6 +3552,7 @@ function exportedAchievements.Load(a)
     a[14887] = ach:New(14887, 0, nil, cov.Kyrian); -- To the Moon
     a[14894] = ach:New(14894, 10); -- "To 'Ghast, Two Curios"
     a[14895] = ach:New(14895, 10); -- 'Ghast Five
+    a[14931] = ach:New(14931, 0); -- Flying Festivities
     a[14938] = ach:New(14938, 0, nil, nil, false); -- Shadowlands Keystone Explorer: Season One
     a[14943] = ach:New(14943, 10); -- Guarmageddon
     a[14961] = ach:New(14961, 10); -- Chains of Domination
@@ -3625,7 +3649,13 @@ function exportedAchievements.Load(a)
     a[15177] = ach:New(15177, 10); -- "Tazavesh, the Veiled Market"
     a[15178] = ach:New(15178, 10); -- Fake It 'Til You Make It
     a[15179] = ach:New(15179, 10); -- This is Fine
+    a[15181] = ach:New(15181, 10); -- Rock n' Roll
     a[15190] = ach:New(15190, 10); -- Mischief!
     a[15191] = ach:New(15191, 0); -- "Rae'shalare, Death's Whisper"
+    a[15241] = ach:New(15241, 10); -- Renowned
+    a[15308] = ach:New(15308, 0); -- Tower Overwhelming
+    a[15309] = ach:New(15309, 10); -- A Towering Success
+    a[15310] = ach:New(15310, 20); -- A Tour of Towers
+    a[15313] = ach:New(15313, 0); -- Rockin' Rollin' Racer
 end
 

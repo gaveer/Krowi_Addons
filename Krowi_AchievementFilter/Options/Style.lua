@@ -26,6 +26,7 @@ options.OptionsTable.args["Style"] = {
         SkinMiscFrames = AddInfo(3, "Skin Misc Frames", function() return SavedData.ElvUISkin.MiscFrames; end),
         SkinTooltip = AddInfo(4, "Skin Tooltip", function() return SavedData.ElvUISkin.Tooltip; end),
         SkinTutorials = AddInfo(5, "Skin Tutorials", function() return SavedData.ElvUISkin.Tutorials; end),
-        SkinAce3 = AddInfo(6, "Skin Ace3", function() return SavedData.ElvUISkin.Options; end)
+        SkinAlertFrames = AddInfo(6, "Skin Alert Frames", function() return SavedData.ElvUISkin.AlertFrames; end),
+        SkinAce3 = AddInfo(7, "Skin Ace3", function() return SavedData.ElvUISkin.Options; end)
     }
 };

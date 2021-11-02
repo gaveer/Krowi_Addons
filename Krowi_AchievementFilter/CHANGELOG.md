@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 - Event Reminders next to the Achievement window are now skinned when ElvUI's Blizzard Skins and Achievements are selected
 - Event Reminders pop ups are now skinned when ElvUI's Blizzard Skins and Alert Frames are selected
 
-[9.1.5.30.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3453438
+[9.1.5.30.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3512817
 
 ## [9.1.0.29.1] - 2021-09-07
 ### Fixed

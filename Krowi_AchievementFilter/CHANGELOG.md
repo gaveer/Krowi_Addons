@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.1.5.32.0] - 2021-
+### Added
+
+[9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
+
 ## [9.1.5.31.0] - 2021-11-04
 ### Added
 - Raiding with Leashes V: Cuteaclysm to the Cataclysm raids

@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.5.31.0] - 2021-
+## [9.1.5.31.0] - 2021-11-04
 ### Added
 - Raiding with Leashes V: Cuteaclysm to the Cataclysm raids
 - Raiding with Leashes IV: Wrath of the Lick King to the Wrath of the Lich King raids
@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - Raiding with Leashes to the Classic raids and Naxxramas
 - Operation: Gnomeregan to Dun Morogh (unobtainable)
 - Zalazane's Fall to Durotat (unobtainable)
+
+### Fixed
+- Calendar events did not refresh properly
 
 [9.1.5.31.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3512817
 

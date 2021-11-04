@@ -26,12 +26,12 @@ function eventData.Load()
             end
         end
     else
-        EventDetails.CalendarEvents = {};
         refreshEvents = true;
     end
 
     diagnostics.Debug("refreshEvents: " .. tostring(refreshEvents));
     if refreshEvents then -- Events are either empty or an event has elapsed so get new data
+        EventDetails.CalendarEvents = {};
         local events = GetEvents();
         for id, event in next, data.CalendarEvents do
             if events[id] then -- At this time we only handle calendar events, POI's are handeled later

@@ -1,4 +1,4 @@
--- [[ Exported at 2021-10-16 14-20-14 ]] --
+-- [[ Exported at 2021-11-02 22-10-18 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -850,6 +850,8 @@ function exportedAchievements.Load(a)
     a[4635] = ach:New(4635, 10); -- Heroic: The Frostwing Halls (25 player)
     a[4636] = ach:New(4636, 25); -- Heroic: Fall of the Lich King (10 player)
     a[4637] = ach:New(4637, 25); -- Heroic: Fall of the Lich King (25 player)
+    a[4786] = ach:New(4786, 0, fac.Alliance, nil, false); -- Operation: Gnomeregan
+    a[4790] = ach:New(4790, 0, fac.Horde, nil, false); -- Zalazane's Fall
     a[4815] = ach:New(4815, 10); -- The Twilight Destroyer (25 player)
     a[4816] = ach:New(4816, 10); -- Heroic: The Twilight Destroyer (25 player)
     a[4817] = ach:New(4817, 10); -- The Twilight Destroyer (10 player)
@@ -1431,6 +1433,7 @@ function exportedAchievements.Load(a)
     a[7929] = ach:New(7929, 10, fac.Horde); -- Dominance Offensive Campaign
     a[7932] = ach:New(7932, 10); -- "I'm In Your Base, Killing Your Dudes"
     a[7933] = ach:New(7933, 10); -- And... It's Good!
+    a[7934] = ach:New(7934, 10); -- Raiding with Leashes
     a[7936] = ach:New(7936, 5); -- Pandaren Spirit Tamer
     a[7937] = ach:New(7937, 0, fac.Alliance, nil, false); -- You Are Not Your $#*@! Legplates (Season 1)
     a[7939] = ach:New(7939, 0, fac.Horde, nil, false); -- The Second Rule of Brawler's Guild (Season 1)
@@ -1548,6 +1551,7 @@ function exportedAchievements.Load(a)
     a[8248] = ach:New(8248, 0, nil, nil, false); -- Ahead of the Curve: Sha of Fear
     a[8249] = ach:New(8249, 0, nil, nil, false); -- Ahead of the Curve: Lei Shen
     a[8260] = ach:New(8260, 0, nil, nil, false); -- Cutting Edge: Ra-den
+    a[8293] = ach:New(8293, 10); -- Raiding with Leashes II: Attunement Edition
     a[8294] = ach:New(8294, 10); -- The Secrets of Ragefire
     a[8295] = ach:New(8295, 10); -- "The Few, the Proud, the Gob Squad"
     a[8310] = ach:New(8310, 10); -- Heroic: A Brewing Storm
@@ -2102,6 +2106,7 @@ function exportedAchievements.Load(a)
     a[9815] = ach:New(9815, 5); -- Big Powermonger: Silver
     a[9817] = ach:New(9817, 5); -- Big Powermonger: Gold
     a[9819] = ach:New(9819, 5); -- Darkmoon Like the Wind
+    a[9824] = ach:New(9824, 10); -- Raiding with Leashes III: Drinkin' From the Sunwell
     a[9825] = ach:New(9825, 10, fac.Alliance); -- Master Relic Hunter
     a[9826] = ach:New(9826, 5); -- Platinum Defender
     a[9827] = ach:New(9827, 10); -- Impervious Defender
@@ -2349,6 +2354,7 @@ function exportedAchievements.Load(a)
     a[10877] = ach:New(10877, 25); -- Pillars of Creation
     a[10994] = ach:New(10994, 10); -- A Glorious Campaign
     a[10996] = ach:New(10996, 10); -- Got to Ketchum All
+    a[11065] = ach:New(11065, 0, nil, nil, false); -- It All Makes Sense Now
     a[11066] = ach:New(11066, 10); -- Underbelly Tycoon
     a[11124] = ach:New(11124, 10); -- Good Suramaritan
     a[11125] = ach:New(11125, 10); -- Now You're Thinking With Portals
@@ -2380,6 +2386,8 @@ function exportedAchievements.Load(a)
     a[11192] = ach:New(11192, 0, nil, nil, false); -- Cutting Edge: Gul'dan
     a[11194] = ach:New(11194, 0, nil, nil, false); -- Ahead of the Curve: Xavius
     a[11195] = ach:New(11195, 0, nil, nil, false); -- Ahead of the Curve: Gul'dan
+    a[11200] = ach:New(11200, 0, nil, nil, false); -- Stand Against the Legion
+    a[11201] = ach:New(11201, 0, nil, nil, false); -- Defender of Azeroth: Legion Invasions
     a[11212] = ach:New(11212, 5); -- Raise an Army
     a[11213] = ach:New(11213, 5); -- Lead a Legion
     a[11214] = ach:New(11214, 5); -- Many Missions
@@ -2414,6 +2422,7 @@ function exportedAchievements.Load(a)
     a[11283] = ach:New(11283, 10, fac.Alliance); -- Flame Warden of Draenor
     a[11284] = ach:New(11284, 10, fac.Horde); -- Flame Keeper of Draenor
     a[11298] = ach:New(11298, 10); -- A Classy Outfit
+    a[11320] = ach:New(11320, 10); -- Raiding with Leashes IV: Wrath of the Lick King
     a[11335] = ach:New(11335, 10); -- Season Tickets
     a[11337] = ach:New(11337, 10); -- You Runed Everything!
     a[11338] = ach:New(11338, 10); -- Dine and Bash
@@ -2584,6 +2593,7 @@ function exportedAchievements.Load(a)
     a[12076] = ach:New(12076, 10); -- Protector of the Argussian Reach
     a[12077] = ach:New(12077, 10); -- Adventurer of Argus
     a[12078] = ach:New(12078, 10); -- Commander of Argus
+    a[12079] = ach:New(12079, 10); -- Raiding with Leashes V: Cuteaclysm
     a[12081] = ach:New(12081, 10); -- Officer of the Light
     a[12083] = ach:New(12083, 25); -- Paragon of Argus
     a[12084] = ach:New(12084, 5); -- Infused and Abused
@@ -3512,7 +3522,7 @@ function exportedAchievements.Load(a)
     a[14835] = ach:New(14835, 10); -- A Resolute Bond
     a[14836] = ach:New(14836, 10); -- Unwavering Bond
     a[14837] = ach:New(14837, 10); -- Nexus of Bonds
-    a[14839] = ach:New(14839, 10); -- Bound To Adventure
+    a[14839] = ach:New(14839, 10); -- Adventures: Off To Adventure
     a[14840] = ach:New(14840, 10); -- Adventures: Learning the Ropes
     a[14841] = ach:New(14841, 10); -- Adventures: Now You're Cooking
     a[14842] = ach:New(14842, 10); -- Adventures: Strength and Resilience
@@ -3657,5 +3667,6 @@ function exportedAchievements.Load(a)
     a[15309] = ach:New(15309, 10); -- A Towering Success
     a[15310] = ach:New(15310, 20); -- A Tour of Towers
     a[15313] = ach:New(15313, 0); -- Rockin' Rollin' Racer
+    a[15327] = ach:New(15327, 0); -- Tormented Hero: Shadowlands Season 2
 end
 

@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Calendar events did not refresh properly
 
-[9.1.5.31.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3512817
+[9.1.5.31.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
 
 ## [9.1.5.30.0] - 2021-11-02
 ### Added

@@ -5,4 +5,7 @@
     <Binding name="AF_OPEN_TAB2" category="ADDONS">
         KrowiAF_ToggleAchievementFrame(2);
     </Binding>
+    <Binding name="AF_OPEN_TAB3" category="ADDONS">
+        KrowiAF_ToggleAchievementFrame(3);
+    </Binding>
 </Bindings>

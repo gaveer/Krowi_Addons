@@ -41,7 +41,14 @@ function achievementsFrame:Load()
 		container.ParentFrame:Update();
 	end
 
-	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementButton_Template", 0, -2);
+	local template = "KrowiAF_AchievementButton_Template";
+	if addon.Options.db.Achievements.Compact then
+		template = "KrowiAF_Small_AchievementButton_Template";
+	end
+	HybridScrollFrame_CreateButtons(frame.Container, template, 0, -2);
+	diagnostics.Debug(frame.Container.buttons[1]:GetHeight());
+	diagnostics.Debug(frame.Container:GetHeight());
+	diagnostics.Debug(math.ceil(frame.Container:GetHeight() / frame.Container.buttons[1]:GetHeight()) + 1);
 	gui.AchievementButton:PostLoadButtons(frame);
 
 	hooksecurefunc("AchievementFrameAchievements_ForceUpdate", function()
@@ -204,7 +211,7 @@ function achievementsFrame:Update()
 		AchievementFrameAchievementsObjectives:Hide();
 	end
 
-	local extraHeight = scrollFrame.largeButtonHeight or ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	local extraHeight = scrollFrame.largeButtonHeight or addon.Options.db.Achievements.ButtonCollapsedHeight;
 	-- diagnostics.Debug("extraHeight " .. tostring(extraHeight));
 
 	local achievementIndex;
@@ -219,9 +226,9 @@ function achievementsFrame:Update()
 		end
 	end
 
-	local totalHeight = #cachedAchievements * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	local totalHeight = #cachedAchievements * addon.Options.db.Achievements.ButtonCollapsedHeight;
 	-- diagnostics.Debug("totalHeight1 " .. tostring(totalHeight));
-	totalHeight = totalHeight + extraHeight - ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	totalHeight = totalHeight + extraHeight - addon.Options.db.Achievements.ButtonCollapsedHeight;
 	-- diagnostics.Debug("totalHeight2 " .. tostring(totalHeight));
 
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
@@ -282,7 +289,11 @@ function achievementsFrame:ClearSelection()
 		if not button.tracked:GetChecked() then
 			button.tracked:Hide();
 		end
-		button.description:Show();
+		if button.reward:GetText() == nil then
+			button.description:Show();
+		else
+			button.description:Hide();
+		end
 		button.hiddenDescription:Hide();
 	end
 
@@ -386,7 +397,11 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 			end
 		end
 		button.id = id;
-		button.label:SetWidth(ACHIEVEMENTBUTTON_LABELWIDTH);
+		local labelWidth = ACHIEVEMENTBUTTON_LABELWIDTH;
+		if addon.Options.db.Achievements.Compact then
+			labelWidth = labelWidth - 10;
+		end
+		button.label:SetWidth(labelWidth);
 		button.label:SetText(name);
 
 		if GetPreviousAchievement(id) then
@@ -430,8 +445,10 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 		end
 
 		if rewardText == "" then
+			button.reward:SetText(nil);
 			button.reward:Hide();
 			button.rewardBackground:Hide();
+			button.description:Show();
 		else
 			button.reward:SetText(rewardText);
 			button.reward:Show();
@@ -441,6 +458,7 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 			else
 				button.rewardBackground:SetVertexColor(0.35, 0.35, 0.35);
 			end
+			button.description:Hide();
 		end
 	end
 
@@ -455,7 +473,7 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 		button.tracked:Hide();
 	end
 
-	AchievementButton_UpdatePlusMinusTexture(button);
+	button:UpdatePlusMinusTexture();
 
 	-- if selection then
 	-- 	diagnostics.Debug(tostring(selection.ID) .. " - " .. tostring(id) .. " - " .. tostring(button.selected) .. " - " .. tostring(not button:IsMouseOver()));
@@ -481,7 +499,11 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 			button.highlight:Hide();
 		end
 		button:Collapse();
-		button.description:Show();
+		if button.reward:GetText() == nil then
+			button.description:Show();
+		else
+			button.description:Hide();
+		end
 		button.hiddenDescription:Hide();
 	end
 

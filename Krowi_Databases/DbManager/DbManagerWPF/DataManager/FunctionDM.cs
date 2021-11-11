@@ -117,5 +117,13 @@ namespace DbManagerWPF.DataManager
 
             return functions.Single(x => x.ID == 44);
         }
+
+        public Function GetTabPvPFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 45);
+        }
     }
 }

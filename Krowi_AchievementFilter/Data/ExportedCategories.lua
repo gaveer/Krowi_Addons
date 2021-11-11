@@ -1,4 +1,4 @@
--- [[ Exported at 2021-10-16 14-20-14 ]] --
+-- [[ Exported at 2021-11-06 22-53-06 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -53,9 +53,16 @@ function exportedCategories.Load(a)
     AddA(tmp[922], a[615]); -- Storming Stormwind
     AddA(tmp[922], a[14815]); -- Executing the Exarch
     AddA(tmp[922], a[388]); -- City Defender
+    AddA(tmp[922], a[11065]); -- It All Makes Sense Now
+    tmp[970] = cat:New(C_Map.GetMapInfo(87).name); -- Ironforge
+    AddC(tmp[687], tmp[970]);
+    AddA(tmp[970], a[616]); -- Overthrow the Council
     tmp[721] = cat:New(C_Map.GetMapInfo(27).name); -- Dun Morogh
     AddC(tmp[687], tmp[721]);
     AddA(tmp[721], a[1186]); -- Down With The Dark Iron
+    AddA(tmp[721], a[11200]); -- Stand Against the Legion
+    AddA(tmp[721], a[11201]); -- Defender of Azeroth: Legion Invasions
+    AddA(tmp[721], a[4786]); -- Operation: Gnomeregan
     tmp[723] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[721], tmp[723]);
     AddA(tmp[723], a[627]); -- Explore Dun Morogh
@@ -71,6 +78,8 @@ function exportedCategories.Load(a)
     AddA(tmp[726], a[768]); -- Explore Tirisfal Glades
     tmp[651] = cat:New(C_Map.GetMapInfo(52).name); -- Westfall
     AddC(tmp[687], tmp[651]);
+    AddA(tmp[651], a[11200]); -- Stand Against the Legion
+    AddA(tmp[651], a[11201]); -- Defender of Azeroth: Legion Invasions
     tmp[653] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[651], tmp[653]);
     AddA(tmp[653], a[4903]); -- Westfall Quests
@@ -123,6 +132,8 @@ function exportedCategories.Load(a)
     AddA(tmp[731], a[841]); -- Explore Wetlands
     tmp[671] = cat:New(C_Map.GetMapInfo(25).name); -- Hillsbrad Foothills
     AddC(tmp[687], tmp[671]);
+    AddA(tmp[671], a[11200]); -- Stand Against the Legion
+    AddA(tmp[671], a[11201]); -- Defender of Azeroth: Legion Invasions
     tmp[672] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[671], tmp[672]);
     AddA(tmp[672], a[4895]); -- Hillsbrad Foothills Quests
@@ -241,6 +252,7 @@ function exportedCategories.Load(a)
     AddA(tmp[921], a[612]); -- Downing the Dark Lady
     AddA(tmp[921], a[14817]); -- Opposing Orgrimmar
     AddA(tmp[921], a[1006]); -- City Defender
+    AddA(tmp[921], a[11065]); -- It All Makes Sense Now
     tmp[923] = cat:New(C_Map.GetMapInfo(88).name); -- Thunder Bluff
     AddC(tmp[688], tmp[923]);
     AddA(tmp[923], a[611]); -- Bleeding Bloodhoof
@@ -252,6 +264,7 @@ function exportedCategories.Load(a)
     tmp[752] = cat:New(C_Map.GetMapInfo(1).name); -- Durotar
     AddC(tmp[688], tmp[752]);
     AddA(tmp[752], a[1186]); -- Down With The Dark Iron
+    AddA(tmp[752], a[4790]); -- Zalazane's Fall
     tmp[753] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[752], tmp[753]);
     AddA(tmp[753], a[728]); -- Explore Durotar
@@ -267,6 +280,8 @@ function exportedCategories.Load(a)
     AddA(tmp[775], a[855]); -- Explore Moonglade
     tmp[705] = cat:New(C_Map.GetMapInfo(10).name); -- Northern Barrens
     AddC(tmp[688], tmp[705]);
+    AddA(tmp[705], a[11200]); -- Stand Against the Legion
+    AddA(tmp[705], a[11201]); -- Defender of Azeroth: Legion Invasions
     tmp[706] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[705], tmp[706]);
     AddA(tmp[706], a[4933]); -- Northern Barrens Quests
@@ -284,6 +299,8 @@ function exportedCategories.Load(a)
     AddA(tmp[762], a[844]); -- Explore Darkshore
     tmp[691] = cat:New(C_Map.GetMapInfo(76).name); -- Azshara
     AddC(tmp[688], tmp[691]);
+    AddA(tmp[691], a[11200]); -- Stand Against the Legion
+    AddA(tmp[691], a[11201]); -- Defender of Azeroth: Legion Invasions
     tmp[692] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[691], tmp[692]);
     AddA(tmp[692], a[4927]); -- Azshara Quests
@@ -357,6 +374,8 @@ function exportedCategories.Load(a)
     AddA(tmp[765], a[846]); -- Explore Thousand Needles
     tmp[713] = cat:New(C_Map.GetMapInfo(71).name); -- Tanaris
     AddC(tmp[688], tmp[713]);
+    AddA(tmp[713], a[11200]); -- Stand Against the Legion
+    AddA(tmp[713], a[11201]); -- Defender of Azeroth: Legion Invasions
     tmp[714] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[713], tmp[714]);
     AddA(tmp[714], a[4935]); -- Tanaris Quests
@@ -472,6 +491,7 @@ function exportedCategories.Load(a)
     AddA(tmp[7], a[429]); -- "Sulfuras, Hand of Ragnaros"
     AddA(tmp[7], a[428]); -- "Thunderfury, Blessed Blade of the Windseeker"
     AddA(tmp[7], a[9550]); -- "Boldly, You Sought the Power of Ragnaros"
+    AddA(tmp[7], a[7934]); -- Raiding with Leashes
     tmp[779] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[7], tmp[779]);
     AddA(tmp[779], a[955]); -- Hydraxian Waterlords
@@ -483,6 +503,7 @@ function exportedCategories.Load(a)
     AddC(tmp[3], tmp[27]);
     AddA(tmp[27], a[685]); -- Blackwing Lair
     AddA(tmp[27], a[11742]); -- Dress in Lairs
+    AddA(tmp[27], a[7934]); -- Raiding with Leashes
     tmp[28] = cat:New((EJ_GetInstanceInfo(76)) .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Zul'Gurub
     AddC(tmp[3], tmp[28]);
     AddA(tmp[28], a[560]); -- Deadliest Catch
@@ -503,6 +524,7 @@ function exportedCategories.Load(a)
     AddA(tmp[30], a[687]); -- Temple of Ahn'Qiraj
     AddA(tmp[30], a[424]); -- Why? Because It's Red
     AddA(tmp[30], a[11743]); -- Accessor-Eyes
+    AddA(tmp[30], a[7934]); -- Raiding with Leashes
     tmp[780] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[30], tmp[780]);
     AddA(tmp[780], a[956]); -- Brood of Nozdormu
@@ -537,6 +559,9 @@ function exportedCategories.Load(a)
     tmp[924] = cat:New(C_Map.GetMapInfo(110).name); -- Silvermoon City
     AddC(tmp[616], tmp[924]);
     AddA(tmp[924], a[613]); -- Killed in Quel'Thalas
+    tmp[969] = cat:New(C_Map.GetMapInfo(103).name); -- The Exodar
+    AddC(tmp[616], tmp[969]);
+    AddA(tmp[969], a[618]); -- Putting Out the Light
     tmp[758] = cat:New(C_Map.GetMapInfo(97).name); -- Azuremyst Isle
     AddC(tmp[616], tmp[758]);
     tmp[759] = cat:New((GetCategoryInfo(97)), true); -- Exploration
@@ -736,6 +761,7 @@ function exportedCategories.Load(a)
     AddA(tmp[74], a[882]); -- Fiery Warhorse's Reins
     AddA(tmp[74], a[11746]); -- Outlandish Style
     AddA(tmp[74], a[2456]); -- Vampire Hunter
+    AddA(tmp[74], a[8293]); -- Raiding with Leashes II: Attunement Edition
     tmp[647] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[74], tmp[647]);
     AddA(tmp[647], a[960]); -- The Violet Eye
@@ -751,13 +777,16 @@ function exportedCategories.Load(a)
     AddC(tmp[73], tmp[77]);
     AddA(tmp[77], a[694]); -- Serpentshrine Cavern
     AddA(tmp[77], a[11747]); -- Merely a Set
+    AddA(tmp[77], a[8293]); -- Raiding with Leashes II: Attunement Edition
     tmp[78] = cat:New((EJ_GetInstanceInfo(749))); -- The Eye
     AddC(tmp[73], tmp[78]);
     AddA(tmp[78], a[696]); -- Tempest Keep
     AddA(tmp[78], a[885]); -- Ashes of Al'ar
+    AddA(tmp[78], a[8293]); -- Raiding with Leashes II: Attunement Edition
     tmp[79] = cat:New((EJ_GetInstanceInfo(750))); -- The Battle for Mount Hyjal
     AddC(tmp[73], tmp[79]);
     AddA(tmp[79], a[695]); -- The Battle for Mount Hyjal
+    AddA(tmp[79], a[9824]); -- Raiding with Leashes III: Drinkin' From the Sunwell
     tmp[646] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[79], tmp[646]);
     AddA(tmp[646], a[959]); -- The Scale of the Sands
@@ -768,6 +797,7 @@ function exportedCategories.Load(a)
     AddA(tmp[80], a[11748]); -- Black is the New Black
     AddA(tmp[80], a[426]); -- Warglaives of Azzinoth
     AddA(tmp[80], a[11869]); -- I'll Hold These For You Until You Get Out
+    AddA(tmp[80], a[9824]); -- Raiding with Leashes III: Drinkin' From the Sunwell
     tmp[645] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[80], tmp[645]);
     AddA(tmp[645], a[958]); -- Sworn to the Deathsworn
@@ -780,6 +810,7 @@ function exportedCategories.Load(a)
     AddA(tmp[82], a[698]); -- Sunwell Plateau
     AddA(tmp[82], a[11749]); -- "Suns Out, Thori'dals Out"
     AddA(tmp[82], a[725]); -- "Thori'dal, the Stars' Fury"
+    AddA(tmp[82], a[9824]); -- Raiding with Leashes III: Drinkin' From the Sunwell
     tmp[786] = cat:New((GetCategoryInfo(15117))); -- Pet Battles
     AddC(tmp[55], tmp[786]);
     AddA(tmp[786], a[6587]); -- Outland Safari
@@ -1063,6 +1094,7 @@ function exportedCategories.Load(a)
     tmp[105] = cat:New((EJ_GetInstanceInfo(754))); -- Naxxramas
     AddC(tmp[85], tmp[105]);
     AddA(tmp[105], a[11750]); -- Undying Aesthetic
+    AddA(tmp[105], a[7934]); -- Raiding with Leashes
     tmp[106] = cat:New((GetDifficultyInfo(3))); -- Naxxramas 10
     AddC(tmp[105], tmp[106]);
     AddA(tmp[106], a[1997]); -- Momma Said Knock You Out (10 player)
@@ -1211,6 +1243,7 @@ function exportedCategories.Load(a)
     AddA(tmp[114], a[4626]); -- And I'll Form the Head!
     AddA(tmp[114], a[3142]); -- "Val'anyr, Hammer of Ancient Kings"
     AddA(tmp[114], a[3316]); -- Herald of the Titans
+    AddA(tmp[114], a[11320]); -- Raiding with Leashes IV: Wrath of the Lick King
     tmp[115] = cat:New((GetDifficultyInfo(3)) .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Ulduar 10
     AddC(tmp[114], tmp[115]);
     AddA(tmp[115], a[3097]); -- Dwarfageddon (10 player)
@@ -1358,6 +1391,7 @@ function exportedCategories.Load(a)
     tmp[117] = cat:New((EJ_GetInstanceInfo(757))); -- Trial of the Crusader
     AddC(tmp[85], tmp[117]);
     AddA(tmp[117], a[11752]); -- Style of the Crusader
+    AddA(tmp[117], a[11320]); -- Raiding with Leashes IV: Wrath of the Lick King
     tmp[118] = cat:New((GetDifficultyInfo(3))); -- Trial of the Crusader 10
     AddC(tmp[117], tmp[118]);
     AddA(tmp[118], a[3797]); -- Upper Back Pain (10 player)
@@ -1405,6 +1439,7 @@ function exportedCategories.Load(a)
     AddA(tmp[123], a[11753]); -- Winter Catalog
     AddA(tmp[123], a[4625]); -- Invincible's Reins
     AddA(tmp[123], a[4623]); -- Shadowmourne
+    AddA(tmp[123], a[11320]); -- Raiding with Leashes IV: Wrath of the Lick King
     tmp[124] = cat:New((GetDifficultyInfo(3))); -- Icecrown Citadel 10
     AddC(tmp[123], tmp[124]);
     AddA(tmp[124], a[4534]); -- Boned (10 player)
@@ -1736,6 +1771,7 @@ function exportedCategories.Load(a)
     AddC(tmp[131], tmp[147]);
     AddA(tmp[147], a[4842]); -- Blackwing Descent
     AddA(tmp[147], a[11754]); -- Glamour of Twilight
+    AddA(tmp[147], a[12079]); -- Raiding with Leashes V: Cuteaclysm
     tmp[902] = cat:New(addon.L["Glory"]); -- Glory
     AddC(tmp[147], tmp[902]);
     AddA(tmp[902], a[5306]); -- Parasite Evening
@@ -1757,6 +1793,7 @@ function exportedCategories.Load(a)
     AddA(tmp[148], a[4850]); -- The Bastion of Twilight
     AddA(tmp[148], a[5313]); -- I Can't Hear You Over the Sound of How Awesome I Am
     AddA(tmp[148], a[11754]); -- Glamour of Twilight
+    AddA(tmp[148], a[12079]); -- Raiding with Leashes V: Cuteaclysm
     tmp[904] = cat:New(addon.L["Glory"]); -- Glory
     AddC(tmp[148], tmp[904]);
     AddA(tmp[904], a[5300]); -- The Only Escape
@@ -1777,12 +1814,14 @@ function exportedCategories.Load(a)
     AddA(tmp[149], a[5122]); -- Heroic: Conclave of Wind
     AddA(tmp[149], a[5123]); -- Heroic: Al'Akir
     AddA(tmp[149], a[4851]); -- Throne of the Four Winds
+    AddA(tmp[149], a[12079]); -- Raiding with Leashes V: Cuteaclysm
     tmp[150] = cat:New((EJ_GetInstanceInfo(78))); -- Firelands
     AddC(tmp[131], tmp[150]);
     AddA(tmp[150], a[5855]); -- Ragnar-O's
     AddA(tmp[150], a[5802]); -- Firelands
     AddA(tmp[150], a[11755]); -- Hot Couture
     AddA(tmp[150], a[5839]); -- "Dragonwrath, Tarecgosa's Rest"
+    AddA(tmp[150], a[12079]); -- Raiding with Leashes V: Cuteaclysm
     tmp[906] = cat:New(addon.L["Glory"]); -- Glory
     AddC(tmp[150], tmp[906]);
     AddA(tmp[906], a[5821]); -- Death from Above
@@ -1812,6 +1851,7 @@ function exportedCategories.Load(a)
     AddA(tmp[151], a[6177]); -- Destroyer's End
     AddA(tmp[151], a[11756]); -- Wardrobe of the Old Gods
     AddA(tmp[151], a[6181]); -- Fangs of the Father
+    AddA(tmp[151], a[12079]); -- Raiding with Leashes V: Cuteaclysm
     tmp[908] = cat:New(addon.L["Glory"]); -- Glory
     AddC(tmp[151], tmp[908]);
     AddA(tmp[908], a[6174]); -- Don't Stand So Close to Me
@@ -4617,6 +4657,7 @@ function exportedCategories.Load(a)
     AddA(tmp[369], a[15073]); -- Shadowlands Keystone Explorer: Season Two
     AddA(tmp[369], a[15077]); -- Shadowlands Keystone Conqueror: Season Two
     AddA(tmp[369], a[15078]); -- Shadowlands Keystone Master: Season Two
+    AddA(tmp[369], a[15327]); -- Tormented Hero: Shadowlands Season 2
     tmp[371] = cat:New((EJ_GetInstanceInfo(1182))); -- The Necrotic Wake
     AddC(tmp[369], tmp[371]);
     AddA(tmp[371], a[14295]); -- Bountiful Harvest
@@ -4864,7 +4905,7 @@ function exportedCategories.Load(a)
     AddA(tmp[419], a[14632]); -- Conducting Anima
     AddA(tmp[419], a[14633]); -- Master Navigator
     AddA(tmp[419], a[14636]); -- Adventurer in Chief
-    AddA(tmp[419], a[14839]); -- Bound To Adventure
+    AddA(tmp[419], a[14839]); -- Adventures: Off To Adventure
     AddA(tmp[419], a[14840]); -- Adventures: Learning the Ropes
     AddA(tmp[419], a[14841]); -- Adventures: Now You're Cooking
     AddA(tmp[419], a[14842]); -- Adventures: Strength and Resilience
@@ -5237,6 +5278,8 @@ function exportedCategories.Load(a)
     tmp[951] = cat:New((GetCategoryInfo(15454))); -- Timewalking
     AddC(tmp[884], tmp[951]);
     AddA(tmp[951], a[13931]); -- "Memories of Fel, Frost and Fire"
+    AddA(tmp[951], a[13928]); -- Alterac Valley of Olde
+    AddA(tmp[951], a[13930]); -- Alterac Valley of Olde
     tmp[954] = cat:New((GetCategoryInfo(15258))); -- Legion
     AddC(tmp[951], tmp[954]);
     AddA(tmp[954], a[15309]); -- A Towering Success
@@ -5354,7 +5397,235 @@ function exportedCategories.Load(a)
     AddA(tmp[931], a[15043]); -- Hoarder of Torghast
     AddA(tmp[931], a[15042]); -- Tea for the Troubled
     AddA(tmp[931], a[15033]); -- Taking the Tremaculum
+    tmp[955] = cat:New((GetCategoryInfo(15270))); -- TAB - PvP
+    tmp[955].IsTab = true;
+    local tabPvPCategories = tmp[955];
+    tmp[960] = cat:New((GetCategoryInfo(14801))); -- Alterac Valley
+    AddC(tmp[955], tmp[960]);
+    AddA(tmp[960], a[218]); -- Alterac Valley Victory
+    AddA(tmp[960], a[219]); -- Alterac Valley Veteran
+    AddA(tmp[960], a[221]); -- Alterac Grave Robber
+    AddA(tmp[960], a[222]); -- Tower Defense
+    AddA(tmp[960], a[1151]); -- Loyal Defender
+    AddA(tmp[960], a[224]); -- Loyal Defender
+    AddA(tmp[960], a[225]); -- Everything Counts
+    AddA(tmp[960], a[1164]); -- Everything Counts
+    AddA(tmp[960], a[223]); -- The Sickly Gazelle
+    AddA(tmp[960], a[220]); -- Stormpike Perfection
+    AddA(tmp[960], a[873]); -- Frostwolf Perfection
+    AddA(tmp[960], a[582]); -- Alterac Valley All-Star
+    AddA(tmp[960], a[707]); -- Stormpike Battle Charger
+    AddA(tmp[960], a[706]); -- Frostwolf Howler
+    AddA(tmp[960], a[1166]); -- To the Looter Go the Spoils
+    AddA(tmp[960], a[1167]); -- Master of Alterac Valley
+    AddA(tmp[960], a[226]); -- The Alterac Blitz
+    AddA(tmp[960], a[709]); -- Hero of the Stormpike Guard
+    AddA(tmp[960], a[708]); -- Hero of the Frostwolf Clan
+    tmp[956] = cat:New((GetCategoryInfo(14802))); -- Arathi Basin
+    AddC(tmp[955], tmp[956]);
+    AddA(tmp[956], a[154]); -- Arathi Basin Victory
+    AddA(tmp[956], a[155]); -- Arathi Basin Veteran
+    AddA(tmp[956], a[165]); -- Arathi Basin Perfection
+    AddA(tmp[956], a[158]); -- Me and the Cappin' Makin' it Happen
+    AddA(tmp[956], a[73]); -- Disgracin' The Basin
+    AddA(tmp[956], a[1153]); -- Overly Defensive
+    AddA(tmp[956], a[157]); -- To The Rescue!
+    AddA(tmp[956], a[161]); -- Resilient Victory
+    AddA(tmp[956], a[156]); -- Territorial Dominance
+    AddA(tmp[956], a[159]); -- Let's Get This Done
+    AddA(tmp[956], a[162]); -- We Had It All Along *cough*
+    AddA(tmp[956], a[583]); -- Arathi Basin All-Star
+    AddA(tmp[956], a[584]); -- Arathi Basin Assassin
+    AddA(tmp[956], a[1169]); -- Master of Arathi Basin
+    AddA(tmp[956], a[711]); -- Knight of Arathor
+    AddA(tmp[956], a[710]); -- The Defiler
+    tmp[961] = cat:New((GetCategoryInfo(15414))); -- Ashran
+    AddC(tmp[955], tmp[961]);
+    AddA(tmp[961], a[9102]); -- Ashran Victory
+    AddA(tmp[961], a[9218]); -- "Grand Theft, 1st Degree"
+    AddA(tmp[961], a[9219]); -- "Grand Theft, 2nd Degree"
+    AddA(tmp[961], a[9220]); -- "Grand Theft, 3rd Degree"
+    AddA(tmp[961], a[9256]); -- Rescue Operation
+    AddA(tmp[961], a[9257]); -- Rescue Operation
+    AddA(tmp[961], a[9106]); -- Just for Me
+    AddA(tmp[961], a[9216]); -- High-value Targets
+    AddA(tmp[961], a[9104]); -- Bounty Hunter
+    AddA(tmp[961], a[9103]); -- Bounty Hunter
+    AddA(tmp[961], a[9222]); -- Divide and Conquer
+    AddA(tmp[961], a[9228]); -- Down Goes Van Rook
+    AddA(tmp[961], a[9225]); -- Take Them Out
+    AddA(tmp[961], a[9224]); -- Take Them Out
+    AddA(tmp[961], a[9408]); -- Operation Counterattack
+    AddA(tmp[961], a[9217]); -- Operation Counterattack
+    AddA(tmp[961], a[9105]); -- Tour of Duty
+    AddA(tmp[961], a[9714]); -- Thy Kingdom Come
+    AddA(tmp[961], a[9715]); -- Thy Kingdom Come
+    AddA(tmp[961], a[9474]); -- Wrynn's Vanguard
+    AddA(tmp[961], a[9473]); -- Vol'jin's Spear
+    AddA(tmp[961], a[9214]); -- Hero of Stormshield
+    AddA(tmp[961], a[9215]); -- Hero of Warspear
+    tmp[964] = cat:New((GetCategoryInfo(15073))); -- Battle for Gilneas
+    AddC(tmp[955], tmp[964]);
+    AddA(tmp[964], a[5245]); -- Battle for Gilneas Victory
+    AddA(tmp[964], a[5246]); -- Battle for Gilneas Veteran
+    AddA(tmp[964], a[5247]); -- Battle for Gilneas Perfection
+    AddA(tmp[964], a[5248]); -- Bustin' Caps to Make It Haps
+    AddA(tmp[964], a[5249]); -- One Two Three You Don't Know About Me
+    AddA(tmp[964], a[5250]); -- Out of the Fog
+    AddA(tmp[964], a[5251]); -- Not Your Average PUG'er
+    AddA(tmp[964], a[5252]); -- Don't Get Cocky Kid
+    AddA(tmp[964], a[5253]); -- Full Coverage
+    AddA(tmp[964], a[5254]); -- Newbs to Plowshares
+    AddA(tmp[964], a[5255]); -- Jugger Not
+    AddA(tmp[964], a[5256]); -- Battle for Gilneas All-Star
+    AddA(tmp[964], a[5257]); -- Battle for Gilneas Assassin
+    AddA(tmp[964], a[5262]); -- Double Rainbow
+    AddA(tmp[964], a[5258]); -- Master of the Battle for Gilneas
+    tmp[957] = cat:New((GetCategoryInfo(15218))); -- Deepwind Gorge
+    AddC(tmp[955], tmp[957]);
+    AddA(tmp[957], a[8331]); -- Deepwind Gorge Victory
+    AddA(tmp[957], a[8332]); -- Deepwind Gorge Veteran
+    AddA(tmp[957], a[8333]); -- Deepwind Gorge Perfection
+    AddA(tmp[957], a[14187]); -- Cruisin' for a Brewsin'
+    AddA(tmp[957], a[14186]); -- Market Dominance
+    AddA(tmp[957], a[14188]); -- Well Gorged
+    AddA(tmp[957], a[14175]); -- Master of Deepwind Gorge
+    AddA(tmp[957], a[8350]); -- Mine! Mine! Mine!
+    AddA(tmp[957], a[8351]); -- Other People's Property
+    AddA(tmp[957], a[8354]); -- Puddle Jumper
+    AddA(tmp[957], a[8355]); -- Weighed Down
+    AddA(tmp[957], a[8359]); -- Capping Spree
+    AddA(tmp[957], a[8358]); -- Deepwind Gorge All-Star
+    AddA(tmp[957], a[8360]); -- Master of Deepwind Gorge
+    tmp[959] = cat:New((GetCategoryInfo(14803))); -- Eye of the Storm
+    AddC(tmp[955], tmp[959]);
+    AddA(tmp[959], a[208]); -- Eye of the Storm Victory
+    AddA(tmp[959], a[209]); -- Eye of the Storm Veteran
+    AddA(tmp[959], a[783]); -- The Perfect Storm
+    AddA(tmp[959], a[784]); -- Eye of the Storm Domination
+    AddA(tmp[959], a[214]); -- Flurry
+    AddA(tmp[959], a[213]); -- Stormtrooper
+    AddA(tmp[959], a[212]); -- Storm Capper
+    AddA(tmp[959], a[216]); -- Bound for Glory
+    AddA(tmp[959], a[233]); -- Bloodthirsty Berserker
+    AddA(tmp[959], a[1171]); -- Master of Eye of the Storm
+    AddA(tmp[959], a[587]); -- Stormy Assassin
+    AddA(tmp[959], a[1258]); -- Take a Chill Pill
+    AddA(tmp[959], a[211]); -- Storm Glory
+    tmp[962] = cat:New((GetCategoryInfo(15003))); -- Isle of Conquest
+    AddC(tmp[955], tmp[962]);
+    AddA(tmp[962], a[3776]); -- Isle of Conquest Victory
+    AddA(tmp[962], a[3777]); -- Isle of Conquest Veteran
+    AddA(tmp[962], a[3851]); -- Mine
+    AddA(tmp[962], a[4177]); -- Mine
+    AddA(tmp[962], a[3847]); -- Four Car Garage
+    AddA(tmp[962], a[3848]); -- A-bomb-inable
+    AddA(tmp[962], a[3849]); -- A-bomb-ination
+    AddA(tmp[962], a[3850]); -- Mowed Down
+    AddA(tmp[962], a[3852]); -- Cut the Blue Wire... No the Red Wire!
+    AddA(tmp[962], a[3853]); -- All Over the Isle
+    AddA(tmp[962], a[3854]); -- Back Door Job
+    AddA(tmp[962], a[3856]); -- Demolition Derby
+    AddA(tmp[962], a[4256]); -- Demolition Derby
+    AddA(tmp[962], a[3855]); -- Glaive Grave
+    AddA(tmp[962], a[3857]); -- Master of Isle of Conquest
+    AddA(tmp[962], a[3957]); -- Master of Isle of Conquest
+    AddA(tmp[962], a[3845]); -- Isle of Conquest All-Star
+    AddA(tmp[962], a[3846]); -- Resource Glut
+    AddA(tmp[962], a[4176]); -- Resource Glut
+    tmp[968] = cat:New((GetCategoryInfo(15292))); -- Seething Shore
+    AddC(tmp[955], tmp[968]);
+    AddA(tmp[968], a[12409]); -- Seething Shore Victory
+    AddA(tmp[968], a[12410]); -- Seething Shore Veteran
+    AddA(tmp[968], a[12404]); -- Claim Jumper
+    AddA(tmp[968], a[12405]); -- Death from Above
+    AddA(tmp[968], a[12406]); -- A Good Start
+    AddA(tmp[968], a[12407]); -- Seething Shore Perfection
+    AddA(tmp[968], a[12408]); -- Seething Shore Domination
+    AddA(tmp[968], a[12411]); -- Blood and Sand
+    AddA(tmp[968], a[12412]); -- Master of Seething Shore
+    tmp[966] = cat:New((GetCategoryInfo(15162))); -- Silvershard Mines
+    AddC(tmp[955], tmp[966]);
+    AddA(tmp[966], a[6739]); -- Silvershard Mines Victory
+    AddA(tmp[966], a[6883]); -- Silvershard Mines Veteran
+    AddA(tmp[966], a[7039]); -- The Long Riders
+    AddA(tmp[966], a[7049]); -- Mine Cart Courier
+    AddA(tmp[966], a[7057]); -- End of the Line
+    AddA(tmp[966], a[7062]); -- Mine Mine Mine!
+    AddA(tmp[966], a[7099]); -- Five for Five
+    AddA(tmp[966], a[7100]); -- My Diamonds and Your Rust
+    AddA(tmp[966], a[7102]); -- Escort Service
+    AddA(tmp[966], a[7103]); -- Greed is Good
+    AddA(tmp[966], a[7106]); -- Master of Silvershard Mines
+    tmp[967] = cat:New((GetCategoryInfo(15163))); -- Temple of Kotmogu
+    AddC(tmp[955], tmp[967]);
+    AddA(tmp[967], a[6740]); -- Temple of Kotmogu Victory
+    AddA(tmp[967], a[6882]); -- Temple of Kotmogu Veteran
+    AddA(tmp[967], a[6947]); -- Four Square
+    AddA(tmp[967], a[6950]); -- Powerball
+    AddA(tmp[967], a[6970]); -- Blackout
+    AddA(tmp[967], a[6973]); -- Can't Stop Won't Stop
+    AddA(tmp[967], a[6971]); -- I've Got the Power
+    AddA(tmp[967], a[6972]); -- What is Best in Life?
+    AddA(tmp[967], a[6980]); -- Temple of Kotmogu All-Star
+    AddA(tmp[967], a[6981]); -- Master of Temple of Kotmogu
+    tmp[965] = cat:New((GetCategoryInfo(15074))); -- Twin Peaks
+    AddC(tmp[955], tmp[965]);
+    AddA(tmp[965], a[5208]); -- Twin Peaking
+    AddA(tmp[965], a[5209]); -- Twin Peaks Veteran
+    AddA(tmp[965], a[5210]); -- Two-Timer
+    AddA(tmp[965], a[5211]); -- Top Defender
+    AddA(tmp[965], a[5213]); -- Soaring Spirits
+    AddA(tmp[965], a[5214]); -- Soaring Spirits
+    AddA(tmp[965], a[5215]); -- Twin Peaks Perfection
+    AddA(tmp[965], a[5216]); -- Peak Speed
+    AddA(tmp[965], a[5226]); -- Cloud Nine
+    AddA(tmp[965], a[5227]); -- Cloud Nine
+    AddA(tmp[965], a[5229]); -- Drag a Maw
+    AddA(tmp[965], a[5228]); -- Wild Hammering
+    AddA(tmp[965], a[5219]); -- I'm in the White Lodge
+    AddA(tmp[965], a[5220]); -- I'm in the Black Lodge
+    AddA(tmp[965], a[5221]); -- "Fire, Walk With Me"
+    AddA(tmp[965], a[5222]); -- "Fire, Walk With Me"
+    AddA(tmp[965], a[5230]); -- Twin Peaks Mountaineer
+    AddA(tmp[965], a[5231]); -- Double Jeopardy
+    AddA(tmp[965], a[5552]); -- Double Jeopardy
+    AddA(tmp[965], a[5223]); -- Master of Twin Peaks
+    tmp[958] = cat:New((GetCategoryInfo(14804))); -- Warsong Gulch
+    AddC(tmp[955], tmp[958]);
+    AddA(tmp[958], a[166]); -- Warsong Gulch Victory
+    AddA(tmp[958], a[167]); -- Warsong Gulch Veteran
+    AddA(tmp[958], a[199]); -- Capture the Flag
+    AddA(tmp[958], a[200]); -- Persistent Defender
+    AddA(tmp[958], a[872]); -- Frenzied Defender
+    AddA(tmp[958], a[168]); -- Warsong Gulch Perfection
+    AddA(tmp[958], a[201]); -- Warsong Expedience
+    AddA(tmp[958], a[204]); -- Ironman
+    AddA(tmp[958], a[203]); -- Not In My House
+    AddA(tmp[958], a[1251]); -- Not In My House
+    AddA(tmp[958], a[202]); -- Quick Cap
+    AddA(tmp[958], a[1502]); -- Quick Cap
+    AddA(tmp[958], a[206]); -- Supreme Defender
+    AddA(tmp[958], a[1252]); -- Supreme Defender
+    AddA(tmp[958], a[207]); -- Save the Day
+    AddA(tmp[958], a[1172]); -- Master of Warsong Gulch
+    AddA(tmp[958], a[1259]); -- Not So Fast
+    AddA(tmp[958], a[713]); -- Silverwing Sentinel
+    AddA(tmp[958], a[712]); -- Warsong Outrider
+    tmp[963] = cat:New((GetCategoryInfo(14901))); -- Wintergrasp
+    AddC(tmp[955], tmp[963]);
+    AddA(tmp[963], a[1717]); -- Wintergrasp Victory
+    AddA(tmp[963], a[1718]); -- Wintergrasp Veteran
+    AddA(tmp[963], a[1755]); -- Within Our Grasp
+    AddA(tmp[963], a[2199]); -- Wintergrasp Ranger
+    AddA(tmp[963], a[2080]); -- Black War Mammoth
+    AddA(tmp[963], a[1737]); -- Destruction Derby
+    AddA(tmp[963], a[2476]); -- Destruction Derby
+    AddA(tmp[963], a[1723]); -- Vehicular Gnomeslaughter
+    AddA(tmp[963], a[1727]); -- Leaning Tower
+    AddA(tmp[963], a[1751]); -- Didn't Stand a Chance
+    AddA(tmp[963], a[1752]); -- Master of Wintergrasp
 
-    return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;
+    return tabExpansionsCategories.Children, tabEventsCategories.Children, tabPvPCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;
 end
 

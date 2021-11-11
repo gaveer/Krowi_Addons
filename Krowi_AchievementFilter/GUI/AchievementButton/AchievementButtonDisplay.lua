@@ -68,7 +68,7 @@ function display:DisplayObjectives(renderOffScreen, achievementsFrame)
 		end
 	end
 	height = height + objectives:GetHeight();
-	if height ~= ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT or self.numLines > ACHIEVEMENTUI_MAX_LINES_COLLAPSED then
+	if height ~= addon.Options.db.Achievements.ButtonCollapsedHeight or self.numLines > ACHIEVEMENTUI_MAX_LINES_COLLAPSED then
 		self.hiddenDescription:Show();
 		self.description:Hide();
 		local descriptionHeight = self.hiddenDescription:GetHeight();

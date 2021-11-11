@@ -22,6 +22,7 @@ L["Focus"] = "Focus";
 -- Tabs
 L["Expansions"] = "Expansions";
 L["Events"] = "Events";
+L["Player vs. Player"] = "Player vs. Player";
 
 -- Categories
 L["Current Zone"] = "Current Zone";
@@ -214,6 +215,10 @@ L["Show Excluded Category Desc"] = "Show / hide {excluded} category.\n\nWhen che
 L["Include all"] = "Include all";
 L["Include all Desc"] = "Include all excluded achievements.";
 
+-- Options Layout Achievements
+L["Compact Achievements"] = "Compact Achievements";
+L["Compact Achievements Desc"] = "Achievements are half the size, similar to the summary achievements.\n\n{reloadRequired}";
+
 -- Options Layout Right Click Menu
 L["Right Click Menu"] = "Right Click Menu";
 L["Show Right Click Menu"] = "Show {rightClickMenu} button";
@@ -260,7 +265,8 @@ L["Special thanks Desc"] = "Special thanks to {bur} ";
 L["Donations"] = "Donations";
 
 -- Keybindings
-L["Toggle Achievement Window to "] = "Toggle Achievement Window to ";
+L["Toggle "] = "Toggle ";
+L[" tab"] = " tab";
 
 -- Icon
 L["Left click"] = "Left click";

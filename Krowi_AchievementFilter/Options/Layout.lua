@@ -99,10 +99,10 @@ options.OptionsTable.args["Layout"] = {
                             C_UI.Reload();
                         end
                         options.Debug(addon.L["Make window movable"], addon.Options.db.Window.Movable);
+                        ReloadUI();
                     end,
-                    confirm = function()
-                        if addon.Options.db.Window.Movable then return addon.L["Requires a reload"]; end
-                    end
+                    confirm = true,
+                    confirmText = addon.L["Requires a reload"]
                 },
                 CategoriesFrameWidthOffset = {
                     order = 2.1, type = "range", width = 1.5,
@@ -213,8 +213,34 @@ options.OptionsTable.args["Layout"] = {
                 },
             }
         },
-        RightClickMenu = {
+        Achievements = {
             order = 3, type = "group",
+            name = addon.L["Achievements"],
+            inline = true,
+            args = {
+                CompactAchievements = {
+                    order = 1, type = "toggle", width = "full",
+                    name = addon.L["Compact Achievements"],
+                    desc = core.ReplaceVars{addon.L["Compact Achievements Desc"],
+                                            reloadRequired = addon.L["Requires a reload"]},
+                    get = function () return addon.Options.db.Achievements.Compact; end,
+                    set = function()
+                        addon.Options.db.Achievements.Compact = not addon.Options.db.Achievements.Compact;
+                        if addon.Options.db.Achievements.Compact then
+                            addon.Options.db.Achievements.ButtonCollapsedHeight = 48; -- reward height = 20
+                        else
+                            addon.Options.db.Achievements.ButtonCollapsedHeight = ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+                        end
+                        options.Debug(addon.L["Compact Achievements"], addon.Options.db.Achievements.Compact);
+                        ReloadUI();
+                    end,
+                    confirm = true,
+                    confirmText = addon.L["Requires a reload"]
+                }
+            }
+        },
+        RightClickMenu = {
+            order = 4, type = "group",
             name = addon.L["Right Click Menu"],
             inline = true,
             args = {
@@ -234,7 +260,7 @@ options.OptionsTable.args["Layout"] = {
             }
         },
         Tooltip = {
-            order = 4, type = "group",
+            order = 5, type = "group",
             name = addon.L["Tooltip"],
             inline = true,
             args = {

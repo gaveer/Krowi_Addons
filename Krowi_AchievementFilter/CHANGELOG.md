@@ -3,11 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [9.1.5.32.0] - 2021-
 ### Added
-
-[9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
-
-## [9.1.5.31.0] - 2021-11-04
-### Added
+- A total of over 250 achievements (details below)
 - Raiding with Leashes V: Cuteaclysm to the Cataclysm raids
 - Raiding with Leashes IV: Wrath of the Lick King to the Wrath of the Lich King raids
 - Stand Against the Legion and Defender of Azeroth: Legion Invasions to the corresponding zones (unobtainable)
@@ -16,6 +12,24 @@ All notable changes to this project will be documented in this file.
 - Raiding with Leashes to the Classic raids and Naxxramas
 - Operation: Gnomeregan to Dun Morogh (unobtainable)
 - Zalazane's Fall to Durotat (unobtainable)
+- New PvP tab with Alterac Valley, Arathi Basin, Ashran, Battle for Gilneas, Deepwind Gorge, Eye of the Storm, Isle of Conquest, Seething Shore, Silvershard Mines, Temple of Kotmogu, Twin Peaks, Warsong Gulch and Wintergrasp
+- Putting Out the Light and The Exodar city to The Burning Crusade - Zones
+- Overthrow the Council and Ironforge city to Classic - Eastern Kingdoms - Zones
+- Slightly added more width to the achievement description space, also changes dynamically when the achievement width changes due to the scrollbar
+- New compact achievements view available that are half the size of the regular ones, toggleable in options
+
+[9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
+
+## [9.1.5.31.0] - 2021-11-04
+### Added
+- ~~Raiding with Leashes V: Cuteaclysm to the Cataclysm raids~~
+- ~~Raiding with Leashes IV: Wrath of the Lick King to the Wrath of the Lich King raids~~
+- ~~Stand Against the Legion and Defender of Azeroth: Legion Invasions to the corresponding zones (unobtainable)~~
+- ~~It All Makes Sense Now to Stormwind City and Orgrimmar~~
+- ~~Raiding with Leashes II: Attunement Edition and Raiding with Leashes III: Drinkin' From the Sunwell to The Burning Crusade raids~~
+- ~~Raiding with Leashes to the Classic raids and Naxxramas~~
+- ~~Operation: Gnomeregan to Dun Morogh (unobtainable)~~
+- ~~Zalazane's Fall to Durotat (unobtainable)~~
 
 ### Fixed
 - Calendar events did not refresh properly

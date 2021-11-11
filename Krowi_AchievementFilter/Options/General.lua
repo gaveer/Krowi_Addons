@@ -182,13 +182,14 @@ options.OptionsTable.args["General"] = {
                     name = addon.L["Exclude Next Patch"],
                     desc = core.ReplaceVars{addon.L["Exclude Next Patch Desc"],
                                             spoilerWarning = string.format(addon.Orange, addon.L["* SPOILER WARNING *"])},
-                    confirm = function() return addon.Options.db.SearchBox.ExcludeNextPatch; end,
-                    confirmText = string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Exclude Next Patch Confirm"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]),
                     get = function() return addon.Options.db.SearchBox.ExcludeNextPatch; end,
                     set = function()
                         addon.Options.db.SearchBox.ExcludeNextPatch = not addon.Options.db.SearchBox.ExcludeNextPatch;
                         options.Debug(addon.L["Exclude Next Patch"], addon.Options.db.SearchBox.ExcludeNextPatch);
-                    end
+                        ReloadUI();
+                    end,
+                    confirm = true,
+                    confirmText = string.format(addon.Orange, addon.L["* SPOILER WARNING *"] .. "\n\n" .. addon.L["Exclude Next Patch Confirm"] .. "\n\n" .. addon.L["* SPOILER WARNING *"]),
                 },
                 MinimumCharactersToSearch = {
                     order = 3.1, type = "range", width = 1.5,

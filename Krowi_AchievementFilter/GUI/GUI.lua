@@ -23,6 +23,7 @@ function gui:LoadWithBlizzard_AchievementUI()
 
     gui.TabButtonExpansions = gui.AchievementFrameTabButton:New(addon.L["Expansions"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesExpansions);
     gui.TabButtonEvents = gui.AchievementFrameTabButton:New(addon.L["Events"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesEvents);
+    gui.TabButtonPvP = gui.AchievementFrameTabButton:New((GetCategoryInfo(15270)), {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesPvP);
 
     local activeCalendarEvents = addon.EventData.GetActiveCalendarEvents();
 
@@ -103,7 +104,7 @@ local function UpdateAchievementFrameHeight(message, offset)
     if gui.TabButtonExpansions and gui.TabButtonExpansions.Selected then -- Need to check if it exists since this can be triggered before it's created
         gui.AchievementsFrame:Hide();
         gui.CategoriesFrame:Hide();
-        gui.SetAchievementFrameWidth(offset);
+        gui.SetAchievementFrameHeight(offset);
         gui.AchievementsFrame:Show();
         gui.CategoriesFrame:Show();
     end
@@ -148,6 +149,9 @@ function gui.SelectTab(tabName)
     elseif tabName == addon.L["Events"] then
         diagnostics.Debug(addon.L["Events"]);
         gui.TabButtonEvents:Select();
+    elseif tabName == (GetCategoryInfo(15270)) then
+        diagnostics.Debug((GetCategoryInfo(15270)));
+        gui.TabButtonPvP:Select();
     end
 end
 

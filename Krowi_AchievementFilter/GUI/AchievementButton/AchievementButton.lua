@@ -7,7 +7,44 @@ local achievementButton = gui.AchievementButton;
 
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
-local Saturate, Desaturate, OnEnter, OnLeave, OnClick;
+local ACHIEVEMENTUI_MAX_LINES_COLLAPSED = 3;
+local TEXTURES_OFFSET = 0;		-- 0.5 when in guild view
+
+local Saturate, Desaturate, Collapse, Expand, UpdatePlusMinusTexture;
+function KrowiAF_AchievementButton_OnLoad(self)
+	self.dateCompleted = self.shield.dateCompleted;
+	if not ACHIEVEMENTUI_FONTHEIGHT then
+		local _, fontHeight = self.description:GetFont();
+		ACHIEVEMENTUI_FONTHEIGHT = fontHeight;
+	end
+
+	local descriptionHeight = ACHIEVEMENTUI_FONTHEIGHT;
+	if not addon.Options.db.Achievements.Compact then
+		descriptionHeight = descriptionHeight * ACHIEVEMENTUI_MAX_LINES_COLLAPSED;
+	end
+	self.description:SetHeight(descriptionHeight);
+	self.Collapse = Collapse;
+	self.Expand = Expand;
+	self.Saturate = AchievementButton_Saturate;
+	self.Desaturate = AchievementButton_Desaturate;
+	self.UpdatePlusMinusTexture = UpdatePlusMinusTexture;
+
+	hooksecurefunc(self, "Saturate", Saturate);
+	hooksecurefunc(self, "Desaturate", Desaturate);
+
+	self:SetScript("OnSizeChanged", function(self, width, height)
+		local descriptionWidth = width - 166;
+		if addon.Options.db.Achievements.Compact then
+			descriptionWidth = width - 104;
+		end
+		self.description:SetWidth(descriptionWidth);
+		self.hiddenDescription:SetWidth(descriptionWidth);
+	end);
+
+	self:Collapse();
+end
+
+local OnEnter, OnLeave, OnClick;
 function achievementButton:PostLoadButtons(achievementsFrame)
 	-- Here we hook a lot of our own functionality to extend the default Blizzard Buttons
 	diagnostics.Trace("achievementButton.PostLoadButtons");
@@ -64,17 +101,17 @@ function achievementButton:PostLoadButtons(achievementsFrame)
 		button.ShowTooltip = function()
 			self.Tooltip.ShowTooltip(button);
 		end;
-		
+
 		local name = button:GetName();
 		button.BottomTsunami1 = _G[name.."BottomTsunami1"];
 		button.TopTsunami1 = _G[name.."TopTsunami1"];
-
-		hooksecurefunc(button, "Saturate", Saturate);
-		hooksecurefunc(button, "Desaturate", Desaturate);
 	end
 end
 
 local function SetTsunamis(self)
+	if addon.Options.db.Achievements.Compact then
+		return;
+	end
 	if self.Achievement.NotObtainable then
 		self.BottomTsunami1:SetTexture(media .. "NotObtainableAchievementBorders");
 		self.BottomTsunami1:SetTexCoord(0, 0.72265, 0.51953125, 0.58203125);
@@ -116,6 +153,77 @@ function Desaturate(self)
 		SetTsunamis(self);
 	else
 		SetTsunamis(self);
+	end
+end
+
+-- [[ Collapse ]] --
+function Collapse(self)
+	if self.collapsed then
+		return;
+	end
+	self.collapsed = true;
+	self:UpdatePlusMinusTexture();
+	self:SetHeight(addon.Options.db.Achievements.ButtonCollapsedHeight);
+	self.background:SetTexCoord(0, 1, 1 - (addon.Options.db.Achievements.ButtonCollapsedHeight / 256), 1);
+	if not self.tracked:GetChecked() then
+		self.tracked:Hide();
+	end
+	self.tabard:Hide();
+	self.guildCornerL:Hide();
+	self.guildCornerR:Hide();
+end
+
+-- [[ Expand ]] --
+function Expand(self, height)
+	if not self.collapsed and self:GetHeight() == height then
+		return;
+	end
+	self.collapsed = nil;
+	self:UpdatePlusMinusTexture();
+	if addon.InGuildView() then
+		if height < GUILDACHIEVEMENTBUTTON_MINHEIGHT then
+			height = GUILDACHIEVEMENTBUTTON_MINHEIGHT;
+		end
+		if self.completed then
+			self.tabard:Show();
+			self.shield:SetFrameLevel(self.tabard:GetFrameLevel() + 1);
+			SetLargeGuildTabardTextures("player", self.tabard.emblem, self.tabard.background, self.tabard.border);
+		end
+		self.guildCornerL:Show();
+		self.guildCornerR:Show();
+	end
+	self:SetHeight(height);
+	self.background:SetTexCoord(0, 1, max(0, 1-(height / 256)), 1);
+end
+
+function UpdatePlusMinusTexture(self)
+	local id = self.id;
+	if not id then
+		return; -- This happens when we create buttons
+	end
+	local display = false;
+	if addon.Options.db.Achievements.Compact then
+		display = true;
+	elseif GetAchievementNumCriteria(id) ~= 0 then
+		display = true;
+	elseif self.completed and GetPreviousAchievement(id) then
+		display = true;
+	elseif not self.completed and GetAchievementGuildRep(id) then
+		display = true;
+	end
+	if display then
+		self.plusMinus:Show();
+		if self.collapsed and self.saturatedStyle then
+			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
+		elseif self.collapsed then
+			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
+		elseif self.saturatedStyle then
+			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
+		else
+			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
+		end
+	else
+		self.plusMinus:Hide();
 	end
 end
 
@@ -185,7 +293,7 @@ function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
 	achievementsFrame:ClearSelection();
 	achievementsFrame:SelectButton(self);
 	achievementsFrame:DisplayAchievement(self, gui.SelectedTab.SelectedAchievement, self.index, self.Achievement);
-	HybridScrollFrame_ExpandButton(achievementsFrame.Container, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
+	HybridScrollFrame_ExpandButton(achievementsFrame.Container, ((self.index - 1) * addon.Options.db.Achievements.ButtonCollapsedHeight), self:GetHeight());
 	achievementsFrame:Update();
 	if not ignoreModifiers then
 		achievementsFrame:AdjustSelection();

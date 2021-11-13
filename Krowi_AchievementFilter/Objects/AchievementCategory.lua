@@ -61,7 +61,7 @@ function category:AddAchievement(achievement) -- Adds an achievement to the achi
     if self.Achievements == nil then
         self.Achievements = {}; -- By creating the achievements table here we reduce memory usage because not every category has achievements
     end
-    achievement.Category = achievement.Category or self;
+    achievement:AddCategory(self);
     tinsert(self.Achievements, achievement);
     return achievement;
 end

@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-06 22-53-06 ]] --
+-- [[ Exported at 2021-11-13 12-03-46 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -5625,7 +5625,98 @@ function exportedCategories.Load(a)
     AddA(tmp[963], a[1727]); -- Leaning Tower
     AddA(tmp[963], a[1751]); -- Didn't Stand a Chance
     AddA(tmp[963], a[1752]); -- Master of Wintergrasp
+    tmp[971] = cat:New(addon.L["Specials"]); -- TAB - Specials
+    tmp[971].IsTab = true;
+    local tabSpecialsCategories = tmp[971];
+    tmp[972] = cat:New((GetCategoryInfo(15248))); -- Mounts
+    AddC(tmp[971], tmp[972]);
+    AddA(tmp[972], a[416]); -- Scarab Lord
+    AddA(tmp[972], a[424]); -- Why? Because It's Red
+    AddA(tmp[972], a[430]); -- Amani War Bear
+    AddA(tmp[972], a[729]); -- Deathcharger's Reins
+    AddA(tmp[972], a[879]); -- Old School Ride
+    AddA(tmp[972], a[880]); -- Swift Zulian Tiger
+    AddA(tmp[972], a[881]); -- Swift Razzashi Raptor
+    AddA(tmp[972], a[882]); -- Fiery Warhorse's Reins
+    AddA(tmp[972], a[883]); -- Reins of the Raven Lord
+    AddA(tmp[972], a[884]); -- Swift White Hawkstrider
+    AddA(tmp[972], a[885]); -- Ashes of Al'ar
+    AddA(tmp[972], a[886]); -- Swift Nether Drake
+    AddA(tmp[972], a[887]); -- Merciless Nether Drake
+    AddA(tmp[972], a[888]); -- Vengeful Nether Drake
+    AddA(tmp[972], a[980]); -- The Horseman's Reins
+    AddA(tmp[972], a[1436]); -- Friends In High Places
+    AddA(tmp[972], a[2076]); -- Armored Brown Bear
+    AddA(tmp[972], a[2077]); -- Wooly Mammoth
+    AddA(tmp[972], a[2078]); -- Traveler's Tundra Mammoth
+    AddA(tmp[972], a[2081]); -- Grand Black War Mammoth
+    AddA(tmp[972], a[2097]); -- Get to the Choppa!
+    AddA(tmp[972], a[2141]); -- Stable Keeper
+    AddA(tmp[972], a[2142]); -- Filling Up The Barn
+    AddA(tmp[972], a[2143]); -- Leading the Cavalry
+    AddA(tmp[972], a[2316]); -- Brutal Nether Drake
+    AddA(tmp[972], a[2536]); -- Mountain o' Mounts
+    AddA(tmp[972], a[2537]); -- Mountain o' Mounts
+    AddA(tmp[972], a[3096]); -- Deadly Gladiator's Frost Wyrm
+    AddA(tmp[972], a[3356]); -- Winterspring Frostsaber
+    AddA(tmp[972], a[3357]); -- Venomhide Ravasaur
+    AddA(tmp[972], a[3496]); -- A Brew-FAST Mount
+    AddA(tmp[972], a[3636]); -- Jade Tiger
+    AddA(tmp[972], a[3756]); -- Furious Gladiator's Frost Wyrm
+    AddA(tmp[972], a[3757]); -- Relentless Gladiator's Frost Wyrm
+    AddA(tmp[972], a[3896]); -- Onyx Panther
+    AddA(tmp[972], a[4600]); -- Wrathful Gladiator's Frost Wyrm
+    AddA(tmp[972], a[4625]); -- Invincible's Reins
+    AddA(tmp[972], a[4626]); -- And I'll Form the Head!
+    AddA(tmp[972], a[4627]); -- X-45 Heartbreaker
+    AddA(tmp[972], a[4832]); -- Friends In Even Higher Places
+    AddA(tmp[972], a[4888]); -- One Hump or Two?
+    AddA(tmp[972], a[5749]); -- Vial of the Sands
+    AddA(tmp[972], a[5767]); -- Scourer of the Eternal Sands
+    AddA(tmp[972], a[6003]); -- Vicious Gladiator's Twilight Drake
+    AddA(tmp[972], a[6322]); -- Ruthless Gladiator's Twilight Drake
+    AddA(tmp[972], a[6741]); -- Cataclysmic Gladiator's Twilight Drake
+    AddA(tmp[972], a[7386]); -- Grand Expedition Yak
+    AddA(tmp[972], a[7860]); -- We're Going to Need More Saddles
+    AddA(tmp[972], a[7862]); -- We're Going to Need More Saddles
+    AddA(tmp[972], a[8092]); -- I've Got 9999 Problems but a Bone-White Primal Raptor Ain't One
+    AddA(tmp[972], a[8213]); -- Friends In Places Higher Yet
+    AddA(tmp[972], a[8216]); -- Malevolent Gladiator's Cloud Serpent
+    AddA(tmp[972], a[8302]); -- Mount Parade
+    AddA(tmp[972], a[8304]); -- Mount Parade
+    AddA(tmp[972], a[8678]); -- Tyrannical Gladiator's Cloud Serpent
+    AddA(tmp[972], a[8705]); -- Grievous Gladiator's Cloud Serpent
+    AddA(tmp[972], a[8707]); -- Prideful Gladiator's Cloud Serpent
+    AddA(tmp[972], a[8794]); -- Friends In Places Even Higher Than That
+    AddA(tmp[972], a[9229]); -- Primal Gladiator's Felblood Gronnling
+    AddA(tmp[972], a[9598]); -- Mountacular
+    AddA(tmp[972], a[9599]); -- Mountacular
+    AddA(tmp[972], a[9713]); -- Awake the Drakes
+    AddA(tmp[972], a[9925]); -- Friends In Places Yet Even Higher Than That
+    AddA(tmp[972], a[10137]); -- Wild Gladiator's Felblood Gronnling
+    AddA(tmp[972], a[10146]); -- Warmongering Gladiator's Felblood Gronnling
+    AddA(tmp[972], a[10355]); -- Lord of the Reins
+    AddA(tmp[972], a[10356]); -- Lord of the Reins
+    AddA(tmp[972], a[10999]); -- Vindictive Gladiator's Storm Dragon
+    AddA(tmp[972], a[11000]); -- Fearless Gladiator's Storm Dragon
+    AddA(tmp[972], a[11001]); -- Cruel Gladiator's Storm Dragon
+    AddA(tmp[972], a[11002]); -- Ferocious Gladiator's Storm Dragon
+    AddA(tmp[972], a[12139]); -- Dominant Gladiator's Storm Dragon
+    AddA(tmp[972], a[12140]); -- Demonic Gladiator's Storm Dragon
+    AddA(tmp[972], a[12931]); -- No Stable Big Enough
+    AddA(tmp[972], a[12932]); -- No Stable Big Enough
+    AddA(tmp[972], a[12933]); -- A Horde of Hoofbeats
+    AddA(tmp[972], a[12934]); -- A Horde of Hoofbeats
+    AddA(tmp[972], a[13093]); -- Dread Gladiator's Proto-Drake
+    AddA(tmp[972], a[13202]); -- Sinister Gladiator's Proto-Drake
+    AddA(tmp[972], a[13450]); -- Fierce Gladiator's Storm Dragon
+    AddA(tmp[972], a[13513]); -- Available in Eight Colors
+    AddA(tmp[972], a[13632]); -- Notorious Gladiator's Proto-Drake
+    AddA(tmp[972], a[13958]); -- Corrupted Gladiator's Proto-Drake
+    AddA(tmp[972], a[14183]); -- Conspicuous Consumption
+    AddA(tmp[972], a[14816]); -- Sinful Gladiator's Soul Eater
+    AddA(tmp[972], a[14999]); -- Unchained Gladiator's Soul Eater
 
-    return tabExpansionsCategories.Children, tabEventsCategories.Children, tabPvPCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;
+    return tabExpansionsCategories.Children, tabEventsCategories.Children, tabPvPCategories.Children, tabSpecialsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;
 end
 

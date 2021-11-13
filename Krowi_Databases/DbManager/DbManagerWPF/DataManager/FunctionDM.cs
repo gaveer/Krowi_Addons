@@ -125,5 +125,13 @@ namespace DbManagerWPF.DataManager
 
             return functions.Single(x => x.ID == 45);
         }
+
+        public Function GetTabSpecialsFunction()
+        {
+            if (!functions.Any())
+                GetAll();
+
+            return functions.Single(x => x.ID == 46);
+        }
     }
 }

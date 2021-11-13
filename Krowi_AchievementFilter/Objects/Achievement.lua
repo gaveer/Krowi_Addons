@@ -138,6 +138,17 @@ function achievement:GetPartOfAChainIDs(validate, filters)
     return self.PartOfAChainIDs;
 end
 
+function achievement:AddCategory(category)
+    if self.Category == nil then
+        self.Category = category;
+    else
+        if self.MoreCategories == nil then
+            self.MoreCategories = {};
+        end
+        tinsert(self.MoreCategories, category);
+    end
+end
+
 function achievement:Include()
     self.Excluded = nil;
     if SavedData.ExcludedAchievements == nil then

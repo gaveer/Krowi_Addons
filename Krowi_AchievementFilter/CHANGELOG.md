@@ -12,11 +12,21 @@ All notable changes to this project will be documented in this file.
 - Raiding with Leashes to the Classic raids and Naxxramas
 - Operation: Gnomeregan to Dun Morogh (unobtainable)
 - Zalazane's Fall to Durotat (unobtainable)
-- New PvP tab with Alterac Valley, Arathi Basin, Ashran, Battle for Gilneas, Deepwind Gorge, Eye of the Storm, Isle of Conquest, Seething Shore, Silvershard Mines, Temple of Kotmogu, Twin Peaks, Warsong Gulch and Wintergrasp
-- Putting Out the Light and The Exodar city to The Burning Crusade - Zones
-- Overthrow the Council and Ironforge city to Classic - Eastern Kingdoms - Zones
+- New PvP tab with Alterac Valley, Arathi Basin, Ashran, Battle for Gilneas, Deepwind Gorge, Eye of the Storm, Isle of Conquest, Seething Shore, Silvershard Mines, Strand of the Ancients (Legacy), Temple of Kotmogu, Twin Peaks, Warsong Gulch and Wintergrasp
+- Putting Out the Light, For the Horde! and The Exodar city to The Burning Crusade - Zones
+- Overthrow the Council, For the Horde! and Ironforge city to Classic - Eastern Kingdoms - Zones
+- For the Alliane! and Wrath of the Alliance to The Burning Crusade - Zones - Silvermoon City
+- For the Alliane! and Wrath of the Alliance to Classic - Zones - Kalimdor - Orgrimmar
+- Wrath of the Alliance and Undercity to Classic - Eastern Kingdoms - Zones
+- Wrath of the Alliance to Classic - Kalimdor - Zones - Thunder Bluff
+- Wrath of the Horde to Stormwind City and Ironforge in Classic - Zones - Eastern Kingdoms
+- Wrath of the Horde to The Burning Crusade - Zones - The Exodar
+- Wrath of the Horde and Darnassus to Classic - Kalimdor - Zones
 - Slightly added more width to the achievement description space, also changes dynamically when the achievement width changes due to the scrollbar
 - New compact achievements view available that are half the size of the regular ones, toggleable in options
+- Queen's Conservatory only shows Night Fae specific achievements
+- New Specials tab with custom categories requested by users
+- Achievements that can be found at multiple locations now have a Go To entry in the right click menu
 
 [9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
 

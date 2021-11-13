@@ -10,7 +10,7 @@ local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 local ACHIEVEMENTUI_MAX_LINES_COLLAPSED = 3;
 local TEXTURES_OFFSET = 0;		-- 0.5 when in guild view
 
-local Saturate, Desaturate, Collapse, Expand, UpdatePlusMinusTexture;
+local UpdatePlusMinusTexture, Saturate, Desaturate, Collapse, Expand;
 function KrowiAF_AchievementButton_OnLoad(self)
 	self.dateCompleted = self.shield.dateCompleted;
 	if not ACHIEVEMENTUI_FONTHEIGHT then
@@ -129,6 +129,37 @@ local function SetTsunamis(self)
 	end
 end
 
+function UpdatePlusMinusTexture(self)
+	local id = self.id;
+	if not id then
+		return; -- This happens when we create buttons
+	end
+	local display = false;
+	if addon.Options.db.Achievements.Compact then
+		display = true;
+	elseif GetAchievementNumCriteria(id) ~= 0 then
+		display = true;
+	elseif self.completed and GetPreviousAchievement(id) then
+		display = true;
+	elseif not self.completed and GetAchievementGuildRep(id) then
+		display = true;
+	end
+	if display then
+		self.plusMinus:Show();
+		if self.collapsed and self.saturatedStyle then
+			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
+		elseif self.collapsed then
+			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
+		elseif self.saturatedStyle then
+			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
+		else
+			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
+		end
+	else
+		self.plusMinus:Hide();
+	end
+end
+
 -- [[ Saturate ]] --
 function Saturate(self)
 	if self.Achievement.NotObtainable then
@@ -194,37 +225,6 @@ function Expand(self, height)
 	end
 	self:SetHeight(height);
 	self.background:SetTexCoord(0, 1, max(0, 1-(height / 256)), 1);
-end
-
-function UpdatePlusMinusTexture(self)
-	local id = self.id;
-	if not id then
-		return; -- This happens when we create buttons
-	end
-	local display = false;
-	if addon.Options.db.Achievements.Compact then
-		display = true;
-	elseif GetAchievementNumCriteria(id) ~= 0 then
-		display = true;
-	elseif self.completed and GetPreviousAchievement(id) then
-		display = true;
-	elseif not self.completed and GetAchievementGuildRep(id) then
-		display = true;
-	end
-	if display then
-		self.plusMinus:Show();
-		if self.collapsed and self.saturatedStyle then
-			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
-		elseif self.collapsed then
-			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
-		elseif self.saturatedStyle then
-			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
-		else
-			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
-		end
-	else
-		self.plusMinus:Hide();
-	end
 end
 
 -- [[ OnEnter ]] --
@@ -318,7 +318,7 @@ local function AddIATLink(achievement)
 	end
 end
 
-local function AddGoToLine(goTo, id, achievementsFrame)
+local function AddGoToAchievementLine(goTo, id, achievementsFrame)
 	local _, name = addon.GetAchievementInfo(id);
 	local disabled;
 	if not addon.Data.Achievements[id] then -- Catch missing achievements from the addon to prevent errors
@@ -334,10 +334,20 @@ local function AddGoToLine(goTo, id, achievementsFrame)
 				});
 end
 
+local function AddGoToAchievementWithCategoryLine(goTo, achievement, category, achievementsFrame)
+	goTo:AddFull({ Text = category:GetPath(),
+					Func = function()
+						achievementsFrame:SelectAchievementWithCategory(achievement, category, nil, true);
+						rightClickMenu:Close();
+					end,
+					Disabled = disabled
+				});
+end
+
 local function AddGoTo(achievementsFrame, achievement)
 	local partOfAChainIDs = achievement:GetPartOfAChainIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
 	local requiredForIDs = achievement:GetRequiredForIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
-	if partOfAChainIDs or requiredForIDs or gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then -- Others can be added here later
+	if partOfAChainIDs or requiredForIDs or achievement.MoreCategories or gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then -- Others can be added here later
 		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
 		local addSeparator = nil;
 
@@ -345,7 +355,7 @@ local function AddGoTo(achievementsFrame, achievement)
 			goTo:AddFull({Text = addon.L["Part of a chain"], IsTitle = true});
 			for _, id in next, partOfAChainIDs do
 				if id ~= achievement.ID then
-					AddGoToLine(goTo, id, achievementsFrame);
+					AddGoToAchievementLine(goTo, id, achievementsFrame);
 				end
 			end
 			addSeparator = true;
@@ -359,10 +369,21 @@ local function AddGoTo(achievementsFrame, achievement)
 			goTo:AddFull({Text = addon.L["Required for"], IsTitle = true});
 			for _, id in next, requiredForIDs do
 				if id ~= achievement.ID then
-					AddGoToLine(goTo, id, achievementsFrame);
+					AddGoToAchievementLine(goTo, id, achievementsFrame);
 				end
 			end
 			addSeparator = true;
+		end
+
+		if achievement.MoreCategories then
+			if addSeparator then
+				goTo:AddSeparator();
+				addSeparator = nil;
+			end
+			goTo:AddFull({Text = addon.L["Other locations"], IsTitle = true});
+			for _, category in next, achievement.MoreCategories do
+				AddGoToAchievementWithCategoryLine(goTo, achievement, category, achievementsFrame);
+			end
 		end
 
 		if gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or
@@ -373,7 +394,7 @@ local function AddGoTo(achievementsFrame, achievement)
 				addSeparator = nil;
 			end
 			goTo:AddFull({Text = achievement.Category:GetPath(), IsTitle = true});
-			AddGoToLine(goTo, achievement.ID, achievementsFrame);
+			AddGoToAchievementLine(goTo, achievement.ID, achievementsFrame);
 			addSeparator = true;
 		end
 

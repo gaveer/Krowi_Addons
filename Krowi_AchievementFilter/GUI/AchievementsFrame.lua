@@ -519,31 +519,8 @@ function achievementsFrame.ClearHighlightedButton()
 end
 
 -- [[ API ]] --
-function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
-	diagnostics.Trace("achievementsFrame:SelectAchievement");
-
-	if not achievement then
-		diagnostics.Debug("No achievement provided");
-		return;
-	end
-
-	if mouseButton == nil then
-		mouseButton = "LeftButton";
-	end
-
-	if gui.FilterButton then
-		achievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(achievement);
-		gui.FilterButton:SetFilters(achievement);
-	end
-
-	-- Select category
-	local category;
-	if gui.FilterButton.Filters.db.MergeSmallCategories then
-		category = achievement:GetMergedCategory(); -- This way we get the parent category
-		diagnostics.Debug(category.Name);
-	else
-		category = achievement.Category;
-	end
+function achievementsFrame:SelectAchievementWithCategory(achievement, category, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+	diagnostics.Trace("achievementsFrame:SelectAchievementWithCategory");
 
 	gui.CategoriesFrame:SelectCategory(category);
 	self.Container.ScrollBar:SetValue(0); -- Makes sure the scrollbar is at the top since this can be in a diff location if the category is already selected
@@ -583,6 +560,35 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 			end
 		end
 	end
+end
+
+function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+	diagnostics.Trace("achievementsFrame:SelectAchievement");
+
+	if not achievement then
+		diagnostics.Debug("No achievement provided");
+		return;
+	end
+
+	if mouseButton == nil then
+		mouseButton = "LeftButton";
+	end
+
+	if gui.FilterButton then
+		achievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(achievement);
+		gui.FilterButton:SetFilters(achievement);
+	end
+
+	-- Select category
+	local category;
+	if gui.FilterButton.Filters.db.MergeSmallCategories then
+		category = achievement:GetMergedCategory(); -- This way we get the parent category
+		diagnostics.Debug(category.Name);
+	else
+		category = achievement.Category;
+	end
+
+	self:SelectAchievementWithCategory(achievement, category, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end
 
 function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)

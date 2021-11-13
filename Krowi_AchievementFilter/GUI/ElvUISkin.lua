@@ -307,6 +307,8 @@ function elvUISkin.Apply()
     if SavedData.ElvUISkin.Achievements then
         skins:HandleTab(gui.TabButtonExpansions);
         skins:HandleTab(gui.TabButtonEvents);
+        skins:HandleTab(gui.TabButtonPvP);
+        skins:HandleTab(gui.TabButtonSpecials);
         ApplyToCategoriesFrame(gui.CategoriesFrame, skins);
         ApplyToAchievementsFrame(gui.AchievementsFrame, engine, skins);
         ApplyToFilterButton(gui.FilterButton, gui.AchievementsFrame, skins);

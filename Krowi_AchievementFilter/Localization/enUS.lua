@@ -23,6 +23,7 @@ L["Focus"] = "Focus";
 L["Expansions"] = "Expansions";
 L["Events"] = "Events";
 L["Player vs. Player"] = "Player vs. Player";
+L["Specials"] = "Specials";
 
 -- Categories
 L["Current Zone"] = "Current Zone";
@@ -70,6 +71,7 @@ L["Focused"] = "Focused";
 L["Brawler's Guild"] = "Brawler's Guild";
 L["Gifts"] = "Gifts"
 L["Other"] = "Other";
+L["Strand of the Ancients"] = "Strand of the Ancients";
 
 -- Filters
 L["Obtainable"] = "Obtainable";
@@ -85,6 +87,7 @@ L["ID"] = "ID";
 -- Tooltips
 L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
+L["Other locations"] = "Other locations";
 L["Objectives progress"] = "Objectives progress";
 L["No achievements are available with the current set of filters"] = "No achievements are available with the current set of filters";
 L["This achievement is no longer obtainable"] = "This achievement is no longer obtainable.";

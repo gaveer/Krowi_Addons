@@ -24,6 +24,7 @@ function gui:LoadWithBlizzard_AchievementUI()
     gui.TabButtonExpansions = gui.AchievementFrameTabButton:New(addon.L["Expansions"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesExpansions);
     gui.TabButtonEvents = gui.AchievementFrameTabButton:New(addon.L["Events"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesEvents);
     gui.TabButtonPvP = gui.AchievementFrameTabButton:New((GetCategoryInfo(15270)), {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesPvP);
+    gui.TabButtonSpecials = gui.AchievementFrameTabButton:New(addon.L["Specials"], {gui.FilterButton, gui.Search.SearchBoxFrame}, gui.AchievementsFrame, gui.CategoriesFrame, addon.Data.CategoriesSpecials);
 
     local activeCalendarEvents = addon.EventData.GetActiveCalendarEvents();
 
@@ -152,6 +153,9 @@ function gui.SelectTab(tabName)
     elseif tabName == (GetCategoryInfo(15270)) then
         diagnostics.Debug((GetCategoryInfo(15270)));
         gui.TabButtonPvP:Select();
+    elseif tabName == addon.L["Specials"] then
+        diagnostics.Debug(addon.L["Specials"]);
+        gui.TabButtonSpecials:Select();
     end
 end
 

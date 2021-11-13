@@ -297,7 +297,7 @@
             </TreeView>
         </GroupBox>
         <GroupBox x:Name="Achievements" Grid.Column="2" Header="Achievements" Margin="0,3,3,3">
-            <TreeView ItemsSource="{Binding Achievements}" BorderThickness="0">
+            <TreeView ItemsSource="{Binding Achievements}" BorderThickness="0" MaxHeight="{Binding ActualHeight, ElementName=Achievements}">
                 <B:Interaction.Behaviors>
                     <V:TreeViewSelectionBehavior SelectedItem="{Binding SelectedAchievement}" />
                 </B:Interaction.Behaviors>

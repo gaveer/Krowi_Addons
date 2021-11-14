@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-13 12-11-50 ]] --
+-- [[ Exported at 2021-11-14 00-59-13 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -146,6 +146,8 @@ function exportedAchievements.Load(a)
     a[583] = ach:New(583, 20); -- Arathi Basin All-Star
     a[584] = ach:New(584, 20); -- Arathi Basin Assassin
     a[587] = ach:New(587, 10); -- Stormy Assassin
+    a[603] = ach:New(603, 10, fac.Horde); -- Wrath of the Horde
+    a[604] = ach:New(604, 10, fac.Alliance); -- Wrath of the Alliance
     a[605] = ach:New(605, 10); -- A Coin of Ancestry
     a[606] = ach:New(606, 10); -- 5 Coins of Ancestry
     a[607] = ach:New(607, 10); -- 10 Coins of Ancestry
@@ -155,9 +157,11 @@ function exportedAchievements.Load(a)
     a[611] = ach:New(611, 10, fac.Alliance); -- Bleeding Bloodhoof
     a[612] = ach:New(612, 0, fac.Alliance, nil, false); -- Downing the Dark Lady
     a[613] = ach:New(613, 10, fac.Alliance); -- Killed in Quel'Thalas
+    a[614] = ach:New(614, 20, fac.Alliance); -- For the Alliance!
     a[615] = ach:New(615, 0, fac.Horde, nil, false); -- Storming Stormwind
     a[616] = ach:New(616, 10, fac.Horde); -- Overthrow the Council
     a[618] = ach:New(618, 10, fac.Horde); -- Putting Out the Light
+    a[619] = ach:New(619, 20, fac.Horde); -- For the Horde!
     a[622] = ach:New(622, 10); -- The Spellweaver's Downfall (10 player)
     a[623] = ach:New(623, 25); -- The Spellweaver's Downfall (25 player)
     a[624] = ach:New(624, 10); -- Less Is More (10 player)
@@ -448,6 +452,9 @@ function exportedAchievements.Load(a)
     a[1296] = ach:New(1296, 10); -- Watch Him Die
     a[1297] = ach:New(1297, 10); -- Hadronox Denied
     a[1307] = ach:New(1307, 0, nil, nil, false); -- Upper Blackrock Spire (Classic)
+    a[1308] = ach:New(1308, 0, nil, nil, false); -- Strand of the Ancients Victory
+    a[1309] = ach:New(1309, 0, nil, nil, false); -- Strand of the Ancients Veteran
+    a[1310] = ach:New(1310, 0, nil, nil, false); -- Storm the Beach
     a[1311] = ach:New(1311, 10); -- Medium Rare
     a[1312] = ach:New(1312, 25); -- Bloody Rare
     a[1356] = ach:New(1356, 10, fac.Horde); -- I've Toured the Fjord
@@ -499,6 +506,13 @@ function exportedAchievements.Load(a)
     a[1751] = ach:New(1751, 10); -- Didn't Stand a Chance
     a[1752] = ach:New(1752, 10); -- Master of Wintergrasp
     a[1755] = ach:New(1755, 10); -- Within Our Grasp
+    a[1757] = ach:New(1757, 0, fac.Alliance, nil, false); -- Defense of the Ancients
+    a[1761] = ach:New(1761, 0, nil, nil, false); -- The Dapper Sapper
+    a[1762] = ach:New(1762, 0, fac.Alliance, nil, false); -- Not Even a Scratch
+    a[1763] = ach:New(1763, 0, nil, nil, false); -- Artillery Veteran
+    a[1764] = ach:New(1764, 0, nil, nil, false); -- Drop It!
+    a[1765] = ach:New(1765, 0, nil, nil, false); -- Steady Hands
+    a[1766] = ach:New(1766, 0, nil, nil, false); -- Ancient Protector
     a[1786] = ach:New(1786, 10); -- School of Hard Knocks
     a[1788] = ach:New(1788, 10); -- Bad Example
     a[1789] = ach:New(1789, 10); -- Daily Chores
@@ -604,7 +618,14 @@ function exportedAchievements.Load(a)
     a[2186] = ach:New(2186, 0, nil, nil, false); -- The Immortal
     a[2187] = ach:New(2187, 0, nil, nil, false); -- The Undying
     a[2188] = ach:New(2188, 0, nil, nil, false); -- Leeeeeeeeeeeeeroy!
+    a[2189] = ach:New(2189, 0, nil, nil, false); -- Artillery Expert
+    a[2190] = ach:New(2190, 0, nil, nil, false); -- Drop It Now!
+    a[2191] = ach:New(2191, 0, nil, nil, false); -- Ancient Courtyard Protector
+    a[2192] = ach:New(2192, 0, fac.Horde, nil, false); -- Not Even a Scratch
+    a[2193] = ach:New(2193, 0, nil, nil, false); -- Explosives Expert
+    a[2194] = ach:New(2194, 0, nil, nil, false); -- Master of Strand of the Ancients
     a[2199] = ach:New(2199, 10); -- Wintergrasp Ranger
+    a[2200] = ach:New(2200, 0, fac.Horde, nil, false); -- Defense of the Ancients
     a[2256] = ach:New(2256, 10); -- Northern Exposure
     a[2257] = ach:New(2257, 25); -- Frostbitten
     a[2316] = ach:New(2316, 0); -- Brutal Nether Drake

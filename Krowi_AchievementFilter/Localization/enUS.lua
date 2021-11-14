@@ -72,6 +72,7 @@ L["Brawler's Guild"] = "Brawler's Guild";
 L["Gifts"] = "Gifts"
 L["Other"] = "Other";
 L["Strand of the Ancients"] = "Strand of the Ancients";
+L["Bur's Mount Collection"] = "Bur's Mount Collection";
 
 -- Filters
 L["Obtainable"] = "Obtainable";

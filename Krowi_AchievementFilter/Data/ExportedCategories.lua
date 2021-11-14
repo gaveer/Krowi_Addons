@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-13 12-03-46 ]] --
+-- [[ Exported at 2021-11-14 00-59-13 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -54,9 +54,15 @@ function exportedCategories.Load(a)
     AddA(tmp[922], a[14815]); -- Executing the Exarch
     AddA(tmp[922], a[388]); -- City Defender
     AddA(tmp[922], a[11065]); -- It All Makes Sense Now
+    AddA(tmp[922], a[603]); -- Wrath of the Horde
     tmp[970] = cat:New(C_Map.GetMapInfo(87).name); -- Ironforge
     AddC(tmp[687], tmp[970]);
     AddA(tmp[970], a[616]); -- Overthrow the Council
+    AddA(tmp[970], a[619]); -- For the Horde!
+    AddA(tmp[970], a[603]); -- Wrath of the Horde
+    tmp[974] = cat:New(C_Map.GetMapInfo(90).name); -- Undercity
+    AddC(tmp[687], tmp[974]);
+    AddA(tmp[974], a[604]); -- Wrath of the Alliance
     tmp[721] = cat:New(C_Map.GetMapInfo(27).name); -- Dun Morogh
     AddC(tmp[687], tmp[721]);
     AddA(tmp[721], a[1186]); -- Down With The Dark Iron
@@ -246,16 +252,22 @@ function exportedCategories.Load(a)
     AddC(tmp[648], tmp[688]);
     AddA(tmp[688], a[1678]); -- Loremaster of Kalimdor
     AddA(tmp[688], a[43]); -- Kalimdor Explorer
+    tmp[975] = cat:New(C_Map.GetMapInfo(89).name); -- Darnassus
+    AddC(tmp[688], tmp[975]);
+    AddA(tmp[975], a[603]); -- Wrath of the Horde
     tmp[921] = cat:New(C_Map.GetMapInfo(85).name); -- Orgrimmar
     AddC(tmp[688], tmp[921]);
     AddA(tmp[921], a[610]); -- Orgrimmar Offensive
     AddA(tmp[921], a[612]); -- Downing the Dark Lady
     AddA(tmp[921], a[14817]); -- Opposing Orgrimmar
+    AddA(tmp[921], a[614]); -- For the Alliance!
     AddA(tmp[921], a[1006]); -- City Defender
     AddA(tmp[921], a[11065]); -- It All Makes Sense Now
+    AddA(tmp[921], a[604]); -- Wrath of the Alliance
     tmp[923] = cat:New(C_Map.GetMapInfo(88).name); -- Thunder Bluff
     AddC(tmp[688], tmp[923]);
     AddA(tmp[923], a[611]); -- Bleeding Bloodhoof
+    AddA(tmp[923], a[604]); -- Wrath of the Alliance
     tmp[756] = cat:New(C_Map.GetMapInfo(57).name); -- Teldrassil
     AddC(tmp[688], tmp[756]);
     tmp[757] = cat:New((GetCategoryInfo(97)), true); -- Exploration
@@ -559,9 +571,13 @@ function exportedCategories.Load(a)
     tmp[924] = cat:New(C_Map.GetMapInfo(110).name); -- Silvermoon City
     AddC(tmp[616], tmp[924]);
     AddA(tmp[924], a[613]); -- Killed in Quel'Thalas
+    AddA(tmp[924], a[614]); -- For the Alliance!
+    AddA(tmp[924], a[604]); -- Wrath of the Alliance
     tmp[969] = cat:New(C_Map.GetMapInfo(103).name); -- The Exodar
     AddC(tmp[616], tmp[969]);
     AddA(tmp[969], a[618]); -- Putting Out the Light
+    AddA(tmp[969], a[619]); -- For the Horde!
+    AddA(tmp[969], a[603]); -- Wrath of the Horde
     tmp[758] = cat:New(C_Map.GetMapInfo(97).name); -- Azuremyst Isle
     AddC(tmp[616], tmp[758]);
     tmp[759] = cat:New((GetCategoryInfo(97)), true); -- Exploration
@@ -5557,6 +5573,25 @@ function exportedCategories.Load(a)
     AddA(tmp[966], a[7102]); -- Escort Service
     AddA(tmp[966], a[7103]); -- Greed is Good
     AddA(tmp[966], a[7106]); -- Master of Silvershard Mines
+    tmp[973] = cat:New(addon.L["Strand of the Ancients"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Strand of the Ancients
+    AddC(tmp[955], tmp[973]);
+    AddA(tmp[973], a[1308]); -- Strand of the Ancients Victory
+    AddA(tmp[973], a[1309]); -- Strand of the Ancients Veteran
+    AddA(tmp[973], a[1310]); -- Storm the Beach
+    AddA(tmp[973], a[1765]); -- Steady Hands
+    AddA(tmp[973], a[1761]); -- The Dapper Sapper
+    AddA(tmp[973], a[2193]); -- Explosives Expert
+    AddA(tmp[973], a[1762]); -- Not Even a Scratch
+    AddA(tmp[973], a[2192]); -- Not Even a Scratch
+    AddA(tmp[973], a[1763]); -- Artillery Veteran
+    AddA(tmp[973], a[2189]); -- Artillery Expert
+    AddA(tmp[973], a[1764]); -- Drop It!
+    AddA(tmp[973], a[2190]); -- Drop It Now!
+    AddA(tmp[973], a[1766]); -- Ancient Protector
+    AddA(tmp[973], a[2191]); -- Ancient Courtyard Protector
+    AddA(tmp[973], a[1757]); -- Defense of the Ancients
+    AddA(tmp[973], a[2200]); -- Defense of the Ancients
+    AddA(tmp[973], a[2194]); -- Master of Strand of the Ancients
     tmp[967] = cat:New((GetCategoryInfo(15163))); -- Temple of Kotmogu
     AddC(tmp[955], tmp[967]);
     AddA(tmp[967], a[6740]); -- Temple of Kotmogu Victory
@@ -5628,7 +5663,7 @@ function exportedCategories.Load(a)
     tmp[971] = cat:New(addon.L["Specials"]); -- TAB - Specials
     tmp[971].IsTab = true;
     local tabSpecialsCategories = tmp[971];
-    tmp[972] = cat:New((GetCategoryInfo(15248))); -- Mounts
+    tmp[972] = cat:New(addon.L["Bur's Mount Collection"]); -- Bur's Mount Collection
     AddC(tmp[971], tmp[972]);
     AddA(tmp[972], a[416]); -- Scarab Lord
     AddA(tmp[972], a[424]); -- Why? Because It's Red
@@ -5650,6 +5685,7 @@ function exportedCategories.Load(a)
     AddA(tmp[972], a[2077]); -- Wooly Mammoth
     AddA(tmp[972], a[2078]); -- Traveler's Tundra Mammoth
     AddA(tmp[972], a[2081]); -- Grand Black War Mammoth
+    AddA(tmp[972], a[2091]); -- Gladiator
     AddA(tmp[972], a[2097]); -- Get to the Choppa!
     AddA(tmp[972], a[2141]); -- Stable Keeper
     AddA(tmp[972], a[2142]); -- Filling Up The Barn
@@ -5675,6 +5711,7 @@ function exportedCategories.Load(a)
     AddA(tmp[972], a[5767]); -- Scourer of the Eternal Sands
     AddA(tmp[972], a[6003]); -- Vicious Gladiator's Twilight Drake
     AddA(tmp[972], a[6322]); -- Ruthless Gladiator's Twilight Drake
+    AddA(tmp[972], a[6375]); -- Challenge Conqueror: Silver
     AddA(tmp[972], a[6741]); -- Cataclysmic Gladiator's Twilight Drake
     AddA(tmp[972], a[7386]); -- Grand Expedition Yak
     AddA(tmp[972], a[7860]); -- We're Going to Need More Saddles
@@ -5684,38 +5721,97 @@ function exportedCategories.Load(a)
     AddA(tmp[972], a[8216]); -- Malevolent Gladiator's Cloud Serpent
     AddA(tmp[972], a[8302]); -- Mount Parade
     AddA(tmp[972], a[8304]); -- Mount Parade
+    AddA(tmp[972], a[8398]); -- Ahead of the Curve: Garrosh Hellscream (10 player)
+    AddA(tmp[972], a[8399]); -- Ahead of the Curve: Garrosh Hellscream (25 player)
     AddA(tmp[972], a[8678]); -- Tyrannical Gladiator's Cloud Serpent
     AddA(tmp[972], a[8705]); -- Grievous Gladiator's Cloud Serpent
     AddA(tmp[972], a[8707]); -- Prideful Gladiator's Cloud Serpent
     AddA(tmp[972], a[8794]); -- Friends In Places Even Higher Than That
+    AddA(tmp[972], a[8898]); -- Challenge Warlord: Silver
+    AddA(tmp[972], a[8985]); -- Glory of the Draenor Raider
     AddA(tmp[972], a[9229]); -- Primal Gladiator's Felblood Gronnling
+    AddA(tmp[972], a[9236]); -- Primal Combatant
+    AddA(tmp[972], a[9238]); -- Primal Combatant
+    AddA(tmp[972], a[9396]); -- Glory of the Draenor Hero
+    AddA(tmp[972], a[9496]); -- Warlord's Deathwheel
+    AddA(tmp[972], a[9550]); -- "Boldly, You Sought the Power of Ragnaros"
     AddA(tmp[972], a[9598]); -- Mountacular
     AddA(tmp[972], a[9599]); -- Mountacular
     AddA(tmp[972], a[9713]); -- Awake the Drakes
+    AddA(tmp[972], a[9909]); -- Heirloom Hoarder
     AddA(tmp[972], a[9925]); -- Friends In Places Yet Even Higher Than That
     AddA(tmp[972], a[10137]); -- Wild Gladiator's Felblood Gronnling
     AddA(tmp[972], a[10146]); -- Warmongering Gladiator's Felblood Gronnling
+    AddA(tmp[972], a[10149]); -- Glory of the Hellfire Raider
     AddA(tmp[972], a[10355]); -- Lord of the Reins
     AddA(tmp[972], a[10356]); -- Lord of the Reins
     AddA(tmp[972], a[10999]); -- Vindictive Gladiator's Storm Dragon
     AddA(tmp[972], a[11000]); -- Fearless Gladiator's Storm Dragon
     AddA(tmp[972], a[11001]); -- Cruel Gladiator's Storm Dragon
     AddA(tmp[972], a[11002]); -- Ferocious Gladiator's Storm Dragon
+    AddA(tmp[972], a[11066]); -- Underbelly Tycoon
+    AddA(tmp[972], a[11163]); -- Glory of the Legion Hero
+    AddA(tmp[972], a[11180]); -- Glory of the Legion Raider
+    AddA(tmp[972], a[11190]); -- "Broken Isles Pathfinder, Part One"
+    AddA(tmp[972], a[11446]); -- "Broken Isles Pathfinder, Part Two"
+    AddA(tmp[972], a[11474]); -- "Free For All, More For Me"
+    AddA(tmp[972], a[11987]); -- Glory of the Argus Raider
+    AddA(tmp[972], a[12069]); -- Explore Argus
     AddA(tmp[972], a[12139]); -- Dominant Gladiator's Storm Dragon
     AddA(tmp[972], a[12140]); -- Demonic Gladiator's Storm Dragon
+    AddA(tmp[972], a[12245]); -- Allied Races: Highmountain Tauren
+    AddA(tmp[972], a[12401]); -- Glory of the Ulduar Raider
+    AddA(tmp[972], a[12415]); -- Heritage of Highmountain
+    AddA(tmp[972], a[12452]); -- Allied Races: Highmountain Tauren (Hidden Character Achievement)
+    AddA(tmp[972], a[12806]); -- Glory of the Uldir Raider
+    AddA(tmp[972], a[12812]); -- Glory of the Wartorn Hero
+    AddA(tmp[972], a[12866]); -- 100 Exalted Reputations
+    AddA(tmp[972], a[12895]); -- Honor Level 15
+    AddA(tmp[972], a[12903]); -- Honor Level 40
+    AddA(tmp[972], a[12906]); -- Honor Level 70
+    AddA(tmp[972], a[12910]); -- Honor Level 125
+    AddA(tmp[972], a[12911]); -- Honor Level 150
+    AddA(tmp[972], a[12914]); -- Honor Level 250
+    AddA(tmp[972], a[12917]); -- Honor Level 500
     AddA(tmp[972], a[12931]); -- No Stable Big Enough
     AddA(tmp[972], a[12932]); -- No Stable Big Enough
     AddA(tmp[972], a[12933]); -- A Horde of Hoofbeats
     AddA(tmp[972], a[12934]); -- A Horde of Hoofbeats
+    AddA(tmp[972], a[12961]); -- Gladiator: Battle for Azeroth Season 1
+    AddA(tmp[972], a[12989]); -- "Battle for Azeroth Pathfinder, Part One"
     AddA(tmp[972], a[13093]); -- Dread Gladiator's Proto-Drake
     AddA(tmp[972], a[13202]); -- Sinister Gladiator's Proto-Drake
+    AddA(tmp[972], a[13212]); -- Gladiator: Battle for Azeroth Season 2
+    AddA(tmp[972], a[13315]); -- Glory of the Dazar'alor Raider
     AddA(tmp[972], a[13450]); -- Fierce Gladiator's Storm Dragon
     AddA(tmp[972], a[13513]); -- Available in Eight Colors
+    AddA(tmp[972], a[13517]); -- Two Sides to Every Tale
     AddA(tmp[972], a[13632]); -- Notorious Gladiator's Proto-Drake
+    AddA(tmp[972], a[13638]); -- Undersea Usurper
+    AddA(tmp[972], a[13647]); -- Gladiator: Battle for Azeroth Season 3
+    AddA(tmp[972], a[13687]); -- Glory of the Eternal Raider
+    AddA(tmp[972], a[13931]); -- "Memories of Fel, Frost and Fire"
     AddA(tmp[972], a[13958]); -- Corrupted Gladiator's Proto-Drake
+    AddA(tmp[972], a[13967]); -- Gladiator: Battle for Azeroth Season 4
+    AddA(tmp[972], a[13994]); -- Through the Depths of Visions
+    AddA(tmp[972], a[14145]); -- Battle for Azeroth Keystone Master: Season Four
+    AddA(tmp[972], a[14146]); -- Glory of the Ny'alotha Raider
     AddA(tmp[972], a[14183]); -- Conspicuous Consumption
+    AddA(tmp[972], a[14322]); -- Glory of the Shadowlands Hero
+    AddA(tmp[972], a[14355]); -- Glory of the Nathria Raider
+    AddA(tmp[972], a[14532]); -- Shadowlands Keystone Master: Season One
+    AddA(tmp[972], a[14570]); -- Twisting Corridors: Layer 8
+    AddA(tmp[972], a[14689]); -- Gladiator: Shadowlands Season 1
+    AddA(tmp[972], a[14751]); -- The Gang's All Here
+    AddA(tmp[972], a[14752]); -- Things To Do When You're Dead
     AddA(tmp[972], a[14816]); -- Sinful Gladiator's Soul Eater
+    AddA(tmp[972], a[14972]); -- Gladiator: Shadowlands Season 2
     AddA(tmp[972], a[14999]); -- Unchained Gladiator's Soul Eater
+    AddA(tmp[972], a[15064]); -- Breaking the Chains
+    AddA(tmp[972], a[15078]); -- Shadowlands Keystone Master: Season Two
+    AddA(tmp[972], a[15089]); -- Flawless Master
+    AddA(tmp[972], a[15130]); -- Glory of the Dominant Raider
+    AddA(tmp[972], a[15178]); -- Fake It 'Til You Make It
 
     return tabExpansionsCategories.Children, tabEventsCategories.Children, tabPvPCategories.Children, tabSpecialsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;
 end

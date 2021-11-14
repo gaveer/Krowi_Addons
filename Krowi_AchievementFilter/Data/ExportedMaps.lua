@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-13 12-03-48 ]] --
+-- [[ Exported at 2021-11-14 00-59-16 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -94,13 +94,13 @@ function exportedMaps.Load(m, a)
     m[81] = {Achievements = {a[1678], a[43], a[416], a[4934], a[856], a[953], a[46]}}; -- Silithus
     m[82] = {Achievements = {a[1678], a[43], a[416], a[4934], a[856], a[953], a[46]}}; -- Silithus - Twilight's Run
     m[83] = {Achievements = {a[944], a[942], a[943], a[1678], a[43], a[3356], a[4940], a[5443], a[857], a[46]}}; -- Winterspring
-    m[84] = {Achievements = {a[1206], a[615], a[14815], a[388], a[11065]}}; -- Stormwind City
-    m[85] = {Achievements = {a[1206], a[610], a[612], a[14817], a[1006], a[11065]}}; -- Orgrimmar - Orgrimmar
-    m[86] = {Achievements = {a[1206], a[610], a[612], a[14817], a[1006], a[11065]}}; -- Orgrimmar - Cleft of Shadow
+    m[84] = {Achievements = {a[1206], a[615], a[14815], a[388], a[11065], a[603]}}; -- Stormwind City
+    m[85] = {Achievements = {a[1206], a[610], a[612], a[14817], a[614], a[1006], a[11065], a[604]}}; -- Orgrimmar - Orgrimmar
+    m[86] = {Achievements = {a[1206], a[610], a[612], a[14817], a[614], a[1006], a[11065], a[604]}}; -- Orgrimmar - Cleft of Shadow
     m[87] = {Achievements = {a[388]}}; -- Ironforge
-    m[88] = {Achievements = {a[1206], a[1006], a[611]}}; -- Thunder Bluff
-    m[89] = {Achievements = {a[1206], a[388]}}; -- Darnassus
-    m[90] = {Achievements = {a[1006]}}; -- Undercity
+    m[88] = {Achievements = {a[1206], a[1006], a[611], a[604]}}; -- Thunder Bluff
+    m[89] = {Achievements = {a[1206], a[388], a[603]}}; -- Darnassus
+    m[90] = {Achievements = {a[604], a[1006]}}; -- Undercity
     m[91] = {Achievements = {a[13928], a[13930], a[218], a[219], a[221], a[222], a[1151], a[224], a[225], a[1164], a[223], a[220], a[873], a[582], a[707], a[706], a[1166], a[1167], a[226], a[709], a[708]}}; -- Alterac Valley
     m[92] = {Achievements = {a[166], a[167], a[199], a[200], a[872], a[168], a[201], a[204], a[203], a[1251], a[202], a[1502], a[206], a[1252], a[207], a[1172], a[1259], a[713], a[712]}}; -- Warsong Gulch
     m[93] = {Achievements = {a[154], a[155], a[165], a[158], a[73], a[1153], a[157], a[161], a[156], a[159], a[162], a[583], a[584], a[1169], a[711], a[710]}}; -- Arathi Basin
@@ -120,7 +120,7 @@ function exportedMaps.Load(m, a)
     m[107] = {Achievements = {a[942], a[943], a[1262], a[1311], a[1312], a[44], a[902], a[1192], a[1273], a[939], a[941], a[1576], a[4958], a[866], a[899], a[901], a[46]}}; -- Nagrand
     m[108] = {Achievements = {a[1262], a[1311], a[1312], a[44], a[763], a[764], a[894], a[1191], a[1272], a[1275], a[867], a[903], a[1205], a[46]}}; -- Terokkar Forest
     m[109] = {Achievements = {a[1262], a[1311], a[1312], a[44], a[902], a[1194], a[843], a[46]}}; -- Netherstorm
-    m[110] = {Achievements = {a[1006], a[613]}}; -- Silvermoon City
+    m[110] = {Achievements = {a[1006], a[613], a[614], a[604]}}; -- Silvermoon City
     m[111] = {Achievements = {a[1165]}}; -- Shattrath City
     m[112] = {Achievements = {a[208], a[209], a[783], a[784], a[214], a[213], a[212], a[216], a[233], a[1171], a[587], a[1258], a[211]}}; -- Eye of the Storm
     m[113] = {Achievements = {a[41], a[2256], a[2257], a[2557], a[45], a[1008], a[1009], a[1010], a[1011], a[1012], a[46]}}; -- Northrend
@@ -935,7 +935,7 @@ function exportedMaps.Load(m, a)
     m[1528] = {Achievements = {a[13250], a[12572], a[12571], a[12573], a[12605], a[12604], a[13710], a[13709], a[13712], a[13635], a[13690], a[13691], a[13692], a[13743], a[13753], a[13758], a[13744], a[13754], a[13759], a[13745], a[13755], a[13760], a[13704], a[13762], a[13746], a[13749], a[13750], a[13747], a[13751], a[13756], a[13748], a[13752], a[13757], a[13645], a[13761], a[13711], a[13765], a[13549], a[13722], a[13699], a[13713], a[13707], a[13763], a[13764], a[13836], a[13638], a[13569], a[13568], a[13720], a[13558], a[13559]}}; -- Nazjatar - Raid Entrance
     m[1530] = {Achievements = {a[14154], a[14161], a[14160], a[14159], a[14158], a[14156]}}; -- Vale of Eternal Blossoms
     m[1533] = {Achievements = {a[14280], a[14758], a[14825], a[14731], a[14515], a[14516], a[14519], a[14315], a[14281], a[14801], a[14737], a[14735], a[14741], a[14762], a[14303], a[14307], a[14311], a[14339], a[14734], a[14767], a[14768], a[14733], a[14514], a[14335]}}; -- Bastion
-    m[1534] = {Achievements = {a[1206], a[610], a[612], a[14817], a[1006], a[11065]}}; -- Orgrimmar
+    m[1534] = {Achievements = {a[1206], a[610], a[612], a[14817], a[614], a[1006], a[11065], a[604]}}; -- Orgrimmar
     m[1536] = {Achievements = {a[14280], a[14758], a[14825], a[14731], a[14515], a[14516], a[14519], a[14315], a[14206], a[14799], a[14305], a[14308], a[14312], a[14626], a[14802], a[14721], a[14634], a[14513], a[14336]}}; -- Maldraxxus
     m[1537] = {Achievements = {a[13928], a[13930], a[218], a[219], a[221], a[222], a[1151], a[224], a[225], a[1164], a[223], a[220], a[873], a[582], a[707], a[706], a[1166], a[1167], a[226], a[709], a[708]}}; -- Alterac Valley
     m[1543] = {Achievements = {a[15064], a[14334], a[14961], a[15000], a[15001], a[15037], a[15039], a[15041], a[15043], a[15042], a[15044], a[15035], a[15036], a[15034], a[15033], a[15032], a[14663], a[14658], a[14659], a[14660], a[14738], a[14742], a[14743], a[14744], a[14745], a[14746], a[14747], a[14761], a[14894], a[14895], a[15054], a[15107], a[14943], a[14656], a[15059], a[15004]}}; -- The Maw

@@ -14,6 +14,7 @@ BINDING_HEADER_AF_NAME = addon.MetaData.Title;
 BINDING_NAME_AF_OPEN_TAB1 = addon.L["Toggle "] .. addon.L["Expansions"] .. addon.L[" tab"];
 BINDING_NAME_AF_OPEN_TAB2 = addon.L["Toggle "] .. addon.L["Events"] .. addon.L[" tab"];
 BINDING_NAME_AF_OPEN_TAB3 = addon.L["Toggle "] .. addon.L["Player vs. Player"] .. addon.L[" tab"];
+BINDING_NAME_AF_OPEN_TAB4 = addon.L["Toggle "] .. addon.L["Specials"] .. addon.L[" tab"];
 
 -- [[ Guild view ]] --
 function addon.InGuildView()

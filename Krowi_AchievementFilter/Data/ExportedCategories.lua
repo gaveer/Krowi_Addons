@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-14 00-59-13 ]] --
+-- [[ Exported at 2021-11-14 21-03-12 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3917,7 +3917,6 @@ function exportedCategories.Load(a)
     tmp[307] = cat:New(C_Map.GetMapInfo(1462).name); -- Mechagon Island
     AddC(tmp[259], tmp[307]);
     AddA(tmp[307], a[13708]); -- Most Minis Wins
-    AddA(tmp[307], a[13513]); -- Available in Eight Colors
     tmp[308] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[307], tmp[308]);
     AddA(tmp[308], a[13553]); -- The Mechagonian Threat
@@ -5665,153 +5664,185 @@ function exportedCategories.Load(a)
     local tabSpecialsCategories = tmp[971];
     tmp[972] = cat:New(addon.L["Bur's Mount Collection"]); -- Bur's Mount Collection
     AddC(tmp[971], tmp[972]);
-    AddA(tmp[972], a[416]); -- Scarab Lord
-    AddA(tmp[972], a[424]); -- Why? Because It's Red
-    AddA(tmp[972], a[430]); -- Amani War Bear
-    AddA(tmp[972], a[729]); -- Deathcharger's Reins
-    AddA(tmp[972], a[879]); -- Old School Ride
-    AddA(tmp[972], a[880]); -- Swift Zulian Tiger
-    AddA(tmp[972], a[881]); -- Swift Razzashi Raptor
-    AddA(tmp[972], a[882]); -- Fiery Warhorse's Reins
-    AddA(tmp[972], a[883]); -- Reins of the Raven Lord
-    AddA(tmp[972], a[884]); -- Swift White Hawkstrider
-    AddA(tmp[972], a[885]); -- Ashes of Al'ar
-    AddA(tmp[972], a[886]); -- Swift Nether Drake
-    AddA(tmp[972], a[887]); -- Merciless Nether Drake
-    AddA(tmp[972], a[888]); -- Vengeful Nether Drake
-    AddA(tmp[972], a[980]); -- The Horseman's Reins
-    AddA(tmp[972], a[1436]); -- Friends In High Places
-    AddA(tmp[972], a[2076]); -- Armored Brown Bear
-    AddA(tmp[972], a[2077]); -- Wooly Mammoth
-    AddA(tmp[972], a[2078]); -- Traveler's Tundra Mammoth
-    AddA(tmp[972], a[2081]); -- Grand Black War Mammoth
-    AddA(tmp[972], a[2091]); -- Gladiator
-    AddA(tmp[972], a[2097]); -- Get to the Choppa!
-    AddA(tmp[972], a[2141]); -- Stable Keeper
-    AddA(tmp[972], a[2142]); -- Filling Up The Barn
-    AddA(tmp[972], a[2143]); -- Leading the Cavalry
-    AddA(tmp[972], a[2316]); -- Brutal Nether Drake
-    AddA(tmp[972], a[2536]); -- Mountain o' Mounts
-    AddA(tmp[972], a[2537]); -- Mountain o' Mounts
-    AddA(tmp[972], a[3096]); -- Deadly Gladiator's Frost Wyrm
     AddA(tmp[972], a[3356]); -- Winterspring Frostsaber
     AddA(tmp[972], a[3357]); -- Venomhide Ravasaur
-    AddA(tmp[972], a[3496]); -- A Brew-FAST Mount
-    AddA(tmp[972], a[3636]); -- Jade Tiger
-    AddA(tmp[972], a[3756]); -- Furious Gladiator's Frost Wyrm
-    AddA(tmp[972], a[3757]); -- Relentless Gladiator's Frost Wyrm
-    AddA(tmp[972], a[3896]); -- Onyx Panther
-    AddA(tmp[972], a[4600]); -- Wrathful Gladiator's Frost Wyrm
-    AddA(tmp[972], a[4625]); -- Invincible's Reins
-    AddA(tmp[972], a[4626]); -- And I'll Form the Head!
-    AddA(tmp[972], a[4627]); -- X-45 Heartbreaker
-    AddA(tmp[972], a[4832]); -- Friends In Even Higher Places
-    AddA(tmp[972], a[4888]); -- One Hump or Two?
-    AddA(tmp[972], a[5749]); -- Vial of the Sands
-    AddA(tmp[972], a[5767]); -- Scourer of the Eternal Sands
-    AddA(tmp[972], a[6003]); -- Vicious Gladiator's Twilight Drake
-    AddA(tmp[972], a[6322]); -- Ruthless Gladiator's Twilight Drake
-    AddA(tmp[972], a[6375]); -- Challenge Conqueror: Silver
-    AddA(tmp[972], a[6741]); -- Cataclysmic Gladiator's Twilight Drake
-    AddA(tmp[972], a[7386]); -- Grand Expedition Yak
-    AddA(tmp[972], a[7860]); -- We're Going to Need More Saddles
-    AddA(tmp[972], a[7862]); -- We're Going to Need More Saddles
-    AddA(tmp[972], a[8092]); -- I've Got 9999 Problems but a Bone-White Primal Raptor Ain't One
-    AddA(tmp[972], a[8213]); -- Friends In Places Higher Yet
-    AddA(tmp[972], a[8216]); -- Malevolent Gladiator's Cloud Serpent
-    AddA(tmp[972], a[8302]); -- Mount Parade
-    AddA(tmp[972], a[8304]); -- Mount Parade
-    AddA(tmp[972], a[8398]); -- Ahead of the Curve: Garrosh Hellscream (10 player)
-    AddA(tmp[972], a[8399]); -- Ahead of the Curve: Garrosh Hellscream (25 player)
-    AddA(tmp[972], a[8678]); -- Tyrannical Gladiator's Cloud Serpent
-    AddA(tmp[972], a[8705]); -- Grievous Gladiator's Cloud Serpent
-    AddA(tmp[972], a[8707]); -- Prideful Gladiator's Cloud Serpent
-    AddA(tmp[972], a[8794]); -- Friends In Places Even Higher Than That
-    AddA(tmp[972], a[8898]); -- Challenge Warlord: Silver
-    AddA(tmp[972], a[8985]); -- Glory of the Draenor Raider
-    AddA(tmp[972], a[9229]); -- Primal Gladiator's Felblood Gronnling
-    AddA(tmp[972], a[9236]); -- Primal Combatant
-    AddA(tmp[972], a[9238]); -- Primal Combatant
-    AddA(tmp[972], a[9396]); -- Glory of the Draenor Hero
-    AddA(tmp[972], a[9496]); -- Warlord's Deathwheel
-    AddA(tmp[972], a[9550]); -- "Boldly, You Sought the Power of Ragnaros"
-    AddA(tmp[972], a[9598]); -- Mountacular
-    AddA(tmp[972], a[9599]); -- Mountacular
-    AddA(tmp[972], a[9713]); -- Awake the Drakes
-    AddA(tmp[972], a[9909]); -- Heirloom Hoarder
-    AddA(tmp[972], a[9925]); -- Friends In Places Yet Even Higher Than That
-    AddA(tmp[972], a[10137]); -- Wild Gladiator's Felblood Gronnling
-    AddA(tmp[972], a[10146]); -- Warmongering Gladiator's Felblood Gronnling
-    AddA(tmp[972], a[10149]); -- Glory of the Hellfire Raider
-    AddA(tmp[972], a[10355]); -- Lord of the Reins
-    AddA(tmp[972], a[10356]); -- Lord of the Reins
-    AddA(tmp[972], a[10999]); -- Vindictive Gladiator's Storm Dragon
-    AddA(tmp[972], a[11000]); -- Fearless Gladiator's Storm Dragon
-    AddA(tmp[972], a[11001]); -- Cruel Gladiator's Storm Dragon
-    AddA(tmp[972], a[11002]); -- Ferocious Gladiator's Storm Dragon
-    AddA(tmp[972], a[11066]); -- Underbelly Tycoon
-    AddA(tmp[972], a[11163]); -- Glory of the Legion Hero
-    AddA(tmp[972], a[11180]); -- Glory of the Legion Raider
-    AddA(tmp[972], a[11190]); -- "Broken Isles Pathfinder, Part One"
-    AddA(tmp[972], a[11446]); -- "Broken Isles Pathfinder, Part Two"
-    AddA(tmp[972], a[11474]); -- "Free For All, More For Me"
-    AddA(tmp[972], a[11987]); -- Glory of the Argus Raider
-    AddA(tmp[972], a[12069]); -- Explore Argus
-    AddA(tmp[972], a[12139]); -- Dominant Gladiator's Storm Dragon
-    AddA(tmp[972], a[12140]); -- Demonic Gladiator's Storm Dragon
-    AddA(tmp[972], a[12245]); -- Allied Races: Highmountain Tauren
-    AddA(tmp[972], a[12401]); -- Glory of the Ulduar Raider
-    AddA(tmp[972], a[12415]); -- Heritage of Highmountain
-    AddA(tmp[972], a[12452]); -- Allied Races: Highmountain Tauren (Hidden Character Achievement)
-    AddA(tmp[972], a[12806]); -- Glory of the Uldir Raider
-    AddA(tmp[972], a[12812]); -- Glory of the Wartorn Hero
     AddA(tmp[972], a[12866]); -- 100 Exalted Reputations
-    AddA(tmp[972], a[12895]); -- Honor Level 15
-    AddA(tmp[972], a[12903]); -- Honor Level 40
-    AddA(tmp[972], a[12906]); -- Honor Level 70
-    AddA(tmp[972], a[12910]); -- Honor Level 125
-    AddA(tmp[972], a[12911]); -- Honor Level 150
-    AddA(tmp[972], a[12914]); -- Honor Level 250
-    AddA(tmp[972], a[12917]); -- Honor Level 500
-    AddA(tmp[972], a[12931]); -- No Stable Big Enough
-    AddA(tmp[972], a[12932]); -- No Stable Big Enough
-    AddA(tmp[972], a[12933]); -- A Horde of Hoofbeats
-    AddA(tmp[972], a[12934]); -- A Horde of Hoofbeats
-    AddA(tmp[972], a[12961]); -- Gladiator: Battle for Azeroth Season 1
-    AddA(tmp[972], a[12989]); -- "Battle for Azeroth Pathfinder, Part One"
-    AddA(tmp[972], a[13093]); -- Dread Gladiator's Proto-Drake
-    AddA(tmp[972], a[13202]); -- Sinister Gladiator's Proto-Drake
-    AddA(tmp[972], a[13212]); -- Gladiator: Battle for Azeroth Season 2
-    AddA(tmp[972], a[13315]); -- Glory of the Dazar'alor Raider
-    AddA(tmp[972], a[13450]); -- Fierce Gladiator's Storm Dragon
-    AddA(tmp[972], a[13513]); -- Available in Eight Colors
-    AddA(tmp[972], a[13517]); -- Two Sides to Every Tale
-    AddA(tmp[972], a[13632]); -- Notorious Gladiator's Proto-Drake
-    AddA(tmp[972], a[13638]); -- Undersea Usurper
-    AddA(tmp[972], a[13647]); -- Gladiator: Battle for Azeroth Season 3
-    AddA(tmp[972], a[13687]); -- Glory of the Eternal Raider
-    AddA(tmp[972], a[13931]); -- "Memories of Fel, Frost and Fire"
-    AddA(tmp[972], a[13958]); -- Corrupted Gladiator's Proto-Drake
-    AddA(tmp[972], a[13967]); -- Gladiator: Battle for Azeroth Season 4
-    AddA(tmp[972], a[13994]); -- Through the Depths of Visions
-    AddA(tmp[972], a[14145]); -- Battle for Azeroth Keystone Master: Season Four
-    AddA(tmp[972], a[14146]); -- Glory of the Ny'alotha Raider
-    AddA(tmp[972], a[14183]); -- Conspicuous Consumption
-    AddA(tmp[972], a[14322]); -- Glory of the Shadowlands Hero
-    AddA(tmp[972], a[14355]); -- Glory of the Nathria Raider
-    AddA(tmp[972], a[14532]); -- Shadowlands Keystone Master: Season One
-    AddA(tmp[972], a[14570]); -- Twisting Corridors: Layer 8
-    AddA(tmp[972], a[14689]); -- Gladiator: Shadowlands Season 1
-    AddA(tmp[972], a[14751]); -- The Gang's All Here
-    AddA(tmp[972], a[14752]); -- Things To Do When You're Dead
-    AddA(tmp[972], a[14816]); -- Sinful Gladiator's Soul Eater
-    AddA(tmp[972], a[14972]); -- Gladiator: Shadowlands Season 2
-    AddA(tmp[972], a[14999]); -- Unchained Gladiator's Soul Eater
-    AddA(tmp[972], a[15064]); -- Breaking the Chains
-    AddA(tmp[972], a[15078]); -- Shadowlands Keystone Master: Season Two
-    AddA(tmp[972], a[15089]); -- Flawless Master
-    AddA(tmp[972], a[15130]); -- Glory of the Dominant Raider
-    AddA(tmp[972], a[15178]); -- Fake It 'Til You Make It
+    tmp[976] = cat:New((GetCategoryInfo(15246))); -- Collections
+    AddC(tmp[972], tmp[976]);
+    AddA(tmp[976], a[2141]); -- Stable Keeper
+    AddA(tmp[976], a[2142]); -- Filling Up The Barn
+    AddA(tmp[976], a[2143]); -- Leading the Cavalry
+    AddA(tmp[976], a[2536]); -- Mountain o' Mounts
+    AddA(tmp[976], a[2537]); -- Mountain o' Mounts
+    AddA(tmp[976], a[7860]); -- We're Going to Need More Saddles
+    AddA(tmp[976], a[7862]); -- We're Going to Need More Saddles
+    AddA(tmp[976], a[8304]); -- Mount Parade
+    AddA(tmp[976], a[8302]); -- Mount Parade
+    AddA(tmp[976], a[9598]); -- Mountacular
+    AddA(tmp[976], a[9599]); -- Mountacular
+    AddA(tmp[976], a[10356]); -- Lord of the Reins
+    AddA(tmp[976], a[10355]); -- Lord of the Reins
+    AddA(tmp[976], a[12932]); -- No Stable Big Enough
+    AddA(tmp[976], a[12931]); -- No Stable Big Enough
+    AddA(tmp[976], a[12933]); -- A Horde of Hoofbeats
+    AddA(tmp[976], a[12934]); -- A Horde of Hoofbeats
+    AddA(tmp[976], a[9713]); -- Awake the Drakes
+    tmp[985] = cat:New(addon.L["Vendor"]); -- Vendor
+    AddC(tmp[972], tmp[985]);
+    AddA(tmp[985], a[2076]); -- Armored Brown Bear
+    AddA(tmp[985], a[2077]); -- Wooly Mammoth
+    AddA(tmp[985], a[2078]); -- Traveler's Tundra Mammoth
+    AddA(tmp[985], a[4888]); -- One Hump or Two?
+    AddA(tmp[985], a[7386]); -- Grand Expedition Yak
+    AddA(tmp[985], a[8092]); -- I've Got 9999 Problems but a Bone-White Primal Raptor Ain't One
+    AddA(tmp[985], a[9909]); -- Heirloom Hoarder
+    AddA(tmp[985], a[14183]); -- Conspicuous Consumption
+    tmp[986] = cat:New(addon.L["Profession"]); -- Profession
+    AddC(tmp[972], tmp[986]);
+    AddA(tmp[986], a[2097]); -- Get to the Choppa!
+    AddA(tmp[986], a[5749]); -- Vial of the Sands
+    tmp[987] = cat:New(addon.L["Events"]); -- Events
+    AddC(tmp[972], tmp[987]);
+    AddA(tmp[987], a[416]); -- Scarab Lord
+    AddA(tmp[987], a[980]); -- The Horseman's Reins
+    AddA(tmp[987], a[3496]); -- A Brew-FAST Mount
+    AddA(tmp[987], a[4627]); -- X-45 Heartbreaker
+    AddA(tmp[987], a[2144]); -- "What a Long, Strange Trip It's Been"
+    AddA(tmp[987], a[9496]); -- Warlord's Deathwheel
+    AddA(tmp[987], a[9550]); -- "Boldly, You Sought the Power of Ragnaros"
+    AddA(tmp[987], a[13931]); -- "Memories of Fel, Frost and Fire"
+    tmp[989] = cat:New(addon.L["Achievements"]); -- Achievements
+    AddC(tmp[972], tmp[989]);
+    AddA(tmp[989], a[879]); -- Old School Ride
+    AddA(tmp[989], a[5767]); -- Scourer of the Eternal Sands
+    AddA(tmp[989], a[11066]); -- Underbelly Tycoon
+    AddA(tmp[989], a[13517]); -- Two Sides to Every Tale
+    AddA(tmp[989], a[13638]); -- Undersea Usurper
+    AddA(tmp[989], a[13994]); -- Through the Depths of Visions
+    AddA(tmp[989], a[14751]); -- The Gang's All Here
+    AddA(tmp[989], a[14752]); -- Things To Do When You're Dead
+    AddA(tmp[989], a[14570]); -- Twisting Corridors: Layer 8
+    AddA(tmp[989], a[15089]); -- Flawless Master
+    AddA(tmp[989], a[15064]); -- Breaking the Chains
+    tmp[979] = cat:New((GetCategoryInfo(15272))); -- Dungeons
+    AddC(tmp[972], tmp[979]);
+    AddA(tmp[979], a[6375]); -- Challenge Conqueror: Silver
+    AddA(tmp[979], a[8898]); -- Challenge Warlord: Silver
+    AddA(tmp[979], a[14145]); -- Battle for Azeroth Keystone Master: Season Four
+    AddA(tmp[979], a[14532]); -- Shadowlands Keystone Master: Season One
+    AddA(tmp[979], a[15078]); -- Shadowlands Keystone Master: Season Two
+    AddA(tmp[979], a[15178]); -- Fake It 'Til You Make It
+    tmp[983] = cat:New(addon.L["Drops"], true); -- Drops
+    AddC(tmp[979], tmp[983]);
+    AddA(tmp[983], a[729]); -- Deathcharger's Reins
+    AddA(tmp[983], a[883]); -- Reins of the Raven Lord
+    AddA(tmp[983], a[884]); -- Swift White Hawkstrider
+    tmp[980] = cat:New(addon.L["Glory"], true); -- Glory
+    AddC(tmp[979], tmp[980]);
+    AddA(tmp[980], a[2136]); -- Glory of the Hero
+    AddA(tmp[980], a[4845]); -- Glory of the Cataclysm Hero
+    AddA(tmp[980], a[6927]); -- Glory of the Pandaria Hero
+    AddA(tmp[980], a[9396]); -- Glory of the Draenor Hero
+    AddA(tmp[980], a[11163]); -- Glory of the Legion Hero
+    AddA(tmp[980], a[12812]); -- Glory of the Wartorn Hero
+    AddA(tmp[980], a[14322]); -- Glory of the Shadowlands Hero
+    tmp[982] = cat:New((GetCategoryInfo(15271))); -- Raids
+    AddC(tmp[972], tmp[982]);
+    AddA(tmp[982], a[8398]); -- Ahead of the Curve: Garrosh Hellscream (10 player)
+    AddA(tmp[982], a[8399]); -- Ahead of the Curve: Garrosh Hellscream (25 player)
+    tmp[984] = cat:New(addon.L["Drops"], true); -- Drops
+    AddC(tmp[982], tmp[984]);
+    AddA(tmp[984], a[880]); -- Swift Zulian Tiger
+    AddA(tmp[984], a[881]); -- Swift Razzashi Raptor
+    AddA(tmp[984], a[424]); -- Why? Because It's Red
+    AddA(tmp[984], a[882]); -- Fiery Warhorse's Reins
+    AddA(tmp[984], a[885]); -- Ashes of Al'ar
+    AddA(tmp[984], a[430]); -- Amani War Bear
+    AddA(tmp[984], a[2081]); -- Grand Black War Mammoth
+    AddA(tmp[984], a[4626]); -- And I'll Form the Head!
+    AddA(tmp[984], a[4625]); -- Invincible's Reins
+    tmp[981] = cat:New(addon.L["Glory"], true); -- Glory
+    AddC(tmp[982], tmp[981]);
+    AddA(tmp[981], a[12401]); -- Glory of the Ulduar Raider
+    AddA(tmp[981], a[2957]); -- Glory of the Ulduar Raider (10 player)
+    AddA(tmp[981], a[2958]); -- Glory of the Ulduar Raider (25 player)
+    AddA(tmp[981], a[4602]); -- Glory of the Icecrown Raider (10 player)
+    AddA(tmp[981], a[4603]); -- Glory of the Icecrown Raider (25 player)
+    AddA(tmp[981], a[4853]); -- Glory of the Cataclysm Raider
+    AddA(tmp[981], a[5828]); -- Glory of the Firelands Raider
+    AddA(tmp[981], a[6169]); -- Glory of the Dragon Soul Raider
+    AddA(tmp[981], a[6932]); -- Glory of the Pandaria Raider
+    AddA(tmp[981], a[8124]); -- Glory of the Thundering Raider
+    AddA(tmp[981], a[8454]); -- Glory of the Orgrimmar Raider
+    AddA(tmp[981], a[8985]); -- Glory of the Draenor Raider
+    AddA(tmp[981], a[10149]); -- Glory of the Hellfire Raider
+    AddA(tmp[981], a[11180]); -- Glory of the Legion Raider
+    AddA(tmp[981], a[11763]); -- Glory of the Tomb Raider
+    AddA(tmp[981], a[11987]); -- Glory of the Argus Raider
+    AddA(tmp[981], a[12806]); -- Glory of the Uldir Raider
+    AddA(tmp[981], a[13315]); -- Glory of the Dazar'alor Raider
+    AddA(tmp[981], a[13687]); -- Glory of the Eternal Raider
+    AddA(tmp[981], a[14146]); -- Glory of the Ny'alotha Raider
+    AddA(tmp[981], a[14355]); -- Glory of the Nathria Raider
+    AddA(tmp[981], a[15130]); -- Glory of the Dominant Raider
+    tmp[977] = cat:New((GetCategoryInfo(15270))); -- PvP
+    AddC(tmp[972], tmp[977]);
+    AddA(tmp[977], a[12895]); -- Honor Level 15
+    AddA(tmp[977], a[12903]); -- Honor Level 40
+    AddA(tmp[977], a[12906]); -- Honor Level 70
+    AddA(tmp[977], a[12910]); -- Honor Level 125
+    AddA(tmp[977], a[12911]); -- Honor Level 150
+    AddA(tmp[977], a[12914]); -- Honor Level 250
+    AddA(tmp[977], a[12917]); -- Honor Level 500
+    AddA(tmp[977], a[9238]); -- Primal Combatant
+    AddA(tmp[977], a[9236]); -- Primal Combatant
+    AddA(tmp[977], a[11474]); -- "Free For All, More For Me"
+    tmp[978] = cat:New((select(2, addon.GetAchievementInfo(2091))), true); -- Gladiator
+    AddC(tmp[977], tmp[978]);
+    AddA(tmp[978], a[886]); -- Swift Nether Drake
+    AddA(tmp[978], a[887]); -- Merciless Nether Drake
+    AddA(tmp[978], a[888]); -- Vengeful Nether Drake
+    AddA(tmp[978], a[2316]); -- Brutal Nether Drake
+    AddA(tmp[978], a[3096]); -- Deadly Gladiator's Frost Wyrm
+    AddA(tmp[978], a[3756]); -- Furious Gladiator's Frost Wyrm
+    AddA(tmp[978], a[3757]); -- Relentless Gladiator's Frost Wyrm
+    AddA(tmp[978], a[4600]); -- Wrathful Gladiator's Frost Wyrm
+    AddA(tmp[978], a[6003]); -- Vicious Gladiator's Twilight Drake
+    AddA(tmp[978], a[6322]); -- Ruthless Gladiator's Twilight Drake
+    AddA(tmp[978], a[6741]); -- Cataclysmic Gladiator's Twilight Drake
+    AddA(tmp[978], a[8216]); -- Malevolent Gladiator's Cloud Serpent
+    AddA(tmp[978], a[8678]); -- Tyrannical Gladiator's Cloud Serpent
+    AddA(tmp[978], a[8705]); -- Grievous Gladiator's Cloud Serpent
+    AddA(tmp[978], a[8707]); -- Prideful Gladiator's Cloud Serpent
+    AddA(tmp[978], a[9229]); -- Primal Gladiator's Felblood Gronnling
+    AddA(tmp[978], a[10137]); -- Wild Gladiator's Felblood Gronnling
+    AddA(tmp[978], a[10146]); -- Warmongering Gladiator's Felblood Gronnling
+    AddA(tmp[978], a[10999]); -- Vindictive Gladiator's Storm Dragon
+    AddA(tmp[978], a[11000]); -- Fearless Gladiator's Storm Dragon
+    AddA(tmp[978], a[11001]); -- Cruel Gladiator's Storm Dragon
+    AddA(tmp[978], a[11002]); -- Ferocious Gladiator's Storm Dragon
+    AddA(tmp[978], a[13450]); -- Fierce Gladiator's Storm Dragon
+    AddA(tmp[978], a[12139]); -- Dominant Gladiator's Storm Dragon
+    AddA(tmp[978], a[12140]); -- Demonic Gladiator's Storm Dragon
+    AddA(tmp[978], a[12961]); -- Gladiator: Battle for Azeroth Season 1
+    AddA(tmp[978], a[13093]); -- Dread Gladiator's Proto-Drake
+    AddA(tmp[978], a[13212]); -- Gladiator: Battle for Azeroth Season 2
+    AddA(tmp[978], a[13202]); -- Sinister Gladiator's Proto-Drake
+    AddA(tmp[978], a[13647]); -- Gladiator: Battle for Azeroth Season 3
+    AddA(tmp[978], a[13632]); -- Notorious Gladiator's Proto-Drake
+    AddA(tmp[978], a[13967]); -- Gladiator: Battle for Azeroth Season 4
+    AddA(tmp[978], a[13958]); -- Corrupted Gladiator's Proto-Drake
+    AddA(tmp[978], a[14689]); -- Gladiator: Shadowlands Season 1
+    AddA(tmp[978], a[14816]); -- Sinful Gladiator's Soul Eater
+    AddA(tmp[978], a[14972]); -- Gladiator: Shadowlands Season 2
+    AddA(tmp[978], a[14999]); -- Unchained Gladiator's Soul Eater
+    tmp[988] = cat:New(addon.L["Recruit-a-Friend"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Recruit-a-Friend
+    AddC(tmp[972], tmp[988]);
+    AddA(tmp[988], a[1436]); -- Friends In High Places
+    AddA(tmp[988], a[4832]); -- Friends In Even Higher Places
+    AddA(tmp[988], a[8213]); -- Friends In Places Higher Yet
+    AddA(tmp[988], a[8794]); -- Friends In Places Even Higher Than That
+    AddA(tmp[988], a[9925]); -- Friends In Places Yet Even Higher Than That
 
     return tabExpansionsCategories.Children, tabEventsCategories.Children, tabPvPCategories.Children, tabSpecialsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;
 end

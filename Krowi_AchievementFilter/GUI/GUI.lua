@@ -194,6 +194,10 @@ function KrowiAF_ToggleAchievementFrame(tab)
         gui.ToggleAchievementFrame(addon.L["Expansions"]);
     elseif tab == 2 then
         gui.ToggleAchievementFrame(addon.L["Events"]);
+    elseif tab == 3 then
+        gui.ToggleAchievementFrame((GetCategoryInfo(15270)));
+    elseif tab == 4 then
+        gui.ToggleAchievementFrame(addon.L["Specials"]);
     end
 end
 

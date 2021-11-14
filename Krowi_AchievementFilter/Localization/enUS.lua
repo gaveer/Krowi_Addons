@@ -73,6 +73,11 @@ L["Gifts"] = "Gifts"
 L["Other"] = "Other";
 L["Strand of the Ancients"] = "Strand of the Ancients";
 L["Bur's Mount Collection"] = "Bur's Mount Collection";
+L["Drops"] = "Drops";
+L["Vendor"] = "Vendor";
+L["Profession"] = "Profession";
+L["Recruit-a-Friend"] = "Recruit-a-Friend";
+L["Achievements"] = "Achievements";
 
 -- Filters
 L["Obtainable"] = "Obtainable";

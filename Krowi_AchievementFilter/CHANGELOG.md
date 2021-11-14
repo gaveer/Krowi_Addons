@@ -28,6 +28,9 @@ All notable changes to this project will be documented in this file.
 - New Specials tab with custom categories requested by users
 - Achievements that can be found at multiple locations now have a Go To entry in the right click menu
 
+### Fixed
+- Undying Aesthetic is once again obtainable
+
 [9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
 
 ## [9.1.5.31.0] - 2021-11-04

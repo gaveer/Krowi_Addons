@@ -66,14 +66,16 @@ namespace DbManagerWPF.ViewModel
             RefreshAchievementEventsView(SelectedAchievement);
         }, () => true);
 
-        private string _AchievementIDsNew;
-        public string AchievementIDsNew { get { return _AchievementIDsNew; } set { _AchievementIDsNew = value; NotifyPropertyChanged(); } }
+        private string achievementIDsNew;
+        public string AchievementIDsNew { get { return achievementIDsNew; } set { achievementIDsNew = value; NotifyPropertyChanged(); } }
 
         public ICommand EnterNewCommand => new CommandHandler(() => AddNewAchievement(), () => true);
 
         public string PointsNew { get; set; }
 
-        public bool ObtainableNew { get; set; } = true;
+
+        private bool obtainableNew = true;
+        public bool ObtainableNew { get => obtainableNew; set { obtainableNew = value; NotifyPropertyChanged(); } }
 
         public bool WowheadLinkNew { get; set; } = true;
 

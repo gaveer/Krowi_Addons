@@ -1,4 +1,15 @@
-﻿<Window x:Class="DbManagerWPF.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:VM="clr-namespace:DbManagerWPF.ViewModel" xmlns:V="clr-namespace:DbManagerWPF.View" xmlns:B="http://schemas.microsoft.com/xaml/behaviors" mc:Ignorable="d" Title="MainWindow" SizeToContent="WidthAndHeight" MaxHeight="1500">
+﻿<Window x:Class="DbManagerWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:VM="clr-namespace:DbManagerWPF.ViewModel"
+        xmlns:V="clr-namespace:DbManagerWPF.View"
+        xmlns:B="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        SizeToContent="WidthAndHeight"
+        MaxHeight="1500">
     <Window.DataContext>
         <VM:MainWindowViewModel />
     </Window.DataContext>
@@ -17,7 +28,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <GroupBox Header="Category" Margin="3,3,3,3">
+            <GroupBox Header="Category"
+                      Margin="3,3,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -40,26 +52,65 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
-                            <Label Margin="3,3,3,3" Content="Category Name" />
-                            <TextBox Grid.Column="1" Margin="3,3,3,3" Text="{Binding CategoryNameNew}" Grid.ColumnSpan="2" />
-                            <Label Grid.Row="1" Margin="3,3,3,3" Content="Function" />
-                            <ComboBox Grid.Column="1" Grid.Row="1" Margin="3,3,3,3" ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunctionNew}" Grid.ColumnSpan="2" />
-                            <Label Grid.Row="2" Margin="3,3,3,3" Content="Function Value" />
-                            <TextBox Grid.Column="1" Grid.Row="2" Margin="3,3,3,3" Text="{Binding FunctionValueNew}" Grid.ColumnSpan="2" />
-                            <CheckBox Grid.Row="3" Grid.ColumnSpan="3" Margin="3,3,3,3" Content="Selected Category as Parent" IsChecked="{Binding SelectedCategoryAsParent}" />
-                            <CheckBox Grid.Row="4" Margin="3,3,3,3" Content="Legacy" IsChecked="{Binding IsLegacyNew}" />
-                            <CheckBox Grid.Column="1" Grid.Row="4" Margin="3,3,3,3" Content="Active" IsChecked="{Binding IsActiveNew}" Grid.ColumnSpan="2" />
-                            <CheckBox Grid.Row="4" Grid.Column="2" Margin="3,3,3,3" Content="Can Merge" IsChecked="{Binding CanMergeNew}" />
-                            <Grid Grid.Row="5" Grid.ColumnSpan="3">
+                            <Label Margin="3,3,3,3"
+                                   Content="Category Name" />
+                            <TextBox Grid.Column="1"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding CategoryNameNew}"
+                                     Grid.ColumnSpan="2" />
+                            <Label Grid.Row="1"
+                                   Margin="3,3,3,3"
+                                   Content="Function" />
+                            <ComboBox Grid.Column="1"
+                                      Grid.Row="1"
+                                      Margin="3,3,3,3"
+                                      ItemsSource="{Binding Functions}"
+                                      SelectedItem="{Binding SelectedFunctionNew}"
+                                      Grid.ColumnSpan="2" />
+                            <Label Grid.Row="2"
+                                   Margin="3,3,3,3"
+                                   Content="Function Value" />
+                            <TextBox Grid.Column="1"
+                                     Grid.Row="2"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding FunctionValueNew}"
+                                     Grid.ColumnSpan="2" />
+                            <CheckBox Grid.Row="3"
+                                      Grid.ColumnSpan="3"
+                                      Margin="3,3,3,3"
+                                      Content="Selected Category as Parent"
+                                      IsChecked="{Binding SelectedCategoryAsParent}" />
+                            <CheckBox Grid.Row="4"
+                                      Margin="3,3,3,3"
+                                      Content="Legacy"
+                                      IsChecked="{Binding IsLegacyNew}" />
+                            <CheckBox Grid.Column="1"
+                                      Grid.Row="4"
+                                      Margin="3,3,3,3"
+                                      Content="Active"
+                                      IsChecked="{Binding IsActiveNew}"
+                                      Grid.ColumnSpan="2" />
+                            <CheckBox Grid.Row="4"
+                                      Grid.Column="2"
+                                      Margin="3,3,3,3"
+                                      Content="Can Merge"
+                                      IsChecked="{Binding CanMergeNew}" />
+                            <Grid Grid.Row="5"
+                                  Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Button Content="Add" Grid.Column="3" Grid.Row="5" Margin="3,3,3,3" Command="{Binding AddNewCategoryCommand}" />
+                                <Button Content="Add"
+                                        Grid.Column="3"
+                                        Grid.Row="5"
+                                        Margin="3,3,3,3"
+                                        Command="{Binding AddNewCategoryCommand}" />
                             </Grid>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Edit" Grid.Row="1">
+                    <GroupBox Header="Edit"
+                              Grid.Row="1">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -73,16 +124,46 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
-                            <Label Margin="3,3,3,3" Content="Category Name" />
-                            <TextBox Grid.Column="1" Margin="3,3,3,3" Text="{Binding CategoryNameEdit}" Grid.ColumnSpan="2" />
-                            <Label Grid.Row="1" Margin="3,3,3,3" Content="Function" />
-                            <ComboBox Grid.Column="1" Grid.Row="1" Margin="3,3,3,3" ItemsSource="{Binding Functions}" SelectedItem="{Binding SelectedFunctionEdit}" Grid.ColumnSpan="2" />
-                            <Label Grid.Row="2" Margin="3,3,3,3" Content="Function Value" Grid.ColumnSpan="3" />
-                            <TextBox Grid.Column="1" Grid.Row="2" Margin="3,3,3,3" Text="{Binding FunctionValueEdit}" Grid.ColumnSpan="2" />
-                            <CheckBox Grid.Row="3" Margin="3,3,3,3" Content="Legacy" IsChecked="{Binding IsLegacyEdit}" />
-                            <CheckBox Grid.Column="1" Grid.Row="3" Margin="3,3,3,3" Content="Active" IsChecked="{Binding IsActiveEdit}" />
-                            <CheckBox Grid.Row="3" Grid.Column="2" Margin="3,3,3,3" Content="Can Merge" IsChecked="{Binding CanMergeEdit}" />
-                            <Grid Grid.Row="4" Grid.ColumnSpan="3">
+                            <Label Margin="3,3,3,3"
+                                   Content="Category Name" />
+                            <TextBox Grid.Column="1"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding CategoryNameEdit}"
+                                     Grid.ColumnSpan="2" />
+                            <Label Grid.Row="1"
+                                   Margin="3,3,3,3"
+                                   Content="Function" />
+                            <ComboBox Grid.Column="1"
+                                      Grid.Row="1"
+                                      Margin="3,3,3,3"
+                                      ItemsSource="{Binding Functions}"
+                                      SelectedItem="{Binding SelectedFunctionEdit}"
+                                      Grid.ColumnSpan="2" />
+                            <Label Grid.Row="2"
+                                   Margin="3,3,3,3"
+                                   Content="Function Value"
+                                   Grid.ColumnSpan="3" />
+                            <TextBox Grid.Column="1"
+                                     Grid.Row="2"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding FunctionValueEdit}"
+                                     Grid.ColumnSpan="2" />
+                            <CheckBox Grid.Row="3"
+                                      Margin="3,3,3,3"
+                                      Content="Legacy"
+                                      IsChecked="{Binding IsLegacyEdit}" />
+                            <CheckBox Grid.Column="1"
+                                      Grid.Row="3"
+                                      Margin="3,3,3,3"
+                                      Content="Active"
+                                      IsChecked="{Binding IsActiveEdit}" />
+                            <CheckBox Grid.Row="3"
+                                      Grid.Column="2"
+                                      Margin="3,3,3,3"
+                                      Content="Can Merge"
+                                      IsChecked="{Binding CanMergeEdit}" />
+                            <Grid Grid.Row="4"
+                                  Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
@@ -91,16 +172,42 @@
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="2*" />
                                 </Grid.ColumnDefinitions>
-                                <Button Content="3" Margin="3" Command="{Binding MoveCategoryLeftCommand}" FontFamily="Marlett" FontSize="20" />
-                                <Button Content="5" Margin="3" Grid.Column="1" Command="{Binding MoveCategoryUpCommand}" FontFamily="Marlett" FontSize="20" />
-                                <Button Content="6" Margin="3" Grid.Column="2" Command="{Binding MoveCategoryDownCommand}" FontFamily="Marlett" FontSize="20" />
-                                <Button Content="4" Margin="3" Grid.Column="3" Command="{Binding MoveCategoryRightCommand}" FontFamily="Marlett" FontSize="20" />
-                                <Button Content="Update" Grid.Column="4" Margin="3,3,3,3" Command="{Binding UpdateCategoryCommand}" />
-                                <Button Content="Remove" Grid.Column="5" Margin="3,3,3,3" Command="{Binding RemoveCategoryCommand}" />
+                                <Button Content="3"
+                                        Margin="3"
+                                        Command="{Binding MoveCategoryLeftCommand}"
+                                        FontFamily="Marlett"
+                                        FontSize="20" />
+                                <Button Content="5"
+                                        Margin="3"
+                                        Grid.Column="1"
+                                        Command="{Binding MoveCategoryUpCommand}"
+                                        FontFamily="Marlett"
+                                        FontSize="20" />
+                                <Button Content="6"
+                                        Margin="3"
+                                        Grid.Column="2"
+                                        Command="{Binding MoveCategoryDownCommand}"
+                                        FontFamily="Marlett"
+                                        FontSize="20" />
+                                <Button Content="4"
+                                        Margin="3"
+                                        Grid.Column="3"
+                                        Command="{Binding MoveCategoryRightCommand}"
+                                        FontFamily="Marlett"
+                                        FontSize="20" />
+                                <Button Content="Update"
+                                        Grid.Column="4"
+                                        Margin="3,3,3,3"
+                                        Command="{Binding UpdateCategoryCommand}" />
+                                <Button Content="Remove"
+                                        Grid.Column="5"
+                                        Margin="3,3,3,3"
+                                        Command="{Binding RemoveCategoryCommand}" />
                             </Grid>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Validate" Grid.Row="2">
+                    <GroupBox Header="Validate"
+                              Grid.Row="2">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -109,12 +216,16 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Content="Validate locations" Margin="3" Command="{Binding ValidateCategoryLocationsCommand}" />
+                            <Button Content="Validate locations"
+                                    Margin="3"
+                                    Command="{Binding ValidateCategoryLocationsCommand}" />
                         </Grid>
                     </GroupBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Achievement" Margin="3,0,3,3" Grid.Row="2">
+            <GroupBox Header="Achievement"
+                      Margin="3,0,3,3"
+                      Grid.Row="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -136,17 +247,39 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Margin="3,3,3,3" Content="Achievement ID(s)" />
-                            <TextBox Grid.Column="1" Margin="3,3,3,3" Text="{Binding AchievementIDsNew, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
+                            <Label Margin="3,3,3,3"
+                                   Content="Achievement ID(s)" />
+                            <TextBox Grid.Column="1"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding AchievementIDsNew, UpdateSourceTrigger=PropertyChanged}"
+                                     Grid.ColumnSpan="2">
                                 <TextBox.InputBindings>
-                                    <KeyBinding Command="{Binding EnterNewCommand}" Key="Enter" />
+                                    <KeyBinding Command="{Binding EnterNewCommand}"
+                                                Key="Enter" />
                                 </TextBox.InputBindings>
                             </TextBox>
-                            <Label Margin="3,3,3,3" Grid.Row="1" Content="Points" />
-                            <TextBox Grid.Column="1" Grid.Row="1" Margin="3,3,3,3" Text="{Binding PointsNew}" Grid.ColumnSpan="2" />
-                            <CheckBox Grid.Row="2" Margin="3,3,3,3" Content="Obtainable" IsChecked="{Binding ObtainableNew, UpdateSourceTrigger=PropertyChanged}" />
-                            <CheckBox Grid.Row="2" Grid.Column="1" Margin="3,3,3,3" Grid.ColumnSpan="2" Content="Wowhead Link" IsChecked="{Binding WowheadLinkNew}" />
-                            <GroupBox Grid.Row="3" Grid.ColumnSpan="3" Header="Faction" Margin="3">
+                            <Label Margin="3,3,3,3"
+                                   Grid.Row="1"
+                                   Content="Points" />
+                            <TextBox Grid.Column="1"
+                                     Grid.Row="1"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding PointsNew}"
+                                     Grid.ColumnSpan="2" />
+                            <CheckBox Grid.Row="2"
+                                      Margin="3,3,3,3"
+                                      Content="Obtainable"
+                                      IsChecked="{Binding ObtainableNew, UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Grid.Row="2"
+                                      Grid.Column="1"
+                                      Margin="3,3,3,3"
+                                      Grid.ColumnSpan="2"
+                                      Content="Wowhead Link"
+                                      IsChecked="{Binding WowheadLinkNew}" />
+                            <GroupBox Grid.Row="3"
+                                      Grid.ColumnSpan="3"
+                                      Header="Faction"
+                                      Margin="3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
@@ -157,13 +290,29 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <RadioButton Content="Default" IsChecked="{Binding FactionDefaultNew}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Content="No Faction" IsChecked="{Binding FactionNoFactionNew}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="1" Content="Alliance" IsChecked="{Binding FactionAllianceNew}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="2" Content="Horde" IsChecked="{Binding FactionHordeNew}" Margin="3" />
+                                    <RadioButton Content="Default"
+                                                 IsChecked="{Binding FactionDefaultNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Content="No Faction"
+                                                 IsChecked="{Binding FactionNoFactionNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 Content="Alliance"
+                                                 IsChecked="{Binding FactionAllianceNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="2"
+                                                 Content="Horde"
+                                                 IsChecked="{Binding FactionHordeNew}"
+                                                 Margin="3" />
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Grid.Row="4" Grid.ColumnSpan="3" Header="Covenant" Margin="3">
+                            <GroupBox Grid.Row="4"
+                                      Grid.ColumnSpan="3"
+                                      Header="Covenant"
+                                      Margin="3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
@@ -175,24 +324,51 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <RadioButton Content="Default" IsChecked="{Binding CovenantDefaultNew}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Content="No Covenant" IsChecked="{Binding CovenantNoCovenantNew}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="1" Content="Kyrian" IsChecked="{Binding CovenantKyrianNew}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="2" Content="Venthyr" IsChecked="{Binding CovenantVenthyrNew}" Margin="3" />
-                                    <RadioButton Grid.Row="2" Grid.Column="1" Content="Night Fae" IsChecked="{Binding CovenantNightFaeNew}" Margin="3" />
-                                    <RadioButton Grid.Row="2" Grid.Column="2" Content="Necrolord" IsChecked="{Binding CovenantNecrolordNew}" Margin="3" />
+                                    <RadioButton Content="Default"
+                                                 IsChecked="{Binding CovenantDefaultNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Content="No Covenant"
+                                                 IsChecked="{Binding CovenantNoCovenantNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 Content="Kyrian"
+                                                 IsChecked="{Binding CovenantKyrianNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="2"
+                                                 Content="Venthyr"
+                                                 IsChecked="{Binding CovenantVenthyrNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="2"
+                                                 Grid.Column="1"
+                                                 Content="Night Fae"
+                                                 IsChecked="{Binding CovenantNightFaeNew}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="2"
+                                                 Grid.Column="2"
+                                                 Content="Necrolord"
+                                                 IsChecked="{Binding CovenantNecrolordNew}"
+                                                 Margin="3" />
                                 </Grid>
                             </GroupBox>
-                            <Grid Grid.Row="5" Grid.ColumnSpan="3">
+                            <Grid Grid.Row="5"
+                                  Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Button Content="Add" Grid.Column="3" Grid.Row="5" Margin="3,3,3,3" Command="{Binding AddNewAchievementCommand}" />
+                                <Button Content="Add"
+                                        Grid.Column="3"
+                                        Grid.Row="5"
+                                        Margin="3,3,3,3"
+                                        Command="{Binding AddNewAchievementCommand}" />
                             </Grid>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Edit" Grid.Row="1">
+                    <GroupBox Header="Edit"
+                              Grid.Row="1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100" />
@@ -207,13 +383,34 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Margin="3,3,3,3" Content="Achievement ID(s)" />
-                            <TextBox Grid.Column="1" Margin="3,3,3,3" Text="{Binding AchievementIDEdit}" Grid.ColumnSpan="2" />
-                            <Label Margin="3,3,3,3" Grid.Row="1" Content="Points" />
-                            <TextBox Grid.Column="1" Grid.Row="1" Margin="3,3,3,3" Text="{Binding PointsEdit}" Grid.ColumnSpan="2" />
-                            <CheckBox Grid.Row="2" Margin="3,3,3,3" Content="Obtainable" IsChecked="{Binding ObtainableEdit}" />
-                            <CheckBox Grid.Row="2" Grid.Column="1" Margin="3,3,3,3" Grid.ColumnSpan="2" Content="Wowhead Link" IsChecked="{Binding WowheadLinkEdit}" />
-                            <GroupBox Grid.Row="3" Grid.ColumnSpan="3" Header="Faction" Margin="3">
+                            <Label Margin="3,3,3,3"
+                                   Content="Achievement ID(s)" />
+                            <TextBox Grid.Column="1"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding AchievementIDEdit}"
+                                     Grid.ColumnSpan="2" />
+                            <Label Margin="3,3,3,3"
+                                   Grid.Row="1"
+                                   Content="Points" />
+                            <TextBox Grid.Column="1"
+                                     Grid.Row="1"
+                                     Margin="3,3,3,3"
+                                     Text="{Binding PointsEdit}"
+                                     Grid.ColumnSpan="2" />
+                            <CheckBox Grid.Row="2"
+                                      Margin="3,3,3,3"
+                                      Content="Obtainable"
+                                      IsChecked="{Binding ObtainableEdit}" />
+                            <CheckBox Grid.Row="2"
+                                      Grid.Column="1"
+                                      Margin="3,3,3,3"
+                                      Grid.ColumnSpan="2"
+                                      Content="Wowhead Link"
+                                      IsChecked="{Binding WowheadLinkEdit}" />
+                            <GroupBox Grid.Row="3"
+                                      Grid.ColumnSpan="3"
+                                      Header="Faction"
+                                      Margin="3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
@@ -224,13 +421,29 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <RadioButton Content="Default" IsChecked="{Binding FactionDefaultEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Content="No Faction" IsChecked="{Binding FactionNoFactionEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="1" Content="Alliance" IsChecked="{Binding FactionAllianceEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="2" Content="Horde" IsChecked="{Binding FactionHordeEdit}" Margin="3" />
+                                    <RadioButton Content="Default"
+                                                 IsChecked="{Binding FactionDefaultEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Content="No Faction"
+                                                 IsChecked="{Binding FactionNoFactionEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 Content="Alliance"
+                                                 IsChecked="{Binding FactionAllianceEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="2"
+                                                 Content="Horde"
+                                                 IsChecked="{Binding FactionHordeEdit}"
+                                                 Margin="3" />
                                 </Grid>
                             </GroupBox>
-                            <GroupBox Grid.Row="4" Grid.ColumnSpan="3" Header="Covenant" Margin="3">
+                            <GroupBox Grid.Row="4"
+                                      Grid.ColumnSpan="3"
+                                      Header="Covenant"
+                                      Margin="3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
@@ -242,15 +455,37 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <RadioButton Content="Default" IsChecked="{Binding CovenantDefaultEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Content="No Covenant" IsChecked="{Binding CovenantNoCovenantEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="1" Content="Kyrian" IsChecked="{Binding CovenantKyrianEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="1" Grid.Column="2" Content="Venthyr" IsChecked="{Binding CovenantVenthyrEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="2" Grid.Column="1" Content="Night Fae" IsChecked="{Binding CovenantNightFaeEdit}" Margin="3" />
-                                    <RadioButton Grid.Row="2" Grid.Column="2" Content="Necrolord" IsChecked="{Binding CovenantNecrolordEdit}" Margin="3" />
+                                    <RadioButton Content="Default"
+                                                 IsChecked="{Binding CovenantDefaultEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Content="No Covenant"
+                                                 IsChecked="{Binding CovenantNoCovenantEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 Content="Kyrian"
+                                                 IsChecked="{Binding CovenantKyrianEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="1"
+                                                 Grid.Column="2"
+                                                 Content="Venthyr"
+                                                 IsChecked="{Binding CovenantVenthyrEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="2"
+                                                 Grid.Column="1"
+                                                 Content="Night Fae"
+                                                 IsChecked="{Binding CovenantNightFaeEdit}"
+                                                 Margin="3" />
+                                    <RadioButton Grid.Row="2"
+                                                 Grid.Column="2"
+                                                 Content="Necrolord"
+                                                 IsChecked="{Binding CovenantNecrolordEdit}"
+                                                 Margin="3" />
                                 </Grid>
                             </GroupBox>
-                            <Grid Grid.Row="5" Grid.ColumnSpan="3">
+                            <Grid Grid.Row="5"
+                                  Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
@@ -258,57 +493,98 @@
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="2*" />
                                 </Grid.ColumnDefinitions>
-                                <Button Content="5" Margin="3" Command="{Binding MoveAchievementUpCommand}" FontFamily="Marlett" FontSize="20" />
-                                <Button Content="6" Margin="3" Grid.Column="1" Command="{Binding MoveAchievementDownCommand}" FontFamily="Marlett" FontSize="20" />
-                                <Button Content="Move" Grid.Row="5" Grid.Column="2" Margin="3,3,3,3" Command="{Binding MoveAchievementCommand}" />
-                                <Button Content="Update" Grid.Column="3" Margin="3,3,3,3" Command="{Binding UpdateAchievementCommand}" />
-                                <Button Content="Remove" Grid.Column="4" Margin="3,3,3,3" Command="{Binding RemoveAchievementCommand}" />
+                                <Button Content="5"
+                                        Margin="3"
+                                        Command="{Binding MoveAchievementUpCommand}"
+                                        FontFamily="Marlett"
+                                        FontSize="20" />
+                                <Button Content="6"
+                                        Margin="3"
+                                        Grid.Column="1"
+                                        Command="{Binding MoveAchievementDownCommand}"
+                                        FontFamily="Marlett"
+                                        FontSize="20" />
+                                <Button Content="Move"
+                                        Grid.Row="5"
+                                        Grid.Column="2"
+                                        Margin="3,3,3,3"
+                                        Command="{Binding MoveAchievementCommand}" />
+                                <Button Content="Update"
+                                        Grid.Column="3"
+                                        Margin="3,3,3,3"
+                                        Command="{Binding UpdateAchievementCommand}" />
+                                <Button Content="Remove"
+                                        Grid.Column="4"
+                                        Margin="3,3,3,3"
+                                        Command="{Binding RemoveAchievementCommand}" />
                             </Grid>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Validate" Grid.Row="2">
+                    <GroupBox Header="Validate"
+                              Grid.Row="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Content="Validate locations" Margin="3" Command="{Binding ValidateAchievementLocationsCommand}" />
-                            <Button Content="Fix locations" Margin="3" Grid.Column="1" Command="{Binding FixAchievementLocationsCommand}" />
+                            <Button Content="Validate locations"
+                                    Margin="3"
+                                    Command="{Binding ValidateAchievementLocationsCommand}" />
+                            <Button Content="Fix locations"
+                                    Margin="3"
+                                    Grid.Column="1"
+                                    Command="{Binding FixAchievementLocationsCommand}" />
                         </Grid>
                     </GroupBox>
                 </Grid>
             </GroupBox>
         </Grid>
-        <GroupBox x:Name="Categories" Grid.Column="1" Header="Categories" Margin="0,3,3,3">
-            <TreeView ItemsSource="{Binding Categories}" BorderThickness="0">
+        <GroupBox x:Name="Categories"
+                  Grid.Column="1"
+                  Header="Categories"
+                  Margin="0,3,3,3">
+            <TreeView ItemsSource="{Binding Categories}"
+                      BorderThickness="0">
                 <B:Interaction.Behaviors>
-                    <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding CategoryHierarchyPredicate}" ExpandSelected="True" SelectedItem="{Binding SelectedCategory}" />
+                    <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding CategoryHierarchyPredicate}"
+                                                 ExpandSelected="True"
+                                                 SelectedItem="{Binding SelectedCategory}" />
                 </B:Interaction.Behaviors>
                 <B:Interaction.Triggers>
                     <B:EventTrigger EventName="SelectedItemChanged">
-                        <B:InvokeCommandAction Command="{Binding SelectedCategoryChangedCommand}" CommandParameter="argument" />
+                        <B:InvokeCommandAction Command="{Binding SelectedCategoryChangedCommand}"
+                                               CommandParameter="argument" />
                     </B:EventTrigger>
                 </B:Interaction.Triggers>
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <Label Content="{Binding}" Margin="0" Padding="0" />
+                        <Label Content="{Binding}"
+                               Margin="0"
+                               Padding="0" />
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
         </GroupBox>
-        <GroupBox x:Name="Achievements" Grid.Column="2" Header="Achievements" Margin="0,3,3,3">
-            <TreeView ItemsSource="{Binding Achievements}" BorderThickness="0" MaxHeight="{Binding ActualHeight, ElementName=Achievements}">
+        <GroupBox x:Name="Achievements"
+                  Grid.Column="2"
+                  Header="Achievements"
+                  Margin="0,3,3,3">
+            <TreeView ItemsSource="{Binding Achievements}"
+                      BorderThickness="0"
+                      MaxHeight="{Binding ActualHeight, ElementName=Achievements}">
                 <B:Interaction.Behaviors>
                     <V:TreeViewSelectionBehavior SelectedItem="{Binding SelectedAchievement}" />
                 </B:Interaction.Behaviors>
                 <B:Interaction.Triggers>
                     <B:EventTrigger EventName="SelectedItemChanged">
-                        <B:InvokeCommandAction Command="{Binding SelectedAchievementChangedCommand}" CommandParameter="argument" />
+                        <B:InvokeCommandAction Command="{Binding SelectedAchievementChangedCommand}"
+                                               CommandParameter="argument" />
                     </B:EventTrigger>
                 </B:Interaction.Triggers>
             </TreeView>
         </GroupBox>
-        <Grid x:Name="CategoryAndAchievementMapsAndEvents" Grid.Column="3">
+        <Grid x:Name="CategoryAndAchievementMapsAndEvents"
+              Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -317,7 +593,9 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <GroupBox Header="UI Map" Grid.Column="4" Margin="0,3,3,3">
+            <GroupBox Header="UI Map"
+                      Grid.Column="4"
+                      Margin="0,3,3,3">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75" />
@@ -327,11 +605,15 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Button Content="Move" Command="{Binding MoveUIMapCommand}" Margin="3" />
+                    <Button Content="Move"
+                            Command="{Binding MoveUIMapCommand}"
+                            Margin="3" />
                     <!--<Button Content="Prune Categories" Command="{Binding PruneCategoriesCommand}" Margin="3" Grid.Row="1" Grid.ColumnSpan="2" />-->
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Selected Category UI Maps" Grid.Row="1" Margin="0,0,3,3">
+            <GroupBox Header="Selected Category UI Maps"
+                      Grid.Row="1"
+                      Margin="0,0,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -342,29 +624,53 @@
                             <ColumnDefinition Width="75" />
                             <ColumnDefinition Width="75" />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Add" Margin="3" Command="{Binding AddUIMapToCategoryCommand}" />
-                        <Button Grid.Column="1" Content="Remove" Margin="3" Command="{Binding RemoveUIMapFromCategoryCommand}" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Button Content="Add"
+                                Margin="3"
+                                Command="{Binding AddUIMapToCategoryCommand}" />
+                        <Button Grid.Column="1"
+                                Content="Remove"
+                                Margin="3"
+                                Command="{Binding RemoveUIMapFromCategoryCommand}" />
+                        <Button Grid.Row="1" Grid.ColumnSpan="2"
+                                Content="Copy from Parent"
+                                Margin="3"
+                                Command="{Binding CopyUIMapFromParentToCategoryCommand}" />
+
                     </Grid>
-                    <GroupBox Header="UI Maps" Margin="3,3,3,3" Grid.Row="1">
-                        <TreeView ItemsSource="{Binding CategoryUIMaps}" BorderThickness="0">
+                    <GroupBox Header="UI Maps"
+                              Margin="3,3,3,3"
+                              Grid.Row="2">
+                        <TreeView ItemsSource="{Binding CategoryUIMaps}"
+                                  BorderThickness="0">
                             <B:Interaction.Behaviors>
-                                <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}" ExpandSelected="True" SelectedItem="{Binding SelectedCategoryUIMap}" />
+                                <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}"
+                                                             ExpandSelected="True"
+                                                             SelectedItem="{Binding SelectedCategoryUIMap}" />
                             </B:Interaction.Behaviors>
                             <B:Interaction.Triggers>
                                 <B:EventTrigger EventName="SelectedItemChanged">
-                                    <B:InvokeCommandAction Command="{Binding SelectedCategoryUIMapChangedCommand}" CommandParameter="argument" />
+                                    <B:InvokeCommandAction Command="{Binding SelectedCategoryUIMapChangedCommand}"
+                                                           CommandParameter="argument" />
                                 </B:EventTrigger>
                             </B:Interaction.Triggers>
                             <TreeView.ItemTemplate>
                                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                                    <Label Content="{Binding}" Margin="0" Padding="0" />
+                                    <Label Content="{Binding}"
+                                           Margin="0"
+                                           Padding="0" />
                                 </HierarchicalDataTemplate>
                             </TreeView.ItemTemplate>
                         </TreeView>
                     </GroupBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Selected Achievement UI Maps" Grid.Row="2" Margin="0,0,3,3">
+            <GroupBox Header="Selected Achievement UI Maps"
+                      Grid.Row="2"
+                      Margin="0,0,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -375,29 +681,45 @@
                             <ColumnDefinition Width="75" />
                             <ColumnDefinition Width="75" />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Add" Margin="3" Command="{Binding AddUIMapToAchievementCommand}" />
-                        <Button Grid.Column="1" Content="Remove" Margin="3" Command="{Binding RemoveUIMapFromAchievementCommand}" />
+                        <Button Content="Add"
+                                Margin="3"
+                                Command="{Binding AddUIMapToAchievementCommand}" />
+                        <Button Grid.Column="1"
+                                Content="Remove"
+                                Margin="3"
+                                Command="{Binding RemoveUIMapFromAchievementCommand}" />
                     </Grid>
-                    <GroupBox Header="UI Maps" Margin="3,3,3,3" Grid.Row="1">
-                        <TreeView ItemsSource="{Binding AchievementUIMaps}" BorderThickness="0" MaxHeight="500">
+                    <GroupBox Header="UI Maps"
+                              Margin="3,3,3,3"
+                              Grid.Row="1">
+                        <TreeView ItemsSource="{Binding AchievementUIMaps}"
+                                  BorderThickness="0"
+                                  MaxHeight="500">
                             <B:Interaction.Behaviors>
-                                <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}" ExpandSelected="True" SelectedItem="{Binding SelectedAchievementUIMap}" />
+                                <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}"
+                                                             ExpandSelected="True"
+                                                             SelectedItem="{Binding SelectedAchievementUIMap}" />
                             </B:Interaction.Behaviors>
                             <B:Interaction.Triggers>
                                 <B:EventTrigger EventName="SelectedItemChanged">
-                                    <B:InvokeCommandAction Command="{Binding SelectedAchievementUIMapChangedCommand}" CommandParameter="argument" />
+                                    <B:InvokeCommandAction Command="{Binding SelectedAchievementUIMapChangedCommand}"
+                                                           CommandParameter="argument" />
                                 </B:EventTrigger>
                             </B:Interaction.Triggers>
                             <TreeView.ItemTemplate>
                                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                                    <Label Content="{Binding}" Margin="0" Padding="0" />
+                                    <Label Content="{Binding}"
+                                           Margin="0"
+                                           Padding="0" />
                                 </HierarchicalDataTemplate>
                             </TreeView.ItemTemplate>
                         </TreeView>
                     </GroupBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Selected Category Events" Grid.Row="3" Margin="0,0,3,3">
+            <GroupBox Header="Selected Category Events"
+                      Grid.Row="3"
+                      Margin="0,0,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -408,24 +730,35 @@
                             <ColumnDefinition Width="75" />
                             <ColumnDefinition Width="75" />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Add" Margin="3" Command="{Binding AddEventToCategoryCommand}" />
-                        <Button Grid.Column="1" Content="Remove" Margin="3" Command="{Binding RemoveEventFromCategoryCommand}" />
+                        <Button Content="Add"
+                                Margin="3"
+                                Command="{Binding AddEventToCategoryCommand}" />
+                        <Button Grid.Column="1"
+                                Content="Remove"
+                                Margin="3"
+                                Command="{Binding RemoveEventFromCategoryCommand}" />
                     </Grid>
-                    <GroupBox Header="Events" Margin="3,3,3,3" Grid.Row="1">
-                        <TreeView ItemsSource="{Binding CategoryEvents}" BorderThickness="0">
+                    <GroupBox Header="Events"
+                              Margin="3,3,3,3"
+                              Grid.Row="1">
+                        <TreeView ItemsSource="{Binding CategoryEvents}"
+                                  BorderThickness="0">
                             <B:Interaction.Behaviors>
                                 <V:TreeViewSelectionBehavior SelectedItem="{Binding SelectedCategoryEvent}" />
                             </B:Interaction.Behaviors>
                             <B:Interaction.Triggers>
                                 <B:EventTrigger EventName="SelectedItemChanged">
-                                    <B:InvokeCommandAction Command="{Binding SelectedCategoryEventChangedCommand}" CommandParameter="argument" />
+                                    <B:InvokeCommandAction Command="{Binding SelectedCategoryEventChangedCommand}"
+                                                           CommandParameter="argument" />
                                 </B:EventTrigger>
                             </B:Interaction.Triggers>
                         </TreeView>
                     </GroupBox>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="Selected Achievement Events" Grid.Row="4" Margin="0,0,3,3">
+            <GroupBox Header="Selected Achievement Events"
+                      Grid.Row="4"
+                      Margin="0,0,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -436,17 +769,26 @@
                             <ColumnDefinition Width="75" />
                             <ColumnDefinition Width="75" />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Add" Margin="3" Command="{Binding AddEventToAchievementCommand}" />
-                        <Button Grid.Column="1" Content="Remove" Margin="3" Command="{Binding RemoveEventFromAchievementCommand}" />
+                        <Button Content="Add"
+                                Margin="3"
+                                Command="{Binding AddEventToAchievementCommand}" />
+                        <Button Grid.Column="1"
+                                Content="Remove"
+                                Margin="3"
+                                Command="{Binding RemoveEventFromAchievementCommand}" />
                     </Grid>
-                    <GroupBox Header="Events" Margin="3,3,3,3" Grid.Row="1">
-                        <TreeView ItemsSource="{Binding AchievementEvents}" BorderThickness="0">
+                    <GroupBox Header="Events"
+                              Margin="3,3,3,3"
+                              Grid.Row="1">
+                        <TreeView ItemsSource="{Binding AchievementEvents}"
+                                  BorderThickness="0">
                             <B:Interaction.Behaviors>
                                 <V:TreeViewSelectionBehavior SelectedItem="{Binding SelectedAchievementEvent}" />
                             </B:Interaction.Behaviors>
                             <B:Interaction.Triggers>
                                 <B:EventTrigger EventName="SelectedItemChanged">
-                                    <B:InvokeCommandAction Command="{Binding SelectedAchievementEventChangedCommand}" CommandParameter="argument" />
+                                    <B:InvokeCommandAction Command="{Binding SelectedAchievementEventChangedCommand}"
+                                                           CommandParameter="argument" />
                                 </B:EventTrigger>
                             </B:Interaction.Triggers>
                         </TreeView>
@@ -454,42 +796,56 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <Grid x:Name="UIMapsAndEvents" Grid.Column="4">
+        <Grid x:Name="UIMapsAndEvents"
+              Grid.Column="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <GroupBox Header="Events" Margin="0,3,3,3">
-                <TreeView ItemsSource="{Binding Events}" BorderThickness="0">
+            <GroupBox Header="Events"
+                      Margin="0,3,3,3">
+                <TreeView ItemsSource="{Binding Events}"
+                          BorderThickness="0">
                     <B:Interaction.Behaviors>
                         <V:TreeViewSelectionBehavior SelectedItem="{Binding SelectedEvent}" />
                     </B:Interaction.Behaviors>
                     <B:Interaction.Triggers>
                         <B:EventTrigger EventName="SelectedItemChanged">
-                            <B:InvokeCommandAction Command="{Binding SelectedEventChangedCommand}" CommandParameter="argument" />
+                            <B:InvokeCommandAction Command="{Binding SelectedEventChangedCommand}"
+                                                   CommandParameter="argument" />
                         </B:EventTrigger>
                         <B:EventTrigger EventName="MouseRightButtonDown">
-                            <B:InvokeCommandAction Command="{Binding MouseRightButtonDownAddEventToAchievementCommand}" CommandParameter="argument" />
+                            <B:InvokeCommandAction Command="{Binding MouseRightButtonDownAddEventToAchievementCommand}"
+                                                   CommandParameter="argument" />
                         </B:EventTrigger>
                     </B:Interaction.Triggers>
                 </TreeView>
             </GroupBox>
-            <GroupBox Header="UI Maps" Margin="0,0,3,3" Grid.Row="1">
-                <TreeView ItemsSource="{Binding UIMaps}" BorderThickness="0">
+            <GroupBox Header="UI Maps"
+                      Margin="0,0,3,3"
+                      Grid.Row="1">
+                <TreeView ItemsSource="{Binding UIMaps}"
+                          BorderThickness="0">
                     <B:Interaction.Behaviors>
-                        <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}" ExpandSelected="True" SelectedItem="{Binding SelectedUIMap}" />
+                        <V:TreeViewSelectionBehavior HierarchyPredicate="{Binding UIMapHierarchyPredicate}"
+                                                     ExpandSelected="True"
+                                                     SelectedItem="{Binding SelectedUIMap}" />
                     </B:Interaction.Behaviors>
                     <B:Interaction.Triggers>
                         <B:EventTrigger EventName="SelectedItemChanged">
-                            <B:InvokeCommandAction Command="{Binding SelectedUIMapChangedCommand}" CommandParameter="argument" />
+                            <B:InvokeCommandAction Command="{Binding SelectedUIMapChangedCommand}"
+                                                   CommandParameter="argument" />
                         </B:EventTrigger>
                         <B:EventTrigger EventName="MouseRightButtonDown">
-                            <B:InvokeCommandAction Command="{Binding MouseRightButtonDownAddUIMapToAchievementCommand}" CommandParameter="argument" />
+                            <B:InvokeCommandAction Command="{Binding MouseRightButtonDownAddUIMapToAchievementCommand}"
+                                                   CommandParameter="argument" />
                         </B:EventTrigger>
                     </B:Interaction.Triggers>
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                            <Label Content="{Binding}" Margin="0" Padding="0" />
+                            <Label Content="{Binding}"
+                                   Margin="0"
+                                   Padding="0" />
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                     <!--<TreeView.ItemContainerStyle>
@@ -500,14 +856,16 @@
                 </TreeView>
             </GroupBox>
         </Grid>
-        <Grid x:Name="RefreshImportExport" Grid.Column="5">
+        <Grid x:Name="RefreshImportExport"
+              Grid.Column="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <GroupBox Header="Refresh" Margin="0,3,3,3">
+            <GroupBox Header="Refresh"
+                      Margin="0,3,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -515,10 +873,14 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
-                    <Button Content="All" Command="{Binding RefreshAllCommand}" Margin="3" />
+                    <Button Content="All"
+                            Command="{Binding RefreshAllCommand}"
+                            Margin="3" />
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Row="1" Header="Import" Margin="0,0,3,3">
+            <GroupBox Grid.Row="1"
+                      Header="Import"
+                      Margin="0,0,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -529,14 +891,31 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
-                    <Button Content="Achievements" Command="{Binding ImportAchievementsCommand}" Margin="3" />
-                    <Button Grid.Row="1" Content="UIMaps" Command="{Binding ImportUIMapsCommand}" Margin="3" />
-                    <Button Grid.Row="2" Content="XuFu Encounters" Command="{Binding ImportXuFuEncountersCommand}" Margin="3" />
-                    <ProgressBar Grid.Row="3" Margin="3" Height="20" Value="{Binding ImportValue}" Maximum="{Binding ImportMax}" />
-                    <TextBlock Grid.Row="3" Text="{Binding ImportText, FallbackValue=TEXT}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button Content="Achievements"
+                            Command="{Binding ImportAchievementsCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="1"
+                            Content="UIMaps"
+                            Command="{Binding ImportUIMapsCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="2"
+                            Content="XuFu Encounters"
+                            Command="{Binding ImportXuFuEncountersCommand}"
+                            Margin="3" />
+                    <ProgressBar Grid.Row="3"
+                                 Margin="3"
+                                 Height="20"
+                                 Value="{Binding ImportValue}"
+                                 Maximum="{Binding ImportMax}" />
+                    <TextBlock Grid.Row="3"
+                               Text="{Binding ImportText, FallbackValue=TEXT}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center" />
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Row="2" Header="Export" Margin="0,0,3,3">
+            <GroupBox Grid.Row="2"
+                      Header="Export"
+                      Margin="0,0,3,3">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -550,13 +929,33 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
-                    <Button Content="1. Achievements" Command="{Binding ExportAchievementsCommand}" Margin="3" />
-                    <Button Grid.Row="1" Content="2. NP Achievements" Command="{Binding ExportNextPatchAchievementsCommand}" Margin="3" />
-                    <Button Grid.Row="2" Content="3. Categories" Command="{Binding ExportCategoriesCommand}" Margin="3" />
-                    <Button Grid.Row="3" Content="4. Maps" Command="{Binding ExportMapsCommand}" Margin="3" />
-                    <Button Grid.Row="4" Content="5. Pet Battles" Command="{Binding ExportPetBattlesCommand}" Margin="3" />
-                    <Button Grid.Row="5" Content="6. Events" Command="{Binding ExportEventsCommand}" Margin="3" />
-                    <Button Grid.Row="6" Content="Export All" Command="{Binding ExportAllCommand}" Margin="3" />
+                    <Button Content="1. Achievements"
+                            Command="{Binding ExportAchievementsCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="1"
+                            Content="2. NP Achievements"
+                            Command="{Binding ExportNextPatchAchievementsCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="2"
+                            Content="3. Categories"
+                            Command="{Binding ExportCategoriesCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="3"
+                            Content="4. Maps"
+                            Command="{Binding ExportMapsCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="4"
+                            Content="5. Pet Battles"
+                            Command="{Binding ExportPetBattlesCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="5"
+                            Content="6. Events"
+                            Command="{Binding ExportEventsCommand}"
+                            Margin="3" />
+                    <Button Grid.Row="6"
+                            Content="Export All"
+                            Command="{Binding ExportAllCommand}"
+                            Margin="3" />
                 </Grid>
             </GroupBox>
         </Grid>

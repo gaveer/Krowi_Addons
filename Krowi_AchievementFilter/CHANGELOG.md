@@ -27,9 +27,14 @@ All notable changes to this project will be documented in this file.
 - Queen's Conservatory only shows Night Fae specific achievements
 - New Specials tab with custom categories requested by users
 - Achievements that can be found at multiple locations now have a Go To entry in the right click menu
+- Ambassador of the Alliance and Ambassador of the Horde to multiple zones
+- Avast Ye, Admiral! to Classic - Zones - The Cape of Stranglethorn - Reputation
+- Insane in the Membrane to multiple zones
+- Pest Control to Wrath of the Lich King - Zones
 
 ### Fixed
-- Undying Aesthetic is once again obtainable
+- Undying Aesthetic is once again marked as obtainable
+- The Burning Crusade - Zones - Bloodmyst Isle - Quests can now merge
 
 [9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
 

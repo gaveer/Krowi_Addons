@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-14 21-03-12 ]] --
+-- [[ Exported at 2021-11-20 12-58-11 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -248,6 +248,7 @@ function exportedAchievements.Load(a)
     a[736] = ach:New(736, 10); -- Explore Mulgore
     a[750] = ach:New(750, 10); -- Explore Northern Barrens
     a[761] = ach:New(761, 10); -- Explore Arathi Highlands
+    a[762] = ach:New(762, 10, fac.Horde); -- Ambassador of the Horde
     a[763] = ach:New(763, 20, fac.Horde); -- The Burning Crusader
     a[764] = ach:New(764, 20, fac.Alliance); -- The Burning Crusader
     a[765] = ach:New(765, 10); -- Explore Badlands
@@ -298,6 +299,7 @@ function exportedAchievements.Load(a)
     a[866] = ach:New(866, 10); -- Explore Nagrand
     a[867] = ach:New(867, 10); -- Explore Terokkar Forest
     a[868] = ach:New(868, 10); -- Explore Isle of Quel'Danas
+    a[871] = ach:New(871, 0); -- "Avast Ye, Admiral!"
     a[872] = ach:New(872, 10); -- Frenzied Defender
     a[873] = ach:New(873, 20, fac.Horde); -- Frostwolf Perfection
     a[879] = ach:New(879, 0, nil, nil, false); -- Old School Ride
@@ -337,6 +339,7 @@ function exportedAchievements.Load(a)
     a[945] = ach:New(945, 25); -- The Argent Champion
     a[946] = ach:New(946, 15); -- The Argent Dawn
     a[947] = ach:New(947, 15); -- The Argent Crusade
+    a[948] = ach:New(948, 10, fac.Alliance); -- Ambassador of the Alliance
     a[949] = ach:New(949, 15); -- Tuskarrmageddon
     a[950] = ach:New(950, 10); -- Frenzyheart Tribe
     a[951] = ach:New(951, 10); -- The Oracles
@@ -629,6 +632,7 @@ function exportedAchievements.Load(a)
     a[2256] = ach:New(2256, 10); -- Northern Exposure
     a[2257] = ach:New(2257, 25); -- Frostbitten
     a[2316] = ach:New(2316, 0, nil, nil, false); -- Brutal Nether Drake
+    a[2336] = ach:New(2336, 0); -- Insane in the Membrane
     a[2416] = ach:New(2416, 10); -- Hard Boiled
     a[2417] = ach:New(2417, 10); -- Chocolate Lover
     a[2418] = ach:New(2418, 10); -- Chocoholic
@@ -643,6 +647,7 @@ function exportedAchievements.Load(a)
     a[2497] = ach:New(2497, 10, fac.Horde); -- Spring Fling
     a[2536] = ach:New(2536, 10, fac.Alliance); -- Mountain o' Mounts
     a[2537] = ach:New(2537, 10, fac.Horde); -- Mountain o' Mounts
+    a[2556] = ach:New(2556, 10); -- Pest Control
     a[2557] = ach:New(2557, 10); -- To All The Squirrels Who Shared My Life
     a[2576] = ach:New(2576, 10); -- Blushing Bride
     a[2676] = ach:New(2676, 10); -- I Found One!

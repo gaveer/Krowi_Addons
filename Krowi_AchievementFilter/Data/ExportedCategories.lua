@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-14 21-03-12 ]] --
+-- [[ Exported at 2021-11-20 12-58-11 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -55,6 +55,9 @@ function exportedCategories.Load(a)
     AddA(tmp[922], a[388]); -- City Defender
     AddA(tmp[922], a[11065]); -- It All Makes Sense Now
     AddA(tmp[922], a[603]); -- Wrath of the Horde
+    tmp[1022] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[922], tmp[1022]);
+    AddA(tmp[1022], a[948]); -- Ambassador of the Alliance
     tmp[970] = cat:New(C_Map.GetMapInfo(87).name); -- Ironforge
     AddC(tmp[687], tmp[970]);
     AddA(tmp[970], a[616]); -- Overthrow the Council
@@ -72,16 +75,25 @@ function exportedCategories.Load(a)
     tmp[723] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[721], tmp[723]);
     AddA(tmp[723], a[627]); -- Explore Dun Morogh
+    tmp[1005] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[721], tmp[1005]);
+    AddA(tmp[1005], a[948]); -- Ambassador of the Alliance
     tmp[722] = cat:New(C_Map.GetMapInfo(37).name); -- Elwynn Forest
     AddC(tmp[687], tmp[722]);
     tmp[724] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[722], tmp[724]);
     AddA(tmp[724], a[776]); -- Explore Elwynn Forest
+    tmp[1006] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[722], tmp[1006]);
+    AddA(tmp[1006], a[948]); -- Ambassador of the Alliance
     tmp[725] = cat:New(C_Map.GetMapInfo(18).name); -- Tirisfal Glades
     AddC(tmp[687], tmp[725]);
     tmp[726] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[725], tmp[726]);
     AddA(tmp[726], a[768]); -- Explore Tirisfal Glades
+    tmp[1026] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[725], tmp[1026]);
+    AddA(tmp[1026], a[762]); -- Ambassador of the Horde
     tmp[651] = cat:New(C_Map.GetMapInfo(52).name); -- Westfall
     AddC(tmp[687], tmp[651]);
     AddA(tmp[651], a[11200]); -- Stand Against the Legion
@@ -93,6 +105,9 @@ function exportedCategories.Load(a)
     tmp[730] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[651], tmp[730]);
     AddA(tmp[730], a[802]); -- Explore Westfall
+    tmp[1028] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[651], tmp[1028]);
+    AddA(tmp[1028], a[948]); -- Ambassador of the Alliance
     tmp[655] = cat:New(C_Map.GetMapInfo(48).name); -- Loch Modan
     AddC(tmp[687], tmp[655]);
     tmp[657] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -102,6 +117,9 @@ function exportedCategories.Load(a)
     tmp[729] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[655], tmp[729]);
     AddA(tmp[729], a[779]); -- Explore Loch Modan
+    tmp[1013] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[655], tmp[1013]);
+    AddA(tmp[1013], a[948]); -- Ambassador of the Alliance
     tmp[681] = cat:New(C_Map.GetMapInfo(21).name); -- Silverpine Forest
     AddC(tmp[687], tmp[681]);
     tmp[682] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -110,6 +128,9 @@ function exportedCategories.Load(a)
     tmp[732] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[681], tmp[732]);
     AddA(tmp[732], a[769]); -- Explore Silverpine Forest
+    tmp[1020] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[681], tmp[1020]);
+    AddA(tmp[1020], a[762]); -- Ambassador of the Horde
     tmp[678] = cat:New(C_Map.GetMapInfo(49).name); -- Redridge Mountains
     AddC(tmp[687], tmp[678]);
     tmp[677] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -118,6 +139,9 @@ function exportedCategories.Load(a)
     tmp[734] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[678], tmp[734]);
     AddA(tmp[734], a[780]); -- Explore Redridge Mountains
+    tmp[1017] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[678], tmp[1017]);
+    AddA(tmp[1017], a[948]); -- Ambassador of the Alliance
     tmp[652] = cat:New(C_Map.GetMapInfo(47).name); -- Duskwood
     AddC(tmp[687], tmp[652]);
     tmp[654] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -127,6 +151,9 @@ function exportedCategories.Load(a)
     tmp[735] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[652], tmp[735]);
     AddA(tmp[735], a[778]); -- Explore Duskwood
+    tmp[1007] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[652], tmp[1007]);
+    AddA(tmp[1007], a[948]); -- Ambassador of the Alliance
     tmp[656] = cat:New(C_Map.GetMapInfo(56).name); -- Wetlands
     AddC(tmp[687], tmp[656]);
     tmp[658] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -136,6 +163,9 @@ function exportedCategories.Load(a)
     tmp[731] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[656], tmp[731]);
     AddA(tmp[731], a[841]); -- Explore Wetlands
+    tmp[1029] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[656], tmp[1029]);
+    AddA(tmp[1029], a[948]); -- Ambassador of the Alliance
     tmp[671] = cat:New(C_Map.GetMapInfo(25).name); -- Hillsbrad Foothills
     AddC(tmp[687], tmp[671]);
     AddA(tmp[671], a[11200]); -- Stand Against the Legion
@@ -146,6 +176,10 @@ function exportedCategories.Load(a)
     tmp[736] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[671], tmp[736]);
     AddA(tmp[736], a[772]); -- Explore Hillsbrad Foothills
+    tmp[1012] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[671], tmp[1012]);
+    AddA(tmp[1012], a[762]); -- Ambassador of the Horde
+    AddA(tmp[1012], a[2336]); -- Insane in the Membrane
     tmp[649] = cat:New(C_Map.GetMapInfo(14).name); -- Arathi Highlands
     AddC(tmp[687], tmp[649]);
     tmp[650] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -154,6 +188,10 @@ function exportedCategories.Load(a)
     tmp[741] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[649], tmp[741]);
     AddA(tmp[741], a[761]); -- Explore Arathi Highlands
+    tmp[996] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[649], tmp[996]);
+    AddA(tmp[996], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[996], a[762]); -- Ambassador of the Horde
     tmp[675] = cat:New(C_Map.GetMapInfo(50).name); -- Northern Stranglethorn
     AddC(tmp[687], tmp[675]);
     tmp[676] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -164,6 +202,10 @@ function exportedCategories.Load(a)
     tmp[739] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[675], tmp[739]);
     AddA(tmp[739], a[781]); -- Explore Northern Stranglethorn
+    tmp[1016] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[675], tmp[1016]);
+    AddA(tmp[1016], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[1016], a[762]); -- Ambassador of the Horde
     tmp[665] = cat:New(C_Map.GetMapInfo(210).name); -- The Cape of Stranglethorn
     AddC(tmp[687], tmp[665]);
     tmp[666] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -172,6 +214,11 @@ function exportedCategories.Load(a)
     tmp[740] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[665], tmp[740]);
     AddA(tmp[740], a[4995]); -- Explore the Cape of Stranglethorn
+    tmp[993] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[665], tmp[993]);
+    AddA(tmp[993], a[762]); -- Ambassador of the Horde
+    AddA(tmp[993], a[871]); -- "Avast Ye, Admiral!"
+    AddA(tmp[993], a[2336]); -- Insane in the Membrane
     tmp[685] = cat:New(C_Map.GetMapInfo(22).name); -- Western Plaguelands
     AddC(tmp[687], tmp[685]);
     tmp[686] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -180,6 +227,10 @@ function exportedCategories.Load(a)
     tmp[746] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[685], tmp[746]);
     AddA(tmp[746], a[770]); -- Explore Western Plaguelands
+    tmp[1027] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[685], tmp[1027]);
+    AddA(tmp[1027], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[1027], a[762]); -- Ambassador of the Horde
     tmp[673] = cat:New(C_Map.GetMapInfo(26).name); -- The Hinterlands
     AddC(tmp[687], tmp[673]);
     tmp[674] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -188,6 +239,9 @@ function exportedCategories.Load(a)
     tmp[742] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[673], tmp[742]);
     AddA(tmp[742], a[773]); -- Explore The Hinterlands
+    tmp[1024] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[673], tmp[1024]);
+    AddA(tmp[1024], a[762]); -- Ambassador of the Horde
     tmp[667] = cat:New(C_Map.GetMapInfo(23).name); -- Eastern Plaguelands
     AddC(tmp[687], tmp[667]);
     tmp[668] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -226,6 +280,9 @@ function exportedCategories.Load(a)
     tmp[737] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[683], tmp[737]);
     AddA(tmp[737], a[782]); -- Explore Swamp of Sorrows
+    tmp[1023] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[683], tmp[1023]);
+    AddA(tmp[1023], a[948]); -- Ambassador of the Alliance
     tmp[663] = cat:New(C_Map.GetMapInfo(36).name); -- Burning Steppes
     AddC(tmp[687], tmp[663]);
     tmp[664] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -243,6 +300,10 @@ function exportedCategories.Load(a)
     tmp[744] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[660], tmp[744]);
     AddA(tmp[744], a[766]); -- Explore Blasted Lands
+    tmp[999] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[660], tmp[999]);
+    AddA(tmp[999], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[999], a[762]); -- Ambassador of the Horde
     tmp[748] = cat:New(C_Map.GetMapInfo(42).name); -- Deadwind Pass
     AddC(tmp[687], tmp[748]);
     tmp[749] = cat:New((GetCategoryInfo(97)), true); -- Exploration
@@ -264,6 +325,9 @@ function exportedCategories.Load(a)
     AddA(tmp[921], a[1006]); -- City Defender
     AddA(tmp[921], a[11065]); -- It All Makes Sense Now
     AddA(tmp[921], a[604]); -- Wrath of the Alliance
+    tmp[1018] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[921], tmp[1018]);
+    AddA(tmp[1018], a[762]); -- Ambassador of the Horde
     tmp[923] = cat:New(C_Map.GetMapInfo(88).name); -- Thunder Bluff
     AddC(tmp[688], tmp[923]);
     AddA(tmp[923], a[611]); -- Bleeding Bloodhoof
@@ -273,6 +337,9 @@ function exportedCategories.Load(a)
     tmp[757] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[756], tmp[757]);
     AddA(tmp[757], a[842]); -- Explore Teldrassil
+    tmp[1025] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[756], tmp[1025]);
+    AddA(tmp[1025], a[948]); -- Ambassador of the Alliance
     tmp[752] = cat:New(C_Map.GetMapInfo(1).name); -- Durotar
     AddC(tmp[688], tmp[752]);
     AddA(tmp[752], a[1186]); -- Down With The Dark Iron
@@ -280,11 +347,17 @@ function exportedCategories.Load(a)
     tmp[753] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[752], tmp[753]);
     AddA(tmp[753], a[728]); -- Explore Durotar
+    tmp[1003] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[752], tmp[1003]);
+    AddA(tmp[1003], a[762]); -- Ambassador of the Horde
     tmp[754] = cat:New(C_Map.GetMapInfo(7).name); -- Mulgore
     AddC(tmp[688], tmp[754]);
     tmp[755] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[754], tmp[755]);
     AddA(tmp[755], a[736]); -- Explore Mulgore
+    tmp[1014] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[754], tmp[1014]);
+    AddA(tmp[1014], a[762]); -- Ambassador of the Horde
     tmp[774] = cat:New(C_Map.GetMapInfo(80).name); -- Moonglade
     AddC(tmp[688], tmp[774]);
     tmp[775] = cat:New((GetCategoryInfo(97)), true); -- Exploration
@@ -300,6 +373,10 @@ function exportedCategories.Load(a)
     tmp[760] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[705], tmp[760]);
     AddA(tmp[760], a[750]); -- Explore Northern Barrens
+    tmp[1015] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[705], tmp[1015]);
+    AddA(tmp[1015], a[762]); -- Ambassador of the Horde
+    AddA(tmp[1015], a[2336]); -- Insane in the Membrane
     tmp[695] = cat:New(C_Map.GetMapInfo(62).name); -- Darkshore
     AddC(tmp[688], tmp[695]);
     tmp[696] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -309,6 +386,9 @@ function exportedCategories.Load(a)
     tmp[762] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[695], tmp[762]);
     AddA(tmp[762], a[844]); -- Explore Darkshore
+    tmp[1001] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[695], tmp[1001]);
+    AddA(tmp[1001], a[948]); -- Ambassador of the Alliance
     tmp[691] = cat:New(C_Map.GetMapInfo(76).name); -- Azshara
     AddC(tmp[688], tmp[691]);
     AddA(tmp[691], a[11200]); -- Stand Against the Legion
@@ -323,6 +403,9 @@ function exportedCategories.Load(a)
     tmp[771] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[691], tmp[771]);
     AddA(tmp[771], a[852]); -- Explore Azshara
+    tmp[990] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[691], tmp[990]);
+    AddA(tmp[990], a[762]); -- Ambassador of the Horde
     tmp[689] = cat:New(C_Map.GetMapInfo(63).name); -- Ashenvale
     AddC(tmp[688], tmp[689]);
     tmp[690] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -332,6 +415,9 @@ function exportedCategories.Load(a)
     tmp[764] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[689], tmp[764]);
     AddA(tmp[764], a[845]); -- Explore Ashenvale
+    tmp[997] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[689], tmp[997]);
+    AddA(tmp[997], a[948]); -- Ambassador of the Alliance
     tmp[709] = cat:New(C_Map.GetMapInfo(65).name); -- Stonetalon Mountains
     AddC(tmp[688], tmp[709]);
     tmp[710] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -341,6 +427,10 @@ function exportedCategories.Load(a)
     tmp[766] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[709], tmp[766]);
     AddA(tmp[766], a[847]); -- Explore Stonetalon Mountains
+    tmp[1021] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[709], tmp[1021]);
+    AddA(tmp[1021], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[1021], a[762]); -- Ambassador of the Horde
     tmp[697] = cat:New(C_Map.GetMapInfo(66).name); -- Desolace
     AddC(tmp[688], tmp[697]);
     tmp[698] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -349,6 +439,9 @@ function exportedCategories.Load(a)
     tmp[767] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[697], tmp[767]);
     AddA(tmp[767], a[848]); -- Explore Desolace
+    tmp[1002] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[697], tmp[1002]);
+    AddA(tmp[1002], a[762]); -- Ambassador of the Horde
     tmp[711] = cat:New(C_Map.GetMapInfo(199).name); -- Southern Barrens
     AddC(tmp[688], tmp[711]);
     tmp[712] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -358,6 +451,10 @@ function exportedCategories.Load(a)
     tmp[761] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[711], tmp[761]);
     AddA(tmp[761], a[4996]); -- Explore Southern Barrens
+    tmp[1019] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[711], tmp[1019]);
+    AddA(tmp[1019], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[1019], a[762]); -- Ambassador of the Horde
     tmp[703] = cat:New(C_Map.GetMapInfo(69).name); -- Feralas
     AddC(tmp[688], tmp[703]);
     tmp[704] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -367,6 +464,10 @@ function exportedCategories.Load(a)
     tmp[769] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[703], tmp[769]);
     AddA(tmp[769], a[849]); -- Explore Feralas
+    tmp[1009] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[703], tmp[1009]);
+    AddA(tmp[1009], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[1009], a[762]); -- Ambassador of the Horde
     tmp[699] = cat:New(C_Map.GetMapInfo(70).name); -- Dustwallow Marsh
     AddC(tmp[688], tmp[699]);
     tmp[700] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -376,6 +477,9 @@ function exportedCategories.Load(a)
     tmp[768] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[699], tmp[768]);
     AddA(tmp[768], a[850]); -- Explore Dustwallow Marsh
+    tmp[1004] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[699], tmp[1004]);
+    AddA(tmp[1004], a[948]); -- Ambassador of the Alliance
     tmp[715] = cat:New(C_Map.GetMapInfo(64).name); -- Thousand Needles
     AddC(tmp[688], tmp[715]);
     tmp[716] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -384,6 +488,10 @@ function exportedCategories.Load(a)
     tmp[765] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[715], tmp[765]);
     AddA(tmp[765], a[846]); -- Explore Thousand Needles
+    tmp[994] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[715], tmp[994]);
+    AddA(tmp[994], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[994], a[762]); -- Ambassador of the Horde
     tmp[713] = cat:New(C_Map.GetMapInfo(71).name); -- Tanaris
     AddC(tmp[688], tmp[713]);
     AddA(tmp[713], a[11200]); -- Stand Against the Legion
@@ -394,6 +502,11 @@ function exportedCategories.Load(a)
     tmp[770] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[713], tmp[770]);
     AddA(tmp[770], a[851]); -- Explore Tanaris
+    tmp[992] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[713], tmp[992]);
+    AddA(tmp[992], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[992], a[762]); -- Ambassador of the Horde
+    AddA(tmp[992], a[2336]); -- Insane in the Membrane
     tmp[701] = cat:New(C_Map.GetMapInfo(77).name); -- Felwood
     AddC(tmp[688], tmp[701]);
     tmp[702] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -402,6 +515,10 @@ function exportedCategories.Load(a)
     tmp[772] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[701], tmp[772]);
     AddA(tmp[772], a[853]); -- Explore Felwood
+    tmp[991] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[701], tmp[991]);
+    AddA(tmp[991], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[991], a[762]); -- Ambassador of the Horde
     tmp[717] = cat:New(C_Map.GetMapInfo(78).name); -- Un'Goro Crater
     AddC(tmp[688], tmp[717]);
     AddA(tmp[717], a[3357]); -- Venomhide Ravasaur
@@ -433,6 +550,9 @@ function exportedCategories.Load(a)
     tmp[777] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[719], tmp[777]);
     AddA(tmp[777], a[857]); -- Explore Winterspring
+    tmp[1031] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[719], tmp[1031]);
+    AddA(tmp[1031], a[2336]); -- Insane in the Membrane
     tmp[2] = cat:New((GetCategoryInfo(15272))); -- Dungeons
     AddC(tmp[1], tmp[2]);
     AddA(tmp[2], a[1283]); -- Classic Dungeonmaster
@@ -583,19 +703,28 @@ function exportedCategories.Load(a)
     tmp[759] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[758], tmp[759]);
     AddA(tmp[759], a[860]); -- Explore Azuremyst Isle
+    tmp[998] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[758], tmp[998]);
+    AddA(tmp[998], a[948]); -- Ambassador of the Alliance
     tmp[693] = cat:New(C_Map.GetMapInfo(106).name); -- Bloodmyst Isle
     AddC(tmp[616], tmp[693]);
-    tmp[694] = cat:New((GetCategoryInfo(15447))); -- Quests
+    tmp[694] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[693], tmp[694]);
     AddA(tmp[694], a[4926]); -- Bloodmyst Isle Quests
     tmp[763] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[693], tmp[763]);
     AddA(tmp[763], a[861]); -- Explore Bloodmyst Isle
+    tmp[1000] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[693], tmp[1000]);
+    AddA(tmp[1000], a[948]); -- Ambassador of the Alliance
     tmp[727] = cat:New(C_Map.GetMapInfo(94).name); -- Eversong Woods
     AddC(tmp[616], tmp[727]);
     tmp[728] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[727], tmp[728]);
     AddA(tmp[728], a[859]); -- Explore Eversong Woods
+    tmp[1008] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[727], tmp[1008]);
+    AddA(tmp[1008], a[762]); -- Ambassador of the Horde
     tmp[669] = cat:New(C_Map.GetMapInfo(95).name); -- Ghostlands
     AddC(tmp[616], tmp[669]);
     tmp[670] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -604,6 +733,9 @@ function exportedCategories.Load(a)
     tmp[733] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[669], tmp[733]);
     AddA(tmp[733], a[858]); -- Explore Ghostlands
+    tmp[1010] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[669], tmp[1010]);
+    AddA(tmp[1010], a[762]); -- Ambassador of the Horde
     tmp[617] = cat:New(C_Map.GetMapInfo(100).name); -- Hellfire Peninsula
     AddC(tmp[616], tmp[617]);
     tmp[624] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -613,6 +745,10 @@ function exportedCategories.Load(a)
     tmp[631] = cat:New((GetCategoryInfo(97)), true); -- Exploration
     AddC(tmp[617], tmp[631]);
     AddA(tmp[631], a[862]); -- Explore Hellfire Peninsula
+    tmp[1011] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[617], tmp[1011]);
+    AddA(tmp[1011], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[1011], a[762]); -- Ambassador of the Horde
     tmp[618] = cat:New(C_Map.GetMapInfo(102).name); -- Zangarmarsh
     AddC(tmp[616], tmp[618]);
     tmp[625] = cat:New((GetCategoryInfo(15447)), true); -- Quests
@@ -623,6 +759,8 @@ function exportedCategories.Load(a)
     AddA(tmp[632], a[863]); -- Explore Zangarmarsh
     tmp[643] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[618], tmp[643]);
+    AddA(tmp[643], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[643], a[762]); -- Ambassador of the Horde
     AddA(tmp[643], a[893]); -- Cenarion War Hippogryph
     AddA(tmp[643], a[953]); -- Guardian of Cenarius
     AddA(tmp[643], a[900]); -- The Czar of Sporeggar
@@ -846,6 +984,7 @@ function exportedCategories.Load(a)
     AddA(tmp[577], a[1010]); -- Northrend Vanguard
     AddA(tmp[577], a[1011]); -- The Winds of the North
     AddA(tmp[577], a[1012]); -- The Winds of the North
+    AddA(tmp[577], a[2556]); -- Pest Control
     tmp[614] = cat:New(C_Map.GetMapInfo(125).name); -- Dalaran
     AddC(tmp[577], tmp[614]);
     AddA(tmp[614], a[1956]); -- Higher Learning
@@ -1662,6 +1801,8 @@ function exportedCategories.Load(a)
     AddA(tmp[568], a[4866]); -- Explore Twilight Highlands
     tmp[573] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
     AddC(tmp[555], tmp[573]);
+    AddA(tmp[573], a[762]); -- Ambassador of the Horde
+    AddA(tmp[573], a[948]); -- Ambassador of the Alliance
     AddA(tmp[573], a[4885]); -- Wildhammer Clan
     AddA(tmp[573], a[4886]); -- Dragonmaw Clan
     tmp[556] = cat:New(C_Map.GetMapInfo(338).name); -- Molten Front
@@ -5290,6 +5431,9 @@ function exportedCategories.Load(a)
     AddA(tmp[925], a[11919]); -- Taking this Show on the Road
     AddA(tmp[925], a[11920]); -- Perfect Performance
     AddA(tmp[925], a[11921]); -- Mosh Pit
+    tmp[1030] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[925], tmp[1030]);
+    AddA(tmp[1030], a[2336]); -- Insane in the Membrane
     tmp[951] = cat:New((GetCategoryInfo(15454))); -- Timewalking
     AddC(tmp[884], tmp[951]);
     AddA(tmp[951], a[13931]); -- "Memories of Fel, Frost and Fire"
@@ -5436,6 +5580,10 @@ function exportedCategories.Load(a)
     AddA(tmp[960], a[226]); -- The Alterac Blitz
     AddA(tmp[960], a[709]); -- Hero of the Stormpike Guard
     AddA(tmp[960], a[708]); -- Hero of the Frostwolf Clan
+    tmp[995] = cat:New((GetCategoryInfo(15273)), true); -- Reputation
+    AddC(tmp[960], tmp[995]);
+    AddA(tmp[995], a[948]); -- Ambassador of the Alliance
+    AddA(tmp[995], a[762]); -- Ambassador of the Horde
     tmp[956] = cat:New((GetCategoryInfo(14802))); -- Arathi Basin
     AddC(tmp[955], tmp[956]);
     AddA(tmp[956], a[154]); -- Arathi Basin Victory

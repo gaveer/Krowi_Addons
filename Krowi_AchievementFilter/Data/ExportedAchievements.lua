@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-20 12-58-11 ]] --
+-- [[ Exported at 2021-11-28 23-04-21 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -1213,6 +1213,7 @@ function exportedAchievements.Load(a)
     a[5505] = ach:New(5505, 10); -- Bullet Time
     a[5506] = ach:New(5506, 10); -- Defender of a Shattered World
     a[5518] = ach:New(5518, 10); -- Stood in the Fire
+    a[5533] = ach:New(5533, 0, nil, nil, false); -- Veteran of the Shifting Sands
     a[5546] = ach:New(5546, 10); -- Glutton for Icy Punishment
     a[5547] = ach:New(5547, 10); -- Glutton for Shadowy Punishment
     a[5548] = ach:New(5548, 10); -- To All the Squirrels Who Cared for Me
@@ -1387,6 +1388,9 @@ function exportedAchievements.Load(a)
     a[6551] = ach:New(6551, 10); -- Friend on the Farm
     a[6552] = ach:New(6552, 10); -- Friends on the Farm
     a[6553] = ach:New(6553, 10); -- Like an Arrow to the Face
+    a[6558] = ach:New(6558, 5); -- Local Pet Mauler
+    a[6559] = ach:New(6559, 5); -- Traveling Pet Mauler
+    a[6560] = ach:New(6560, 10); -- World Pet Mauler
     a[6585] = ach:New(6585, 5); -- Kalimdor Safari
     a[6586] = ach:New(6586, 5); -- Eastern Kingdoms Safari
     a[6587] = ach:New(6587, 5); -- Outland Safari
@@ -1615,6 +1619,8 @@ function exportedAchievements.Load(a)
     a[7485] = ach:New(7485, 0, nil, nil, false); -- Cutting Edge: Will of the Emperor
     a[7486] = ach:New(7486, 0, nil, nil, false); -- Cutting Edge: Grand Empress Shek'zeer
     a[7487] = ach:New(7487, 0, nil, nil, false); -- Cutting Edge: Sha of Fear
+    a[7498] = ach:New(7498, 5); -- Taming the Great Outdoors
+    a[7499] = ach:New(7499, 10); -- Taming the World
     a[7502] = ach:New(7502, 10); -- Savior of Stoneplow
     a[7509] = ach:New(7509, 5, fac.Horde); -- Scenaturday
     a[7518] = ach:New(7518, 10); -- "Wanderers, Dreamers, and You"

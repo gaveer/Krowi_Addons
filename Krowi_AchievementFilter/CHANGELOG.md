@@ -31,6 +31,9 @@ All notable changes to this project will be documented in this file.
 - Avast Ye, Admiral! to Classic - Zones - The Cape of Stranglethorn - Reputation
 - Insane in the Membrane to multiple zones
 - Pest Control to Wrath of the Lich King - Zones
+- Local Pet Mauler, Traveling Pet Mauler and World Pet Mauler to multiple zones
+- Taming the Great Outdoors and Taming the World to multiple zones
+- Zone data for Taming Kalimdor, Taming Eastern Kingdoms
 
 ### Fixed
 - Undying Aesthetic is once again marked as obtainable

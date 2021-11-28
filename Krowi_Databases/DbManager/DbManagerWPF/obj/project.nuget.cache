@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "k4y51//mtigtez7en/VXTxtAvEXTZ6cCqAUn8tuM7DiSnQpnlYonwNArLo/pPpGubJQ3FOIbo3XxSU6alvMeDg==",
+  "dgSpecHash": "lryIVTn/BryO/sVn05Z2PLWW0uQfI//UdO5soCBVh1569i7EdFjlMq72lf/7Z+yPS7uPOuBRQ4222iBUD6RsQQ==",
   "success": true,
   "projectFilePath": "E:\\World of Warcraft\\_retail_\\Interface\\AddOns\\Krowi_Databases\\DbManager\\DbManagerWPF\\DbManagerWPF.csproj",
   "expectedPackageFiles": [
@@ -11,7 +11,11 @@
     "C:\\Users\\Frederik\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
     "C:\\Users\\Frederik\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\Frederik\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.4\\sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
-    "C:\\Users\\Frederik\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+    "C:\\Users\\Frederik\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Frederik\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

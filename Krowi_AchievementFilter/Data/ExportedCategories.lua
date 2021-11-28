@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-20 12-58-11 ]] --
+-- [[ Exported at 2021-11-28 23-04-21 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -531,6 +531,7 @@ function exportedCategories.Load(a)
     tmp[707] = cat:New(C_Map.GetMapInfo(81).name); -- Silithus
     AddC(tmp[688], tmp[707]);
     AddA(tmp[707], a[416]); -- Scarab Lord
+    AddA(tmp[707], a[5533]); -- Veteran of the Shifting Sands
     tmp[708] = cat:New((GetCategoryInfo(15447)), true); -- Quests
     AddC(tmp[707], tmp[708]);
     AddA(tmp[708], a[4934]); -- Silithus Quests
@@ -672,6 +673,11 @@ function exportedCategories.Load(a)
     AddA(tmp[785], a[6612]); -- Kalimdor Tamer
     AddA(tmp[785], a[6603]); -- Taming Eastern Kingdoms
     AddA(tmp[785], a[6602]); -- Taming Kalimdor
+    AddA(tmp[785], a[6558]); -- Local Pet Mauler
+    AddA(tmp[785], a[6559]); -- Traveling Pet Mauler
+    AddA(tmp[785], a[6560]); -- World Pet Mauler
+    AddA(tmp[785], a[7498]); -- Taming the Great Outdoors
+    AddA(tmp[785], a[7499]); -- Taming the World
     tmp[55] = cat:New((GetCategoryInfo(14865))); -- The Burning Crusade
     AddC(tmp[883], tmp[55]);
     tmp[616] = cat:New(addon.L["Zones"]); -- Zones
@@ -970,6 +976,11 @@ function exportedCategories.Load(a)
     AddA(tmp[786], a[6587]); -- Outland Safari
     AddA(tmp[786], a[6614]); -- Outland Tamer
     AddA(tmp[786], a[6604]); -- Taming Outland
+    AddA(tmp[786], a[6558]); -- Local Pet Mauler
+    AddA(tmp[786], a[6559]); -- Traveling Pet Mauler
+    AddA(tmp[786], a[6560]); -- World Pet Mauler
+    AddA(tmp[786], a[7498]); -- Taming the Great Outdoors
+    AddA(tmp[786], a[7499]); -- Taming the World
     tmp[83] = cat:New((GetCategoryInfo(14866))); -- Wrath of the Lich King
     AddC(tmp[883], tmp[83]);
     tmp[577] = cat:New(addon.L["Zones"]); -- Zones
@@ -1667,6 +1678,11 @@ function exportedCategories.Load(a)
     AddA(tmp[787], a[6588]); -- Northrend Safari
     AddA(tmp[787], a[6615]); -- Northrend Tamer
     AddA(tmp[787], a[6605]); -- Taming Northrend
+    AddA(tmp[787], a[6558]); -- Local Pet Mauler
+    AddA(tmp[787], a[6559]); -- Traveling Pet Mauler
+    AddA(tmp[787], a[6560]); -- World Pet Mauler
+    AddA(tmp[787], a[7498]); -- Taming the Great Outdoors
+    AddA(tmp[787], a[7499]); -- Taming the World
     tmp[781] = cat:New((GetCategoryInfo(14941))); -- Argent Tournament
     AddC(tmp[83], tmp[781]);
     AddA(tmp[781], a[2756]); -- Argent Aspiration
@@ -2031,6 +2047,11 @@ function exportedCategories.Load(a)
     tmp[788] = cat:New((GetCategoryInfo(15117))); -- Pet Battles
     AddC(tmp[129], tmp[788]);
     AddA(tmp[788], a[7525]); -- Taming Cataclysm
+    AddA(tmp[788], a[6558]); -- Local Pet Mauler
+    AddA(tmp[788], a[6559]); -- Traveling Pet Mauler
+    AddA(tmp[788], a[6560]); -- World Pet Mauler
+    AddA(tmp[788], a[7498]); -- Taming the Great Outdoors
+    AddA(tmp[788], a[7499]); -- Taming the World
     tmp[547] = cat:New((GetCategoryInfo(15075))); -- Tol Barad
     AddC(tmp[129], tmp[547]);
     AddA(tmp[547], a[5489]); -- Master of Tol Barad
@@ -2583,6 +2604,11 @@ function exportedCategories.Load(a)
     AddA(tmp[549], a[7908]); -- I Choose You
     AddA(tmp[549], a[7936]); -- Pandaren Spirit Tamer
     AddA(tmp[549], a[8080]); -- Fabled Pandaren Tamer
+    AddA(tmp[549], a[6558]); -- Local Pet Mauler
+    AddA(tmp[549], a[6559]); -- Traveling Pet Mauler
+    AddA(tmp[549], a[6560]); -- World Pet Mauler
+    AddA(tmp[549], a[7498]); -- Taming the Great Outdoors
+    AddA(tmp[549], a[7499]); -- Taming the World
     tmp[790] = cat:New(addon.L["Brawler's Guild"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Brawler's Guild
     AddC(tmp[189], tmp[790]);
     AddA(tmp[790], a[7937]); -- You Are Not Your $#*@! Legplates (Season 1)

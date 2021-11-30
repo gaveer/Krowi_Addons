@@ -78,6 +78,7 @@ L["Vendor"] = "Vendor";
 L["Profession"] = "Profession";
 L["Recruit-a-Friend"] = "Recruit-a-Friend";
 L["Achievements"] = "Achievements";
+L["Southshore vs. Tarren Mill"] = "Southshore vs. Tarren Mill";
 
 -- Filters
 L["Obtainable"] = "Obtainable";

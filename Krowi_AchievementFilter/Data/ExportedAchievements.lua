@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-28 23-04-21 ]] --
+-- [[ Exported at 2021-11-30 19-43-54 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -1036,6 +1036,7 @@ function exportedAchievements.Load(a)
     a[4884] = ach:New(4884, 10); -- Ramkahen
     a[4885] = ach:New(4885, 10, fac.Alliance); -- Wildhammer Clan
     a[4886] = ach:New(4886, 10, fac.Horde); -- Dragonmaw Clan
+    a[4887] = ach:New(4887, 0, nil, nil, false); -- Tripping the Rifts
     a[4888] = ach:New(4888, 10); -- One Hump or Two?
     a[4892] = ach:New(4892, 10); -- Eastern Plaguelands Quests
     a[4893] = ach:New(4893, 10); -- Western Plaguelands Quests
@@ -1391,21 +1392,27 @@ function exportedAchievements.Load(a)
     a[6558] = ach:New(6558, 5); -- Local Pet Mauler
     a[6559] = ach:New(6559, 5); -- Traveling Pet Mauler
     a[6560] = ach:New(6560, 10); -- World Pet Mauler
+    a[6584] = ach:New(6584, 5); -- Big City Pet Brawlin' - Alliance
     a[6585] = ach:New(6585, 5); -- Kalimdor Safari
     a[6586] = ach:New(6586, 5); -- Eastern Kingdoms Safari
     a[6587] = ach:New(6587, 5); -- Outland Safari
     a[6588] = ach:New(6588, 5); -- Northrend Safari
     a[6589] = ach:New(6589, 5); -- Pandaria Safari
+    a[6590] = ach:New(6590, 10); -- World Safari
     a[6602] = ach:New(6602, 5, fac.Horde); -- Taming Kalimdor
     a[6603] = ach:New(6603, 5, fac.Alliance); -- Taming Eastern Kingdoms
     a[6604] = ach:New(6604, 5); -- Taming Outland
     a[6605] = ach:New(6605, 5); -- Taming Northrend
     a[6606] = ach:New(6606, 5); -- Taming Pandaria
+    a[6607] = ach:New(6607, 10); -- Taming Azeroth
+    a[6611] = ach:New(6611, 10); -- Continental Tamer
     a[6612] = ach:New(6612, 5); -- Kalimdor Tamer
     a[6613] = ach:New(6613, 5); -- Eastern Kingdoms Tamer
     a[6614] = ach:New(6614, 5); -- Outland Tamer
     a[6615] = ach:New(6615, 5); -- Northrend Tamer
     a[6616] = ach:New(6616, 5); -- Pandaria Tamer
+    a[6621] = ach:New(6621, 5); -- Big City Pet Brawlin' - Horde
+    a[6622] = ach:New(6622, 10); -- Big City Pet Brawler
     a[6671] = ach:New(6671, 10); -- Seeds of Doubt
     a[6674] = ach:New(6674, 10); -- "Anything You Can Do, I Can Do Better..."
     a[6683] = ach:New(6683, 10); -- Less Than Three
@@ -1771,6 +1778,8 @@ function exportedAchievements.Load(a)
     a[8295] = ach:New(8295, 10); -- "The Few, the Proud, the Gob Squad"
     a[8302] = ach:New(8302, 10, fac.Horde); -- Mount Parade
     a[8304] = ach:New(8304, 10, fac.Alliance); -- Mount Parade
+    a[8306] = ach:New(8306, 0, fac.Alliance, nil, false); -- Hordebreaker
+    a[8307] = ach:New(8307, 0, fac.Horde, nil, false); -- Darkspear Revolutionary
     a[8310] = ach:New(8310, 10); -- Heroic: A Brewing Storm
     a[8311] = ach:New(8311, 10); -- Heroic: Crypt of Forgotten Kings
     a[8312] = ach:New(8312, 10); -- Heroic: Blood in the Snow
@@ -2240,6 +2249,7 @@ function exportedAchievements.Load(a)
     a[9562] = ach:New(9562, 10, fac.Horde); -- Securing Draenor
     a[9564] = ach:New(9564, 10, fac.Alliance); -- Securing Draenor
     a[9565] = ach:New(9565, 5); -- Master Trapper
+    a[9566] = ach:New(9566, 0, fac.Horde, nil, false); -- Victory in Hillsbrad
     a[9571] = ach:New(9571, 10); -- Broke Back Precipice
     a[9572] = ach:New(9572, 10); -- Proving Yourself: Bronze Damage
     a[9573] = ach:New(9573, 10); -- Proving Yourself: Silver Damage
@@ -2331,6 +2341,7 @@ function exportedAchievements.Load(a)
     a[9726] = ach:New(9726, 10); -- Treasure Hunter
     a[9727] = ach:New(9727, 10); -- Expert Treasure Hunter
     a[9728] = ach:New(9728, 10); -- Grand Treasure Hunter
+    a[9729] = ach:New(9729, 0, fac.Alliance, nil, false); -- Victory in Hillsbrad
     a[9738] = ach:New(9738, 10, fac.Alliance); -- Warlord of Draenor
     a[9755] = ach:New(9755, 5); -- Darkmoon Race Enthusiast
     a[9756] = ach:New(9756, 5); -- Darkmoon Racer Novice
@@ -3376,6 +3387,7 @@ function exportedAchievements.Load(a)
     a[13501] = ach:New(13501, 10); -- Gotta Bounce
     a[13506] = ach:New(13506, 10); -- A Good Eye-dea
     a[13512] = ach:New(13512, 10); -- Master Calligrapher
+    a[13513] = ach:New(13513, 5); -- Available in Eight Colors
     a[13517] = ach:New(13517, 20); -- Two Sides to Every Tale
     a[13541] = ach:New(13541, 20); -- Mecha-Done
     a[13542] = ach:New(13542, 5, fac.Horde); -- How to Train Your Direhorn
@@ -3519,6 +3531,7 @@ function exportedAchievements.Load(a)
     a[14008] = ach:New(14008, 10); -- Mana Sponge
     a[14019] = ach:New(14019, 10); -- Smoke Test
     a[14020] = ach:New(14020, 5); -- Pet Battle Challenge: Blackrock Depths
+    a[14021] = ach:New(14021, 10); -- The Shadows Revealed
     a[14023] = ach:New(14023, 10); -- Realizing Your Potential
     a[14024] = ach:New(14024, 10); -- Buzzer Beater
     a[14026] = ach:New(14026, 10); -- Temper Tantrum

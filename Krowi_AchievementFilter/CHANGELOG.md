@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - A total of over 250 achievements (details below)
 - Raiding with Leashes V: Cuteaclysm to the Cataclysm raids
 - Raiding with Leashes IV: Wrath of the Lick King to the Wrath of the Lich King raids
-- Stand Against the Legion and Defender of Azeroth: Legion Invasions to the corresponding zones (unobtainable)
+- Stand Against the Legion and Defender of Azeroth: Legion Invasions to the corresponding zones (both unobtainable)
 - It All Makes Sense Now to Stormwind City and Orgrimmar
 - Raiding with Leashes II: Attunement Edition and Raiding with Leashes III: Drinkin' From the Sunwell to The Burning Crusade raids
 - Raiding with Leashes to the Classic raids and Naxxramas
@@ -33,7 +33,14 @@ All notable changes to this project will be documented in this file.
 - Pest Control to Wrath of the Lich King - Zones
 - Local Pet Mauler, Traveling Pet Mauler and World Pet Mauler to multiple zones
 - Taming the Great Outdoors and Taming the World to multiple zones
-- Zone data for Taming Kalimdor, Taming Eastern Kingdoms
+- Zone data for Taming Kalimdor, Taming Eastern Kingdoms, Taming Outland, Taming Northrend, Taming Cataclysm, Taming Pandaria and Taming Azeroth
+- Available in Eight Colors to Battle for Azeroth - Zones - Mechagon Island - Exploration
+- Tripping the Rifts (unobtainable) to Cataclysm
+- Big City Pet Brawlin' - Alliance, Big City Pet Brawlin' - Horde and Big City Pet Brawler to Class - and The Burning Crusade - Pet Battles
+- Victory in Hillsbrad (unobtainable) to Southshore vs. Tarren Mill
+- Hordebreaker and Darkspear Revolutionary (both unobtainable) to Pandaria
+- Zone data for Pandaria Tamer, Pandaria Safari, Northrend Safari, Northrend Tamer, Outland Safari, Outland Tamer, Eastern Kingdoms Safari, Eastern Kingdoms Tamer, Kalimdor Safari and Kalimdor Tamer
+- World Safari to multiple Pet Battles categories
 
 ### Fixed
 - Undying Aesthetic is once again marked as obtainable

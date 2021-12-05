@@ -1,4 +1,4 @@
--- [[ Exported at 2021-11-30 19-43-54 ]] --
+-- [[ Exported at 2021-12-04 11-07-32 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -850,7 +850,6 @@ function exportedAchievements.Load(a)
     a[3582] = ach:New(3582, 10); -- Terokkar Turkey Time
     a[3596] = ach:New(3596, 10, fac.Alliance); -- Pilgrim's Progress
     a[3597] = ach:New(3597, 10, fac.Horde); -- Pilgrim's Progress
-    a[3636] = ach:New(3636, 0); -- Jade Tiger
     a[3676] = ach:New(3676, 10, fac.Alliance); -- A Silver Confidant
     a[3677] = ach:New(3677, 10, fac.Horde); -- The Sunreavers
     a[3736] = ach:New(3736, 10); -- Pony Up!
@@ -891,7 +890,6 @@ function exportedAchievements.Load(a)
     a[3855] = ach:New(3855, 10); -- Glaive Grave
     a[3856] = ach:New(3856, 10, fac.Alliance); -- Demolition Derby
     a[3857] = ach:New(3857, 25, fac.Alliance); -- Master of Isle of Conquest
-    a[3896] = ach:New(3896, 0); -- Onyx Panther
     a[3916] = ach:New(3916, 10); -- Call of the Crusade (25 player)
     a[3917] = ach:New(3917, 10); -- Call of the Crusade (10 player)
     a[3918] = ach:New(3918, 10); -- Call of the Grand Crusade (10 player)
@@ -1399,6 +1397,7 @@ function exportedAchievements.Load(a)
     a[6588] = ach:New(6588, 5); -- Northrend Safari
     a[6589] = ach:New(6589, 5); -- Pandaria Safari
     a[6590] = ach:New(6590, 10); -- World Safari
+    a[6601] = ach:New(6601, 5); -- Taming the Wild
     a[6602] = ach:New(6602, 5, fac.Horde); -- Taming Kalimdor
     a[6603] = ach:New(6603, 5, fac.Alliance); -- Taming Eastern Kingdoms
     a[6604] = ach:New(6604, 5); -- Taming Outland
@@ -1631,6 +1630,7 @@ function exportedAchievements.Load(a)
     a[7502] = ach:New(7502, 10); -- Savior of Stoneplow
     a[7509] = ach:New(7509, 5, fac.Horde); -- Scenaturday
     a[7518] = ach:New(7518, 10); -- "Wanderers, Dreamers, and You"
+    a[7520] = ach:New(7520, 10); -- The Loremaster
     a[7522] = ach:New(7522, 10); -- Crypt of Forgotten Kings
     a[7523] = ach:New(7523, 10, fac.Alliance); -- Theramore's Fall
     a[7524] = ach:New(7524, 10, fac.Horde); -- Theramore's Fall
@@ -1805,6 +1805,7 @@ function exportedAchievements.Load(a)
     a[8342] = ach:New(8342, 0, fac.Horde, nil, false); -- Collect Your Deck (Season 2)
     a[8343] = ach:New(8343, 0, fac.Horde, nil, false); -- Deck Your Collection (Season 1)
     a[8347] = ach:New(8347, 10); -- Keep those Bombs Away! (From Me)
+    a[8348] = ach:New(8348, 10); -- The Longest Day
     a[8350] = ach:New(8350, 0, nil, nil, false); -- Mine! Mine! Mine!
     a[8351] = ach:New(8351, 0, nil, nil, false); -- Other People's Property
     a[8354] = ach:New(8354, 0, nil, nil, false); -- Puddle Jumper
@@ -2397,6 +2398,7 @@ function exportedAchievements.Load(a)
     a[9914] = ach:New(9914, 5, fac.Horde); -- Azeroth's Top Twenty Tunes
     a[9915] = ach:New(9915, 0); -- Crashin' Thrashin' Shredder
     a[9923] = ach:New(9923, 10, fac.Horde); -- Loremaster of Draenor
+    a[9924] = ach:New(9924, 5); -- Field Photographer
     a[9925] = ach:New(9925, 0, nil, nil, false); -- Friends In Places Yet Even Higher Than That
     a[9928] = ach:New(9928, 10, fac.Alliance); -- Don't Call Me Junior
     a[9972] = ach:New(9972, 10); -- A Race Against Slime
@@ -2901,7 +2903,6 @@ function exportedAchievements.Load(a)
     a[12129] = ach:New(12129, 10); -- This is the War Room!
     a[12139] = ach:New(12139, 0, nil, nil, false); -- Dominant Gladiator's Storm Dragon
     a[12140] = ach:New(12140, 0, nil, nil, false); -- Demonic Gladiator's Storm Dragon
-    a[12245] = ach:New(12245, 10); -- Allied Races: Highmountain Tauren
     a[12257] = ach:New(12257, 10); -- Stardust Crusaders
     a[12270] = ach:New(12270, 10); -- Bringing Hexy Back
     a[12272] = ach:New(12272, 10); -- Gold Fever
@@ -2985,7 +2986,6 @@ function exportedAchievements.Load(a)
     a[12410] = ach:New(12410, 15); -- Seething Shore Veteran
     a[12411] = ach:New(12411, 10); -- Blood and Sand
     a[12412] = ach:New(12412, 25); -- Master of Seething Shore
-    a[12415] = ach:New(12415, 10); -- Heritage of Highmountain
     a[12416] = ach:New(12416, 5); -- The Total Package
     a[12429] = ach:New(12429, 10, fac.Alliance); -- Wetlands Quests
     a[12430] = ach:New(12430, 10, fac.Alliance); -- Duskwood Quests

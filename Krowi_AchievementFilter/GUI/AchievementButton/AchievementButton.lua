@@ -22,6 +22,7 @@ function KrowiAF_AchievementButton_OnLoad(self)
 	if not addon.Options.db.Achievements.Compact then
 		descriptionHeight = descriptionHeight * ACHIEVEMENTUI_MAX_LINES_COLLAPSED;
 	end
+	diagnostics.Debug(descriptionHeight);
 	self.description:SetHeight(descriptionHeight);
 	self.Collapse = Collapse;
 	self.Expand = Expand;
@@ -255,6 +256,8 @@ function OnClick(self, button, achievementsFrame, ignoreModifiers, anchor, offse
 	elseif button == "RightButton" then
 		diagnostics.Debug("RightButton");
 		OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame);
+	else
+		diagnostics.Debug(button);
 	end
 end
 
@@ -381,9 +384,15 @@ local function AddGoTo(achievementsFrame, achievement)
 				addSeparator = nil;
 			end
 			goTo:AddFull({Text = addon.L["Other locations"], IsTitle = true});
-			for _, category in next, achievement.MoreCategories do
-				AddGoToAchievementWithCategoryLine(goTo, achievement, category, achievementsFrame);
+			if gui.SelectedTab.SelectedCategory ~= achievement.Category then
+				AddGoToAchievementWithCategoryLine(goTo, achievement, achievement.Category, achievementsFrame);
 			end
+			for _, category in next, achievement.MoreCategories do				
+				if gui.SelectedTab.SelectedCategory ~= category then
+					AddGoToAchievementWithCategoryLine(goTo, achievement, category, achievementsFrame);
+				end
+			end
+			addSeparator = true;
 		end
 
 		if gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or

@@ -289,7 +289,7 @@ function achievementsFrame:ClearSelection()
 		if not button.tracked:GetChecked() then
 			button.tracked:Hide();
 		end
-		if button.reward:GetText() == nil then
+		if button.reward:GetText() == nil or not addon.Options.db.Achievements.Compact then
 			button.description:Show();
 		else
 			button.description:Hide();
@@ -445,10 +445,12 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 		end
 
 		if rewardText == "" then
-			button.reward:SetText(nil);
+			if addon.Options.db.Achievements.Compact then
+				button.reward:SetText(nil);
+				button.description:Show();
+			end
 			button.reward:Hide();
 			button.rewardBackground:Hide();
-			button.description:Show();
 		else
 			button.reward:SetText(rewardText);
 			button.reward:Show();
@@ -458,7 +460,9 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 			else
 				button.rewardBackground:SetVertexColor(0.35, 0.35, 0.35);
 			end
-			button.description:Hide();
+			if addon.Options.db.Achievements.Compact then
+				button.description:Hide();
+			end
 		end
 	end
 
@@ -522,6 +526,10 @@ end
 function achievementsFrame:SelectAchievementWithCategory(achievement, category, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
 	diagnostics.Trace("achievementsFrame:SelectAchievementWithCategory");
 
+	if mouseButton == nil then
+		mouseButton = "LeftButton";
+	end
+
 	gui.CategoriesFrame:SelectCategory(category);
 	self.Container.ScrollBar:SetValue(0); -- Makes sure the scrollbar is at the top since this can be in a diff location if the category is already selected
 
@@ -534,11 +542,15 @@ function achievementsFrame:SelectAchievementWithCategory(achievement, category, 
 
 	while not shown do
 		for _, button in next, container.buttons do
-			diagnostics.Debug(button:GetTop());
-			diagnostics.Debug(gui.GetSafeScrollChildBottom(child));
+			-- diagnostics.Debug(button:GetTop());
+			-- diagnostics.Debug(gui.GetSafeScrollChildBottom(child));
 			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
+				diagnostics.Debug("Req 1 ok");
 				if not (gui.SelectedTab.SelectedAchievement and gui.SelectedTab.SelectedAchievement.ID == achievement.ID) then
+					diagnostics.Debug("Req 2 ok");
 					button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
+				else					
+					diagnostics.Debug("Req 2 nok");
 				end
 				shown = button;
 				break;
@@ -568,10 +580,6 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 	if not achievement then
 		diagnostics.Debug("No achievement provided");
 		return;
-	end
-
-	if mouseButton == nil then
-		mouseButton = "LeftButton";
 	end
 
 	if gui.FilterButton then

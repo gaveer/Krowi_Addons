@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="E:/World of Warcraft/_retail_/Interface/AddOns/Krowi_Databases/Krowi_AchievementFilter.db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="0" synchronous="1"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3739"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,16:mainAchievementUIMap"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Achievement" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="42"/><column index="2" value="68"/><column index="3" value="84"/><column index="4" value="48"/><column index="5" value="77"/><column index="6" value="97"/></column_widths><filter_values><column index="1" value="11765"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementUIMap" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="42"/><column index="2" value="107"/><column index="3" value="62"/></column_widths><filter_values><column index="2" value="6585"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Achievement_AGT" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="9" mode="0"/></sort><column_widths><column index="1" value="42"/><column index="2" value="272"/><column index="3" value="443"/><column index="4" value="159"/><column index="5" value="68"/><column index="6" value="123"/><column index="7" value="48"/><column index="8" value="56"/><column index="9" value="58"/><column index="10" value="70"/><column index="11" value="84"/><column index="12" value="123"/><column index="13" value="110"/><column index="14" value="129"/><column index="15" value="129"/></column_widths><filter_values><column index="2" value="souls"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Achievement_AGT_Ignore" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="42"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Category" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="2" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="63"/><column index="3" value="172"/><column index="4" value="66"/><column index="5" value="76"/><column index="6" value="300"/><column index="7" value="54"/><column index="8" value="50"/><column index="9" value="73"/></column_widths><filter_values><column index="3" value="wint"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="CategoryAchievement" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="63"/><column index="3" value="82"/><column index="4" value="107"/></column_widths><filter_values><column index="4" value="11765"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="CategoryUIMap" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="82"/><column index="3" value="62"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Function" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="300"/><column index="3" value="128"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="UIMap_AGT" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="272"/><column index="3" value="129"/><column index="4" value="129"/><column index="5" value="111"/><column index="6" value="300"/><column index="7" value="300"/><column index="8" value="66"/></column_widths><filter_values><column index="2" value="darnass"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Krowi_AchievementFilter_InsertUIMap_Template.sql">-- Readable querry
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="E:/World of Warcraft/_retail_/Interface/AddOns/Krowi_Databases/Krowi_AchievementFilter.db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="0" synchronous="1"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3739"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainUIMap_AGT"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Achievement" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="117"/><column index="2" value="68"/><column index="3" value="84"/><column index="4" value="48"/><column index="5" value="77"/><column index="6" value="97"/></column_widths><filter_values><column index="1" value="12415"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="AchievementUIMap" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="2" mode="0"/></sort><column_widths><column index="1" value="42"/><column index="2" value="107"/><column index="3" value="62"/></column_widths><filter_values><column index="2" value="14280"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Achievement_AGT" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="9" mode="0"/></sort><column_widths><column index="1" value="42"/><column index="2" value="272"/><column index="3" value="443"/><column index="4" value="159"/><column index="5" value="68"/><column index="6" value="123"/><column index="7" value="48"/><column index="8" value="56"/><column index="9" value="58"/><column index="10" value="70"/><column index="11" value="84"/><column index="12" value="123"/><column index="13" value="110"/><column index="14" value="129"/><column index="15" value="129"/></column_widths><filter_values><column index="2" value="souls"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Achievement_AGT_Ignore" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="42"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Category" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="2" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="63"/><column index="3" value="172"/><column index="4" value="66"/><column index="5" value="76"/><column index="6" value="300"/><column index="7" value="54"/><column index="8" value="50"/><column index="9" value="73"/></column_widths><filter_values><column index="3" value="wint"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="CategoryAchievement" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="63"/><column index="3" value="82"/><column index="4" value="107"/></column_widths><filter_values><column index="3" value="768"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="CategoryUIMap" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="82"/><column index="3" value="62"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Function" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="300"/><column index="3" value="128"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="UIMap_AGT" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="272"/><column index="3" value="129"/><column index="4" value="129"/><column index="5" value="111"/><column index="6" value="300"/><column index="7" value="300"/><column index="8" value="66"/></column_widths><filter_values><column index="2" value="winter"/></filter_values><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Krowi_AchievementFilter_InsertUIMap_Template.sql">-- Readable querry
 INSERT OR REPLACE INTO UIMap VALUES (${ID}, '${OriginalName}',
 	CASE WHEN (SELECT COUNT(*) FROM UIMap WHERE ID = ${ID}) &gt; 0 THEN
 		(SELECT DateAdded FROM UIMap WHERE ID = ${ID}) ELSE DATETIME()
@@ -52,7 +52,16 @@ AND AGT.Category_AGT_ID != 15280 AND AGT.Category_AGT_ID != 15446 -- Ignore Othe
 -- AND AGT.ID &gt; 14938
 
 -- ORDER BY AGT.Category_AGT_ID, AGT.UIOrder;
-ORDER BY AGT.ID;</sql><sql name="SQL 5">SELECT
+ORDER BY AGT.ID;</sql><sql name="SQL 10">select * from Achievement_AGT left join Achievement_AGT_Ignore on Achievement_AGT.ID = Achievement_AGT_Ignore.ID where Achievement_AGT_Ignore.ID is not null;
+
+select Achievement_AGT_Ignore.ID, Achievement_AGT.Name, Category.ID, Category.Name, Achievement_AGT.RewardText from Achievement_AGT_Ignore 
+left join Achievement on Achievement_AGT_Ignore.ID = Achievement.ID
+left join Achievement_AGT on Achievement_AGT.ID = Achievement.ID
+left join CategoryAchievement on CategoryAchievement.AchievementID = Achievement.ID
+left join Category on Category.ID = CategoryAchievement.CategoryID
+where Achievement.ID is not null;
+
+delete from Achievement_AGT_Ignore where ID in (879,886,887,888,1436,1705,1706,2016,2017,2097,2141,2142,2143,2316,2536,2537,3096,3756,3757,4600,4832,5749,6003,6059,6060,6061,6322,6741,7852,7860,7862,8213,8216,8302,8304,8678,8698,8705,8707,8794,9229,9236,9238,9598,9599,9713,9909,9915,9925,10137,10146,10337,10355,10356,10751,10999,11000,11001,11002,11913,12139,12140,12850,12866,12895,12903,12906,12910,12911,12914,12917,12931,12932,12933,12934,13093,13202,13450,13632,13927,13958,14816,14931,14999);</sql><sql name="SQL 5">SELECT
 	E.ID, E.Title, E.Icon
 FROM
 	Event E
@@ -70,67 +79,91 @@ ORDER BY
 SELECT Achievement_AGT.ID, Achievement_AGT.Name, Achievement_AGT.Description, Achievement_AGT.RewardText, Achievement_AGT.Category_AGT_ID, CategoryAchievement.CategoryID
 from CategoryAchievement left join Achievement on CategoryAchievement.AchievementID = Achievement.ID left join Achievement_AGT on Achievement.ID = Achievement_AGT.ID
 where CategoryID = 972
-ORDER by CategoryAchievement.Location</sql><sql name="SQL 9">INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 249);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 249);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 249);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 83);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 83);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 83);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 78);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 78);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 78);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 64);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 64);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 64);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 65);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 65);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 65);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 71);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 71);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 71);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 10);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 10);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 10);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 199);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 199);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 199);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 81);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 81);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 81);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 7);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 7);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 7);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 198);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 198);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 198);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 77);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 77);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 77);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 69);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 69);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 69);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 70);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 70);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 70);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 1);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 1);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 1);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 66);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 66);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 66);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 62);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 62);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 62);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 97);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 97);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 97);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 106);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 106);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 106);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 76);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 76);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 76);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6612, 63);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6611, 63);
-INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(6590, 63);
+ORDER by CategoryAchievement.Location</sql><sql name="SQL 9">INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 100);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 101);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 102);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 104);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 105);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 106);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 107);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 108);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 109);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 113);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 114);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 115);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 116);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 1161);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 1165);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 117);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 118);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 119);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 12);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 120);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 121);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 13);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 14);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 15);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 1525);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 1533);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 1536);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 1565);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 17);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 198);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 199);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 203);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 207);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 22);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 224);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 23);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 241);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 249);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 26);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 32);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 36);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 371);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 376);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 379);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 388);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 418);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 422);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 424);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 47);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 48);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 49);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 51);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 52);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 525);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 535);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 539);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 542);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 543);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 550);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 56);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 572);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 619);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 62);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 63);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 630);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 634);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 64);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 641);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 65);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 650);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 66);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 680);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 69);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 70);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 71);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 77);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 78);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 81);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 83);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 862);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 863);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 864);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 875);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 876);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 895);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 896);
+INSERT INTO AchievementUIMap (AchievementID, UIMapID) VALUES(7520, 942);
 </sql><current_tab id="2"/></tab_sql></sqlb_project>

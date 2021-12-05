@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
 - Insane in the Membrane to multiple zones
 - Pest Control to Wrath of the Lich King - Zones
 - Local Pet Mauler, Traveling Pet Mauler and World Pet Mauler to multiple zones
-- Taming the Great Outdoors and Taming the World to multiple zones
+- Taming the Wild, Taming the Great Outdoors and Taming the World to multiple zones
 - Zone data for Taming Kalimdor, Taming Eastern Kingdoms, Taming Outland, Taming Northrend, Taming Cataclysm, Taming Pandaria and Taming Azeroth
 - Available in Eight Colors to Battle for Azeroth - Zones - Mechagon Island - Exploration
 - Tripping the Rifts (unobtainable) to Cataclysm
@@ -41,6 +41,10 @@ All notable changes to this project will be documented in this file.
 - Hordebreaker and Darkspear Revolutionary (both unobtainable) to Pandaria
 - Zone data for Pandaria Tamer, Pandaria Safari, Northrend Safari, Northrend Tamer, Outland Safari, Outland Tamer, Eastern Kingdoms Safari, Eastern Kingdoms Tamer, Kalimdor Safari and Kalimdor Tamer
 - World Safari to multiple Pet Battles categories
+- The Loremaster to multiple zones
+- Field Photographer to multiple zones
+- Wintergrasp under Wrath of the Lich King - Zones for Field Photographer
+- The Longest Day to multiple zones
 
 ### Fixed
 - Undying Aesthetic is once again marked as obtainable

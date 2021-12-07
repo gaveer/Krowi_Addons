@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [9.2.0.33.0] - 2021-
+### Added
+
+[9.2.0.33.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3553912
+
 ## [9.1.5.32.0] - 2021-12-07
 ### Added
 - A total of over 250 achievements (details below)

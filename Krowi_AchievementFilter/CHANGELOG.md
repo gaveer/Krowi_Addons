@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.5.32.0] - 2021-
+## [9.1.5.32.0] - 2021-12-07
 ### Added
 - A total of over 250 achievements (details below)
 - Raiding with Leashes V: Cuteaclysm to the Cataclysm raids
@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file.
 - Field Photographer to multiple zones
 - Wintergrasp under Wrath of the Lich King - Zones for Field Photographer
 - The Longest Day to multiple zones
+- New tutorial page for Compact Achievements
 
 ### Fixed
 - Undying Aesthetic is once again marked as obtainable

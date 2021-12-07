@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file.
 - Undying Aesthetic is once again marked as obtainable
 - The Burning Crusade - Zones - Bloodmyst Isle - Quests can now merge
 
-[9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3515428
+[9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3553912
 
 ## [9.1.5.31.0] - 2021-11-04
 ### Added

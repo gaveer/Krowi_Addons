@@ -20,6 +20,7 @@ Battle for Azeroth expansion feature: Brawler's Guild, Island Expeditions, War E
 Shadowlands expansion feature: Torghast and Covenant Sanctums.
 Coming in x: New achievements coming in the next patch hidden behind a * SPOLER WARNING *
 Unobtainable Legacy categories can be found when the 'Not Obtainable' filter is checked.
+
 Features
 
 A new tab with custom categories mentioned above.
@@ -37,14 +38,17 @@ World Map Button with its own Selected Zone category to show achievements for th
 Exclude achievements you're not interested in.
 Event reminder for active events with achievements.
 Compact achievements similar to the summary achievements.
+
 Planned in next version
 
 Planned in future version
 
 Right Click Menu for the default Blizzard tabs with initially only a link to Wowhead.
+
 Suggestions for future versions
 
 Custom filters the player can add.
+
 More features are planned in the future and can be requested via the issues system or discord.
 
 Feel free to join discord and say hi: https://discord.gg/DCxq5rRNW5.

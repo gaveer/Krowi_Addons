@@ -57,7 +57,17 @@ namespace DbManagerWPF.ViewModel
         public ObservableCollection<Function> Functions { get { return _Functions; } set { _Functions = value; NotifyPropertyChanged(); } }
 
         private Function _SelectedFunctionNew;
-        public Function SelectedFunctionNew { get { return _SelectedFunctionNew; } set { _SelectedFunctionNew = value; NotifyPropertyChanged(); } }
+        public Function SelectedFunctionNew
+        {
+            get { return _SelectedFunctionNew; }
+            set
+            {
+                _SelectedFunctionNew = value;
+                if (string.IsNullOrEmpty(CategoryNameNew))
+                    CategoryNameNew = value?.Description;
+                NotifyPropertyChanged();
+            }
+        }
 
         private string _FunctionValueNew;
         public string FunctionValueNew { get { return _FunctionValueNew; } set { _FunctionValueNew = value; NotifyPropertyChanged(); } }
@@ -205,6 +215,10 @@ namespace DbManagerWPF.ViewModel
             var category = categoryDM.GetLast();
             category = Categories.Find(category.ID);
             SelectedCategory = category;
+            var parentUIMaps = SelectedCategory.Parent.GetUIMaps(true);
+            foreach (var uiMap in parentUIMaps)
+                uiMapDM.AddToCategory(SelectedCategory, uiMap);
+            RefreshCategoryUIMapsView(SelectedCategory, true);
 
             // Clear input fields
             CategoryNameNew = null;

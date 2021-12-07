@@ -38,84 +38,72 @@ namespace DbManagerWPF.DataManager
             return functions;
         }
 
-        public Function GetLegacyFunction()
+        private Function GetXFunction(int id)
         {
             if (!functions.Any())
                 GetAll();
 
-            return functions.Single(x => x.ID == 5);
+            return functions.Single(x => x.ID == id);
+        }
+
+        public Function GetLegacyFunction()
+        {
+            return GetXFunction(5);
         }
 
         public Function GetCurrentZoneFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 21);
+            return GetXFunction(21);
         }
 
         public Function GetSelectedZoneFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 27);
+            return GetXFunction(27);
         }
 
         public Function GetComingInFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 23);
+            return GetXFunction(23);
         }
 
         public Function GetExcludedFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 34);
+            return GetXFunction(34);
         }
 
         public Function Get10PlayerFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 6);
+            return GetXFunction(6);
         }
 
         public Function Get25PlayerFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 7);
+            return GetXFunction(7);
         }
 
         public Function GetTabEventsFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 37);
+            return GetXFunction(37);
         }
 
         public Function GetTabExpansionsFunction()
         {
-            if (!functions.Any())
-                GetAll();
-
-            return functions.Single(x => x.ID == 38);
+            return GetXFunction(38);
         }
 
         public Function GetFocusedFunction()
         {
-            if (!functions.Any())
-                GetAll();
+            return GetXFunction(44);
+        }
 
-            return functions.Single(x => x.ID == 44);
+        public Function GetTabPvPFunction()
+        {
+            return GetXFunction(45);
+        }
+
+        public Function GetTabSpecialsFunction()
+        {
+            return GetXFunction(46);
         }
     }
 }

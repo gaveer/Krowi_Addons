@@ -1,16 +1,68 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [9.1.5.31.0] - 2021-11-04
+## [9.1.5.32.0] - 2021-12-07
 ### Added
+- A total of over 250 achievements (details below)
 - Raiding with Leashes V: Cuteaclysm to the Cataclysm raids
 - Raiding with Leashes IV: Wrath of the Lick King to the Wrath of the Lich King raids
-- Stand Against the Legion and Defender of Azeroth: Legion Invasions to the corresponding zones (unobtainable)
+- Stand Against the Legion and Defender of Azeroth: Legion Invasions to the corresponding zones (both unobtainable)
 - It All Makes Sense Now to Stormwind City and Orgrimmar
 - Raiding with Leashes II: Attunement Edition and Raiding with Leashes III: Drinkin' From the Sunwell to The Burning Crusade raids
 - Raiding with Leashes to the Classic raids and Naxxramas
 - Operation: Gnomeregan to Dun Morogh (unobtainable)
 - Zalazane's Fall to Durotat (unobtainable)
+- New PvP tab with Alterac Valley, Arathi Basin, Ashran, Battle for Gilneas, Deepwind Gorge, Eye of the Storm, Isle of Conquest, Seething Shore, Silvershard Mines, Strand of the Ancients (Legacy), Temple of Kotmogu, Twin Peaks, Warsong Gulch and Wintergrasp
+- Putting Out the Light, For the Horde! and The Exodar city to The Burning Crusade - Zones
+- Overthrow the Council, For the Horde! and Ironforge city to Classic - Eastern Kingdoms - Zones
+- For the Alliane! and Wrath of the Alliance to The Burning Crusade - Zones - Silvermoon City
+- For the Alliane! and Wrath of the Alliance to Classic - Zones - Kalimdor - Orgrimmar
+- Wrath of the Alliance and Undercity to Classic - Eastern Kingdoms - Zones
+- Wrath of the Alliance to Classic - Kalimdor - Zones - Thunder Bluff
+- Wrath of the Horde to Stormwind City and Ironforge in Classic - Zones - Eastern Kingdoms
+- Wrath of the Horde to The Burning Crusade - Zones - The Exodar
+- Wrath of the Horde and Darnassus to Classic - Kalimdor - Zones
+- Slightly added more width to the achievement description space, also changes dynamically when the achievement width changes due to the scrollbar
+- New compact achievements view available that are half the size of the regular ones, toggleable in options
+- Queen's Conservatory only shows Night Fae specific achievements
+- New Specials tab with custom categories requested by users
+- Achievements that can be found at multiple locations now have a Go To entry in the right click menu
+- Ambassador of the Alliance and Ambassador of the Horde to multiple zones
+- Avast Ye, Admiral! to Classic - Zones - The Cape of Stranglethorn - Reputation
+- Insane in the Membrane to multiple zones
+- Pest Control to Wrath of the Lich King - Zones
+- Local Pet Mauler, Traveling Pet Mauler and World Pet Mauler to multiple zones
+- Taming the Wild, Taming the Great Outdoors and Taming the World to multiple zones
+- Zone data for Taming Kalimdor, Taming Eastern Kingdoms, Taming Outland, Taming Northrend, Taming Cataclysm, Taming Pandaria and Taming Azeroth
+- Available in Eight Colors to Battle for Azeroth - Zones - Mechagon Island - Exploration
+- Tripping the Rifts (unobtainable) to Cataclysm
+- Big City Pet Brawlin' - Alliance, Big City Pet Brawlin' - Horde and Big City Pet Brawler to Class - and The Burning Crusade - Pet Battles
+- Victory in Hillsbrad (unobtainable) to Southshore vs. Tarren Mill
+- Hordebreaker and Darkspear Revolutionary (both unobtainable) to Pandaria
+- Zone data for Pandaria Tamer, Pandaria Safari, Northrend Safari, Northrend Tamer, Outland Safari, Outland Tamer, Eastern Kingdoms Safari, Eastern Kingdoms Tamer, Kalimdor Safari and Kalimdor Tamer
+- World Safari to multiple Pet Battles categories
+- The Loremaster to multiple zones
+- Field Photographer to multiple zones
+- Wintergrasp under Wrath of the Lich King - Zones for Field Photographer
+- The Longest Day to multiple zones
+- New tutorial page for Compact Achievements
+
+### Fixed
+- Undying Aesthetic is once again marked as obtainable
+- The Burning Crusade - Zones - Bloodmyst Isle - Quests can now merge
+
+[9.1.5.32.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3553912
+
+## [9.1.5.31.0] - 2021-11-04
+### Added
+- ~~Raiding with Leashes V: Cuteaclysm to the Cataclysm raids~~
+- ~~Raiding with Leashes IV: Wrath of the Lick King to the Wrath of the Lich King raids~~
+- ~~Stand Against the Legion and Defender of Azeroth: Legion Invasions to the corresponding zones (unobtainable)~~
+- ~~It All Makes Sense Now to Stormwind City and Orgrimmar~~
+- ~~Raiding with Leashes II: Attunement Edition and Raiding with Leashes III: Drinkin' From the Sunwell to The Burning Crusade raids~~
+- ~~Raiding with Leashes to the Classic raids and Naxxramas~~
+- ~~Operation: Gnomeregan to Dun Morogh (unobtainable)~~
+- ~~Zalazane's Fall to Durotat (unobtainable)~~
 
 ### Fixed
 - Calendar events did not refresh properly

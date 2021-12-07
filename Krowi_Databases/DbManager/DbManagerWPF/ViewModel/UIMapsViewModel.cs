@@ -44,6 +44,7 @@ namespace DbManagerWPF.ViewModel
 
         public ICommand AddUIMapToCategoryCommand => new CommandHandler(() => AddUIMapToCategory(), () => SelectedCategory != null && SelectedUIMap != null);
         public ICommand RemoveUIMapFromCategoryCommand => new CommandHandler(() => RemoveUIMapFromCategory(), () => SelectedCategory != null && SelectedCategoryUIMap != null);
+        public ICommand CopyUIMapFromParentToCategoryCommand => new CommandHandler(() => CopyUIMapFromParentToCategory(), () => SelectedCategory != null);
 
         private ObservableCollection<UIMap> _CategoryUIMaps;
         public ObservableCollection<UIMap> CategoryUIMaps { get { return _CategoryUIMaps; } set { _CategoryUIMaps = value; NotifyPropertyChanged(); } }
@@ -179,6 +180,15 @@ namespace DbManagerWPF.ViewModel
         public void RemoveUIMapFromCategory()
         {
             uiMapDM.RemoveFromCategory(SelectedCategory, SelectedCategoryUIMap);
+
+            RefreshCategoryUIMapsView(SelectedCategory, true);
+        }
+
+        public void CopyUIMapFromParentToCategory()
+        {
+            var parentUIMaps = SelectedCategory.Parent.GetUIMaps(true);
+            foreach (var uiMap in parentUIMaps)
+                uiMapDM.AddToCategory(SelectedCategory, uiMap);
 
             RefreshCategoryUIMapsView(SelectedCategory, true);
         }

@@ -22,6 +22,8 @@ L["Focus"] = "Focus";
 -- Tabs
 L["Expansions"] = "Expansions";
 L["Events"] = "Events";
+L["Player vs. Player"] = "Player vs. Player";
+L["Specials"] = "Specials";
 
 -- Categories
 L["Current Zone"] = "Current Zone";
@@ -69,6 +71,14 @@ L["Focused"] = "Focused";
 L["Brawler's Guild"] = "Brawler's Guild";
 L["Gifts"] = "Gifts"
 L["Other"] = "Other";
+L["Strand of the Ancients"] = "Strand of the Ancients";
+L["Bur's Mount Collection"] = "Bur's Mount Collection";
+L["Drops"] = "Drops";
+L["Vendor"] = "Vendor";
+L["Profession"] = "Profession";
+L["Recruit-a-Friend"] = "Recruit-a-Friend";
+L["Achievements"] = "Achievements";
+L["Southshore vs. Tarren Mill"] = "Southshore vs. Tarren Mill";
 
 -- Filters
 L["Obtainable"] = "Obtainable";
@@ -84,6 +94,7 @@ L["ID"] = "ID";
 -- Tooltips
 L["Part of a chain"] = "Part of a chain";
 L["Required for"] = "Required for";
+L["Other locations"] = "Other locations";
 L["Objectives progress"] = "Objectives progress";
 L["No achievements are available with the current set of filters"] = "No achievements are available with the current set of filters";
 L["This achievement is no longer obtainable"] = "This achievement is no longer obtainable.";
@@ -214,6 +225,10 @@ L["Show Excluded Category Desc"] = "Show / hide {excluded} category.\n\nWhen che
 L["Include all"] = "Include all";
 L["Include all Desc"] = "Include all excluded achievements.";
 
+-- Options Layout Achievements
+L["Compact Achievements"] = "Compact Achievements";
+L["Compact Achievements Desc"] = "Achievements are 2/3rd the size, similar to the summary achievements.\n\n{reloadRequired}";
+
 -- Options Layout Right Click Menu
 L["Right Click Menu"] = "Right Click Menu";
 L["Show Right Click Menu"] = "Show {rightClickMenu} button";
@@ -260,7 +275,8 @@ L["Special thanks Desc"] = "Special thanks to {bur} ";
 L["Donations"] = "Donations";
 
 -- Keybindings
-L["Toggle Achievement Window to "] = "Toggle Achievement Window to ";
+L["Toggle "] = "Toggle ";
+L[" tab"] = " tab";
 
 -- Icon
 L["Left click"] = "Left click";
@@ -300,7 +316,7 @@ L["Categories per expansion Desc"] = "Achievements are put in categories per exp
 L["Right Click Menu Desc"] = "Each achievement in the new tab has a {rightClickMenu}.\n\n" ..
                                 "Features:\n" ..
                                 AF_TAB .. "- Link to {wowhead}\n" ..
-                                AF_TAB .. "- {goTo} shortcut to achievements that are {partOfAChain} or that are {require} this achievment to be completed. " ..
+                                AF_TAB .. "- {goTo} shortcut to achievements that are {partOfAChain}, that are {require} this achievment to be completed or are also found under other categories. " ..
                                 "Achievements in the {currentZone} category have a shortcut to their proper location in the categories tree.\n" ..
                                 AF_TAB .. "- Link to {xuFuPetGuides} if the achievement is related to {petBattles} and {xuFuPetGuides} has relevant information about it\n" ..
                                 AF_TAB .. "- Shortcut to {IAT} if tactics for the achievement are available ({IAT} is {installed})\n" ..
@@ -401,15 +417,20 @@ L["World Map Button Desc"] = "Hover:\n" ..
 L["New Achievement Colors"] = "New Achievement Colors";
 L["New Achievement Colors Desc"] = "- The default gold Blizzard achievement of an obtained achievement. The border is changed from red to gold.\n" ..
                                     "- The new red achievement of a not obtained not obtainable achievement with default grey Blizzard border.\n" ..
-                                    "- The new red achievement and red border of an obtained not obtainable achievement\n" ..
+                                    "- The new red achievement and red border of an obtained not obtainable achievement.\n" ..
                                     "- The default blue Blizzard achievement and border of an obtained account-wide achievement.\n";
-                                    
+
 L["Event Reminder"] = "Event Reminder";
 L["Event Reminder Desc"] = "Events are added to the new tab and a reminder will pop up when one of the events is active.\n\n" ..
                             "Clicking it will open the category with the obtainable achievements while the event is active.\n" ..
                             "It will dissapear when right clicked or after {EventAlertFadeDelay} seconds when ignored.\n\n" ..
                             "The reminder is also present on the right side of the achievement window.\n\n" ..
                             "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
+
+L["Compact Achievements T"] = "Compact Achievements";
+L["Compact Achievements T Desc"] = "- Achievements are 2/3rd the size, similar to the summary achievements.\n" ..
+                                    "- Shows either the first line of the description or the reward.\n\n" ..
+                                    "All options can be found under Game Menu -> Interface -> AddOns -> {addonName}";
 
 L["OC"] = "OC";
 L["NONC"] = "NONC";

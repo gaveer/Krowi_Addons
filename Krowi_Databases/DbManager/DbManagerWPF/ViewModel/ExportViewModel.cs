@@ -165,7 +165,7 @@ namespace DbManagerWPF.ViewModel
                 ExportCategory(sb, category);
 
             sb.AppendLine("");
-            sb.AppendLineTabbed(1, "return tabExpansionsCategories.Children, tabEventsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;");
+            sb.AppendLineTabbed(1, "return tabExpansionsCategories.Children, tabEventsCategories.Children, tabPvPCategories.Children, tabSpecialsCategories.Children, currentZoneCategory, selectedZoneCategory, focusedCategory, excludedCategory, nextPatchCategory;");
             sb.AppendLine("end");
 
             using var file = new StreamWriter(@"../../../../../../Krowi_AchievementFilter/Data/ExportedCategories.lua");
@@ -199,6 +199,16 @@ namespace DbManagerWPF.ViewModel
             {
                 sb.AppendLineTabbed(1, $"tmp[{category.ID}].IsTab = true;");
                 sb.AppendLineTabbed(1, $"local tabEventsCategories = tmp[{category.ID}];");
+            }
+            if (category.Function == functionDM.GetTabPvPFunction())
+            {
+                sb.AppendLineTabbed(1, $"tmp[{category.ID}].IsTab = true;");
+                sb.AppendLineTabbed(1, $"local tabPvPCategories = tmp[{category.ID}];");
+            }
+            if (category.Function == functionDM.GetTabSpecialsFunction())
+            {
+                sb.AppendLineTabbed(1, $"tmp[{category.ID}].IsTab = true;");
+                sb.AppendLineTabbed(1, $"local tabSpecialsCategories = tmp[{category.ID}];");
             }
             if (category.Function == functionDM.GetCurrentZoneFunction())
             {
@@ -740,6 +750,9 @@ namespace DbManagerWPF.ViewModel
                     break;
                 case 884:
                     appendString += "data.CategoriesEvents";
+                    break;
+                case 955:
+                    appendString += "data.CategoriesPvP";
                     break;
                 default:
                     break;

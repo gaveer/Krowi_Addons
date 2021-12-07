@@ -1,6 +1,6 @@
 See the images for a quick look at the ingame UI! This might give you a better idea of what is added to the default Blizzard UI.
 
-Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3600 achievements are added so far spread over 750+ categories, linked to 1600+ zones and 32 events.
+Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3950 achievements are added so far spread over 850+ categories, linked to 1600+ zones and 34 events.
 
 Categories
 
@@ -20,6 +20,7 @@ Battle for Azeroth expansion feature: Brawler's Guild, Island Expeditions, War E
 Shadowlands expansion feature: Torghast and Covenant Sanctums.
 Coming in x: New achievements coming in the next patch hidden behind a * SPOLER WARNING *
 Unobtainable Legacy categories can be found when the 'Not Obtainable' filter is checked.
+
 Features
 
 A new tab with custom categories mentioned above.
@@ -36,14 +37,18 @@ Hovering achievements in meta achievements shows more information about the achi
 World Map Button with its own Selected Zone category to show achievements for the zone you're viewing.
 Exclude achievements you're not interested in.
 Event reminder for active events with achievements.
+Compact achievements similar to the summary achievements.
+
 Planned in next version
 
 Planned in future version
 
 Right Click Menu for the default Blizzard tabs with initially only a link to Wowhead.
+
 Suggestions for future versions
 
 Custom filters the player can add.
+
 More features are planned in the future and can be requested via the issues system or discord.
 
 Feel free to join discord and say hi: https://discord.gg/DCxq5rRNW5.

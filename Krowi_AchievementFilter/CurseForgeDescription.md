@@ -1,5 +1,5 @@
 <p><strong>See the images for a quick look at the ingame UI! This might give you a better idea of what is added to the default Blizzard UI.</strong></p>
-<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3600 achievements are added so far spread over 750+ categories, linked to 1600+ zones and 32 events.</p>
+<p>Achievement Filter adds a tab to the Achievement Window that orders the achievements by expansion and further subdivisions. Over 3950 achievements are added so far spread over 850+ categories, linked to 1600+ zones and 34 events.</p>
 <p><strong>Categories</strong></p>
 <ul>
 <li>The <em><strong>Current Zone</strong></em> category shows which achievements are related to the current zone you're in. (This is still being approved on.)</li>
@@ -35,6 +35,7 @@
 <li><strong><em>World Map Button</em></strong> with its own Selected Zone category to show achievements for the zone you're viewing.</li>
 <li><strong><em>Exclude achievements</em></strong> you're not interested in.</li>
 <li><strong><em>Event reminder</em></strong> for active events with achievements.</li>
+<li><strong><em>Compact achievements</em></strong> similar to the summary achievements.</li>
 </ul>
 <p><strong>Planned in next version</strong></p>
 <ul>

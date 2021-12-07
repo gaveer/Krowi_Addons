@@ -41,7 +41,14 @@ function achievementsFrame:Load()
 		container.ParentFrame:Update();
 	end
 
-	HybridScrollFrame_CreateButtons(frame.Container, "KrowiAF_AchievementButton_Template", 0, -2);
+	local template = "KrowiAF_AchievementButton_Template";
+	if addon.Options.db.Achievements.Compact then
+		template = "KrowiAF_Small_AchievementButton_Template";
+	end
+	HybridScrollFrame_CreateButtons(frame.Container, template, 0, -2);
+	diagnostics.Debug(frame.Container.buttons[1]:GetHeight());
+	diagnostics.Debug(frame.Container:GetHeight());
+	diagnostics.Debug(math.ceil(frame.Container:GetHeight() / frame.Container.buttons[1]:GetHeight()) + 1);
 	gui.AchievementButton:PostLoadButtons(frame);
 
 	hooksecurefunc("AchievementFrameAchievements_ForceUpdate", function()
@@ -204,7 +211,7 @@ function achievementsFrame:Update()
 		AchievementFrameAchievementsObjectives:Hide();
 	end
 
-	local extraHeight = scrollFrame.largeButtonHeight or ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	local extraHeight = scrollFrame.largeButtonHeight or addon.Options.db.Achievements.ButtonCollapsedHeight;
 	-- diagnostics.Debug("extraHeight " .. tostring(extraHeight));
 
 	local achievementIndex;
@@ -219,9 +226,9 @@ function achievementsFrame:Update()
 		end
 	end
 
-	local totalHeight = #cachedAchievements * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	local totalHeight = #cachedAchievements * addon.Options.db.Achievements.ButtonCollapsedHeight;
 	-- diagnostics.Debug("totalHeight1 " .. tostring(totalHeight));
-	totalHeight = totalHeight + extraHeight - ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT;
+	totalHeight = totalHeight + extraHeight - addon.Options.db.Achievements.ButtonCollapsedHeight;
 	-- diagnostics.Debug("totalHeight2 " .. tostring(totalHeight));
 
 	HybridScrollFrame_Update(scrollFrame, totalHeight, displayedHeight);
@@ -282,7 +289,11 @@ function achievementsFrame:ClearSelection()
 		if not button.tracked:GetChecked() then
 			button.tracked:Hide();
 		end
-		button.description:Show();
+		if button.reward:GetText() == nil or not addon.Options.db.Achievements.Compact then
+			button.description:Show();
+		else
+			button.description:Hide();
+		end
 		button.hiddenDescription:Hide();
 	end
 
@@ -386,7 +397,11 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 			end
 		end
 		button.id = id;
-		button.label:SetWidth(ACHIEVEMENTBUTTON_LABELWIDTH);
+		local labelWidth = ACHIEVEMENTBUTTON_LABELWIDTH;
+		if addon.Options.db.Achievements.Compact then
+			labelWidth = labelWidth - 10;
+		end
+		button.label:SetWidth(labelWidth);
 		button.label:SetText(name);
 
 		if GetPreviousAchievement(id) then
@@ -430,6 +445,10 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 		end
 
 		if rewardText == "" then
+			if addon.Options.db.Achievements.Compact then
+				button.reward:SetText(nil);
+				button.description:Show();
+			end
 			button.reward:Hide();
 			button.rewardBackground:Hide();
 		else
@@ -440,6 +459,9 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 				button.rewardBackground:SetVertexColor(1, 1, 1);
 			else
 				button.rewardBackground:SetVertexColor(0.35, 0.35, 0.35);
+			end
+			if addon.Options.db.Achievements.Compact then
+				button.description:Hide();
 			end
 		end
 	end
@@ -455,7 +477,7 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 		button.tracked:Hide();
 	end
 
-	AchievementButton_UpdatePlusMinusTexture(button);
+	button:UpdatePlusMinusTexture();
 
 	-- if selection then
 	-- 	diagnostics.Debug(tostring(selection.ID) .. " - " .. tostring(id) .. " - " .. tostring(button.selected) .. " - " .. tostring(not button:IsMouseOver()));
@@ -481,7 +503,11 @@ function achievementsFrame:DisplayAchievement(button, achievement, index, select
 			button.highlight:Hide();
 		end
 		button:Collapse();
-		button.description:Show();
+		if button.reward:GetText() == nil then
+			button.description:Show();
+		else
+			button.description:Hide();
+		end
 		button.hiddenDescription:Hide();
 	end
 
@@ -497,30 +523,11 @@ function achievementsFrame.ClearHighlightedButton()
 end
 
 -- [[ API ]] --
-function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
-	diagnostics.Trace("achievementsFrame:SelectAchievement");
-
-	if not achievement then
-		diagnostics.Debug("No achievement provided");
-		return;
-	end
+function achievementsFrame:SelectAchievementWithCategory(achievement, category, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+	diagnostics.Trace("achievementsFrame:SelectAchievementWithCategory");
 
 	if mouseButton == nil then
 		mouseButton = "LeftButton";
-	end
-
-	if gui.FilterButton then
-		achievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(achievement);
-		gui.FilterButton:SetFilters(achievement);
-	end
-
-	-- Select category
-	local category;
-	if gui.FilterButton.Filters.db.MergeSmallCategories then
-		category = achievement:GetMergedCategory(); -- This way we get the parent category
-		diagnostics.Debug(category.Name);
-	else
-		category = achievement.Category;
 	end
 
 	gui.CategoriesFrame:SelectCategory(category);
@@ -535,11 +542,15 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 
 	while not shown do
 		for _, button in next, container.buttons do
-			diagnostics.Debug(button:GetTop());
-			diagnostics.Debug(gui.GetSafeScrollChildBottom(child));
+			-- diagnostics.Debug(button:GetTop());
+			-- diagnostics.Debug(gui.GetSafeScrollChildBottom(child));
 			if button.id == achievement.ID and math.ceil(button:GetTop()) >= math.ceil(gui.GetSafeScrollChildBottom(child)) then
+				diagnostics.Debug("Req 1 ok");
 				if not (gui.SelectedTab.SelectedAchievement and gui.SelectedTab.SelectedAchievement.ID == achievement.ID) then
+					diagnostics.Debug("Req 2 ok");
 					button:Click(mouseButton, nil, ignoreModifiers, anchor, offsetX, offsetY);
+				else					
+					diagnostics.Debug("Req 2 nok");
 				end
 				shown = button;
 				break;
@@ -561,6 +572,31 @@ function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreMod
 			end
 		end
 	end
+end
+
+function achievementsFrame:SelectAchievement(achievement, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)
+	diagnostics.Trace("achievementsFrame:SelectAchievement");
+
+	if not achievement then
+		diagnostics.Debug("No achievement provided");
+		return;
+	end
+
+	if gui.FilterButton then
+		achievement = gui.FilterButton:GetHighestAchievementWhenCollapseSeries(achievement);
+		gui.FilterButton:SetFilters(achievement);
+	end
+
+	-- Select category
+	local category;
+	if gui.FilterButton.Filters.db.MergeSmallCategories then
+		category = achievement:GetMergedCategory(); -- This way we get the parent category
+		diagnostics.Debug(category.Name);
+	else
+		category = achievement.Category;
+	end
+
+	self:SelectAchievementWithCategory(achievement, category, mouseButton, ignoreModifiers, anchor, offsetX, offsetY);
 end
 
 function achievementsFrame:SelectAchievementFromID(id, mouseButton, ignoreModifiers, anchor, offsetX, offsetY)

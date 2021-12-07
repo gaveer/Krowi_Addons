@@ -7,7 +7,45 @@ local achievementButton = gui.AchievementButton;
 
 local media = "Interface\\AddOns\\Krowi_AchievementFilter\\Media\\";
 
-local Saturate, Desaturate, OnEnter, OnLeave, OnClick;
+local ACHIEVEMENTUI_MAX_LINES_COLLAPSED = 3;
+local TEXTURES_OFFSET = 0;		-- 0.5 when in guild view
+
+local UpdatePlusMinusTexture, Saturate, Desaturate, Collapse, Expand;
+function KrowiAF_AchievementButton_OnLoad(self)
+	self.dateCompleted = self.shield.dateCompleted;
+	if not ACHIEVEMENTUI_FONTHEIGHT then
+		local _, fontHeight = self.description:GetFont();
+		ACHIEVEMENTUI_FONTHEIGHT = fontHeight;
+	end
+
+	local descriptionHeight = ACHIEVEMENTUI_FONTHEIGHT;
+	if not addon.Options.db.Achievements.Compact then
+		descriptionHeight = descriptionHeight * ACHIEVEMENTUI_MAX_LINES_COLLAPSED;
+	end
+	diagnostics.Debug(descriptionHeight);
+	self.description:SetHeight(descriptionHeight);
+	self.Collapse = Collapse;
+	self.Expand = Expand;
+	self.Saturate = AchievementButton_Saturate;
+	self.Desaturate = AchievementButton_Desaturate;
+	self.UpdatePlusMinusTexture = UpdatePlusMinusTexture;
+
+	hooksecurefunc(self, "Saturate", Saturate);
+	hooksecurefunc(self, "Desaturate", Desaturate);
+
+	self:SetScript("OnSizeChanged", function(self, width, height)
+		local descriptionWidth = width - 166;
+		if addon.Options.db.Achievements.Compact then
+			descriptionWidth = width - 104;
+		end
+		self.description:SetWidth(descriptionWidth);
+		self.hiddenDescription:SetWidth(descriptionWidth);
+	end);
+
+	self:Collapse();
+end
+
+local OnEnter, OnLeave, OnClick;
 function achievementButton:PostLoadButtons(achievementsFrame)
 	-- Here we hook a lot of our own functionality to extend the default Blizzard Buttons
 	diagnostics.Trace("achievementButton.PostLoadButtons");
@@ -64,17 +102,17 @@ function achievementButton:PostLoadButtons(achievementsFrame)
 		button.ShowTooltip = function()
 			self.Tooltip.ShowTooltip(button);
 		end;
-		
+
 		local name = button:GetName();
 		button.BottomTsunami1 = _G[name.."BottomTsunami1"];
 		button.TopTsunami1 = _G[name.."TopTsunami1"];
-
-		hooksecurefunc(button, "Saturate", Saturate);
-		hooksecurefunc(button, "Desaturate", Desaturate);
 	end
 end
 
 local function SetTsunamis(self)
+	if addon.Options.db.Achievements.Compact then
+		return;
+	end
 	if self.Achievement.NotObtainable then
 		self.BottomTsunami1:SetTexture(media .. "NotObtainableAchievementBorders");
 		self.BottomTsunami1:SetTexCoord(0, 0.72265, 0.51953125, 0.58203125);
@@ -89,6 +127,37 @@ local function SetTsunamis(self)
 		self.TopTsunami1:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Borders");
 		self.TopTsunami1:SetTexCoord(0.72265, 0, 0.58203125, 0.51953125);
 		self.TopTsunami1:SetAlpha(0.3);
+	end
+end
+
+function UpdatePlusMinusTexture(self)
+	local id = self.id;
+	if not id then
+		return; -- This happens when we create buttons
+	end
+	local display = false;
+	if addon.Options.db.Achievements.Compact then
+		display = true;
+	elseif GetAchievementNumCriteria(id) ~= 0 then
+		display = true;
+	elseif self.completed and GetPreviousAchievement(id) then
+		display = true;
+	elseif not self.completed and GetAchievementGuildRep(id) then
+		display = true;
+	end
+	if display then
+		self.plusMinus:Show();
+		if self.collapsed and self.saturatedStyle then
+			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
+		elseif self.collapsed then
+			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET, TEXTURES_OFFSET + 0.25);
+		elseif self.saturatedStyle then
+			self.plusMinus:SetTexCoord(0, .5, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
+		else
+			self.plusMinus:SetTexCoord(.5, 1, TEXTURES_OFFSET + 0.25, TEXTURES_OFFSET + 0.50);
+		end
+	else
+		self.plusMinus:Hide();
 	end
 end
 
@@ -119,6 +188,46 @@ function Desaturate(self)
 	end
 end
 
+-- [[ Collapse ]] --
+function Collapse(self)
+	if self.collapsed then
+		return;
+	end
+	self.collapsed = true;
+	self:UpdatePlusMinusTexture();
+	self:SetHeight(addon.Options.db.Achievements.ButtonCollapsedHeight);
+	self.background:SetTexCoord(0, 1, 1 - (addon.Options.db.Achievements.ButtonCollapsedHeight / 256), 1);
+	if not self.tracked:GetChecked() then
+		self.tracked:Hide();
+	end
+	self.tabard:Hide();
+	self.guildCornerL:Hide();
+	self.guildCornerR:Hide();
+end
+
+-- [[ Expand ]] --
+function Expand(self, height)
+	if not self.collapsed and self:GetHeight() == height then
+		return;
+	end
+	self.collapsed = nil;
+	self:UpdatePlusMinusTexture();
+	if addon.InGuildView() then
+		if height < GUILDACHIEVEMENTBUTTON_MINHEIGHT then
+			height = GUILDACHIEVEMENTBUTTON_MINHEIGHT;
+		end
+		if self.completed then
+			self.tabard:Show();
+			self.shield:SetFrameLevel(self.tabard:GetFrameLevel() + 1);
+			SetLargeGuildTabardTextures("player", self.tabard.emblem, self.tabard.background, self.tabard.border);
+		end
+		self.guildCornerL:Show();
+		self.guildCornerR:Show();
+	end
+	self:SetHeight(height);
+	self.background:SetTexCoord(0, 1, max(0, 1-(height / 256)), 1);
+end
+
 -- [[ OnEnter ]] --
 function OnEnter(self, achievementsFrame)
 	diagnostics.Trace("OnEnter");
@@ -147,6 +256,8 @@ function OnClick(self, button, achievementsFrame, ignoreModifiers, anchor, offse
 	elseif button == "RightButton" then
 		diagnostics.Debug("RightButton");
 		OnClickRightButton(self, anchor, offsetX, offsetY, achievementsFrame);
+	else
+		diagnostics.Debug(button);
 	end
 end
 
@@ -185,7 +296,7 @@ function OnClickLeftButton(self, ignoreModifiers, achievementsFrame)
 	achievementsFrame:ClearSelection();
 	achievementsFrame:SelectButton(self);
 	achievementsFrame:DisplayAchievement(self, gui.SelectedTab.SelectedAchievement, self.index, self.Achievement);
-	HybridScrollFrame_ExpandButton(achievementsFrame.Container, ((self.index - 1) * ACHIEVEMENTBUTTON_COLLAPSEDHEIGHT), self:GetHeight());
+	HybridScrollFrame_ExpandButton(achievementsFrame.Container, ((self.index - 1) * addon.Options.db.Achievements.ButtonCollapsedHeight), self:GetHeight());
 	achievementsFrame:Update();
 	if not ignoreModifiers then
 		achievementsFrame:AdjustSelection();
@@ -210,7 +321,7 @@ local function AddIATLink(achievement)
 	end
 end
 
-local function AddGoToLine(goTo, id, achievementsFrame)
+local function AddGoToAchievementLine(goTo, id, achievementsFrame)
 	local _, name = addon.GetAchievementInfo(id);
 	local disabled;
 	if not addon.Data.Achievements[id] then -- Catch missing achievements from the addon to prevent errors
@@ -226,10 +337,20 @@ local function AddGoToLine(goTo, id, achievementsFrame)
 				});
 end
 
+local function AddGoToAchievementWithCategoryLine(goTo, achievement, category, achievementsFrame)
+	goTo:AddFull({ Text = category:GetPath(),
+					Func = function()
+						achievementsFrame:SelectAchievementWithCategory(achievement, category, nil, true);
+						rightClickMenu:Close();
+					end,
+					Disabled = disabled
+				});
+end
+
 local function AddGoTo(achievementsFrame, achievement)
 	local partOfAChainIDs = achievement:GetPartOfAChainIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
 	local requiredForIDs = achievement:GetRequiredForIDs(gui.FilterButton.Validate, gui.FilterButton:GetFilters());
-	if partOfAChainIDs or requiredForIDs or gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then -- Others can be added here later
+	if partOfAChainIDs or requiredForIDs or achievement.MoreCategories or gui.SelectedTab.SelectedCategory == addon.Data.CurrentZoneCategory or gui.SelectedTab.SelectedCategory == addon.Data.SelectedZoneCategory then -- Others can be added here later
 		local goTo = addon.Objects.MenuItem:New({Text = addon.L["Go to"]});
 		local addSeparator = nil;
 
@@ -237,7 +358,7 @@ local function AddGoTo(achievementsFrame, achievement)
 			goTo:AddFull({Text = addon.L["Part of a chain"], IsTitle = true});
 			for _, id in next, partOfAChainIDs do
 				if id ~= achievement.ID then
-					AddGoToLine(goTo, id, achievementsFrame);
+					AddGoToAchievementLine(goTo, id, achievementsFrame);
 				end
 			end
 			addSeparator = true;
@@ -251,7 +372,24 @@ local function AddGoTo(achievementsFrame, achievement)
 			goTo:AddFull({Text = addon.L["Required for"], IsTitle = true});
 			for _, id in next, requiredForIDs do
 				if id ~= achievement.ID then
-					AddGoToLine(goTo, id, achievementsFrame);
+					AddGoToAchievementLine(goTo, id, achievementsFrame);
+				end
+			end
+			addSeparator = true;
+		end
+
+		if achievement.MoreCategories then
+			if addSeparator then
+				goTo:AddSeparator();
+				addSeparator = nil;
+			end
+			goTo:AddFull({Text = addon.L["Other locations"], IsTitle = true});
+			if gui.SelectedTab.SelectedCategory ~= achievement.Category then
+				AddGoToAchievementWithCategoryLine(goTo, achievement, achievement.Category, achievementsFrame);
+			end
+			for _, category in next, achievement.MoreCategories do				
+				if gui.SelectedTab.SelectedCategory ~= category then
+					AddGoToAchievementWithCategoryLine(goTo, achievement, category, achievementsFrame);
 				end
 			end
 			addSeparator = true;
@@ -265,7 +403,7 @@ local function AddGoTo(achievementsFrame, achievement)
 				addSeparator = nil;
 			end
 			goTo:AddFull({Text = achievement.Category:GetPath(), IsTitle = true});
-			AddGoToLine(goTo, achievement.ID, achievementsFrame);
+			AddGoToAchievementLine(goTo, achievement.ID, achievementsFrame);
 			addSeparator = true;
 		end
 

@@ -322,6 +322,16 @@ function tutorials.Load()
                                             EventAlertFadeDelay = string.format(addon.Yellow, addon.Options.db.EventAlert.FadeDelay)};
         end
     });
+    tinsert(pages, { -- 12
+        Image = media .. "CompactAchievements",
+        ImageSize = {722, 385},
+        ImageTexCoord = {0, 722/1024, 0, 385/512},
+        SubTitle = string.format(addon.Yellow, addon.L["Compact Achievements T"]),
+        Text = core.ReplaceVars{addon.L["Compact Achievements T Desc"],
+                                addonName = addon.MetaData.Title},
+        OnShow = function(self)
+        end
+    });
 
     tutorials.FeaturesTutorial = tutorials:New(SavedData, "FeaturesTutorial");
     tutorials.FeaturesTutorial:SetFrameTitle(addon.MetaData.Title .. " - " .. addon.MetaData.BuildVersion);

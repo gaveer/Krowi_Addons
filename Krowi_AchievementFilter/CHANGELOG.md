@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [9.2.0.33.0] - 2021-
 ### Added
+- Sepulcher of the First Ones raid
+- Zereth Mortis
+- Torghast achievements + new wing
+- New PvP Season 3 mount
+
+### Changed
+- Shadowlands Season 2 PvP mount is no longer obtainable
+- Shadowlands Season 2 Keystone Master is no longer obtainable
+- Ahead of the Curve and Cutting Edge Sylvanas Windrunner is no longer obtainable
 
 [9.2.0.33.0]: https://www.curseforge.com/wow/addons/krowi-achievement-filter/files/3553912
 

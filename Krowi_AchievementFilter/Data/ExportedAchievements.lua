@@ -1,4 +1,4 @@
--- [[ Exported at 2021-12-07 17-35-35 ]] --
+-- [[ Exported at 2021-12-07 20-36-02 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -3842,7 +3842,7 @@ function exportedAchievements.Load(a)
     a[14815] = ach:New(14815, 10, fac.Horde); -- Executing the Exarch
     a[14816] = ach:New(14816, 0, nil, nil, false); -- Sinful Gladiator's Soul Eater
     a[14817] = ach:New(14817, 10, fac.Alliance); -- Opposing Orgrimmar
-    a[14825] = ach:New(14825, 25); -- Explorer of the Shadowlands
+    a[14825] = ach:New(14825, 25); -- Shadowlands Voyager
     a[14833] = ach:New(14833, 10, nil, cov.Necrolord); -- Fashion Abomination
     a[14834] = ach:New(14834, 10); -- Bound with Purpose
     a[14835] = ach:New(14835, 10); -- A Resolute Bond
@@ -3892,9 +3892,9 @@ function exportedAchievements.Load(a)
     a[14938] = ach:New(14938, 0, nil, nil, false); -- Shadowlands Keystone Explorer: Season One
     a[14943] = ach:New(14943, 10); -- Guarmageddon
     a[14961] = ach:New(14961, 10); -- Chains of Domination
-    a[14972] = ach:New(14972, 0); -- Gladiator: Shadowlands Season 2
+    a[14972] = ach:New(14972, 0, nil, nil, false); -- Gladiator: Shadowlands Season 2
     a[14998] = ach:New(14998, 10); -- "Name A Better Duo, I'll Wait"
-    a[14999] = ach:New(14999, 0); -- Unchained Gladiator's Soul Eater
+    a[14999] = ach:New(14999, 0, nil, nil, false); -- Unchained Gladiator's Soul Eater
     a[15000] = ach:New(15000, 10); -- United Front
     a[15001] = ach:New(15001, 5); -- Jailer's Personal Stash
     a[15003] = ach:New(15003, 10); -- To the Nines
@@ -3934,20 +3934,20 @@ function exportedAchievements.Load(a)
     a[15066] = ach:New(15066, 10); -- Reliquary Restoration
     a[15067] = ach:New(15067, 10); -- Adamant Vaults
     a[15069] = ach:New(15069, 5); -- The Archivists' Codex
-    a[15073] = ach:New(15073, 0); -- Shadowlands Keystone Explorer: Season Two
+    a[15073] = ach:New(15073, 0, nil, nil, false); -- Shadowlands Keystone Explorer: Season Two
     a[15075] = ach:New(15075, 10); -- Infiltrators
     a[15076] = ach:New(15076, 5); -- The Box of Many Things
-    a[15077] = ach:New(15077, 0); -- Shadowlands Keystone Conqueror: Season Two
-    a[15078] = ach:New(15078, 0); -- Shadowlands Keystone Master: Season Two
+    a[15077] = ach:New(15077, 0, nil, nil, false); -- Shadowlands Keystone Conqueror: Season Two
+    a[15078] = ach:New(15078, 0, nil, nil, false); -- Shadowlands Keystone Master: Season Two
     a[15079] = ach:New(15079, 10); -- "Many, Many Things"
     a[15080] = ach:New(15080, 10); -- So Blessed
-    a[15081] = ach:New(15081, 10); -- Flawless: Skoldus Hall
-    a[15082] = ach:New(15082, 10); -- Flawless: Fracture Chambers
-    a[15083] = ach:New(15083, 10); -- Flawless: Coldheart Interstitia
-    a[15084] = ach:New(15084, 10); -- Flawless: The Soulforges
-    a[15087] = ach:New(15087, 10); -- Flawless: Mort'regar
-    a[15088] = ach:New(15088, 10); -- Flawless: The Upper Reaches
-    a[15089] = ach:New(15089, 20); -- Flawless Master
+    a[15081] = ach:New(15081, 10); -- Flawless: Skoldus Hall (Layer 12)
+    a[15082] = ach:New(15082, 10); -- Flawless: Fracture Chambers (Layer 12)
+    a[15083] = ach:New(15083, 10); -- Flawless: Coldheart Interstitia (Layer 12)
+    a[15084] = ach:New(15084, 10); -- Flawless: The Soulforges (Layer 12)
+    a[15087] = ach:New(15087, 10); -- Flawless: Mort'regar (Layer 12)
+    a[15088] = ach:New(15088, 10); -- Flawless: The Upper Reaches (Layer 12)
+    a[15089] = ach:New(15089, 20); -- Flawless Master (Layer 12)
     a[15091] = ach:New(15091, 10); -- A Taste of Perfection
     a[15092] = ach:New(15092, 20); -- Master of Torment
     a[15093] = ach:New(15093, 10); -- Avenge Me!
@@ -3982,19 +3982,56 @@ function exportedAchievements.Load(a)
     a[15131] = ach:New(15131, 10); -- Whack-A-Soul
     a[15132] = ach:New(15132, 10); -- Knowledge is Power
     a[15133] = ach:New(15133, 10); -- This World is a Prism
-    a[15134] = ach:New(15134, 0); -- Ahead of the Curve: Sylvanas Windrunner
-    a[15135] = ach:New(15135, 0); -- Cutting Edge: Sylvanas Windrunner
+    a[15134] = ach:New(15134, 0, nil, nil, false); -- Ahead of the Curve: Sylvanas Windrunner
+    a[15135] = ach:New(15135, 0, nil, nil, false); -- Cutting Edge: Sylvanas Windrunner
     a[15177] = ach:New(15177, 10); -- "Tazavesh, the Veiled Market"
     a[15178] = ach:New(15178, 10); -- Fake It 'Til You Make It
     a[15179] = ach:New(15179, 10); -- This is Fine
     a[15181] = ach:New(15181, 10); -- Rock n' Roll
     a[15190] = ach:New(15190, 10); -- Mischief!
     a[15191] = ach:New(15191, 0); -- "Rae'shalare, Death's Whisper"
+    a[15211] = ach:New(15211, 5); -- Completing the Code
+    a[15219] = ach:New(15219, 5); -- Automa
+    a[15220] = ach:New(15220, 5); -- Enlightened Brokers
+    a[15224] = ach:New(15224, 10); -- Explore Zereth Mortis
+    a[15229] = ach:New(15229, 5); -- Traversing the Spheres
     a[15241] = ach:New(15241, 10); -- Renowned
+    a[15251] = ach:New(15251, 10); -- The Jailer's Gauntlet: Layer 1
+    a[15252] = ach:New(15252, 10); -- The Jailer's Gauntlet: Layer 2
+    a[15253] = ach:New(15253, 10); -- The Jailer's Gauntlet: Layer 3
+    a[15254] = ach:New(15254, 10); -- The Jailer's Gauntlet: Layer 4
+    a[15255] = ach:New(15255, 10); -- The Jailer's Gauntlet: Layer 5
+    a[15256] = ach:New(15256, 10); -- The Jailer's Gauntlet: Layer 6
+    a[15257] = ach:New(15257, 10); -- The Jailer's Gauntlet: Layer 7
+    a[15258] = ach:New(15258, 10); -- The Jailer's Gauntlet: Layer 8
+    a[15259] = ach:New(15259, 10); -- Secrets of the First Ones
     a[15308] = ach:New(15308, 0); -- Tower Overwhelming
     a[15309] = ach:New(15309, 10); -- A Towering Success
     a[15310] = ach:New(15310, 20); -- A Tour of Towers
     a[15313] = ach:New(15313, 0); -- Rockin' Rollin' Racer
-    a[15327] = ach:New(15327, 0); -- Tormented Hero: Shadowlands Season 2
+    a[15314] = ach:New(15314, 10); -- Flawless: Skoldus Hall (Layer 16)
+    a[15315] = ach:New(15315, 10); -- Amidst Ourselves
+    a[15316] = ach:New(15316, 10); -- Flawless: Fracture Chambers (Layer 16)
+    a[15317] = ach:New(15317, 10); -- Flawless: The Soulforges (Layer 16)
+    a[15318] = ach:New(15318, 10); -- Flawless: Coldheart Interstitia (Layer 16)
+    a[15319] = ach:New(15319, 10); -- Flawless: Mort'regar (Layer 16)
+    a[15320] = ach:New(15320, 10); -- Flawless: The Upper Reaches (Layer 16)
+    a[15322] = ach:New(15322, 20); -- Flawless Master (Layer 16)
+    a[15324] = ach:New(15324, 20); -- Tower Ranger
+    a[15327] = ach:New(15327, 0, nil, nil, false); -- Tormented Hero: Shadowlands Season 2
+    a[15331] = ach:New(15331, 10); -- Treasures of Zereth Mortis
+    a[15336] = ach:New(15336, 25); -- From A to Zereth
+    a[15381] = ach:New(15381, 10); -- Power ON
+    a[15384] = ach:New(15384, 0); -- Cosmic Gladiator's Soul Eater
+    a[15386] = ach:New(15386, 10); -- Shimmering Secrets
+    a[15388] = ach:New(15388, 25); -- Shadowlands Explorer
+    a[15391] = ach:New(15391, 10); -- Adventurer of Zereth Mortis
+    a[15392] = ach:New(15392, 10); -- Dune Dominance
+    a[15396] = ach:New(15396, 10); -- We Are All Made of Stars
+    a[15397] = ach:New(15397, 0); -- Four Ring Circus
+    a[15398] = ach:New(15398, 10); -- Those Belong in a Museum!
+    a[15399] = ach:New(15399, 10); -- Coming to Terms
+    a[15400] = ach:New(15400, 10); -- Where the Wild Beasts Are
+    a[15401] = ach:New(15401, 0); -- Wisdom Comes From the Desert
 end
 

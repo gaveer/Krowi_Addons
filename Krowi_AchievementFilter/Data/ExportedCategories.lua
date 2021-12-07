@@ -1,4 +1,4 @@
--- [[ Exported at 2021-12-07 17-35-35 ]] --
+-- [[ Exported at 2021-12-07 20-36-02 ]] --
 -- [[ This code is automatically generated as an export from ]] --
 -- [[ an SQLite database and is not meant for manual edit. ]] --
 
@@ -4743,7 +4743,8 @@ function exportedCategories.Load(a)
     AddC(tmp[6], tmp[344]);
     AddA(tmp[344], a[14280]); -- Loremaster of Shadowlands
     AddA(tmp[344], a[14758]); -- The World Beyond
-    AddA(tmp[344], a[14825]); -- Explorer of the Shadowlands
+    AddA(tmp[344], a[15388]); -- Shadowlands Explorer
+    AddA(tmp[344], a[14825]); -- Shadowlands Voyager
     AddA(tmp[344], a[14731]); -- To All the Squirrels I've Loved and Lost
     AddA(tmp[344], a[14515]); -- Zo'Sorg's Bidding
     AddA(tmp[344], a[14516]); -- Impressing Zo'Sorg
@@ -4916,6 +4917,24 @@ function exportedCategories.Load(a)
     AddC(tmp[812], tmp[813]);
     AddA(tmp[813], a[15059]); -- Death's Advance
     AddA(tmp[813], a[15069]); -- The Archivists' Codex
+    tmp[1035] = cat:New(C_Map.GetMapInfo(1970).name); -- Zereth Mortis
+    AddC(tmp[344], tmp[1035]);
+    tmp[1036] = cat:New((GetCategoryInfo(15447))); -- Quests
+    AddC(tmp[1035], tmp[1036]);
+    AddA(tmp[1036], a[15229]); -- Traversing the Spheres
+    AddA(tmp[1036], a[15336]); -- From A to Zereth
+    AddA(tmp[1036], a[15259]); -- Secrets of the First Ones
+    tmp[1037] = cat:New((GetCategoryInfo(97))); -- Exploration
+    AddC(tmp[1035], tmp[1037]);
+    AddA(tmp[1037], a[15224]); -- Explore Zereth Mortis
+    AddA(tmp[1037], a[15391]); -- Adventurer of Zereth Mortis
+    AddA(tmp[1037], a[15392]); -- Dune Dominance
+    AddA(tmp[1037], a[15331]); -- Treasures of Zereth Mortis
+    AddA(tmp[1037], a[15211]); -- Completing the Code
+    tmp[1038] = cat:New((GetCategoryInfo(15273))); -- Reputation
+    AddC(tmp[1035], tmp[1038]);
+    AddA(tmp[1038], a[15219]); -- Automa
+    AddA(tmp[1038], a[15220]); -- Enlightened Brokers
     tmp[369] = cat:New((GetCategoryInfo(15272))); -- Dungeons
     AddC(tmp[6], tmp[369]);
     AddA(tmp[369], a[14418]); -- Shadowlands Dungeon Hero
@@ -5084,6 +5103,17 @@ function exportedCategories.Load(a)
     AddA(tmp[859], a[15119]); -- Mythic: Fatescribe Roh-Kalo
     AddA(tmp[859], a[15120]); -- Mythic: Kel'Thuzad
     AddA(tmp[859], a[15121]); -- Mythic: Sylvanas Windrunner
+    tmp[1040] = cat:New((EJ_GetInstanceInfo(1195))); -- Sepulcher of the First Ones
+    AddC(tmp[370], tmp[1040]);
+    AddA(tmp[1040], a[15315]); -- Amidst Ourselves
+    AddA(tmp[1040], a[15381]); -- Power ON
+    AddA(tmp[1040], a[15386]); -- Shimmering Secrets
+    AddA(tmp[1040], a[15396]); -- We Are All Made of Stars
+    AddA(tmp[1040], a[15397]); -- Four Ring Circus
+    AddA(tmp[1040], a[15398]); -- Those Belong in a Museum!
+    AddA(tmp[1040], a[15399]); -- Coming to Terms
+    AddA(tmp[1040], a[15400]); -- Where the Wild Beasts Are
+    AddA(tmp[1040], a[15401]); -- Wisdom Comes From the Desert
     tmp[380] = cat:New((GetCategoryInfo(15117))); -- Pet Battles
     AddC(tmp[6], tmp[380]);
     AddA(tmp[380], a[14867]); -- Shadowlands Safari
@@ -5107,18 +5137,11 @@ function exportedCategories.Load(a)
     AddA(tmp[424], a[14809]); -- Traversing Torghast
     AddA(tmp[424], a[14810]); -- Terror of Torghast
     AddA(tmp[424], a[15091]); -- A Taste of Perfection
-    AddA(tmp[424], a[15089]); -- Flawless Master
+    AddA(tmp[424], a[15089]); -- Flawless Master (Layer 12)
+    AddA(tmp[424], a[15322]); -- Flawless Master (Layer 16)
     AddA(tmp[424], a[14499]); -- Phanciful
     AddA(tmp[424], a[14500]); -- Phantastic
     AddA(tmp[424], a[14501]); -- Phanatical
-    AddA(tmp[424], a[14468]); -- Twisting Corridors: Layer 1
-    AddA(tmp[424], a[14469]); -- Twisting Corridors: Layer 2
-    AddA(tmp[424], a[14470]); -- Twisting Corridors: Layer 3
-    AddA(tmp[424], a[14471]); -- Twisting Corridors: Layer 4
-    AddA(tmp[424], a[14472]); -- Twisting Corridors: Layer 5
-    AddA(tmp[424], a[14568]); -- Twisting Corridors: Layer 6
-    AddA(tmp[424], a[14569]); -- Twisting Corridors: Layer 7
-    AddA(tmp[424], a[14570]); -- Twisting Corridors: Layer 8
     AddA(tmp[424], a[14498]); -- Gatekeepers of Torghast
     AddA(tmp[424], a[14773]); -- Explosive Extermination
     AddA(tmp[424], a[14776]); -- For the Hoarder!
@@ -5138,30 +5161,55 @@ function exportedCategories.Load(a)
     AddA(tmp[424], a[15094]); -- Rampage
     AddA(tmp[424], a[15096]); -- Crowd Pleaser
     AddA(tmp[424], a[15092]); -- Master of Torment
+    AddA(tmp[424], a[15324]); -- Tower Ranger
     tmp[843] = cat:New((select(2, addon.GetAchievementInfo(14463))), true); -- Skoldus Hall
     AddC(tmp[424], tmp[843]);
     AddA(tmp[843], a[14463]); -- Skoldus Hall
-    AddA(tmp[843], a[15081]); -- Flawless: Skoldus Hall
+    AddA(tmp[843], a[15081]); -- Flawless: Skoldus Hall (Layer 12)
+    AddA(tmp[843], a[15314]); -- Flawless: Skoldus Hall (Layer 16)
     tmp[844] = cat:New((select(2, addon.GetAchievementInfo(14473))), true); -- Fracture Chambers
     AddC(tmp[424], tmp[844]);
     AddA(tmp[844], a[14473]); -- Fracture Chambers
-    AddA(tmp[844], a[15082]); -- Flawless: Fracture Chambers
+    AddA(tmp[844], a[15082]); -- Flawless: Fracture Chambers (Layer 12)
+    AddA(tmp[844], a[15316]); -- Flawless: Fracture Chambers (Layer 16)
     tmp[845] = cat:New((select(2, addon.GetAchievementInfo(14478))), true); -- The Soulforges
     AddC(tmp[424], tmp[845]);
     AddA(tmp[845], a[14478]); -- The Soulforges
-    AddA(tmp[845], a[15084]); -- Flawless: The Soulforges
+    AddA(tmp[845], a[15084]); -- Flawless: The Soulforges (Layer 12)
+    AddA(tmp[845], a[15317]); -- Flawless: The Soulforges (Layer 16)
     tmp[846] = cat:New((select(2, addon.GetAchievementInfo(14483))), true); -- Coldheart Interstitia
     AddC(tmp[424], tmp[846]);
     AddA(tmp[846], a[14483]); -- Coldheart Interstitia
-    AddA(tmp[846], a[15083]); -- Flawless: Coldheart Interstitia
+    AddA(tmp[846], a[15083]); -- Flawless: Coldheart Interstitia (Layer 12)
+    AddA(tmp[846], a[15318]); -- Flawless: Coldheart Interstitia (Layer 16)
     tmp[847] = cat:New((select(2, addon.GetAchievementInfo(14488))), true); -- Mort'regar
     AddC(tmp[424], tmp[847]);
     AddA(tmp[847], a[14488]); -- Mort'regar
-    AddA(tmp[847], a[15087]); -- Flawless: Mort'regar
+    AddA(tmp[847], a[15087]); -- Flawless: Mort'regar (Layer 12)
+    AddA(tmp[847], a[15319]); -- Flawless: Mort'regar (Layer 16)
     tmp[848] = cat:New((select(2, addon.GetAchievementInfo(14493))), true); -- The Upper Reaches
     AddC(tmp[424], tmp[848]);
     AddA(tmp[848], a[14493]); -- The Upper Reaches
-    AddA(tmp[848], a[15088]); -- Flawless: The Upper Reaches
+    AddA(tmp[848], a[15088]); -- Flawless: The Upper Reaches (Layer 12)
+    AddA(tmp[848], a[15320]); -- Flawless: The Upper Reaches (Layer 16)
+    tmp[1039] = cat:New(addon.L["Other wings"]); -- Other wings
+    AddC(tmp[424], tmp[1039]);
+    AddA(tmp[1039], a[14468]); -- Twisting Corridors: Layer 1
+    AddA(tmp[1039], a[14469]); -- Twisting Corridors: Layer 2
+    AddA(tmp[1039], a[14470]); -- Twisting Corridors: Layer 3
+    AddA(tmp[1039], a[14471]); -- Twisting Corridors: Layer 4
+    AddA(tmp[1039], a[14472]); -- Twisting Corridors: Layer 5
+    AddA(tmp[1039], a[14568]); -- Twisting Corridors: Layer 6
+    AddA(tmp[1039], a[14569]); -- Twisting Corridors: Layer 7
+    AddA(tmp[1039], a[14570]); -- Twisting Corridors: Layer 8
+    AddA(tmp[1039], a[15251]); -- The Jailer's Gauntlet: Layer 1
+    AddA(tmp[1039], a[15252]); -- The Jailer's Gauntlet: Layer 2
+    AddA(tmp[1039], a[15253]); -- The Jailer's Gauntlet: Layer 3
+    AddA(tmp[1039], a[15254]); -- The Jailer's Gauntlet: Layer 4
+    AddA(tmp[1039], a[15255]); -- The Jailer's Gauntlet: Layer 5
+    AddA(tmp[1039], a[15256]); -- The Jailer's Gauntlet: Layer 6
+    AddA(tmp[1039], a[15257]); -- The Jailer's Gauntlet: Layer 7
+    AddA(tmp[1039], a[15258]); -- The Jailer's Gauntlet: Layer 8
     tmp[419] = cat:New((GetCategoryInfo(15441))); -- Covenant Sanctums
     AddC(tmp[6], tmp[419]);
     AddA(tmp[419], a[14627]); -- Choosing Your Purpose
@@ -5991,7 +6039,7 @@ function exportedCategories.Load(a)
     AddA(tmp[989], a[14751]); -- The Gang's All Here
     AddA(tmp[989], a[14752]); -- Things To Do When You're Dead
     AddA(tmp[989], a[14570]); -- Twisting Corridors: Layer 8
-    AddA(tmp[989], a[15089]); -- Flawless Master
+    AddA(tmp[989], a[15089]); -- Flawless Master (Layer 12)
     AddA(tmp[989], a[15064]); -- Breaking the Chains
     tmp[979] = cat:New((GetCategoryInfo(15272))); -- Dungeons
     AddC(tmp[972], tmp[979]);
@@ -6105,6 +6153,7 @@ function exportedCategories.Load(a)
     AddA(tmp[978], a[14816]); -- Sinful Gladiator's Soul Eater
     AddA(tmp[978], a[14972]); -- Gladiator: Shadowlands Season 2
     AddA(tmp[978], a[14999]); -- Unchained Gladiator's Soul Eater
+    AddA(tmp[978], a[15384]); -- Cosmic Gladiator's Soul Eater
     tmp[988] = cat:New(addon.L["Recruit-a-Friend"] .. " (" .. (GetCategoryInfo(15234)) .. ")"); -- Recruit-a-Friend
     AddC(tmp[972], tmp[988]);
     AddA(tmp[988], a[1436]); -- Friends In High Places
